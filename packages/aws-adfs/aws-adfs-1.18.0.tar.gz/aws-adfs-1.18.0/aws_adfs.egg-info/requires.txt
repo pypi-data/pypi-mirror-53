@@ -1,0 +1,18 @@
+click
+botocore>=1.12.6
+boto3>=1.9.6
+requests[security]
+configparser
+fido2
+
+[:python_version < "3.5"]
+lxml<4.4.0
+
+[:python_version >= "3.5"]
+lxml
+
+[test]
+pytest-runner
+pytest
+mock
+coverage<4
