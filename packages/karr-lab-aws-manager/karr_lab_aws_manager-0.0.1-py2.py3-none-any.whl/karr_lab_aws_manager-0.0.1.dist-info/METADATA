@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: karr-lab-aws-manager
+Version: 0.0.1
+Summary: Package to manage aws services run by karr lab
+Home-page: https://github.com/KarrLab/karr_lab_aws_manager
+Author: Karr Lab
+Author-email: info@karrlab.org
+License: MIT
+Download-URL: https://github.com/KarrLab/karr_lab_aws_manager
+Keywords: aws boto3 datanator karrlab data
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Requires-Dist: boto3
+Requires-Dist: cement (>=3.0.0)
+Requires-Dist: configparser
+Requires-Dist: datanator-query-python (>=0.2.5)
+Requires-Dist: elasticsearch
+Requires-Dist: mock
+Requires-Dist: pkg-utils
+Requires-Dist: quilt3
+Requires-Dist: requests
+Requires-Dist: requests-aws4auth
+Requires-Dist: ruamel.yaml (==0.15.70)
+Requires-Dist: setuptools
+Requires-Dist: urllib3 (==1.24.2)
+Provides-Extra: all
+Requires-Dist: capturer ; extra == 'all'
+Requires-Dist: cement ; extra == 'all'
+Requires-Dist: datanator-query-python ; extra == 'all'
+Requires-Dist: sphinx (>=1.8) ; extra == 'all'
+Requires-Dist: sphinx-fontawesome ; extra == 'all'
+Requires-Dist: sphinx-rtd-theme (>=0.4.2) ; extra == 'all'
+Requires-Dist: sphinxcontrib-addmetahtml (>=0.1.1) ; extra == 'all'
+Requires-Dist: sphinxcontrib-bibtex ; extra == 'all'
+Requires-Dist: sphinxcontrib-googleanalytics (>=0.1.1) ; extra == 'all'
+Requires-Dist: sphinxcontrib-spelling ; extra == 'all'
+Requires-Dist: sphinxprettysearchresults ; extra == 'all'
+Provides-Extra: docs
+Requires-Dist: sphinx (>=1.8) ; extra == 'docs'
+Requires-Dist: sphinx-fontawesome ; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme (>=0.4.2) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-addmetahtml (>=0.1.1) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-bibtex ; extra == 'docs'
+Requires-Dist: sphinxcontrib-googleanalytics (>=0.1.1) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-spelling ; extra == 'docs'
+Requires-Dist: sphinxprettysearchresults ; extra == 'docs'
+Provides-Extra: tests
+Requires-Dist: capturer ; extra == 'tests'
+Requires-Dist: cement ; extra == 'tests'
+Requires-Dist: datanator-query-python ; extra == 'tests'
+
+UNKNOWN
+
+
