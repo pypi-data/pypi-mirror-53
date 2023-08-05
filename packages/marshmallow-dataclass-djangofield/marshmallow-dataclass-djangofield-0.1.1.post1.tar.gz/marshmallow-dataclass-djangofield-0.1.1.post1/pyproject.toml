@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "marshmallow-dataclass-djangofield"
+version = "0.1.1-1"
+description = "Use marshmallow-dataclass as a Django Field"
+license = "MIT"
+authors = [
+    "Oliver Ford <dev@ojford.com>",
+]
+readme = "README.md"
+repository = "https://github.com/OJFord/marshmallow-dataclass-djangofield"
+keywords = [
+    "Django",
+    "database",
+    "marshmallow",
+]
+classifiers = [
+    "Framework :: Django",
+    "Topic :: Database",
+]
+
+[tool.poetry.dependencies]
+django = "^2.2"
+marshmallow = "^3.0.3"
+marshmallow_dataclass = "^6.0.0"
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = [
+    "poetry>=0.12",
+]
+build-backend = "poetry.masonry.api"

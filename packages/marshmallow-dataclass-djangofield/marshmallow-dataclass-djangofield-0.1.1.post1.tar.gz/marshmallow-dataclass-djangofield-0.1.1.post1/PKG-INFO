@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: marshmallow-dataclass-djangofield
+Version: 0.1.1.post1
+Summary: Use marshmallow-dataclass as a Django Field
+Home-page: https://github.com/OJFord/marshmallow-dataclass-djangofield
+License: MIT
+Keywords: Django,database,marshmallow
+Author: Oliver Ford
+Author-email: dev@ojford.com
+Requires-Python: >=3.7,<4.0
+Classifier: Framework :: Django
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Database
+Requires-Dist: django (>=2.2,<3.0)
+Requires-Dist: marshmallow (>=3.0.3,<4.0.0)
+Requires-Dist: marshmallow_dataclass (>=6.0.0,<7.0.0)
+Project-URL: Repository, https://github.com/OJFord/marshmallow-dataclass-djangofield
+Description-Content-Type: text/markdown
+
+Use [marshmallow-dataclass](https://github.com/lovasoa/marshmallow_dataclass)es as [Django](https://github.com/django/django) Fields.
+
+## Usage
+```python
+from marshmallow_dataclass_djangofield import MarshmallowField
+from marshmallow_dataclass_djangofield import marshmallow_dataclass_djangofield
+
+
+
+class MyModel(Model):
+    
+    @marshmallow_dataclass_djangofield(model_name='MyModel')
+    @marshmallow_dataclass.dataclass
+    class MyDataClass:
+        foo: str
+        bar: int
+
+    foobars = MarshmallowField(many=True, schema=MyDataClass)
+```
+
