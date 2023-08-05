@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: gsea-incontext-notk
+Version: 0.1.3
+Summary: GSEA-InContext Gene Set Enrichment Analysis in Python
+Home-page: https://github.com/CostelloLab/GSEA-InContext_noTk
+Author: Rani Powers (fork originally from gsea_incontext_notk by Zhuoqing Fang)
+Author-email: rani.powers@cuanschutz.edu
+License: MIT
+Download-URL: https://github.com/CostelloLab/GSEA-InContext_noTk
+Keywords: Gene Ontology,GO,Biology,Enrichment,Bioinformatics,Computational Biology
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Software Development :: Libraries
+Description-Content-Type: text/markdown
+Requires-Dist: numpy (>=1.13.0)
+Requires-Dist: pandas (>=0.16)
+Requires-Dist: beautifulsoup4 (>=4.4.1)
+Requires-Dist: requests
+Requires-Dist: scipy
+
+GSEA-InContext: Gene Set Enrichment Analysis In Context
+========
+
+NOTE: This is a stripped-down copy of the GSEA-InContext Python package. It has all graphics- and plot-related functionality removed so that it can be used on shinyapps.io, which cannot use packages that require access to the display (e.g., packages that require Tcl/Tk). The full package with plotting capability is [here](https://pypi.org/project/gsea-incontext).
+
+
