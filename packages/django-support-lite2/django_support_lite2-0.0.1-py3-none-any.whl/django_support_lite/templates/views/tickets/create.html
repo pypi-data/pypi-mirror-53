@@ -1,0 +1,28 @@
+{% extends DSL_LAYOUT_NAME %}
+
+{% block django_support_lite_content %}
+    <div class="clearfix">
+        <div class="float-left">
+            <h5>
+                Create Ticket
+            </h5>
+        </div>
+
+        <div class="float-right">
+            <a class="btn btn-primary btn-sm" href="{% url 'django_support_lite:tickets.list' %}">
+                Cancel
+            </a>
+        </div>
+    </div>
+
+    <hr />
+
+    <form action="{% url 'django_support_lite:tickets.create' %}" enctype="multipart/form-data" method="post">
+        {% include 'partials/form.html' with form=form %}
+        {% csrf_token %}
+
+        <button class="btn btn-primary">
+            Create
+        </button>
+    </form>
+{% endblock %}

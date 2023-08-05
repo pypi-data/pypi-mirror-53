@@ -1,0 +1,117 @@
+{% extends DSL_LAYOUT_NAME %}
+
+{% load static %}
+{% load ticket %}
+
+{% block django_support_lite_content %}
+    <div class="clearfix">
+        <div class="float-left">
+            <h5>
+                List Tickets
+            </h5>
+
+            {% if perms.django_support_lite.can_manage %}
+                <div>
+                    <span class="badge badge-primary">
+                        Tickets pending response: {{ count_pending }}
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if not perms.django_support_lite.can_manage %}
+            <div class="float-right">
+                <a class="btn btn-primary btn-sm" href="{% url 'django_support_lite:tickets.create' %}">
+                    Create
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <hr />
+
+    {% if tickets %}
+        <table class="table table-striped table-borderless">
+            <thead>
+                <tr>
+                    <th style="width: 15%">
+                        Status
+                    </th>
+
+                    <th style="width: 15%">
+                        Priority
+                    </th>
+
+                    <th style="width: 20%">
+                        Title
+                    </th>
+
+                    {% if perms.django_support_lite.can_manage %}
+                        <th style="width: 20%">
+                            User
+                        </th>
+                    {% endif %}
+
+                    <th style="width: 20%">
+                        Last Updated
+                    </th>
+
+                    <th style="width: 10%">
+                        &nbsp;
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>
+                            <span class="badge badge-{{ ticket|ticket_state_css_class }}">
+                                {{ ticket|ticket_state_label }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge badge-{{ ticket.priority|ticket_priority_css_class }}">
+                                {{ ticket.priority|ticket_priority_label }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <small>
+                                {{ ticket.title }}
+                            </small>
+                        </td>
+
+                        {% if perms.django_support_lite.can_manage %}
+                            <td>
+                                <small>
+                                    {{ ticket.user.username }}
+                                </small>
+                            </td>
+                        {% endif %}
+
+                        <td>
+                            <small>
+                                {{ ticket.updated_at }}
+                            </small>
+                        </td>
+
+                        <td class="text-right">
+                            <a href="{% url 'django_support_lite:tickets.view' ticket.id %}" class="btn btn-sm btn-primary">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr />
+
+        <nav>
+            {% include 'partials/pagination.html' with pagination=pagination %}
+        </nav>
+    {% else %}
+        {% include 'partials/stub.html' with text='No tickets.' %}
+    {% endif %}
+{% endblock %}

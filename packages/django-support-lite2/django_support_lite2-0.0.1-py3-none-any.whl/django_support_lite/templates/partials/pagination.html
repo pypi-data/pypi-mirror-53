@@ -1,0 +1,15 @@
+<ul class="pagination">
+    {% for link in pagination %}
+        <li class="page-item {% if link.2 %} active {% endif %}">
+            {% if link.0 %}
+                <a class="page-link" href="{{ link.1 }}">
+                    {{ link.0 }}
+                </a>
+            {% else %}
+                <span class="page-link" style="cursor: default">
+                    ..
+                </span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
