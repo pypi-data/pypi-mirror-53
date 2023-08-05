@@ -1,0 +1,119 @@
+#! python
+
+"""Sync a Markdown document from a Bitbucket repo to a Confluence page."""
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+
+from cc import Confluence
+from md2cc import render_to_html
+from util import parse_file
+
+parser = argparse.ArgumentParser(
+    description=('Sync a Markdown document from a Bitbucket repo to a '
+                 'Confluence page.'))
+parser.add_argument('--host', type=str, required=False,
+                    default='https://hello.atlassian.net/wiki/',
+                    help='the base URL for the Confluence Cloud instance')
+parser.add_argument('-u', '--username', type=str, required=True,
+                    help='the username to use for API authentication')
+parser.add_argument('-p', '--password', type=str, required=True,
+                    help='the password to use for API authentication')
+parser.add_argument('-r', '--repository', type=str,
+                    help=('the full name (workspace/slug) of the Bitbucket '
+                          'repository'))
+parser.add_argument('--commit', type=str, required=False,
+                    help=('the commit hash to sync (used to sync all of the '
+                          'files changed in a commit)'))
+parser.add_argument('--path', type=str, required=False,
+                    help='path to the Markdown file(s) to sync to Confluence')
+
+args = parser.parse_args()
+
+
+def get_repository_url(repository):
+    """Provide a repository URL given its full name (workspace/slug).
+
+    In case a full URL is provided instead, return it directly. (This allows
+    a repository hosted in a non-production environment to be specified.)
+    """
+    if repository.startswith('https://'):
+        return repository
+    return 'https://bitbucket.org/{}'.format(repository)
+
+
+def get_files(args):
+    """Get the list of files for the given arguments.
+
+    If the `--commit` argument is specified, list the files changed in the
+    commit.
+
+    If the `--path` argument is specified and is a file, the list will only
+    contain the file. If it's a directory, it will contain all of the files in
+    the directory.
+    """
+    if not ((args.commit is None) ^ (args.path is None)):
+        raise TypeError('You must specify one of either --commit or --path '
+                        '(but not both).')
+
+    if args.commit:
+        diff_tree_output = subprocess.check_output([
+            'git', 'diff', '--name-only',
+            '{commit}..{commit}^'.format(commit=args.commit)])
+        files = [line.decode()
+                 for line in diff_tree_output.splitlines()]
+
+    elif os.path.isfile(args.path):
+        files = [args.path]
+
+    else:
+        files = [os.path.normpath(os.path.join(root, file))
+                 for (root, dirs, files) in os.walk(args.path)
+                 for file in files]
+
+        # Filter out everything under the .git directory (in case args.path is
+        # the root of the repository).
+        files = [file for file in files
+                 if not file.startswith('.git/')]
+
+    # Filter out any files changed other than Markdown files.
+    return [file for file in files
+            if (os.path.exists(file) and
+                re.search(r'\.(?:md|markdown)$', file))]
+
+
+def get_latest_commit(file):
+    """Get the hash of the commit that last modified a file."""
+    rev_list_output = subprocess.check_output([
+        'git', 'rev-list', '-1', 'HEAD', file])
+    return rev_list_output.decode().strip()
+
+
+repository_url = (get_repository_url(args.repository)
+                  if args.repository else None)
+files = get_files(args)
+
+client = Confluence(host=args.host, username=args.username,
+                    password=args.password)
+
+if len(files) == 0:
+    print('No files to sync.')
+else:
+    for file in files:
+        try:
+            frontmatter, body = parse_file(file)
+        except ValueError:
+            continue
+
+        sys.stdout.write('Syncing {}... '.format(file))
+        html = render_to_html(body, client, repository_url,
+                              include_header=frontmatter.get('header', True),
+                              include_toc=frontmatter.get('toc', False))
+        updated = client.update_page(frontmatter['page_id'],
+                                     title=frontmatter['title'],
+                                     content=html,
+                                     node=get_latest_commit(file))
+        sys.stdout.write('{}\n'.format('OK' if updated else 'No changes'))
