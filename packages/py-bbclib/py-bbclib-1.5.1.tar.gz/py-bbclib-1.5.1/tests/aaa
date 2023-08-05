@@ -1,0 +1,318 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.7.4, pytest-5.0.1, py-1.8.0, pluggy-0.12.0
+rootdir: /Users/t-kubo/work/github/beyond-blockchain/py-bbclib/tests, inifile: pytest.ini
+
+
+private_key: b'da0217e7afb2ff12986345d33cc19974d4581dc448d984b727eb6e0b741c97b0'
+private_key(pem):
+ b'-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEINoCF+evsv8SmGNF0zzBmXTUWB3ESNmEtyfrbgt0HJewoAoGCCqGSM49\nAwEHoUQDQgAEOiWVtDFDxR4I3beNGiUvLdXU41gWqTu4KmzDlJHCeXGJcUZFWxnD\nkZ3FNichQh8gtpvYE1Glo8FnlKEhOKdrog==\n-----END EC PRIVATE KEY-----\n'
+public_key: b'043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba2'
+collected 3 items
+
+test_bbclib_assets_v3.py 
+----- test_00_keypair -----
+.
+----- test_01_transaction_with_relation_and_witness_and_proof -----
+Digest: b'f93eef6c22d3a751e0a9513e31381f83d5d54a9a9b775f79cb30644dbce8360e'
+Serialized data: b'030000006e85c91b6d0100002000000000000300c9000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d010024002000305a4c125f40ac70c42ad0a174b64052d3453d6020f6003f94697f1347f655180000730000002000853869d54214eeb9d319de88202bad3b92819eb0cca7bfed89bc08c6b13484da2000a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f28182000ec837fc792c32e6d92c495f14cf37544bf951af0177b011b50b3214214cff3e40000000000000500636363636300000000000000008b000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d01002400200020f8d37637365062c61993ee4d85d236cd1a16febe78acfa9c8277d976206fc4000000000000350000002000b434d281eba41cc15cc554c793529b888d0e00fe766f96d8bc650c05edbca7d01100313233343536373839306162636465666700000000be000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d010024002000fda083fdd56b4c7e872e34689482d7c92fcc5a8a3b3467205ab601ad07684a4f00000000000000000000680000000300200015d57ccde08ec4b00875acdc139f5df26baa801b8d0bfbb7df7bc221bf70b75820004854526d5372bea55bfbb39826eea5bcfaa794d4dd519f698f8772a355152a702000fc46f835f61b1e87e8c1ed30839eceabbaeee8e5d5a88c637b2232beff473ce701004a00000002002000a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f281800002000bafc4b982e42efcf19ffd4316c646dc4143e9c13d1b940ba89a312f5c49d4e130100000002008d0000000200000008020000043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba20002000037b927eed15f4d837bc2dd8de510f7f949ec0aaadc4027e9c1d3bd8c992401c69763ee4dad95b8ad46c6e5b70a1b9ecf80326cff7461044dca2baae59bd337408d000000020000000802000004a984aea3014fff3308efef4202646c6daa012590d460ed6a453e43c16e96dadac411368c940836352c8cc46752d51a0467ac69361b96413992d1ec6323f300fc00020000a0d66bbfd5ff9ca942239205bb1f6e62d1b3ffa0602be9cb593c967bdb1c0e705f3598aa245c6b4caa79a974a256fa8fc026011196060b5b4d9018e7f886eced'
+------- Dump of the transaction data ------
+* transaction_id: b'f93eef6c22d3a751e0a9513e31381f83d5d54a9a9b775f79cb30644dbce8360e'
+version: 3
+timestamp: 1568129254766
+id_length of transaction_id: 32
+Event[]: 0
+Reference[]: 0
+Relation[]: 3
+ [0]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'305a4c125f40ac70c42ad0a174b64052d3453d6020f6003f94697f1347f65518'
+     asset_id: None
+  Asset:
+     asset_id: b'853869d54214eeb9d319de88202bad3b92819eb0cca7bfed89bc08c6b13484da'
+     user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+     nonce: b'ec837fc792c32e6d92c495f14cf37544bf951af0177b011b50b3214214cff3e4'
+     file_size: 0
+     file_digest: None
+     body_size: 5
+     body: b'ccccc'
+ [1]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'20f8d37637365062c61993ee4d85d236cd1a16febe78acfa9c8277d976206fc4'
+     asset_id: None
+  AssetRaw:
+     asset_id: b'b434d281eba41cc15cc554c793529b888d0e00fe766f96d8bc650c05edbca7d0'
+     body_size: 17
+     body: b'1234567890abcdefg'
+ [2]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'fda083fdd56b4c7e872e34689482d7c92fcc5a8a3b3467205ab601ad07684a4f'
+     asset_id: None
+  AssetHash:
+     num of hashes: 3
+     asset_id(hash): b'15d57ccde08ec4b00875acdc139f5df26baa801b8d0bfbb7df7bc221bf70b758'
+     asset_id(hash): b'4854526d5372bea55bfbb39826eea5bcfaa794d4dd519f698f8772a355152a70'
+     asset_id(hash): b'fc46f835f61b1e87e8c1ed30839eceabbaeee8e5d5a88c637b2232beff473ce7'
+Witness:
+ [0]
+  user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+  sig_index: 0
+ [1]
+  user_id: b'bafc4b982e42efcf19ffd4316c646dc4143e9c13d1b940ba89a312f5c49d4e13'
+  sig_index: 1
+Cross_Ref: None
+Signature[]: 2
+ [0]
+  key_type: 2
+  signature: b'37b927eed15f4d837bc2dd8de510f7f949ec0aaadc4027e9c1d3bd8c992401c69763ee4dad95b8ad46c6e5b70a1b9ecf80326cff7461044dca2baae59bd33740'
+  pubkey: b'043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba2'
+ [1]
+  key_type: 2
+  signature: b'a0d66bbfd5ff9ca942239205bb1f6e62d1b3ffa0602be9cb593c967bdb1c0e705f3598aa245c6b4caa79a974a256fa8fc026011196060b5b4d9018e7f886eced'
+  pubkey: b'04a984aea3014fff3308efef4202646c6daa012590d460ed6a453e43c16e96dadac411368c940836352c8cc46752d51a0467ac69361b96413992d1ec6323f300fc'
+
+------- Dump of the transaction data ------
+* transaction_id: b'f93eef6c22d3a751e0a9513e31381f83d5d54a9a9b775f79cb30644dbce8360e'
+version: 3
+timestamp: 1568129254766
+id_length of transaction_id: 32
+Event[]: 0
+Reference[]: 0
+Relation[]: 3
+ [0]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'305a4c125f40ac70c42ad0a174b64052d3453d6020f6003f94697f1347f65518'
+     asset_id: None
+  Asset:
+     asset_id: b'853869d54214eeb9d319de88202bad3b92819eb0cca7bfed89bc08c6b13484da'
+     user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+     nonce: b'ec837fc792c32e6d92c495f14cf37544bf951af0177b011b50b3214214cff3e4'
+     file_size: 0
+     file_digest: None
+     body_size: 5
+     body: b'ccccc'
+ [1]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'20f8d37637365062c61993ee4d85d236cd1a16febe78acfa9c8277d976206fc4'
+     asset_id: None
+  AssetRaw:
+     asset_id: b'b434d281eba41cc15cc554c793529b888d0e00fe766f96d8bc650c05edbca7d0'
+     body_size: 17
+     body: b'1234567890abcdefg'
+ [2]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'fda083fdd56b4c7e872e34689482d7c92fcc5a8a3b3467205ab601ad07684a4f'
+     asset_id: None
+  AssetHash:
+     num of hashes: 3
+     asset_id(hash): b'15d57ccde08ec4b00875acdc139f5df26baa801b8d0bfbb7df7bc221bf70b758'
+     asset_id(hash): b'4854526d5372bea55bfbb39826eea5bcfaa794d4dd519f698f8772a355152a70'
+     asset_id(hash): b'fc46f835f61b1e87e8c1ed30839eceabbaeee8e5d5a88c637b2232beff473ce7'
+Witness:
+ [0]
+  user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+  sig_index: 0
+ [1]
+  user_id: b'bafc4b982e42efcf19ffd4316c646dc4143e9c13d1b940ba89a312f5c49d4e13'
+  sig_index: 1
+Cross_Ref: None
+Signature[]: 2
+ [0]
+  key_type: 2
+  signature: b'37b927eed15f4d837bc2dd8de510f7f949ec0aaadc4027e9c1d3bd8c992401c69763ee4dad95b8ad46c6e5b70a1b9ecf80326cff7461044dca2baae59bd33740'
+  pubkey: b'043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba2'
+ [1]
+  key_type: 2
+  signature: b'a0d66bbfd5ff9ca942239205bb1f6e62d1b3ffa0602be9cb593c967bdb1c0e705f3598aa245c6b4caa79a974a256fa8fc026011196060b5b4d9018e7f886eced'
+  pubkey: b'04a984aea3014fff3308efef4202646c6daa012590d460ed6a453e43c16e96dadac411368c940836352c8cc46752d51a0467ac69361b96413992d1ec6323f300fc'
+
+Proof result: 1
+.
+----- test_02_create_transaction_by_utility -----
+Digest: b'a398211d1b96d0e98f3527d7e7b7f60cfbf9b249532800eaa07565ea1b69b66f'
+Serialized data: b'030000007185c91b6d0100002000000000000600c9000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d0100240020000da28bb10e56540da2b20a02971e8f4e81aa22f58e5241412f797474cac9b1b400007300000020004676653048106e33095a8b82c9f28bc53e1ccff3de5df942ee379d62d91ca6c72000a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818200038d60769abcf723a01fd5816999bc91a5859098f221524e68f4d697892bf8d8e0000000000000500636363636300000000000000007a000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d0100240020006b3fd1f7a9456ff7b3f2396600395cba2ffcbe3f294b47b4c35cf271fe24686c0000000000002400000020003720c127a0c24434338d3b278c5e5da332ccfcfe619417a18cb4b544a63b9dc70000000000009c000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d0100240020001e0aab8370cd6c53975cb2e4aea867ccb8d0901d930d83ed1f4fdcbfac5d05dc000000000000000000004600000002002000762a3aada1cdb75890cc19c8a6f0224e3cb19e286b727c96319aa042db4410d420000a3d69fdf03a392027a7beae4db734d9fd348a477761eb34e5a2170787dacf42a4000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d000074000000200097a3af2959da78497149ad4fc573caa7808af1785de46f20f880970655bbbe7a2000a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818200043b9669c5165628dfc7e5325a182b6e01226bfce1401b53c6ecbd7716af4cb73000000000000060078787878787800000000000000005a000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d0000000000002a0000002000aa176f90a970322e0b8ccbf690f7cb59cfcaabd6d78070f53c47f2751037618a06007979797979790000000076000000200078cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d000000000000000000004600000002002000997e4c823d2d03e1c2e88557e7267318b626d654e7b2be4bd7e908de3046d70720005c332c636571bbc0c086f284e2aa2b29c6abd361624d1df223a3d90980f7c5b601004a00000002002000a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f281800002000bafc4b982e42efcf19ffd4316c646dc4143e9c13d1b940ba89a312f5c49d4e130100000002008d0000000200000008020000043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba20002000020570fecffdbd87518a823ef77b526cb1dccb0d075d308285b0f10340e4551c5a7748396142fd1566f364a774842354b95c2a532467ab218c24f4ca0f5ebe7868d000000020000000802000004a984aea3014fff3308efef4202646c6daa012590d460ed6a453e43c16e96dadac411368c940836352c8cc46752d51a0467ac69361b96413992d1ec6323f300fc00020000f1a0b56a405db87e274ecba2204a2f445df732334fa0af45bec319be99aad19a0bac676a8e9dfbf42f9bafb271ea26081e933d5fe8a5e57524eb5f479919b30d'
+------- Dump of the transaction data ------
+* transaction_id: b'a398211d1b96d0e98f3527d7e7b7f60cfbf9b249532800eaa07565ea1b69b66f'
+version: 3
+timestamp: 1568129254769
+id_length of transaction_id: 32
+Event[]: 0
+Reference[]: 0
+Relation[]: 6
+ [0]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'0da28bb10e56540da2b20a02971e8f4e81aa22f58e5241412f797474cac9b1b4'
+     asset_id: None
+  Asset:
+     asset_id: b'4676653048106e33095a8b82c9f28bc53e1ccff3de5df942ee379d62d91ca6c7'
+     user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+     nonce: b'38d60769abcf723a01fd5816999bc91a5859098f221524e68f4d697892bf8d8e'
+     file_size: 0
+     file_digest: None
+     body_size: 5
+     body: b'ccccc'
+ [1]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'6b3fd1f7a9456ff7b3f2396600395cba2ffcbe3f294b47b4c35cf271fe24686c'
+     asset_id: None
+  AssetRaw:
+     asset_id: b'3720c127a0c24434338d3b278c5e5da332ccfcfe619417a18cb4b544a63b9dc7'
+     body_size: 0
+     body: None
+ [2]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'1e0aab8370cd6c53975cb2e4aea867ccb8d0901d930d83ed1f4fdcbfac5d05dc'
+     asset_id: None
+  AssetHash:
+     num of hashes: 2
+     asset_id(hash): b'762a3aada1cdb75890cc19c8a6f0224e3cb19e286b727c96319aa042db4410d4'
+     asset_id(hash): b'0a3d69fdf03a392027a7beae4db734d9fd348a477761eb34e5a2170787dacf42'
+ [3]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Asset:
+     asset_id: b'97a3af2959da78497149ad4fc573caa7808af1785de46f20f880970655bbbe7a'
+     user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+     nonce: b'43b9669c5165628dfc7e5325a182b6e01226bfce1401b53c6ecbd7716af4cb73'
+     file_size: 0
+     file_digest: None
+     body_size: 6
+     body: b'xxxxxx'
+ [4]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  AssetRaw:
+     asset_id: b'aa176f90a970322e0b8ccbf690f7cb59cfcaabd6d78070f53c47f2751037618a'
+     body_size: 6
+     body: b'yyyyyy'
+ [5]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  AssetHash:
+     num of hashes: 2
+     asset_id(hash): b'997e4c823d2d03e1c2e88557e7267318b626d654e7b2be4bd7e908de3046d707'
+     asset_id(hash): b'5c332c636571bbc0c086f284e2aa2b29c6abd361624d1df223a3d90980f7c5b6'
+Witness:
+ [0]
+  user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+  sig_index: 0
+ [1]
+  user_id: b'bafc4b982e42efcf19ffd4316c646dc4143e9c13d1b940ba89a312f5c49d4e13'
+  sig_index: 1
+Cross_Ref: None
+Signature[]: 2
+ [0]
+  key_type: 2
+  signature: b'20570fecffdbd87518a823ef77b526cb1dccb0d075d308285b0f10340e4551c5a7748396142fd1566f364a774842354b95c2a532467ab218c24f4ca0f5ebe786'
+  pubkey: b'043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba2'
+ [1]
+  key_type: 2
+  signature: b'f1a0b56a405db87e274ecba2204a2f445df732334fa0af45bec319be99aad19a0bac676a8e9dfbf42f9bafb271ea26081e933d5fe8a5e57524eb5f479919b30d'
+  pubkey: b'04a984aea3014fff3308efef4202646c6daa012590d460ed6a453e43c16e96dadac411368c940836352c8cc46752d51a0467ac69361b96413992d1ec6323f300fc'
+
+------- Dump of the transaction data ------
+* transaction_id: b'a398211d1b96d0e98f3527d7e7b7f60cfbf9b249532800eaa07565ea1b69b66f'
+version: 3
+timestamp: 1568129254769
+id_length of transaction_id: 32
+Event[]: 0
+Reference[]: 0
+Relation[]: 6
+ [0]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'0da28bb10e56540da2b20a02971e8f4e81aa22f58e5241412f797474cac9b1b4'
+     asset_id: None
+  Asset:
+     asset_id: b'4676653048106e33095a8b82c9f28bc53e1ccff3de5df942ee379d62d91ca6c7'
+     user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+     nonce: b'38d60769abcf723a01fd5816999bc91a5859098f221524e68f4d697892bf8d8e'
+     file_size: 0
+     file_digest: None
+     body_size: 5
+     body: b'ccccc'
+ [1]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'6b3fd1f7a9456ff7b3f2396600395cba2ffcbe3f294b47b4c35cf271fe24686c'
+     asset_id: None
+  AssetRaw:
+     asset_id: b'3720c127a0c24434338d3b278c5e5da332ccfcfe619417a18cb4b544a63b9dc7'
+     body_size: 0
+     body: None
+ [2]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Pointers[]: 1
+   [0]
+     transaction_id: b'1e0aab8370cd6c53975cb2e4aea867ccb8d0901d930d83ed1f4fdcbfac5d05dc'
+     asset_id: None
+  AssetHash:
+     num of hashes: 2
+     asset_id(hash): b'762a3aada1cdb75890cc19c8a6f0224e3cb19e286b727c96319aa042db4410d4'
+     asset_id(hash): b'0a3d69fdf03a392027a7beae4db734d9fd348a477761eb34e5a2170787dacf42'
+ [3]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  Asset:
+     asset_id: b'97a3af2959da78497149ad4fc573caa7808af1785de46f20f880970655bbbe7a'
+     user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+     nonce: b'43b9669c5165628dfc7e5325a182b6e01226bfce1401b53c6ecbd7716af4cb73'
+     file_size: 0
+     file_digest: None
+     body_size: 6
+     body: b'xxxxxx'
+ [4]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  AssetRaw:
+     asset_id: b'aa176f90a970322e0b8ccbf690f7cb59cfcaabd6d78070f53c47f2751037618a'
+     body_size: 6
+     body: b'yyyyyy'
+ [5]
+  asset_group_id: b'78cc69ad406718b1bd46d74be66d8220ce6a99028a52ad358c482645f9b8ac5d'
+  AssetHash:
+     num of hashes: 2
+     asset_id(hash): b'997e4c823d2d03e1c2e88557e7267318b626d654e7b2be4bd7e908de3046d707'
+     asset_id(hash): b'5c332c636571bbc0c086f284e2aa2b29c6abd361624d1df223a3d90980f7c5b6'
+Witness:
+ [0]
+  user_id: b'a226591314fe4df6846b45041b79aca989a0d5fe0bd4d45ccfc99a91b58f2818'
+  sig_index: 0
+ [1]
+  user_id: b'bafc4b982e42efcf19ffd4316c646dc4143e9c13d1b940ba89a312f5c49d4e13'
+  sig_index: 1
+Cross_Ref: None
+Signature[]: 2
+ [0]
+  key_type: 2
+  signature: b'20570fecffdbd87518a823ef77b526cb1dccb0d075d308285b0f10340e4551c5a7748396142fd1566f364a774842354b95c2a532467ab218c24f4ca0f5ebe786'
+  pubkey: b'043a2595b43143c51e08ddb78d1a252f2dd5d4e35816a93bb82a6cc39491c27971897146455b19c3919dc5362721421f20b69bd81351a5a3c16794a12138a76ba2'
+ [1]
+  key_type: 2
+  signature: b'f1a0b56a405db87e274ecba2204a2f445df732334fa0af45bec319be99aad19a0bac676a8e9dfbf42f9bafb271ea26081e933d5fe8a5e57524eb5f479919b30d'
+  pubkey: b'04a984aea3014fff3308efef4202646c6daa012590d460ed6a453e43c16e96dadac411368c940836352c8cc46752d51a0467ac69361b96413992d1ec6323f300fc'
+
+Proof result: 1
+.
+
+=============================== warnings summary ===============================
+../bbclib/libs/bbclib_utils.py:24
+  ../bbclib/libs/bbclib_utils.py:24: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated, and in 3.8 it will stop working
+    from collections import Mapping
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+===================== 3 passed, 1 warnings in 0.06 seconds =====================
