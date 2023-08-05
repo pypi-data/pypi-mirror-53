@@ -1,0 +1,7 @@
+__title__ = 'pyprofilers'
+__description__ = 'A convenient wrapper library for different Python profilers.'
+__url__ = 'https://github.com/andreasfelix/pyprofilers'
+__version__ = '0.1'
+__author__ = 'Felix Andreas'
+__license__ = ''
+__copyright__ = 'Copyright 2019 Felix Andreas'
