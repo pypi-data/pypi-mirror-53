@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: biuletyn-bip
+Version: 0.0.0.dev0
+Summary: Polish BIP (Biuletyn Informacji Publicznej) as Flask application
+Home-page: http://github.com/zgoda/bip
+Author: Jarek Zgoda
+Author-email: jarek.zgoda@gmail.com
+License: GPLv3
+Description: Biuletyn Informacji Publicznej
+        ==============================
+        
+        .. image:: https://travis-ci.com/zgoda/bip.svg?branch=master
+            :target: https://travis-ci.com/zgoda/bip
+            :alt: Travis-CI build status
+        
+        .. image:: https://api.codacy.com/project/badge/Grade/0f475803793e4774be186f7e4c937d15
+            :target: https://www.codacy.com/manual/jarek.zgoda/bip
+            :alt: Codacy code quality report
+        
+        .. image:: https://api.codacy.com/project/badge/Coverage/0f475803793e4774be186f7e4c937d15
+            :target: https://www.codacy.com/manual/jarek.zgoda/bip
+            :alt: Codacy coverage report
+        
+        Flask application that implements Polish BIP baseline
+        (`Bulletin of Public Information <https://en.wikipedia.org/wiki/Biuletyn_Informacji_Publicznej>`_)
+        according to Polish law requirements.
+        
+        Aplikacja Flask implementująca podstawowy Biuletyn Informacji Publicznej (BIP)
+        zgodnie z polskimi wymogami prawnymi.
+        
+Keywords: bip public information bulletin
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Flask
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: Polish
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Content Management System
+Requires-Python: ~=3.7
+Provides-Extra: prod
