@@ -1,0 +1,19 @@
+{
+    "datasets": {
+        "pascalvoc": {
+            "type": "thelper.data.PASCALVOC",
+            "params": {
+                "root": "data/pascalvoc",
+                "task": "detect",
+                "subset": "trainval",
+                "download": true,
+                "preload": false
+            }
+        }
+    },
+    "viz": {
+        "kwargs": {
+            "block": false
+        }
+    }
+}
