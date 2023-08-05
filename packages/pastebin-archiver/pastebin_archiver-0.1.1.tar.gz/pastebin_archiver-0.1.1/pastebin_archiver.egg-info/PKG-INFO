@@ -1,0 +1,94 @@
+Metadata-Version: 2.1
+Name: pastebin-archiver
+Version: 0.1.1
+Summary: Archive all public posts from Pastebin.com
+Home-page: https://gitlab.com/jonpavelich/pastebin-archiver
+Author: Jon Pavelich
+Author-email: pypi@jonpavelich.com
+License: MIT
+Description: 
+        # Pastebin Archiver
+        ## What is this?
+        This app retrieves new posts made on Pastebin.com and stores them offline in a database. You can see the latest public posts it will retrieve [here](https://pastebin.com/archive).
+        
+        ## Why?
+        Some of the pastes posted to Pastebin contain interesting or sensitive data, and sometimes pastes are deleted by their poster or Pastebin staff. Running an instance of this archiver lets you retrieve deleted pastes and build a large dataset to run queries against.
+        
+        ## Pastebin API info
+        _Important:_ This archiver uses the [Pastebin Scraping API](https://pastebin.com/doc_scraping_api) which requires a whitelisted IP address and a Lifetime Pro account to use. [More info here](https://pastebin.com/faq#17).
+        
+        ## Installation
+        ### Install from PyPI (recommended)
+        1. Ensure you have Python 3.7+ installed.
+        2. Run `pip install pastebin_archiver`
+        3. Done! Jump down to the [Usage](#usage) section to get started.
+        
+        ### Install from source
+        1. Ensure you have Python 3.7+ and pipenv installed
+            ```shell
+            $ python --version
+            Python 3.7.4
+            $ pipenv --version
+            pipenv, version 2018.11.26
+            ```
+        2. Clone the git repository
+            ```shell
+            git clone https://gitlab.com/jonpavelich/pastebin-archiver.git 
+            ```
+        3. Install the dependencies
+            ```shell
+            $ cd pastebin-archiver
+            $ pipenv install --dev
+            ``` 
+        4. Install the local package
+            ```shell
+            $ pipenv shell
+            $ pip install -e .
+            ```
+        5. Run it
+            ```shell
+            $ python -m pastebin_archiver
+            ```
+        
+        ## Usage
+        ### Command line usage
+        If you installed the package using pip, then you can simply run `pastebin-archiver`: 
+        ```shell
+        $ pastebin-archiver         # Run with default settings
+        $ pastebin-archiver --help  # Print available command line options
+        ```
+        
+        ### Python usage 
+        If you'd prefer to use the package in your own code, you can do so like this:
+        ```python
+        # Import the package
+        from pastebin_archiver import PastebinArchiver
+        
+        # (Optional) configure logging
+        logging.basicConfig(level=logging.DEBUG) 
+        
+        # Run the application
+        app = PastebinArchiver()
+        app.main()
+        ```
+        _Important:_ `app.main()` does not return, it runs forever looking for new pastes to fetch.
+        
+        ## Configuration
+        ### Database
+        By default, the fetched data will be saved to a SQLite database file in your working directory called `pastebin.db`. You can change this behaviour by passing in a database connection string using the `--database` option. For example:
+        ```shell
+        $ pastebin-archiver --database 'postgresql://user:pass@localhost/mydatabase'
+        ```
+        
+        For detailed info on connection strings, see [the SQLAlchemy documentation](https://docs.sqlalchemy.org/en/13/core/engines.html#database-urls).
+        
+        ## Contributing
+        If you find any bugs or have any suggestions to improve the project, please [open an issue](https://gitlab.com/jonpavelich/pastebin-archiver/issues/new) on GitLab. I'm not accepting merge requests for the project at this time, but you're always welcome to fork the project and work on it yourself.
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7.0
+Description-Content-Type: text/markdown
+Provides-Extra: postgresql
