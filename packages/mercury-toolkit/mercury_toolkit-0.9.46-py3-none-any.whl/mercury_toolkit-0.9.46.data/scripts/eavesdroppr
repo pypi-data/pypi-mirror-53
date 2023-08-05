@@ -1,0 +1,69 @@
+#!python
+
+'''Usage:
+          eavesdroppr --config <configfile> channels
+          eavesdroppr --config <configfile> -c <event_channel>
+          eavesdroppr --config <configfile> -c <event_channel> -g (trigger | procedure)
+
+   Options:
+          -g --generate    generate SQL LISTEN/NOTIFY code          
+          -c --channel     target event channel
+'''
+
+#
+# eavesdroppr: eavesdrop on PostgreSQL records
+# code generator and dependency injector for observing Postgres changes
+# via LISTEN/NOTIFY
+#
+
+import os, sys
+import docopt
+import yaml
+import pgpubsub
+import logging
+from snap import snap, common
+from mercury import edcore
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+def main(args):
+
+    yaml_config = None
+    if args.get('--config'):
+        yaml_config = common.read_config_file(args['<configfile>'])
+
+    if args.get('channels'):
+        print('\n'.join(yaml_config['channels'].keys()))
+        return 0
+
+    service_registry = common.ServiceObjectRegistry(snap.initialize_services(yaml_config))
+
+    channel_id = args['<event_channel>']
+    if not yaml_config['channels'].get(channel_id):
+        raise edcore.NoSuchEventChannel(channel_id)
+
+    channel_config = yaml_config['channels'][channel_id]
+
+    project_dir = common.load_config_var(yaml_config['globals']['project_home'])
+    sys.path.append(project_dir)
+
+    handler_module_name = yaml_config['globals']['handler_module']
+    handler_function_name = yaml_config['channels'][channel_id].get('handler_function') or 'default_handler'
+    handler_function = common.load_class(handler_function_name, handler_module_name)
+    connect_function_name = yaml_config['globals']['pubsub_connect_func']
+    connect_function = common.load_class(connect_function_name, handler_module_name)
+
+    if args['--generate']:
+        edcore.generate_code(channel_id, channel_config, **args)
+    else:
+        edcore.listen(channel_id,
+                      handler_function,
+                      connect_function,
+                      service_registry)
+
+
+if __name__ == '__main__':
+    args = docopt.docopt(__doc__)
+    main(args)
