@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: spiderling
+Version: 1.0.1a0
+Summary: Spiderling Analytics
+Home-page: UNKNOWN
+Author: Equipe Analytics
+Author-email: analytics@inmetrics.com.br
+License: GPLv3
+Keywords: orchestration
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: requests (>=2.22.0)
+Requires-Dist: psutil (>=5.6.3)
+Requires-Dist: netifaces (>=0.10.9)
+
+Spiderling é a interface (atuador) de comunicação entre os serviços de Analytics e o SpiderBot (Maestro) por meio da Plataforma da Konker.
+
+
