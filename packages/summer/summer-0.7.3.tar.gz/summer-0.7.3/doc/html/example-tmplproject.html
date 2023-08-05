@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Real World template project &mdash; summer 0.7.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="summer API doc" href="api.html" />
+    <link rel="prev" title="Basic Application Context" href="example-appcontext.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> summer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example-appcontext.html">Basic Application Context</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Real World template project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conf-py">conf.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmplprojecttest-py">tmplprojecttest.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmplproject-main-py">tmplproject/main.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmplproject-appcontext-py">tmplproject/appcontext.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">summer API doc</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">summer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="examples.html">Examples</a> &raquo;</li>
+        
+      <li>Real World template project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/example-tmplproject.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-summer.tests.examples.tmplproject">
+<span id="real-world-template-project"></span><h1>Real World template project<a class="headerlink" href="#module-summer.tests.examples.tmplproject" title="Permalink to this headline">¶</a></h1>
+<p>Presents a template of a real <em>Python</em> project and shows features of the
+summer framework.</p>
+<p>Requirements:</p>
+<ul class="simple">
+<li><p><em>SQLite</em> – uses in memory db available with no special config.</p></li>
+<li><p><em>LDAP</em> – uses simple ldap db holding user accounts.</p></li>
+</ul>
+<p>SQL database is simple and uses just two entities with m:n relationship
+between Category &lt;–&gt; Item.</p>
+<p>LDAP support can be turned off, if not, you will need to set up your own
+ldap server, see <code class="file docutils literal notranslate"><span class="pre">ldap/sample.local.sh</span></code> for details.</p>
+<p>As well as with <a class="reference internal" href="example-appcontext.html"><span class="doc">Basic Application Context</span></a>, there are some obvious
+configuration files:</p>
+<ul class="simple">
+<li><p>standard Python logging config <code class="file docutils literal notranslate"><span class="pre">logging.cfg</span></code></p></li>
+<li><p>summer framework config <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code></p></li>
+</ul>
+<p>Project is organized with one single package, so please look at:</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">tmplprojecttest.py</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">tmplproject/main.py</span></code></p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">tmplproject/appcontext.py</span></code></p></li>
+</ul>
+<div class="section" id="conf-py">
+<h2>conf.py<a class="headerlink" href="#conf-py" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2009-2019 Martin Slouf &lt;martinslouf@users.sourceforge.net&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This file is a part of Summer.</span>
+<span class="c1">#</span>
+<span class="c1"># Summer is free software; you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the Free</span>
+<span class="c1"># Software Foundation; either version 3 of the License, or (at your option)</span>
+<span class="c1"># any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with this program; if not, write to the Free Software</span>
+<span class="c1"># Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">summer</span>
+
+<span class="c1"># create ConfigValue instance</span>
+<span class="n">config_value</span> <span class="o">=</span> <span class="n">summer</span><span class="o">.</span><span class="n">ConfigValue</span><span class="p">()</span>
+
+<span class="n">project_name</span> <span class="o">=</span> <span class="s2">&quot;tmplproject&quot;</span>
+<span class="n">project_topdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">))</span>
+
+<span class="c1"># allow override by setting SQLALCHEMY_URI environment variable (depends on your OS)</span>
+<span class="n">sqlalchemy_uri</span> <span class="o">=</span> <span class="n">config_value</span><span class="p">(</span><span class="s2">&quot;SQLALCHEMY_URI&quot;</span><span class="p">,</span> <span class="s2">&quot;sqlite:///:memory:&quot;</span><span class="p">)</span>
+<span class="n">sqlalchemy_autocommit</span> <span class="o">=</span> <span class="n">config_value</span><span class="p">(</span><span class="s2">&quot;SQLALCHEMY_AUTOCOMMIT&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">l10n_domain</span> <span class="o">=</span> <span class="n">project_name</span>
+<span class="n">l10n_dir</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">/l10n&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">project_topdir</span><span class="p">,)</span>
+<span class="n">l10n_languages</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;cs&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">)</span>
+
+<span class="n">ldap_host</span> <span class="o">=</span> <span class="n">config_value</span><span class="p">(</span><span class="s2">&quot;LDAP_HOST&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost&quot;</span><span class="p">)</span>
+<span class="n">ldap_port</span> <span class="o">=</span> <span class="n">config_value</span><span class="p">(</span><span class="s2">&quot;LDAP_PORT&quot;</span><span class="p">,</span> <span class="mi">389</span><span class="p">)</span>
+<span class="n">ldap_base</span> <span class="o">=</span> <span class="s2">&quot;dc = sample, dc = local&quot;</span>
+<span class="n">ldap_login</span> <span class="o">=</span> <span class="n">config_value</span><span class="p">(</span><span class="s2">&quot;LDAP_LOGIN&quot;</span><span class="p">,</span> <span class="s2">&quot;cn = admin, dc = sample, dc = local&quot;</span><span class="p">)</span>
+<span class="n">ldap_password</span> <span class="o">=</span> <span class="n">config_value</span><span class="p">(</span><span class="s2">&quot;LDAP_PASSWORD&quot;</span><span class="p">,</span> <span class="s2">&quot;secret&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmplprojecttest-py">
+<h2>tmplprojecttest.py<a class="headerlink" href="#tmplprojecttest-py" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2009-2019 Martin Slouf &lt;martinslouf@users.sourceforge.net&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This file is a part of Summer.</span>
+<span class="c1">#</span>
+<span class="c1"># Summer is free software; you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the Free</span>
+<span class="c1"># Software Foundation; either version 3 of the License, or (at your option)</span>
+<span class="c1"># any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with this program; if not, write to the Free Software</span>
+<span class="c1"># Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+
+<span class="sd">&quot;&quot;&quot;Relatively advanced standalone example.</span>
+
+<span class="sd">Check the sample config files in this directory.  Look at the single</span>
+<span class="sd">:py:module:`tmplproject` module.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging.config</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c1"># configure logging as soon as possible</span>
+<span class="n">LOGGING_CFG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;logging.cfg&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">fileConfig</span><span class="p">(</span><span class="n">LOGGING_CFG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;logging config = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">LOGGING_CFG</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">summer.tests.examples.tmplproject.tmplproject</span> <span class="k">import</span> <span class="n">main</span>
+
+
+<span class="k">class</span> <span class="nc">TmplProjectTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Demonstrates various summer features in *real-world* project.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">test_tmplproject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;#### TEST STARTS HERE ####&quot;</span><span class="p">)</span>
+        <span class="n">main</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;#### TEST ENDS HERE ####&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmplproject-main-py">
+<h2>tmplproject/main.py<a class="headerlink" href="#tmplproject-main-py" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2009-2019 Martin Slouf &lt;martinslouf@users.sourceforge.net&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This file is a part of Summer.</span>
+<span class="c1">#</span>
+<span class="c1"># Summer is free software; you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the Free</span>
+<span class="c1"># Software Foundation; either version 3 of the License, or (at your option)</span>
+<span class="c1"># any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with this program; if not, write to the Free Software</span>
+<span class="c1"># Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+
+<span class="sd">&quot;&quot;&quot;Main entry point to the program.&quot;&quot;&quot;</span>
+
+<span class="c1"># usual imports</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">summer</span>
+
+<span class="c1"># import ApplicationContext</span>
+<span class="kn">from</span> <span class="nn">.appcontext</span> <span class="k">import</span> <span class="n">ctx</span>
+
+<span class="c1"># import for demo purposes</span>
+<span class="kn">from</span> <span class="nn">.model</span> <span class="k">import</span> <span class="n">Category</span>
+
+<span class="c1"># configure logging as soon as possible</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Entry point to our program.&quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;sample started&quot;</span><span class="p">)</span>
+    <span class="c1"># create the sample database</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">session_factory</span><span class="o">.</span><span class="n">create_schema</span><span class="p">()</span>
+    <span class="c1"># run demonstration</span>
+    <span class="n">do_demonstration</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;sample finished&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">do_demonstration</span><span class="p">():</span>
+    <span class="n">mark</span> <span class="o">=</span> <span class="s2">&quot;PROGRAM OUTPUT&gt;&quot;</span>
+
+    <span class="c1"># l10n</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> test localization -- </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mark</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;localized message&quot;</span><span class="p">))</span>
+
+    <span class="c1"># db</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;let&#39;s create some objects and persist them&quot;</span><span class="p">)</span>
+    <span class="n">category_dao</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">category_dao</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+        <span class="n">cat</span> <span class="o">=</span> <span class="n">Category</span><span class="p">()</span>
+        <span class="n">cat</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">cat</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;code_</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">order</span><span class="p">,)</span>
+        <span class="n">category_dao</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+
+    <span class="c1"># we go through result set using paging</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;let&#39;s iterate using db paging through what we have just persisted&quot;</span><span class="p">)</span>
+    <span class="n">cat_filter</span> <span class="o">=</span> <span class="n">summer</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">cat_filter</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="n">page</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> page </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mark</span><span class="p">,</span> <span class="n">cat_filter</span><span class="o">.</span><span class="n">page</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">category_dao</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">cat_filter</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mark</span><span class="p">,</span> <span class="n">cat</span><span class="p">)</span>
+
+    <span class="c1"># ldap</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;let&#39;s use LDAP demo query for arbitrary objects (not all of them, just those with ou=users)&quot;</span><span class="p">)</span>
+    <span class="n">user_manager</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">user_manager</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">user_manager</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mark</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmplproject-appcontext-py">
+<h2>tmplproject/appcontext.py<a class="headerlink" href="#tmplproject-appcontext-py" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2009-2019 Martin Slouf &lt;martinslouf@users.sourceforge.net&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This file is a part of Summer.</span>
+<span class="c1">#</span>
+<span class="c1"># Summer is free software; you can redistribute it and/or modify it under</span>
+<span class="c1"># the terms of the GNU Lesser General Public License as published by the Free</span>
+<span class="c1"># Software Foundation; either version 3 of the License, or (at your option)</span>
+<span class="c1"># any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with this program; if not, write to the Free Software</span>
+<span class="c1"># Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Application context definition.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">summer</span>
+
+<span class="c1"># do all the necessary imports, all that is imported bellow is deployed</span>
+<span class="c1"># into the context, just as an example -- you can deploy anything you want</span>
+<span class="c1"># of course</span>
+<span class="kn">from</span> <span class="nn">.orm.tables</span> <span class="k">import</span> <span class="n">TableDefinitions</span>
+<span class="kn">from</span> <span class="nn">.orm.mappings</span> <span class="k">import</span> <span class="n">ClassMappings</span>
+<span class="kn">from</span> <span class="nn">.manager</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">CategoryDao</span><span class="p">,</span> <span class="n">CategoryManager</span><span class="p">,</span>
+    <span class="n">ItemDao</span><span class="p">,</span> <span class="n">ItemManager</span><span class="p">,</span>
+    <span class="n">UserDao</span><span class="p">,</span> <span class="n">UserManager</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">conf</span>
+
+
+<span class="k">class</span> <span class="nc">ApplicationContext</span><span class="p">(</span><span class="n">summer</span><span class="o">.</span><span class="n">Context</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">session_provider</span> <span class="o">=</span> <span class="n">summer</span><span class="o">.</span><span class="n">DefaultSessionProvider</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">sqlalchemy_uri</span><span class="p">,</span> <span class="n">conf</span><span class="o">.</span><span class="n">sqlalchemy_autocommit</span><span class="p">)</span>
+        <span class="n">ldap_connection_provider</span> <span class="o">=</span> <span class="n">summer</span><span class="o">.</span><span class="n">DefaultLdapConnectionProvider</span><span class="p">(</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">ldap_host</span><span class="p">,</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">ldap_port</span><span class="p">,</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">ldap_login</span><span class="p">,</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">ldap_password</span><span class="p">,</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">ldap_base</span><span class="p">)</span>
+        <span class="n">l10n</span> <span class="o">=</span> <span class="n">summer</span><span class="o">.</span><span class="n">Localization</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">l10n_domain</span><span class="p">,</span> <span class="n">conf</span><span class="o">.</span><span class="n">l10n_dir</span><span class="p">,</span> <span class="n">conf</span><span class="o">.</span><span class="n">l10n_languages</span><span class="p">)</span>
+        <span class="n">summer</span><span class="o">.</span><span class="n">Context</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_provider</span><span class="p">,</span> <span class="n">ldap_connection_provider</span><span class="p">,</span> <span class="n">l10n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">orm_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># you can do whatever setup you want, here you can see so-called</span>
+        <span class="c1"># &quot;classical&quot; mapping, see *SqlAlchemy* for details</span>
+
+        <span class="c1"># first let&#39;s complete database initialization with custom table</span>
+        <span class="c1"># definitions and mappings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_factory</span><span class="o">.</span><span class="n">table_definitions</span> <span class="o">=</span> <span class="n">TableDefinitions</span><span class="p">()</span>
+        <span class="c1"># class mappings must be defined _after_ table definitions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_factory</span><span class="o">.</span><span class="n">class_mappings</span> <span class="o">=</span> <span class="n">ClassMappings</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">context_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># deploy our dao objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category_dao</span> <span class="o">=</span> <span class="n">CategoryDao</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_factory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_dao</span> <span class="o">=</span> <span class="n">ItemDao</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_factory</span><span class="p">)</span>
+
+        <span class="c1"># let&#39;s deploy LDAP DAO&#39;s; treat them as analogy to SQL DAO&#39;s,</span>
+        <span class="c1"># though the LDAP has no sense of SQL transaction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_dao</span> <span class="o">=</span> <span class="n">UserDao</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ldap_session_factory</span><span class="p">)</span>
+
+        <span class="c1"># let&#39;s define some higher level business level objects (managers)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category_manager</span> <span class="o">=</span> <span class="n">CategoryManager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category_dao</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_manager</span> <span class="o">=</span> <span class="n">ItemManager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">item_dao</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_manager</span> <span class="o">=</span> <span class="n">UserManager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_dao</span><span class="p">)</span>
+
+
+<span class="c1"># module level reference to (singleton) ApplicationContext</span>
+<span class="n">ctx</span> <span class="o">=</span> <span class="n">ApplicationContext</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="summer API doc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example-appcontext.html" class="btn btn-neutral float-left" title="Basic Application Context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2019, martinslouf@users.sourceforge.net
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

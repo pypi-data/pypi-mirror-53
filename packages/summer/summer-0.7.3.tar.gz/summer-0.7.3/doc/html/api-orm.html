@@ -1,0 +1,905 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ORM – object relational mapping &mdash; summer 0.7.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LDAP – lightweight directory access)" href="api-ldap.html" />
+    <link rel="prev" title="Core modules" href="api-core.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> summer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">summer API doc</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api-core.html">Core modules</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ORM – object relational mapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.sf"><strong>sf</strong> – ORM session factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.dao"><strong>dao</strong> – ORM data access object support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api-ldap.html">LDAP – lightweight directory access)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-aop.html">AOP modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-pc.html">Producer–Consumer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-misc.html">Miscellaneous modules</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">summer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">summer API doc</a> &raquo;</li>
+        
+      <li>ORM – object relational mapping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api-orm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="orm-object-relational-mapping">
+<h1>ORM – object relational mapping<a class="headerlink" href="#orm-object-relational-mapping" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-summer.sf">
+<span id="sf-orm-session-factory"></span><h2><strong>sf</strong> – ORM session factory<a class="headerlink" href="#module-summer.sf" title="Permalink to this headline">¶</a></h2>
+<p>Module <code class="docutils literal notranslate"><span class="pre">sf</span></code> defines <a class="reference internal" href="#summer.sf.SessionFactory" title="summer.sf.SessionFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionFactory</span></code></a> class which is central
+point for your ORM mapping and <em>SQL database</em> access providing connections
+to database.</p>
+<dl class="class">
+<dt id="summer.sf.SessionProvider">
+<em class="property">class </em><code class="sig-prename descclassname">summer.sf.</code><code class="sig-name descname">SessionProvider</code><a class="reference internal" href="_modules/summer/sf.html#SessionProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to be used as based for providing <em>SqlAlchemy</em> session.</p>
+<p>See default implementation in
+<a class="reference internal" href="#summer.sf.DefaultSessionProvider" title="summer.sf.DefaultSessionProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.sf.DefaultSessionProvider</span></code></a>.</p>
+<dl class="method">
+<dt id="summer.sf.SessionProvider.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#SessionProvider.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionProvider.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionProvider.engine">
+<em class="property">property </em><code class="sig-name descname">engine</code><a class="headerlink" href="#summer.sf.SessionProvider.engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <em>SqlAlchemy</em> engine implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>SqlAlchemy</em> engine implementation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.engine.Engine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionProvider.sessionmaker">
+<em class="property">property </em><code class="sig-name descname">sessionmaker</code><a class="headerlink" href="#summer.sf.SessionProvider.sessionmaker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <em>SqlAlchemy</em> session factory class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>SqlAlchemy</em> session factory class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.orm.sessionmaker</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.sf.SessionProvider.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.sf.SessionProvider.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.sf.DefaultSessionProvider">
+<em class="property">class </em><code class="sig-prename descclassname">summer.sf.</code><code class="sig-name descname">DefaultSessionProvider</code><span class="sig-paren">(</span><em class="sig-param">uri: str</em>, <em class="sig-param">autocommit: bool = False</em>, <em class="sig-param">pool_recycle: int = 3600</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#DefaultSessionProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.DefaultSessionProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.sf.SessionProvider" title="summer.sf.SessionProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.sf.SessionProvider</span></code></a></p>
+<dl class="method">
+<dt id="summer.sf.DefaultSessionProvider.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">uri: str</em>, <em class="sig-param">autocommit: bool = False</em>, <em class="sig-param">pool_recycle: int = 3600</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#DefaultSessionProvider.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.DefaultSessionProvider.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uri</strong> (<em>str</em>) – <em>SqlAlchemy</em>’s uri (ie. connection string)</p></li>
+<li><p><strong>autocommit</strong> (<em>bool</em>) – <em>SqlAlchemy</em>’s autocommit</p></li>
+<li><p><strong>pool_recycle</strong> (<em>int</em>) – <em>SqlAlchemy</em>’s pool recycling timeout</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.DefaultSessionProvider.engine">
+<em class="property">property </em><code class="sig-name descname">engine</code><a class="headerlink" href="#summer.sf.DefaultSessionProvider.engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <em>SqlAlchemy</em> engine implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>SqlAlchemy</em> engine implementation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.engine.Engine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.DefaultSessionProvider.sessionmaker">
+<em class="property">property </em><code class="sig-name descname">sessionmaker</code><a class="headerlink" href="#summer.sf.DefaultSessionProvider.sessionmaker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <em>SqlAlchemy</em> session factory class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>SqlAlchemy</em> session factory class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.orm.sessionmaker</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.sf.SessionFactory">
+<em class="property">class </em><code class="sig-prename descclassname">summer.sf.</code><code class="sig-name descname">SessionFactory</code><span class="sig-paren">(</span><em class="sig-param">session_provider: summer.sf.SessionProvider</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#SessionFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Thread safe <em>SqlAlchemy</em> session provider.</p>
+<dl class="class">
+<dt id="summer.sf.SessionFactory.Local">
+<em class="property">class </em><code class="sig-name descname">Local</code><span class="sig-paren">(</span><em class="sig-param">engine: sqlalchemy.engine.base.Engine</em>, <em class="sig-param">sessionmaker: sqlalchemy.orm.session.sessionmaker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#SessionFactory.Local"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionFactory.Local" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_thread._local</span></code></p>
+<p>Thread local session &amp; connection wrapper.</p>
+<dl class="method">
+<dt id="summer.sf.SessionFactory.Local.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">engine: sqlalchemy.engine.base.Engine</em>, <em class="sig-param">sessionmaker: sqlalchemy.orm.session.sessionmaker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#SessionFactory.Local.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionFactory.Local.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.Local.sqlalchemy_session">
+<em class="property">property </em><code class="sig-name descname">sqlalchemy_session</code><a class="headerlink" href="#summer.sf.SessionFactory.Local.sqlalchemy_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current <em>SqlAlchemy</em> session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>existing of just created <em>SqlAlchemy</em> session.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.orm.Session</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.Local.autocommit">
+<em class="property">property </em><code class="sig-name descname">autocommit</code><a class="headerlink" href="#summer.sf.SessionFactory.Local.autocommit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates to <code class="xref py py-meth docutils literal notranslate"><span class="pre">sqlalchemy_session.autocommit()</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.Local.connection">
+<em class="property">property </em><code class="sig-name descname">connection</code><a class="headerlink" href="#summer.sf.SessionFactory.Local.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use <code class="xref py py-attr docutils literal notranslate"><span class="pre">connection.connection</span></code> to obtain <em>Python</em> DB API
+connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current thread-bound <em>SqlAclhemy</em> connection</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.engine.Connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.Local.active">
+<em class="property">property </em><code class="sig-name descname">active</code><a class="headerlink" href="#summer.sf.SessionFactory.Local.active" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get status of current <em>SqlAlchemy</em> transaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>True</cite> if transaction is in progress, <cite>False</cite> otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">session_provider: summer.sf.SessionProvider</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#SessionFactory.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionFactory.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.sf.SessionFactory" title="summer.sf.SessionFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionFactory</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>uri</strong> (<em>str</em>) – <em>SqlAlchemy</em> connection string (including username
+and password)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.table_definitions">
+<em class="property">property </em><code class="sig-name descname">table_definitions</code><a class="headerlink" href="#summer.sf.SessionFactory.table_definitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current table definitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDefinitions</span></code> instance</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>TableDefinitions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.class_mappings">
+<em class="property">property </em><code class="sig-name descname">class_mappings</code><a class="headerlink" href="#summer.sf.SessionFactory.class_mappings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current class mappings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current <code class="xref py py-class docutils literal notranslate"><span class="pre">ClassMappings</span></code> instance</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ClassMappings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.session">
+<em class="property">property </em><code class="sig-name descname">session</code><a class="headerlink" href="#summer.sf.SessionFactory.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current thread-local <em>SqlAlchemy session</em> wrapper (creating one, if
+non-exististent).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>existing or just created <em>SqlAlchemy session</em> wrapper</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#summer.sf.SessionFactory.Local" title="summer.sf.SessionFactory.Local">SessionFactory.Local</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.sqlalchemy_session">
+<em class="property">property </em><code class="sig-name descname">sqlalchemy_session</code><a class="headerlink" href="#summer.sf.SessionFactory.sqlalchemy_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates to <a class="reference internal" href="#summer.sf.SessionFactory.Local.sqlalchemy_session" title="summer.sf.SessionFactory.Local.sqlalchemy_session"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SessionFactory.Local.sqlalchemy_session()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.connection">
+<em class="property">property </em><code class="sig-name descname">connection</code><a class="headerlink" href="#summer.sf.SessionFactory.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates to <a class="reference internal" href="#summer.sf.SessionFactory.Local.connection" title="summer.sf.SessionFactory.Local.connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SessionFactory.Local.connection()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.dialect">
+<em class="property">property </em><code class="sig-name descname">dialect</code><a class="headerlink" href="#summer.sf.SessionFactory.dialect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <em>SqlAlchemy</em> dialect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current <em>SqlAlchemy</em> dialect</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.engine.Dialect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.sqlite_dialect">
+<em class="property">property </em><code class="sig-name descname">sqlite_dialect</code><a class="headerlink" href="#summer.sf.SessionFactory.sqlite_dialect" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>SQLite</em> is great database for testing or local access, but not designed
+for multi-threaded/-process applications.  Sometimes it is handy to
+know you are using it to bypass its limitations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>True</cite> if running over sqlite, <cite>False</cite> otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.SessionFactory.create_schema">
+<code class="sig-name descname">create_schema</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#SessionFactory.create_schema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.SessionFactory.create_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create database schema using <em>SqlAlchemy</em>.  Call once
+<a class="reference internal" href="#summer.sf.SessionFactory.table_definitions" title="summer.sf.SessionFactory.table_definitions"><code class="xref py py-attr docutils literal notranslate"><span class="pre">table_definitions</span></code></a> are set.</p>
+<p>Use with caution – will destroy all your data!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.sf.SessionFactory.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.sf.SessionFactory.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.sf.AbstractTableDefinitions">
+<em class="property">class </em><code class="sig-prename descclassname">summer.sf.</code><code class="sig-name descname">AbstractTableDefinitions</code><a class="reference internal" href="_modules/summer/sf.html#AbstractTableDefinitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.AbstractTableDefinitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container for <em>SqlAlchemy</em> table definitions.  Registers itself at
+session factory.  A callback class – use to provide table definitions
+to ORM.</p>
+<p>See <a class="reference internal" href="api-core.html#summer.context.Context.orm_init" title="summer.context.Context.orm_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">summer.context.Context.orm_init()</span></code></a> method.</p>
+<dl class="method">
+<dt id="summer.sf.AbstractTableDefinitions.define_tables">
+<code class="sig-name descname">define_tables</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#AbstractTableDefinitions.define_tables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.AbstractTableDefinitions.define_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override in subclasses to define database tables.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.sf.AbstractTableDefinitions.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.sf.AbstractTableDefinitions.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.sf.AbstractClassMappings">
+<em class="property">class </em><code class="sig-prename descclassname">summer.sf.</code><code class="sig-name descname">AbstractClassMappings</code><a class="reference internal" href="_modules/summer/sf.html#AbstractClassMappings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.AbstractClassMappings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container for <em>SqlAlchemy</em> mappings.  Registers itself at session
+factory.  A callback class – use to provide class mappings to ORM.</p>
+<p>See <a class="reference internal" href="api-core.html#summer.context.Context.orm_init" title="summer.context.Context.orm_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">summer.context.Context.orm_init()</span></code></a> method.</p>
+<dl class="attribute">
+<dt id="summer.sf.AbstractClassMappings.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.sf.AbstractClassMappings.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.sf.AbstractClassMappings.create_mappings">
+<code class="sig-name descname">create_mappings</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/sf.html#AbstractClassMappings.create_mappings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.sf.AbstractClassMappings.create_mappings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override in subclasses to define mappings (tables to ORM classes –
+entities).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.dao">
+<span id="dao-orm-data-access-object-support"></span><h2><strong>dao</strong> – ORM data access object support<a class="headerlink" href="#module-summer.dao" title="Permalink to this headline">¶</a></h2>
+<p>Provides <em>DAO</em> support.</p>
+<p>Base <a class="reference internal" href="#summer.dao.Dao" title="summer.dao.Dao"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dao</span></code></a> class provides access to <a class="reference internal" href="#summer.dao.Dao.session" title="summer.dao.Dao.session"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dao.session()</span></code></a> and
+py:meth:<cite>Dao.connection</cite> properties.</p>
+<p>That means that inside any <em>DAO</em> object subclassed from <a class="reference internal" href="#summer.dao.Dao" title="summer.dao.Dao"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dao</span></code></a> you
+can access current (thread-bound) <em>SqlAlchemy</em> session simply by accessing
+<a class="reference internal" href="#summer.dao.Dao.session" title="summer.dao.Dao.session"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dao.session()</span></code></a> and direct connection to database by accessing
+<a class="reference internal" href="#summer.dao.Dao.connection" title="summer.dao.Dao.connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dao.connection()</span></code></a>.</p>
+<p>Much more interesting is <a class="reference internal" href="#summer.dao.EntityDao" title="summer.dao.EntityDao"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityDao</span></code></a> class which is inteded to be
+used as a base <em>DAO</em> class for your <a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.Entity</span></code></a>.</p>
+<dl class="class">
+<dt id="summer.dao.Dao">
+<em class="property">class </em><code class="sig-prename descclassname">summer.dao.</code><code class="sig-name descname">Dao</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#Dao"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.Dao" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base <em>DAO</em> class.</p>
+<p>Provides safe access to thread bound session through <a class="reference internal" href="#summer.dao.Dao.session" title="summer.dao.Dao.session"><code class="xref py py-attr docutils literal notranslate"><span class="pre">session</span></code></a>
+attribute.  Alternative is <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_session()</span></code>.</p>
+<dl class="method">
+<dt id="summer.dao.Dao.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#Dao.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.Dao.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.dao.Dao" title="summer.dao.Dao"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dao</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>session_factory</strong> (<a class="reference internal" href="#summer.sf.SessionFactory" title="summer.sf.SessionFactory"><em>SessionFactory</em></a>) – session factory to be used</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.Dao.session">
+<em class="property">property </em><code class="sig-name descname">session</code><a class="headerlink" href="#summer.dao.Dao.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current session (bound to current thread).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.orm.Session</span></code> instance</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Session</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.Dao.connection">
+<em class="property">property </em><code class="sig-name descname">connection</code><a class="headerlink" href="#summer.dao.Dao.connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current connection (bound to current thread).</p>
+<p>Use <code class="xref py py-attr docutils literal notranslate"><span class="pre">connection.connection</span></code> to obtain
+<em>Python DB API 2.0 connection</em> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.engine.Connection</span></code> instance</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.dao.Dao.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.dao.Dao.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.dao.EntityDao">
+<em class="property">class </em><code class="sig-prename descclassname">summer.dao.</code><code class="sig-name descname">EntityDao</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em>, <em class="sig-param">clazz: type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#EntityDao"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.dao.Dao" title="summer.dao.Dao"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.dao.Dao</span></code></a></p>
+<p>Base <em>DAO</em> class for persistent classes subclassed from
+<a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.Entity</span></code></a>.</p>
+<p>Provides basic persistent operations.</p>
+<p>Defines another property – <a class="reference internal" href="#summer.dao.EntityDao.query" title="summer.dao.EntityDao.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">query()</span></code></a> – access to
+generic <em>SqlAlchemy</em> query over <a class="reference internal" href="#summer.dao.EntityDao.clazz" title="summer.dao.EntityDao.clazz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clazz()</span></code></a>.</p>
+<dl class="method">
+<dt id="summer.dao.EntityDao.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em>, <em class="sig-param">clazz: type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#EntityDao.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.dao.EntityDao" title="summer.dao.EntityDao"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityDao</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_factory</strong> (<a class="reference internal" href="#summer.sf.SessionFactory" title="summer.sf.SessionFactory"><em>SessionFactory</em></a>) – session factory intance to be
+passed to superclass
+(<a class="reference internal" href="#summer.dao.Dao" title="summer.dao.Dao"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dao</span></code></a>)</p></li>
+<li><p><strong>clazz</strong> (<em>type</em>) – reference to class type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.clazz">
+<em class="property">property </em><code class="sig-name descname">clazz</code><a class="headerlink" href="#summer.dao.EntityDao.clazz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get class type for this dao.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>class for this <a class="reference internal" href="#summer.dao.EntityDao" title="summer.dao.EntityDao"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityDao</span></code></a></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.query">
+<em class="property">property </em><code class="sig-name descname">query</code><a class="headerlink" href="#summer.dao.EntityDao.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get new query instance using <a class="reference internal" href="#summer.dao.EntityDao.clazz" title="summer.dao.EntityDao.clazz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clazz()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>query over <a class="reference internal" href="#summer.dao.EntityDao.clazz" title="summer.dao.EntityDao.clazz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clazz()</span></code></a></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>sqlalchemy.orm.Query</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao._check_entity">
+<code class="sig-name descname">_check_entity</code><span class="sig-paren">(</span><em class="sig-param">entity: summer.domain.Entity</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#EntityDao._check_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao._check_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if entity is correct.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity"><em>Entity</em></a>) – entity instance to be checked</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao._get_result_list">
+<code class="sig-name descname">_get_result_list</code><span class="sig-paren">(</span><em class="sig-param">query: sqlalchemy.orm.query.Query</em>, <em class="sig-param">query_filter: summer.domain.Filter</em><span class="sig-paren">)</span> &#x2192; List[summer.domain.Entity]<a class="reference internal" href="_modules/summer/dao.html#EntityDao._get_result_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao._get_result_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of entities with filter offset applied.  Useful for paging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>Query</em>) – query to be executed</p></li>
+<li><p><strong>query_filter</strong> (<a class="reference internal" href="api-core.html#summer.domain.Filter" title="summer.domain.Filter"><em>Filter</em></a>) – filter to be used for paging</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of entities using query and paging supplied</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">ident: object</em><span class="sig-paren">)</span> &#x2192; summer.domain.Entity<a class="reference internal" href="_modules/summer/dao.html#EntityDao.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get entity by <code class="xref py py-attr docutils literal notranslate"><span class="pre">Entity.id</span></code> attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ident</strong> (<em>object</em>) – primary key for <code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>entity instance or raise <code class="xref py py-class docutils literal notranslate"><span class="pre">NoResultFound</span></code> if</dt><dd><p>none is found</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">entity: summer.domain.Entity</em><span class="sig-paren">)</span> &#x2192; summer.domain.Entity<a class="reference internal" href="_modules/summer/dao.html#EntityDao.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save an entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity"><em>Entity</em></a>) – entity to be persisted</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>persisted instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.merge">
+<code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param">entity: summer.domain.Entity</em><span class="sig-paren">)</span> &#x2192; summer.domain.Entity<a class="reference internal" href="_modules/summer/dao.html#EntityDao.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge an entity.</p>
+<p>Same as <a class="reference internal" href="#summer.dao.EntityDao.save" title="summer.dao.EntityDao.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a>, but entity is associated with current session
+if it is not.  For example if entity comes from another session
+(or thread).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity"><em>Entity</em></a>) – entity to be merged</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>persisted instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">entity_or_id: object</em><span class="sig-paren">)</span> &#x2192; summer.domain.Entity<a class="reference internal" href="_modules/summer/dao.html#EntityDao.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entity_or_id</strong> (<em>object</em>) – either <code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code> or its primary
+key</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>just deleted entity instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param">query_filter: summer.domain.Filter</em><span class="sig-paren">)</span> &#x2192; List[summer.domain.Entity]<a class="reference internal" href="_modules/summer/dao.html#EntityDao.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find collection of entities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query_filter</strong> (<a class="reference internal" href="api-core.html#summer.domain.Filter" title="summer.domain.Filter"><em>Filter</em></a>) – filter with at least paging set</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of entities using query and paging supplied</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.get_by_uniq">
+<code class="sig-name descname">get_by_uniq</code><span class="sig-paren">(</span><em class="sig-param">col_name: str</em>, <em class="sig-param">col_value: object</em><span class="sig-paren">)</span> &#x2192; summer.domain.Entity<a class="reference internal" href="_modules/summer/dao.html#EntityDao.get_by_uniq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.get_by_uniq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get entity by its unique attribute value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col_name</strong> (<em>str</em>) – attribute column name</p></li>
+<li><p><strong>col_value</strong> (<em>object</em>) – attribute value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>entity instance or raise <code class="xref py py-class docutils literal notranslate"><span class="pre">NoResultFound</span></code> if</dt><dd><p>none is found.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.EntityDao.get_by_uniq_or_none">
+<code class="sig-name descname">get_by_uniq_or_none</code><span class="sig-paren">(</span><em class="sig-param">col_name: str</em>, <em class="sig-param">col_value: object</em><span class="sig-paren">)</span> &#x2192; summer.domain.Entity<a class="reference internal" href="_modules/summer/dao.html#EntityDao.get_by_uniq_or_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.EntityDao.get_by_uniq_or_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get entity by its unique attribute value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col_name</strong> (<em>str</em>) – attribute column name</p></li>
+<li><p><strong>col_value</strong> (<em>object</em>) – attribute value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>entity instance or <code class="docutils literal notranslate"><span class="pre">None</span></code> if none is found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api-core.html#summer.domain.Entity" title="summer.domain.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.dao.CodeEntityDao">
+<em class="property">class </em><code class="sig-prename descclassname">summer.dao.</code><code class="sig-name descname">CodeEntityDao</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em>, <em class="sig-param">clazz: type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#CodeEntityDao"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.CodeEntityDao" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.dao.EntityDao" title="summer.dao.EntityDao"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.dao.EntityDao</span></code></a></p>
+<p>Base <em>DAO</em> class for persistent classes subclassed from
+<a class="reference internal" href="api-core.html#summer.domain.CodeEntity" title="summer.domain.CodeEntity"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.CodeEntity</span></code></a>.</p>
+<dl class="method">
+<dt id="summer.dao.CodeEntityDao.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">session_factory: summer.sf.SessionFactory</em>, <em class="sig-param">clazz: type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#CodeEntityDao.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.CodeEntityDao.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.dao.CodeEntityDao" title="summer.dao.CodeEntityDao"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodeEntityDao</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_factory</strong> (<a class="reference internal" href="#summer.sf.SessionFactory" title="summer.sf.SessionFactory"><em>SessionFactory</em></a>) – session factory intance to be
+passed to superclass
+(<a class="reference internal" href="#summer.dao.Dao" title="summer.dao.Dao"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dao</span></code></a>)</p></li>
+<li><p><strong>clazz</strong> (<em>type</em>) – reference to class type</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.dao.CodeEntityDao.find_map">
+<code class="sig-name descname">find_map</code><span class="sig-paren">(</span><em class="sig-param">query_filter: summer.domain.Filter</em><span class="sig-paren">)</span> &#x2192; Dict[str, summer.domain.CodeEntity]<a class="reference internal" href="_modules/summer/dao.html#CodeEntityDao.find_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.CodeEntityDao.find_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the objects into a map by <code class="xref py py-attr docutils literal notranslate"><span class="pre">CodeEntity.code</span></code> attribute
+used as a map key.</p>
+<blockquote>
+<div><p>query_filter (Filter): filter with at least paging set</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dictionary of entities using query and paging supplied</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.dao.DaoException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.dao.</code><code class="sig-name descname">DaoException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#DaoException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.DaoException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-core.html#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.dao.DaoException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/dao.html#DaoException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.dao.DaoException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api-ldap.html" class="btn btn-neutral float-right" title="LDAP – lightweight directory access)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api-core.html" class="btn btn-neutral float-left" title="Core modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2019, martinslouf@users.sourceforge.net
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

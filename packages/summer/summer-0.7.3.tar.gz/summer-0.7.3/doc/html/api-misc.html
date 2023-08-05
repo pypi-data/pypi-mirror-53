@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Miscellaneous modules &mdash; summer 0.7.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Producer–Consumer" href="api-pc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> summer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">summer API doc</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api-core.html">Core modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-orm.html">ORM – object relational mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-ldap.html">LDAP – lightweight directory access)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-aop.html">AOP modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-pc.html">Producer–Consumer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Miscellaneous modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.utils"><strong>utils</strong> – utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.stringutils"><strong>stringutils</strong> – string utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.ipythonutils"><strong>ipythonutils</strong> – ipython debugging support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.ass"><strong>ass</strong> – assert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.lod"><strong>lod</strong> – list of dictionaries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">summer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">summer API doc</a> &raquo;</li>
+        
+      <li>Miscellaneous modules</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api-misc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="miscellaneous-modules">
+<h1>Miscellaneous modules<a class="headerlink" href="#miscellaneous-modules" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-summer.utils">
+<span id="utils-utilities"></span><h2><strong>utils</strong> – utilities<a class="headerlink" href="#module-summer.utils" title="Permalink to this headline">¶</a></h2>
+<p>Utility functions and classes.</p>
+<dl class="function">
+<dt id="summer.utils.locate_file">
+<code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">locate_file</code><span class="sig-paren">(</span><em class="sig-param">path_to_module: str</em>, <em class="sig-param">filename: str</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/summer/utils.html#locate_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.locate_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to locate the file in <em>module path</em>.  Starts the search in
+current directory and goes up in directory structure until file is
+found or module namespace is left.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_to_module</strong> (<em>str</em>) – directory path, ususally just pass in
+<code class="docutils literal notranslate"><span class="pre">__file__</span></code> built-in</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – file to look for</p></li>
+</ul>
+</dd>
+</dl>
+<p>FIXME martin.slouf – now it only checks 3 levels up, instead of end of
+module namespace.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.utils.chunks">
+<code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">chunks</code><span class="sig-paren">(</span><em class="sig-param">col: collections.abc.Iterable</em>, <em class="sig-param">chunk_size: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#chunks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.chunks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield successive n-sized chunks from iterable.</p>
+<p>Thanks to: <a class="reference external" href="http://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python">http://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col</strong> (<em>collections.Iterable</em>) – collection to be chunked</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – chunk size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>generator over collection of chunks</dt><dd><p>(collection of original elements split into
+several smaller collections of <em>chunk_size</em>
+length)</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>types.GeneratorType</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.utils.Printable">
+<em class="property">class </em><code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">Printable</code><a class="reference internal" href="_modules/summer/utils.html#Printable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.Printable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Tries to pretty print object properties into a unicode string.</p>
+<p>Suitable for multi-inheritance, see <code class="xref py py-class docutils literal notranslate"><span class="pre">summer.model.Domain</span></code>.</p>
+<dl class="method">
+<dt id="summer.utils.Printable.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#Printable.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.Printable.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return printable object string representation in unicode.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.Printable.__bytes__">
+<code class="sig-name descname">__bytes__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#Printable.__bytes__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.Printable.__bytes__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return printable object representation in platform specific encoding.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.Printable.__repr__">
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#Printable.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.Printable.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.utils.Printable.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.utils.Printable.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.utils.FileReader">
+<em class="property">class </em><code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">FileReader</code><span class="sig-paren">(</span><em class="sig-param">fin: io.IOBase</em>, <em class="sig-param">enc: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#FileReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.FileReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Simple &amp; handy class for reading text file line by line with specified
+encoding.  Converts line read to unicode.  Counts line read.  Does no
+file manipulation (opening, closing) except for reading.  If used, you
+should delegate all reading to this simple class.</p>
+<dl class="method">
+<dt id="summer.utils.FileReader.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">fin: io.IOBase</em>, <em class="sig-param">enc: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#FileReader.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.FileReader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the <a class="reference internal" href="#summer.utils.FileReader" title="summer.utils.FileReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileReader</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fin</strong> (<em>io.IOBase</em>) – file-like object to be read</p></li>
+<li><p><strong>enc</strong> (<em>str</em>) – file encoding</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.FileReader.readline">
+<code class="sig-name descname">readline</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/summer/utils.html#FileReader.readline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.FileReader.readline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read single line from a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>line as unicode string.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.utils.FileReader.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.utils.FileReader.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.utils.ThreadSafeCounter">
+<em class="property">class </em><code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">ThreadSafeCounter</code><span class="sig-paren">(</span><em class="sig-param">initial_value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#ThreadSafeCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ThreadSafeCounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Thread safe counter.</p>
+<dl class="method">
+<dt id="summer.utils.ThreadSafeCounter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">initial_value=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#ThreadSafeCounter.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ThreadSafeCounter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.utils.ThreadSafeCounter" title="summer.utils.ThreadSafeCounter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadSafeCounter</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>initial_value</strong> (<em>int</em>) – initial value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.ThreadSafeCounter.inc">
+<code class="sig-name descname">inc</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/summer/utils.html#ThreadSafeCounter.inc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ThreadSafeCounter.inc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase counter by 1 and return new value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.ThreadSafeCounter.dec">
+<code class="sig-name descname">dec</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/summer/utils.html#ThreadSafeCounter.dec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ThreadSafeCounter.dec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrease counter by 1 and return new value.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.utils.ThreadSafeCounter.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.utils.ThreadSafeCounter.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.utils.IdGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">IdGenerator</code><a class="reference internal" href="_modules/summer/utils.html#IdGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.IdGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Thread safe id generator.</p>
+<dl class="method">
+<dt id="summer.utils.IdGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#IdGenerator.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.IdGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.IdGenerator.gen_id">
+<code class="sig-name descname">gen_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/summer/utils.html#IdGenerator.gen_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.IdGenerator.gen_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates new id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>new id</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.utils.IdGenerator.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.utils.IdGenerator.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.utils.Singleton">
+<em class="property">class </em><code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">Singleton</code><a class="reference internal" href="_modules/summer/utils.html#Singleton"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.Singleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
+<p>Metaclass that makes the class producing singleton instance.</p>
+<dl class="method">
+<dt id="summer.utils.Singleton.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#Singleton.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.Singleton.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call self as a function.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.utils.ConfigValue">
+<em class="property">class </em><code class="sig-prename descclassname">summer.utils.</code><code class="sig-name descname">ConfigValue</code><a class="reference internal" href="_modules/summer/utils.html#ConfigValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ConfigValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Configuration class that defines a default value while checking the
+os environment <code class="docutils literal notranslate"><span class="pre">os.environ</span></code> for a possible override.</p>
+<dl class="method">
+<dt id="summer.utils.ConfigValue.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#ConfigValue.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ConfigValue.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.ConfigValue.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/utils.html#ConfigValue.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ConfigValue.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.ConfigValue.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">env_variable_name: str</em>, <em class="sig-param">default_value: object</em><span class="sig-paren">)</span> &#x2192; object<a class="reference internal" href="_modules/summer/utils.html#ConfigValue.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ConfigValue.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call self as a function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.utils.ConfigValue.convert_value_str">
+<code class="sig-name descname">convert_value_str</code><span class="sig-paren">(</span><em class="sig-param">value_str: str</em>, <em class="sig-param">target_class: type</em><span class="sig-paren">)</span> &#x2192; object<a class="reference internal" href="_modules/summer/utils.html#ConfigValue.convert_value_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.utils.ConfigValue.convert_value_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method that converts a string value to proper type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_str</strong> (<em>str</em>) – value to be converted</p></li>
+<li><p><strong>target_class</strong> (<em>type</em>) – required target type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Converted value or original one, if no conversion found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.utils.ConfigValue.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.utils.ConfigValue.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.stringutils">
+<span id="stringutils-string-utilities"></span><h2><strong>stringutils</strong> – string utilities<a class="headerlink" href="#module-summer.stringutils" title="Permalink to this headline">¶</a></h2>
+<p>Utility string functions that should be probably part of <em>Python</em>
+stdlib.</p>
+<p><code class="xref py py-data docutils literal notranslate"><span class="pre">EMPTY_STRING</span></code> defines an empty string (ie. “”)</p>
+<p>This module is not imported into public <em>summer</em> namespace, so you should
+import it directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">summer</span> <span class="k">import</span> <span class="n">stringutils</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="summer.stringutils.has_text">
+<code class="sig-prename descclassname">summer.stringutils.</code><code class="sig-name descname">has_text</code><span class="sig-paren">(</span><em class="sig-param">obj: object</em>, <em class="sig-param">strip: bool = True</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/summer/stringutils.html#has_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.stringutils.has_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for text in string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – object to be tested</p></li>
+<li><p><strong>strip</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> <em>obj</em> is stripped before checking</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>obj</em> is string and contains some non-white</dt><dd><p>characters; <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.stringutils.to_unicode">
+<code class="sig-prename descclassname">summer.stringutils.</code><code class="sig-name descname">to_unicode</code><span class="sig-paren">(</span><em class="sig-param">obj: object</em>, <em class="sig-param">encoding: str</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/summer/stringutils.html#to_unicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.stringutils.to_unicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unicode representation of an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>unicoce string object representation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.stringutils.wrap">
+<code class="sig-prename descclassname">summer.stringutils.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">text: str</em>, <em class="sig-param">width: int</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/summer/stringutils.html#wrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.stringutils.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>A word-wrap function that preserves existing line breaks and most spaces
+in the text. Expects that existing line breaks are posix newlines
+(\n).</p>
+<p>Taken from:
+<a class="reference external" href="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/148061/index_txt">http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/148061/index_txt</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – text to be wrapped</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – max number of characters in single line</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>wrapped original text</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.ipythonutils">
+<span id="ipythonutils-ipython-debugging-support"></span><h2><strong>ipythonutils</strong> – ipython debugging support<a class="headerlink" href="#module-summer.ipythonutils" title="Permalink to this headline">¶</a></h2>
+<p>Support for embedded <em>IPython</em> invocation.</p>
+<p>This module is not imported into public <em>summer</em> namespace, so you
+should import it directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">summer</span> <span class="k">import</span> <span class="n">ipythonutils</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="summer.ipythonutils.run_ipshell">
+<code class="sig-prename descclassname">summer.ipythonutils.</code><code class="sig-name descname">run_ipshell</code><span class="sig-paren">(</span><em class="sig-param">banner: str = None</em>, <em class="sig-param">local_variables: dict = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ipythonutils.html#run_ipshell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ipythonutils.run_ipshell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs an embedded <em>IPython</em> interpretter at the place of your call.</p>
+<p>To invoke the interpreter at the place of your choice:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">summer.ipythonutils</span> <span class="k">import</span> <span class="n">run_ipshell</span>
+<span class="n">run_ipshell</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>banner</strong> (<em>str</em>) – banner (greeting) to be used</p></li>
+<li><p><strong>local_variables</strong> (<em>dict</em>) – dictionary of variables accessible through
+<code class="docutils literal notranslate"><span class="pre">l</span></code> variable in invoked shell, defaults
+to current <code class="docutils literal notranslate"><span class="pre">locals()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.ass">
+<span id="ass-assert"></span><h2><strong>ass</strong> – assert<a class="headerlink" href="#module-summer.ass" title="Permalink to this headline">¶</a></h2>
+<p>Provides various pre-implemented simple tests (ie. asserts) suitable for
+input argument testing.</p>
+<p>This module is not imported into public <em>summer</em> namespace, so you should
+import it directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">summer</span> <span class="k">import</span> <span class="n">ass</span>
+</pre></div>
+</div>
+<dl class="exception">
+<dt id="summer.ass.AssertException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ass.</code><code class="sig-name descname">AssertException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ass.html#AssertException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.AssertException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-core.html#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<p>Raised when some of the assertions methods in this module fails.</p>
+<dl class="method">
+<dt id="summer.ass.AssertException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ass.html#AssertException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.AssertException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.ass.is_none">
+<code class="sig-prename descclassname">summer.ass.</code><code class="sig-name descname">is_none</code><span class="sig-paren">(</span><em class="sig-param">obj: object</em>, <em class="sig-param">msg: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/summer/ass.html#is_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.is_none" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – object instance to be tested</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – message in exception if test fails</p></li>
+<li><p><strong>kwargs</strong> – arguments forwarded to exceptions (usually context values
+that are presented in stacktrace alongside the message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>obj</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.ass.is_not_none">
+<code class="sig-prename descclassname">summer.ass.</code><code class="sig-name descname">is_not_none</code><span class="sig-paren">(</span><em class="sig-param">obj: object</em>, <em class="sig-param">msg: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/summer/ass.html#is_not_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.is_not_none" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – object instance to be tested</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – message in exception if test fails</p></li>
+<li><p><strong>kwargs</strong> – arguments forwarded to exceptions (usually context values
+that are presented in stacktrace alongside the message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>obj</em> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.ass.is_true">
+<code class="sig-prename descclassname">summer.ass.</code><code class="sig-name descname">is_true</code><span class="sig-paren">(</span><em class="sig-param">expr: bool</em>, <em class="sig-param">msg: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/summer/ass.html#is_true"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.is_true" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>bool</em>) – object instance to be tested</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – message in exception if test fails</p></li>
+<li><p><strong>kwargs</strong> – arguments forwarded to exceptions (usually context values
+that are presented in stacktrace alongside the message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>expr</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.ass.is_false">
+<code class="sig-prename descclassname">summer.ass.</code><code class="sig-name descname">is_false</code><span class="sig-paren">(</span><em class="sig-param">expr: bool</em>, <em class="sig-param">msg: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/summer/ass.html#is_false"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.is_false" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>bool</em>) – object instance to be tested</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – message in exception if test fails</p></li>
+<li><p><strong>kwargs</strong> – arguments forwarded to exceptions (usually context values
+that are presented in stacktrace alongside the message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>expr</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.ass.has_text">
+<code class="sig-prename descclassname">summer.ass.</code><code class="sig-name descname">has_text</code><span class="sig-paren">(</span><em class="sig-param">obj: str</em>, <em class="sig-param">msg: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/summer/ass.html#has_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ass.has_text" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>str</em>) – object instance to be tested</p></li>
+<li><p><strong>msg</strong> (<em>str</em>) – message in exception if test fails</p></li>
+<li><p><strong>kwargs</strong> – arguments forwarded to exceptions (usually context values
+that are presented in stacktrace alongside the message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>obj</em> is <code class="docutils literal notranslate"><span class="pre">str</span></code> and is not empty, <code class="docutils literal notranslate"><span class="pre">False</span></code>
+otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.lod">
+<span id="lod-list-of-dictionaries"></span><h2><strong>lod</strong> – list of dictionaries<a class="headerlink" href="#module-summer.lod" title="Permalink to this headline">¶</a></h2>
+<p>List of dictionaries (<em>lod</em>) – simple yet powerfull in memory data
+structure, ie. <em>grid</em>.</p>
+<p>Thanks to: <a class="reference external" href="http://stackoverflow.com/questions/1038160/python-data-structure-for-maintaing-tabular-data-in-memory">http://stackoverflow.com/questions/1038160/python-data-structure-for-maintaing-tabular-data-in-memory</a></p>
+<p>This module is not imported into public <em>summer</em> namespace, so you should
+import it directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">summer</span> <span class="k">import</span> <span class="n">lod</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="summer.lod.lod_populate">
+<code class="sig-prename descclassname">summer.lod.</code><code class="sig-name descname">lod_populate</code><span class="sig-paren">(</span><em class="sig-param">lod: list</em>, <em class="sig-param">fin: io.IOBase</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/lod.html#lod_populate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.lod.lod_populate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate lod using CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lod</strong> (<em>list</em>) – list to be extended with data</p></li>
+<li><p><strong>fin</strong> (<em>io.IOBase</em>) – file-like object in CSV format</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.lod.lod_query">
+<code class="sig-prename descclassname">summer.lod.</code><code class="sig-name descname">lod_query</code><span class="sig-paren">(</span><em class="sig-param">lod: list</em>, <em class="sig-param">filter_obj=None</em>, <em class="sig-param">sort_keys=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/lod.html#lod_query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.lod.lod_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup in lod based on query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lod</strong> (<em>list</em>) – lod to be used</p></li>
+<li><p><strong>filter_obj</strong> – filter to be used</p></li>
+<li><p><strong>sort_keys</strong> – sort criteria</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>collection of matching rows</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.lod.lod_lookup">
+<code class="sig-prename descclassname">summer.lod.</code><code class="sig-name descname">lod_lookup</code><span class="sig-paren">(</span><em class="sig-param">lod: list</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/lod.html#lod_lookup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.lod.lod_lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup in lod by attribute values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lod</strong> (<em>list</em>) – lod to be used</p></li>
+<li><p><strong>**kw</strong> (<em>dict</em>) – use keyword arguments.  keys are column names, their
+value is attribute value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>first matching row</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="api-pc.html" class="btn btn-neutral float-left" title="Producer–Consumer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2019, martinslouf@users.sourceforge.net
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
