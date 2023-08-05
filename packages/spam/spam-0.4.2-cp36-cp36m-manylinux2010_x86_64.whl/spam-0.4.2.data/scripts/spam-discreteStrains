@@ -1,0 +1,217 @@
+#!/usr/bin/env python
+
+# This script calculates strains in a granular assembly using Bagi's strain tesselation technique.
+# This means that at the fundamental level, strains are calculated on space-filling tetrahedra that
+#   connectivityect four grain centres.
+# Tesselations can either be provided or calculated within the script.
+#
+# The strains defined on tetrahedra can either be output as-are, or processed further,
+# either projected back to grains (whereby the value at each grain is a weighted local average
+#   and NOT the strain of the grain itself).
+# ...or projected onto a regular grid.
+
+from __future__ import print_function
+# import tifffile
+import numpy
+
+import argparse
+import spam.helpers
+import spam.DIC
+import spam.mesh
+import spam.label
+import pickle
+
+
+# Define argument parser object
+parser = argparse.ArgumentParser()
+
+# Parse arguments with external helper function
+args = spam.helpers.optionsParser.discreteStrainsCalcParser(parser)
+
+print("-------------------------------")
+print("| Discrete Strain Calculation |")
+print("-------------------------------")
+
+# This option skips the kinematics of particle zero in the kinematics file that will be read,
+#   since when working with labelled images particle zero is the background and `spam-ddic` does
+#   not correlate it (and in its output files there is a "blank" particle zero to be ignored).
+if args.KEEP_ZERO: start = 0
+else:              start = 1
+
+# Check the strain mode, set as default large strains
+# largeStrains = True
+# if args.SMALL_STRAINS:
+# largeStrains = False
+
+print("\nCurrent Settings:")
+argsDict = vars(args)
+for key in sorted(argsDict):
+    print("\t{}: {}".format(key, argsDict[key]))
+
+# Something needs to set this to true
+triangulationAvailable = False
+
+print("\nLoading kinematics...")
+if args.inFile.name[-3::] == "tsv":
+    TSV = spam.helpers.readTSV(args.inFile.name, readDisplacements=True, readEverything=False)
+    #dims = TSV["numberOfLabels"]-start
+    coordinates   = TSV['fieldCoords'][start:]
+    displacements = TSV['PhiField'][start:, 0:3, -1]
+    print(coordinates.shape, displacements.shape)
+    try:
+        radii = TSV['radius'][start::]**2.0
+    except BaseException:
+        radii = None
+    del TSV
+elif args.inFile.name[-3::] == "vtk":
+    VTK = spam.helpers.readUnstructuredVTK(args.inFile.name)
+    #dims = VTK[0].shape[0]
+    coordinates = VTK[0].copy()
+    displacements = VTK[2]['displacements']
+    connectivity  = VTK[1].copy()
+    triangulationAvailable = True
+    try:
+        radii = VTK[2]['radius']**2.0
+    except BaseException:
+        radii = None
+    del VTK
+else:
+    print("\nspam-discreteStrains: Don't recognise this input kinematics file -- it should be a file from spam-ddic")
+
+# Apparently we cannot read the VTK files we write with spam-ddic
+# If someone saves a proper VTK with a triangulation it should have bene loaded above,
+#   but just in case different files are used...
+if args.TRI_FILE is not None:
+    if args.TRI_FILE[-3::] == "vtk":
+        # print("\nspam-discreteStrains: I've read this file already I think")
+        VTK = spam.helpers.readUnstructuredVTK(args.TRI_FILE)
+        connectivity = VTK[1].copy().astype(numpy.uint)
+        triangulationAvailable = True
+        del VTK
+
+    elif args.TRI_FILE[-3::] == "tsv":
+        connectivity = numpy.genfromtxt(args.TRI_FILE).astype(numpy.uint)
+        triangulationAvailable = True
+    else:
+        print("\nspam-discreteStrains: Don't recognise this input triangulation file -- it should be a file from spam-ddic")
+
+# Should we compute a triangulation?
+if args.TRI:
+    # Look for some weights to pass to triangulate
+    if args.RADII_TSV_FILE is not None:
+        radii = numpy.loadtxt(args.RADII_FILE)[start::]**2.0
+
+    if args.RADII_LABELLED_FILE is not None:
+        import tifffile
+        radii = spam.label.equivalentRadii(tifffile.imread(args.RADII_LABELLED_FILE))[start::]**2.0
+
+    # Run the triangulation whether we have radii or not
+    connectivity = spam.mesh.triangulate(coordinates, weights=radii)
+    triangulationAvailable = True
+
+# else:
+    # print("spam-discreteStrains: Input file extension not recognised, please give me VTK or TSV from spam-ddic")
+    # exit()
+
+# If notbody set this to true, we're in big trouble
+if not triangulationAvailable:
+    print("\nspam-discreteStrains: No triangulation available, either set -tri to compute it or pass a triangulation file with -tf")
+    exit()
+
+# Check what output to return, set as default only strain fields (no decomposition and gradient tensors)
+# onlyStrain = True
+# if args.NOT_ONLY_STRAIN:
+    # onlyStrain = False
+
+# nans in COM?
+# nanmask = numpy.isfinite(coordinates[:,0])
+
+# Compute bagi strains with initial and deformed centres of mass.
+print("\nStart strain calculation...")
+# We'll do this with "onlyStrains=False" in case we need to project F (and R?) to grains
+strainMatrix, F, R, volStrain, devStrain = spam.mesh.bagiStrain(coordinates, connectivity, displacements, onlyStrain=False)
+
+# Compute bagi strains with initial and deformed centres of mass.
+if args.PROJECT_TO_GRAINS:
+    print("\nProjecting strain field onto the grains...")
+    # We need to project F, since it is in ZYX, U is in the eigendirections and cannot be summed.
+    Fgrains = spam.mesh.projectTetFieldToGrains(connectivity, F, coordinates+displacements)
+    print("Fgrains.shape", Fgrains.shape)
+    # Empty arrays to contain decomposition of F
+    Ugrains = numpy.zeros_like(Fgrains)
+    FgrainsOut = numpy.zeros_like(Fgrains)
+    Rgrains = numpy.zeros((Fgrains.shape[0],3))
+    volStrainGrains = numpy.zeros(Fgrains.shape[0])
+    devStrainGrains = numpy.zeros(Fgrains.shape[0])
+    # Loop over grains, decomposing F into strain components
+    for i in range(Fgrains.shape[0]):
+        FgrainsOut[i], Ugrains[i], Rgrains[i], volStrainGrains[i], devStrainGrains[i] = spam.mesh.strain.decomposeDisplacementGradientLargeStrain(Fgrains[i] - numpy.eye(3), twoD=False)
+    # output both TSV and VTK for now...
+    TSVout = numpy.array([list(range(start,coordinates.shape[0]+start)),
+                          volStrainGrains,
+                          devStrainGrains,
+                          Rgrains[:,0],
+                          Rgrains[:,1],
+                          Rgrains[:,2]
+                          ]).T
+    numpy.savetxt(args.OUT_DIR+"/"+args.PREFIX+"-grainProjection.tsv",
+                  TSVout,
+                  delimiter='\t',
+                  header='Label\tVolumetricStrain\tDeviatoricStrain\tRotationVectorZ\tRotationVectorY\tRotationVectorX\n')
+    # The VTK information will be added to the VTK at the end of the function.
+
+# if largeStrains:
+# if onlyStrain:
+# strainMatrix, volStrain, devStrain = smesh.computeStrainField(disp, nodeSpacing = [spaceZ, spaceY, spaceX], largeStrains=largeStrains, onlyStrain=onlyStrain)
+# else:
+# strainMatrix, F, r, volStrain, devStrain = smesh.computeStrainField(disp, nodeSpacing = [spaceZ, spaceY, spaceX], largeStrains=largeStrains, onlyStrain=onlyStrain)
+# else:
+# if onlyStrain:
+# strainMatrix, volStrain, devStrain = smesh.computeStrainField(disp, nodeSpacing = [spaceZ, spaceY, spaceX], largeStrains=largeStrains, onlyStrain=onlyStrain)
+# else:
+# strainMatrix, F, volStrain, devStrain = smesh.computeStrainField(disp, nodeSpacing = [spaceZ, spaceY, spaceX], largeStrains=largeStrains, onlyStrain=onlyStrain)
+
+# Extract strain tensor components
+strainComponents = {}
+
+strainComponents['zz'] = numpy.array(strainMatrix[:, 0, 0])
+strainComponents['zy'] = numpy.array(strainMatrix[:, 0, 1])
+strainComponents['zx'] = numpy.array(strainMatrix[:, 0, 2])
+strainComponents['yz'] = numpy.array(strainMatrix[:, 1, 0])
+strainComponents['yy'] = numpy.array(strainMatrix[:, 1, 1])
+strainComponents['yx'] = numpy.array(strainMatrix[:, 1, 2])
+strainComponents['xz'] = numpy.array(strainMatrix[:, 2, 0])
+strainComponents['xy'] = numpy.array(strainMatrix[:, 2, 1])
+strainComponents['xx'] = numpy.array(strainMatrix[:, 2, 2])
+strainComponents['volumetric'] = volStrain
+strainComponents['deviatoric'] = devStrain
+
+# Save strain fields
+# if args.TIF:
+# if largeStrains:
+# for component in enumerate(componentsL):
+# tifffile.imsave(args.OUT_DIR+"/"+args.PREFIX+"-{}-largeStrains.tif".format(component[1]), strainComponents[component[1]].astype('<f4'))
+# else:
+# for component in enumerate(componentsS):
+# tifffile.imsave(args.OUT_DIR+"/"+args.PREFIX+"-{}-smallStrains.tif".format(component[1]), strainComponents[component[1]].astype('<f4'))
+
+if args.VTK:
+    print("\nSaving VTK strain fields...", end='')
+    cellData = {}
+    # if largeStrains:
+    cellData = {"zz": strainComponents["zz"],
+                "zy": strainComponents["zy"],
+                "zx": strainComponents["zx"],
+                "yz": strainComponents["yz"],
+                "yy": strainComponents["yy"],
+                "yx": strainComponents["yx"],
+                "xz": strainComponents["xz"],
+                "xy": strainComponents["xy"],
+                "xx": strainComponents["xx"],
+                "volumetric": strainComponents["volumetric"],
+                "deviatoric": strainComponents["deviatoric"],
+                }
+    # aspectRatio = [spaceZ, spaceY, spaceX]
+
+    spam.helpers.writeUnstructuredVTK(coordinates, connectivity, cellData=cellData, fileName=args.OUT_DIR + "/" + args.PREFIX + ".vtk")
+    print("done.")
