@@ -1,0 +1,11 @@
+#!/bin/sh
+if [ -d "$HOME/.vim" ]; then
+	cd ~ 
+	mkdir -p .byobu
+	git clone https://github.com/whohe/.tmux ~/.tmux --branch master-fish 
+	ln -s .tmux/tmux.conf .tmux.conf
+	cd .tmux 
+	git submodule update --init --recursive 
+	cd ~/.byobu 
+	ln -s ../.tmux.conf . 
+fi
