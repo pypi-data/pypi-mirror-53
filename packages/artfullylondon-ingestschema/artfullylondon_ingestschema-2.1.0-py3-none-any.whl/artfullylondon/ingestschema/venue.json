@@ -1,0 +1,173 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/venue.json",
+    "type": "object",
+    "properties": {
+        "id": {
+            "title": "Venue ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "version": {
+            "title": "Version",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/version"
+                }
+            ]
+        },
+        "entityStatus": {
+            "title": "Entity Status",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/entityStatus"
+                }
+            ]
+        },
+        "title": {
+            "title": "Title",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/title"
+                }
+            ]
+        },
+        "url": {
+            "title": "URL",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/url"
+                }
+            ]
+        },
+        "description": {
+            "title": "Description",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/prose"
+                }
+            ]
+        },
+        "address": {
+            "title": "Address",
+            "type": "string",
+            "minLength": 1
+        },
+        "postcode": {
+            "title": "Postcode",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/ukPostcode"
+                }
+            ]
+        },
+        "latitude": {
+            "title": "Latitude",
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+        },
+        "longitude": {
+            "title": "Longitude",
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+        },
+        "email": {
+            "title": "Email",
+            "type": "string",
+            "format": "email"
+        },
+        "telephone": {
+            "title": "Telephone",
+            "type": "string",
+            "minLength": 1
+        },
+        "wheelchairAccess": {
+            "title": "Wheelchair Access Type",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/wheelchairAccess"
+                }
+            ]
+        },
+        "disabledBathroom": {
+            "title": "Disabled Bathroom Type",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/disabledBathroom"
+                }
+            ]
+        },
+        "hearingFacilities": {
+            "title": "Hearing Facilities Type",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/hearingFacilities"
+                }
+            ]
+        },
+        "hasPermanentCollection": {
+            "title": "Has Permanent Collection",
+            "type": "boolean"
+        },
+        "openingRules": {
+            "title": "Opening Rules",
+            "allOf": [
+                {
+                    "$ref": "rules-types.json#/definitions/openingRules"
+                }
+            ]
+        },
+        "closingRules": {
+            "title": "Closing Rules",
+            "allOf": [
+                {
+                    "$ref": "rules-types.json#/definitions/closingRules"
+                }
+            ]
+        },
+        "images": {
+            "title": "Images",
+            "allOf": [
+                {
+                    "$ref": "image-types.json#/definitions/images"
+                }
+            ]
+        },
+        "currentWatchedContent": {
+            "title": "Current Watched Content",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/watchedContent"
+                }
+            ]
+        },
+        "publishedWatchedContent": {
+            "title": "Published Watched Content",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/watchedContent"
+                }
+            ]
+        }
+    },
+    "required": [
+        "id",
+        "version",
+        "entityStatus",
+        "title",
+        "address",
+        "postcode",
+        "latitude",
+        "longitude",
+        "wheelchairAccess",
+        "disabledBathroom",
+        "hearingFacilities",
+        "hasPermanentCollection"
+    ],
+    "additionalProperties": false
+}

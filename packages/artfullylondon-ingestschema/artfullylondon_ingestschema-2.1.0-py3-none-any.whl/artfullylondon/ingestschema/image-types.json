@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/image-types.json",
+    "definitions": {
+        "imageUrls": {
+            "type": "array",
+            "items": {
+                "title": "Image URL",
+                "type": "string",
+                "format": "uri"
+            },
+            "minItems": 1
+        },
+        "images": {
+            "type": "array",
+            "items": {
+                "title": "Image",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "Image ID",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/uuid"
+                            }
+                        ]
+                    },
+                    "ratio": {
+                        "title": "Image Ratio",
+                        "type": "number",
+                        "minimum": 0
+                    },
+                    "dominantColor": {
+                        "title": "Dominant Color",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/hexColor"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "ratio"
+                ],
+                "additionalProperties": false
+            },
+            "minItems": 1
+        }
+    }
+}

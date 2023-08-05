@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/feed-entity-watch.json",
+    "type": "object",
+    "properties": {
+        "feedType": {
+            "title": "Feed Type",
+            "const": "EntityWatch"
+        },
+        "entity": {
+            "title": "Entity Type",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/entity"
+                }
+            ]
+        },
+        "venueId": {
+            "title": "Venue ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "venueEntityId": {
+            "title": "Venue Entity ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "version": {
+            "title": "Venue Version",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/version"
+                }
+            ]
+        },
+        "url": {
+            "title": "URL",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/url"
+                }
+            ]
+        },
+        "title": {
+            "title": "Title",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/title"
+                }
+            ]
+        },
+        "watchedContent": {
+            "title": "Watched Content",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/watchedContent"
+                }
+            ]
+        }
+    },
+    "required": [
+        "feedType",
+        "entity",
+        "venueId",
+        "venueEntityId",
+        "version",
+        "url",
+        "watchedContent"
+    ],
+    "additionalProperties": false
+}
