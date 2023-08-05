@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: hedgehog-server
+Version: 0.10.0rc1
+Summary: Hedgehog Robot Controller Server
+Home-page: https://github.com/PRIArobotics/HedgehogServer
+Author: Clemens Koza
+Author-email: koza@pria.at
+License: AGPLv3+
+Description: Hedgehog Robot Controller Server
+        ================================
+        
+        Master: |travis-master|_ |coveralls-master|_
+        
+        Develop: |travis-develop|_ |coveralls-develop|_
+        
+        .. |travis-master| image:: https://travis-ci.org/PRIArobotics/HedgehogServer.svg?branch=master
+        .. _travis-master: https://travis-ci.org/PRIArobotics/HedgehogServer
+        .. |coveralls-master| image:: https://coveralls.io/repos/github/PRIArobotics/HedgehogServer/badge.svg?branch=master
+        .. _coveralls-master: https://coveralls.io/github/PRIArobotics/HedgehogServer?branch=master
+        .. |travis-develop| image:: https://travis-ci.org/PRIArobotics/HedgehogServer.svg?branch=develop
+        .. _travis-develop: https://travis-ci.org/PRIArobotics/HedgehogServer
+        .. |coveralls-develop| image:: https://coveralls.io/repos/github/PRIArobotics/HedgehogServer/badge.svg?branch=develop
+        .. _coveralls-develop: https://coveralls.io/github/PRIArobotics/HedgehogServer?branch=develop
+        
+        ----
+        
+        This project provides the server for the Hedgehog Educational Robotics Controller.
+        Clients can communicate with it via the ZMQ & Protobuf based Hedgehog Protocol.
+        
+Keywords: hedgehog robotics controller server
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Programming Language :: Python :: 3
+Provides-Extra: raspberry
+Provides-Extra: dev
