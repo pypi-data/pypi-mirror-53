@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+import sys
+import textwrap
+import argparse
+from privex.helpers import ErrHelpParser, empty
+from privex.pyrewall import conf, VERSION
+from privex.pyrewall.conf import FILE_SUFFIX, CONF_DIRS, SEARCH_DIRS
+from privex.pyrewall.core import find_file
+from privex.pyrewall.PyreParser import PyreParser
+from privex.pyrewall.repl import repl_main
+
+CMD_DESC = {
+    'parse': f'Parse a {FILE_SUFFIX} file and output rules compatible with iptables-restore',
+    'reload': f'Reload {FILE_SUFFIX}, .v4 and .v6 files from the first valid folder in CONF_DIRS'
+}
+
+CONF_DIR_LIST = "\n".join("   - " +c for c in CONF_DIRS)
+SEARCH_DIR_LIST = "\n".join("   - " +c for c in SEARCH_DIRS)
+
+HELP_TEXT = textwrap.dedent(f'''\
+
+PyreWall Version v{VERSION}
+(C) 2019 Privex Inc. ( https://wwww.privex.io )
+Official Repo: https://github.com/Privex/pyrewall
+
+
+Sub-commands:
+
+    parse  (-i 4|6) [filename]      - {CMD_DESC['parse']}
+    reload                          - {CMD_DESC['reload']}
+
+CONF_DIRS: 
+{CONF_DIR_LIST}
+
+SEARCH_DIRS: 
+{SEARCH_DIR_LIST}
+
+''')
+
+parser = ErrHelpParser(
+    description='PyreWall - Python firewall management using iptables',
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    epilog=HELP_TEXT
+)
+
+
+def parse_stdin(ipver='both'):
+    lines = []
+    for l in sys.stdin:
+        lines.append(l.strip())
+    p = PyreParser()
+    ip4, ip6 = p.parse_lines(lines=lines)
+    print_rules(ip4=ip4, ip6=ip6, ipver=ipver)
+
+
+def print_rules(ip4: list = None, ip6: list = None, ipver='both'):
+    ip4, ip6 = [] if not ip4 else ip4, [] if not ip6 else ip6
+
+    if ipver.lower() in ['4', 'v4', 'ipv4', 'both'] and len(ip4) > 0:
+        print('# --- IPv4 Rules --- #')
+        for l in ip4:
+            print(l)
+        print('# --- End IPv4 Rules --- #')
+    print()
+    if ipver.lower() in ['6', 'v6', 'ipv6', 'both'] and len(ip6) > 0:
+        print('# --- IPv6 Rules --- #')
+        for l in ip6:
+            print(l)
+        print('# --- End IPv6 Rules --- #')
+
+
+def ap_parse(opt):
+    f = opt.file
+    if f == '-' or (empty(f) and not sys.stdin.isatty()):
+        return parse_stdin(opt.ipver)
+    if empty(f):
+        return parser.error('error: the following arguments are required: file')
+    try:
+        path = find_file(f, SEARCH_DIRS, extensions=conf.SEARCH_EXTENSIONS)
+    except FileNotFoundError:
+        print(f'ERROR: The file "{f}" could not be found in any of your search directories.', file=sys.stderr)
+        return sys.exit(1)
+    print(f'Parsing file: {path}', file=sys.stderr)
+    p = PyreParser()
+    ip4, ip6 = p.parse_file(path=path)
+    print_rules(ip4=ip4, ip6=ip6, ipver=opt.ipver)
+
+
+def ap_reload(opt):
+    f = opt.files
+    print(f'reloading files: {f}')
+
+
+def ap_repl(opt):
+    repl_main()
+
+
+sp = parser.add_subparsers()
+
+parse_sp = sp.add_parser('parse', description=CMD_DESC['parse'])
+parse_sp.add_argument('file', default=None, help='Pyrewall file to parse', nargs='?')
+parse_sp.add_argument(
+    '-i', type=str, default='both', dest='ipver',
+    help='4 = Output only IPv4 config, 6 = Output only IPv6 config, both = Output both configurations (default)'
+)
+
+parse_sp.set_defaults(func=ap_parse)
+
+reload_sp = sp.add_parser('reload', description=CMD_DESC['reload'])
+reload_sp.add_argument('files', help='Pyrewall file(s) to reload', nargs='+')
+
+reload_sp.set_defaults(func=ap_parse)
+
+parse_repl = sp.add_parser('repl', description=CMD_DESC['parse'])
+parse_repl.set_defaults(func=ap_repl)
+
+args = parser.parse_args()
+
+# Resolves the error "'Namespace' object has no attribute 'func'
+# Taken from https://stackoverflow.com/a/54161510/2648583
+try:
+    func = args.func
+    func(args)
+except AttributeError:
+    if not sys.stdin.isatty():
+        parse_stdin()
+        sys.exit(0)
+    parser.error('Too few arguments')
+    sys.exit(1)
+
