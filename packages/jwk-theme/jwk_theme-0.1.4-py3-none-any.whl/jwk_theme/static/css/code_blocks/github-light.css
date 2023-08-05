@@ -1,0 +1,54 @@
+/*!
+ * GitHub Light v0.5.0
+ * Copyright (c) 2012 - 2017 GitHub, Inc.
+ * Licensed under MIT (https://github.com/primer/github-syntax-theme-generator/blob/master/LICENSE)
+ */
+
+pre {
+  white-space: pre;
+  overflow: auto;
+  word-wrap: normal; /* horizontal scrolling */
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 20px;
+  background: #f6f8fa;
+  color: #24292e;
+}
+
+.c /* comment, punctuation.definition.comment, string.comment */ {
+  color: #6a737d;
+}
+
+.no /* constant, entity.name.constant, variable.other.constant, variable.language, support, meta.property-name, support.constant, support.variable, meta.module-reference, markup.raw, meta.diff.header, meta.output */,
+.nv /* string variable */ {
+  color: #005cc5;
+}
+
+.nf /* Function name */ {
+  color: #d57600;
+}
+
+.ni /* entity.name */ {
+  color: #6f42c1;
+}
+
+.s, .s1 /* string source */ {
+  color: #5d8e00;
+}
+
+.kn /* keyword, storage, storage.type */ {
+  color: #d73a49;
+}
+
+.k /* keywords */ {
+  color: #0076d5;
+}
+
+.nv /* variable */ {
+  color: #e36209;
+}
+
+.nb /* types */ {
+  color: #a101c3;
+}
