@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: voxelfuse_primitives
+Version: 1.0.3
+Summary: Classes for generating primitives using the VoxelFuse library
+Home-page: https://github.com/cdbrauer/VoxelFuse-Primitives
+Author: Cole Brauer
+License: UNKNOWN
+Description: # VoxelFuse-Primitives
+        Classes for generating primitives using the [VoxelFuse](https://github.com/cdbrauer/VoxelFuse) library.
+        
+        ![Example 1](../master/images/main.png?raw=true)
+        
+        ## Installation
+        
+        The voxelfuse_primitives library can be installed using pip.
+        
+            pip3 install voxelfuse-primitives
+            
+        The classes needed by your script can then be imported in Python.  For example:
+        
+            from voxelfuse_primitives.solid import Solid
+            from voxelfuse_primitives.linkage import Linkage
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
