@@ -1,0 +1,19 @@
+Metadata-Version: 1.2
+Name: pycopy-pprint
+Version: 0.1
+Summary: Dummy pprint module for Pycopy
+Home-page: https://github.com/pfalcon/pycopy-lib
+Author: Paul Sokolovsky
+Author-email: pycopy-dev@googlegroups.com
+Maintainer: Paul Sokolovsky
+Maintainer-email: pycopy-dev@googlegroups.com
+License: MIT
+Description: This is a dummy implementation of a module for the standard library of
+        Pycopy project (https://github.com/pfalcon/pycopy).
+        It contains zero or very little functionality, and primarily intended to
+        avoid import errors (using idea that even if an application imports a
+        module, it may be not using it onevery code path, so may work at least
+        partially). It is expected that more complete implementation of the module
+        will be provided later. Please help with the development if you are
+        interested in this module.
+Platform: UNKNOWN
