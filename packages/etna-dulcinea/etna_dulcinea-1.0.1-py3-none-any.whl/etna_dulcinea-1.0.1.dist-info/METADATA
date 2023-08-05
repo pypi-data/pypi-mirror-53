@@ -1,0 +1,94 @@
+Metadata-Version: 2.1
+Name: etna-dulcinea
+Version: 1.0.1
+Summary: Script to test Quixote moulinettes locally
+Home-page: https://github.com/etna-alternance/dulcinea
+Author: Clément Doumergue
+Author-email: doumer_c@etna-alternance.net
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: etna-panza
+
+Dulcinea
+========
+
+Script allowing to test Quixote moulinettes locally.
+
+## Install
+```
+pip install -r requirements.txt
+```
+
+## How to use dulcinea
+
+```python
+usage: dulcinea.py [-h] -c CONFIG_FILE -i INFO_FILE [-r ROOT_DIR] moulinette_directory
+
+positional arguments:
+  moulinette_directory
+
+optional arguments:
+  -h, --help                                show this help message and exit
+  -c CONFIG_FILE, --config-file CONFIG_FILE json file containing the user informations
+  -i INFO_FILE,	 --info-file INFO_FILE      json file containing the information of the jobs to execute
+  -r ROOT_DIR,	--root-dir ROOT_DIR         directory where the jobs will be executed
+```
+
+### Conf file example
+
+The conf file must be given using the `-c` option and contain usefull meta-data to insert in the context such as the user's information
+
+```json
+{
+  "intra_user": "login_z",
+  "intra_password": "superPassSecure",
+  "gitlab_token": "superCuteToken"
+}
+```
+
+
+### Blueprint
+
+In order to test the moulinette locally, the script must be able to fetch some dummy delivery to test.
+
+Usually, it is achieved by replacing the fetching step with a "local" fetch using the `fetch.copy` built-in:
+
+```python
+import quixote.fetch.copy as fetch
+
+@quixote.fetcher
+def fetch_by_copying():
+    fetch.copy(path_to_the_dummy_delivery_folder)
+
+```
+
+> The dummy delivery folder must contain a directory for each group_id specified in the info file
+> which will act as dummy delivery for the specific job. See the documentation for `fetch.copy`.
+
+### Info file example
+
+The info file must be given using the `-i` option and should contain the meta-data of all dummy deliveries.
+
+```
+[
+    {
+        "module_id": 1,
+        "activity_id": 1,
+        "group_id": 1
+    },
+    {
+        "module_id": 1,
+        "activity_id": 1,
+        "group_id": 2
+    }
+]
+```
+
+> The values for `module_id` and `activity_id` don't really matter, they are just dummy values to insert into the context.
+> `group_id` however must match the directory name inside the dummy delivery folder.
+
+
