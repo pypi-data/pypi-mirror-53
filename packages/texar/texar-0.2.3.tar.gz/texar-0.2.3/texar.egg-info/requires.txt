@@ -1,0 +1,14 @@
+numpy<1.17.0
+pathlib>=1.0
+pyyaml
+requests
+funcsigs>=1.0.2
+packaging
+
+[tensorflow-cpu]
+tensorflow<2.0,>=1.10.0
+tensorflow-probability>=0.3.0
+
+[tensorflow-gpu]
+tensorflow-gpu<2.0,>=1.10.0
+tensorflow-probability>=0.3.0
