@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: py2md
+Version: 0.0.5
+Summary: Run python code in jupyter to generate markdown reports.
+Home-page: https://github.com/Xero64/py2md
+Author: Xero64
+Author-email: xero64@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# py2md
+
+Run python code in jupyter to generate markdown reports.
+
+Usage:
+
+```
+python -m py2md test_py2md.py
+```
+
+This will then run jupyter and generate a md file output with associated images.
+
+Debug Usage:
+
+```
+python -m py2md test_py2md.py --debug
+```
+
+This will also print out all jupyter output to see if anything is missing from the output.
+
+
