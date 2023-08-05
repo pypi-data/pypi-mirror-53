@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: GSimPy
+Version: 0.0.1
+Summary: A Python Package for calculating similarity between groups
+Home-page: https://github.com/curlyae1995/GSimPy
+Author: YifeiZhang
+Author-email: curlyar1995@163.com
+License: UNKNOWN
+Platform: all
+Description-Content-Type: text/plain
+Requires-Dist: numpy
+Requires-Dist: pyecharts
+Requires-Dist: matplotlib
+
+###### **This package is used for calculating similarity between groups**
+
+###### how to use this:
+    Prepare two TXT file restore item data and group data respectively.
+    each line of the data is a item-element or group-item association.
+    In item.txt, the first parameter is ITEM_ID, the second parameter is ELEMENT_ID, separated by whitespace.
+    In group.txt, the first parameter is GROUP_ID, the second parameter is ITEM_ID, separated by whitespace.
+
+    Use the methods given in data package to write data into database.
+
