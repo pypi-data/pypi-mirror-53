@@ -1,0 +1,31 @@
+<img
+  {% if hi_def %}
+   {% if lazy %}data-{% endif %}srcset="https://res.cloudinary.com/canonical/image/fetch/{{ hi_def_cloudinary_options }}/{{ url }} 2x"
+  {% endif %}
+  {% if lazy %}data-{% endif %}src="https://res.cloudinary.com/canonical/image/fetch/{{ std_def_cloudinary_options }}/{{ url }}"
+  alt="{{ alt }}"
+  width="{{ width }}"
+  height="{{ height }}"
+  class="{% if lazy %}lazyload{% endif %} {% if extra_classes %}{{ extra_classes }}{% endif %}"
+  {% for attr_name, attr_value in attributes.items() %}
+    {{ attr_name }}="{{ attr_value }}"
+  {% endfor %}
+/>
+
+<noscript>
+  <img
+    {% if hi_def %}
+      srcset="https://res.cloudinary.com/canonical/image/fetch/{{ hi_def_cloudinary_options }}/{{ url }} 2x"
+    {% endif %}
+    src="https://res.cloudinary.com/canonical/image/fetch/{{ std_def_cloudinary_options }}/{{ url }}"
+    alt="{{ alt }}"
+    width="{{ width }}"
+    height="{{ height }}"
+    {% if extra_classes %}
+      class="{{ extra_classes }}"
+    {% endif %}
+    {% for attr_name, attr_value in attributes.items() %}
+      {{ attr_name }}="{{ attr_value }}"
+    {% endfor %}
+  />
+</noscript>
