@@ -1,0 +1,47 @@
+# Coinpy
+
+Coinpy is a package to handle distribution data. There's a specific focus on gaussian and binomial distributions
+
+Functions include returning the mean, standard deviation and plots of given dataset. You can also use coinpy to import data and add gaussian curves.
+
+Made with assistance of [Udacity](https://www.udacity.com/) during the data science course in object-oriented programming.
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install coinpy.
+
+```bash
+pip install coinpy
+```
+
+## Usage
+
+```python
+from coinpy import Gaussian
+
+gaussian_one = Gaussian()
+
+gaussian_one.read_data_file('numbers.txt', True)
+# read .txt file from local directory
+
+gaussian_one.calculate_mean()
+# returns and stores float mean 25 for example
+
+gaussian_one.calculate_stdev()
+# returns and stores standard dev 2 for example
+
+gaussian_one.pdf(5)
+# given x (or 5) returns prob density function 0.19947
+
+gaussian_one.plot_histogram_pdf()
+# returns normalized histogram and prob density function
+
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
