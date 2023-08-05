@@ -1,0 +1,2 @@
+{% load bee_django_report_filter %}
+{{ user_course_section.user_course|get_user_pass_section_count }}/{{ user_course_section.user_course.course.coursesectionmid_set.all|length }}

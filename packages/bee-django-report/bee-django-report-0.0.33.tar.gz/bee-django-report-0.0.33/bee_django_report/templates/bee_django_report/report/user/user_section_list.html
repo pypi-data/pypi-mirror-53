@@ -1,0 +1,90 @@
+{% extends "bee_django_report/base.html" %}
+{% load bee_django_report_filter %}
+{% block content %}
+    {% include 'bee_django_report/logo.html' %}
+    {% include 'bee_django_report/nav.html' %}
+    <div><h4></h4></div>
+    <div>
+
+        <form method="get">
+            {{ search_form }}
+            <input type="hidden" name="export" id="export">
+
+            <button class="" onclick="click_search()">查询</button>
+            <button class="" onclick="click_export()">导出</button>
+        </form>
+    </div>
+    <div style="margin: 10px 0;">
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th>学生</th>
+                <th>结课时间</th>
+                <th>课程</th>
+                <th>课件</th>
+                <th>进度</th>
+            </tr>
+            {% for user in user_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{{ user.get_user_search_link }}">
+                            {{ user.get_sn }}{{ user.userprofile.get_sn }} {{ user.get_user_name }} <span style="color: red;">{{ user.get_status|default:"" }}</span></a>
+                    </td>
+                    <td>
+                        {{ user.get_expire_date|default:"" }}
+                    </td>
+                    {% get_user_current_course_section user as user_course_section %}
+                    <td>{{ user_course_section.user_course.course }}</td>
+                    <td>{{ user_course_section.section }}</td>
+                    <td>
+                        {% if user_course_section %}
+                            {% include 'bee_django_report/report/user/_user_section_progress.html' %}
+                        {% endif %}
+                    </td>
+
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% include 'bee_django_report/paginator.html' %}
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $.datetimepicker.setLocale('ch');
+            $('#id_expire_date_start').datetimepicker({
+                format: 'Y-m-d',
+                timepicker: false,
+                scrollMonth: false,
+                scrollTime: false,
+                scrollInput: false
+            });
+            $('#id_expire_date_start').attr("autocomplete", "off");
+            $('#id_expire_date_end').datetimepicker({
+                format: 'Y-m-d',
+                timepicker: false,
+                scrollMonth: false,
+                scrollTime: false,
+                scrollInput: false
+            });
+            $('#id_expire_date_end').attr("autocomplete", "off");
+        });
+        function click_search() {
+            var $form = $("form");
+            var $export = $("#export");
+            $export.attr("value", "");
+            $form.submit()
+
+        }
+        function click_export() {
+            var $form = $("form");
+            var $export = $("#export");
+            $export.attr("value", "1");
+            $form.submit()
+
+        }
+    </script>
+
+{% endblock %}
