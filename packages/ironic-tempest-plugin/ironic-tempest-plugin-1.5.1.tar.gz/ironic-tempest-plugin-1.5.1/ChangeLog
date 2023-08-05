@@ -1,0 +1,249 @@
+CHANGES
+=======
+
+1.5.1
+-----
+
+* Skip the manual cleaning test if software RAID testing is enabled
+* Abort waiting early if reached a failure state
+* Build pdf doc
+
+1.5.0
+-----
+
+* Add a test for software RAID
+* Update api-ref location
+* Support for testing adoption in the standalone job
+* Make single tenant ip version configurable
+
+1.4.0
+-----
+
+* Use unique names in allocation tests
+* Switch to the new canonical constraints URL on master
+* Single tenant tests: BM to BM and BM to VM
+* Update sphinx requirements
+* Allocation API: add tests on backfilling allocations
+* Compatible with old Swift service enable
+* Add choice introspection store\_data backend
+* Using proper options for blkid
+* Fixing grep in validate mount point
+* Add Stein jobs
+* Delete created allocations
+* Remove Pike jobs and make Queens non-voting
+* Replace git.openstack.org URLs with opendev.org URLs
+* OpenDev Migration Patch
+* Removing obsolete oslosphinx
+
+1.3.0
+-----
+
+* discovery: optional support for testing changing driver
+* Run all defined jobs defined in check and gate
+* Deploy Templates: Allow old ironic API to return 405
+* Fix deploy template tests on Rocky and earlier
+* Marking ironic-standalone job voting again
+* Allocation API: use generate\_uuid for random resource classes
+* Temporary marking ironic-standalone non-voting
+* Deploy templates: API test nits
+* Test BM with VM on the same network
+* Deploy templates: add API tests
+* inspector py3 gate fix
+* Ensure list\_with\_limit tests pass
+* Update json module to jsonutils
+* Fix a race in the allocation API tests
+* tests for node description
+* Allocation API: functional tests
+* Fix for the Api discovery tests
+* Enable tempest run -l without credential setting
+* Rename zuulv3 jobs
+* [gate] update the list of the voting jobs
+* Tests for exposing conductors
+* Change openstack-dev to openstack-discuss
+* Replace Ocata jobs with Rocky
+
+1.2.1
+-----
+
+* multitenancy: Don't use fixed IPs in the test
+* Add API tests for protected nodes
+* Add API tests for portgroup update
+* Update the outdated URL in HACKING.rst
+* fix bug link in readme
+* Update the usage documentation with recent changes
+* Stop relying on VCPU count in the introspection tests
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* Test cases for iLO drivers in standalone ironic
+
+1.2.0
+-----
+
+* Correct the usage on listing neutron ports
+* Add API tests for the reset\_interfaces parameter
+* Rescue mode tempest tests
+* Add API tests for setting/resetting hardware interfaces
+* Force deploy\_interface for cleaning to be iscsi
+* Ensure we create nodes with valid CPU archs
+* Add bios testing to plugin
+* change default python 3 env in tox to 3.5
+* Do not boot nodes if not set in standalone tests
+* Add manual clean step ironic standalone test
+* Power fault recovery: tempest tests
+* fix tox python3 overrides
+* Remove volume v1 API service client usage
+* fix a typo in code
+* Update the home-page url in setup.cfg
+* Add the functional (API) tests job
+* Allow using the fake-hardware hardware type for API tests
+* Explicitly use iscsi for standalone BaremetalIpmiRescuePartitioned
+* Add comments for [deploy|rescue]\_interface
+* Gate: run the multinode job instead of the regular one
+* Rework the ironic-inspector auto-discovery test
+* Run ironic-inspector discovery jobs in the CI
+* Rescue mode standalone tests
+* Validate scheduling fields in basic ops scenario
+* Use the main introspection test instead of the smoke one
+* Updated from global requirements
+* Add example configuration for running our tests with nova
+* Updated from global requirements
+* Add a full set of tests for the IPMI hardware type to the standalone job
+* Added fixed\_ip support for standalone-ironic
+* Add jobs for stable/queens
+* Add [baremetal] available\_nodes configuration option
+
+1.1.0
+-----
+
+* Replace use of functools.wraps() with six.wraps()
+* Switch to override-checkout for stable branch jobs
+* Sort node traits in comparisons
+* Zuul: Remove project name
+* Add node trait tests
+* Updated from global requirements
+* Updated from global requirements
+
+1.0.0
+-----
+
+* Cleaned up the requirements of Ironic Tempest plugin
+* Add ansible deploy interface test
+* Add ability to set deploy interface
+* Introduce stable/ocata jobs
+* Update the list of CI jobs
+* Update README and setup.cfg, initial version of usage guide
+* Add DSVM jobs to the gate for ironic-tempest-plugin
+* Correct introspection rules path
+* Change config option to 'ironic\_inspector' and False by default
+* Fix pep8 issue
+* Add correct skip for ironic-inspector
+* Provide \_\_init\_\_.py to make all modules importable
+* Add tempest entry point
+* Fix introspection modules locations and imports
+* Ensure ping actually succed
+* Add py35 gate for ironic-inspector
+* Add I202 to flake ignore list
+* Update tests to do not use deprecated test.services()
+* pep8: Add 'application-import-names = ironic\_inspector'
+* Update tests to do not use deprecated test.services()
+* Replace the usage of 'admin\_manager' with 'os\_admin'
+* Update after recent removal of cred manager aliases
+* Fix API VIF tests when using flat network
+* Update vif\_attach from NeutronVIFPortIDMixin
+* Update the documentation link for doc migration
+* Add functional API tests for volume connector and volume target
+* Replace the deprecated tempest.test.attr with decorators.attr
+* Use flake8-import-order
+* Switch to use test\_utils.call\_until\_true
+* Switch to decorators.idempotent\_id
+* Remove unused "service" argument from tempest client manager
+* Tempest test tag baremetal doesn't exist
+* Add tempest plugin API tests for driver
+* [tempest] also catch BadRequest in negative tests with physical\_network in old API
+* [Tempest] fix negative tests on old API versions
+* Add negative attribute to negative port tests
+* Tempest scenario test for boot-from-volume
+* Add tempest tests for physical networks
+* Replace the usage of 'manager' with 'os\_primary'
+* Fix broken links in tempest plugin README
+* Replace test.attr with decorators.attr
+* Replace test.attr with decorators.attr
+* Replace test.attr with decorators.attr
+* Add functional api tests for node resource class
+* Add assertion of name to test\_list\_portgroups test
+* Skip PortNotFound when unbinding port
+* Skip VIF tests for standalone ironic
+* Fix docstrings for creating methods in baremetal api tests
+* Define minimum required API ver for portgroups
+* Add standalone tests using direct HTTP links
+* Extend tests and checks for node VIFs
+* Add functional API tests for portgroups
+* Fix local copy of scenario manager
+* Prune local copy of tempest.scenario.manager.py
+* Include a copy of tempest.scenario.manager module
+* Add ironic standlaone test with ipmi dynamic driver
+* Add Ironic standalone tests
+* Fix the exception message in tempest plugin
+* Refactor waiters in our tempest plugin
+* This adds a tempest test for creating a chassis with a specific UUID
+* Do not load credentials on import in tempest plugin clients.py
+* Trivial: Change hardcoded values in tempest plugin
+* Fix BaseBaremetalTest.\_assertExpected docstring
+* Deduplicate \_assertExpected method in tests
+* Change misc to test\_utils for tempest test
+* Switch to use test\_utils.call\_until\_true
+* Remove trailing slash from base\_url in tempest plugin
+* Switch to decorators.idempotent\_id
+* Update validate\_ports from BaremetalBasicOps
+* Skip VIF api tests for old api versions
+* Remove default\_params\_with\_timeout\_values from tempest client
+* Add Virtual Network Interface REST APIs
+* Remove service argument from tempest plugin client manager
+* Move CONF.service\_available.ironic to our plugin
+* Enhance wait\_for\_bm\_node\_status waiter
+* Use polling in set\_console\_mode tempest test
+* Drop bad skip check in tempest plugin
+* Stop disabling the Neutron tempest plugin
+* Test discovered nodes are in ENROLL state and fix typo
+* Add a test for introspection abort action verification
+* Only disable Neutron tests when our Grenade is running
+* Stop adding ServiceAvailable group option
+* Tempest: add auto-discovery test
+* Disable neutron tests in our grenade
+* Fix tempest.conf generation
+* Bring configurations from tempest to ironic\_tempest\_plugin
+* Update to hacking 0.12.0 and use new checks
+* Remove unused argument in Tempest Plugin
+* Fix docstrings to match with method arguments
+* Fix docstrings in tempest plugin baremetal json client
+* Replace assertTrue(isinstance()) with assertIsInstance()
+* Fix docstrings in Tempest Plugin REST client for Ironic API
+* [trivial] Fix typo in docstring
+* Replace six iteration methods with standard ones
+* Remove unused LOG and CONF
+* Fix incorrect order of params of assertEqual()
+* Using assertIsNone() is preferred over assertEqual()
+* Fix incorrect order of params of assertEqual()
+* Tempest: increase ironic sync timeout
+* Add a simple smoke test to be run in the grenade gate
+* Tempest: wrap instance actions into inspector methods
+* Fix tempest tests
+* Tempest: don't rely on tempest ironic client
+* Tempest: add basic test
+* Script to extract the ironic\_tempest\_plugin/ directory
+* Initial commit from cookiecutter
+* Added .gitreview
+* Add test to verify ironic multitenancy
+* No need for 'default=None' in config variable
+* tempest: start using get\_configured\_admin\_credentials
+* Fix signature for request method
+* Introduce provision states: AVAILABLE, ENROLL
+* Add support for API microversions in Tempest tests
+* Fix usage of rest\_client expected\_success() in tests
+* Document how to run the tempest tests
+* Tune interval for node provision state check
+* Replace depricated tempest-lib with tempest.lib
+* Comment out test options that already exists on tempest's tree
+* Refresh ssh verification mechanism
+* Remove hard-coded DEPLOYWAIT timeout from Baremetal Scenario
+* Migrate Tempest tests into Ironic tree
