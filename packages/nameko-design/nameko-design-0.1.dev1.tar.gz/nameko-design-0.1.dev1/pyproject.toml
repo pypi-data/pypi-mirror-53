@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "nameko-design"
+version = "0.1.dev1"
+description = "Generate http files from design schema inspired by goa"
+authors = ["yukinagae <yuki.nagae1130@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/yukinagae/nameko-design"
+repository = "https://github.com/yukinagae/nameko-design"
+keywords = ["nameko", "microservices", "design", "framework"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Jinja2 = "^2.10"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.7"
+autopep8 = "^1.4"
+
+[tool.poetry.scripts]
+nameko-design = 'nameko_design.main:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
