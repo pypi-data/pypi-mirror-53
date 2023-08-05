@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+        Django Support Lite &mdash; {{ title }}
+    </title>
+
+    {% load static %}
+    <link href="{% static 'django_support_lite/favicon.ico' %}" rel="icon" />
+    <link href="{% static 'django_support_lite/css/bootstrap.min.css' %}" rel="stylesheet" />
+</head>
+<body>
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                {% if message.tags == "success" %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+
+                {% if message.tags == "error" %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div>
+        {% block django_support_lite_content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
