@@ -1,0 +1,6 @@
+[vaex.dataframe.accessor]
+viz = vaex.viz:DataFrameAccessorViz
+
+[vaex.plugin]
+plot = vaex.viz.mpl:add_plugin
+
