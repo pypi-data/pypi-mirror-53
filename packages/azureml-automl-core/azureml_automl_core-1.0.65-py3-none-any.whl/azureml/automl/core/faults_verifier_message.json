@@ -1,0 +1,94 @@
+{
+	"version": "1.0.0",
+	"types": {
+
+		"_missing_value": {
+			"name": "Missing Values Imputation",
+			"states": {
+				"passed": "There were no missing values found in the training data.",
+				"fixed": "The training data had the following missing values which were resolved.\n\nPlease review your data source for data quality issues and possibly filter out the rows with these missing values.\n\nIf the missing values are expected, you can either accept the above imputation, or implement your own custom imputation that may be more appropriate based on the data type and business process.\n"
+			},
+			"parameters": {
+				"column_name": {
+					"name": "Column name"
+				},
+				"imputation_type": {
+					"name": "Imputation type",
+					"values": {
+						"mean": "Mean",
+						"mode": "Mode"
+					}
+				}
+			}
+		},
+
+		"_cross_validation": {
+			"name": "Cross Validation",
+			"states": {
+				"done": "Each iteration of the trained model was validated through cross-validation."
+			},
+			"parameters": {
+				"number_of_folds": {
+					"name": "Number of folds"
+				}
+			}
+		},
+		"_train_test_split": {
+			"name": "Train-Test Data Split",
+			"states": {
+				"done": "Your input data has been split into a training dataset and a holdout test dataset for validation of the model. The test holdout dataset reflects the original distribution of your input data."
+			},
+
+			"parameters": {
+				"dataset": {
+					"name": "Dataset",
+					"values": {
+						"train": "Training dataset",
+						"test": "Test dataset"
+					}
+				},
+				"row_counts": {
+					"name": "Row counts"
+				},
+				"percentage": {
+					"name": "Percentage"
+				}
+			}
+		},
+		"_detect_high_cardinal_feature": {
+			"name": "High Cardinality Feature Detection",
+			"states": {
+				"passed": "Your inputs were analyzed, and no high cardinality features were detected.",
+				"done": "High cardinality inputs were detected in dataset and were featurized as {}."
+			},
+
+			"parameters": {
+				"column_name": {
+					"name": "Column name"
+				},
+				"content_type": {
+					"name": "Column Content Type",
+					"values": {
+						"categorical_hash": "Categorical Hash",
+						"text": "Text"
+					}
+				}
+			}
+		},
+		"_class_balancing": {
+			"name": "Class Balancing Detection",
+			"states": {
+				"passed": "Classes are balanced in the training data.",
+				"alerted": "Classes in the training data are imbalanced."
+			},
+			"parameters": {
+				"size_of_smallest_class": {
+					"name": "Size of the smallest class"
+				},
+                "num_of_samples": {
+					"name": "number of samples in the training data"
+				}
+			}
+		}
+	}
+}
