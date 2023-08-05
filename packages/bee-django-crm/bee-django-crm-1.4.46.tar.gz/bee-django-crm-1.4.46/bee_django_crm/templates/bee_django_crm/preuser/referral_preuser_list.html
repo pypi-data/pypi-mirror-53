@@ -1,0 +1,20 @@
+{% extends "bee_django_crm/custom_base.html" %}
+{% load bee_django_crm_filter %}
+
+{% block content %}
+
+    <div class="text-center"><h4>报名效果</h4></div>
+    <div class="text-right">
+        <a href="{% url 'bee_django_crm:user_poster' %}" target="_blank">我的分享图</a>
+    </div>
+
+    <div>共{{ paginator.count }}人</div>
+    {% include 'bee_django_crm/preuser/_referral_preuser_list.html' %}
+
+    {% include 'bee_django_crm/paginator.html' %}
+{% endblock %}
+{% block scripts %}
+    <script>
+
+    </script>
+{% endblock %}

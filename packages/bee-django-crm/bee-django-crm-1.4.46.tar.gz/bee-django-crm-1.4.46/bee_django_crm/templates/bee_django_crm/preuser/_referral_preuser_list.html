@@ -1,0 +1,14 @@
+
+{% block content %}
+<table class="table">
+
+        {% for preuser in referral_preuser %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="col-xs-4">{{ preuser.name }} ({% if preuser.level == 3 %}已报名{% else %}已申请{% endif %})
+                </td>
+                <td>{{ preuser.created_at|default:""|date:"Y-m-d" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

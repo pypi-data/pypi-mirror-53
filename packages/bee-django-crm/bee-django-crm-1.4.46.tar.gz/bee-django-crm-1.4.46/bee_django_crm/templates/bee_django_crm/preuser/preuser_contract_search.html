@@ -1,0 +1,13 @@
+<form action="{% url 'bee_django_crm:preuser_contract_list'  0 %}" method="get">
+    {{ search_form }}
+    <input type="hidden" name="export" id="export">
+    {#    <input type="submit" value="查询"/>#}
+
+    <button class="" onclick="click_search()">查询</button>
+{#    <button class="" onclick="click_export()">导出</button>#}
+</form>
+{% block scripts %}
+    <script>
+
+    </script>
+{% endblock %}

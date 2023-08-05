@@ -1,0 +1,45 @@
+{% extends "bee_django_crm/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+    {% include 'bee_django_crm/logo.html' %}
+    {% include 'bee_django_crm/nav.html' %}
+    <div style="margin: 5px 0;">
+        <form action="{% url 'bee_django_crm:regcode_check' %}" method="get">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button '验证' %}
+        </form>
+    </div>
+    {% include 'bee_django_crm/messages.html' %}
+    {% if regcode %}
+        <div>
+            <h4>卡密详情</h4>
+        </div>
+        <table class="table">
+            <tr>
+                <td>卡号</td>
+                <td>{{ regcode.reg_name }}</td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td>{{ regcode.reg_code }}</td>
+            </tr>
+            <tr>
+                <td>使用情况</td>
+                <td>
+                    {% if regcode.used_preuser or regcode.used_at %}
+                        被【
+                        <a href="{% url 'bee_django_crm:preuser_detail' regcode.used_preuser.id %}">{{ regcode.used_preuser.name }}</a>
+                        】于【{{ regcode.used_at }}】使用
+                    {% else %}
+                        未被使用
+                    {% endif %}
+                </td>
+            </tr>
+
+        </table>
+    {% endif %}
+{% endblock %}
+
+
