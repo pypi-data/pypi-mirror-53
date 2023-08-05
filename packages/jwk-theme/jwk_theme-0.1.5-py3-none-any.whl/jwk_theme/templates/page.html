@@ -1,0 +1,29 @@
+﻿{% extends "without-sidebar.html" %}
+
+{% block title %}- {{ page.title }}{% endblock title %}
+
+{% block image_header %}
+	{% if page.image_header %}
+		<img src="{{ page.image_header }}">
+	{% endif %}
+{% endblock image_header %}
+
+{% block page_breadcrumbs %}
+	<li>{{ page.title }}</li>
+{% endblock page_breadcrumbs %}
+
+{% block content %}
+	{% if not page.hide_headline %}
+		<h3 class="headline">
+			{{ page.title }}{% if page.subtitle %}<small> - {{ page.subtitle }}</small>{% endif %}
+		</h3>
+		<span class="line" style="margin-bottom:35px;"></span>
+		<div class="clearfix"></div>
+	{% endif %}
+	{{ page.content }}
+{% endblock content %}
+
+{% block pv %}
+	{{ super() }}
+	{{ page.pageview }}
+{% endblock pv %}

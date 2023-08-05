@@ -1,0 +1,44 @@
+﻿{% extends "without-sidebar.html" %}
+
+{% block title %}- {{ page.title }}{% endblock title %}
+
+{% block image_header %}
+	{% if page.image_header %}
+		<img src="{{ page.image_header }}">
+	{% endif %}
+{% endblock image_header %}
+
+{% block page_breadcrumbs %}
+	<li>{{ page.title }}</li>
+{% endblock page_breadcrumbs %}
+
+{% block content %}
+	{% if not page.hide_headline %}
+		<h3 class="headline">
+			{{ page.title }}{% if page.subtitle %}<small> - {{ page.subtitle }}</small>{% endif %}
+		</h3>
+		<span class="line" style="margin-bottom:35px;"></span>
+		<div class="clearfix"></div>
+	{% endif %}
+	{{ page.content }}
+
+
+{% if GITHUB_ACTIVITY_FEED %}
+	<h3 class="headline">Github Activity</h3>
+	<span class="line" style="margin-bottom: 35px;"></span>
+	<div class="clearfix"></div>
+	<div class="social social-github">
+		<ul>
+		{% for entry in github_activity %}
+			<li><b>{{ entry[0] }}</b><br /> {{ entry[1] }}</li>
+		{% endfor %}
+		</ul>
+	</div><!-- /.github_activity -->
+	<br>
+{% endif %}
+{% endblock content %}
+
+
+{% block pv %}
+	{{ super() }} {{ page.pageview }}
+{% endblock pv %}
