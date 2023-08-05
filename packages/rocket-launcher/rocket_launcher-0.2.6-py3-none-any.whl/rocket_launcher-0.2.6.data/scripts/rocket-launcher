@@ -1,0 +1,14 @@
+#!python
+import os
+import threading
+import time
+from rockets import *
+w=threading.Thread(target=supervisord, name='supervisor')
+w.start()
+
+multiplexer()
+terminal()
+ranger()
+git()
+
+os.system('sudo -H -u who byobu');
