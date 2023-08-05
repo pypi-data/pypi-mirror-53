@@ -1,0 +1,117 @@
+kinto-megaphone
+===============
+
+|travis| |master-coverage|
+
+.. |travis| image:: https://travis-ci.org/Kinto/kinto-megaphone.svg?branch=master
+    :target: https://travis-ci.org/Kinto/kinto-megaphone
+
+.. |master-coverage| image::
+    https://coveralls.io/repos/Kinto/kinto-megaphone/badge.png?branch=master
+    :alt: Coverage
+    :target: https://coveralls.io/r/Kinto/kinto-megaphone
+
+Send global broadcast messages to Megaphone on changes.
+
+* `Megaphone <https://github.com/mozilla-services/megaphone/>`_
+* `Kinto documentation <http://kinto.readthedocs.io/en/latest/>`_
+* `Issue tracker <https://github.com/Kinto/kinto-megaphone/issues>`_
+
+
+Installation
+------------
+
+Install the Python package:
+
+::
+
+    pip install kinto-megaphone
+
+
+Add it to kinto.includes::
+
+    kinto.includes = kinto_megaphone
+
+Then, you'll want to add a listener.
+
+The kinto-megaphone listener is called ``KintoChangesListener`` and
+it watches the ``monitor/changes`` collection from ``kinto-changes``.
+You provide a list of resources, and when those resources are updated
+in ``monitor/changes``, we notify Megaphone with the new collection
+timestamp.
+
+If talking to Megaphone fails, it will abort the request (including
+rolling back the changes made in the request).
+
+kinto-megaphone only offers this one kind of listener right
+now, but that could change later.
+
+Add it using configuration like::
+
+  kinto.event_listeners = mp
+  kinto.event_listeners.mp.use = kinto_megaphone.listeners
+  kinto.event_listeners.mp.api_key = foobar
+  kinto.event_listeners.mp.url = https://megaphone.example.com/
+  kinto.event_listeners.mp.broadcaster_id = remote-settings
+  kinto.event_listeners.mp.match_kinto_changes = /buckets/main /buckets/blocklists/collections/addons /buckets/blocklists/collections/gfx
+
+Note that the ``match_kinto_changes`` configuration only lets you
+describe resources that are tracked by kinto-changes -- you won't be
+able to put e.g. groups or accounts in there.
+
+
+Changelog
+=========
+
+This document describes changes between each past release.
+
+
+0.4.0 (2019-09-30)
+------------------
+
+- Log version value when broadcasting to Megaphone
+
+
+0.3.0 (2018-11-12)
+------------------
+
+- Add configuration to restrict what kinto-changes records cause notifications (#13).
+
+
+0.2.3 (2018-11-07)
+------------------
+
+- Remove a broken log message (#10).
+
+
+0.2.2 (2018-11-07)
+------------------
+
+- I failed to correctly release 0.2.1. Try again.
+
+
+0.2.1 (2018-11-07)
+------------------
+
+- Add a few log messages to help try to troubleshoot.
+
+
+0.2.0 (2018-09-25)
+------------------
+
+- Update to match kinto 10.1.1 -- see Kinto/kinto#1770 (#2).
+- Add a heartbeat feature.
+
+
+0.1.0 (2018-09-12)
+------------------
+
+- Initial implementation
+
+
+Contributors
+============
+
+* Ethan Glasser-Camp <eglassercamp@mozilla.com>
+
+
