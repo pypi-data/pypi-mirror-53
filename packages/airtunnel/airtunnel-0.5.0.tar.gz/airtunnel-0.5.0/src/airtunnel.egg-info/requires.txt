@@ -1,0 +1,10 @@
+pandas>=0.24
+schema<0.7,>=0.6
+apache-airflow
+
+[dev]
+pyarrow==0.13
+pytest-cov==2.7.1
+apache-airflow[crypto]==1.10.5
+pytest<4.5.0,>=4.4.0
+flake8
