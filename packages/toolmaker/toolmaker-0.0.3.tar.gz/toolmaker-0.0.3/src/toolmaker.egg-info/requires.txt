@@ -1,0 +1,16 @@
+importlib_metadata
+pex[cachecontrol,requests]
+shiv
+zapp
+
+[package]
+twine
+wheel
+zapp
+
+[test]
+astroid<2.3
+pylint<2.4
+pytest
+pytest-pycodestyle
+pytest-pylint
