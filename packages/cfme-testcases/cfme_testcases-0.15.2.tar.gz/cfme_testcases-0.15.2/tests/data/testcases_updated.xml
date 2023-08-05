@@ -1,0 +1,1969 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testcases project-id="Insights">
+  <properties>
+    <property name="polarion-custom-lookup-method-field-id" value="testCaseID"/>
+    <property name="lookup-method" value="custom"/>
+  </properties>
+  <testcase assignee-id="psegedy" id="dd41d340dc89b6045de27c03f5f6330f" initial-estimate="1/60h">
+    <title>TestCVEsQuery.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple CVEs using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L193"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L193" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="98cecb145a88fdbb5a9fd7ea3f224b18" initial-estimate="1/60h">
+    <title>TestCVEsQuery.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L207"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L207" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="26eb6f2fc3d9cb90caab865ec888b7a9" initial-estimate="1/60h">
+    <title>TestCVEsQuery.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L231"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L231" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="7802bc873e52d79d12bc10f21de56b54" initial-estimate="1/60h">
+    <title>TestCVEsModifiedSince.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Tests &lt;strong&gt;multiple&lt;/strong&gt; CVEs using POST.&lt;/dt&gt;
+&lt;dd&gt;&lt;table class="first last docutils field-list" frame="void" rules="none"&gt;
+&lt;col class="field-name" /&gt;
+&lt;col class="field-body" /&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr class="field"&gt;&lt;th class="field-name"&gt;param rest_api:&lt;/th&gt;&lt;td class="field-body"&gt;REST API client&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L255"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L255" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="aa5477491a6182154829849ea736fa4e" initial-estimate="1/60h">
+    <title>TestCVEsModifiedSince.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L272"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L272" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="73821748b1900e8faf016966887bd50a" initial-estimate="1/60h">
+    <title>TestCVEsModifiedSince.test_modified_no_tz</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests modified since without timezone using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L292"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L292" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="52bf32e5e3316edc8e77fd90005f50b4" initial-estimate="1/60h">
+    <title>TestCVEsCorrect.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple CVEs using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L350"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L350" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="013aa90c24112042603cd6fbbbd2255a" initial-estimate="1/60h">
+    <title>TestCVEsCorrect.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L358"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L358" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="ea879348148557f670124bdec6c31631" initial-estimate="1/60h">
+    <title>TestCVEsCorrect.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L367"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L367" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="031ecd26fa9b1f70095db819dad80e36" initial-estimate="1/60h">
+    <title>TestCVEsCorrect.test_post_multi_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple CVEs using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L376"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L376" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="663d914710a75719f6925ca0a9e9345d" initial-estimate="1/60h">
+    <title>TestCVEsCorrect.test_post_single_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L385"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L385" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="7748ce4228cb633176572c62772cf8e1" initial-estimate="1/60h">
+    <title>TestCVEsCorrect.test_get_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single CVE using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L395"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve_in" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L395" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="c70fc4b7ac5602a2fddec14f8fe8021c" initial-estimate="1/60h">
+    <title>TestCVEsRegex.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single cve regex using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L409"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L409" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="31693d8fdb1b1d186ffcfe84adbf9fe7" initial-estimate="1/60h">
+    <title>TestCVEsRegex.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single cve regex using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L434"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="cve" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L434" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="f0ddc4f071b735cf6172e4d81608906f" initial-estimate="1/60h">
+    <title>TestCVEsPagination.test_pagination</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests CVEs pagination using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L460"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L460" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="1bb58d38292bffdd48617fe0ce69cc1a" initial-estimate="1/60h">
+    <title>TestCVEsPagination.test_pagination_neg</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Negative testing of CVEs pagination with page/page_size &amp;lt;= 0&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_cves.py#L491"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="page_info" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_cves.py#L491" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="927bc480ea5f3607fc76fcec4b38fdd9" initial-estimate="1/60h">
+    <title>TestDBChange.test_dbchange</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests that dates in db are changing after /sync&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_dbchange.py#L11"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_dbchange.py#L11" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="1926e165932120057e086de9fc8a1051" initial-estimate="1/60h">
+    <title>TestErrataQuery.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple test errata using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L102"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L102" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="d05448ee8c07c9a042e2a699917a74a0" initial-estimate="1/60h">
+    <title>TestErrataQuery.test_post_multi_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple real errata using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L110"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L110" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="bd22f15a63a164bb7f759ab8854539a0" initial-estimate="1/60h">
+    <title>TestErrataQuery.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single test erratum using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L120"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L120" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="9b08bb220208758515035cd760fde3dd" initial-estimate="1/60h">
+    <title>TestErrataQuery.test_post_single_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single real erratum using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L129"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L129" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="19f8245105daee9576495b9baaae1e2e" initial-estimate="1/60h">
+    <title>TestErrataQuery.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single real erratum using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L141"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L141" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="63503b71360aa6b4199ef3ed3aabc1d9" initial-estimate="1/60h">
+    <title>TestErrataModifiedSince.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple test errata using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L203"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L203" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="524cab60af013a9d65df76600a3d48a1" initial-estimate="1/60h">
+    <title>TestErrataModifiedSince.test_post_multi_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple real errata using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L211"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L211" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="7b164ce46d6dabd4c1dcec9a038f450f" initial-estimate="1/60h">
+    <title>TestErrataModifiedSince.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single test erratum using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L220"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L220" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="06eed2e42ba0ed8b2b95f6418d948d66" initial-estimate="1/60h">
+    <title>TestErrataModifiedSince.test_post_single_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single real erratum using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L229"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L229" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="484d552811e9b1af7097d1c9f5daa02b" initial-estimate="1/60h">
+    <title>TestErrataModifiedSince.test_modified_no_tz</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests modified since without timezone using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L239"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L239" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="952ba1b3b8bedb610d9038140a71eec9" initial-estimate="1/60h">
+    <title>TestErrataRegex.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single erratum using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L253"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L253" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="71090f382f85e5bd16668ac434ce9cbc" initial-estimate="1/60h">
+    <title>TestErrataRegex.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single real erratum using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L273"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="erratum" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L273" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="10b23d127710a1018f12fa10a419ce00" initial-estimate="1/60h">
+    <title>TestErrataPagination.test_pagination</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests errata pagination using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L294"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L294" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="0db91368852af7a76cc596b9a47775e9" initial-estimate="1/60h">
+    <title>TestErrataPagination.test_pagination_neg</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Negative testing of errata pagination with page/page_size &amp;lt;= 0&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_errata.py#L325"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="page_info" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_errata.py#L325" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="82b34cd3c14ef3b09402e4d86865e7e5" initial-estimate="1/60h">
+    <title>TestJSON.test_json_updates</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests various json - /updates endpoint. API version v1 and v2&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_json.py#L86"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="json" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_json.py#L86" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="a6f0cde2de468328a9a56acf50ead2b7" initial-estimate="1/60h">
+    <title>TestJSON.test_json_cves</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests various json - /cves endpoint.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_json.py#L97"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="json" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_json.py#L97" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="8ded43f62557e31f0d84c6a7a0650798" initial-estimate="1/60h">
+    <title>TestJSON.test_json_errata</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests various json - /errata endpoint.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_json.py#L122"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="json" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_json.py#L122" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="6a5b6fb81ff41246425e6a9da1603715" initial-estimate="1/60h">
+    <title>TestJSON.test_json_repos</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests various json - /repos endpoint.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_json.py#L147"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="json" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_json.py#L147" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="49c6c809fd06b12a528b89fb529936f2" initial-estimate="1/60h">
+    <title>TestJSON.test_json_packages</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests various json - /packages endpoint.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_json.py#L172"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="json" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_json.py#L172" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="fd622a31861260d2472bcf5c9d116ec4" initial-estimate="1/60h">
+    <title>TestPackagesQuery.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple pkgs using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_packages.py#L11"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_packages.py#L11" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="cb7c86b90217efb9dfac4cd7aab321f0" initial-estimate="1/60h">
+    <title>TestPackagesQuery.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single pkg using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_packages.py#L25"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="pkg" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_packages.py#L25" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="medium" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="1e3a7ab928b3e01e88fb97429df0c072" initial-estimate="1/60h">
+    <title>TestPackagesQuery.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single pkg using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_packages.py#L41"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="pkg" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_packages.py#L41" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="08ee6de60553905a11fa3ab4d120705e" initial-estimate="1/60h">
+    <title>TestContainerReconnect.test_reconnect</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests reconnection to reposcan container&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_reconnect.py#L9"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_reconnect.py#L9" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="a25c6cd5311dd917b87cca54f04b709f" initial-estimate="1/60h">
+    <title>TestReposQuery.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple test repos using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L85"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L85" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="216fd7bb9d2f35a8c99519c239af2a24" initial-estimate="1/60h">
+    <title>TestReposQuery.test_post_multi_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple real repos using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L93"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L93" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="ab2cda6d2431015b60bf5dd4dddfaf14" initial-estimate="1/60h">
+    <title>TestReposQuery.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single test repo using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L102"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L102" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="74d10242a117c65ff423f92831b82739" initial-estimate="1/60h">
+    <title>TestReposQuery.test_post_single_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single real repo using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L111"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L111" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="24759a2226f7aaf2afd03cbf030eeae3" initial-estimate="1/60h">
+    <title>TestReposQuery.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single test repo using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L121"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L121" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="4f88006f76df04db8aa8ff5e58cea285" initial-estimate="1/60h">
+    <title>TestReposQuery.test_get_smoke</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single real repo using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L130"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L130" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="fc0b5f1d559c08b4a62ca0100b3605f7" initial-estimate="1/60h">
+    <title>TestReposNonexistent.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests multiple non-existent repos using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L143"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L143" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="805b0a7023651aba83d156810ecc33c7" initial-estimate="1/60h">
+    <title>TestReposNonexistent.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single non-existent repo using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L155"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo_name" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L155" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="239a5e20e2817f7b1d053ec78cafc961" initial-estimate="1/60h">
+    <title>TestReposNonexistent.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single non-existent repo using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L170"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo_name" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L170" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="e7a709467d053d4a9eec3e55283376c3" initial-estimate="1/60h">
+    <title>TestReposPagination.test_pagination</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests repos pagination using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L185"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L185" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="a336cde71a61ca3b7c904e3c04660197" initial-estimate="1/60h">
+    <title>TestReposPagination.test_pagination_neg</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Negative testing of repos pagination with page/page_size &amp;lt;= 0&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L216"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="page_info" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L216" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="8e1b8de4c4c4815d9f9ce5984705bb96" initial-estimate="1/60h">
+    <title>TestReposRegex.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single repo regex using POST.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L242"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L242" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="691963e741c6da17bdee3f5ce058f42b" initial-estimate="1/60h">
+    <title>TestReposRegex.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests single repo regex using GET.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_repos.py#L260"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="repo" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_repos.py#L260" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="7f824b5c7fdcee25976171a817e1a483" initial-estimate="1/60h">
+    <title>test_sync_cves</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Test cves sync.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_sync_cves.py#L10"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_sync_cves.py#L10" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="36b4423fd91f7f5dfe30298ebe91b74d" initial-estimate="1/60h">
+    <title>test_repo_refresh</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Test repo refresh.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_sync_repos.py#L10"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step"/>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_sync_repos.py#L10" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="c9fc9bdc15d8b58479c08755eb4ccabd" initial-estimate="1/60h">
+    <title>TestUpdatesBasic.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates using POST with multiple packages. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L41"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L41" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="10091d8168eb7b610c321c7f6f0b0716" initial-estimate="1/60h">
+    <title>TestUpdatesBasic.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates using POST with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L51"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L51" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="69a462f6f1c3aa8a46eaaf9c50ac0cb6" initial-estimate="1/60h">
+    <title>TestUpdatesBasic.test_get_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates using GET with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L63"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L63" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="dbba2568b046b0d9c243f49d9a68acb9" initial-estimate="1/60h">
+    <title>TestUpdateInOtherRepo.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates in different repo using POST with multiple packages. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L111"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L111" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="8a725fb17bc130ab8d30db7feb584092" initial-estimate="1/60h">
+    <title>TestUpdateInOtherRepo.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates in different repo using POST with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L121"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L121" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="5cf57176742e148196ca1634ebc24950" initial-estimate="1/60h">
+    <title>TestUpdateInOtherRepo.test_get_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates in different repo using GET with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L133"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L133" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="82d8f74f05f2da22a43177eb82a86ef8" initial-estimate="1/60h">
+    <title>TestUpdateToNoarch.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates to noarch package using POST with multiple packages. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L181"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L181" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="e1ee4f73744a4dcb40eb6e3c37e2dd6c" initial-estimate="1/60h">
+    <title>TestUpdateToNoarch.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates to noarch package using POST with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L191"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L191" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="a9a8bd9aa157f517adde39dcf3df2db7" initial-estimate="1/60h">
+    <title>TestUpdateToNoarch.test_get_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates to noarch package using GET with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L203"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L203" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="74769ef45a8acd55d86fb267a624a5e8" initial-estimate="1/60h">
+    <title>TestUpdateFromNoarch.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates from noarch package using POST with multiple packages. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L247"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L247" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="c1c468c36ec285aa7734cc675b205f64" initial-estimate="1/60h">
+    <title>TestUpdateFromNoarch.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates from noarch package using POST with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L257"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L257" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="e3c230a5377a251ac26936ed5eae2fd3" initial-estimate="1/60h">
+    <title>TestUpdateFromNoarch.test_get_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests correct updates from noarch package using GET with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L269"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L269" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="30ffc35ffa1ba59747408cb159bbd356" initial-estimate="1/60h">
+    <title>TestUpdateI386Filter.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Tests correct updates from i386 package with basearch set to x86_64&lt;/dt&gt;
+&lt;dd&gt;using POST with multiple packages. API versions 'v1' and 'v2'&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L318"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L318" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="6b38f7bc82a507dc9487e7537009a5bb" initial-estimate="1/60h">
+    <title>TestUpdateI386Filter.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Tests correct updates from i386 package with basearch set to x86_64&lt;/dt&gt;
+&lt;dd&gt;using POST with single package. API versions 'v1' and 'v2'&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_tier2_udpates.py#L329"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_tier2_udpates.py#L329" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="1fa96b8e8fac7fa32e8de182dfab7cac" initial-estimate="1/60h">
+    <title>TestUpdatesAll.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates using POST with multiple packages. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L42"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L42" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="dd7f14fd58ee0d309dc522078aa26e2b" initial-estimate="1/60h">
+    <title>TestUpdatesAll.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates using POST with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L52"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package_record" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L52" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="ce28b91860a302688677d4bd7e048866" initial-estimate="1/60h">
+    <title>TestUpdatesAll.test_get</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates using GET with single package. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L65"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+          <parameter name="package_record" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L65" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="5a7e99436c62ba1b7f9189c9ce8f4f75" initial-estimate="1/60h">
+    <title>TestUpdatesInRepos.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates in repos using POST with multiple packages. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L115"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L115" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="354135b718d4f9856927d37980d04a28" initial-estimate="1/60h">
+    <title>TestUpdatesInRepos.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates in repos using POST with single package. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L125"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="package_record" scope="local"/>
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L125" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="fff2beb88e85120ee4121fee184786b5" initial-estimate="1/60h">
+    <title>TestUpdatesInRepos.test_post_nonexistent_repo</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates in repos using POST with single package. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L137"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L137" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="42159534aca81f72b8f80035b9aef87e" initial-estimate="1/60h">
+    <title>TestUpdatesFilterRelease.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates with filtered release version using POST with multiple packages. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L176"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L176" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="176986011839813402328e5000c8de04" initial-estimate="1/60h">
+    <title>TestUpdatesFilterRelease.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates with filtered release version using POST with single package. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L186"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="package_record" scope="local"/>
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L186" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="d89d8f99a15c6d06c355bf4fc2a623a1" initial-estimate="1/60h">
+    <title>TestUpdatesFilterBasearch.test_post_multi</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates with filtered basearch using POST with multiple packages. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L234"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L234" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="fd597d9c2f2af733a3b40f7ac5f1c2e3" initial-estimate="1/60h">
+    <title>TestUpdatesFilterBasearch.test_post_single</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests updates with filtered basearch using POST with single package. API version 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L244"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="package_record" scope="local"/>
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L244" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="6c53ee58263eac946534042cccb78893" initial-estimate="1/60h">
+    <title>TestUpdatesDiff.test_post_diff</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests that application returns always the same response using POST. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L261"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L261" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="psegedy" id="071140e1f1b7b6a315e6e78cc7db82e2" initial-estimate="1/60h">
+    <title>TestUpdatesDiff.test_get_diff</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Tests that application returns always the same response using GET. API versions 'v1' and 'v2'&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_updates.py#L277"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="api_ver" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_updates.py#L277" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+  <testcase assignee-id="mkourim" id="cd8b8165a4221d22216f8055d022c3dc" initial-estimate="1/60h">
+    <title>test_with_errata_tool</title>
+    <description>&lt;div class="document"&gt;
+&lt;p&gt;Compares VMaaS results with Errata Tool results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;br id="id123"/&gt;&lt;br/&gt;&lt;a href="iqe_vulnerability/tests/test_with_errata_tool.py#L89"&gt;Test Source&lt;/a&gt;</description>
+    <test-steps>
+      <test-step>
+        <test-step-column id="step">
+          <parameter name="package_name" scope="local"/>
+        </test-step-column>
+      </test-step>
+    </test-steps>
+    <custom-fields>
+      <custom-field content="iqe_vulnerability/tests/test_with_errata_tool.py#L89" id="automation_script"/>
+      <custom-field content="automated" id="caseautomation"/>
+      <custom-field content="high" id="caseimportance"/>
+      <custom-field content="component" id="caselevel"/>
+      <custom-field content="positive" id="caseposneg"/>
+      <custom-field content="-" id="subtype1"/>
+      <custom-field content="-" id="subtype2"/>
+      <custom-field content="functional" id="testtype"/>
+    </custom-fields>
+  </testcase>
+</testcases>

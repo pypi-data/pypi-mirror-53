@@ -1,0 +1,77 @@
+polarion-project-id: Insights
+xunit_import_properties:
+    polarion-testrun-status-id: inprogress
+    polarion-lookup-method: custom
+    polarion-custom-lookup-method-field-id: testCaseID
+testcase_import_properties:
+    lookup-method: custom
+    polarion-custom-lookup-method-field-id: testCaseID
+polarion_url: https://polarion.url.com
+
+default_fields:
+    assignee: ""
+    casecomponent: ""
+    initialEstimate: 1/60h
+    caseimportance: high
+    caselevel: component
+    caseposneg: positive
+    caseautomation: automated
+    testtype: functional
+    subtype1: "-"
+    subtype2: "-"
+    tags: ""
+    setup: ""
+    teardown: ""
+    description: ""
+    linkedWorkItems: ""
+    testSteps: ""
+    expectedResults: ""
+    title: ""
+    work_item_id: ""
+
+docstrings:
+    required_fields:
+        - assignee
+
+    marker_fields:
+        caseautomation: "@pytest.mark.manual"
+
+    custom_fields:
+        - caseautomation
+        - casecomponent
+        - caseimportance
+        - caselevel
+        - caseposneg
+        - setup
+        - subtype1
+        - subtype2
+        - tags
+        - teardown
+        - testtype
+
+    valid_values:
+        caseimportance:
+            - critical
+            - high
+            - medium
+            - low
+        caseposneg:
+            - positive
+            - negative
+        testtype:
+            - functional
+            - nonfunctional
+            - structural
+            - integration
+            - upgrade
+        caseautomation:
+            - automated
+            - manualonly
+            - notautomated
+        caselevel:
+            - component
+            - integration
+            - system
+            - acceptance
+        casecomponent:
+            - vmaas
