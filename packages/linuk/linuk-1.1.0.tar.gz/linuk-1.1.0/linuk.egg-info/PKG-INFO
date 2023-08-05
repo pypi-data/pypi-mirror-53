@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: linuk
+Version: 1.1.0
+Summary: Library with built in python code.
+Home-page: https://github.com/Psychewolf/linuk
+Author: Kazi_jaber
+Author-email: jaforjaber@gmail.com
+License: UNKNOWN
+Description: # linuk
+        Python Utility library for built in python codes.
+        
+        # Installation
+            
+            pip install linuk
+        
+        
+        # Example
+            
+            from linuk.basic import listmaker
+            listmaker('ab cd ef gh')
+        
+        # Whats New
+        New module with python code templates
+        	import linuk.templates
+        
+        added acronym_maker to linuk.basic
+        	from linuk.basic import *
+        	acronym_maker("Sega Nintendo Sony")
+            
+        ## for more documentation use built in help() command.
+            
+            
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
