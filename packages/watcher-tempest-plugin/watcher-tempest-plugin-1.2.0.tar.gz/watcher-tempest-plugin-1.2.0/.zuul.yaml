@@ -1,0 +1,23 @@
+- project:
+    templates:
+      - check-requirements
+      - tempest-plugin-jobs
+    check:
+      jobs:
+        - watcher-tempest-functional
+        - watcher-tempest-dummy_optim
+        - watcher-tempest-actuator
+        - watcher-tempest-strategies:
+            voting: false
+        - watcher-tempest-vm_workload_consolidation
+        - watcher-tempest-host_maintenance
+        - watcher-tempest-storage_balance
+        - watcher-tempest-workload_balancing:
+            voting: false
+        - watcher-tempest-zone_migration
+
+    gate:
+      queue: watcher
+      jobs:
+        - watcher-tempest-functional
+
