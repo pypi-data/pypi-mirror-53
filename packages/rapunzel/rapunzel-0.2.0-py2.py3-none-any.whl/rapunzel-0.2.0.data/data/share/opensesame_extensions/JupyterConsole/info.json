@@ -1,0 +1,22 @@
+{
+    "label": "Show console",
+    "tooltip": "Show Jupyter/ IPython console",
+    "priority": 101,
+    "icon": "os-debug",
+    "settings": {
+        "jupyter_inprocess": false,
+        "jupyter_visible": true,
+        "jupyter_focus_shortcut": "Ctrl+3",
+        "jupyter_kernels": "python;ir"
+    },
+    "shortcut": "Ctrl+D",
+    "checkable": true,
+    "menu": {
+        "index": 8,
+        "submenu": "View"
+    },
+    "toolbar": {
+        "index": 13
+    },
+    "modes": ["default", "ide"]
+}
