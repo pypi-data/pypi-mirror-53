@@ -1,0 +1,7 @@
+include setup.py
+include README
+
+recursive-include cubicweb_signedrequest *
+recursive-include cubicweb_signedrequest/data *.gif *.png *.ico *.css *.js
+recursive-include cubicweb_signedrequest/i18n *.po
+recursive-include cubicweb_signedrequest/wdoc *
