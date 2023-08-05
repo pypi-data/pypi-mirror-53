@@ -1,0 +1,16 @@
+taler-util
+==========
+
+util code for the GNU Taler project.
+
+legal
+-----
+Modules contained in this package are licensed LGPL 3 (or later). 
+
+tests
+-----
+To run the unittests, execute
+
+	python3.7 setup.py tests
+
+
