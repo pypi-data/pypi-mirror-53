@@ -1,0 +1,23 @@
+marshmallow<4.0,>=3.0.0
+typing-inspect
+
+[:python_version == "3.6"]
+dataclasses
+
+[dev]
+marshmallow-enum
+marshmallow-union
+pre-commit~=1.18
+sphinx
+
+[docs]
+sphinx
+
+[enum]
+marshmallow-enum
+
+[lint]
+pre-commit~=1.18
+
+[union]
+marshmallow-union
