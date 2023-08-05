@@ -1,0 +1,29 @@
+#!python
+
+"""
+Process a saved json state file and corresponding Python script
+to produce an output Python script with keywords expanded.
+
+To run:
+    psnap filename.json
+
+Inputs/outputs:
+    filename.json specifies input Python code ("code_src") and
+    output with keyword expansion ("code_snap").
+"""
+
+import sys
+from psnap import keyword_expander
+
+def _psnap_main():
+    if len(sys.argv) != 2:
+        print("Usage: {} infile.json".format(sys.argv[0]))
+        return
+
+    data = keyword_expander.KeywordExpander.expand_from_json_file(sys.argv[1])
+
+    print("INFILE: {}".format(data['code_src']))
+    print("WROTE: {}".format(data['code_snap']))
+
+if __name__ == "__main__":
+    _psnap_main()
