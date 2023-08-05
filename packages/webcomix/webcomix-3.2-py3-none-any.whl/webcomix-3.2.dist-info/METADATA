@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: webcomix
+Version: 3.2
+Summary: Webcomic downloader
+Home-page: https://github.com/J-CPelletier/webcomix
+Author: Jean-Christophe Pelletier
+Author-email: pelletierj97@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Scrapy
+Requires-Python: >=3.5
+Requires-Dist: Click
+Requires-Dist: fake-useragent
+Requires-Dist: scrapy
+Requires-Dist: tqdm
+Requires-Dist: PyDispatcher
+Requires-Dist: scrapy-splash
+Provides-Extra: dev
+Requires-Dist: pytest ; extra == 'dev'
+Requires-Dist: pytest-cov (==2.5.1) ; extra == 'dev'
+Requires-Dist: pytest-mock ; extra == 'dev'
+Requires-Dist: coveralls ; extra == 'dev'
+Requires-Dist: pre-commit ; extra == 'dev'
+Requires-Dist: mypy ; extra == 'dev'
+
+webcomix is a webcomic downloader that can additionally create a .cbz file once downloaded.
+
+
