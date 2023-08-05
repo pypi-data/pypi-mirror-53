@@ -1,0 +1,166 @@
+awssh
+----------------
+
+`awssh` uses boto3 to list your AWS instances and easily ssh, run commands, create tunnels, and ProxyJump based on 
+'Key Name'. It supports aws-cli `--profile` and `--region` options, and environment variables 
+(AWS_DEFAULT_REGION, AWS_DEFAULT_PROFILE, etc.) to specify configuration options and credentials.
+```
+➜  ~ awssh
+Querying AWS for EC2 instances in default region...
+
+     Name           Instance ID   Public IP       Private IP       Zone          Key Name
+ 0 - JumpHost-1     i-06755dff7   3.13.18.215     10.120.1.119     us-east-2a    project-100715
+ 1 - WinStack       i-088fbe001   None            10.120.1.40      us-east-2a    project-100715
+ 2 - JumpHost-2     i-00498e224   48.14.28.186    10.120.0.8       us-east-2a    project-101018
+ 3 - PCoIP          i-0b79c1a8f   None            10.120.1.46      us-east-2a    project-101018
+ 4 - Dyna-dyna      i-03ed2e9df   None            10.120.1.7       us-east-2a    project-101018
+ 5 - ECS Instance   i-01b2877c1   None            10.120.1.55      us-east-2a    project-101018
+ 6 - MySQL-PROD     i-01b2877c1   None            10.120.1.55      us-east-2a    project-100715
+ 7 - codeCommit     i-06755dff7   None            10.120.1.119     us-east-2a    project-100715
+
+Enter server number: 7
+
+Connecting to codeCommit via JumpHost-1:
+
+[centos@code-commit ~]$
+```
+
+Installation
+----------------
+First, install the aws-cli and boto3 libraries: 
+```bash
+pip3 install awscli --upgrade --user
+pip3 install boto3
+```
+
+Next, set up aws credentials, default profile, and default regions:
+```bash
+aws configure
+```
+**Note**: configure your
+ [AWS Profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) 
+ to be able to use the `--profile` option and the AWS_DEFAULT_PROFILE environment variable.
+
+Install the `awssh` utility:
+```bash
+pip3 install ssh-aws --user  # or pip3 install ssh-aws
+```
+
+Finally, depending on your Python version, make sure that `$HOME/Library/Python/<version>/bin` is part of PATH.
+```bash
+echo $PATH
+```
+**Note**: the `awssh` utility is installed in `$HOME/Library/Python/<version>/bin` which may not be on your PATH.
+
+
+Version update
+----------------
+```bash
+echo y | pip3 uninstall ssh-aws
+pip3 install ssh-aws --no-cache --user  # or pip3 install --no-cache ssh-aws
+awssh --version
+```
+
+
+Requirements
+----------------
+- Python
+- [boto3](https://github.com/boto/boto3)
+- [aws-cli](https://github.com/aws/aws-cli)
+- [OpenSSH 7.3](https://www.openssh.com/txt/release-7.3)
+
+
+Features
+----------------
+
+The `awssh` utility gives you a list of aws instances and preconfigures `ssh` with the proper key and user.
+You can filter by instance name. If it matches only one instance you will be logged into it. If an instance 
+without an external IP is selected, the utility attempts to find its jump server and ssh with the ProxyJump 
+configuration directive (e.g. `ssh -A -J user@<jump.host> user@<target.host>`). Agent forwarding should be 
+used with caution. `awssh` also allows local and remote port forwarding for ssh tunneling 
+(e.g. `ssh -L 9000:imgur.com:80 user@<ip_address>`). 
+
+
+Usage
+-----
+
+```
+usage: awssh [-h] [--users USERS [USERS ...]] [--profile PROFILE]
+             [--region REGION] [-i KEY_PATH] [-c COMMAND]
+             [-r REMOTE_HOST] [-p REMOTE_PORT] [-l LOCAL_PORT]
+             [--keys KEYS] [--timeout TIMEOUT] [--console-output]
+             [--version] [--verbose]
+             [filter]
+
+SSH into AWS instances. "awssh --profile prod-acc-2 --users fduran --region
+us-east-2 instance-name". The default user list is centos, ubuntu, and
+ec2-user. "awssh --profile prod-acc-2" will attempt ssh with default users.
+Due to the nature of nargs, "awssh --users user1 user2 instance-name" will not
+be parsed properly; instead try "awssh instance-name --users user1 user2". If
+available, a "JumpHost" will be automatically chosen when the instance
+selected has no external IP. You can also explicitly direct the JumpHost by
+providing two selections from the list, i.e. Enter server number: <jump>
+<target>).
+
+positional arguments:
+  filter                Optional instance name or key word as a filter. If
+                        only one instance is found, it will connect to it
+                        directly.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --users USERS [USERS ...]
+                        Users to try (centos, ubuntu, and ec2-user are
+                        defaults).
+  --profile PROFILE     Use a specific profile from your credentials file.
+  --region REGION       AWS region (User default if none is provided).
+  -i KEY_PATH, --key-path KEY_PATH
+                        Specific key path, overrides, --keys
+  -c COMMAND, --command COMMAND
+                        Translates to ssh -t <COMMAND>
+  -r REMOTE_HOST, --remote-host REMOTE_HOST
+                        Open a tunnel. Equivalent to ssh -L <local-port
+                        >:<remote-host>:<remote-port> <selected-aws-host>
+  -p REMOTE_PORT, --remote-port REMOTE_PORT
+                        Port to use on the remote host (default is 5432).
+  -l LOCAL_PORT, --local-port LOCAL_PORT
+                        Port to use on the local host. Get overwritten by
+                        remote port if not defined.
+  --keys KEYS           Directory of the private keys (~/.ssh by default).
+  --timeout TIMEOUT     SSH connection timeout.
+  --console-output, -o  Display the instance console out before logging in.
+  --version, -v         Returns awssh's version.
+  --verbose, -V         Verbose, prints instance details.
+
+MFA:
+  If MFA is required, provide both arguments:
+
+  --serial-number SERIAL_NUMBER
+                        The identification number of the MFA device that is
+                        associated with the IAM user. Specify this value if
+                        the IAM user has a policy that requires MFA
+                        authentication. You can find the device for an IAM
+                        user viewing the user's security credentials.
+  --token-code TOKEN_CODE
+                        The value provided by the MFA device, if MFA is
+                        required. If any policy requires the IAM user to
+                        submit an MFA code, specify this value. If MFA
+                        authentication is required, the user must provide a
+                        code when requesting a set of temporary security
+                        credentials. A user who fails to provide the code
+                        receives an "access denied" response when requesting
+                        resources that require MFA authentication.
+
+  Examples:
+    awssh
+    awssh --profile prod-acc-2
+    awssh --users fduran --profile prod-acc-2 --region us-east-2 -c top
+    awssh --users user1 user2 --region us-east-2 --keys '~/.ssh' instance-name
+    awssh --users user1 user2 -c 'df -h' --verbose
+    awssh --serial-number arn:aws:iam::123456789000:mfa/fduran --token-code 123654 --verbose
+    awssh --profile mfa --region us-west-1
+```
+
+pypi.org
+-----
+- [ssh-aws](https://pypi.org/project/ssh-aws/)
