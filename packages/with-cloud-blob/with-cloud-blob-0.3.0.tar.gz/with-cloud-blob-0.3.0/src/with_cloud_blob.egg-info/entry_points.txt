@@ -1,0 +1,11 @@
+[console_scripts]
+with-cloud-blob = with_cloud_blob._cli:main
+
+[with_cloud_blob.lock_backends]
+dynamodb = with_cloud_blob.backends.lock_dynamodb:Backend
+file = with_cloud_blob.backends.lock_file:Backend
+
+[with_cloud_blob.storage_backends]
+file = with_cloud_blob.backends.storage_file:Backend
+s3 = with_cloud_blob.backends.storage_s3:Backend
+
