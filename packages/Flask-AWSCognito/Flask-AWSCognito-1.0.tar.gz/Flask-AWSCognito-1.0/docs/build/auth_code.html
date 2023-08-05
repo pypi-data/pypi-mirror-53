@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Authorization code grant &#8212; Flask-AWSCognito 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="authorization-code-grant">
+<h1>Authorization code grant<a class="headerlink" href="#authorization-code-grant" title="Permalink to this headline">¶</a></h1>
+<p>The authorization code grant is the preferred method for authorizing end users. Instead of directly providing user pool tokens to an end user upon authentication, an authorization code is provided. This code is then sent to a custom application that can exchange it for the desired tokens. Because the tokens are never exposed directly to an end user, they are less likely to become compromised.</p>
+<dl class="simple">
+<dt>See <a class="reference external" href="https://aws.amazon.com/blogs/mobile/understanding-amazon-cognito-user-pool-oauth-2-0-grants/">AWS</a> docs.</dt><dd></dd>
+</dl>
+<div class="section" id="diagram">
+<h2>Diagram<a class="headerlink" href="#diagram" title="Permalink to this headline">¶</a></h2>
+<img alt="https://raw.githubusercontent.com/cgauge/Flask-AWSCognito/master/docs/img/flask-cognito.png" src="https://raw.githubusercontent.com/cgauge/Flask-AWSCognito/master/docs/img/flask-cognito.png" />
+</div>
+<div class="section" id="sign-in">
+<h2>Sign in<a class="headerlink" href="#sign-in" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>A user open AWS Cognito UI for:</dt><dd><ul class="simple">
+<li><p>sign up</p></li>
+<li><p>registration confirmation (confirmation code is sent user’s email address)</p></li>
+<li><p>password reset</p></li>
+<li><p>sign in</p></li>
+</ul>
+</dd>
+</dl>
+<p>To get URL for sign in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/sign_in&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sign_in</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">aws_auth</span><span class="o">.</span><span class="n">get_sign_in_url</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="redirect">
+<h2>Redirect<a class="headerlink" href="#redirect" title="Permalink to this headline">¶</a></h2>
+<p>After successful sign in the user is redirected to Flask endpoint
+(see Redirect URL in <strong>Prepare Cognito</strong>)</p>
+<p>Endpoint’s example code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/aws_cognito_redirect&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">aws_cognito_redirect</span><span class="p">():</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">)</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">aws_auth</span><span class="o">.</span><span class="n">get_access_token</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="authorize">
+<h2>Authorize<a class="headerlink" href="#authorize" title="Permalink to this headline">¶</a></h2>
+<p>Now the client has access token and it should present it to any endpoint
+that requires authorization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nd">@aws_auth.authentication_required</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">claims</span> <span class="o">=</span> <span class="n">aws_auth</span><span class="o">.</span><span class="n">claims</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;claims&#39;</span><span class="p">:</span> <span class="n">claims</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Authenticated user data is available through plugins attribute <cite>claims</cite></p>
+</div>
+<div class="section" id="client">
+<h2>Client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h2>
+<p>A client could be an JavaScript app, running in a user browser.
+It should:
+- remember access token it got as a Redirect URL response
+- present a token in each request to Flask endpoint using a HTTP header
+like <code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Basic</span> <span class="pre">TOKEN_HERE</span></code></p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Flask-AWSCognito</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_aws.html">Prepare Cognito</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure_flask.html">Configure Flask app</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, CustomerGauge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/auth_code.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
