@@ -1,0 +1,76 @@
+language: python
+dist: xenial
+python:
+  # - "2.6"
+  # - "2.7" #fails
+  # - "3.3"
+  # - "3.4" #fails
+  - "3.5"
+  - "3.6"
+  - "3.7"  # 3.7 development branch
+  #- "nightly"
+env:
+  - WITH_OPENCL=0
+  #- WITH_OPENCL=1
+
+#matrix:
+  #fast_finish: true
+  #config:
+    #WITH_OPENCL=1:
+      #addons:
+        #apt:
+          #packages:
+          #- python-pyopencl
+          #- python3-pyopencl
+          #- opencl-headers
+
+#matrix:
+  #fast_finish: true
+  #include:
+    ##- name: "Python 3.7.1 on Xenial Linux"
+    ##python: 3.7           # this works for Linux but is ignored on macOS or Windows
+    ##dist: xenial          # required for Python >= 3.7
+   #- name: "Python 3.7.2 on macOS"
+     #os: osx
+     #osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
+     #language: shell       # 'language: python' is an error on Travis CI macOS
+   #- name: "Python 3.7.3 on Windows"
+     #os: windows           # Windows 10.0.17134 N/A Build 17134
+     #language: shell       # 'language: python' is an error on Travis CI Windows
+     #before_install:
+      #- choco install python
+      #- choco install jdk8 
+     #env: PATH="/c/Python37:/c/Python37/Scripts:/c/Program Files/Java/jdk1.8.0_211/bin:$PATH"
+  #allow_failures:
+    #- os: osx
+    #- os: windows
+
+
+
+install:
+  - export WITH_OPENCL=0
+  - pip3 install --upgrade pip
+  - pip3 install --ignore-installed setuptools
+  - pip3 install --ignore-installed wheel
+  - pip3 install --ignore-installed pytest-cov
+  - pip3 install --ignore-installed pytest
+  - pip3 install --ignore-installed codecov
+  - if [[ "$WITH_OPENCL" == "1" ]]; then pip install --ignore-installed pyopencl; fi
+  - pip3 install -e .
+  - export DISPLAY=:0.0
+  # - python -c "import pyconrad.autoinit;pyconrad.edu().stanford.rsl.conrad.utils.Configuration.initConfig()"
+# command to run tests
+script:
+  - python3 -c "import pyconrad"
+  - pytest # or py.test for Python versions 3.5 and below
+  - codecov
+
+addons:
+  apt:
+    packages:
+    - python-pyopencl
+    - python3-pyopencl
+    - opencl-headers
+
+notifications:
+  email: true
