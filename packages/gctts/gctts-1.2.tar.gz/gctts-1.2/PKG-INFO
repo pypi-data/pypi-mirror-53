@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: gctts
+Version: 1.2
+Summary: A simple way to generate high quality TTS MP3 files.
+Home-page: https://github.com/JamesClick/gctts
+Author: J. Click
+License: MIT
+Description: # Google Cloud Text To Speech CLI
+        ### _Or, GCTTS for short_
+        
+        ## Purpose
+        I needed a quick way to generate high quality TTS mp3 clips.
+        
+        ## Usage:
+            gctts mp3 --apikey=APIKEY FILENAME.mp3
+        
+        ## Installation:
+        Available on the PyPI registry. For most installations, use `pip3 --user gctts`
+        
+        ## Lifehacks:
+        ### Persistent API Key
+        Use the environment variable `GCTTS_APIKEY` to set the API key.
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
