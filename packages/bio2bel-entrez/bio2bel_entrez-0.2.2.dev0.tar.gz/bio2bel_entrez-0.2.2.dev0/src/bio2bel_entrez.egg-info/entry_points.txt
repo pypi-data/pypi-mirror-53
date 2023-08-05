@@ -1,0 +1,8 @@
+[bio2bel]
+entrez = bio2bel_entrez
+homologene = bio2bel_entrez.homologene_manager
+
+[console_scripts]
+bio2bel_entrez = bio2bel_entrez.cli:main
+bio2bel_homologene = bio2bel_entrez.homologene_manager:main
+
