@@ -1,0 +1,34 @@
+language: python
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=py27
+    - python: 3.7
+      env: TOXENV=py37
+    - python: pypy
+      env: TOXENV=pypy
+    - python: 3.7
+      env: TOXENV=check
+
+install:
+  - pip install -r requirements.txt
+  - pip install tox-travis
+
+script:
+  - tox
+
+after_success:
+  # Hack for coveralls to find sources
+  - sed -E -ie 's/.tox.py(27|36|37|py).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
+  - coveralls
+
+deploy:
+  - provider: pypi
+    user: miurahr
+    password:
+      secure: CUY3E7DJMMyC9ARkkC5plAWTAnwmp+wyS+GbRgjOPDL8H4AwzCSCD03D4z/5BHHpGFilF+sAsaNte/9dDjtzEXtvmMCfJwovShnr9GdAm+PU4+TyhEWqVYbeYHiJMiSnLPcsyJMkYZ8JtNMXyp0onPQr6P28OsEq+ohG6Ha9P1Y=
+    distributions: "sdist bdist_wheel"
+    skip_existing: true
+    on:
+      repo: miurahr/pykakasi
+      tags: true
