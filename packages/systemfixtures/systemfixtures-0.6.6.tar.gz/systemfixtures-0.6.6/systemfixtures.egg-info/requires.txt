@@ -1,0 +1,13 @@
+fakesleep
+fixtures
+pbr
+requests-mock
+six
+testtools
+
+[:(python_version < '3.5')]
+subprocess32
+
+[test]
+coverage>=4.2
+sphinx

@@ -1,0 +1,71 @@
+CHANGES
+=======
+
+0.6.6
+-----
+
+* Make wget works with no output argument (#5)
+* Add new timestamping flag to wget (#3)
+* Add Python 3.6 to the test matrix
+* Add more functions to be mocked by FakeFilesystem: (#1)
+
+0.6.5
+-----
+
+* Move repository to github.com/testing-cabal, update pointers accordingly
+
+0.6.4
+-----
+
+* Support os.rename in FakeFilesystem
+
+0.6.3
+-----
+
+* Add FakeExecutable.log method and include timestamps in test\_listen
+
+0.6.2
+-----
+
+* Add a mailmap file for unique AUTHORS entries
+* Add logging to FakeExecutable.hang()
+* Point the README to Read the Docs
+* Streamline development process
+* Make the FakeExecutableTest.test\_listen test more robust
+
+0.6.1
+-----
+
+* Fix flakiness in FakeExecutable tests
+
+0.6.0
+-----
+
+* Add FakeExecutable fixture for creating a Python script that behaves like some real executable
+
+0.5.1
+-----
+
+* Add new FakeThreads fixture
+* Add FakeTime.reset method, as convenient passthrough to fakesleep.reset
+
+0.4.3
+-----
+
+* Add documentation about filing issues
+
+0.4.2
+-----
+
+* Add a section in the README pointing to the GitHub project
+* Fix unit tests failures when running as root
+
+0.4.1
+-----
+
+* Don't include .travis.yml in the tarball
+
+0.4.0
+-----
+
+* Initial release
