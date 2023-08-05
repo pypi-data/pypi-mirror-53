@@ -1,0 +1,335 @@
+#!/usr/bin/python
+
+# See file COPYING distributed with fsutils for copyright and license.
+
+import sys
+import os
+import argparse
+import fsutils.logs
+
+version = '0.3.3'
+
+# available output fields
+fields = ('BUILD', 'UNAME', 'ARGS', 'NR', 'RN', 'TSTART', 'TFINISH', 'TRUN', 
+          'E', 'R', 'SPEC', 'SN', 'STEPNAME', 'STEPTSTART', 'STEPTRUN')
+
+progname = os.path.basename(sys.argv[0])
+
+description = """
+
+Report on the status of FreeSurfer runs.
+
+By default, {progname} reports on the latest run for each subject in 
+$SUBJECTS_DIR.
+
+An alternate subjects directory can be specified using the -S flag.
+
+Individual subjects can be selected at the command line.  If these 
+specifiers include a forward slash or if no subjects directory is given, 
+they are taken as paths to subject directories or recon-all.log files.
+
+Examples:
+
+    {progname} -- report on the last run for all subjects in $SUBJECTS_DIR
+
+    {progname} -S /data/study_2 S001 S002 S003 -- report on the last run 
+        for subjects S001, S002, and S003 in SUBJECTS_DIR=/data/study_2
+
+    {progname} ./S001 /tmp/recon-all.log -- report on the last run for 
+        the subject in S001 and the subject described by /tmp/recon-all.log
+
+Output can be customized by a comma-separated list of fields:
+
+    BUILD -- the FreeSurfer build stamp
+
+    UNAME -- the uname -a report
+
+    ARGS -- the run arguments
+
+    NR -- number of runs
+
+    RN -- the run number being reported on
+
+    TSTART -- the run start time
+
+    TFINISH -- the run end time
+
+    TRUN -- the run time
+
+    SN -- the number of the running step
+
+    STEPNAME -- the name of the running step
+
+    STEPTSTART -- the start time of the running step
+
+    STEPTRUN -- the run time of the running step
+
+    E -- 'E' if the run exited with errors
+
+    R -- 'R' if the case is still running
+
+    SPEC -- the subject specifier
+
+Reporting order is customized by a comma-separated list of the same fields.
+
+The run number to be reported on can be specified using the -r option and 
+defaults to the last run.  Use "-r all" to report on all runs.
+
+""".format(progname=progname)
+
+class DisplayRun:
+
+    """runs with order and print variables"""
+
+    def __init__(self, run, dash_flag):
+        self.order_vars = {'BUILD': run.build_stamp, 
+                           'UNAME': run.uname, 
+                           'ARGS': run.args, 
+                           'NR': len(run.subject.runs), 
+                           'SPEC': run.subject.spec, 
+                           'RN': run.run_number, 
+                           'TSTART': run.t_start, 
+                           'TFINISH': run.t_end, 
+                           'TRUN': run.t_run, 
+                           'R': run.is_running, 
+                           'E': run.error, 
+                           'SN': run.step_number, 
+                           'STEPNAME': run.step_name, 
+                           'STEPTSTART': run.step_t_start, 
+                           'STEPTRUN': run.step_t_run}
+        self.print_vars = dict(self.order_vars)
+        self.print_vars['TSTART'] = format_time(run.t_start)
+        self.print_vars['TRUN'] = format_delta(run.t_run)
+        if run.is_running:
+            self.print_vars['R'] = 'R'
+            self.print_vars['STEPTSTART'] = format_time(run.step_t_start)
+            self.print_vars['STEPTRUN'] = format_delta(run.step_t_run)
+            if dash_flag:
+                self.print_vars['TFINISH'] = '-          -'
+                self.print_vars['E'] = '-'
+            else:
+                self.print_vars['TFINISH'] = ''
+                self.print_vars['E'] = ''
+        else:
+            self.print_vars['TFINISH'] = format_time(run.t_end)
+            if dash_flag:
+                if run.error:
+                    self.print_vars['E'] = 'E'
+                else:
+                    self.print_vars['E'] = '-'
+                self.print_vars['R'] = '-'
+                self.print_vars['SN'] = '-'
+                self.print_vars['STEPNAME'] = '-'
+                self.print_vars['STEPTSTART'] = '-'
+                self.print_vars['STEPTRUN'] = '-'
+            else:
+                if run.error:
+                    self.print_vars['E'] = 'E'
+                else:
+                    self.print_vars['E'] = ''
+                self.print_vars['R'] = ''
+                self.print_vars['SN'] = ''
+                self.print_vars['STEPNAME'] = ''
+                self.print_vars['STEPTSTART'] = ''
+                self.print_vars['STEPTRUN'] = ''
+        return
+
+def run_cmp(a, b):
+    """cmp() on runs, ordering by the fields in order_fields"""
+    for field in order_fields:
+        c = cmp(a.order_vars[field], b.order_vars[field])
+        if c != 0:
+            return c
+    return 0
+
+def format_time(t):
+    return t.strftime('%Y-%m-%d %H:%M:%S')
+
+def format_delta(d):
+    s = d.seconds % 60
+    minutes = d.seconds / 60
+    m = minutes % 60
+    hours = minutes / 60
+    h = 24 * d.days + hours
+    return '%02d:%02d:%02d' % (h, m, s)
+
+parser = argparse.ArgumentParser(description=description, 
+                                 formatter_class=argparse.RawTextHelpFormatter)
+
+parser.add_argument('-v', '--version', 
+                    default=False, 
+                    action='store_true', 
+                    dest='version', 
+                    help='show version and exit')
+parser.add_argument('-H', '--suppress-header', 
+                    default=False, 
+                    action='store_true', 
+                    dest='suppress_header', 
+                    help='suppress header')
+parser.add_argument('-o', '--output', 
+                    dest='output_fields', 
+                    default='NR,RN,TSTART,TFINISH,TRUN,E,SPEC', 
+                    help='output fields')
+parser.add_argument('-O', '--order', 
+                    dest='order_fields', 
+                    default='SPEC,RN', 
+                    help='order fields')
+parser.add_argument('--dash', '-d', 
+                    default=False, 
+                    action='store_true', 
+                    help='print dashes for empty values')
+parser.add_argument('--long', '-l', 
+                    default=False, 
+                    action='store_true', 
+                    help='print a long listing (one field per line)')
+parser.add_argument('--run', '-r', 
+                    default=None, 
+                    help='run number')
+parser.add_argument('--subjects-dir', '-S')
+parser.add_argument('--debug', '-D', 
+                    default=False, 
+                    action='store_true', 
+                    help='print debugging information')
+parser.add_argument('subjects', 
+                    metavar='subject', 
+                    nargs='*')
+
+args = parser.parse_args()
+
+if args.version:
+    print '%s %s' % (progname, version)
+    sys.exit(0)
+
+output_fields = []
+for field in args.output_fields.split(','):
+    field = field.upper().strip()
+    if field not in fields:
+        sys.stderr.write('%s: unknown output field "%s"\n' % (progname, field))
+        sys.exit(1)
+    output_fields.append(field)
+
+order_fields = []
+for field in args.order_fields.split(','):
+    field = field.upper().strip()
+    if field not in fields:
+        sys.stderr.write('%s: unknown order field "%s"\n' % (progname, field))
+        sys.exit(1)
+    order_fields.append(field)
+
+if args.run is None:
+    run = 'last'
+elif args.run == 'all':
+    run = 'all'
+else:
+    try:
+        run = int(args.run)
+    except ValueError:
+        sys.stderr.write('%s: bad value for run number\n' % progname)
+        sys.exit(2)
+    if run <= 0:
+        sys.stderr.write('%s: bad value for run number\n' % progname)
+        sys.exit(2)
+
+subjects_dir = args.subjects_dir
+if not subjects_dir and 'SUBJECTS_DIR' in os.environ:
+    subjects_dir = os.environ['SUBJECTS_DIR']
+
+subjects = []
+
+if not subjects_dir:
+    if not args.subjects:
+        parser.print_usage(sys.stderr)
+        fmt = '%s: error: no subjects directory or subjects given\n'
+        sys.stderr.write(fmt % progname)
+        sys.exit(2)
+    for spec in args.subjects:
+        try:
+            subjects.append(fsutils.logs.Subject(spec, debug=args.debug))
+        except fsutils.logs.LogError, data:
+            sys.stderr.write('%s: %s: %s\n' % (progname, spec, str(data)))
+else:
+    if not os.path.isdir(subjects_dir):
+        msg = '%s: %s is not a directory\n' % (progname, subjects_dir)
+        sys.stderr.write(msg)
+        sys.exit(1)
+    if not args.subjects:
+        for subject in os.listdir(subjects_dir):
+            try:
+                subjects.append(fsutils.logs.Subject(subject, 
+                                                     subjects_dir=subjects_dir, 
+                                                     debug=args.debug))
+            except fsutils.logs.SubjectError:
+                # subjects directory given but no specific subjects given 
+                # means that we're asked to scan for subjects, so in this 
+                # case we won't report on errors in subjects we try
+                pass
+            except fsutils.logs.LogError, data:
+                msg = '%s: %s: %s\n' % (progname, subject, str(data))
+                sys.stderr.write(msg)
+    else:
+        for subject in args.subjects:
+            try:
+                subjects.append(fsutils.logs.Subject(subject, 
+                                                     subjects_dir=subjects_dir, 
+                                                     debug=args.debug))
+            except fsutils.logs.LogError, data:
+                msg = '%s: %s: %s\n' % (progname, subject, str(data))
+                sys.stderr.write(msg)
+
+if not subjects:
+    sys.stderr.write('%s: no subjects found\n' % progname)
+    sys.exit(1)
+
+runs = []
+for subject in subjects:
+    if run == 'all':
+        runs.extend(subject)
+    elif run == 'last':
+        runs.append(subject[-1])
+    else:
+        try:
+            runs.append(subject[run-1])
+        except IndexError:
+            fmt = '%s: %s has no run %d\n'
+            sys.stderr.write(fmt % (progname, subject.spec, run))
+
+if not runs:
+    sys.stderr.write('%s: no runs found\n' % progname)
+    sys.exit(1)
+
+display_runs = []
+for run in runs:
+    display_runs.append(DisplayRun(run, args.dash))
+
+display_runs.sort(run_cmp)
+
+if args.long:
+
+    for run in display_runs:
+        for field in output_fields:
+            print '%s: %s' % (field, run.print_vars[field])
+        print
+
+else:
+
+    headers = []
+    fmts = []
+    for field in output_fields:
+        widths = [ len(field) ]
+        for run in display_runs:
+            widths.append(len('{0}'.format(run.print_vars[field])))
+        width = max(widths)
+        headers.append(field.ljust(width))
+        fmts.append('{%s:%d}' % (field, width))
+
+    header = '  '.join(headers).strip()
+    fmt = '  '.join(fmts).strip()
+
+    if not args.suppress_header:
+        print header
+    for run in display_runs:
+        print fmt.format(**run.print_vars).rstrip()
+
+sys.exit(0)
+
+# eof
