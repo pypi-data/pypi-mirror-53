@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: pysmz3
+Version: 1.0.1
+Summary: A python module for interacting with samus.link, such as generating new smz3 games and retrieving old games.
+Home-page: https://github.com/tcprescott/python-pysmz3
+Author: Thomas Prescott
+Author-email: tcprescott@gmail.com
+License: UNKNOWN
+Description: # pysmz3 for Python 3.6/3.7!
+        Pyz3r is an unofficial python abstraction library for interacting with the [samus.link](https://samus.link) API.
+        
+        This allows developers to create applications that not only generate games on [samus.link](https://samus.link),
+        but also create the ROM as well using the patch data provided by the website.
+        
+        It is a very stripped down version of pyz3r.  All game patching code was removed, and most other code was removed too.
+        
+        ## Installation
+        This module is available on PyPI.  It can be installed via pip:
+        
+        `pip install pysmz3`
+        
+        ## Compatiblity
+        This library has been tested on both Linux (Centos 7) and Windows on Python 3.6 and 3.7.  
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
