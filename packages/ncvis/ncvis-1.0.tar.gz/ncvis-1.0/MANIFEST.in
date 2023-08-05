@@ -1,0 +1,6 @@
+graft lib/hnswlib/hnswlib/
+graft lib/pcg-cpp/include/
+graft src/
+graft wrapper/
+exclude src/main.cpp
+include recipe/meta.yaml
