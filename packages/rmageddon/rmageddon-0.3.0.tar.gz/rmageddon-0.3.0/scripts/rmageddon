@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+""" rmageddon: Linting tool for R analysis container """
+
+from __future__ import print_function
+
+import click
+
+import sys
+import logging
+
+import rmageddon.lint
+import rmageddon.builder
+from rmageddon.validation import RAnalysisValidation
+
+
+@click.group()
+@click.version_option(rmageddon.__version__)
+@click.option(
+    '-v', '--verbose',
+    is_flag=True,
+    default=False,
+    help="Verbose output (print debug statements)"
+)
+def rmageddon_cli(verbose):
+    if verbose:
+        logging.basicConfig(level=logging.DEBUG, format="\n%(levelname)s: %(message)s")
+    else:
+        logging.basicConfig(level=logging.INFO, format="\n%(levelname)s: %(message)s")
+
+
+@rmageddon_cli.command()
+@click.argument(
+    'pipeline_dir',
+    type=click.Path(exists=True),
+    required=True,
+    metavar="<R project directory>"
+)
+def lint(pipeline_dir):
+    """ Check R project against linting guidelines """
+    logging.info("Resolve R packages and extend conda environment...")
+    lint_obj = rmageddon.lint.RContainerLint(pipeline_dir)
+    lint_obj.lint_rproject()
+    lint_obj.print_results()
+
+    if len(lint_obj.failed) > 0: sys.exit(1)
+
+
+@rmageddon_cli.command()
+@click.argument(
+    'rpackages',
+    type=click.Path(exists=True),
+    required=True,
+    metavar="<R package list>"
+)
+@click.argument(
+    'conda_env',
+    type=click.Path(exists=True),
+    required=True,
+    metavar="<conda environment file>"
+)
+def build(rpackages, conda_env):
+    """ Resolve R packages resources from Anaconda cloud """
+    logging.info("Resolve R packages and extend conda environment...")
+    env_builder = rmageddon.builder.EnvBuilder(rpackages, conda_env)
+    env_builder.build()
+    env_builder.print_results()
+
+    if len(env_builder.failed) > 0: sys.exit(1)
+
+
+@rmageddon_cli.command()
+@click.argument(
+    'files',
+    nargs=2,
+    type=click.Path(exists=True),
+    required=True,
+    metavar="<R analysis result files to validate>"
+)
+def validate(files):
+    """ Create a diff of two R analysis result files"""
+    logging.info("Validating R analysis results...")
+    validator = RAnalysisValidation(files[0], files[1])
+    validator.diff()
+    validator.print_results()
+
+    if len(validator.failed) > 0: sys.exit(1)
+
+
+if __name__ == '__main__':
+    print("""
+ _______  _______  _______  _______  _______  ______   ______   _______  _       
+(  ____ )(       )(  ___  )(  ____ \(  ____ \(  __  \ (  __  \ (  ___  )( (    /|
+| (    )|| () () || (   ) || (    \/| (    \/| (  \  )| (  \  )| (   ) ||  \  ( |
+| (____)|| || || || (___) || |      | (__    | |   ) || |   ) || |   | ||   \ | |
+|     __)| |(_)| ||  ___  || | ____ |  __)   | |   | || |   | || |   | || (\ \) |
+| (\ (   | |   | || (   ) || | \_  )| (      | |   ) || |   ) || |   | || | \   |
+| ) \ \__| )   ( || )   ( || (___) || (____/\| (__/  )| (__/  )| (___) || )  \  |
+|/   \__/|/     \||/     \|(_______)(_______/(______/ (______/ (_______)|/    )_)
+                                                  
+2018, QBiC software, Sven Fillinger, Lukas Heumos
+sven.fillinger@qbic.uni-tuebingen.de
+    """)
+    rmageddon_cli()
