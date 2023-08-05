@@ -1,0 +1,81 @@
+language: python
+dist: xenial
+group: travis_latest
+services:
+  - mysql
+  - postgresql
+  - memcached
+addons:
+# Use postgresql 9.3 to get commit-lock testing
+# Use postgresql 9.4 to get support for BLOB SQL functions for pg8000
+# Use postgresql 9.5 to get support for INSERT ON CONFLICT UPDATE
+# Use postgresql 9.6 ... just because
+# In Postgresql 10, you don't have to put the arguments after a
+# function name in things like COMMENT, if it's unique.
+  postgresql: "9.6"
+# The default mysql is 5.7; we have a specific test for 8.0.
+
+matrix:
+  include:
+    - python: 2.7
+    - python: pypy
+    - python: pypy3
+    - python: 3.7
+      services:
+        - docker
+        - postgresql
+        - memcached
+      before_install:
+        - docker pull mysql:8.0
+        - docker run -d --publish 3306:3306 --rm --name mysqld -e MYSQL_ALLOW_EMPTY_PASSWORD=yes mysql:8.0
+        - cp .travis/docker.cnf ~/.my.cnf
+    - python: 3.5
+    - python: 3.6
+
+env:
+    global:
+        - PYTHONHASHSEED=8675309
+        - CC="ccache gcc"
+        - CCACHE_NOCPP2=true
+        - CCACHE_SLOPPINESS=file_macro,time_macros,include_file_ctime,include_file_mtime
+        - CCACHE_NOHASHDIR=true
+        - CFLAGS="-g -pipe"
+        - RS_TEST_CMD="-m zope.testrunner --test-path=src --auto-color --auto-progress"
+
+script:
+# coverage slows PyPy down from 2minutes to 12+.
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then pylint --rcfile=.pylintrc relstorage -f parseable -r n; fi
+  - RELSTORAGE_GEVENT_NO_SWITCH_WHEN_LOCKED=true python -m gevent.monkey `which zope-testrunner` --test-path=src --color -vvv -t BlobCache --layer gevent
+  - if [[ $TRAVIS_PYTHON_VERSION == pypy* ]]; then python $RS_TEST_CMD; fi
+  - if [[ $TRAVIS_PYTHON_VERSION != pypy* ]]; then coverage run $RS_TEST_CMD; fi
+  # Make sure we can import without zope.schema, which is intended to
+  # be a test dependency, and optional for production
+  - pip uninstall -y zope.schema && python -c 'import relstorage.interfaces, relstorage.adapters.interfaces, relstorage.cache.interfaces'
+after_success:
+  - coveralls
+notifications:
+  email: false
+
+before_install:
+  - python --version
+before_script:
+  - ccache -s
+  - python -c 'import sqlite3; print(sqlite3.sqlite_version)'
+
+install:
+  - pip install -U pip
+  - pip install -U setuptools wheel coveralls
+  - pip install -U "pylint>=1.7.1"
+  - pip install -U 'cffi; platform_python_implementation=="CPython"'
+  - pip install -U -e ".[test,all_tested_drivers]"
+  - .travis/postgres.sh
+  - .travis/mysql.sh
+
+cache:
+  pip: true
+  directories:
+    - $HOME/.wheelhouse
+    - $HOME/.ccache
+
+before_cache:
+    - rm -f $HOME/.cache/pip/log/debug.log
