@@ -1,0 +1,19 @@
+{% load tom_education_extras %}
+
+<table class="table table-striped">
+  <thead><tr><th>Target</th><th>Status</th><th>Scheduled</th></tr></thead>
+  <tbody>
+  {% for observation in observationrecords %}
+  <tr>
+    <td>{{ observation.target.name}}</td>
+    <td>{% status_icon observation.status %}</td>
+    <td><a href="{% url 'tom_observations:detail' observation.id %}">
+      {% if observation.scheduled_start %}
+      {{ observation.scheduled_start }}
+      {% else %}
+      Pending
+      {% endif %}
+    </a></td>
+  </tr>
+  {% endfor %}
+</table>

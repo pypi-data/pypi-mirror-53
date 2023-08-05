@@ -1,0 +1,105 @@
+{% load bootstrap4 %}
+{% load static tom_education_extras %}
+{% include 'tom_dataproducts/partials/js9_scripts.html' %}
+
+<h4 id="async-section">Processes</h4>
+<div id="async-table-wrapper">
+    <p id="loading">Loading...</p>
+    <p id="no-processes" style="display: none;">No pending processes</p>
+
+    <table class="table table-striped" style="display: none;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<h4>Data</h4>
+
+<form method="POST" action="" id="dataproduct-action-form" data-target="{{ target.pk }}">
+  <input type="hidden" name="action" value="" />
+  {% csrf_token %}
+  <div>
+    <!-- Actions -->
+    {% buttons %}
+        {% if pipeline_names %}
+            <p>
+                <label for="pipeline-select">Pipeline process: </label>
+                <select id="pipeline-select" class="form-control" style="display: inline; width: 10em;">
+                    <option value="">----</option>
+                    {% for name in pipeline_names %}
+                        <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" name="pipeline" class="btn btn-primary"
+                       value="Run pipeline" />
+            </p>
+
+            {% for pipeline_name, flags in pipeline_flags.items %}
+                <fieldset class="form-group" style="display: none;" id="{{ pipeline_name }}-flags">
+                    {% for flag_name, info in flags.items %}
+                        <div class="form-check">
+                            <input name="pipeline_flag_{{ flag_name }}" type="checkbox" value=""
+                                   id="pipeline-flag-{{ flag_name }}" class="form-check-input"
+                                   {% if info.default %}checked{% endif %}/>
+                            <label class="form-check-label" for="pipeline-flag-{{ flag_name }}">
+                                {{ info.long_name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </fieldset>
+            {% endfor %}
+        {% endif %}
+
+        <p>
+            <input type="submit" name="view_gallery" class="btn btn-primary"
+                   value="View gallery" />
+            <input type="submit" name="delete" class="btn btn-danger"
+                   value="Delete" />
+
+            <input type="hidden" name="pipeline_name" value="" />
+        </p>
+
+        <p>{% dataproduct_selection_buttons %}</p>
+    {% endbuttons %}
+  </div>
+
+  <table class="table table-striped">
+    <thead><tr><th></th><th></th><th></th><th>Filename</th><th>Tag</th><th>Delete</th></tr></thead>
+    <tbody>
+    {% for product in products %}
+      <tr>
+        {# Show checkbox for performing action on this product #}
+        <td>{% dataproduct_checkbox product %}</td>
+
+        {% if not product.featured %}
+        <td><a href="{% url 'tom_dataproducts:feature' pk=product.id %}?target_id={{ target.id }}" title="Make Featured Image" class="btn btn-primary">Feature</a></td>
+        {% else %}
+        <td><span class="btn btn-secondary active featured">Featured</span></td>
+        {% endif %}
+        <td>
+          {%  if 'fits' in product.get_file_name or product.tag == 'fits_file' %}
+            {% include 'tom_dataproducts/partials/js9_button.html' with url=product.data.url only %}
+          {% endif %}
+        </td>
+        <td><a href="{{ product.data.url }}">{{ product.get_file_name }}</a></td>
+        <td>
+          {% if product.tag %}
+            {{ product.get_tag_display }}
+          {% endif %}
+          </a>
+        </td>
+        <td><a href="{% url 'tom_dataproducts:delete' product.id %}" class="btn btn-danger">Delete</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+</form>
+
+<script type='text/javascript' src='{% static 'tom_education/common.js' %}'></script>
+<script type='text/javascript' src='{% static 'tom_education/dataproduct_action_form.js' %}'></script>
+<script type='text/javascript' src='{% static 'tom_education/dataproduct_checklist_utils.js' %}'></script>

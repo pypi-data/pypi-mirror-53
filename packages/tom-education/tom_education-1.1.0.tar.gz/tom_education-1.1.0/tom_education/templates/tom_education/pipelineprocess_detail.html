@@ -1,0 +1,58 @@
+{% extends 'tom_common/base.html' %}
+{% load static tom_education_extras %}
+
+{% block title %}Pipeline process {{ object.identifier }}{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'tom_education/css/pipelineprocess_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ object.identifier }}</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <!-- Side panel -->
+        <dl class="row">
+            <dt class="col-sm-6">Created</dt>
+            <dd id="process-created">{% loading_message %}</dd>
+
+            <dt class="col-sm-6">Status</dt>
+            <dd id="process-status">{% loading_message %}</dd>
+
+            <dt class="col-sm-6">Finished</dt>
+            <dd id="process-finished">{% loading_message %}</dd>
+
+            <dt class="col-sm-6">Outputs</dt>
+            <dd id="process-outputs-link">{% loading_message %}</dd>
+
+            {% if object.target %}
+                <dt class="col-sm-6">Target</dt>
+                <dd>
+                    <a href="{{ target_url }}" title="View the associated target">
+                        {{ object.target.name|truncatechars:20 }}
+                    </a>
+                </dd>
+            {% endif %}
+        </dl>
+    </div>
+    <div class="col-md-8">
+        <h4>Log output</h4>
+        <p>
+            <label>
+                <input type="checkbox" id="follow-logs" />
+                Automatically scroll logs
+            </label>
+        </p>
+        <pre class="logs"><code>{% loading_message %}</code></pre>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    const PIPELINE_PROCESS_PK = "{{ object.pk }}";
+</script>
+<script type='text/javascript' src='{% static 'tom_education/common.js' %}'></script>
+<script type='text/javascript' src='{% static 'tom_education/pipelineprocess_detail.js' %}'></script>
+
+{% endblock %}

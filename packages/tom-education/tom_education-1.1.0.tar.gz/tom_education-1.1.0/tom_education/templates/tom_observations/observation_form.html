@@ -1,0 +1,97 @@
+{% extends 'tom_common/base.html' %}
+{% load bootstrap4 crispy_forms_tags static tom_education_extras %}
+{% block title %}Submit Observation{% endblock %}
+{% block content %}
+<h2>&crarr;&nbsp;<a href="{% url 'tom_education:target_detail' target.pk %}">{{ target.name }}</a></h2>
+<h3>Submit an observation to {{ form.facility.value }}</h3>
+
+<p>
+    {% if templates %}
+        Create from template:
+        {% for name, url in templates %}
+            <a href="{{ url }}" title="Create observation from template '{{ name }}'">
+                {{ name }}</a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    {% endif %}
+</p>
+
+<form action="" method="post">
+    {% if form.facility.value != 'LCO' %}
+        {% crispy form %}
+    {% else %}
+        {# Render the LCO form 'by hand' instead of with crispy for more flexibility over the layout #}
+        {% csrf_token %}
+
+        {% bootstrap_form_errors form %}
+
+        {{ form.facility }}
+        {{ form.target_id }}
+        {{ form.observation_type }}
+
+        <div class="form-row">
+            <div class="col">
+                {% bootstrap_field form.name %}
+                {% bootstrap_field form.proposal %}
+                {% bootstrap_field form.ipp_value %}
+                {% bootstrap_field form.observation_mode %}
+            </div>
+            <div class="col">
+                {% bootstrap_field form.instrument_type %}
+                {% bootstrap_field form.max_airmass %}
+                {% bootstrap_field form.start %}
+                {% bootstrap_field form.end %}
+            </div>
+        </div>
+    {% endif %}
+
+    <h4>Filters</h4>
+
+    <table id="filters-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Exposure count</th>
+                <th>Exposure time</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for filter_code, filter_name, keys in filter_fields %}
+            <tr data-code="{{ filter_code }}">
+                <th>{{ filter_name }}</th>
+                {% for key in keys %}
+                    <td>
+                        {% bootstrap_field form|get_form_field:key show_label=False placeholder="" %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% buttons %}
+        {# Show submit button if we are not using crispy #}
+        {% if form.facility.value == 'LCO' %}
+            {# TODO: make submit and create-new buttons appear side-by-side #}
+            {# with crispy (non-LCO) form, instead of in separate <div>s #}
+            {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}
+        {% endif %}
+
+        {% if show_new_template_action %}
+            {% with new_template_action_button as b %}
+                {% bootstrap_button b.1 button_type="submit" name=b.0 %}
+            {% endwith %}
+        {% endif %}
+    {% endbuttons %}
+</form>
+
+{# For the LCO form, include JavaScript to filter 'filters' based on the selected instrument #}
+{% if instrument_filters %}
+    <script type="application/json" id="instrument-filters-json">
+    {
+        "instrument_filters": {{ instrument_filters|safe }}
+    }
+    </script>
+    <script type='text/javascript' src='{% static 'tom_education/lco_instrument_filtering.js' %}'></script>
+{% endif %}
+
+{% endblock %}
