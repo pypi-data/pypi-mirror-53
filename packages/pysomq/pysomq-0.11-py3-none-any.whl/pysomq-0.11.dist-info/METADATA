@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: pysomq
+Version: 0.11
+Summary: Provide a bidirectional connection to a serial interface via zeroMQ
+Home-page: https://gitlab.com/casabre/pysomq
+Author: Carsten Sauerbrey
+Author-email: carsten.sauerbrey@gmail.com
+License: MIT
+Platform: linux
+Platform: win32
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: pyzmq (>=18.1.0)
+Requires-Dist: pyserial (>=3.4)
+
+# PySoMQ: Python bindings for serial over ØMQ
+
+This package utilizes the Python bindings of [ØMQ](http://www.zeromq.org) 
+in order to provide a lightweight and fast serial bidirectional 
+[PySerial](https://pypi.org/project/pyserial/) communication interface.
+
+## Downloading
+
+Unless you specifically want to develop PySoMQ, I recommend downloading
+the PySoMQ source code or wheels from
+[PyPI](https://pypi.io/project/pysomq).
+
+
+## Development
+
+You can get the latest source code from my 
+[Gitlab](https://gitlab.com/casabre/pysomq)
+ repository. For extension or bugfixes, please create a new branch with
+  final merge request. Any contribution is appreciated!
+
+Currently, the Linux and Windows versions are tested and verified. OSX
+and cygwin support has to be tested.
+
