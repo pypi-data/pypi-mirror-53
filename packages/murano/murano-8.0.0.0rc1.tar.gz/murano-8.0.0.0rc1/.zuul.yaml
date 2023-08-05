@@ -1,0 +1,137 @@
+- project:
+    templates:
+      - check-requirements
+      - openstack-cover-jobs
+      - openstack-lower-constraints-jobs
+      - openstack-python-jobs
+      - openstack-python3-train-jobs
+      - periodic-stable-jobs
+      - publish-openstack-docs-pti
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - murano-congress-devstack
+        - murano-rally-task
+        - murano-tempest-api
+        - murano-tempest-cfapi
+        - murano-grenade
+        - murano-tempest-api-ipv6-only
+    gate:
+      queue: murano
+      jobs:
+        - murano-tempest-api
+        - murano-tempest-api-ipv6-only
+
+- job:
+    name: murano-congress-devstack
+    parent: murano-tempest-base
+    voting: false
+    timeout: 4200
+    irrelevant-files: &murano-irrelevant-files
+      - ^(test-|)requirements.txt$
+      - ^setup.cfg$
+      - ^doc/.*$
+      - ^.*\.rst$
+      - ^releasenotes/.*$
+      - ^murano/tests/.*$
+    required-projects:
+      - openstack/congress
+      - openstack/congress-dashboard
+      - openstack/mistral
+      - openstack/mistral-dashboard
+      - openstack/python-congressclient
+      - openstack/python-heatclient
+      - openstack/python-mistralclient
+      - openstack/python-muranoclient
+    vars:
+      devstack_services:
+        tls-proxy: false
+      devstack_localrc:
+        MURANO_ENABLE_MODEL_POLICY_ENFORCEMENT: true
+      devstack_plugins:
+        congress: https://opendev.org/openstack/congress
+        mistral: https://opendev.org/openstack/mistral
+      tempest_test_regex: functional
+
+- job:
+    name: murano-rally-task
+    parent: rally-task-murano
+    irrelevant-files: *murano-irrelevant-files
+    timeout: 7800
+    vars:
+      devstack_plugins:
+        rally-openstack: https://opendev.org/openstack/rally-openstack
+      rally_task: rally-jobs/task-murano.yaml
+    required-projects:
+      - openstack/rally-openstack
+
+- job:
+    name: murano-tempest-base
+    parent: devstack-tempest
+    irrelevant-files: *murano-irrelevant-files
+    timeout: 7800
+    required-projects: &base_required_projects
+      - openstack/heat
+      - openstack/murano
+      - openstack/murano-dashboard
+      - openstack/python-heatclient
+      - openstack/python-muranoclient
+      - openstack/tempest
+      - openstack/murano-tempest-plugin
+    vars: &base_vars
+      devstack_plugins:
+        murano: https://opendev.org/openstack/murano
+        heat: https://opendev.org/openstack/heat
+      devstack_services:
+        tempest: true
+        s-account: false
+        s-container: false
+        s-object: false
+        s-proxy: false
+        tls-proxy: false
+      devstack_localrc:
+        TEMPEST_PLUGINS: "/opt/stack/murano-tempest-plugin"
+      tempest_test_regex: application_catalog
+      tox_envlist: all
+
+- job:
+    name: murano-tempest-api
+    parent: murano-tempest-base
+
+- job:
+    name: murano-tempest-api-ipv6-only
+    parent: devstack-tempest-ipv6
+    description: |
+      Murano devstack tempest tests job for IPv6-only deployment
+    timeout: 7800
+    irrelevant-files: *murano-irrelevant-files
+    required-projects: *base_required_projects
+    vars: *base_vars
+
+- job:
+    name: murano-tempest-cfapi
+    parent: murano-tempest-base
+    voting: false
+    vars:
+      devstack_services:
+        murano-cfapi: true
+      tempest_test_regex: service_broker
+
+- job:
+    name: murano-grenade
+    parent: legacy-dsvm-base
+    timeout: 10800
+    voting: false
+    run: playbooks/legacy/grenade-devstack-murano/run.yaml
+    post-run: playbooks/legacy/grenade-devstack-murano/post.yaml
+    irrelevant-files: *murano-irrelevant-files
+    required-projects:
+      - openstack/grenade
+      - openstack/devstack-gate
+      - openstack/heat
+      - openstack/murano
+      - openstack/murano-dashboard
+      - openstack/python-heatclient
+      - openstack/python-muranoclient
+      - openstack/heat-tempest-plugin
+      - openstack/murano-tempest-plugin
