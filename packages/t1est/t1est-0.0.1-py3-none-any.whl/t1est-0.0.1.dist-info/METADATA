@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: t1est
+Version: 0.0.1
+Summary: T1 fitting
+Home-page: https://github.com/mckib2/t1est
+Author: Nicholas McKibben
+Author-email: nicholas.bgp@gmail.com
+License: GPLv3
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Requires-Dist: numpy (>=1.17.2)
+Requires-Dist: matplotlib (>=3.1.1)
+Requires-Dist: phantominator (>=0.4.3)
+Requires-Dist: tqdm (>=4.36.1)
+
+T1 fitting
+----------
+
+Simple T1 fitting.  Uses the following fitting model:
+x = A - B \exp{-t/T_1}
+
+where A and B are complex coefficients, t are the inversion times.
+
+Installation
+------------
+
+Should be as easy as:
+
+.. code-block:: bash
+
+    pip install t1est
+
+Usage
+-----
+
+Run examples as follows:
+
+.. code-block:: python
+
+    python -m t1est.examples.basic_usage
+
+The function `t1est()` can be called as follows:
+
+.. code-block:: python
+
+    from t1est import t1est
+    T1map = t1est(
+        x, TIs, time_axis=-1, mask=mask, method='trf', T1_bnds=(0, 3),
+        chunksize=10, molli=True)
+
+Notice that `x` may be any dimensional, but time points must lie
+along the `time_axis` dimension. If `molli=True`, then T1 is adjusted
+as follows: T1' = T1 (B/A - 1)
+
+
