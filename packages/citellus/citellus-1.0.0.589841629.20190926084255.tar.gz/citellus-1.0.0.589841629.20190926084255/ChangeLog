@@ -1,0 +1,65 @@
+CHANGES
+=======
+
+* Update contributors
+* Define OSP Stein EOL
+* Adjust repo with 'latest' tripleo-common-healthcheck and node-problem-detector
+* Fix colours to match new labels
+* Adjust labels
+* Hide pie when there's no data at all
+* Update online sample of citellus execution
+* Add charts for profiles
+* Optimize more loops
+* Optimize loops for faster generation
+* Add support for Node Problem Detector checks: https://github.com/kubernetes/node-problem-detector/
+* Add placeholder for folder
+* Fix more var names
+* Fix var names
+* Report on OSP14 EOL
+* Use LC\_ALL for dates
+* Rewrite functions to use the first\_available one
+* Add first\_file\_available function
+* Use latest PF
+* Changes to services based on systemctl
+* Fix is\_enabled to check correct file instead of array
+* Check leapp issues with separated / and /var
+* Fix ntp service name on Debian
+* Add patch to systemd\_list\_units
+* Use functions and grep properly
+* Show badge for telegram group
+* Make function to find master/node configs across OCP PSSA
+* Add ocs function version
+* Update rhrelease for RHEL8
+* Fix alignment
+* Update RHEL8 lifecycle
+* Adjust image and size
+* Update links to images and plugin count
+* Fix return for discover\_osp\_version
+* osp node role controller detected by nova-api process running
+* Added osp version discover by openstack-neutron pkgs
+* Upgrade release to 1.0.0
+
+V1.0.0
+------
+
+* force LANG=C for date
+* Reuse calculated var for check
+* Implement some logic in loops
+* Revert "Add --dumpgroups for magui and filter plugins"
+* Add --dumpgroups for magui and filter plugins
+* Try to make Magui faster/resource-savvy
+* Simplyfy system role for OCP using functions
+* Skip ovirt role if OSP env
+* Fix pacemaker IP metadata and add cluster name
+* Add route grouping for hosts in same environment
+* Simplify date in metadata to year-month-day
+* Skip if no osp release found
+* Do not output unknown in ovirt if no detected role
+* Use variable defined for nodelist
+* Use $() instead of \`\`
+* Simplify cat|grep into grep
+* fix and use version for ocp
+* Add extra functions
+* Calculate OCP minor version
+* Optimize imports and simple vars
+* Fix pep8 complains on regexps and conditional
