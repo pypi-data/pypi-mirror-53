@@ -1,0 +1,29 @@
+{
+    "root_folder": "/tmp/foo/bar",
+    "protocols": [
+        {
+            "name": "test_with_parameters",
+            "template": "double/1",
+            "views": {
+                "double": {
+                    "view": "Parametrized",
+                    "parameters": {
+                        "threshold": 3
+                    }
+                }
+            }
+        },
+        {
+            "name": "test_with_empty_parameters",
+            "template": "double/1",
+            "views": {
+                "double": {
+                    "view": "Parametrized",
+                    "parameters": {
+                    }
+                }
+            }
+        }
+    ],
+    "schema_version": 2
+}
