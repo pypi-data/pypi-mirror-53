@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: klear
+Version: 1.0.0
+Summary: A minimal chat system.
+Home-page: https://gitlab.com/raiyanyahya/klear
+Author: Raiyan Yahya
+Author-email: raiyanyahyadeveloper@gmail.com
+License: MIT
+Description: # KLEAR v0.1BETA
+        
+        Klear is a simple , clean and effective way to text between teams. Text between friends or teams from the cli. Klear is built with python and only uses sockets for communication.
+        
+        #### Note: Klear is still in development. The developer is not responsible for any issues caused.
+        ## Installation
+        
+        Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+        
+        ```bash
+        pip install klear
+        ```
+        ## Run on your own server
+        ```bash
+        python klear_server.py
+        ```
+        By default the server is mapped on port 8081, please update the server script with a port you want to use.
+        
+        ## Contributing
+        Pull requests are very much welcome. For major changes, please open an issue first to discuss what you would like to change.
+        
+        Please make sure to update tests as appropriate.
+        
+        ## License
+        [MIT](https://choosealicense.com/licenses/mit/)
+Keywords: cli
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Utilities
+Classifier: License :: Public Domain
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Provides-Extra: test
