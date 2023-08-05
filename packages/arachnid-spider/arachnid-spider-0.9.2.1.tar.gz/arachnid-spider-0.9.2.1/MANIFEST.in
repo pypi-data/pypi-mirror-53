@@ -1,0 +1,4 @@
+include output_early_showcase.png LICENSE Pipfile*
+recursive-include arachnid/crawler/data *
+recursive-include arachnid/output *
+prune arachnid/output/scraped_data *
