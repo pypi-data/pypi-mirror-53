@@ -1,0 +1,19 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
+include LICENSE
+include README.rst
+
+recursive-exclude __pycache__
+recursive-exclude *.py[co]
+
+prune integration_tests
+prune example_lz
+prune alembic
+prune sandbox
+prune workflow
+prune scripts
+prune htmlcov
+prune docs
+prune tests
+prune landingzone
