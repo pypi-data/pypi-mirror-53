@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: baal
+Version: 1.0.0
+Summary: Library for bayesian active learning.
+Home-page: https://github.com/ElementAI/baal
+Author: Parmida Atighehchian, Frédéric Branchaud-Charron, Jan Freyberg, Lorne Schell
+Author-email: parmida@elementai.com,
+                    frederic.branchaud-charron@elementai.com,
+                    jan.freyberg@elementai.com,
+                    lorne.schell@elementai.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: Unix
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Utilities
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: scipy
+Requires-Dist: torch (==1.2.0)
+Requires-Dist: torchvision (>=0.2.2)
+Requires-Dist: gpytorch
+Requires-Dist: tqdm
+Requires-Dist: h5py
+Requires-Dist: structlog
+Requires-Dist: joblib
+Provides-Extra: documentation
+Requires-Dist: sphinx ; extra == 'documentation'
+Requires-Dist: m2r ; extra == 'documentation'
+Requires-Dist: sphinx-rtd-theme ; extra == 'documentation'
+Requires-Dist: jupyter-sphinx ; extra == 'documentation'
+Requires-Dist: nbsphinx ; extra == 'documentation'
+Requires-Dist: sphinx-automodapi ; extra == 'documentation'
+Requires-Dist: numpydoc ; extra == 'documentation'
+Provides-Extra: test
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pytest-pep8 ; extra == 'test'
+Requires-Dist: hypothesis ; extra == 'test'
+Requires-Dist: coverage ; extra == 'test'
+Requires-Dist: coveralls ; extra == 'test'
+
+UNKNOWN
+
+
