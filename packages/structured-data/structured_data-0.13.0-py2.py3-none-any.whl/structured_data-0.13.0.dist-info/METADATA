@@ -1,0 +1,347 @@
+Metadata-Version: 2.1
+Name: structured-data
+Version: 0.13.0
+Summary: Code generators for immutable structured data, including algebraic data types, and functions to destructure them.
+Home-page: https://github.com/mwchase/python-structured-data
+Author: Max Woerner Chase
+Author-email: max.chase@gmail.com
+License: MIT license
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Unix
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Utilities
+Requires-Python: >=3.7
+Requires-Dist: astor
+
+========
+Overview
+========
+
+
+
+Code generators for immutable structured data, including algebraic data types, and functions to destructure them.
+Structured Data provides three public modules: ``structured_data.adt``, ``structured_data.match``, and ``structured_data.data``.
+
+The ``adt`` module provides base classes and an annotation type for converting a class into algebraic data types.
+
+The ``match`` module provides a ``Pattern`` class that can be used to build match structures, and a ``Matchable`` class that wraps a value, and attempts to apply match structures to it.
+If the match succeeds, the bindings can be extracted and used.
+It includes some special support for ``adt`` subclasses.
+
+The match architecture allows you tell pull values out of a nested structure:
+
+.. code-block:: python3
+
+    structure = (match.pat.a, match.pat.b[match.pat.c, match.pat.d], 5)
+    my_value = (('abc', 'xyz'), ('def', 'ghi'), 5)
+    matchable = match.Matchable(my_value)
+    if matchable(structure):
+        # The format of the matches is not final.
+        print(matchable['a'])  # ('abc', 'xyz')
+        print(matchable['b'])  # ('def', 'ghi')
+        print(matchable['c'])  # 'def'
+        print(matchable['d'])  # 'ghi'
+
+The subscript operator allows binding both the outside and the inside of a structure.
+Indexing a ``Matchable`` is forwarded to a ``matches`` attribute, which is ``None`` if the last match was not successful, and otherwise contains an instance of a custom mapping type, which allows building the matched values back up into simple structures.
+
+The ``Sum`` base class exists to create classes that do not necessarily have a single fixed format, but do have a fixed set of possible formats.
+This lowers the maintenance burden of writing functions that operate on values of a ``Sum`` class, because the full list of cases to handle is directly in the class definition.
+
+Here are implementations of common algebraic data types in other languages:
+
+.. code-block:: python3
+
+    class Maybe(adt.Sum, typing.Generic[T]):
+
+        Just: adt.Ctor[T]
+        Nothing: adt.Ctor
+
+
+    class Either(adt.Sum, typing.Generic[E, R]):
+
+        Left: adt.Ctor[E]
+        Right: adt.Ctor[R]
+
+The ``data`` module provides classes based on these examples.
+
+* Free software: MIT license
+
+How Can I Help?
+===============
+
+Currently, this project has somewhat high quality metrics, though some of them have been higher.
+I am highly skeptical of this, because I've repeatedly given in to the temptation to code to the metrics.
+I can't trust the metrics, and I know the code well enough that I can't trust my own judgment to figure out which bits need to be improved and how.
+I need someone to review the code and identify problem spots based on what doesn't make sense to them.
+The issues are open.
+
+Should I Use This?
+==================
+
+Until there's a major version out, probably not.
+
+There are several alternatives in the standard library that may be better suited to particular use-cases:
+
+- The ``namedtuple`` factory creates tuple classes with a single structure; the ``typing.NamedTuple`` class offers the ability to include type information. The interface is slightly awkward, and the values expose their tuple-nature easily. (NOTE: In Python 3.8, the fast access to namedtuple members means that they bypass user-defined ``__getitem__`` methods, thereby allowing factory consumers to customize indexing without breaking attribute access. It looks like it does still rely on iteration behavior for various convenience methods.)
+- The ``enum`` module provides base classes to create finite enumerations. Unlike NamedTuple, the ability to convert values into an underlying type must be opted into in the class definition.
+- The ``dataclasses`` module provides a class decorator that converts a class into one with a single structure, similar to a namedtuple, but with more customization: instances are mutable by default, and it's possible to generate implementations of common protocols.
+- The Structured Data ``adt`` decorator is inspired by the design of ``dataclasses``. (A previous attempt used metaclasses inspired by the ``enum`` module, and was a nightmare.) Unlike ``enum``, it doesn't require all instances to be defined up front; instead each class defines constructors using a sequence of types, which ultimately determines the number of arguments the constructor takes. Unlike ``namedtuple`` and ``dataclasses``, it allows instances to have multiple shapes with their own type signatures. Unlike using regular classes, the set of shapes is specified up front.
+- If you want multiple shapes, and don't want to specify them ahead of time, your best bet is probably a normal tree of classes, where the leaf classes are ``dataclasses``.
+
+Installation
+============
+
+::
+
+    pip install structured-data
+
+Documentation
+=============
+
+https://python-structured-data.readthedocs.io/
+
+Development
+===========
+
+To run the all tests run::
+
+    tox
+
+
+Changelog
+=========
+
+Unreleased
+----------
+
+0.13.0 (2019-09-29)
+-------------------
+
+Added
+~~~~~
+
+- ``match.function`` and ``match.Property`` decorators for Haskell-style function definitions.
+
+Fixed
+~~~~~
+- Accessing data descriptors on ``Sum`` and ``Product`` instances.
+
+0.12.1 (2019-09-04)
+-------------------
+
+Added
+~~~~~
+
+- Product classes can make use of custom ``__new__``.
+
+0.12.0 (2019-09-03)
+-------------------
+
+Added
+~~~~~
+
+- Product base class
+
+Changed
+~~~~~~~
+
+- Improved documentation of some match constructors.
+- Exposed ``MatchDict`` type, so it gets documented.
+- Converted the ``adt`` decorator to a ``Sum`` base class.
+
+Removed
+~~~~~~~
+
+- ``Guard`` type removed in favor of user-defined validation functions.
+
+0.11.1 (2019-03-23)
+-------------------
+
+Changed
+~~~~~~~
+
+- Restore proper behavior of ``__new__`` overrides.
+
+0.11.0 (2019-03-23)
+-------------------
+
+Changed
+~~~~~~~
+
+- Consider all overrides of checked dunder methods, not just those in the decorated class.
+
+0.10.1 (2019-03-22)
+-------------------
+
+Added
+~~~~~
+
+- A non-ergonomic but simple wrapper class for use by the typing plugin. It's not available to runtime code.
+
+0.10.0 (2019-03-21)
+-------------------
+
+Changed
+~~~~~~~
+
+- Actually, the facade was working, I was just confused. Restored the facade.
+
+0.9.0 (2019-03-20)
+------------------
+
+Changed
+~~~~~~~
+
+- Removed the facade.
+- Added stability guarantee to Ctor.
+
+0.8.0 (2019-03-19)
+------------------
+
+Changed
+~~~~~~~
+
+- Rewrote the facade.
+
+0.7.0 (2019-03-19)
+------------------
+
+Changed
+~~~~~~~
+
+- Tried to put up a facade for type analysis. It didn't work.
+
+0.6.1 (2019-03-18)
+------------------
+
+Added
+~~~~~
+
+- ``Bind`` class for attaching extra data to a match structure.
+- PEP 561 support.
+
+Changed
+~~~~~~~
+
+- As-patterns are now formed with indexing instead of the ``@`` operator.
+- ``AttrPattern`` and ``DictPattern`` now take keyword arguments instead of a ``dict`` argument, and form new versions of themselves with an ``alter`` method.
+- Actually. Change ``DictPattern`` back, stop trying to keep these things in synch.
+
+0.6.0 (2018-07-27)
+------------------
+
+Added
+~~~~~
+
+- ``AttrPattern`` and ``DictPattern`` classes that take a ``dict`` argument and perform destructuring match against arbitrary objects, and mappings, respectively.
+
+Changed
+~~~~~~~
+
+- Added special handling for matching AsPatterns against different AsPatterns. This is subject to change, as it's definitely an edge case.
+
+0.5.0 (2018-07-22)
+------------------
+
+Added
+~~~~~
+
+- ``Matchable`` class is now callable and indexable. Calling is forwarded to the ``match`` method, and indexing forwards to the ``matches`` attribute, if it exists, and raises an error otherwise.
+- ``Matchable`` class now has custom coercion to bool: ``False`` if the last match attempt failed, ``True`` otherwise.
+
+Changed
+~~~~~~~
+
+- Renamed ``enum`` to ``adt`` to avoid confusion.
+- Renamed ``ValueMatcher`` to ``Matchable``.
+- ``Matchable.match`` now returns the ``Matchable`` instance, which can then be coerced to ``bool``, or indexed directly.
+
+0.4.0 (2018-07-21)
+------------------
+
+Added
+~~~~~
+
+- Mapping class especially for match values. It's capable of quickly and concisely pulling out groups of variables, but it also properly supports extracting just a single value.
+- Mapping class can now index from a ``dict`` to a ``dict``, in order to support ``**kwargs`` unpacking.
+
+Fixed
+~~~~~
+
+- A bug (not present in any released version) that caused the empty tuple target to accept any tuple value. This is included partly because this was just such a weird bug.
+
+Removed
+~~~~~~~
+
+- Unpublished the ``MatchFailure`` exception type, and the ``desugar`` function.
+
+0.3.0 (2018-07-15)
+------------------
+
+Added
+~~~~~
+
+- Simpler way to create match bindings.
+- Dependency on the ``astor`` library.
+- First attempt at populating the annotations and signature of the generated constructors.
+- ``data`` module containing some generic algebraic data types.
+- Attempts at monad implementations for ``data`` classes.
+
+Changed
+~~~~~~~
+
+- Broke the package into many smaller modules.
+- Switched many attributes to use a ``WeakKeyDictionary`` instead.
+- Moved prewritten methods into a class to avoid defining reserved methods at the module level.
+- When assigning equality methods is disabled for a decorated class, the default behavior is now ``object`` semantics, rather than failing comparison and hashing with a ``TypeError``.
+- The prewritten comparison methods no longer return ``NotImplemented``.
+
+Removed
+~~~~~~~
+
+- Ctor metaclass.
+
+0.2.1 (2018-07-13)
+------------------
+
+Fixed
+~~~~~
+
+- Removed an incorrect classifier. This code cannot run on pypy.
+
+0.2.0 (2018-07-13)
+------------------
+
+Added
+~~~~~
+
+- Explicit ``__bool__`` implementation, to consider all constructor instances as truthy, unless defined otherwise.
+- Python 3.7 support.
+
+Changed
+~~~~~~~
+
+- Marked the enum constructor base class as private. (``EnumConstructor`` -> ``_EnumConstructor``)
+- Switched scope of test coverage to supported versions. (Python 3.7)
+
+Removed
+~~~~~~~
+
+- Support for Python 3.6 and earlier.
+- Incidental functionality required by supported Python 3.6 versions. (Hooks to enable restricted subclassing.)
+
+0.1.0 (2018-06-10)
+------------------
+
+- First release on PyPI.
+
+
