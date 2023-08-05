@@ -1,0 +1,352 @@
+<!--
+	Overriding Alabaster Theme to replace link to static page source
+	with a link to GitHub. Using instructions from official guide.
+
+	https://www.sphinx-doc.org/en/master/templating.html#jinja-sphinx-templating-primer
+-->
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>User Guide &#8212; Anitya 0.16.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Release Notes" href="release-notes.html" />
+    <link rel="prev" title="Anitya" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<p>Anitya attempts to select reasonable default settings for projects and in many
+cases, these should work just fine. However, there are millions of software
+projects out there and some do not follow common release methods. In those
+cases, Anitya offers more flexible tools.</p>
+<div class="section" id="creating-a-new-project">
+<h2>Creating a New Project<a class="headerlink" href="#creating-a-new-project" title="Permalink to this headline">¶</a></h2>
+<p>You can <a class="reference external" href="https://release-monitoring.org/project/new">create new projects</a> in the web interface if you have logged in.
+When you create a new project, you must select a <a class="reference internal" href="glossary.html#term-backend"><span class="xref std std-term">backend</span></a> to fetch
+the version with. If the project is released in several places, please use
+the backend for the language <a class="reference internal" href="glossary.html#term-ecosystem"><span class="xref std std-term">ecosystem</span></a>. For example, if a project is
+hosted on <a class="reference external" href="https://github.com/">GitHub</a> and publishes releases to <a class="reference external" href="https://pypi.python.org/">PyPI</a>, use the PyPI backend.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Occasionally projects stop publishing releases to their ecosystem’s package
+index, but continue to tag releases. In those cases, it’s fine to use the
+backend for the source hosting service (GitHub, BitBucket, etc.) the project
+is using.</p>
+</div>
+<div class="section" id="backends">
+<h3>Backends<a class="headerlink" href="#backends" title="Permalink to this headline">¶</a></h3>
+<p>The backend of a project tells Anitya how to retrieve the versions of the
+project.</p>
+<p>The backends available are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cpan.py</span></code> for perl projects hosted on <a class="reference external" href="https://www.cpan.org/">CPAN</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cran.py</span></code> for R projects hosted on <a class="reference external" href="https://cran.r-project.org/">CRAN</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crates.py</span></code> for crates hosted on <a class="reference external" href="https://crates.io/">crates.io</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">debian.py</span></code> for projects hosted on the
+<a class="reference external" href="http://ftp.debian.org/debian/pool/main/">Debian ftp</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drupal6.py</span></code> for Drupal6 modules hosted on
+<a class="reference external" href="https://drupal.org/project/">drupal.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drupal7.py</span></code> for Drupal7 modules hosted on
+<a class="reference external" href="https://drupal.org/project/">drupal.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">folder.py</span></code> for projects whose release archives are provided in a folder
+basic apache folder or modified one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">freshmeat.py</span></code> for projects hosted on
+<a class="reference external" href="http://freshmeat.net/">freshmeat.net</a> / <a class="reference external" href="http://freecode.com/">freecode.com</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">github.py</span></code> for projects hosted on <a class="reference external" href="https://github.com/">github.com</a>
+using <cite>Github v4 API &lt;https://developer.github.com/v4/&gt;</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gitlab.py</span></code> for projects hosted on
+<cite>GitLab server &lt;https://about.gitlab.com/&gt;_</cite>.
+This backend is using <cite>GitLab API v4 &lt;https://docs.gitlab.com/ee/api/README.html&gt;_</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gnome.py</span></code> for projects hosted on
+<a class="reference external" href="https://download.gnome.org/sources/">download.gnome.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gnu.py</span></code> for projects hosted on <a class="reference external" href="https://www.gnu.org/software/">gnu.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">google.py</span></code> for projects hosted on
+<a class="reference external" href="https://code.google.com/">code.google.com</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hackage.py</span></code> for projects hosted on
+<a class="reference external" href="https://hackage.haskell.org/">hackage.haskell.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">launchpad.py</span></code> for projects hosted on
+<a class="reference external" href="https://launchpad.net/">launchpad.net</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">npmjs.py</span></code> for projects hosted on <a class="reference external" href="https://www.npmjs.org/">npmjs.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pear.py</span></code> for projects hosted on
+<a class="reference external" href="https://pear.php.net/">pear.php.net</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pecl.py</span></code> for projects hosted on
+<a class="reference external" href="https://pecl.php.net/">pecl.php.net</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pypi.py</span></code> for projects hosted on
+<a class="reference external" href="https://pypi.python.org/pypi">pypi.python.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rubygems.py</span></code> for projects hosted on
+<a class="reference external" href="https://rubygems.org/">rubygems.org</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sourceforge.py</span></code> for projects hosted on
+<a class="reference external" href="https://sourceforge.net/">sourceforge.net</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stackage.py</span></code> for projects hosted on
+<a class="reference external" href="https://www.stackage.org/">www.stackage.org</a></p></li>
+</ul>
+<p>If your project cannot be used with any of these backend you can always try
+the <code class="docutils literal notranslate"><span class="pre">custom</span></code> backend.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">custom.py</span></code> for projects who require a more flexible way of finding their
+version.</p></li>
+</ul>
+<p>The custom backend requires two arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">version_url</span></code> the url of the page where the versions information can be
+found, for example for <a class="reference external" href="http://banshee.fm/">banshee</a>
+that would be <a class="reference external" href="http://banshee.fm/download/">their download page</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s possible to provide a “glob” for projects that place their tarballs
+in multiple directories. For example, gcc uses
+<code class="docutils literal notranslate"><span class="pre">https://ftp.gnu.org/gnu/gcc/*/</span></code> to find the tarballs in each version
+directory.</p>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">regex</span></code> a regular expression using the Python <a class="reference external" href="https://docs.python.org/3/library/re.html">re</a> syntax to find the
+releases on the <code class="docutils literal notranslate"><span class="pre">version_url</span></code> page.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In most cases, you can set the <code class="docutils literal notranslate"><span class="pre">regex</span></code> to <cite>DEFAULT</cite> which will
+make anitya use its default regular expression:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;package name&gt;(?:[-_]?(?:minsrc|src|source))?[-_]([^-/_\s]+?)(?i)(?:[-_](?:minsrc|src|source|asc|release))?\.(?:tar|t[bglx]z|tbz2|zip)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="project-name">
+<h3>Project Name<a class="headerlink" href="#project-name" title="Permalink to this headline">¶</a></h3>
+<p>The project name should match the upstream project name. Duplicate project names
+are allowed as long as the projects are not part of the same ecosystem. That is,
+you can have two projects called <code class="docutils literal notranslate"><span class="pre">msgpack</span></code>, but you cannot have two projects
+called <code class="docutils literal notranslate"><span class="pre">msgpack</span></code> that are both in the <code class="docutils literal notranslate"><span class="pre">PyPI</span></code> ecosystem.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When project is not part of any ecosystem, duplicate projects are detected
+based on the homepage of project.</p>
+</div>
+</div>
+<div class="section" id="version-prefix">
+<h3>Version Prefix<a class="headerlink" href="#version-prefix" title="Permalink to this headline">¶</a></h3>
+<p>The version prefix can be used to retrieve the exact version number when the
+upstream maintainer prefixes its versions.</p>
+<p>For example, if the project’s version are: <code class="docutils literal notranslate"><span class="pre">foo-1.2</span></code>, you can set the
+version prefix to <code class="docutils literal notranslate"><span class="pre">foo-</span></code> to tell Anitya how to get the version <code class="docutils literal notranslate"><span class="pre">1.2</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s common for projects to prefix their source control tags with a <code class="docutils literal notranslate"><span class="pre">v</span></code> when
+making a release. Anitya will automatically strip this from versions it finds.</p>
+</div>
+<p>More concrete examples:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/junit-team/junit/tags">junit</a> tags are of the form:
+<code class="docutils literal notranslate"><span class="pre">r&lt;version&gt;</span></code>, to retrieve the version, one can set the version prefix
+to <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p></li>
+<li><p><a class="reference external" href="https://github.com/adrianlopezroche/fdupes/tags">fdupes</a> tags are of
+the form <code class="docutils literal notranslate"><span class="pre">fdupes-&lt;version&gt;</span></code>, for this project, the version prefix can
+be set to <code class="docutils literal notranslate"><span class="pre">fdupes-</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="regular-expressions">
+<h3>Regular Expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you need to use a custom regular expression to find the version
+on a page. Anitya accepts user-defined regular expressions using the Python
+<a class="reference external" href="https://docs.python.org/3/library/re.html">re</a> syntax.</p>
+<p>The simplest way to check your regular expression is to open a python shell
+and test it.</p>
+<p>Below is an example on how it can be done:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.opendx.org/download.html&#39;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;version.is ([\d]*)\.&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="go">[u&#39;4&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;version.is ([\d\.-]*)\.&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="go">[u&#39;4.4.4&#39;]</span>
+</pre></div>
+</div>
+<p>If you prefer graphical representation you can use
+<a class="reference external" href="https://www.debuggex.com/">Debuggex</a>.</p>
+<p>The regular expression <code class="docutils literal notranslate"><span class="pre">version.is</span> <span class="pre">([\d\.]*)\.</span></code> can then be provided to
+anitya and used to find the new releases.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the captured groups are used as version, delimited by dot.
+For example: <code class="docutils literal notranslate"><span class="pre">1_2_3</span></code> could be captured by regular expression <code class="docutils literal notranslate"><span class="pre">(\d)_(\d)_(\d)</span></code>.
+This will create version <code class="docutils literal notranslate"><span class="pre">1.2.3</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="integrating-with-anitya">
+<h2>Integrating with Anitya<a class="headerlink" href="#integrating-with-anitya" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fedmsg">
+<h3>fedmsg<a class="headerlink" href="#fedmsg" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://www.fedmsg.com">fedmsg</a> is a message bus. In other words it is a
+system that allows for the sending and receiving of notifications between
+applications.  For anitya, every action made on the application is
+announced/broadcasted on this bus, allowing anyone listening to it to act
+immediately instead of (for example) polling hourly all the data, looking for
+changes, and acting then. For the full list of messages Anitya sends, see
+the <a class="reference external" href="https://fedora-fedmsg.readthedocs.io/en/latest/topics.html#anitya">fedmsg topic documentation</a>.</p>
+<p>To start receiving <a class="reference external" href="http://www.fedmsg.com">fedmsg</a> messages from anitya,
+it is as simple as:</p>
+<ul class="simple">
+<li><p>install <code class="docutils literal notranslate"><span class="pre">fedmsg</span></code> the way you want:</p></li>
+</ul>
+<p>On Fedora</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dnf</span> <span class="n">install</span> <span class="n">fedmsg</span>
+</pre></div>
+</div>
+<p>On Debian</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">fedmsg</span>
+</pre></div>
+</div>
+<p>Via pip</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">fedmsg</span>
+</pre></div>
+</div>
+<ul>
+<li><p>in the configuration file: <code class="docutils literal notranslate"><span class="pre">/etc/fedmsg.d/endpoints.py</span></code>, make sure you
+activate the anitya endpoint</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;anitya-public-relay&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;tcp://release-monitoring.org:9940&quot;</span><span class="p">,</span>
+<span class="p">],</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="from-python">
+<h4>From python<a class="headerlink" href="#from-python" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fedmsg</span>
+
+<span class="c1"># Yield messages as they&#39;re available from a generator</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">fedmsg</span><span class="o">.</span><span class="n">tail_messages</span><span class="p">():</span>
+    <span class="nb">print</span> <span class="n">topic</span><span class="p">,</span> <span class="n">msg</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="from-the-shell">
+<h4>From the shell<a class="headerlink" href="#from-the-shell" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fedmsg-tail --really-pretty
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reporting-issues">
+<h2>Reporting Issues<a class="headerlink" href="#reporting-issues" title="Permalink to this headline">¶</a></h2>
+<p>You can report problems on our <a class="reference external" href="https://github.com/release-monitoring/anitya/issues">issue tracker</a>. The <a class="reference external" href="https://github.com/release-monitoring/anitya">source code</a> is also
+available on GitHub. The development team hangs out in <code class="docutils literal notranslate"><span class="pre">#fedora-apps</span></code> on the
+freenode network. Please do stop by and say hello.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Anitya</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=release-monitoring&repo=anitya&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-new-project">Creating a New Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integrating-with-anitya">Integrating with Anitya</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reporting-issues">Reporting Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="admin-guide.html">Administration Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database models</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Anitya</a></li>
+      <li>Next: <a href="release-notes.html" title="next chapter">Release Notes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" style="text-align: center">
+      &copy;2019, Red Hat, Inc. and others.|
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      (<a href="https://github.com/release-monitoring/anitya/tree/master/docs/_templates">customized</a>)
+      |
+      <a href="https://github.com/release-monitoring/anitya/tree/master/docs/user-guide.rst"
+          rel="nofollow">View source</a>
+    </div>
+  </body>
+</html>

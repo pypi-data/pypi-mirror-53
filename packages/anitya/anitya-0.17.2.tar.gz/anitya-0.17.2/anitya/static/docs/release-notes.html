@@ -1,0 +1,663 @@
+<!--
+	Overriding Alabaster Theme to replace link to static page source
+	with a link to GitHub. Using instructions from official guide.
+
+	https://www.sphinx-doc.org/en/master/templating.html#jinja-sphinx-templating-primer
+-->
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Release Notes &#8212; Anitya 0.16.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="User Guide" href="user-guide.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="release-notes">
+<h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>0.16.1 (2019-07-16)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Check service: Counters saved to database are always 0
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/795">#795</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="development-changes">
+<h3>Development Changes<a class="headerlink" href="#development-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fix issue with documentation build
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/789">#789</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Michal Konečný</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>0.16.0 (2019-06-24)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="features">
+<h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Turn Anitya cron job to service
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/668">#668</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>Bug Fixes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Error 500 when opening distro page
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/709">#709</a>)</p></li>
+<li><p>“Edit” form for Distro Mapping forgets the distributions
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/744">#744</a>)</p></li>
+<li><p>anitya.project.map.new not send when adding new mapping through APIv2
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/760">#760</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>Development Changes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add new dependency ordered_set
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/668">#668</a>)</p></li>
+<li><p>Add diff-cover to tox testing suite
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/782">#782</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h3>Contributors<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Michal Konečný</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>0.15.1 (2019-03-06)<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id15">
+<h3>Bug Fixes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fix topic for fedora_messaging
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/750">PR#750</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h3>Development Changes<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Check formatting using black
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/725">PR#725</a>)</p></li>
+<li><p>Remove gunicorn dependency
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/742">PR#742</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="other-changes">
+<h3>Other Changes<a class="headerlink" href="#other-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add sample configuration for Fedora Messaging
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/738">#738</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id18">
+<h3>Contributors<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Michal Konečný</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id19">
+<h2>0.15.0 (2019-02-20)<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id20">
+<h3>Features<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Convert to Fedora Messaging
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/570">PR#570</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id21">
+<h3>Bug Fixes<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Release notes point to fedora-messaging
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/699">#699</a>)</p></li>
+<li><p>Javascript error on add project page
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/714">#714</a>)</p></li>
+<li><p>Changed copyright datum on frontpage to 2013-2019
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/721">#721</a>)</p></li>
+<li><p>Invalid User-Agent
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/729">#729</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h3>Development Changes<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Rename Vagrantfile.example to Vagrantfile
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/715">PR#715</a>)</p></li>
+<li><p>Introduce bandit to tox tests
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/724">PR#724</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id27">
+<h3>Other Changes<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Added example of usage in contribution guide.
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/719">PR#719</a>)</p></li>
+<li><p>Fix URL to fedmsg website on index.html to use the correct website URL
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/722">PR#722</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h3>Contributors<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Jeremy Cline</p></li>
+<li><p>AsciiWolf</p></li>
+<li><p>Zlopez</p></li>
+<li><p>Michal Konečný</p></li>
+<li><p>Neal Gompa</p></li>
+<li><p>Yaron Shahrabani</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id29">
+<h2>0.14.1 (2019-01-17)<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id30">
+<h3>Features<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Show raw version on project page for admins
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/696">PR#696</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id31">
+<h3>Bug Fixes<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Libraries.io consumer is replacing topic_prefix for Anitya
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/704">PR#704</a>)</p></li>
+<li><p>Release unlocked lock in cronjob
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/708">PR#708</a>)</p></li>
+<li><p>Comparing by dates created version duplicates
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/702">#702</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id33">
+<h3>Development Changes<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Remove Date version scheme
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/707">PR#707</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id34">
+<h3>Contributors<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Anatoli Babenia</p></li>
+<li><p>Michal Konečný</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id35">
+<h2>0.14.0 (2019-01-08)<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id36">
+<h3>Features<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add delete cascade on DB models
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/608">PR#608</a>)</p></li>
+<li><p>Logs table is replaced by simple status on project
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/635">PR#635</a>)</p></li>
+<li><p>Update form for adding new distributions
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/639">PR#639</a>)</p></li>
+<li><p>Refresh page after full check
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/670">PR#670</a>)</p></li>
+<li><p>Show URL for version check on project UI
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/549">#549</a>)</p></li>
+<li><p>Link to backend info from project view and edit pages
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/556">#556</a>)</p></li>
+<li><p>Retrieve all versions, not only the newest one
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/595">#595</a>)</p></li>
+<li><p>Add rate limit handling
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/600">#600</a>)</p></li>
+<li><p>Basic user management UI for admins
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/621">#621</a>)</p></li>
+<li><p>Rate limit enhancements
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/665">#665</a>)</p></li>
+<li><p>Add ecosystem information to project.version.update fedmsg topic.
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/666">#666</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id44">
+<h3>Bug Fixes<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fix unhandled exception in GitLab backend
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/663">PR#663</a>)</p></li>
+<li><p>Can’t rename mapping for gstreamer
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/598">#598</a>)</p></li>
+<li><p>Source map error: request failed with status 404 for various javascript packages
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/606">#606</a>)</p></li>
+<li><p>about#test-your-regex link is broken
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/628">#628</a>)</p></li>
+<li><p>Github backend returns reversed list
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/642">#642</a>)</p></li>
+<li><p>Version prefix not working in GitLab backend
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/644">#644</a>)</p></li>
+<li><p>Latest version on Project UI is shown with prefix
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/662">#662</a>)</p></li>
+<li><p>Crash when version is too long
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/674">#674</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id52">
+<h3>Development Changes<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add python 3.7 to tox tests
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/650">PR#650</a>)</p></li>
+<li><p>Update Vagrantfile to use Fedora 29 image
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/653">PR#653</a>)</p></li>
+<li><p>Drop support for python 2.7 and python 3.5
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/672">PR#672</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id53">
+<h3>Other Changes<a class="headerlink" href="#id53" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Update contribution guide
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/636">PR#636</a>)</p></li>
+<li><p>Add GDPR SAR script
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/649">PR#649</a>)</p></li>
+<li><p>Add supported versions of python to setup script
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/651">PR#651</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id54">
+<h3>Contributors<a class="headerlink" href="#id54" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Anatoli Babenia</p></li>
+<li><p>Graham Williamson</p></li>
+<li><p>Jeremy Cline</p></li>
+<li><p>Michal Konečný</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id55">
+<h2>0.13.2 (2018-10-12)<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id56">
+<h3>Features<a class="headerlink" href="#id56" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Show users their ID on Settings page
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/631">PR#631</a>)</p></li>
+<li><p>Add sorting by creation date for versions
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/593">#593</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id58">
+<h3>Bug Fixes<a class="headerlink" href="#id58" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Can’t parse owner/repo on Github backend
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/632">PR#632</a>)</p></li>
+<li><p>Login into staging using OpenID not possible
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/issues/616">#616</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id60">
+<h3>Development Changes<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add towncrier for generating release notes
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/618">PR#618</a>)</p></li>
+<li><p>Remove deprecations warning
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/627">PR#627</a>)</p></li>
+<li><p>Add documentation dependency to vagrant container
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/630">PR#630</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id61">
+<h3>Contributors<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to the contributors of bug reports, pull requests, and pull request
+reviews for this release:</p>
+<ul class="simple">
+<li><p>Eli Young</p></li>
+<li><p>Jeremy Cline</p></li>
+<li><p>Michal Konečný</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v0-13-1">
+<h2>v0.13.1<a class="headerlink" href="#v0-13-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id62">
+<h3>Features<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add database schema generation (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/603">#603</a>).</p></li>
+</ul>
+</div>
+<div class="section" id="id64">
+<h3>Bug Fixes<a class="headerlink" href="#id64" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fix cron issues (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/613">#613</a>).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v0-13-0">
+<h2>v0.13.0<a class="headerlink" href="#v0-13-0" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Explicitly depend on <code class="docutils literal notranslate"><span class="pre">defusedxml</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="id66">
+<h3>Features<a class="headerlink" href="#id66" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Update GitHub backend to <a class="reference external" href="https://developer.github.com/v4/">GitHub API v4</a> (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/582">#582</a>).</p></li>
+<li><p>Add GitLab backend. This is implemented using <a class="reference external" href="https://docs.gitlab.com/ee/api/README.html">GitLab API v4</a> (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/591">#591</a>).</p></li>
+<li><p>Update CPAN backend to use metacpan.org (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/569">#569</a>).</p></li>
+<li><p>Parse XML from CPAN with defusedxml (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/569">#569</a>).</p></li>
+</ul>
+</div>
+<div class="section" id="id71">
+<h3>Bug Fixes<a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Change edit message for project, when no edit actually happened (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/579">#579</a>).</p></li>
+<li><p>Fix wrong title on Edit page (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/578">#578</a>).</p></li>
+<li><p>Default custom regex is now configurable (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/571">#571</a>).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v0-12-1">
+<h2>v0.12.1<a class="headerlink" href="#v0-12-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id75">
+<h3>Dependencies<a class="headerlink" href="#id75" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Unpin <code class="docutils literal notranslate"><span class="pre">straight.plugin</span></code> dependency. It was pinned to avoid a bug which has
+since been fixed in the latest releases (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/564">#564</a>).</p></li>
+</ul>
+</div>
+<div class="section" id="id77">
+<h3>Bug Fixes<a class="headerlink" href="#id77" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Rather than returning an HTTP 500 when authenticating with two separate
+identity providers using the same email, return a HTTP 400 to indicate the
+client should not retry the request and inform them they must log in with
+the original identity provider (<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/563">#563</a>).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="v0-12-0">
+<h2>v0.12.0<a class="headerlink" href="#v0-12-0" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id79">
+<h3>Dependencies<a class="headerlink" href="#id79" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Drop the dependency on the Python <code class="docutils literal notranslate"><span class="pre">bunch</span></code> package as it is not used.</p></li>
+<li><p>There is no longer a hard dependency on the <code class="docutils literal notranslate"><span class="pre">rpm</span></code> Python package.</p></li>
+<li><p>Introduce a dependency on the Python <code class="docutils literal notranslate"><span class="pre">social-auth-app-flask-sqlalchemy</span></code> and
+<code class="docutils literal notranslate"><span class="pre">flask-login</span></code> packages in order to support authenticating against OAuth2,
+OpenID Connect, and plain OpenID providers.</p></li>
+<li><p>Introduce a dependency on the Python <code class="docutils literal notranslate"><span class="pre">blinker</span></code> package to support signaling
+in Flask.</p></li>
+<li><p>Introduce a dependency on the Python <code class="docutils literal notranslate"><span class="pre">pytoml</span></code> package in order to support
+a TOML configuration format.</p></li>
+</ul>
+</div>
+<div class="section" id="backwards-incompatible-changes">
+<h3>Backwards-incompatible Changes<a class="headerlink" href="#backwards-incompatible-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Dropped support for Python 2.6</p></li>
+<li><p>Added support for Python 3.4+</p></li>
+</ul>
+<div class="section" id="apis">
+<h4>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h4>
+<p>A number of functions that make up Anitya’s Python API have been moved
+(<a class="reference external" href="https://github.com/release-monitoring/anitya/pull/503">#503</a>). The full
+list of functions are below. Note that no function signatures have changed.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.check_release</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.check_project_release</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.fedmsg_publish</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.fedmsg_publish</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.log</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.log</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.init</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.init</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.create_project</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.create_project</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.edit_project</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.edit_project</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.map_project</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.map_project</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.flag_project</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.flag_project</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.set_flag_state</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.set_flag_state</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anitya.lib.get_last_cron</span></code> is now <code class="docutils literal notranslate"><span class="pre">anitya.lib.utilities.get_last_cron</span></code>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="deprecations">
+<h3>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Deprecated the v1 HTTP API.</p></li>
+</ul>
+</div>
+<div class="section" id="id81">
+<h3>Features<a class="headerlink" href="#id81" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Introduced a new set of APIs under <code class="docutils literal notranslate"><span class="pre">api/v2/</span></code> that support write operations
+for users authenticated with an API token.</p></li>
+<li><p>Configuration is now TOML format.</p></li>
+<li><p>Added a user guide to the documentation.</p></li>
+<li><p>Added an admin guide to the documentation.</p></li>
+<li><p>Automatically generate API documentation with Sphinx.</p></li>
+<li><p>Introduce httpdomain support to document the HTTP APIs.</p></li>
+<li><p>Add initial support for projects to set a “version scheme” in order to help
+with version ordering. At the present the only version scheme implemented is
+the RPM scheme.</p></li>
+<li><p>Add support for authenticating using a large number of OAuth2, OpenID Connect,
+and OpenID providers.</p></li>
+<li><p>Add a fedmsg consumer that integrates with libraries.io to provide more timely
+project update notifications.</p></li>
+<li><p>Add support for running on OpenShift with s2i.</p></li>
+<li><p>Switch over to pypi.org rather than pypi.python.org</p></li>
+<li><p>Use HTTPS in backend examples, default URLs, and documentation.</p></li>
+</ul>
+</div>
+<div class="section" id="id82">
+<h3>Bug Fixes<a class="headerlink" href="#id82" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed deprecation warnings from using <code class="docutils literal notranslate"><span class="pre">flask.ext</span></code> (#431).</p></li>
+<li><p>Fix the NPM backend’s update feed.</p></li>
+</ul>
+</div>
+<div class="section" id="developer-improvements">
+<h3>Developer Improvements<a class="headerlink" href="#developer-improvements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed all warnings generated from building the Sphinx documentation and
+introduce tests to ensure there are no regressions (#427).</p></li>
+<li><p>Greatly improved the unit tests by breaking monolithic tests up.</p></li>
+<li><p>Moved the unit tests into the <code class="docutils literal notranslate"><span class="pre">anitya.tests</span></code> package so tests didn’t need
+to mess with the Python path.</p></li>
+<li><p>Fixed logging during test runs</p></li>
+<li><p>Switched to pytest as the test runner since nose is dead.</p></li>
+<li><p>Introduced nested transactions for database tests rather than removing the
+database after each test. This greatly reduced run time.</p></li>
+<li><p>Added support for testing against multiple Python versions via tox.</p></li>
+<li><p>Added Travis CI integration.</p></li>
+<li><p>Added code coverage with pytest-cov and Codecov integration.</p></li>
+<li><p>Fixed all flake8 errors.</p></li>
+<li><p>Refactored the database code to avoid circular dependencies.</p></li>
+<li><p>Allow the Vagrant environment to be provisioned with an empty database.</p></li>
+</ul>
+</div>
+<div class="section" id="id83">
+<h3>Contributors<a class="headerlink" href="#id83" title="Permalink to this headline">¶</a></h3>
+<p>Many thanks to all the contributors for this release, including those who filed
+issues. Commits for this release were contributed by:</p>
+<ul class="simple">
+<li><p>Elliott Sales de Andrade</p></li>
+<li><p>Jeremy Cline</p></li>
+<li><p>luto</p></li>
+<li><p>Michael Simacek</p></li>
+<li><p>Nick Coghlan</p></li>
+<li><p>Nicolas Quiniou-Briand</p></li>
+<li><p>Ricardo Martincoski</p></li>
+<li><p>robled</p></li>
+</ul>
+<p>Thank you all for your hard work.</p>
+</div>
+</div>
+<div class="section" id="v0-11-0">
+<h2>v0.11.0<a class="headerlink" href="#v0-11-0" title="Permalink to this headline">¶</a></h2>
+<p>Released February 08, 2017.</p>
+<ul class="simple">
+<li><p>Return 4XX codes in error cases for /projects/new rather than 200 (Issue #246)</p></li>
+<li><p>Allow projects using the “folder” backend to make insecure HTTPS requests
+(Issue #386)</p></li>
+<li><p>Fix an issue where turning the insecure flag on and then off for a project
+resulted in insecure requests until the server was restarted (Issue #394)</p></li>
+<li><p>Add a data migration to set the ecosystem of existing projects if the backend
+they use is the default backend for an ecosystem. Note that this migration
+can fail if existing data has duplicate projects since there is a new
+constraint that a project name is unique within an ecosystem (Issue #402).</p></li>
+<li><p>Fix the regular expression used with the Debian backend to strip the “orig”
+being incorrectly included in the version (Issue #398)</p></li>
+<li><p>Added a new backend and ecosystem for <a class="reference external" href="https://crates.io">https://crates.io</a> (Issue #414)</p></li>
+<li><p>[insert summary of change here]</p></li>
+</ul>
+</div>
+<div class="section" id="v0-10-1">
+<h2>v0.10.1<a class="headerlink" href="#v0-10-1" title="Permalink to this headline">¶</a></h2>
+<p>Released November 29, 2016.</p>
+<ul class="simple">
+<li><p>Fix an issue where the version prefix was not being stripped (Issue #372)</p></li>
+<li><p>Fix an issue where logs were not viewable to some users (Issue #367)</p></li>
+<li><p>Update anitya’s mail_logging to be compatible with old and new psutil
+(Issue #368)</p></li>
+<li><p>Improve Anitya’s error reporting via email (Issue #368)</p></li>
+<li><p>Report the reason fetching a URL failed for the folder backend (Issue #338)</p></li>
+<li><p>Add a timeout to HTTP requests Anitya makes to ensure it does not wait
+indefinitely (Issue #377)</p></li>
+<li><p>Fix an issue where prefixes could be stripped further than intended (Issue #381)</p></li>
+<li><p>Add page titles to the HTML templates (Issue #371)</p></li>
+<li><p>Switch from processes to threads in the Anitya cron job to avoid sharing
+network sockets for HTTP requests across processes (Issue #335)</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Anitya</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=release-monitoring&repo=anitya&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.16.1 (2019-07-16)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">0.16.0 (2019-06-24)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">0.15.1 (2019-03-06)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">0.15.0 (2019-02-20)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id29">0.14.1 (2019-01-17)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id35">0.14.0 (2019-01-08)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id55">0.13.2 (2018-10-12)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-13-1">v0.13.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-13-0">v0.13.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-12-1">v0.12.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-12-0">v0.12.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-11-0">v0.11.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-10-1">v0.10.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="admin-guide.html">Administration Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database models</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="user-guide.html" title="previous chapter">User Guide</a></li>
+      <li>Next: <a href="glossary.html" title="next chapter">Glossary</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" style="text-align: center">
+      &copy;2019, Red Hat, Inc. and others.|
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      (<a href="https://github.com/release-monitoring/anitya/tree/master/docs/_templates">customized</a>)
+      |
+      <a href="https://github.com/release-monitoring/anitya/tree/master/docs/release-notes.rst"
+          rel="nofollow">View source</a>
+    </div>
+  </body>
+</html>
