@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: focustools
+Version: 0.1.3
+Summary: Python utilities supporting the FOCUS package and cryo-EM data processing in general.
+Home-page: https://github.com/C-CINA/focustools
+Author: Ricardo Righetto
+Author-email: ricardo.righetto@unibas.ch
+License: GPLv3
+Keywords: cryoEM cryo-EM focus single-particle tomography subtomogram-averaging electron-microscopy
+Platform: UNKNOWN
+Requires-Dist: numpy (>=1.11)
+Requires-Dist: numexpr
+Requires-Dist: matplotlib
+Requires-Dist: mrcz (>=0.5.2)
+Requires-Dist: packaging
+Requires-Dist: blosc
+
+FOCUS TOOLS offers Python functions and scripts for performing common tasks in cryogenic electron microscopy (cryo-EM) data processing such as postprocessing 3D maps, filtering, masking, computing FSC curves, cropping/padding in real and Fourier space, CTF correction, among others. Some of the scripts and functions contained here were developed to support the FOCUS package. Others were written for the developer's own studies or mere convenience, and are made available here in the hope they can be useful to someone else.
+
+The I/O of MRC files is based on the [MRCZ library](https://github.com/em-MRCZ/python-mrcz).
+
+Where possible, tasks are accelerated by the [NumExpr](https://github.com/pydata/numexpr) engine.
+
