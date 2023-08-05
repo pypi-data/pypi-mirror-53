@@ -1,0 +1,39 @@
+{
+    "properties": {
+        "uuid": {
+            "type": "string",
+            "description": "Globally unique ID"
+        },
+        "revision": {
+            "type": "integer",
+            "description": "Revision number"
+        },
+        "name": {
+            "type": "string",
+            "description": "Sample name"
+        },
+        "projects": {
+            "type": "array",
+            "description": "List of foreign keys to Projects"
+        },
+        "composition": {
+            "type": "string",
+            "description": "Sample composition (IUCr specification)"
+        },
+        "tags": {
+            "type": "array",
+            "description": "Arbitrary useful labels"
+        },
+        "description": {
+            "type": "string",
+            "description": "Longer sample description"
+        }
+    },
+    "required": [
+        "uuid",
+        "revision",
+        "name"
+     ],
+    "type": "object",
+    "description": "Document created for a single sample"
+}

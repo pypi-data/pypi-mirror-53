@@ -1,0 +1,31 @@
+{
+    "properties": {
+        "uuid": {
+            "type": "string",
+            "description": "Globally unique ID"
+        },        
+        "revision": {
+            "type": "integer",
+            "description": "Revision number"
+        },
+        "kind": {
+            "type": "string",
+            "description": "Type of the container"
+        },
+        "name": {
+            "type": "string",
+            "description": "Container name"
+        },
+        "contents": {
+            "type": "object",
+            "description": "Maps a Sample Foreign key to a location"
+        }
+    },
+    "required": [
+        "uuid",
+        "revision",
+        "name"
+     ],
+    "type": "object",
+    "description": "Document created for group of containers."
+}
