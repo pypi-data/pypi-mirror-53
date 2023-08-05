@@ -1,0 +1,24 @@
+[run]
+# source = multiprocess
+include =
+    */multiprocess/*
+    */_multiprocess/*
+omit = 
+    */examples/*
+    */multiprocess/tests/*
+# timid = true
+# parallel = true
+# concurrency = multiprocessing # thread
+# data_file = $TRAVIS_BUILD_DIR/.coverage
+# data_file = ./.coverage
+# debug = trace
+
+[report]
+include =
+    */multiprocess/*
+    */_multiprocess/*
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+# show_missing = true
+ignore_errors = true
