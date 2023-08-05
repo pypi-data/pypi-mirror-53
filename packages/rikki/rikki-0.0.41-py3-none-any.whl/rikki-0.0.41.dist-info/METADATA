@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: rikki
+Version: 0.0.41
+Summary: A small runner script which allows to run behaviour tests backed by proxy
+Home-page: https://github.com/yamsergey/rikki
+Author: Sergey Yamshchikov
+Author-email: yamsergey@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: allure-behave (>=2.8.5)
+Requires-Dist: allure-python-commons (>=2.8.5)
+Requires-Dist: Appium-Python-Client (>=0.47)
+Requires-Dist: behave (>=1.2.6)
+Requires-Dist: mitmproxy (>=4.0.4)
+Requires-Dist: selenium (>=3.141.0)
+Requires-Dist: deepdiff (>=4.0.7)
+
+[![CircleCI](https://circleci.com/gh/yamsergey/rikki.svg?style=svg&circle-token=a3ff3d7f5da08b8af00e14b5f704d375855f5685)](https://circleci.com/gh/yamsergey/rikki) [![PyPI version](https://badge.fury.io/py/rikki.svg)](https://badge.fury.io/py/rikki)
+
+# Rikki - complicated testing environment 
+
+This project it's set of tools and utilities which allow to run behavioral tests backed up by a proxy. The configuration allows to tests things that couldn't be automated before:
+
+- Ads implementations 
+- In-app Tracking
+- GDPR complaints
+- And more
+
+## Dependencies 
+Currently the project use Behave and Mitmproxy.
+
+
+
+
