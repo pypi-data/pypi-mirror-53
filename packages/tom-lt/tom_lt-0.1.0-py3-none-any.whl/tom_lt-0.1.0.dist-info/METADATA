@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: tom-lt
+Version: 0.1.0
+Summary: Liverpool Telescope facility module for the TOM Toolkit
+Home-page: https://tom-toolkit.readthedocs.io
+Author: TOM Toolkit Project
+Author-email: dcollom@lco.global
+License: UNKNOWN
+Keywords: tomtoolkit,astronomy,astrophysics,cosmology,science,fits,observatory,liverpool-telescope
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: Topic :: Scientific/Engineering :: Physics
+Description-Content-Type: text/markdown
+Requires-Dist: tomtoolkit
+Requires-Dist: suds-py3
+Requires-Dist: lxml
+
+# Liverpool Telescope facility module for the TOM Toolkit
+
+This module adds [Liverpool Telescope](http://telescope.livjm.ac.uk/) support to the TOM
+Toolkit. Using this module TOMs can submit observations to the Liverpool Telescope phase 2
+system.
+
+## Installation:
+
+Install the module into your TOM environment:
+
+    pip install tom-lt
+
+Add `tom_lt.lt.LTFacility` to the `TOM_FACILITY_CLASSES` in your TOM's
+`settings.py`:
+
+    TOM_FACILITY_CLASSES = [
+        'tom_observations.facilities.lco.LCOFacility'
+        ...
+        'tom_lt.lt.LTFacility'
+    ]
+
+
