@@ -1,0 +1,265 @@
+Metadata-Version: 2.1
+Name: cgshop2020-pyutils
+Version: 0.1.3
+Summary: Utilities for the CG:SHOP 2020 Optimization Competition on the Minimum Convex Partition Problem.
+Home-page: https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2020/
+Author: TU Braunschweig, IBR, Algorithms Group (Phillip Keldenich and Dominik Krupke)
+Author-email: keldenich@ibr.cs.tu-bs.de, krupke@ibr.cs.tu-bs.de
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: C++
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 4 - Beta
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib
+
+# Official Python Utilities for the CG:SHOP 2020 Optimization Competition.
+
+We provide basic code to ease your participation in this year's [challenge](https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2020/).
+Due to it popularity and simplicity, the choice has fallen on Python.
+However, the real code is written in C++ with CGAL to provide the needed accuracy and
+efficiency.
+
+This python module allows you to easily read the instance and potentially convert them
+into an easier format. The JSON format is not as simple as last year's raw format but
+it allows to add metadata. Further, it allows you to verify your instances. It uses
+the same core as the server so if this code accepts your solution, so will our server.
+
+The code is not perfect but we will work to improve this code during the competition.
+Feedback is welcome.
+
+The C++-core unfortunately messes with the platform independence of Python.
+At this point, we already spent much more time into making the module as compatible as
+possible possible than into the actual code.
+Unfortunately, there are still a lot of ugly workarounds, which we try to remove soon.
+The module has been tested on OS X and Linux.
+__Windows is still experimentally.__
+
+We implemented a fallback mode that in case the native core could not be loaded at least
+the basic functionality for reading and writing solutions and instances is available.
+
+Please report any bugs you may find.
+
+[https://gitlab.ibr.cs.tu-bs.de/alg/cgshop2020_pyutils](https://gitlab.ibr.cs.tu-bs.de/alg/cgshop2020_pyutils)
+
+## Installing
+
+You need to have a 64bit operating system (Linux, OS X, Windows) and a 64bit Python
+interpreter for full functionality. Unfortunately, it is very easy on Windows to 
+accidentally install outdated 32bit versions. 32bit users will only be able to use
+a limited functionality (or have to compile the core themselves).
+
+The module is available through pypi, e.g.,
+```python
+pip install cgshop2020-pyutils
+```
+
+or when using the generally recommended [pipenv](https://github.com/pypa/pipenv). 
+
+```python
+pipenv install cgshop2020-pyutils
+```
+
+Note that you have to use `_` instead of `-` when importing the module.
+
+You can also simply copy the folder `cgshop2020_pyutils` into your code folder and use
+it like a local module.
+
+If you want to work in C++ directly, you can also simply copy our `cpp_core`.
+If you have some experience with CMake, this should be straightforward.
+However, you will be missing the JSON functionality as this is written in pure Python
+(which is much simpler than doing this in C++).
+
+## Features
+
+* Reading and writing instance files.
+* Reading and writing solution files.
+* Verifying solutions for feasibility.
+* Simple triangulation solver to get a trivial feasible solution.
+
+The exact same implementation will be used on the submission server.
+Thus, if this library will accept your solution, so will the submission server.
+
+## Instance
+
+Create your own instance:
+```python
+from cgshop2020_pyutils import Instance, Point
+instance = Instance(name="my_instance", points=[Point(1.0, 1.0), Point(0.0, 3.0), Point(2.0, 0.0)])
+index = instance.add_point(Point(1.0, 5.0)) # add additional points
+assert index == 3, "Every point gets an index starting at zero."
+assert instance[0] == Point(1.0, 1.0) # Simple access via index
+instance.meta_data["comment"] = "This is just an example."
+```
+or load an instance from file (most likely)
+```python
+from cgshop2020_pyutils import InstanceReader
+reader = InstanceReader()
+instance = reader.from_json("mona_lisa_1000000.instance.json")
+```
+
+You can access the points via index:
+```python
+from cgshop2020_pyutils import Instance, Point
+instance = Instance(name="my_instance", points=[Point(1.0, 1.0), Point(0.0, 3.0), Point(2.0, 0.0)])
+
+for point in instance:
+    print(point)
+
+for i in range(len(instance)):
+    point = instance[i]
+    print(point)
+```
+
+### Instance Format
+
+An instance in json can look likes this:
+```json
+{"points": [
+            {"i": 0, "x": 2396.0, "y": 5284.0}, 
+            {"i": 1, "x": 2656.0, "y": 2938.0}, 
+            {"i": 2, "x": 4120.0, "y": 2278.0}, 
+            {"i": 3, "x": 4342.0, "y": 102.0}, 
+            {"i": 4, "x": 4384.0, "y": 2988.0}, 
+            {"i": 5, "x": 5136.0, "y": 2280.0}, 
+            {"i": 6, "x": 6634.0, "y": 5416.0}, 
+            {"i": 7, "x": 8598.0, "y": 2632.0}, 
+            {"i": 8, "x": 8898.0, "y": 4170.0}, 
+            {"i": 9, "x": 11738.0, "y": 1550.0}
+           ], 
+  "type": "Instance", 
+  "name": "euro-night-0000010", 
+  "meta": {
+            "comment": "HIP even point set instance (10 points) sampled from image ", 
+            "faces_in_delaunay": 12
+           }
+}
+```
+* `points`: a list of points with (i=index, x=x coordinate, y=y coordinate)
+* `type`: "Instance", just tells you that this json describes an instance
+* `meta` some optional metadata
+    * `comment`: Some comment on the instance
+    * `faces_in_delaunay`: Number of faces in the delaunay triangulation as trivially achievable objective value.
+* `name`: name of instance. 
+
+Last time we used some raw text format which is easier to parse but less powerful.
+If you don't want to read json in your software, we recommend to convert the instances
+via our python library to a simpler format.
+```python
+from cgshop2020_pyutils import InstanceReader
+reader = InstanceReader()
+instance = reader.from_json("./my_json_instance.json")
+with open("my_simple_instance.txt", "w") as simple_file:
+    for index in range(len(instance)):
+        point = instance[index]
+        simple_file.write(f"{index} {point.get_x()} {point.get_y()}\n")
+```
+
+## Solution
+
+```python
+from cgshop2020_pyutils import Solution, Edge
+solution = Solution(instance="my_instance")
+solution.add_edge(Edge(0, 1)) # edge from point with index 0 to point with index 1
+solution.add_edge(Edge(0, 2)) # edge from point with index 0 to point with index 2
+
+solution.delete_double_edges() # remove redundant edges, as double edges are illegal.
+for edge in solution:
+    print(edge)
+for i in range(len(solution)):
+    edge = solution[i]
+    print(edge)
+```
+you can easily create a valid json file for upload:
+```python
+from cgshop2020_pyutils import SolutionWriter
+writer = SolutionWriter()
+writer.to_json(solution=solution, path="my_solution.json")
+```
+
+We will probably add a functionality for automatic upload from code in the near future.
+
+## Meta data
+
+`Solution` and `Instance` both have a `meta_data` attribute which is a dictionary.
+For example you can add a comment by
+```python
+my_solution.meta_data["comment"] = "This is a comment"
+```
+which will also be saved when converting to JSON.
+Everything that can be converted to string will be saved to json and also reloaded
+when reading the json.
+
+## Checker
+
+We provide an efficient checker for verifying solutions.
+In case of infeasibility, the checker also provides a message with an error description.
+If the solution is feasible, the objective value is computed.
+
+```python
+from cgshop2020_pyutils import SolutionChecker
+
+checker = SolutionChecker()
+status = checker(instance=instance, solution=solution)
+print(status.is_feasible())
+print(status.get_message())
+print(status.get_objective_value())
+```
+
+## Visualization
+
+We provide a simple visualization based on matplotlib to quickly plot instances and solutions.
+
+```python
+from cgshop2020_pyutils import Visualizer
+vis = Visualizer()
+vis.visualize_solution(solution=solution, instance=instance) # opens plot if possible
+vis.visualize_solution(solution=solution, instance=instance, path="my_fig.pdf") # writes plot to file
+```
+
+## Trivial Triangulation Solver
+
+We provide a simple solver that just computes the Delaunay triangulation.
+
+```python
+from cgshop2020_pyutils import TrivialTriangulationSolver
+solver = TrivialTriangulationSolver()
+solution = solver(instance)
+```
+
+## Compiling yourself
+
+You should not need to do this as the module comes with precompiled binaries. However, it is possible to recompile the C++-core on your machine.
+
+You need to have the following libraries installed:
+* A C++ compiler e.g. Debian/Ubuntu `apt-get install g++`
+* CMake Debian/Ubuntu: `apt-get install cmake`, OS X:`brew install cmake`
+* CGAL Debian/Ubuntu: `apt-get install cgal`, OS X:`brew install cgal`
+* Boost Debian/Ubuntu: `apt-get install boost`, OS X:`brew install boost`
+* Python3 (of course)
+* matplotlib in Python3 (e.g., `pip3 install matplotlib`)
+
+Otherwise, you likely get an error. 
+
+Do a manual recompile with:
+```python
+import cgshop2020_pyutils
+cgshop2020_pyutils.compile_cpp_core()
+```
+This will only work if you installed into user space (without sudo) as otherwise the
+compiler cannot write the files into the module folder.
+
+This command actually just executes CMake.
+You could also do this by hand.
+
+For Windows, CMake might use slightly different paths. In that case, you could simply copy the created `.dll` into the `binaries` folder.
+
+## Changelog
+
+* _0.1.0_ First published version with native support for OS X and Linux.
+* _0.1.1_ Experimental Windows support
+* _0.1.2_ 32bit detection and warning.
+* _0.1.3_ fixed a problem with some Windows versions (could not find the supplied dependencies in the same folder)
+
