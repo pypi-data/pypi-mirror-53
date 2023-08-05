@@ -1,0 +1,84 @@
+- project:
+    templates:
+      - openstack-python-jobs-neutron
+      - openstack-python3-train-jobs-neutron
+      - publish-openstack-docs-pti
+      - release-notes-jobs-python3
+      - check-requirements
+      - periodic-stable-jobs-neutron
+    check:
+      jobs:
+        - openstack-tox-lower-constraints:
+            # Currently, we cannot specify that we want neutron
+            # checked out from master using tox-siblings for this
+            # job, so this always fails.
+            voting: false
+        - openstack-tox-pep8:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-py27:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-py36:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-py37:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-cover:
+            required-projects:
+              - openstack/neutron
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - neutron-tempest-plugin-bgpvpn-bagpipe:
+            irrelevant-files:
+              - ^(test-|)requirements.txt$
+              - ^setup.cfg$
+        - legacy-networking-bagpipe-dsvm-fullstack:
+            required-projects:
+              - openstack/neutron
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+            voting: false
+        - networking-bagpipe-tempest
+    gate:
+      jobs:
+        - openstack-tox-pep8:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-py27:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-py36:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - openstack-tox-py37:
+            required-projects:
+              - openstack/networking-bgpvpn
+              - openstack/networking-sfc
+        - neutron-tempest-plugin-bgpvpn-bagpipe:
+            irrelevant-files:
+              - ^(test-|)requirements.txt$
+              - ^setup.cfg$
+        - networking-bagpipe-tempest
+
+- job:
+    name: networking-bagpipe-tempest
+    parent: tempest-full-py3
+    timeout: 10800
+    required-projects:
+      - openstack/tempest
+      - openstack/neutron
+      - openstack/networking-bagpipe
+    vars:
+      tempest_concurrency: 4
+    irrelevant-files:
+      - ^(test-|)requirements.txt$
+      - ^setup.cfg$
