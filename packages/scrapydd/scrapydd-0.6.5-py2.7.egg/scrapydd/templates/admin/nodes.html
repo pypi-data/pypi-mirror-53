@@ -1,0 +1,45 @@
+{% extends '../base_sidebar.html' %}
+{% block sidebar %}
+  {% include 'admin_sidebar.html' %}
+{% end sidebar %}
+{% block content %}
+  <form>
+    {% module xsrf_form_html() %}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">New Node Key</label>
+        <input type="text" class="form-control" id="inputEmail4" placeholder="Email" value="{{usable_key.key}}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">SecretKey</label>
+        <input type="text" class="form-control" id="inputPassword4" placeholder="Password" value="{{usable_key.secret_key}}">
+      </div>
+    </div>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>IP Address</th>
+        <th>Status</th>
+        <th>Tags</th>
+        <th>Last Heartbeat</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for node in nodes %}
+        <tr>
+          <td>{{node.id}}</td>
+          <td>{{node.client_ip}}</td>
+          {% if node.isalive %}
+          <td class="bg-success text-white">Online</td>
+          {% else %}
+          <td class="bg-danger text-white">Offline</td>
+          {% end %}
+          <td>{{node.tags}}</td>
+          <td>{{node.last_heartbeat}}</td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}
