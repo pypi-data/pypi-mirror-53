@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "graphql-core"
+version = "3.0.0b1"
+description = """
+GraphQL-core is a Python port of GraphQL.js,
+ the JavaScript reference implementation for GraphQL."""
+license = "MIT"
+authors = [
+    "Christoph Zwerschke <cito@online.de>"
+]
+readme = "README.md"
+homepage = "https://github.com/graphql-python/graphql-core-next"
+repository = "https://github.com/graphql-python/graphql-core-next"
+documentation = "https://graphql-core-next.readthedocs.io/"
+keywords = ["graphql"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7"
+]
+packages = [
+    { include = "graphql", from = "src" },
+    { include = "tests", format = "sdist" },
+    { include = "docs", format = "sdist" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5"
+pytest-asyncio = ">=0.10"
+pytest-benchmark = "^3.2"
+pytest-cov = "^2.7"
+pytest-describe = ">=0.12"
+pyyaml = "^5.1"
+black = ">=19.3b0"
+flake8 = "^3.7"
+mypy = ">=0.720"
+codecov = "^2"
+sphinx = "^2.2"
+sphinx_rtd_theme = ">=0.4"
+check-manifest = ">=0.39"
+bump2version = ">=0.5"
+tox = "^3.14"
+
+[tool.black]
+target-version = ['py36', 'py37', 'py38']
+[build-system]
+requires = ["poetry>=1.0.0b1"]
+build-backend = "poetry.masonry.api"
+
