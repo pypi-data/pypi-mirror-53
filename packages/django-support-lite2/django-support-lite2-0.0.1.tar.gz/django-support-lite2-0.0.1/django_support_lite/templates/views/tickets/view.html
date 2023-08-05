@@ -1,0 +1,152 @@
+{% extends DSL_LAYOUT_NAME %}
+
+{% load ticket %}
+
+{% block django_support_lite_content %}
+    <h5>
+        {{ ticket.title }}
+    </h5>
+
+    <div>
+        <span class="badge badge-{{ ticket|ticket_state_css_class }}">
+            {{ ticket|ticket_state_label }}
+        </span>
+
+        {% if ticket.status == Status.OPEN and perms.django_support_lite.can_manage %}
+            <span class="badge badge-{{ ticket.priority|ticket_priority_css_class }}">
+                {{ ticket.priority|ticket_priority_label }}
+            </span>
+        {% endif %}
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-6">
+            <small>
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        User
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ ticket.user.username }}
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        Date created
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ ticket.created_at }}
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        Last updated
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ ticket.updated_at }}
+                    </dd>
+
+                    {% if ticket.status == Status.CLOSE and perms.django_support_lite.can_manage %}
+                        <dt class="col-sm-4">
+                            Closed by
+                        </dt>
+                        <dd class="col-sm-8">
+                            {{ ticket.user_close.username }}
+                        </dd>
+                    {% endif %}
+                </dl>
+            </small>
+        </div>
+
+        <div class="col-sm-6 text-right">
+            {% if ticket.status == Status.OPEN and perms.django_support_lite.can_manage %}
+                <div class="btn-group">
+                    <a href="{% url 'django_support_lite:tickets.set_priority' ticket.id 0 %}" class="btn btn-sm btn-{% if not ticket.priority == Priority.LOW %}outline-{% endif %}success">
+                        {{ 0|ticket_priority_label }}
+                    </a>
+
+                    <a href="{% url 'django_support_lite:tickets.set_priority' ticket.id 1 %}" class="btn btn-sm btn-{% if not ticket.priority == Priority.NORMAL %}outline-{% endif %}warning">
+                        {{ 1|ticket_priority_label }}
+                    </a>
+
+                    <a href="{% url 'django_support_lite:tickets.set_priority' ticket.id 2 %}" class="btn btn-sm btn-{% if not ticket.priority == Priority.HIGH %}outline-{% endif %}danger">
+                        {{ 2|ticket_priority_label }}
+                    </a>
+                </div>
+            {% endif %}
+
+            <div class="btn-group">
+                {% if ticket.status == Status.OPEN %}
+                    <a href="{% url 'django_support_lite:tickets.set_status_close' ticket.id %}" class="btn btn-sm btn-outline-secondary">
+                        Close Ticket
+                    </a>
+
+                    {% if perms.django_support_lite.can_manage %}
+                        <a href="{% url 'django_support_lite:tickets.set_status_archive' ticket.id %}" class="btn btn-sm btn-outline-secondary">
+                            Archive Ticket
+                        </a>
+                    {% endif %}
+                {% else %}
+                    {% if ticket.status == Status.CLOSE %}
+                        <a href="{% url 'django_support_lite:tickets.set_status_open' ticket.id %}" class="btn btn-sm btn-outline-secondary">
+                            Reopen Ticket
+                        </a>
+                    {% endif %}
+
+                    {% if ticket.status == Status.ARCHIVE and perms.django_support_lite.can_manage %}
+                        <a href="{% url 'django_support_lite:tickets.set_status_open' ticket.id %}" class="btn btn-sm btn-outline-secondary">
+                            Restore Ticket
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    {% if ticket.status == Status.ARCHIVE %}
+        {% include 'partials/stub.html' with text='Ticket in the archive and is only available to view.' %}
+    {% elif ticket.status == Status.CLOSE %}
+        {% include 'partials/stub.html' with text='The ticket is closed. You have to reopen it in order to continue discussion.' %}
+    {% else %}
+        <form action="{% url 'django_support_lite:tickets.view' ticket.id %}" method="post" enctype="multipart/form-data" class="mt-4">
+            {% include 'partials/form.html' with form=form %}
+            {% csrf_token %}
+
+            <button class="btn btn-primary">
+                Send
+            </button>
+        </form>
+    {% endif %}
+
+    {% if ticket_messages %}
+        <hr />
+
+        <div class="list-group">
+            {% for ticket_message in ticket_messages %}
+                <div class="list-group-item list-group-item-action flex-column align-items-start" id="message-{{ ticket_message.id }}">
+                    <div class="d-flex w-100 justify-content-between mb-1">
+                        <small>
+                            {{ ticket_message.user.username }}
+                        </small>
+
+                        <small>{{ ticket_message.created_at }}</small>
+                    </div>
+
+                    <p class="mb-2">
+                        {{ ticket_message.text }}
+                    </p>
+
+                    <div>
+                        {% for image in ticket_message.image_set.all %}
+                            <a href="{{ DSL_UPLOAD_URL_PREFIX }}/{{ image.path }}" target="_blank">
+                                <img class="rounded" src="{{ DSL_UPLOAD_URL_PREFIX }}/{{ image.path }}" style="height: 100px;" />
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
