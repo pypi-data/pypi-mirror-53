@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: readthedocs-version-warning-mkdocs-plugin
+Version: 0.0.1
+Summary: ReadTheDocs version warning MkDocs plugin replace placeholder text with warning banner for specific versions if deployed on Readthedocs
+Home-page: https://github.com/grossmannmartin/readthedocs-version-warning-mkdocs-plugin
+Author: Martin Grossmann
+Author-email: martin@vyvoj.net
+License: MIT
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+Requires-Dist: mkdocs
+Requires-Dist: requests
+
+# ReadTheDocs version warning MkDocs plugin
+
+"ReadTheDocs version warning MkDocs plugin" is a very basic [mkdocs plugin](http://www.mkdocs.org/user-guide/plugins/)
+that replace placeholder text (`### VERSION-WARNING-BANNER-PLACEHOLDER ###`) in the theme template with warning admonition.
+
+## Configuration
+
+```yaml
+plugins:
+    - readthedocs-version-warning:
+        project_id: "000000"
+        show_on_versions:
+            - latest
+```
+
+`project_id` - Id of the target project on ReadTheDocs.
+From this project will be used the default version to render link to the stable version.
+`show_on_versions` - List of versions on which the banner should appear.
+
