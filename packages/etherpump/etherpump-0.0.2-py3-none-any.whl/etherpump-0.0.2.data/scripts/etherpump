@@ -1,0 +1,50 @@
+#!python
+
+from etherpump import VERSION
+import sys
+
+usage = """Usage:
+    etherpump CMD
+
+where CMD could be:
+    pull
+    index
+    dumpcsv
+    gettext
+    gethtml
+    creatediffhtml
+    list
+    listauthors
+    revisionscount
+    showmeta
+    html5tidy
+
+For more information on each command try:
+    etherpump CMD --help
+
+"""
+
+try:
+    cmd = sys.argv[1]
+    if cmd.startswith("-"):
+        args = sys.argv
+    else:
+        args = sys.argv[2:]
+
+    if any(arg in args for arg in ['--help', '-h']):
+        print(usage)
+        sys.exit(0)
+    elif any(arg in args for arg in ['--version', '-v']):
+        print('etherpump {}'.format(VERSION))
+        sys.exit(0)
+
+except IndexError:
+    print(usage)
+    sys.exit(0)
+try:
+    # http://stackoverflow.com/questions/301134/dynamic-module-import-in-python
+    cmdmod = __import__("etherpump.commands.%s" % cmd, fromlist=["etherdump.commands"])
+    cmdmod.main(args)
+except ImportError as e:
+    print("Error performing command '{0}'\n(python said: {1})\n".format(cmd, e))
+    print(usage)
