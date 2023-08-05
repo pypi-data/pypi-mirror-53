@@ -1,0 +1,42 @@
+{% extends "aristotle_mdr/base.html" %}
+{% load util_tags %}
+
+{% block content %}
+<h1>{% block title %}Aristotle Extensions{% endblock %}</h1>
+
+{% if content_extensions or download_extensions %}
+    <p>
+    Below is a complete listing of the extensions that are used in {{ config.SITE_NAME }},
+    click any of the headings below for more information.
+    </p>
+    {% if content_extensions %}
+        <h2>The following content extensions are available in this registry</h2>
+        <dl>
+        {% for ext in content_extensions %}
+            <dt>
+                {% if ext.about_url %}
+                    <a href="{{ ext.about_url }}">{{ ext.verbose_name }}</a>
+                {% else %}
+                    {{ ext.verbose_name }}
+                {% endif %}
+            </dt>
+            <dd>{{ ext.description|bleach }}</dd>
+        {% endfor %}
+        </dl>
+    {% endif %}
+
+    {% if download_extensions %}
+        <h2>The following download formats are available in this registry</h2>
+        {% for ext in download_extensions %}
+        <i class="fa {{ ext.icon_class }}"></i>
+        <strong>
+            {{ ext.label }}
+        </strong>
+        <p>{{ ext.description }}</p>
+        {% endfor %}
+    {% endif %}
+{% else %}
+    No extensions have been installed on this site.
+{% endif %}
+
+{% endblock %}

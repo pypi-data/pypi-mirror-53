@@ -1,0 +1,82 @@
+{% extends 'aristotle_mdr/concepts/contentInfoBase.html' %}
+
+{% load aristotle_tags i18n l10n %}
+{% load render_bundle from webpack_loader %}
+
+
+{% block webpack_bundle %}
+    {% render_bundle 'comparer' 'js' %}
+{% endblock %}
+
+{% block webpack_css_bundle %}
+    {% render_bundle 'comparer' 'css' %}
+{% endblock %}
+
+{% block title %}Metadata comparison tool{{ item.name }}{% endblock %}
+
+{% block content %}
+    <h1>Metadata comparison tool</h1>
+    <form method="get" action="">
+        <div class="well well-sm">
+            <em>This tool allows you to compare items.</em>
+            Text in green below is present only in the item in that column, text in red is
+            present only in the opposite column and text in white is similar across both items.
+        </div>
+        <table class="table table-bordered compare">
+            <thead>
+            <tr>
+                <th>
+                    {{ form.item_a.label }}<br>
+                    {{ form.item_a }}
+                </th>
+                <th></th>
+                <th>
+                    {{ form.item_b.label }}<br>
+                    {{ form.item_b }}
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+
+            {% if item_a and item_b %}
+            <tbody>
+                <tr>
+                    <td><a href="{{item_a.get_absolute_url}}">{{item_a}}</a></td>
+                    <td>To</td>
+                    <td><a href="{{item_b.get_absolute_url}}">{{item_b}}</a></td>
+                    <td>
+                        <a href="?item_a={{item_b.pk}}&item_b={{item_a.pk}}" title="Reverse order"><i class="fa fa-retweet"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <div class="container text-center">
+            <input id="compare" type="submit" class="btn btn-primary text-center" value="Compare" />
+        </div>
+    </form>
+    <hr>
+    {% if not_all_versions_selected %}
+        <div class="well">
+            Both versions must be selected
+        </div>
+    {% elif cannot_compare %}
+        <div class="well">
+            Those versions could not be compared
+        </div>
+    {% else %}
+        {% if not has_same_base_model %}
+            <div class="well">
+                The metadata items being compared are not of the same type.
+                Only common metadata fields are compared. Custom fields are compared based on name only.
+            </div>
+        {% endif %}
+        <div class="container">
+            {% if diffs %}
+                {% include "aristotle_mdr/actions/compare/compare_table.html" with allow_html_comparison=False comparing_concepts=True %}
+            {% endif %}
+        </div>
+    {% endif %} {# <!-- End not all versions selected --> #}
+
+{% endblock %}
