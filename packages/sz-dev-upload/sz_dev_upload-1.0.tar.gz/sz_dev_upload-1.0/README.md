@@ -1,0 +1,1 @@
+This is a project made just to learn how to upload python packages to pypi.org
