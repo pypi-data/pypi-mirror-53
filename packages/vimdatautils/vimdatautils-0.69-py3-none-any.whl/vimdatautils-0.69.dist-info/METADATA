@@ -1,0 +1,70 @@
+Metadata-Version: 2.1
+Name: vimdatautils
+Version: 0.69
+Summary: Vim pipeline utility to ingest data
+Home-page: UNKNOWN
+Author: Vim D&I
+Author-email: dni@getvim.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Database
+Requires-Python: >=3
+Description-Content-Type: text/markdown
+Requires-Dist: credstash (==1.15.0)
+Requires-Dist: jinja2
+Requires-Dist: psycopg2 (==2.8.3)
+Requires-Dist: boto3 (==1.9.86)
+
+vimdatautils
+=============
+
+Vim python package to ingest data into a database
+
+Features
+========
+
+1. InboundPipeline.py utility,  used by a specific integration component
+2. Data access layer (Dal),  provides simplified methods to access data in postgres db
+
+Installation
+============
+
+vimdatautils requires Python 3
+
+    pip install vimdatautils
+
+Or to install/upgrade a specific version
+
+    pip install vimdatautils==<VERSION> --force-reinstall
+
+
+Quickstart
+==========
+1. InboundPipeline, you will need to implement two methods: pre_load_logic, post_load_logic
+```
+from vimdatautils.inbound_pipeline import InboundPipeline
+class Inbound(InboundPipeline):
+def pre_load_logic(self):
+        print("this will be executed before the load!")
+
+    def post_load_logic(self):
+        print("this will be executed after the load!")
+
+    def main():
+        inbound = Inbound("config_file.json", "postgresql://postgres:password@127.0.0.1/postgres")
+        inbound.execute()
+```
+2. Dal, import vimdatautils.dal, you will need to construct the dal with a postgres connection string in the below pattern
+
+       postgresql://<db_user>:<db_password>@<db_host>/db_name
+
+```
+from vimdatautils.dal import Dal
+
+dal = Dal("postgresql://postgres:password@127.0.0.1/postgres")
+dal.execute_cmd("select 1;")
+```
+
+
