@@ -1,0 +1,78 @@
+Metadata-Version: 2.1
+Name: wcraas-discovery
+Version: 0.1.0
+Summary: WCraaS Discovery Service
+Home-page: https://github.com/WCraaS/wcraas_discovery
+Author: Kolokotronis Panagiotis
+Author-email: panagiks@gmail.com
+License: MIT license
+Keywords: wcraas_discovery
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+Requires-Dist: aio-pika
+Requires-Dist: bs4
+Requires-Dist: Click (>=7.0)
+Requires-Dist: environs
+Requires-Dist: wcraas-common
+Requires-Dist: yarl
+
+================
+wcraas_discovery
+================
+
+
+.. image:: https://img.shields.io/pypi/v/wcraas_discovery.svg
+        :target: https://pypi.python.org/pypi/wcraas_discovery
+
+.. image:: https://img.shields.io/travis/WCraaS/wcraas_discovery.svg
+        :target: https://travis-ci.org/WCraaS/wcraas_discovery
+
+.. image:: https://readthedocs.org/projects/wcraas-discovery/badge/?version=latest
+        :target: https://wcraas-discovery.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+
+.. image:: https://pyup.io/repos/github/WCraaS/wcraas_discovery/shield.svg
+     :target: https://pyup.io/repos/github/WCraaS/wcraas_discovery/
+     :alt: Updates
+
+
+
+WCraaS Discovery Service
+
+
+* Free software: MIT license
+* Documentation: https://wcraas-discovery.readthedocs.io.
+
+
+Features
+--------
+
+* TODO
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+=======
+History
+=======
+
+0.1.0 (2019-09-21)
+------------------
+
+* First release on PyPI.
+
+
