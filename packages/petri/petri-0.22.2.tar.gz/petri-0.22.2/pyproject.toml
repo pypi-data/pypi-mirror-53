@@ -1,0 +1,70 @@
+[tool.meta]
+release = "pre-alpha"
+maintainer = "Pablo Woolvett <pablowoolvett@gmail.com>"
+copyright = ""
+url = "https://www.github.com/pwoolvett/petri"
+license = "MIT"
+
+[tool.poetry]
+name = "petri"
+version = "0.22.2"
+description = "Handle project/application config from pyproject.toml"
+authors = [
+  "Pablo Woolvett <pablowoolvett@gmail.com>"
+]
+readme = "README.rst"
+include = ["pyproject.toml"]
+
+[tool.poetry.scripts]
+petri = 'petri.__main__:_main'
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+python-dotenv= "^0.10"
+logzero= "^1.5"
+toml= "^0.10"
+autologging = "^1.3"
+tzlocal = "^1.5"
+pydantic = "^0.32.2"
+
+tqdm = {version = "^4.36.1", optional = true}
+
+[tool.poetry.extras]
+tqdm = ["tqdm"]
+
+[tool.poetry.dev-dependencies]
+black = { version = "*", allows-prereleases = true }
+autopep8 = "^1.4"
+pylint = "^2.3"
+flake8 = "^3.7"
+flake8-bugbear = "^19.3"
+mypy = "^0.701"
+mypy-extensions = "^0.4"
+coverage = "^4.5"
+pytest-cov = "^2.6"
+hypothesis = "^4.17"
+behave = "^1.2"
+Sphinx = "^1.8"
+doc8 = "^0.8"
+sphinx_rtd_theme = "^0.4.2"
+sphinx-autodoc-typehints = "^1.5"
+sphinx-autobuild = "^0.7.1"
+pytest = "^4.0"
+pep8 = "^1.7"
+bandit = "^1.6"
+docformatter = "^1.1"
+sphinxcontrib-apidoc = "^0.3.0"
+
+[tool.black]
+line-length = 79
+target-version = ['py36']
+quiet = true
+
+[tool.dephell.main]
+from = {format = "poetry", path = "pyproject.toml"}
+to = {format = "setuppy", path = "setup.py"}
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
