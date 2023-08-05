@@ -1,0 +1,21 @@
+from setuptools import setup
+setup(
+    name='rocket-launcher',
+    version='0.2.6',
+    author='who',
+    author_email='who@whooami.me',
+    scripts=[
+        'rockets/bin/configure-version-controller',
+        'rockets/bin/configure-file-browser',
+        'rockets/bin/configure-secure_shell',
+        'rockets/bin/configure-multiplexer',
+        'rockets/bin/install-google-chrome',
+        'rockets/bin/install-mongo-client',
+        'rockets/bin/run-docker-server',
+        'rockets/bin/install-last-node',
+        'rockets/bin/set-terminal-fish',
+        'rockets/bin/set-text-editor',
+        'rocket-launcher',
+    ],
+    packages=['rockets'],
+)
