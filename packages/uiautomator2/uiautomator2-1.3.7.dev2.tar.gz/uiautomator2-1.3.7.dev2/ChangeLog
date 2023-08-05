@@ -1,0 +1,162 @@
+CHANGES
+=======
+
+* fix d.xpath.when(..).when(..), thread-safe reset-uiautomator
+
+1.3.6
+-----
+
+* use monkey command to install apk on TMQ platform
+* fix d.xpath.watcher, fix d.shell can not handle & and ? bug
+
+1.3.5
+-----
+
+* add xpath.apply\_watch\_from\_yaml, support xpath.when(1).when(2)
+* fix homepage link
+* fix atx-agent version compare check
+
+1.3.4
+-----
+
+* remove useless cli
+* use jsonrpc.dumpWindowsHierarchy instead of http GET /dump/hierarchy
+* assert file\_size when cache\_download
+
+1.3.3
+-----
+
+* fix uiautomator start error
+
+1.3.2
+-----
+
+* update atx-agent to fix UIAutomation not connected error
+* upgrade apk version
+* enhance reset\_uiautomator()
+
+1.3.1
+-----
+
+* fix adbutils dep version
+
+1.3.0
+-----
+
+* fix check atx-agent
+* fix last commit
+* add function to check atx-agent version
+* update atx-agent version
+* update dingtalk webhook again
+* update dingtalk webhook
+
+1.2.6
+-----
+
+* fix when uiautomator not alive, func connect can not auto init error
+
+1.2.5
+-----
+
+* update dingtalk robot webhook url
+* set init as default, set default screenshot name when use cli:uiautomator2 screenshot
+* rename current\_app to app\_current
+* add webview for future develop
+
+1.2.4
+-----
+
+* fix app\_start without activity not launch error
+* add adcd.py(abstract class about device) and implement pure adb to run test
+* implement pure adb to run test
+* use Baidu OCR to select element (#419)
+
+1.2.3
+-----
+
+* update androidbinary to fix momo can not start error #393
+* add support u2.connect\_usb(serial, init=False)
+* change function behavior d.touch.up() to d.touch.up(x, y)
+
+1.2.2
+-----
+
+* fix app\_list\_running() only show 3rd party apps bug, add support to read from env-var ANDROID\_SERIAL
+
+1.2.1
+-----
+
+* fix and add doc for app\_start #425, add uiautomator check in dump\_hierarchy
+* add thread lock in dump\_hierarchy
+* fix session restart
+* Update README.md
+* add notification about dingtalk travis
+
+1.2.0
+-----
+
+* add wait gone
+* add strict argument to session()
+* rename UIAutomatorServer to Device, add session.restart() method
+* change http://tool.appetizer.io to https protocol
+* add swipe\_ext('right', 0.9) method
+* add app\_wait, app\_list\_running
+
+1.1.0
+-----
+
+* add swipe and screenshot to d.xpath element
+* fix  init with serial
+* update changelog, remove d.watchers.watched, use IPython.embed first in cmd:uiautomator2 console
+* add console in command line
+* fix shell(stream=True) timeout error, close #394
+
+1.0.3
+-----
+
+* fix android Q support again
+
+1.0.2
+-----
+
+* replace google-fire with argparse, add current, stop, start subcommand in command line
+* remove useless u2cli
+
+1.0.1
+-----
+
+* fix init unknown host service, close #373
+* add develop.md
+* fix debug mode decode error
+
+0.3.3
+-----
+
+* add watch\_clear and address
+* add xpath.watch\_stop()
+
+0.3.2
+-----
+
+* fix debug curl print
+* fix shell calls in connect
+
+0.3.1
+-----
+
+* fix #370
+* test with 3.5
+
+0.3.0
+-----
+
+* fix fix
+* fix travis again
+* fix travis
+* update readme
+* add missing dep:adbutils
+* update xpath doc, add set\_text to xpath
+* remove uiautomator2/adbutils.py, use thirdparty adbutils
+* add quickstart, fix healthcheck for OnePlus
+* fix screenshot method
+* say goodbye to python2 and welcome python3
