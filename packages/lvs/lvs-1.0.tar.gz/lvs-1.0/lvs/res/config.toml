@@ -1,0 +1,131 @@
+# log_level = <level>, a <level> could be "debug", "info", "warn",
+# "critical", like log_level = "info"
+# log_level = critical will show almost no information
+log_level = "info"
+
+# log_to_file = "" will not log to file
+# log_to_file = "lvs_log.txt" will save log to <home>/`lvs_log.txt`
+# where <home> is your home directory, like C:/Users/Me
+log_to_file = ""
+
+
+[server_address]
+
+    # Use ip = "127.0.0.1" or "localhost" to connect to server streaming
+    # on this device
+    # If using stream server on other device, use that device's ip
+    ip = "127.0.0.1"
+
+    # Use port = 4289 for default, use something else if the stream server
+    # is using different port
+    port = 4289
+
+
+[server_settings]
+
+    # source = 0 will try to use default camera device
+    # source = 1 will try to use next available camera device
+    # source = "C:/Path/to/video.mp4" will use video.mp4
+    source = 0
+
+    # Use ip = "127.0.0.1" or "localhost" to serve on this device
+    # Use ip = "0.0.0.0" to make this server available on local network
+    ip = "0.0.0.0"
+
+    # Use port = 4289 for default, use something else if not available
+    # Clients will get served by this server when they connect on this port
+    port = 4289
+
+    # Number of connections to be queued for serving
+    backlog = 0
+
+
+[flask_settings]
+
+    # Use ip = "127.0.0.1" or "localhost" to serve on this device
+    # Use ip = "0.0.0.0" to make this server available on local network
+    ip = "0.0.0.0"
+
+    # Use port = 4288 for default, use something else if not available
+    # Clients will get served by this server when connected to this port
+    # Enter "<ip>:<port>" in the browser to access the video stream, where
+    # <ip> shall be replaced by server ip like 192.168.1.23, and <port>
+    # shall be replaced by port number like 1234
+    # Note that :<port> can be omitted from entering in browser if port = 80,
+    # however, using port = 80 may require privileged permissions to run
+    port = 4288
+
+    # Number of seconds to wait for closing connection to the server after
+    # all browser clients have disconnected. Default sleep_delay = 10 seconds
+    sleep_delay = 10
+
+    # background_color = <color>, changes `index.html`'s background color,
+    # where <color> is html background property such as "white", "gray", etc
+    background_color = "gray"
+
+    # debug = true, will show debug information on errors
+    debug = false
+
+
+[stream_settings]
+
+    # grayscale = true will result in black and white colored video,
+    # but may slightly improve performance
+    grayscale = false
+
+    # show_datetime = true will embed current datetime info as given by
+    # server machine on top of video stream
+    show_datetime = false
+
+    # show_fps = true will show estimated frames per second served by server
+    show_fps = false
+
+    # Text color in BGR format i.e [Blue, Green, Red], [255, 0, 0] is blue
+    # text_color = [255, 255, 255] is white, [0, 0, 0] is black
+    text_color = [255, 255, 255]
+
+    # font_scale = 1, size of font
+    font_scale = 1
+
+    # thickness = 1, text thickness, a whole number
+    thickness = 2
+
+
+[save_settings]
+
+    # cascade classifier to use for detection purposes. Inside res folder
+    # haarcascade_frontalface_default.xml has been copied from opencv,
+    # location, <python-installed-here>/Python<version>/site-packages/cv2/data/*.xml
+    cascade_classifier = "cascade_classifiers/haarcascade_frontalface_default.xml"
+
+    # detection_interval = 15 means run detection on every 15th frame
+    # Note that detection is computationally intensive task, and
+    # lowering this value could lower performance. Minimum value is 1
+    detection_interval = 15
+
+    # dir_name = "lvs_saves" will result in saving videos inside lvs_saves folder
+    dir_name = "lvs_saves"
+
+    # save_dir = "" will default to user's home plus above mentioned dir_name
+    # Example path for windows, save_dir = "C:/Users/Me/Videos"
+    # Example path for linux, save_dir = "/home/Me/Videos"
+    # Note that certain characters such as a  space ' ' need escaping like '\ '
+    save_dir = ""
+
+    # save_type = "continuous" will save all the time ignoring detection
+    # save_type = "detection" will only save when detection occurs
+    save_type = "continuous"
+
+    # save_duration = 3600 will save videos in 3600 seconds video chunks for
+    # save_type = "continuous" or save once for every detection when using
+    # save_type = "detection"
+    save_duration = 3600
+
+    # older_than = 86400 will delete video files which were created 86400 seconds
+    # (1 day) ago and end in ".avi" extension
+    older_than = 86400
+
+    # sweep_interval = 0 will result in not sweeping at all
+    # sweep_interval = 3600 will check every 3600 seconds(1 hour) to find out
+    # the files which should be deleted
+    sweep_interval = 0
