@@ -1,0 +1,43 @@
+- job:
+    name: zun-tempest-py35-docker-sql-queens
+    parent: zun-tempest-py35-docker-sql
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/queens
+    vars:
+      branch_override: stable/queens
+
+- job:
+    name: zun-tempest-py35-docker-sql-rocky
+    parent: zun-tempest-py35-docker-sql
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+
+- job:
+    name: zun-tempest-py35-docker-sql-stein
+    parent: zun-tempest-py35-docker-sql
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+
+- project:
+    templates:
+      - check-requirements
+      - publish-openstack-docs-pti
+      - tempest-plugin-jobs
+    check:
+      jobs:
+        - zun-tempest-docker-sql
+        - zun-tempest-py3-docker-sql
+        - zun-tempest-py35-docker-sql-queens
+        - zun-tempest-py35-docker-sql-rocky
+        - zun-tempest-py35-docker-sql-stein
+        - zun-tempest-multinode-docker-sql
+    gate:
+      queue: zun
+      jobs:
+        - zun-tempest-docker-sql
+        - zun-tempest-py3-docker-sql
+        - zun-tempest-py35-docker-sql-queens
+        - zun-tempest-py35-docker-sql-rocky
+        - zun-tempest-py35-docker-sql-stein
