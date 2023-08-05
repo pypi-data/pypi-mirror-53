@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: pytest-thawgun
+Version: 0.0.1
+Summary: Pytest plugin for time travel
+Home-page: https://github.com/mrzechonek/thawgun
+Author: Michał Lowas-Rzechonek
+Author-email: michal@rzechonek.net
+License: Apache 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Testing
+Classifier: Framework :: Pytest
+Requires-Python: >= 3.5
+Requires-Dist: async-generator
+Requires-Dist: freezegun
+Requires-Dist: pytest-asyncio
+Provides-Extra: testing
+Requires-Dist: coverage ; extra == 'testing'
+
+UNKNOWN
+
+
