@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="never">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/ico" href="/icon.png" />
+    <title>Watchdog v{{version}} (interval={{loop_interval}}s)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{cdn_urls['VUE_JS_CDN']}}"></script>
+    <script src="{{cdn_urls['ELEMENT_JS_CDN']}}"></script>
+    <script src="{{cdn_urls['VUE_RESOURCE_CDN']}}"></script>
+    <style>
+        @import url("{{cdn_urls['ELEMENT_CSS_CDN']}}");
+
+        html {
+            width: 98%;
+            height: 98%;
+            margin: 0 auto;
+            background-color: #eceff1;
+            word-wrap: break-word;
+        }
+
+        #buttons>* {
+            margin-left: 0.5em;
+        }
+
+        div#head {
+            display: flex;
+        }
+
+        div#state {
+            margin: 0.5em;
+            display: flex;
+            font-size: 0.8em;
+        }
+
+        .state-item {
+            margin-right: 1em;
+            border-bottom: 1px dashed gray;
+        }
+
+        div#foot {
+            display: flex;
+        }
+
+        div.fill-flex {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="head">
+            <div class="fill-flex"></div>
+            <div id="state">
+                <span class="state-item">
+                    Version: {{version}}
+                </span>
+                <span class="state-item">
+                    Page Refresh: ${refresh_time} (${autoRefreshInterval/1000}s)
+                </span>
+                <span class="state-item">
+                    Crawl Task: ${tasks[0] == undefined?'no tasks':tasks[0].last_check_time} ({{loop_interval}}s)
+                </span>
+                <span class="state-item">
+                    Status:
+                    <i class="el-icon-loading" v-show="status_icon_flag=='loading'"> ${status}</i>
+                    <i class="el-icon-warning" v-show="status_icon_flag=='warning'"> ${status}</i>
+                    <i class="el-icon-error" v-show="status_icon_flag=='error'"> ${status}</i>
+                    <i class="el-icon-success" v-show="status_icon_flag=='success'"> ${status}</i>
+                </span>
+
+            </div>
+            <div id="buttons">
+                <el-button @click.native.prevent="addTask" type="primary" size="small" round><i
+                        class="el-icon-circle-plus"></i>
+                    Add Task
+                </el-button>
+                <el-button @click.native.prevent="refreshData" size="small" round><i class="el-icon-refresh-right"></i>
+                    Refresh Page
+                </el-button>
+                <el-button @click="crawlTask" size="small" title="Crawl once without interval sleeping." round><i
+                        class="el-icon-download"></i> Force Crawl
+                </el-button>
+                <a href="/rss" target="_blank" rel="noopener noreferrer">
+                    <el-button round size="small" type="warning"><i class="el-icon-star-off"></i> RSS Reader
+                    </el-button>
+                </a>
+
+                <a href="https://github.com/ClericPy/OnWebChange/issues" target="_blank" rel="noopener noreferrer">
+                    <el-button round size="small" type="success"><i class="el-icon-s-comment"></i> Feedback
+                    </el-button>
+                </a>
+
+                <el-button @click.native.prevent="shutdown" round size="small" type="danger"><i
+                        class="el-icon-error"></i>
+                    Shutdown
+                </el-button>
+
+            </div>
+        </div>
+        <hr>
+        <template style="width: 100%; height: 70%;">
+
+            <el-table :data="tasks" highlight-current-row @current-change="handleCurrentChange" stripe
+                style="width: 100%; height: 100%;">
+                <el-table-column prop="name" label="name" width="180">
+                </el-table-column>
+                <el-table-column prop="check_interval" label="check_interval" width="180">
+                </el-table-column>
+                <el-table-column prop="last_check_time" label="last_check_time">
+                </el-table-column>
+                <el-table-column prop="last_change_time" label="last_change_time">
+                </el-table-column>
+                <el-table-column prop="latest_data" label="latest_data">
+                </el-table-column>
+                <el-table-column label="origin_url">
+                    <template slot-scope="scope">
+                        <a :href="scope.row.origin_url" target="_blank"
+                            class="buttonText">${scope.row.origin_url}</a></template>
+                </el-table-column>
+                <el-table-column prop="change_time_ago" label="change_time_ago">
+                </el-table-column>
+                <el-table-column fixed="right" label="Delete" width="120">
+                    <template slot-scope="scope">
+                        <el-button @click.native.prevent="showTask(scope.row)" type="warning"
+                            icon="el-icon-edit-outline" circle>
+                        </el-button>
+                        <el-button @click.native.prevent="removeTask(scope.row.name)" type="danger"
+                            icon="el-icon-delete" circle>
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </template>
+
+
+        <el-dialog title="Task Info" :visible.sync="dialogFormVisible">
+            <el-form :model="task_form">
+                <el-form-item label="name *">
+                    <el-input v-model="task_form.name" placeholder="unique name" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="request_args *">
+                    <el-input v-model="task_form.request_args" type="textarea" autosize
+                        placeholder="url / curl string / requests args json" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="origin_url">
+                    <el-input v-model="task_form.origin_url" placeholder="null as request_args.url" autocomplete="off">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="parser_name">
+                    <el-input v-model="task_form.parser_name"
+                        placeholder="re, css, json, python, defaults to None, use the resp.text" autocomplete="off">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="operation">
+                    <el-input v-model="task_form.operation" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="value">
+                    <el-input v-model="task_form.value" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="check_interval">
+                    <el-input v-model="task_form.check_interval" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="max_change">
+                    <el-input v-model="task_form.max_change" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="sorting_list">
+                    <el-switch v-model="task_form.sorting_list" active-color="#13ce66" inactive-color="#ff4949">
+                    </el-switch>
+                </el-form-item>
+                <el-form-item label="last_check_time">
+                    <el-input v-model="task_form.last_check_time" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="last_change_time">
+                    <el-input v-model="task_form.last_change_time" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="latest_data">
+                    <el-input v-model="task_form.latest_data" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="check_result_list" style="width: 100%">
+                    <el-table :data="task_form.check_result_list" style="width: 100%">
+                        <el-table-column prop="time" label="time" min-width="100%">
+                        </el-table-column>
+                        <el-table-column prop="data" label="data" min-width="100%">
+                        </el-table-column>
+                    </el-table>
+                </el-form-item>
+                <el-form-item label="change_time_ago">
+                    <el-input v-model="task_form.change_time_ago" autocomplete="off" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="encoding">
+                    <el-input v-model="task_form.encoding" placeholder="can be null string" autocomplete="off">
+                    </el-input>
+                </el-form-item>
+
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">Cancel</el-button>
+                <el-button @click.native.prevent="testTask" type="primary" plain><i class="el-icon-refresh-right"></i>
+                    Test Task
+                </el-button>
+                <el-button @click.native.prevent="updateTask" type="warning"><i class="el-icon-upload"></i>
+                    Update Task
+                </el-button>
+            </div>
+        </el-dialog>
+
+    </div>
+
+    <script>
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "H+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1
+                .length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[
+                    k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        var Main = {
+            data() {
+                return {
+                    tasks: [],
+                    currentRow: null,
+                    global_last_change_time: null,
+                    ok: true,
+                    dialogFormVisible: false,
+                    task_form: {},
+                    status_icon_flag: 'loading',
+                    status: 'loading',
+                    refresh_time: '',
+                    autoRefreshInterval: 60000
+                };
+            },
+            methods: {
+                openAlert(body, title) {
+                    this.$alert(body, title, {
+                        confirmButtonText: 'Ok',
+                        distinguishCancelAndClose: true,
+                        closeOnPressEscape: true,
+                        closeOnClickModal: true,
+                    });
+                },
+                check_change() {
+                    if (this.tasks[0] == undefined) {
+                        return
+                    }
+                    var current_change_time = this.tasks[0].last_change_time
+                    if (this.global_last_change_time == null) {
+                        this.global_last_change_time = current_change_time
+                    }
+                    if (current_change_time > this.global_last_change_time) {
+                        this.global_last_change_time = current_change_time
+                        this.status = this.tasks[0].name + ' changed at ' + current_change_time
+                        this.status_icon_flag = 'warning'
+                        alert(this.tasks[0].name + " changed.")
+                    }
+                },
+                refreshData() {
+                    if (this.ok != true) {
+                        return
+                    }
+                    this.refresh_time = new Date().Format("yyyy-MM-dd HH:mm:ss")
+                    this.$http.get('/get_task_list').then(
+                        r => {
+                            this.tasks = r.body.tasks
+                            this.status = 'online'
+                            this.status_icon_flag = 'success'
+                            this.check_change()
+                        }, r => {
+                            this.status = 'Bad request (' + r.status + ') :' + r.statusText
+                            this.status_icon_flag = 'error'
+                            this.ok = false
+                        }
+                    )
+                },
+                onload_function() {
+                    this.refreshData()
+                },
+                shutdown() {
+                    this.$http.get('/shutdown').then(
+                        r => {
+                            this.openAlert('server shutdown.')
+                        }, r => {
+                            this.openAlert('server shutdown.')
+                        }
+                    )
+                },
+                handleCurrentChange(val) {
+                    // this.currentRow = val;
+                    this.refreshData()
+                },
+                addTask() {
+                    var data = {
+                        "name": "",
+                        "request_args": "",
+                        "parser_name": "",
+                        "operation": "",
+                        "value": "",
+                        "check_interval": 300,
+                        "max_change": 2,
+                        "sorting_list": true,
+                        "origin_url": "",
+                        "encoding": null
+                    }
+                    this.showTask(data)
+                },
+                showTask(item) {
+                    // if (item.request_args.constructor === Object) {
+                    if (item.request_args.url) {
+                        item.request_args = JSON.stringify(item.request_args, null, 2)
+                    }
+                    this.task_form = item
+                    this.dialogFormVisible = true
+                },
+                removeTask(name) {
+                    this.$confirm('Delete?', 'Confirm', {
+                        confirmButtonText: 'OK',
+                        cancelButtonText: 'Cancel',
+                        type: 'warning'
+                    }).then(() => {
+                        this.$http.get('/remove_task', {
+                            params: {
+                                name: name
+                            }
+                        }).then(
+                            r => {
+                                this.refreshData()
+                            }, r => {
+                                this.status = 'removeTask failed, Bad request (' + r.status + ') :' + r
+                                    .statusText
+                                this.status_icon_flag = 'error'
+                            }
+                        )
+                        this.$message({
+                            type: 'success',
+                            message: 'Delete success!'
+                        });
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: 'Delete canceled.'
+                        });
+                    });
+
+
+                },
+                testTask() {
+                    var data = this.task_form
+                    this.$http.post('/test_task', data).then(
+                        r => {
+                            this.openAlert(JSON.stringify(r.body))
+                            this.refreshData()
+                        }, r => {
+                            this.status = 'testTask failed, Bad request (' + r.status + ') :' + r.statusText
+                            this.status_icon_flag = 'error'
+                        }
+                    )
+                },
+                crawlTask() {
+                    this.$http.get('/crawl_once').then(
+                        r => {
+                            this.openAlert(JSON.stringify(r.body))
+                            setInterval(() => {
+                                app.refreshData()
+                            }, 10000);
+                        }, r => {
+                            this.status = 'testTask failed, Bad request (' + r.status + ') :' + r.statusText
+                            this.status_icon_flag = 'error'
+                        }
+                    )
+                },
+                updateTask() {
+                    var data = this.task_form
+                    this.$http.post('/update_task', data).then(
+                        r => {
+                            this.openAlert(JSON.stringify(r.body))
+                            this.refreshData()
+                        }, r => {
+                            this.status = 'updateTask failed, Bad request (' + r.status + ') :' + r.statusText
+                            this.status_icon_flag = 'error'
+                        }
+                    )
+                }
+            },
+            watch: {
+
+            },
+            computed: {}
+        }
+        var vue_app = Vue.extend(Main)
+        var app = new vue_app({
+            delimiters: ['${', '}']
+        }).$mount('#app')
+        window.onload = app.onload_function
+        setInterval(() => {
+            app.refreshData()
+        }, app.autoRefreshInterval);
+    </script>
+</body>
+
+</html>
