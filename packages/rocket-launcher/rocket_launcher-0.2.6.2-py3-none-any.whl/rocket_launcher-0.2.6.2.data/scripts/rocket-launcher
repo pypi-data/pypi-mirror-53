@@ -1,0 +1,34 @@
+#!python
+import os
+import threading
+import time
+from rockets import *
+
+out=''
+rockets=['configure-file-browser',
+	'configure-multiplexer',
+	'configure-secure_shell',
+	'configure-version-controller',
+	'install-google-chrome',
+	'install-last-node',
+	'install-mongo-client',
+	'run-docker-server',
+	'set-terminal-fish',
+	'set-text-editor'
+]
+for i in rockets:
+	out=out+"[program:"+i+"]\ncommand = "+i+"\n\n"
+
+f = open("/etc/supervisor.d/rocket-launcher.ini", "w+")
+f.write(out)
+f.close()
+
+w=threading.Thread(target=supervisord, name='supervisor')
+w.start()
+
+multiplexer()
+terminal()
+ranger()
+git()
+
+os.system('sudo -H -u who byobu');
