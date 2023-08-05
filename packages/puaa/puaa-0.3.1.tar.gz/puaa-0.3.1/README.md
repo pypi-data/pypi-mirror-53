@@ -1,0 +1,85 @@
+# puaa
+
+An uaa test server in python.
+The main purpose is to serve as an easily configurable mock oauth server.
+
+**Attention: it's not a secured OAuth server and must never be used on production machines.** 
+
+
+## Install
+
+Like any python package:
+
+```
+pip install puaa
+```
+
+
+## Configure
+
+The server is configured through a regular uaa.yml but uses only a small subset
+of it, mainly "jwt" and "oauth" sections:
+
+```
+issuer:
+  uri: http://localhost:8000
+
+oauth:
+  clients:
+    test:
+      id: test
+      secret: test
+      authorized-grant-types: client_credentials
+      scope: none
+      authorities: uaa.admin,clients.admin,clients.read,clients.write,clients.secret
+
+jwt:
+ token:
+   policy:
+     accessTokenValiditySeconds: 3600
+     activeKeyId: key-id-1
+     keys:
+       key-id-1:
+         signingKey: |
+           -----BEGIN RSA PRIVATE KEY-----
+           ...
+           -----END RSA PRIVATE KEY-----
+```
+
+
+## Run locally
+
+Needs few environment variables to start:
+
+```
+export AUTHLIB_INSECURE_TRANSPORT=true
+export UAA_CONFIG_FILE=<PATH>/uaa.yaml
+gunicorn -k gevent puaa.app:app
+```
+
+Then can retrieve a token with e.g.:
+
+```
+curl -sS http://localhost:8000/oauth/token -u test:test -d 'grant_type=client_credentials'
+```
+
+To list JWT keys:
+
+```
+curl -sS http://localhost:8000/token_keys
+```
+
+## Limitations
+
+Supports the "client_credentials" grant only so far.
+
+
+## Alternatives
+
+The full uaa server https://github.com/cloudfoundry/uaa/
+But I gave up to configure it as I wish.
+
+
+## License
+
+MIT License
