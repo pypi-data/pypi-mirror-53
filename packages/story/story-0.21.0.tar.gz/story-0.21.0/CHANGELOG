@@ -1,0 +1,11 @@
+# v0.15.0
+
+- New location of Storyscript CLI config and cache directories.
+- Automatically check for new versions, and prompt the user to upgrade, when available.
+- Cache app UUID between calls, to improve speed.
+- New hidden `--support`, `--config`, `--cache`, & `--reset`, for providing user support.
+- All CLI arguments can be passed as environment variables (`STORY_…`)
+- Use Requests HTTP sessions (for connection reuse/pooling), whenever possible.
+- More proper exit codes.
+- Ability to use `story write` without being logged in.
+- New `story apps open` command.
