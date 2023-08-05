@@ -1,0 +1,98 @@
+CHANGES
+=======
+
+0.3.0
+-----
+
+* add console\_scripts, use proxy to cache js
+
+0.2.5
+-----
+
+* fix tree className not show correct
+* change min python 3.5 to 3.6
+
+0.2.4
+-----
+
+* fix ios support
+* remove httpx
+* add copy button
+* ui change
+* add clearCanvas, fix tap generateWrong code bug
+
+0.2.3
+-----
+
+* remove support for py2.7
+* update readme and requirements, clean code
+
+0.2.2
+-----
+
+* support live screen
+
+0.2.1
+-----
+
+* clean code
+* add XPathLite
+* add \_global to make rerun
+* save code for my macmini is gone
+* change ui
+* change structure
+* add element-ui, call connect when first reload
+
+0.2.0
+-----
+
+* fix connect show error, py3 required
+* fix ios canot tap bug, close #48
+* fix debug area console error
+
+0.1.2
+-----
+
+* fix travis
+* modify weditor for tag release
+* fix new chrome view broken bug
+* limit facebook-wda min version
+
+0.1.1
+-----
+
+* optimize connect handler
+
+0.1.0
+-----
+
+* add contenteditable to make it easy to copy
+* change all prop name to lower case
+* merge requirements
+* use localhost:17310 instead of atx.open.netease.com
+* limit futures only needed in py2.7
+* update deps
+* support create shortcut in desktop
+* update requirements of feature
+* add packageName
+* remove atx from requirements
+* fix weditor run failed in python2
+* add back button
+* fix lot of issues
+* fix tap and sendKeys error
+* use uiautomator2 instead of atx-uiautomator
+* long time no update, push the old modifications
+
+0.0.3
+-----
+
+* show error when connect failed
+* upgrade weditor  to 0.0.3 add tree view
+* remove enter after sendKeys
+* support absolute position
+* support percent click
+* fix home click
+* add static url to prevent js cache
+* sendKeys change to click and type
+* move weditor-web to weditor repo
+* fix device default bug
