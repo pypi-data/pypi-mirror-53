@@ -1,0 +1,224 @@
+Metadata-Version: 2.1
+Name: ftw.globalstatusmessage
+Version: 1.7.0
+Summary: Shows a global message on every site.
+Home-page: https://github.com/4teamwork/ftw.globalstatusmessage
+Author: 4teamwork AG
+Author-email: mailto:info@4teamwork.ch
+License: GPL2
+Description: Introduction
+        ============
+        
+        With ``ftw.globalstatusmessage`` a Plone site administrator display messages
+        on all pages.
+        
+        This is useful for inform the users about an upcoming maintance downtime or
+        any other important thing.
+        
+        The message can be changed in the plone control panel:
+        
+        
+        .. image:: https://raw.githubusercontent.com/4teamwork/ftw.globalstatusmessage/master/docs/screenshot.png
+        
+        Exclude sites
+        -------------
+        
+        With the ``Exclude sites`` option it is possible to show the global status
+        message only for certain sub sites.
+        All containers providing the interface ``INavigationRoot`` are considered
+        sub sites. Make sure that the ``object_provides`` catalog index is up to date
+        after enabling the interface for a container.
+        
+        When having nested sub sites, the nearest parent sub site relative to the
+        current context is relevant.
+        If the nearest sub site is not excluded but a parent is excluded, the message
+        is shown on the current context.
+        
+        
+        Compatibility
+        =============
+        
+        Supports Plone `4.3` and `5.1`.
+        
+        
+        Installation
+        ============
+        
+        - Add ``ftw.globalstatusmessage`` to your buildout configuration:
+        
+        ::
+        
+            [instance]
+            eggs +=
+                ftw.globalstatusmessage
+        
+        - Install the generic import profile.
+        
+        
+        Uninstall
+        =========
+        
+        This package provides an uninstall Generic Setup profile.
+        Uninstall the package by using Plone's addon controlpanel or portal_quickInstaller.
+        
+        
+        
+        Links
+        =====
+        
+        - Github: https://github.com/4teamwork/ftw.globalstatusmessage
+        - Issues: https://github.com/4teamwork/ftw.globalstatusmessage/issues
+        - Pypi: http://pypi.python.org/pypi/ftw.globalstatusmessage
+        - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.globalstatusmessage
+        
+        
+        Copyright
+        =========
+        
+        This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
+        
+        ``ftw.globalstatusmessage`` is licensed under GNU General Public License, version 2.
+        
+        Changelog
+        =========
+        
+        
+        1.7.0 (2019-09-26)
+        ------------------
+        
+        - Drop support for Plone 4.2. [mbaechtold]
+        
+        - Remove unused plone.app.form dependency. [djowett-ftw]
+        
+        - Make Plone 5.1 compatible. The global status message is displayed in a
+          viewlet for Plone 5 (rather than a template slot). [djowett-ftw]
+        
+        - Work around duplication of the `plone.globalstatusmessage` viewlet.
+          (See https://github.com/plone/Products.CMFPlone/issues/2947)
+          [djowett-ftw]
+        
+        
+        1.6.2 (2017-08-22)
+        ------------------
+        
+        - Make the receiving endpoint available if `ftw.publisher.receiver`
+          is installed. Fixes 1.6.1. [mbaechtold]
+        
+        
+        1.6.1 (2017-08-17)
+        ------------------
+        
+        - Prevent exception if `ftw.publisher.sender` is not installed.
+          Fixes 1.6.0 [mbaechtold]
+        
+        
+        1.6.0 (2017-08-16)
+        ------------------
+        
+        - New feature allows to send the global status message config to a
+          `ftw.publisher.receiver` instance. [mbaechtold, jone]
+        
+        
+        1.5.0 (2017-02-17)
+        ------------------
+        
+        - Add option to exclude anonymous users from viewing the status message.
+          [hvelarde]
+        
+        - Remove indirect dependency on five.grok.
+          [hvelarde]
+        
+        - Drop Plone 4.1 support. [jone]
+        
+        
+        1.4.3 (2016-12-02)
+        ------------------
+        
+        - Fix class assertion on DOM-Element.
+          [raphael-s]
+        
+        
+        1.4.2 (2016-10-31)
+        ------------------
+        
+        - Chameleon support: fix status message class. [jone]
+        
+        
+        1.4.1 (2015-05-06)
+        ------------------
+        
+        - Add Finnish translations.
+          [petri]
+        
+        
+        1.4.0 (2014-06-02)
+        ------------------
+        
+        - Add option to exclude subsites from displaying the status message.
+          [jone]
+        
+        - Brazilian Portuguese and Spanish translations were updated.
+          [hvelarde]
+        
+        - Configlet was migrated to plone.app.registry (closes #13).
+          [hvelarde]
+        
+        
+        1.3.0 (2014-05-14)
+        ------------------
+        
+        - Brazilian Portuguese and Spanish translations were added.
+          [hvelarde]
+        
+        - Implement uninstall profile.
+          [jone]
+        
+        - Remove no longer used utility.
+          [jone]
+        
+        - Protect statusmessage viewlet with browserlayer.
+          The viewlet should not be rendered when the package is not installed.
+          [jone]
+        
+        - Replace old PloneTestCase tests with p.a.testing tests.
+          [jone]
+        
+        - Remove z3c.autoinclude includeDependencies, no longer required.
+          [jone]
+        
+        
+        1.2 (2013-06-21)
+        ----------------
+        
+        - Use own permission to manage globalstatusmessages.
+          [Julian Infanger]
+        
+        - Drop Plone 4.0 support.
+          [jone]
+        
+        
+        1.1 (2012-05-21)
+        ----------------
+        
+        - Make Plone 4.1.x compatible.
+          [mathias.leimgruber]
+        
+        - Prepare for public release.
+          [mathias.leimgruber]
+        
+        1.0 (2011-04-12)
+        ----------------
+        - Fix egg structure / added readme
+          [mathias.leimgruber]
+        
+        - Initial release
+          [ttschanz]
+        
+Keywords: ftw global status message plone
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Framework :: Plone :: 4.3
+Classifier: Framework :: Plone :: 5.1
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: tests

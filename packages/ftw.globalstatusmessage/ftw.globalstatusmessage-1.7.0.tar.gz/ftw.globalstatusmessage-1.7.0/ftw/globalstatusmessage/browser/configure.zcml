@@ -1,0 +1,51 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+        name="global_statusmessage_config"
+        class=".controlpanel.StatusMessageControlPanel"
+        permission="ftw.globalstatusmessage.EditMessage"
+        />
+
+    <browser:view
+        zcml:condition="installed ftw.publisher.receiver"
+        for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+        name="global_statusmessage_config_receiver"
+        class=".publisher.ConfigReceiverView"
+        permission="ftw.globalstatusmessage.EditMessage"
+        />
+
+    <browser:viewlet
+        zcml:condition="not-have plone-5"
+        for="*"
+        name="ftw.globalstatusmessage.statusmessageviewlet"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".viewlets.statusmessage.StatusmessageViewlet"
+        permission="zope2.View"
+        layer="ftw.globalstatusmessage.interfaces.IGlobalStatusMessageLayer"
+        />
+
+    <browser:viewlet
+        zcml:condition="have plone-5"
+        for="*"
+        name="ftw.globalstatusmessage.statusmessageviewlet"
+        manager="plone.app.layout.viewlets.interfaces.IGlobalStatusMessage"
+        class=".viewlets.statusmessage.StatusmessageViewlet"
+        permission="zope2.View"
+        layer="ftw.globalstatusmessage.interfaces.IGlobalStatusMessageLayer"
+        />
+
+    <!-- A (hopefully) temporary addition to work around CMFPlone #2947 -->
+    <browser:viewlet
+        zcml:condition="have plone-5"
+        name="ftw.globalstatusmessage.styles"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        template="viewlets/styles.pt"
+        permission="zope2.View"
+        layer="ftw.globalstatusmessage.interfaces.IGlobalStatusMessageLayer"
+        />
+
+</configure>
