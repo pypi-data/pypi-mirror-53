@@ -1,0 +1,296 @@
+CHANGES
+=======
+
+1.2.0rc7
+--------
+
+* Decode UTF-8 when inserting resource metadata key/values into Resource Cache
+
+1.2.0rc6
+--------
+
+* Remove Celery Entrypoint from Coverage
+* Remove Celery Entrypoint from Coverage
+* Open Sourcing Additional Celery Tests
+* sentinel tests
+* Fix DEFAULT\_CONFIG\_FILE\_PATH
+* More updates
+* Fixup comment typos
+* Fix runner and unit tests for runner
+* Update Plugin Schedulers
+* Updates from internal codebase
+
+1.2.0rc5
+--------
+
+* device\_info\_ipvX -> ipvX
+
+1.2.0rc4
+--------
+
+* Update Enrichment Schemas
+
+1.2.0rc3
+--------
+
+* Add Additional Enrichment Groups
+
+1.2.0rc2
+--------
+
+* netmask\_to\_cidr & decimal\_to\_mac
+* Deploy to PyPI only tagged builds
+* Fix typo for description\_content\_type
+* Start using pbr for setuptools
+* Sync Internal and OSS
+* Removed the flaky test
+* Added tests for resource/manager
+* fix conflict
+* update tests/test\_helpers.py:test\_dns\_resolution
+* update tests/test\_framework.py
+* increase coverage
+* generic topic key
+* update tests/test\_base\_plugin.py
+* cleanup
+* check kafka configuration is correct
+* update tests/test\_schema.py
+* PEP 8
+* Increase Test Coverage
+* Use an IP from RFC 5737 to test failure conditions
+* Upgrade version of yahoo\_panoptes\_snmp we depend on
+
+1.2.0rc1
+--------
+
+* Updated Enrichment Results
+* Update test\_base\_plugin.py
+* Additional Kafka Knobs & Increased Test Coverage
+* Add missing docstring
+* Add docstrings. Clean up module references
+* Add Cisco NXOS enrichment plugin and tests
+* Update docstrings and code cleanup
+* Add tests for ios device metrics enrichments
+* Update Maintainer List
+* Add plugin files for cisco ios enrichments
+* Replace smart quotes with straight-quotes
+* Light-editing
+* Add 'order\_matters=False' to test\_runner.py tests
+* Add space to changed line so that format of .travis.yml \*exactly\* matches previous version
+* Update jdk command for travis from 7 to 8
+* Edit 'Background' section
+* Add docs for Generic SNMP Polling Plugin DSL
+* Update plugin test framework to allow setting resource model. Code cleanup
+* Add fan and power metrics for SRX devices and update tests
+* Clean up plugin\_enrichment\_juniper\_device\_metrics.py for opensourcing
+* Sanitize test files for Juniper Enrichment Plugin
+* Add missing docstring
+* Change method signature of \_add\_defaults and update tests
+* Add more detail in docstrings and further clean up code
+* code cleanup
+* Use mock of time to fix timing problem when test run with tox
+* Add debugging lines
+* Remove read enrichment from file tests
+* Cleanup
+* Remove system MIB oids from tests
+* Snapshot. Open-sourced tests for sysDescr, SysUptime, failing to get value (unsupported MIB?). Have removed offending entries in public.snmprec for the time being, but need to re-cover lines of code. Still more json results files that need to be updated
+* Snapshot
+* Snapshot. Troubleshooting bulk\_walk not returning stats
+* Refactor Generic SNMP Polling plugin to inherit from PanoptesSNMPBasePlugin. Change test file to use plugin\_class rather than plugin\_instance
+* Add yahoo\_panoptes/plugins/helpers/snmp\_connections.py to .gitignore
+* Removed two TODOS: '# OIDDataTypes. TODO match formatting to ent.type output' for \_TYPE\_MAPPING dict (currently line 21) and 'correct exception block?' for \_build\_map exception block (currently line 120)
+* Add generic snmp polling plugin and basic test files
+* Undo changes to panoptes\_base\_plugin
+* Add vendored Zookeeper files
+* Use vendored Zookeeper libs
+* resource\_creation\_timestamp and \_resource\_ttl should be strings
+* Dare I say the last one?
+* Another typo
+* Good typo catch
+* Removed files that we don't need anymore Clarified some points in System Metrics
+* Updated the polling flow diagram
+* Beefed up the flowchart Added the connection states Updated a couple of ambiguities in the document
+* Emphasized 'convention', clarified a couple of the error states
+* predictably missed the one reference
+* heading anchors
+* Converted the SVG down to PNG
+* Modified the section on CPU Utilization to remove ambiguity about instantaneous values
+* Removed the spurious 'txt' from the blocks, changed 'AuthenticationFailure' to 'authentication failure', fixed the nested UL for readability and removed the spurious anchors
+* Older version are on 'archive'
+* Added System Metrics documentation
+* Fixing some breaks in 'Concepts'
+* Fixup unit tests
+* fixes yahoo/panoptes#43
+* Bump versions of libs within the ZK jar
+* Fixup typos
+* Download Zookeeper from Apache's archive
+* ZK\_VERSION, not ZOOKEEPER\_VERSION
+* Add ZOOKEEPER\_VERSION environment variable to .travis.yml
+* Try with the latest version of Kazoo
+* Umm - extract the actual ZK version we've downloaded
+* Test against Zookeeper version 3.4.13
+* Update and expand documentation in README.md
+* Pin Kazoo version to 2.5.0 in tox.ini
+* Update README.md to add link to the Docker image
+* Simplify set operations tests. Add clarifying comments
+* Add copyright notice to test\_secrets.py
+* Add tests for passed kv\_store api methods. Make a creative mock for 'get' in 'get\_by\_site'
+* Snapshot. Working on testing fallback to default
+* Add first test for get\_by\_site
+* Remove integer from garbage objects log lines in extract
+* Add deploy lines back
+* Add deploy back
+* Add deploy lines back to travis config
+* Restore .travis.yml lines
+* Add testfixtures to tox.ini
+* Remove deploy for fork's travis ci
+* Update test in test\_plugin\_manager.py to account for new plugin. Add testfixtures to setup.cfg
+* Start adding tests for PanoptesSecretsStore
+* Add clarifying comment for methods with 'pass' in TestPanoptesPluginWithEnrichmentRunner
+* Standardize string interpolation to old style. Clear away redundant tests
+* Clean up tests
+* Use packaged ratelimitingfilter
+* Add normalize\_key to set\_members method. Increase ttl time for ttl test
+* pycodestyle for test\_key\_value\_store.py
+* Add tests for set operations in TestPanoptesKeyValueStore. Add test for PanoptesKeyValueStoreValidators. Fix typos in key\_value\_store.py
+* Add tests for PanoptesKeyValueStore
+* Update docstring for Panoptes Test Polling Plugin 2
+* Remove unused import
+* Add additional test plugin files. Expand tests for log lines
+* Clean up logger tests. Working on test\_plugin\_wrong\_result\_type
+* Snapshot. Troubleshoot printing of LogCapture for test\_plugin\_wrong\_result\_type. Need to explore replacing 'logger.warn', etc, in runner.py with calls to logging wrapper methods
+* Snapshot. Add testfixtures.LogCapture in order to verify expected log messages are hit for each test
+* Create class for testing key\_value\_store
+* Add copyright header
+* Delete unnecessary config file
+* Remove run\_scheduler.py
+* Create TestPanoptesSecretsStore class
+* Add remaining tests for PanoptesSNMPBasePlugin. Add tests for PanoptesSNMPBaseEnrichmentPlugin
+* Add tests for PanoptesSNMPBasePlugin
+* Edit test order to hit 100% coverage for PanotpesPluginRunner
+* Change reference to old config file name
+* Rename .panoptes-plugin.example test file to .panoptes-plugin to fix broken test in test\_plugin\_manager.py
+* Fix differences in repr test string for PanoptesPluginInfo.\_\_repr\_\_
+* Test non-multithreading/multiprocessing components of PanoptesPluginScheduler
+* Break out get\_test\_conf\_file into new tests/helpers.py file. Replace dunder on properties with single-underscore
+* Consolidate redundant code in test\_plugin\_info\_execute\_now. Tidy up tests
+* Snapshot. Trying to run schuduler.run() in separate thread so I can be sure to kill that specific thread
+* Snapshot. Working on how to test sending SIGTERM, SIGINT, to thread that is spun off
+* Fix small code cleanliness issues
+* Add test for enrichment is None. Clean up tests
+* Add more tests. Need to test when enrichment is none
+* Change .panoptes-plugin file to .panoptes-plugin.example
+* Fix typo
+* Minor changes
+* Clean up tests. Remove unnecessary patches
+* Snapshot
+* Snapshot. Working on PluginInfo details
+* Fix plugins\_paths in runner and manager
+* Support multiple plugin paths for each type of plugin
+* Use absolute imports in enrichment plugins
+* Remove unused import
+* Use configuration file from OS environment
+* Remove unused \_TIMESTAMP and unused imports
+* Consolidate and clean up tests
+* Add tests for PanoptesPluginContext and PanoptesPluginWithEnrichmentContext
+* Rename test config files. Clean up tests and add comments
+* Add tests for PanoptesPluginInfo.lock. Refactor others
+* Snapshot. Should last\_executed, last\_results, be able to be updated multiple times?
+* Snapshot. Working on testing second if-block in execute\_now
+* Snapshot. Add tests for PanoptesPluginInfo. Working on changing execute\_frequency source from details to config\_dict
+* Snapshot. Working on execute\_frequency, and figuring out how self.details gets assigned
+* Add tests for PanoptesResourceEncoder
+* Work on tests for PanoptesResourceEncoder
+* Remove unused imports
+* Clean up tests. Change PanoptesResourceError raised in PanoptesResourceCache.get\_resources to PanoptesResourceCacheException
+* Remove superfluous test code
+* Fix minor bug with set literal
+* Ensure PanoptesResourceCache.get\_resources handles PanoptesResources with malformed metadata correctly
+* Snapshot. Working on testing resource with un-parseable metadata
+* Add PanoptesResourceCacheException class
+* Add class for testing PanoptesResourceEncoder
+* Add more tests for PanoptesResourceCache errors when setting up
+* Remove debugging print lines
+* Add tests for get\_resources
+* Snapshot of debugging code
+* Add a couple more checks for PanoptesResourceStore.get\_resource bad input
+* Have get\_resource raise PanoptesResourceError instead of bare Exception. Add tests for bad input for PanoptesResourceStore methods
+* Add more comments. Consolidate tests for PanoptesResourceStore
+* Add comments
+* Add back tests/test\_framework\_enrichment\_cache.py
+* Edit tests for key not found in find\_keys and resource\_endpoint = None when instantiating PanoptesResource
+* Delete test\_framework\_enrichment\_cache.py
+* Snapshot. Start adding tests for PanoptesResourceCache
+* Introduce remaining changes for resources.py tests. Update comment and assert statements in resources.py
+* Nuke tests/config\_files/test\_panoptes\_config\_bad\_missing\_zookeeper.ini
+* Add more changes for testing resources.py
+* Add base case to test\_get\_panoptes\_logger. Edit test for when instantiating logger fails
+* Remove superfluous lines from missing zookeeper config file. Clarify test for get\_calling\_module\_name\_error
+* Clean up and expand tests
+* Remove redundant \_\_del\_\_ tests. Add clarifying comments
+* Change paths in test\_get\_lock in test\_framework.py
+* Change property name in test\_framework\_enrichment.py
+* Clean up test\_framework\_enrichment\_cache.py
+* Expand and clean up enrichment.py unit tests
+* Add more tests for enrichment.py and clean up tests
+* Remove unnecessary special check for unreadable plugins path by renaming relevant config file
+* Refactor test for unreadable plugins path and add config file to test bad logging config
+* Add missing bracket
+* Add badge for slack
+* Remove unreachable code. Add test config file for bad redis namespace. Tidy up tests
+* Reformat resource filter DSL example
+* Couple of typos and break out serialization section for resources
+* Update config file references across several files
+* First pass of concepts documentation
+* Update config file location
+* Add clarifying comments to test\_framework.py
+* Fix path in bad enrichment path config files
+* Adjust formatting in config file
+* Fix import paths
+* Update Installation.md
+* updated installation steps
+* Clean up metrics tests. Add comments for clarity
+* Make tests more concise. Add comments
+* Clean up plugins helpers tests
+* Add tests for context.py
+* add missing periods
+* Change paths for importing and patching
+* Fix paths for patching in tests
+* Add tests for metrics.py
+* Add tests for validators. Minor bug fixes in validators.py
+* added handler for influxdb
+* Embed links after alt test and images
+* Use refernce links
+* Git rid of camo links
+* Update log location for InfluxDB consumer
+* Fix anchor tags in Installation.md
+* Add badges and lowercase anchor names
+* Documentation Cleanups
+* Fix module paths for Discovery From JSON File example config files
+* Cleanup, move and add example config files
+* Breakout and expand installation instructions
+* Depend on yahoo\_panoptes\_snmp>=0.2.5.100
+* Cleanup resource\_filter in interface polling plugin example config file
+* Cleanup interface enrichment plugin example config file
+* Bump version and remove package\_data for discovery plugin
+* Use absolute imports and inherit from PanoptesPollingPlugin in PluginPollingDeviceInterfaceMetrics
+* Use absolute imports, fix typo and inherit from PanoptesEnrichmentPlugin in PluginEnrichmentInterface
+* Fix typo in PanoptesSNMPBaseEnrichmentPlugin class name
+* Change Discovery From JSON File plugin example config filename and make it use localhost.json
+* Use absolute imports in Discovery From JSON File Plugin
+* Change default config file path in const.py
+* Change group\_id, queue and database name in InfluxDB consumer example config file
+* Change default config file path for InfluxDB consumer
+* Fix typo in .travis.yml
+* Update password and remove redundant quotes
+* Read long description from README.md and bump version numbers automatically
+* Use libs from within Zookeeper tarball
+* Fixup paths for unit test and coverage result files
+* Install libsnmp30 before tests
+* Fixup log4j packages and paths
+* Install tox, virtualenv etc
+* Use openjdk
+* Use apache-log4j packages
+* Build, test and publish with Travis CI
+* Add .gitignore
+* Fix author\_email
+* Initial Commit
