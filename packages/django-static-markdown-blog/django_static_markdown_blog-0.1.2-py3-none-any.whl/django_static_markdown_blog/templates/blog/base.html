@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Markdown blog</title>
+
+    {% block css_files %}{% endblock %}
+    {% block js_files %}{% endblock %}
+    <style>
+.breadcrumb {
+    list-style: none;
+}
+
+.breadcrumb li {
+    display: inline;
+}
+
+.blog {
+    border: 1px #999 solid;
+}
+
+.blog-header {
+    border-bottom: 1px #999 solid;
+    padding: 5px;
+}
+
+.blog-header small {
+    margin: auto 0;
+}
+
+.blog-header h1 {
+    margin: 0;
+}
+
+.blog-content {
+    padding: 5px;
+}
+
+.blog-content img {
+    margin: auto;
+    display: block;
+}
+
+.blog-content table {
+    margin: 10px 0 20px;
+    border-collapse: collapse;
+}
+
+.blog-content table th, .blog-content table td {
+    padding: 5px 10px;
+    text-align: center;
+    border: 1px solid #999;
+}
+
+.blog-children {
+    list-style: none;
+}
+
+.blog-children li {
+    padding: 5px;
+}
+
+.blog-footer {
+    border-top: 1px #999 solid;
+    padding: 5px;
+}
+
+.justify-content-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.gpx {
+    border: 1px #999 solid;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 1px #ccc;
+    width: 95%;
+    margin: 10px auto;
+}
+
+.gpx header {
+    padding: 5px;
+    padding-top: 8px;
+}
+
+.gpx header h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.gpx header .start {
+    font-size: smaller;
+    color: #444;
+}
+
+.gpx .map {
+    border: 1px #999 solid;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    height: 500px;
+}
+
+.gpx footer {
+    padding: 5px;
+    margin: 0;
+}
+
+.gpx ul.info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.gpx ul.info li {
+    color: #444;
+    padding: 2px;
+    display: inline;
+}
+
+.gpx ul.info li span {
+    color: black;
+}
+    </style>
+</head>
+<body>
+
+    {% if breadcrumb %}
+    <nav aria-labelledby="" role="navigation">
+        <ol class="breadcrumb">
+            {% for bc in breadcrumb %}
+            <li class="breadcrumb-item">
+                <a href="{% url 'blog:content' bc.url %}">
+                {{ bc.title }}
+                </a> &gt;
+            </li>
+            {% endfor %}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ content.title }}
+            </li>
+        </ol>
+    </nav>
+    {% endif %}
+
+    <div class="card blog">
+
+        <div class="card-header blog-header justify-content-between">
+            <h1>{{ content.title }}</h1>
+
+            {% if not content.children %}
+            <small>
+                {{ content.date|date:"d M Y"|lower }}
+            </small>
+            {% endif %}
+        </div>
+
+        <div class="card-body">
+
+            {% if content.content %}
+            <div class="card-text blog-content">
+                {{ content.content|safe }}
+            </div>
+            {% endif %}
+
+            {% if content.children %}
+
+            <ul class="list-group blog-children">
+                {% for child in content.children %}
+
+                <li class="list-group-item">
+                    <a href="{% url 'blog:content' child.url %}">
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <span>
+                                {% if child.icon %}
+                                {% with 'icons/'|add:child.icon|add:'.png' as icon %}
+                                <img src="{% static icon %}" alt="icon" class="icone-16">
+                                {% endwith %}
+                                {% endif %}
+
+                                <strong>
+                                    {{ child.title }}
+                                </strong>
+                            </span>
+                            <span class="badge badge-info">
+                                {{ child.date|date:" d/m/Y" }}
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                {% endfor %}
+            </ul>
+
+            {% endif %}
+
+        </div>
+
+        {% if previous_content or next_content %}
+        <div class="card-footer blog-footer">
+            <div class="row justify-content-between">
+
+            <div class="col">
+                {% if previous_content %}
+                <a href="{% url 'blog:content' previous_content.url %}">
+                    {{ previous_content.title }}
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="col text-right">
+                {% if next_content %}
+                <a href="{% url 'blog:content' next_content.url %}">
+                {{ next_content.title }}
+                </a>
+                {% endif %}
+            </div>
+
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <footer>
+        Powered by <a href="https://pypi.org/project/django-static-markdown-blog/">Aloha</a>
+    </footer>
+</body>
+</html>

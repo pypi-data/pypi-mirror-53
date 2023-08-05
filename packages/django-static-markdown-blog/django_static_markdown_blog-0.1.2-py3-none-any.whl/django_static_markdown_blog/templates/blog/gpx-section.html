@@ -1,0 +1,33 @@
+
+<section id="{{ map_id }}" class="gpx"
+         data-gpx-source="{{ gpx_url }}"
+         data-map-target="{{ map_id }}-map">
+    <header>
+        <h3>Chargement de la carte...</h3>
+        <span class="start"></span>
+    </header>
+
+    <article>
+        <div id="{{ map_id }}-map" class="map"></div>
+    </article>
+
+    <footer>
+        <ul class="info">
+            <li>Distance&nbsp;:&nbsp;<span class="distance"></span>&nbsp;km</li>
+            &mdash;
+            <li>Durée&nbsp;:&nbsp;<span class="duration"></span></li>
+            &mdash;
+            <li>Arrêt&nbsp;:&nbsp;<span class="stop-duration"></span></li>
+            &mdash;
+            <li>Vitesse moyenne&nbsp;:&nbsp;<span class="average-speed"></span>&nbsp;km/h</li>
+            &mdash;
+            <li>
+                Dénivellé&nbsp;:&nbsp;+<span class="elevation-gain"></span>&nbsp;m,&nbsp;-<span class="elevation-loss"></span>&nbsp;m&nbsp;(net&nbsp;:&nbsp;<span class="elevation-net"></span>&nbsp;m)
+            </li>
+        </ul>
+    </footer>
+</section>
+
+<script type="text/javascript">
+  display_gpx(document.getElementById('{{ map_id }}'), marker_options)
+</script>
