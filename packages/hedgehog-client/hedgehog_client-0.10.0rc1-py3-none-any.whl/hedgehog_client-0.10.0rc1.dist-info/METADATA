@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: hedgehog-client
+Version: 0.10.0rc1
+Summary: Client library for communicating with Hedgehog Robot Controllers
+Home-page: https://github.com/PRIArobotics/HedgehogClient
+Author: Clemens Koza
+Author-email: koza@pria.at
+License: AGPLv3+
+Keywords: hedgehog robotics controller client
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: concurrent-utils (~=0.2.0)
+Requires-Dist: hedgehog-protocol (~=0.10.0rc2)
+Requires-Dist: hedgehog-utils[protobuf,zmq] (~=0.7.0rc1)
+Requires-Dist: pycreate2
+Provides-Extra: dev
+Requires-Dist: pytest ; extra == 'dev'
+Requires-Dist: pytest-runner ; extra == 'dev'
+Requires-Dist: pytest-asyncio ; extra == 'dev'
+Requires-Dist: pytest-cov ; extra == 'dev'
+Requires-Dist: pytest-timeout ; extra == 'dev'
+Requires-Dist: mypy ; extra == 'dev'
+
+Hedgehog Client Library
+=======================
+
+Master: |travis-master|_ |coveralls-master|_
+
+Develop: |travis-develop|_ |coveralls-develop|_
+
+.. |travis-master| image:: https://travis-ci.org/PRIArobotics/HedgehogClient.svg?branch=master
+.. _travis-master: https://travis-ci.org/PRIArobotics/HedgehogClient
+.. |coveralls-master| image:: https://coveralls.io/repos/github/PRIArobotics/HedgehogClient/badge.svg?branch=master
+.. _coveralls-master: https://coveralls.io/github/PRIArobotics/HedgehogClient?branch=master
+.. |travis-develop| image:: https://travis-ci.org/PRIArobotics/HedgehogClient.svg?branch=develop
+.. _travis-develop: https://travis-ci.org/PRIArobotics/HedgehogClient
+.. |coveralls-develop| image:: https://coveralls.io/repos/github/PRIArobotics/HedgehogClient/badge.svg?branch=develop
+.. _coveralls-develop: https://coveralls.io/github/PRIArobotics/HedgehogClient?branch=develop
+
+----
+
+This project provides a client library to communicate with Hedgehog Educational Robotics Controllers.
+
+
