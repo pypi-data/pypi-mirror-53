@@ -1,0 +1,40 @@
+Metadata-Version: 1.1
+Name: sbmlutils
+Version: 0.3.7
+Summary: SBML python utilities
+Home-page: https://github.com/matthiaskoenig/sbmlutils
+Author: Matthias König
+Author-email: konigmatt@googlemail.com
+License: LGPLv3
+Description: sbmlutils: python utilities for SBML
+        ====================================
+        
+        ``sbmlutils`` is a collection of python utilities for working with
+        `SBML <http://www.sbml.org>`__ models implemented on top of
+        `libsbml <http://sbml.org/Software/libSBML>`__ and other libraries
+        available from https://github.com/matthiaskoenig/sbmlutils
+        
+        Features include among others
+        
+        -  HTML reports of SBML models
+        -  helper functions for model creation, manipulation, and annotation
+        -  interpolation functions to add experimental data to models
+        -  implementation of dynamic flux balance analysis (DFBA)
+        -  file converters (XPP)
+        
+        Documentation is available at https://sbmlutils.readthedocs.io
+        
+        © 2017-2019 Matthias König
+        
+Keywords: SBML,dynamic FBA,DFBA,model merging
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
