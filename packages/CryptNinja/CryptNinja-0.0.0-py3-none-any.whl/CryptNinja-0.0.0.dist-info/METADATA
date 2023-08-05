@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: CryptNinja
+Version: 0.0.0
+Summary: This is a next gen password safe which uses Key gen algos like argon hash.
+Home-page: UNKNOWN
+Author: Jayant Raizada
+Author-email: jayantraizada1993@live.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: cryptography
+Requires-Dist: argon2-cffi
+Requires-Dist: tabulate
+Requires-Dist: pycryptodome
+
+It is a password safe to store your passwords in one place.
+CryptNinja currently works on windows and it has a command line interface.
+
+To run cryptninja, open command prompt on windows or powershell and type cryptninja.
+
+Your feedback is very important, feel free to reach me on my email address with comments, suggestions or any new ideas. I am working on a GUI version which will be available soon.
+
