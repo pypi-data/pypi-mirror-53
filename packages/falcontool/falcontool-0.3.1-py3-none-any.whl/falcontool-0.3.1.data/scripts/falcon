@@ -1,0 +1,17 @@
+#!python
+from commands import create, run, shell
+
+import click
+
+
+@click.group()
+@click.pass_context
+def cli(ctx):
+    pass
+
+
+if __name__ == '__main__':
+    cli.add_command(create)
+    cli.add_command(run)
+    cli.add_command(shell)
+    cli()
