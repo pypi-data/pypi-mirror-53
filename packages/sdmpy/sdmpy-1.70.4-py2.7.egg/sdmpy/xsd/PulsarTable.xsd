@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ ALMA - Atacama Large Millimeter Array
+ (c) European Southern Observatory, 2002
+ (c) Associated Universities Inc., 2002
+ Copyright by ESO (in the framework of the ALMA collaboration),
+ Copyright by AUI (in the framework of the ALMA collaboration),
+ All rights reserved.
+ 
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ 
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY, without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ MA 02111-1307  USA
+ 
+////////////////////////////////////////////////////////////////////////////////////////
+//
+//                                    WARNING 
+//  This is generated code!  Do not modify this file.                  
+//  If you do, all changes will be lost when the file is re-generated. 
+//
+////////////////////////////////////////////////////////////////////////////////////////
+ File PulsarTable.xsd
+ -->
+<xs:schema   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		               elementFormDefault="unqualified" 
+                       attributeFormDefault="unqualified"
+					   xmlns:plsr="http://Alma/XASDM/PulsarTable"
+					   xmlns:ent="Alma/CommonEntity"
+					   targetNamespace="http://Alma/XASDM/PulsarTable"
+                       version="3 -1">
+ 	<xs:import namespace="Alma/CommonEntity" schemaLocation="http://almaobservatory.org/XML/Common/2.1/CommonEntity.xsd"/>
+ 
+		<!-- No specific import for ArrayTime -->
+		<!-- No specific import for double -->
+		<!-- No specific import for Frequency -->
+		<!-- No specific import for Tag -->
+		<!-- No specific import for String -->
+		<!-- No specific import for float -->
+		<!-- No specific import for int -->
+		<!-- No specific import for Interval -->
+	
+	
+	
+	
+	
+	
+	
+	
+    <xs:element name="PulsarTable">
+        <xs:complexType>
+            <xs:sequence>
+             	<!-- This table's Entity . -->
+            	<xs:element name="Entity" type="ent:EntityT"/>
+
+            	<!-- This table's Container's Entity. -->
+            	<xs:element name="ContainerEntity" type="ent:EntityT"/>
+            	
+            	<!-- And then the sequence of its rows -->
+                <xs:element name="row" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+         <xs:element name="pulsarId" type=
+"xs:string"
+
+/>
+         <xs:element name="refTime" type=
+"xs:string"
+
+/>
+         <xs:element name="refPulseFreq" type=
+"xs:string"
+
+/>
+         <xs:element name="refPhase" type=
+"xs:string"
+
+/>
+         <xs:element name="numBin" type=
+"xs:string"
+
+/>
+     	 <xs:element name="numPoly" type=
+"xs:string"
+
+  minOccurs="0"/>
+     	 <xs:element name="phasePoly" type=
+"xs:string"
+
+  minOccurs="0"/>
+     	 <xs:element name="timeSpan" type=
+"xs:string"
+
+  minOccurs="0"/>
+     	 <xs:element name="startPhaseBin" type=
+"xs:string"
+
+  minOccurs="0"/>
+     	 <xs:element name="endPhaseBin" type=
+"xs:string"
+
+  minOccurs="0"/>
+     	 <xs:element name="dispersionMeasure" type=
+"xs:string"
+
+  minOccurs="0"/>
+     	 <xs:element name="refFrequency" type=
+"xs:string"
+
+  minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

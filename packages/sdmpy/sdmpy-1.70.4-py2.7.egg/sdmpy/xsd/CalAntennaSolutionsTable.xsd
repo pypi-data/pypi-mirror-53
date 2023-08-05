@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ ALMA - Atacama Large Millimeter Array
+ (c) European Southern Observatory, 2002
+ (c) Associated Universities Inc., 2002
+ Copyright by ESO (in the framework of the ALMA collaboration),
+ Copyright by AUI (in the framework of the ALMA collaboration),
+ All rights reserved.
+ 
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ 
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY, without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ MA 02111-1307  USA
+ 
+////////////////////////////////////////////////////////////////////////////////////////
+//
+//                                    WARNING 
+//  This is generated code!  Do not modify this file.                  
+//  If you do, all changes will be lost when the file is re-generated. 
+//
+////////////////////////////////////////////////////////////////////////////////////////
+ File CalAntennaSolutionsTable.xsd
+ -->
+<xs:schema   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		               elementFormDefault="unqualified" 
+                       attributeFormDefault="unqualified"
+					   xmlns:clantsol="http://Alma/XASDM/CalAntennaSolutionsTable"
+					   xmlns:ent="Alma/CommonEntity"
+	xmlns:atmphc="http://Alma/XENUM/AtmPhaseCorrectionMod"
+	xmlns:recvrb="http://Alma/XENUM/ReceiverBandMod"
+	xmlns:poltyp="http://Alma/XENUM/PolarizationTypeMod"
+	xmlns:bbnam="http://Alma/XENUM/BasebandNameMod"
+					   targetNamespace="http://Alma/XASDM/CalAntennaSolutionsTable"
+                       version="3 -1">
+ 	<xs:import namespace="Alma/CommonEntity" schemaLocation="http://almaobservatory.org/XML/Common/2.1/CommonEntity.xsd"/>
+ 
+		<!-- No specific import for boolean -->
+		<!-- No specific import for Angle -->
+		<!-- We need the schema of AtmPhaseCorrection -->
+		<xs:import namespace="http://Alma/XENUM/AtmPhaseCorrectionMod" 
+	        schemaLocation="http://almaobservatory.org/XML/XENUM/1/AtmPhaseCorrection.xsd"/>
+		<!-- No specific import for ArrayTime -->
+		<!-- We need the schema of ReceiverBand -->
+		<xs:import namespace="http://Alma/XENUM/ReceiverBandMod" 
+	        schemaLocation="http://almaobservatory.org/XML/XENUM/1/ReceiverBand.xsd"/>
+		<!-- No specific import for Frequency -->
+		<!-- No specific import for String -->
+		<!-- We need the schema of PolarizationType -->
+		<xs:import namespace="http://Alma/XENUM/PolarizationTypeMod" 
+	        schemaLocation="http://almaobservatory.org/XML/XENUM/1/PolarizationType.xsd"/>
+		<!-- No specific import for float -->
+		<!-- We need the schema of BasebandName -->
+		<xs:import namespace="http://Alma/XENUM/BasebandNameMod" 
+	        schemaLocation="http://almaobservatory.org/XML/XENUM/1/BasebandName.xsd"/>
+		<!-- No specific import for int -->
+		<!-- No specific import for Interval -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    <xs:element name="CalAntennaSolutionsTable">
+        <xs:complexType>
+            <xs:sequence>
+             	<!-- This table's Entity . -->
+            	<xs:element name="Entity" type="ent:EntityT"/>
+
+            	<!-- This table's Container's Entity. -->
+            	<xs:element name="ContainerEntity" type="ent:EntityT"/>
+            	
+            	<!-- And then the sequence of its rows -->
+                <xs:element name="row" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+         <xs:element name="antennaName" type=
+"xs:string"
+
+/>
+         <xs:element name="atmPhaseCorrection" type=
+"atmphc:AtmPhaseCorrection"
+
+/>
+         <xs:element name="basebandName" type=
+"bbnam:BasebandName"
+
+/>
+         <xs:element name="receiverBand" type=
+"recvrb:ReceiverBand"
+
+/>
+         <xs:element name="startValidTime" type=
+"xs:string"
+
+/>
+         <xs:element name="endValidTime" type=
+"xs:string"
+
+/>
+         <xs:element name="numReceptor" type=
+"xs:string"
+
+/>
+         <xs:element name="refAntennaName" type=
+"xs:string"
+
+/>
+         <xs:element name="direction" type=
+"xs:string"
+
+/>
+         <xs:element name="frequencyRange" type=
+"xs:string"
+
+/>
+         <xs:element name="integrationTime" type=
+"xs:string"
+
+/>
+         <xs:element name="polarizationTypes" type=
+"xs:string"
+
+/>
+         <xs:element name="correctionValidity" type=
+"xs:string"
+
+/>
+         <xs:element name="phaseAnt" type=
+"xs:string"
+
+/>
+         <xs:element name="phaseAntRMS" type=
+"xs:string"
+
+/>
+         <xs:element name="amplitudeAnt" type=
+"xs:string"
+
+/>
+         <xs:element name="amplitudeAntRMS" type=
+"xs:string"
+
+/>
+         <xs:element name="calDataId" type=
+"xs:string"
+
+/>
+         <xs:element name="calReductionId" type=
+"xs:string"
+
+/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
