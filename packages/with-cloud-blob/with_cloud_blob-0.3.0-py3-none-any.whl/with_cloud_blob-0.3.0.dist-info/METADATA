@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: with-cloud-blob
+Version: 0.3.0
+Summary: UNKNOWN
+Home-page: https://github.com/kshpytsya/with-cloud-blob
+Author: Kyrylo Shpytsya
+Author-email: kshpitsa@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Security :: Cryptography
+Classifier: Topic :: System :: Installation/Setup
+Classifier: Topic :: System :: Software Distribution
+Classifier: Topic :: System :: Systems Administration
+Requires-Python: >=3.7, <3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Requires-Dist: atomicwrites (<2,>=1.2.1)
+Requires-Dist: boto3 (<2,>=1.9.210)
+Requires-Dist: click (<8,>=7.0)
+Requires-Dist: click-log (<1,>=0.3.2)
+Requires-Dist: fastavro (<1,>=0.22.5)
+Requires-Dist: filelock (<4,>=3.0.8)
+Requires-Dist: implements (<1,>=0.1.4)
+Requires-Dist: pynacl (<2,>=1.3.0)
+Requires-Dist: python-dynamodb-lock (<1,>=0.9.1)
+
+# with-cloud-blob
+
+[![Build Status](https://travis-ci.org/kshpytsya/with-cloud-blob.svg?branch=master)](https://travis-ci.org/kshpytsya/with-cloud-blob)
+[![Coverage Status](https://coveralls.io/repos/github/kshpytsya/with-cloud-blob/badge.svg?branch=master)](https://coveralls.io/github/kshpytsya/with-cloud-blob?branch=master)
+[![Tests](https://report.ci/status/kshpytsya/with-cloud-blob/badge.svg?branch=master)](https://report.ci/status/kshpytsya/with-cloud-blob?branch=master)
+
+
