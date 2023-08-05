@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+from __future__ import print_function
+
+import tifffile
+import numpy
+import spam.label
+import spam.helpers
+import spam.mesh
+import scipy.ndimage
+import argparse
+
+# Define argument parser object
+parser = argparse.ArgumentParser()
+
+# Parse arguments with external helper function
+args = spam.helpers.optionsParser.ITKwatershedParser(parser)
+
+print("-> Loading binary image...", end='')
+binVol = tifffile.imread(args.inFile.name)
+print("done.")
+
+if args.MARKER_FILE is not None:
+    print("-> Loading marker image...", end='')
+    markerVol = tifffile.imread(args.MARKER_FILE)
+    print("done.")
+
+    # 2019-09-07 EA: changing dilation/erosion into a single pass by a spherical element, rather than repeated
+    # iterations of the standard.
+    if args.LABEL_DILATE != 0:
+        BB = spam.label.boundingBoxes( markerVol)
+        COM = spam.label.centresOfMass(markerVol, boundingBoxes=BB)
+        #plt.imshow(imLab[25]); plt.show()
+        tmp = numpy.zeros_like(markerVol)
+        for label in range(1,markerVol.max()+1):
+            gl = spam.label.getLabel(markerVol, label, labelDilate=args.LABEL_DILATE, boundingBoxes=BB, centresOfMass=COM)
+            if gl is not None:
+                tmp[gl['slice']] = gl['subvol']*label
+    markerVol = tmp
+else:
+    markerVol = None
+
+lab = spam.label.watershed(binVol, markers=markerVol)
+
+print("-> Saving labelled image...", end='')
+tifffile.imsave(args.OUT_DIR+"/"+args.PREFIX+".tif", lab)
+print("done.")
