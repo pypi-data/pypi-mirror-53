@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: lumigo-log-shipper
+Version: 1.0.3
+Summary: Ship logs to lumigo platform
+Home-page: https://github.com/lumigo-io/lumigo-python-log-shipper.git
+Author: Lumigo LTD (https://lumigo.io)
+Author-email: support@lumigo.io
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: boto3
+Requires-Dist: attr
+
+# lumigo-python-log-shipper
+```
+from lumigo_log_shipper import lumigo_shipper
+def my_lambda(event, context):
+    lumigo_shipper.ship_logs(event)
+```
+
+With programtic error:
+```
+from lumigo_log_shipper import lumigo_shipper
+def my_lambda(event, context):
+    lumigo_shipper.ship_logs(event, "[Error]")
+```
+
+
