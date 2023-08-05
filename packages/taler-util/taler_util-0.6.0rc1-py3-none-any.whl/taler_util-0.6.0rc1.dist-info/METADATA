@@ -1,0 +1,30 @@
+Metadata-Version: 2.0
+Name: taler-util
+Version: 0.6.0rc1
+Summary: Util library for GNU Taler
+Home-page: https://git.taler.net/taler-util.git
+Author: Taler Systems SA
+Author-email: ng0@taler.net
+License: LGPL3+
+Platform: any
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.1
+
+taler-util
+==========
+
+util code for the GNU Taler project.
+
+legal
+-----
+Modules contained in this package are licensed LGPL 3 (or later). 
+
+tests
+-----
+To run the unittests, execute
+
+	python3.7 setup.py tests
+
+
