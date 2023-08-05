@@ -1,0 +1,5 @@
+{% spaceless %}
+<a class="button{% if class %} {{ class }}{% endif %}" href="{{ href }}" {% if target %} target="{{ target }}"{% endif %} {% if title %} title="{{ title }}"{% endif %}>
+    {% include './label.html' with class=class label=label icon=icon only %}
+</a>
+{% endspaceless %}

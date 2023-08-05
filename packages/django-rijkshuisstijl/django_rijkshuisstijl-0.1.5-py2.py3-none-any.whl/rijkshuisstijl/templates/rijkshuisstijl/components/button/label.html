@@ -1,0 +1,4 @@
+{% spaceless %}{% load rijkshuisstijl %}
+{% if not 'no-text' in class and label %}<span class="button__label">{{ label }}</span>{% endif %}
+{% if icon %}{% icon icon label=label %}{% endif %}
+{% endspaceless %}

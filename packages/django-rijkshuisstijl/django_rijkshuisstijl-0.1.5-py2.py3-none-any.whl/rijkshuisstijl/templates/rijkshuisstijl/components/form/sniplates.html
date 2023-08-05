@@ -1,0 +1,70 @@
+{% extends 'sniplates/django.html' %}{% spaceless %}{% load sniplates rijkshuisstijl_filters %}
+    {% block _formControl %}
+        {% firstof value field.initial as value %}
+        {% include 'rijkshuisstijl/components/form/form-control.html' with class=widget.attrs.class value=value %}
+    {% endblock %}
+
+    {% block ClearableFileInput %}
+        {% reuse '_formControl' type='file' raw_value=raw_value %}
+    {% endblock %}
+
+    {% block Select %}
+        {% reuse '_formControl' type='select' %}
+    {% endblock %}
+
+    {% block SelectMultiple %}
+        {% reuse '_formControl' type='select' multiple=True %}
+    {% endblock %}
+
+    {% block MultipleChoiceField %}
+        {% reuse 'SelectMultiple' %}
+    {% endblock %}
+
+    {% block CheckboxSelectMultiple %}
+        {% reuse '_formControl' type='checkbox' %}
+    {% endblock %}
+
+    {% block RadioSelect %}
+        {% reuse '_formControl' type='radio' %}
+    {% endblock %}
+
+    {% block CheckboxInput %}
+        {% reuse '_formControl' type='checkbox' checked=form_field.value %}
+    {% endblock %}
+
+    {% block DateInput %}
+        {% reuse '_formControl' type='date' value=value|input_date_format %}
+    {% endblock %}
+
+    {% block TimeInput %}
+        {% reuse '_formControl' type="time" value=value|input_time_format %}
+    {% endblock %}
+
+    {% block DateTimeInput %}
+        {% reuse 'TextInput' %}
+    {% endblock %}
+
+    {% block EmailInput %}
+        {% reuse '_formControl' type='email' placeholder='naam@domein.nl' %}
+    {% endblock %}
+
+    {% block NumberInput %}
+        {% reuse '_formControl' type='number' %}
+    {% endblock %}
+
+    {% block URLInput %}
+        {% reuse '_formControl' type='url' placeholder='http://' %}
+    {% endblock %}
+
+    {% block TextInput %}
+        {% reuse '_formControl' %}
+    {% endblock %}
+
+    {% block PasswordInput %}
+        {% reuse '_formControl' type='password' %}
+    {% endblock %}
+
+    {% block Textarea %}
+        {% reuse '_formControl' type='textarea' %}
+    {% endblock %}
+{% endspaceless %}

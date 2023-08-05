@@ -1,0 +1,21 @@
+{% spaceless %}{% load l10n rijkshuisstijl_form %}
+    {% if is_paginated %}
+        <{{ tag }} class="paginator{% if class %} {{ class }}{% endif %}"{% if form %} method="get"{% endif %}>
+            <span class="paginator__label">
+                {% if page_obj.has_previous %}
+                    <a class="paginator__link paginator__link--first" href="?page={{ 1 }}" data-page="1">{{ label_first }}</a>
+                    <a class="paginator__link paginator__link--previous" href="?page={{ page_obj.previous_page_number|unlocalize }}" data-page="{{ page_obj.previous_page_number|unlocalize }}">{{ label_previous }}</a>
+                {% endif %}
+            </span>
+
+            <span class="paginator__label">{% form_input type='number' min=1 name='page' max=paginator.num_pages|unlocalize value=page_obj.number|unlocalize %}<span>&nbsp;/ {{ paginator.num_pages|unlocalize }}</span></span>
+
+            <span class="paginator__label">
+                {% if page_obj.has_next %}
+                    <a class="paginator__link paginator__link--next" href="?page={{ page_obj.next_page_number|unlocalize }}" data-page="{{ page_obj.next_page_number|unlocalize }}">{{ label_next }}</a>
+                    <a class="paginator__link paginator__link--last" href="?page=last" data-page="last">{{ label_last }}</a>
+                {% endif %}
+            </span>
+        </{{ tag }}>
+    {% endif %}
+{% endspaceless %}

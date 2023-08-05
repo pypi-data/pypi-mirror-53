@@ -1,0 +1,69 @@
+{% spaceless %}{% load i18n %}
+    <div class="form-control{% if class %} {{ class }}{% endif %}">
+
+        {% if label %}
+            <header class="form-control__header">
+                {% if label and required %}
+                    {% include 'rijkshuisstijl/components/form/label.html' with label=label|add:'&nbsp;*'|safe for=id %}{% endif %}
+                {% if label and not required %}
+                    {% include 'rijkshuisstijl/components/form/label.html' with label=label for=id %}{% endif %}
+            </header>
+        {% endif %}
+
+
+        {% if label %}
+            <div class="form-control__body">
+        {% endif %}
+
+
+        {% if type == 'checkbox' %}
+            {% if choices %}
+                {% for choice in choices %}
+                    {% include 'rijkshuisstijl/components/form/checkbox.html' with choice=choice type=type name=name value=value checked=checked id=id errors=errors select_all=select_all widget_attrs=widget.attrs only %}
+                {% endfor %}
+            {% else %}
+                {% include 'rijkshuisstijl/components/form/checkbox.html' with type=type name=name value=value checked=checked id=id errors=errors select_all=select_all widget_attrs=widget.attrs only %}
+            {% endif %}
+
+        {% elif type == 'radio' %}
+            <div class="form-control__choices">
+                {% for choice in choices %}
+                    {% include 'rijkshuisstijl/components/form/checkbox.html' with choice=choice type=type name=name value=value id=id errors=errors widget_attrs=widget.attrs only %}
+                {% endfor %}
+            </div>
+
+        {% elif type == 'file' %}
+            {% include 'rijkshuisstijl/components/form/input.html' with type=type name=name value=value raw_value=raw_value checked=checked placeholder=placeholder id=id errors=errors widget_attrs=widget.attrs only %}
+
+            {% if raw_value %}
+                <div class="help-text">
+                    <div class="help-text__body">
+                        {{ _('Huidige') }}: <a class="form-control__link" href="{{ url }}">{{ url }}</a>
+                        {% include 'rijkshuisstijl/components/form/checkbox.html' with type='checkbox' name=html_name|add:'-clear' id=html_name|add:'-clear_id' label='wissen' %}
+                    </div>
+                </div>
+            {% endif %}
+
+        {% elif type == 'select' %}
+            {% include 'rijkshuisstijl/components/form/select.html' with name=name value=value id=id errors=errors %}
+        {% elif type == 'textarea' %}
+            {% include 'rijkshuisstijl/components/form/textarea.html' with name=name value=value placeholder=placeholder id=id errors=errors widget_attrs=widget.attrs only %}
+        {% else %}
+            {% include 'rijkshuisstijl/components/form/input.html' with type=type name=name value=value checked=checked placeholder=placeholder id=id errors=errors widget_attrs=widget.attrs only %}
+        {% endif %}
+
+
+        {% if errors %}
+            {% include 'rijkshuisstijl/components/form/errors.html' with errors=errors for=id %}
+        {% endif %}
+        {% if help_text %}
+            {% include 'rijkshuisstijl/components/form/help-text.html' with help_text=help_text for=id %}
+        {% endif %}
+
+
+        {% if label %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endspaceless %}
