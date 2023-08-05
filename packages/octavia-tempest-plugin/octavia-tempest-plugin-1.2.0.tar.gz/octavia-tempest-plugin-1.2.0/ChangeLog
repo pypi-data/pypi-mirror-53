@@ -1,0 +1,147 @@
+CHANGES
+=======
+
+1.2.0
+-----
+
+* Fix OpenStack clients region parameter
+* Fix spare\_pool\_enabled option type
+* Associate floating IP after lb ACTIVE
+* Set connection\_retry\_interval back up to 1200
+* Enable overcommit\_memory in test server VMs
+* Add missing keystoneauth1 to requirements.txt
+* Add amphora failover API test
+* Add amphora update service client and API test
+* Add a flavor to the load balancer CRUD scenarios
+* Adds provider flavor capabilities API tests
+* Increase connection\_max\_retries to 480 secs on CentOS jobs
+* Sync enabled\_provider\_drivers config help message
+* Fix VIP IPv6 subnet discovery order
+* Sync Sphinx requirement
+* Skip iptables act/stby test based on topology set
+* Support skipping APP\_COOKIE and HTTP\_COOKIE
+* Fix IPv6 tests if ipv6-private-subnet is stateless
+* Set irrelevant files on CI jobs
+* Update tox.ini for new upper constraints strategy
+* Fix quoting in zuul for tempest plugins
+* Fix log output format string
+* Rename iptables-based active-standby jobs
+
+1.1.0
+-----
+
+* Save amphora logs in gate
+* Fix the load balancer service clients
+* Fix tests not honoring the provider setting
+* Fix the IPv6 tests for no ipv6-public-subnet
+* Replace git.openstack.org URLs with opendev.org URLs
+* Add a scenario test for spare pool
+* Fix ipv6 multinode gate (use private subnet)
+* Add TLS Barbican jobs against stable branches
+* Drop requirement on octavia-lib
+* OpenDev Migration Patch
+* Add octavia-v2-dsvm-scenario-ubuntu-xenial job
+* Add config option for pool algorithms
+* Add iptables-based active/standby scenario test
+* Add the provider flavor capabilities service client
+* Run octavia-tempest-plugin against stable/stein
+* Fix octavia-tempest-plugin releasenotes theme
+
+1.0.0
+-----
+
+* Adapt protocol and skip tests depending on config
+* Fix barbican service\_available check
+* Add octavia-lib to required projects
+* Update json module to jsonutils
+* Check Monitor in Member Scenario Tests
+* Update the live jobs to set higher retries
+* Skip amphora scenario test if provider is not set
+* Use cls.skipException and raise it
+* Modify Member tests for Provider Drivers
+* Adds provider API tests
+* Adds flavor API tests
+* Adds flavor profile API tests
+* Add the provider service client
+* Add the flavor service client
+* Add the flavor profile service client
+* Add listener stats service client and API test
+* Add wait for resource cleanup if there is no parent
+* Add configuration to enable/disable L7,L4 protocols
+* Retry subnet/network deletes on 409 Conflict
+* Add a TLS scenario using Barbican
+* Add traffic tests using an IPv6 VIP
+* Change openstack-dev to openstack-discuss
+* Fix a spelling mistake
+* Fix dependency on requests library version
+* Adds get\_amphora\_stats to the service client
+* Add v2 two-node scenario test
+* Transition to python 3.x primary gates
+* Make the CentOS 7 scenario gate non-voting
+* Adds a mixed IPv4/IPv6 members traffic test
+
+0.2.0
+-----
+
+* Collect diskimage-builder logs
+* Add configuration support for skipping tests
+* Enable Octavia API audit logging for API jobs
+* Run octavia-tempest-plugin patches against stable
+* Raise build\_timeout from 60 to 300
+* Use the infra mirrors for DIB
+* Fix test\_with\_ipv6 = False failure
+* Disable KVM at limestone (again)
+* Fix tests to honor Octavia API versioning
+* Fix the scenario parent job to use the live base
+* Fix the readme example
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* Gate on CentOS 7 and check on Ubuntu Bionic
+* Disable kvm on OVH infra instances
+* Update links in README.rst
+
+0.1.0
+-----
+
+* Add "wait for active" after object delete
+* Re-enable KVM
+* fix tox python3 overrides
+* Fix a potential IP address conflict
+* Spare amps have no role
+* Correctly guess amp count based on detected topo
+* Create scenario tests for amphora
+* Create api+scenario tests for l7rules
+* Create api+scenario tests for l7policies
+* Create api+scenario tests for healthmonitors
+* Migrate to stestr
+* Create basic traffic balancing scenario test
+* Create api+scenario tests for members
+* Create api+scenario tests for pools
+* Fix sphinx-docs job for sphinx >1.7
+* Fix the invalid home-page url
+* Create api+scenario tests for listeners
+* Fix tests for Octavia API compat changes
+* Create scenario tests for load balancers
+* Revert "Create scenario tests for loadbalancers"
+* Updated from global requirements
+* Updated from global requirements
+* Zuul: Remove project name
+* Updated from global requirements
+* Updated from global requirements
+* Create floating ip by normal user
+* Rename tox\_venvlist (2/2)
+* Rename tox\_venvlist (1/2)
+* Fix a typo in the test HTTP server
+* Enable Qos in gate
+* Add missing \_\_init\_\_.py file
+* Update README
+* Disable more services from the scenario jobs
+* Updated from global requirements
+* Add a scenario test gate
+* Create scenario tests for loadbalancers
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Initial setup of the octavia-tempest-plugin repo
+* Added .gitreview
