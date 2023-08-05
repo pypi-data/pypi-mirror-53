@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: libpythonprosfx
+Version: 0.1
+Summary: Módulo para exemplificar construção de projetos Python no curso PyTools
+Home-page: https://github.com/undersfx/PyTools
+Author: Thiago Rodrigues
+Author-email: undersoft.corp@gmail.com
+License: GNU AFFERO GENERAL PUBLIC LICENSE
+Description: # PyTools
+        Módulo para exemplificar construção de projetos Python no curso [PyTools](https://www.python.pro.br/modulos/pytools) da [Python Pro](https://www.python.pro.br/)
+        
+        [![Build Status](https://travis-ci.org/undersfx/PyTools.svg?branch=master)](https://travis-ci.org/undersfx/PyTools) [![Updates](https://pyup.io/repos/github/undersfx/PyTools/shield.svg)](https://pyup.io/repos/github/undersfx/PyTools/) [![Python 3](https://pyup.io/repos/github/undersfx/PyTools/python-3-shield.svg)](https://pyup.io/repos/github/undersfx/PyTools/)
+        
+        Instalação:
+        
+        ```console
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements-dev.txt
+        ```
+        
+        Tecnologias Abordadas:
+        
+        1. Git
+        2. Pyenv
+        3. Virtualenv
+        4. Pip
+        5. Flake8
+        6. Travis CI
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Framework :: Pytest
+Description-Content-Type: text/markdown
