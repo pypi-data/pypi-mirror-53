@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: sampleworld-rb
+Version: 0.0.1
+Summary: Just a sample package for python package development
+Home-page: https://github.com/rizwanbutt314/python-package-development
+Author: Rizwan Hameed
+Author-email: rizwanbutt314@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+
+# python-package-development
+This repository contains a simple code as python package from which you can have a better idea of python package development.
+
+## Installation
+Run following command to install this package
+```
+pip install sampleworld-rb
+```
+
+## Usage
+```python
+
+from sampleworld import sample_world
+
+sample_world() # print 'Name missing'
+
+sample_world(name='Rizwan') #print Given Name: Rizwan
+
+```
+
