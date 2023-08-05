@@ -1,0 +1,49 @@
+{
+  "name": "jupyterlab-nvdashboard",
+  "version": "0.1.11",
+  "description": "A JupyterLab extension for displaying GPU usage dashboards",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension"
+  ],
+  "homepage": "https://github.com/jacobtomlinson/jupyterlab-nvdashboard",
+  "bugs": {
+    "url": "https://github.com/jacobtomlinson/jupyterlab-nvdashboard/issues"
+  },
+  "license": "",
+  "author": "NV Dashbaord contributors",
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacobtomlinson/jupyterlab-nvdashboard.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "watch": "tsc -w",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^1.0.2",
+    "@jupyterlab/apputils": "^1.0.2",
+    "@jupyterlab/coreutils": "^3.0.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "~16.4.13",
+    "@types/react-dom": "~16.0.7",
+    "mocha": "^6.2.0",
+    "rimraf": "^2.6.1",
+    "typescript": "~3.3.1"
+  },
+  "jupyterlab": {
+    "extension": true
+  }
+}
