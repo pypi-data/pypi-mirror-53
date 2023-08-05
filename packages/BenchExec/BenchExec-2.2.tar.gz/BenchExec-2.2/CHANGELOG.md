@@ -1,0 +1,533 @@
+# BenchExec Changelog
+
+## BenchExec 2.2
+
+This release fixes two security issues, all users are encouraged to update:
+
+- Since BenchExec 2.1, the setup of the container for the tool-info module
+  (which was added in BenchExec 1.20) could silently fail, for example
+  if user namespaces are disabled on the system. In this case the tool-info
+  module would be executed outside of the container.
+  Run execution was not affected.
+- The kernel offers a keyring feature for storage of keys related to features
+  like Kerberos and ecryptfs. Before Linux 5.2, there existed one keyring per
+  user, and BenchExec did not prevent access from the tool inside the container
+  to the kernel keyring of the user who started BenchExec.
+  Now such accesses are forbidden (on all kernel versions) using
+  [seccomp](http://man7.org/linux/man-pages/man2/seccomp.2.html)
+  if [libseccomp2](https://github.com/seccomp/libseccomp) is installed,
+  which should the case on any standard distribution.
+  Note that seccomp filters do have a slight performance impact
+  and could prevent some binaries on exotic architectures from working.
+  In such a case please file a [bug report](https://github.com/sosy-lab/benchexec/issues/new).
+
+
+## BenchExec 2.1
+
+`benchexec` can now partition the Level 3 cache of the CPU for parallel runs
+and measure cache usage and memory bandwidth,
+at least on some Intel CPUs and if the [pqos](https://github.com/intel/intel-cmt-cat/tree/master/pqos)
+and [pqos_wrapper](https://gitlab.com/sosy-lab/software/pqos-wrapper) are installed.
+More information is in the [documentation](https://gitlab.com/sosy-lab/software/pqos-wrapper/wikis/home).
+
+Furthermore, some error messages for systems without container support were improved.
+
+
+## BenchExec 2.0
+
+This release does not add new features compared to BenchExec 1.22,
+but removes several deprecated features and brings several other backwards-incompatible changes
+to make BenchExec more consistent and user-friendly:
+
+- Support for Python 3.2 and 3.3 is removed, the minimal Python version is now 3.4.
+  Additionally, `runexec`/`RunExecutor` continue to support Python 2.7
+  [until end of 2019](https://github.com/sosy-lab/benchexec/issues/438).
+- Support for running benchmarks as a different user with `sudo` is removed
+  (parameters `--user`/`--users`).
+  Use container mode as better method for isolating runs.
+- [Container mode](doc/container.md) is enabled by default.
+  It can be disabled with `--no-container`,
+  but this decreases reliability of benchmarking.
+- If the `cpuacct` cgroup is not available,
+  CPU-time measurements and limits are not supported.
+- Either container mode or the `freezer` cgroup are required
+  to ensure protection against fork bombs.
+- [Niceness](http://man7.org/linux/man-pages/man2/nice.2.html)
+  of benchmarked process is not changed, previously it was increased by 5.
+- Changes to input of `benchexec`:
+  - The memory limit given to `benchexec` requires an explicitly specified unit.
+  - Support for `<test>` tags, `<sourcefiles>` tags,
+    and variables named `${sourcefile_*}` removed from benchmark definitions.
+    Use `<rundefinition>`, `<tasks>`, and `${inputfile_*}` instead.
+  - Variables named `${taskdef_*}` are defined only if task-definition files are used,
+    and variables named `${inputfile_*}` only otherwise.
+- Changes to `table-generator`:
+  - A column named `memUsage` is automatically renamed to `memory`.
+  - A column named `memory` is automatically converted to Megabytes.
+  Both conversions are only applied if no `<column>` tags are used.
+- Changes to [run-result data](doc/run-results.md):
+  - In case of aborted or failed runs, no dummy results (e.g., `cputime` of 0s)
+    are present.
+  - The memory results of `benchexec` are named `memory`, not `memUsage`.
+  - Memory results have the unit `B` explicitly specified.
+    Furthermore, units are present in all attributes of the result XML files
+    where they were still missing.
+  - Result item `exitcode` is removed, only `RunExecutor.execute_run()` still returns it,
+    but as an object instance instead of an `int`.
+    Use `returnvalue` and `exitsignal` instead.
+- Module `benchexec.test_tool_wrapper` is removed, use `benchexec.test_tool_info` instead.
+- BenchExec (both `benchexec` and `runexec`) terminates itself cleanly after aborting all runs
+  if it receives one of the signals `SIGTERM`, `SIGINT` (Ctrl+C), or `SIGQUIT`.
+
+Additionally, this release adds a fix for the container
+that is used since BenchExec 1.20 for the tool-info module.
+In this container, the environment variable `HOME` did not point to `/home/benchexec`
+as expected but to the user's real home directory.
+This broke tools like Ultimate if the `/home` was configured to be hidden or read-only.
+
+Furthermore, we declare the following features deprecated
+and plan on removing them for [BenchExec 3.0](https://github.com/sosy-lab/benchexec/milestone/8),
+which is expected to be released in January 2020:
+
+- Support for Python 2.7 and 3.4 (cf. [#438](https://github.com/sosy-lab/benchexec/issues/438))
+- Support for checking correctness of run results and computing scores
+  if task-definition files are *not* used (cf. [#439](https://github.com/sosy-lab/benchexec/issues/439))
+
+Please respond in the respective issue if one of these deprecations
+is a problem for you.
+
+
+## BenchExec 1.22
+
+- More robust handling of Ctrl+C in `benchexec`.
+  For example, output files are now always fully written, whereas previously
+  pressing Ctrl+C at the wrong time could result in truncated files.
+  A side effect of this is that if you call
+  `benchexec.benchexec.BenchExec().start()` in own Python code,
+  you must now add a signal handler for `SIGINT`.
+  The same was already true for users of `RunExecutor`, this is now documented.
+- Fix Ctrl+C for `benchexec` in container mode.
+  In BenchExec 1.21, one would need to press Ctrl+C twice to stop `benchexec`.
+- Fix unreliable container mode on Python 3.7.
+- Some robustness improvements and fixes of rare deadlocks.
+- Decreased overhead of `benchexec` while runs are executing.
+
+
+## BenchExec 1.21
+
+This release contains only a few bug fixes:
+
+- Forwarding signals to the benchmarked process (and thus, stopping runs via Ctrl+C),
+  was broken on Python 2.
+- If the freezer cgroup was available but mounted in a separate hierarchy,
+  it was not used reliably as protection against fork bombs when killing processes.
+- Since BenchExec 1.19, an exception would occur if a non-existing command
+  was started in container mode.
+- Since BenchExec 1.19, copying output files from a container would occur
+  while subprocesses are still running and would be counted towards the
+  walltime limit. This is fixed, although subprocesses will still be running
+  if the freezer cgroup is not available (cf. #433).
+
+
+## BenchExec 1.20
+
+- If `benchexec --container` is used, all code that is part of the tool-info
+  module (as well as all processes started by it) are now run in a separate
+  container with the same layout and restrictions as the run container.
+  Note, however, that it is not the same container, so any modifications
+  made by the tool-info module to files on disk are *not* visible in the runs!
+  The `test_tool_info` utility also has gained a parameter `--container`
+  for testing how a tool-info module behaves in a container.
+- Nested containers are now supported.
+  Due to a change to the internal implementation of the container mode,
+  commands like the following succeed now:
+  `containerexec -- containerexec --hidden-dir /sys -- /bin/bash`.
+  (Some parts of `/sys` need to be excluded because of kernel limitations.)
+  Note that nesting `runexec` or `benchexec` is still not supported,
+  because nested cgroups are not implemented,
+  so any cgroup-related features (resource limitations and measurements)
+  are missing. But nesting `containerexec` and `runexec --container`
+  (or vice-versa) now works.
+- `/etc/hostname` in container now also shows the container's host name
+  that exists since BenchExec 1.19.
+- Change how CPUs with several NUMA nodes per CPU are handled:
+  BenchExec will now treat each NUMA node like a separate CPU package
+  and avoid creating runs that span several NUMA nodes. Thanks @alohamora!
+
+
+## BenchExec 1.19
+
+- In container mode, all temp directories are now on a `tmpfs` "RAM disk".
+  This affects everything written to directories in the hidden or overlay modes.
+  Files written there are now included in the memory measurements and the memory limit!
+  The advantage is that performance should be more deterministic,
+  especially if several runs use much I/O in parallel.
+  This feature can be disabled with `--no-tmpfs`.
+- `/dev/shm` and `/run/shm` are now available inside the container
+  and provide a `tmpfs` instance (even with `--no-tmpfs`)
+  as required by some tools for shared memory.
+- Container mode now recommends [LXCFS](https://github.com/lxc/lxcfs)
+  and automatically uses it if available for a better container isolation
+  (e.g., uptime measures container uptime, not host uptime).
+  On Debian/Ubuntu, just use `sudo apt install lxcfs`.
+- Several small bug fixes and other improvements of isolation for container mode
+  (e.g., host name in container is no longer the real host name).
+- Add `benchexec --no-hyperthreading`, which restricts core assignments
+  to a single virtual core per physical CPU core
+  (all other sibling cores will stay unused). Thanks @alohamora!
+
+
+## BenchExec 1.18
+
+- Add result `done` that tools can output if the standard results `true`/`false`/`unknown`
+  are not applicable (for example because no property was checked),
+  and the run completed successfully.
+- In container mode, `--keep-system-config` is no longer necessary if overlayfs
+  is not used for `/etc`, and thus it is is no longer automatically implied in such cases.
+- Benchmark definitions support a new attribute `displayName` with a human-readable name
+  that will be shown in tables.
+- A new variable `${taskdef_name}` can now be used in places where variable substitution is supported.
+- Table-generator supports `%` as unit for numerical values.
+- Some improvements for score handling outside of SV-COMP (i.e., if scores are not calculated by BenchExec).
+- New tool-info modules for Test-Comp'19
+- Several small bug fixes and improvements
+
+
+## BenchExec 1.17
+
+- Tasks can now be defined in a YAML-based format,
+  cf. [the documentation](https://github.com/sosy-lab/benchexec/blob/master/doc/benchexec.md#task-definition-files)
+  This supports tasks with several input files,
+  and allows providing metadata such as expected verdicts
+  in a structured format instead of encoded in the file name.
+  The format will be extended to handle more information in the future.
+- The wall-time limit can now be specified separately from the CPU-time limit
+  for `benchexec` as command-line parameter or in the benchmark definition.
+- Support for SV-COMP'19 property `memcleanup`.
+- In containers, properly handle `/run/systemd/resolve`,
+  which is necessary for DNS resolution on systems with `systemd-resolved`.
+- Avoid warnings for mountpoints below inaccessible directories in containers.
+- Improvements for handling `NaN` and `Inf` values in `table-generator`.
+- Log output of BenchExec will now have colors if `coloredlogs` is installed.
+- New tool-info modules and updates for SV-COMP'19.
+
+
+## BenchExec 1.16
+
+- Support for [energy measurements](https://github.com/sosy-lab/benchexec/blob/master/doc/resources.md#energy)
+  if [cpu-energy-meter](https://github.com/sosy-lab/cpu-energy-meter) is installed.
+- Several small bug fixes and improvements
+
+
+## BenchExec 1.15 (skipped)
+
+
+## BenchExec 1.14
+
+- Updated tool-info modules for all participants of [SV-COMP'18](https://sv-comp.sosy-lab.org/2018/).
+- Extended support for variable replacements in table-definitions
+  of table-generator.
+
+
+## BenchExec 1.13
+
+- For Debian/Ubuntu, the `.deb` package is now the recommended way
+  of [installation](https://github.com/sosy-lab/benchexec/blob/master/doc/INSTALL.md),
+  because it automatically configures cgroups as necessary.
+- BenchExec now automatically attempts to use the sub-cgroup
+  `system.slice/benchexec-cgroup.service` if it does not have access
+  to the current cgroup.
+  This means that if you followed our installation instructions
+  for systems with systemd, there is no need anymore to manually
+  put your shell into the correct cgroup.
+- Several smaller bug fixes for table-generator:
+  [#249](https://github.com/sosy-lab/benchexec/issues/249),
+  [#250](https://github.com/sosy-lab/benchexec/issues/250),
+  [#259](https://github.com/sosy-lab/benchexec/issues/259),
+  [#260](https://github.com/sosy-lab/benchexec/issues/260),
+  [#271](https://github.com/sosy-lab/benchexec/issues/271),
+  [#272](https://github.com/sosy-lab/benchexec/issues/272)
+- For users of the Python API of RunExecutor,
+  different file names can now be specified for stdout and stderr
+  of the tool.
+- Some new tool-info modules and updates for SV-COMP'18.
+
+
+## BenchExec 1.12
+
+- Fix execution of runs specified with `<withoutfile>` tags
+  in the benchmark definition: the name of the run was missing
+  from the command-line in BenchExec 1.11.
+
+## BenchExec 1.11
+
+- `table-generator` can now be given result XML files as arguments
+  in addition to a table-definition XML file (with parameter `-x`).
+  In this case, it will use the column definitions from the latter
+  for tables with the separately given results.
+- The directory `contrib` of the repository now contains a script
+  [`statistics-tex.py`](https://github.com/sosy-lab/benchexec/blob/master/contrib/statistics-tex.py),
+  which can export summary data for benchmark results
+  (e.g., number of solved tasks, average CPU time, etc.)
+  to LaTeX.
+- The dummy tools `true` and `false`, which could be used for testing
+  a BenchExec installation, are replaced with a more generic dummy tool
+  called `dummy`.
+- A few minor bug fixes and performance optimizations.
+
+A new paper about BenchExec called
+[Reliable Benchmarking: Requirements and Solutions](https://www.sosy-lab.org/~dbeyer/Publications/2017-STTT.Reliable_Benchmarking_Requirements_and_Solutions.pdf)
+is now available.
+
+Please note that support for Python 3.2 and 3.3 is deprecated.
+Furthermore, the support for "sudo mode" (parameter `--user`/`--users`)
+is also deprecated.
+All deprecated features will be removed in BenchExec 2.0.
+
+
+## BenchExec 1.10
+
+This release brings several smaller and medium-sized features:
+
+- Tool-info modules for all participants of [SV-COMP'17](https://sv-comp.sosy-lab.org/2017/),
+  and support for results of the category `correct-unconfirmed`,
+  which is used by SV-COMP if witness validation was not successful.
+  To conform with SV-COMP's definitions, violations of the SV-COMP reachability property `unreach-call`
+  will now be reported as `false(unreach-call)` instead of `false(reach)`.
+- [Measurement of block I/O](https://github.com/sosy-lab/benchexec/blob/master/doc/resources.md#disk-space-and-io) if the `blkio` cgroup controller is available
+  (experimental, please read the [documentation](https://github.com/sosy-lab/benchexec/blob/master/doc/resources.md#disk-space-and-io)!).
+- [Measurement of the energy used by the CPU](https://github.com/sosy-lab/benchexec/blob/master/doc/resources.md#energy) for a run,
+  if the tool [cpu-energy-meter](https://github.com/sosy-lab/cpu-energy-meter) is installed on the system
+  (experimental, please read the [documentation](https://github.com/sosy-lab/benchexec/blob/master/doc/resources.md#energy)!).
+- [Ability to limit the disk space](https://github.com/sosy-lab/benchexec/blob/master/doc/resources.md#disk-space-and-io) a tool can occupy in container mode.
+- Various minor improvements to make container mode more robust.
+- The feature for executing benchmarks under different user accounts with sudo
+  is now marked as deprecated and may be removed in the future,
+  consider using the container mode instead for isolating runs
+  (cf. [issue #215](https://github.com/sosy-lab/benchexec/issues/215)).
+- `table-generator` is now more flexible:
+  - Builtin support for certain unit conversions,
+    such that the scale factor does not always need to be explicitly specified.
+    Furthermore, unit conversions now work even if the values already have a unit.
+  - Column titles can be manually specified with the `displayTitle` attribute.
+  - What columns are relevant for the "diff" table can be configured.
+
+Please also note that we are considering dropping the support for Python 3.2
+and maybe 3.3 in BenchExec 2.0 (to be released in a few weeks).
+If this is a problem for you, please tell us in [issue #207](https://github.com/sosy-lab/benchexec/issues/207).
+
+
+## BenchExec 1.9
+
+The main feature of this release is the addition of a [container mode](https://github.com/sosy-lab/benchexec/blob/master/doc/container.md)
+that allows to isolate runs from each other and from the host,
+for example preventing filesystem and network accesses.
+It also allows to collect and store all files created by the tool in a run.
+The container mode is still in beta and disabled by default for now,
+it will be enabled by default in BenchExec 2.0.
+Please try it out and tell us your experiences!
+
+Further changes:
+- `table-generator` now supports HTTP(S) URLs to be given for result XML files
+  to allow generating tables for results without needing to download them first.
+  The HTML tables will contain correct links to the log files.
+- New SV-COMP property deadlock supported by `benchexec`.
+- The parameters `--rundefinition` and `--tasks` of `benchexec` now support wildcards.
+- Rounding of very small and very large values in `table-generator` has been fixed.
+- The default font for HTML tables has changed,
+  it is now a font that supports correctly aligned digits.
+
+## BenchExec 1.8
+
+- `benchexec` now compresses results by default: XML result files
+  are compressed with BZip2, and log files are stored within a ZIP archive.
+  This can reduce the necessary disk space significantly
+  (typically these logs compress very well),
+  and for large benchmark sets it reduces the number of necessary files,
+  which can make dealing with the results much faster.
+  The previous behavior can be restored with the parameter `--no-compress-results`.
+- `table-generator` now supports benchmark results where the log files
+  are stored in a ZIP file instead of a regular directory.
+  All features continue to work with compressed results,
+  including extraction of values from log files and viewing log files from HTML tables
+  (cf. [table-generator documentation](https://github.com/sosy-lab/benchexec/blob/master/doc/table-generator.md) for more details).
+  Compressed and uncompressed results are handled transparently and can be mixed,
+  and using results that were manually compressed or decompressed
+  is also supported.
+
+## BenchExec 1.7
+
+- Fix `table-generator` behavior for columns where different cells have different units:
+  The release notes for 1.6 claimed that these columns are treated as text column,
+  when instead they were rejected. Now they are treated as text.
+  Note that BenchExec does not create such columns itself, so this should not affect most users.
+- Fix computation of scores according to the SV-COMP scoring scheme:
+  if the expected result is for example `false(valid-deref)` and the tool returns `false(valid-free)`,
+  the resulting score is the one for a wrong false answer (-16 points),
+  not the one for a wrong true answer (-32 points).
+  The latter score is only given if the tool actually answers `true` incorrectly.
+- Change result classification, if the returned answer does not belong to the property of the task,
+  for example, if the tool returns `true` instead of `sat` for a task with category `satisfiability`,
+  or if the tool returns `false(no-overflow)` when it should not even check for overflows.
+  Now these results are classified as unknown (with score 0),
+  previously these were treated as wrong answers.
+- Fix escaping of links in HTML tables, e.g., to log files with special characters in their name.
+  This was broken in 1.6.
+
+## BenchExec 1.6
+
+This release brings several improvements to `table-generator`:
+- `table-generator` now rounds measurement values in a scientifically correct way,
+  i.e., with a fixed number of significant digits, not with a fixed number of decimal places.
+  The attribute `numberOfDigits` of `<column>` tags in table-definition files
+  now also specifies significant digits, not decimal places.
+  By default, in HTML tables all fractional values are now rounded (e.g., time measurements)
+  and all integer values continue without rounding (e.g., memory measurements),
+  previously only "time" columns were rounded.
+  The remaining rounding-related behavior stays unchanged:
+  In CSV tables, values are not rounded by default,
+  and if `numberOfDigits` is explicitly given for a column,
+  it's value will always be rounded in both HTML and CSV tables.
+- `table-generator` now automatically extracts units from the cells in a column
+  and puts them into the table header.
+- In HTML tables, numeric values are now aligned at the decimal point,
+  and text values are left aligned (previously both were right aligned).
+- `table-generator` now allows to convert values from one unit into another.
+  So far this is only implemented for values that do not have a unit attached to them,
+  and both the target unit and the scale factor need to be specified explicitly
+  in the `<column>` tag.
+  This can be used for example to show memory measurements in MB instead of Bytes in tables.
+- `table-generator` now allows columns with links to arbitrary files to be added to tables.
+- `table-generator` does not handle columns where cells have differing units wrongly anymore.
+  Previously, the unit was simply dropped, leading to wrong values for statistics.
+  Now such columns are treated as text and no statistics are generated.
+  (Note that BenchExec never creates such columns by itself,
+  only if values are extracted from the tool output this could happen).
+
+Other changes:
+- The behavior of `benchexec --timelimit` was changed slightly,
+  if a value for `hardtimelimit` was given in the benchmark-definition file.
+  If a time limit is specified on the command line, this now overrides both soft and hard time limit.
+- Implementation of tool-info modules got easier because the `test_tool_info` helper got improved
+  (it now allows to test the function for extracting results from tool outputs).
+- Several tool-info modules of tools participating in SV-COMP got improved.
+- Simplified cgroups setup for systemd systems.
+- Improved documentation.
+
+## BenchExec 1.5
+
+- Improved definition of time and memory limits:
+  Both can now be specified including units such as "s", "min" / "MB", "GB".
+  to make them easier to read and less ambiguous.
+  The old input format without units is still valid.
+- runexec now allows enabling other cgroup subsystems and setting arbitrary cgroup options.
+- HTML tables gained the possibility for inverting row filters.
+- Improve detection of out-of-memory situations (were not always reported as OOM).
+- External resources in HTML tables are loaded from HTTPS URLs
+  such that browsers do not complain because of mixed content when viewing tables via HTTPS.
+- Improved warnings for swapping and CPU throttling for benchexec.
+- Various improvements to internal handling of memory values,
+  they are not consistently stored as bytes
+  (this only affects extensions of BenchExec, not regular input and output for users).
+
+## BenchExec 1.4
+
+- BenchExec moved to https://github.com/sosy-lab/benchexec
+- Fix several bugs in table-generator introduced in version 1.3.
+- BenchExec now creates fresh empty directories for $HOME and $TMPDIR
+  of all runs, and removes them afterwards.
+- table-generator now transparently supports result XML files as input
+  that are compressed with GZip or BZip2.
+- benchexec now reports some more information as status when a tool crashes,
+  e.g. whether it segfaulted or aborted, and what the exit code was
+  (previously this was only done for some tools).
+- If a tool produces a result but still violates a resource limit,
+  this is now shown in the status (but still counted as timeout / out of memory).
+- Added dummy tool "calculatepi" that needs no input files and no installation,
+  but can be used to create some CPU load and test benchmarking
+  (it calculates Pi up some arbitrary number of digits using the tool "bc").
+- Renaming "tool wrapper" to "tool info".
+  This is mostly an internal and documentation change, but the utility
+  `benchexec.test_tool_wrapper` is now named `benchexec.test_tool_info`.
+
+## BenchExec 1.3
+
+- Fix core assignment on AMD Bulldozer/Piledriver Opterons.
+- Measure and report CPU time usage per core
+  (hidden by default in tables, use `table-generator --all-columns` to show).
+- Parameter `--user` allows executing benchmarks under a different user
+  (cf. https://github.com/sosy-lab/benchexec/blob/master/doc/separate-user.md).
+- Performance improvements for table-generator,
+  including parallel processing of input and output files and statistics.
+- HTML Tables support filtering rows by task name.
+- Improved statistics in HTML tables: median is now the arithmetic median,
+  unnecessary rounding removed, standard deviation added,
+  and missing results are not counted as "0" but ignored in calculation.
+- New utility for testing tool wrappers, making it easier to add support
+  for new tools.
+- Several new modules for integration of various software verifiers.
+
+## BenchExec 1.2
+
+- BenchExec now records whether TurboBoost was enabled during benchmarking.
+- Updated SV-COMP scoring scheme to SV-COMP 2016.
+- Support new property 'no-overflow' for SV-COMP 2016.
+- Several new modules for integration of various software verifiers.
+- Some improvements to CPU-core assignment.
+
+## BenchExec 1.1
+
+- HTML tables produced by table-generator now have a header that stays
+  always visible, even when scrolling through the table.
+- A Debian package is now created for releases and made available on GitHub.
+- Small bug fixes.
+
+## BenchExec 1.0
+
+- Multiple runs for the same file can now be shown in the table in different rows
+  if they have different properties or ids.
+- Helper files for generating scatter and quantile plots with Gnuplot added.
+- Doctype declarations are now used in all XML files.
+- Statistics output at end of benchexec run was wrong.
+
+## BenchExec 0.5
+
+- Allow to redirect stdin of the benchmarked tool in runexec / RunExecutor
+- Fix bug in measurement of CPU time
+  (only occurred in special cases and produced a wrong value below 0.5s)
+- Improve utility command for checking cgroups to work around a problem
+  with cgrulesngd not handlings threads correctly.
+
+## BenchExec 0.4
+
+- Support for integrating SMTLib 2 compliant SMT solvers and checking the expected output.
+- runexec now supports Python 2 again.
+- table-generator allows to selected desired output formats and supports output to stdout.
+- Added utility command for checking if cgroups have been set up correctly.
+- Avoid "false posititive/negative" and use "incorrect false/true" instead.
+- Command-line arguments to all tools can be read from a file given with prefix "@".
+- Bug fixes and performance improvements.
+
+## BenchExec 0.3
+
+- HTML tables now have header with direct access to plots.
+- Maximum score of table is generated again.
+- table-generator can now extract statistic values for other tools, too (not only CPAchecker).
+- More flexible time limit specifications.
+- Warnings shown if system swaps or throttles during benchmarking.
+- Improved reliability of benchmarking: forbid swapping, use freezer to kill processes atomically.
+- Renamed `<sourcefiles>` tag to `<tasks>` in benchexec input.
+- Bug fixes.
+- Added documentation.
+- Added more tests.
+
+
+## BenchExec 0.2
+
+- bug fixes
+- switch to Python 3 completely
+
+
+## BenchExec 0.1
+
+Initial version of BenchExec as taken from the repository of CPAchecker.
