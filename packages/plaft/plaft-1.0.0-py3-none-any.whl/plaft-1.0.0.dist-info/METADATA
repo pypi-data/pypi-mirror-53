@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: plaft
+Version: 1.0.0
+Summary: Simple tool for automating the correction of programming language exercises
+Home-page: https://github.com/ifnmgjanauba/plaft
+Author: IFNMG Campus Avançado de Janaúba
+Author-email: cezarfelipe@gmail.com
+License: GPLv3
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Education
+Classifier: Topic :: Utilities
+Requires-Python: >= 3.6
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: pyyaml
+Requires-Dist: pexpect
+
+# Plaft
+
+Simple tool for automating the correction of programming language exercises
+
+## Installation
+
+First make sure you have Python 3.6 or higher installed. You can download Python [here](https://www.python.org/downloads/).
+
+To install plaft under Linux / OS X:
+
+```
+pip install plaft
+```
+
+Under Windows, please [install the Linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Then install plaft within the subsystem.
+
+## Usage
+
+For example, the directory that contains all the student code files directories, look like this:
+
+```
++ Tests
+|-+ student1
+    |-- ex01.py
+    |-- ex02.py
+|-+ student2
+    |-- ex01.py
+    |-- ex02.py
+```
+
+To check of students code files, run plaft like so:
+
+```
+plaft -a "/tests" -c "tests.yaml"
+```
+
