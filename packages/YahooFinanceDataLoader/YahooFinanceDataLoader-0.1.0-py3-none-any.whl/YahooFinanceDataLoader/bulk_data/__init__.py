@@ -1,0 +1,2 @@
+from YahooFinanceDataLoader.bulk_data.download_bulk_data import download_bulk_data
+
