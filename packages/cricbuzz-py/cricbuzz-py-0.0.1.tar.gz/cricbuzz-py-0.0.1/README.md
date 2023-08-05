@@ -1,0 +1,1 @@
+this package retrieves scores from https://www.cricbuzz.com/match-api/livematches.json
