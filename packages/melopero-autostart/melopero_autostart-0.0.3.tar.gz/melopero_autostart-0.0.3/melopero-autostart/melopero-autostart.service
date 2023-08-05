@@ -1,0 +1,10 @@
+[Unit]
+Description=melopero-autostart
+After=multi-user.target
+
+[Service]
+Type=forking
+ExecStart=/home/melopero-autostart/StartScripts.sh
+
+[Install]
+WantedBy=multi-user.target
