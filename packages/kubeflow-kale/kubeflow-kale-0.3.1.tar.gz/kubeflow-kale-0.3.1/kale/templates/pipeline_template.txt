@@ -1,0 +1,124 @@
+import kfp.components as comp
+from kubernetes import client as k8s_client
+
+{# PIPELINE FUNCTION BLOCKS #}
+{% for func in block_functions -%}
+{{func}}
+{% endfor -%}
+
+{# DEFINE PIPELINE TASKS FROM FUNCTIONS #}
+{%- for name in block_functions_names -%}
+{{ name }}_op = comp.func_to_container_op({{ name }}, base_image='{{ docker_base_image }}')
+{% endfor -%}
+
+{# DECLARE PIPELINE #}
+import kfp.dsl as dsl
+@dsl.pipeline(
+   name='{{ pipeline_name }}',
+   description='{{ pipeline_description }}'
+)
+def auto_generated_pipeline():
+
+    marshal_vop = dsl.VolumeOp(
+        name="kale_marshal_volume",
+        resource_name="kale-marshal-pvc",
+        modes=dsl.VOLUME_MODE_RWM,
+        size="1Gi"
+    )
+
+    pvolumes_dict = {'/marshal': marshal_vop.volume}
+
+    {% for vol in volumes -%}
+    {% set name= vol['name'] %}
+    {% set mountpoint = vol['mount_point'] %}
+{#    TODO Add size#}
+    {% set pvc_size = "1Gi" %}
+    {% if vol['type'] == 'pv' %}
+
+    pvc{{ loop.index }}  = k8s_client.V1PersistentVolumeClaim(
+        api_version="v1",
+        kind="PersistentVolumeClaim",
+        metadata=k8s_client.V1ObjectMeta(
+            name="{{ name }}-claim-{{ pipeline_name }}"
+        ),
+        spec=k8s_client.V1PersistentVolumeClaimSpec(
+            volume_name="{{ name }}",
+            storage_class_name="local-storage",
+            access_modes=['ReadWriteOnce'],
+            resources=k8s_client.V1ResourceRequirements(
+                requests={"storage": {{ pvc_size }}}
+            )
+        )
+    )                                                              
+
+    vop{{ loop.index }} = dsl.VolumeOp(
+        name="pvc-data{{ loop.index }}",
+        k8s_resource=pvc{{ loop.index }}
+    )
+
+    {% elif vol['type'] == 'pvc' %}
+
+    vop{{ loop.index }} = dsl.PipelineVolume(pvc='{{ name }}')
+
+    {% elif vol['type'] == 'rok' %}
+
+    vop{{ loop.index }} = dsl.VolumeOp(
+        name='create-volume-{{ loop.index }}',
+        resource_name='rok-volume-{{ loop.index }}',
+        annotations={"rok/origin": '{{ name }}'},
+        size='{{ pvc_size }}'
+    )
+
+    {% endif %}
+
+    pvolumes_dict['{{ mountpoint }}'] = vop{{ loop.index }}.volume
+
+    {% endfor %}
+
+    {% for name in block_functions_names %}
+
+    {{ name }}_task = {{ name }}_op({{ block_function_args[ name ]|join(', ') }})\
+                            .add_pvolumes(pvolumes_dict)
+
+    {% endfor %}
+
+    {# Snaphosts #}
+    {% for vol in volumes -%}
+    {% if vol['snapshot'] %}
+    snapshot{{ loop.index }} = dsl.VolumeSnapshotOp(
+        name='snapshot-volume-{{ loop.index }}',
+        resource_name='{{ vol['snapshot_name'] }}',
+        volume=vop{{ loop.index }}.volume.after({{ leaf_nodes| map('add_suffix', '_task') | join(', ') }})
+    )
+    {% endif %}
+    {% endfor %}
+
+{#    vol_dict = {#}
+{#        "apiVersion": "v1",#}
+{#        "kind": "PersistentVolumeClaim",#}
+{#        "metadata": {#}
+{#            "name": marshal_vop.outputs['name']#}
+{#        }#}
+{#    }#}
+{##}
+{#    delete_vol = dsl.ResourceOp(#}
+{#        name="delete_kale_marshal_volume",#}
+{#        action="delete",#}
+{#        k8s_resource=vol_dict#}
+{#    ).after({{ leaf_steps|join(', ') }})  # Depend on the last executing steps#}
+
+{# The script will deploy the pipeline if run manually #}
+if __name__ == "__main__":
+    pipeline_func = auto_generated_pipeline
+    pipeline_filename = pipeline_func.__name__ + '.pipeline.tar.gz'
+    import kfp.compiler as compiler
+    compiler.Compiler().compile(pipeline_func, pipeline_filename)
+
+    # Get or create an experiment and submit a pipeline run
+    import kfp
+    client = kfp.Client()
+    experiment = client.create_experiment('{{ experiment_name }}')
+
+    # Submit a pipeline run
+    run_name = '{{ pipeline_name }}_run'
+    run_result = client.run_pipeline(experiment.id, run_name, pipeline_filename, {})
