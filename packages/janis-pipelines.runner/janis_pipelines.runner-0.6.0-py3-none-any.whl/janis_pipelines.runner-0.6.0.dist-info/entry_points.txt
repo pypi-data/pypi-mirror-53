@@ -1,0 +1,6 @@
+[console_scripts]
+janis = janis_runner.cli:process_args
+
+[janis.extension]
+runner = janis_runner
+
