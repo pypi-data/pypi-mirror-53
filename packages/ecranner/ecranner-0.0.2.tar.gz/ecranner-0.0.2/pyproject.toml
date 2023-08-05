@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "ecranner"
+version = "0.0.2"
+description = "Scan the vulnerability of Docker images stored in ECR"
+authors = ["homoluctus <w.slife18sy@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/homoluctus/ecranner"
+repository = "https://github.com/homoluctus/ecranner"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Unix",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.7",
+]
+packages = [
+  { include = "ecranner" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.22"
+boto3 = "^1.9"
+docker = "^4.0"
+pyyaml = "^5.1"
+jsonschema = "^3.0"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.4"
+flake8 = "^3.7"
+pytest = "^5.1"
+
+[tool.poetry.scripts]
+ecranner = "ecranner.cli:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
