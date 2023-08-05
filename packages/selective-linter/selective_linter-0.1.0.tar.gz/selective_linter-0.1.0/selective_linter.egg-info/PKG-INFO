@@ -1,0 +1,44 @@
+Metadata-Version: 2.1
+Name: selective-linter
+Version: 0.1.0
+Summary: A script to be used as a pre-commit git hook for projects written in Swift
+Home-page: https://github.com/mattboran/SelectiveSwiftLinter
+Author: Matt Boran
+Author-email: mattboran@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/mattboran/SelectiveSwiftLinter/releases/download/0.1.0/selective_linter-0.1.0-py3-none-any.whl
+Description: # Selective (Swift) Linter
+        
+        This is a package to be used as a pre-commit git hook to lint changes in .swift files using [Swiftlint Installed via Homebrew](https://formulae.brew.sh/formula/swiftlint).
+        
+        ### Installation and  Dependencies
+        To install swiftlint from the terminal use Homebrew:
+        ```sh
+        $ brew install swiftlint
+        ```
+        To install this Python3 package
+        
+        ```sh
+        $ pip3 install selective_linter
+        ```
+        
+        To install the git hook to a repository, navigate to the root of that repository and run
+        
+        ```sh
+        $ python3 -m selective_linter --install
+        ```
+        
+        This also adds the `.lint_cache` file to your `.gitignore`.
+        
+        To deactivate the script run
+        
+        ```sh
+        $ git config hooks.skipswitflint true
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Requires-Python: >3.0.0
+Description-Content-Type: text/markdown
