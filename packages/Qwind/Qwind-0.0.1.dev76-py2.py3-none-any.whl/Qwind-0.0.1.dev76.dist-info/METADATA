@@ -1,0 +1,69 @@
+Metadata-Version: 2.1
+Name: Qwind
+Version: 0.0.1.dev76
+Summary: AGN line-driven winds model.
+Home-page: https://github.com/arnauqb/qwind
+Author: Arnau Quera-Bofarull
+Author-email: arnau.quera-bofarull@durham.ac.uk
+License: GPL
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Requires-Dist: astropy (==3.2.1)
+Requires-Dist: llvmlite (==0.29.0)
+Requires-Dist: numba (==0.45.0)
+Requires-Dist: numpy (==1.16.4)
+Requires-Dist: scipy (==1.3.0)
+Requires-Dist: tqdm (==4.32.1)
+Requires-Dist: pytest (==5.0.1)
+Requires-Dist: pandas (==0.24.2)
+
+Qwind: A non-hydrodynamical model of AGN line-driven winds.
+###########################################################
+
+Qwind is a code that aims to simulate the launching and acceleration phase of line-driven winds in the context of AGN accretion discs. To do that, we model the wind as a set of streamlines originating on the surface of the AGN accretion disc, and we evolve them following their equation of motion, given by the balance between radiative and gravitational force.
+
+Code summary
+============
+
+Please refer to (paper) for a detailed physical explanation of the model. The code is divided into three main classes: <em>wind</em>, <em>radiation</em>, and <em>streamline</em>. The <em>wind</em> class is the main class and the one that is used to initialise the model. It contains the global information of the accretion disc such as accretion rate, density profile, etc. The radiation processes are handled in the <em>radiation</em> class. There are multiple implementations of the radiation class available, for different treatments of the radiation field. A model can be initialised with a particular radiation model by changing the ``radiation_mode`` argument when initialising the wind class. Lastly, the <em>streamline</em> class represents a single streamline, and contains the Euler iterator that solves its equation of motion. It also stores all the physical information of the streamline  at every point it travels, so that it is easy to analyse and debug.
+
+Getting started
+===============
+
+Prerequisites
+-------------
+
+The required Python modules are
+
+``
+scipy
+numba
+``
+
+Installing
+----------
+
+The code can be installed with pip
+
+```
+pip install qwind
+```
+
+Running the tests
+=================
+
+The tests can be easily run by installing pytest and running
+
+```
+cd tests
+pytest
+```
+
+License
+=======
+
+The project is licensed under the GPL3 license. See LICENSE.md file for details.
+Please refer to (link to Notebook) for a quick start on how to use the code.
+
+
+
