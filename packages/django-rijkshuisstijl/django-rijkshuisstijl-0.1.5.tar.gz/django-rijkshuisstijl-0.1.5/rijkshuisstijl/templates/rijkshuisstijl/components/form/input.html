@@ -1,0 +1,9 @@
+{% spaceless %}{% load rijkshuisstijl_utils %}
+    {% capture as base_attrs %} type="{{ type|default:'text' }}"{% if name %} name="{{ name }}"{% endif %}{% endcapture %}
+    {% capture as optional_attrs %}{% if value and value != None and value != 'None' %} value="{{ value }}"{% endif %}{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}{% if size %} size={{ size }}{% endif %}{% endcapture %}
+    {% capture as valdation_atrs %}{% if date_format %} date-format="{{ date_format }}"{% endif %}{% if disabled %} disabled{% endif %}{% if min %} min="{{ min }}"{% endif %}{% if max %} max={{ max }}{% endif %}{% if readonly%} readonly{% endif %}{% if required %} required{% endif %}{% if type == 'time' or step %} step="{{ step|default:60 }}"{% endif %}{% endcapture %}
+    {% capture as meta_atrs %}{% if id %} id="{{ id }}"{% endif %}{% endcapture %}
+    {% capture as additional_attrs %}{% for attr, value in widget_attrs.items %} {{ attr }}="{{ value }}"{% endfor %}{% endcapture %}
+    <input class="input{% if errors %} input--error{% endif %}{% if "readonly" in widget_attrs %} input--readonly{% endif %}{% if class %} {{ class }}{% endif %}"{{ base_attrs }}{{ optional_attrs }}{{ valdation_atrs }}{{ meta_atrs }}{{ additional_attrs }}>
+    {% if type == 'file' %}<label class="input__filepicker"{% if id %} for="{{ id }}"{% endif %}>{% firstof raw_value placeholder _('Bestand kiezen') %}</label>{% endif %}
+{% endspaceless %}

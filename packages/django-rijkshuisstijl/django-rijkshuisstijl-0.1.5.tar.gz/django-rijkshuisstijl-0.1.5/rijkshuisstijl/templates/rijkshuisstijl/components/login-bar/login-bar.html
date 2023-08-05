@@ -1,0 +1,13 @@
+{% spaceless %}
+<div class="login-bar">
+    <p class="login-bar__body">
+        {% if request.user.is_authenticated %}
+            <a class="login-bar__link login-bar__link--primary" href="{{ details_url }}">{{ label_logged_in_as }} {{ request.user }}</a>
+            <a class="login-bar__link login-bar__link--secondary" href="{{ logout_url }}">{{ label_logout }}</a>
+        {% else %}
+            <a class="login-bar__link login-bar__link--primary" href="{{ login_url }}">{{ label_login }}</a>
+            <a class="login-bar__link login-bar__link--secondary" href="{{ registration_url }}">{{ label_request_account }}</a>
+        {% endif %}
+    </p>
+</div>
+{% endspaceless %}

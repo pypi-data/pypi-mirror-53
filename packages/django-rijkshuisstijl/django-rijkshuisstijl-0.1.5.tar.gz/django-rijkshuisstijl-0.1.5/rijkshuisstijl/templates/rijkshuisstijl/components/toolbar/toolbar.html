@@ -1,0 +1,15 @@
+{% spaceless %}{% load rijkshuisstijl %}
+    <nav class="toolbar">
+        <ul class="toolbar__list">
+            {% for item in items %}
+                <li class="toolbar__list-item">
+                    {% if item.href %}
+                        {% button_link class='button--small button--transparent' href=item.href target=item.target|default:None label=item.label title=item.title|default:None icon=item.icon|default:None %}
+                    {% else %}
+                        {% button class='button--small button--transparent' name=item.name label=item.label title=item.title|default:None icon=item.icon|default:None %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endspaceless %}

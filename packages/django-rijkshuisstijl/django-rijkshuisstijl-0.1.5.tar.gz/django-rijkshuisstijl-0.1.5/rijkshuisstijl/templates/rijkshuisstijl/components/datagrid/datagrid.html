@@ -1,0 +1,124 @@
+{% spaceless %}{% load rijkshuisstijl rijkshuisstijl_filters rijkshuisstijl_form %}
+    <div class="datagrid{% if class %} {{ class }}{% endif %}" id="{{ id }}" role="group">
+        {% if form %}
+            <form class="datagrid__form" method="post"{% if form_action %} action="{{ form_action }}"{% endif %}>
+            {% csrf_token %}
+        {% endif %}
+        <header class="datagrid__header">
+            {% if title %}
+                <div class="datagrid__infobar">
+                    <h4 class="datagrid__title">{{ title }}</h4>
+                    {% if queryset and not is_paginated %}  {# TODO: paginator support in count. #}
+                        <div class="datagrid__count">
+                            <p class="datagrid__number">{{ queryset.count }}</p>
+                            <p class="datagrid__text">{{ label_result_count }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="toolbar{% if form_buttons %} toolbar--justify{% endif %}">
+                <ul class="toolbar__list">
+                    {% if form_buttons and toolbar_position in 'top,both' %}
+                        {% for item in form_buttons %}
+                            <li class="toolbar__list-item">
+                                {% firstof item.class 'button--transparent' as item_class %}
+                                {% button class='button--small '|add:item_class name=item.name label=item.label title=item.title|default:None icon=item.icon|default:None %}
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+
+                <ul class="toolbar__list">
+                    <li class="toolbar__list-item">
+                        {% dom_filter class='filter--class-only' filter_target='#'|add:id|add:' tbody tr' %}
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="datagrid__body">
+            <table class="datagrid__table">
+                <thead class="datagrid__table-header">
+                <tr class="datagrid__row">
+                    {% if form %}
+                        <th class="datagrid__caption datagrid__caption--checkbox">
+                            {% form_control type='checkbox' select_all='#'|add:id|add:' .datagrid__cell--checkbox .input' %}
+                        </th>
+                    {% endif %}
+
+                    {% for column in columns %}
+                        {% if column.key in orderable_column_keys %}
+
+                            {% with ordering|get:column.key as ordering %}
+                                <th class="datagrid__caption datagrid__caption--{{ column.key }} datagrid__caption--orderable{% if ordering.direction %} datagrid__caption--ordered-{{ ordering.direction }}{% endif %}">
+                                    <a class="datagrid__link" href="{{ ordering.url }}">{{ column.label }}</a>
+                                </th>
+                            {% endwith %}
+                        {% else %}
+                            <th class="datagrid__caption datagrid--{{ column.key }}">{{ column.label }}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </thead>
+
+                <tbody class="datagrid__table-body">
+                {% for object in object_list %}
+                    <tr class="datagrid__row{% if object.datagrid_modifier_class %} datagrid__row--{{ object.datagrid_modifier_class }}{% endif %}{% if object.get_absolute_url %} fake-link fake-link--double-click"
+                        data-href="{{ object.get_absolute_url }}"{% else %}"{% endif %}>
+                    {% if form %}
+                        <td class="datagrid__cell datagrid__cell--checkbox">
+                            {% form_control type='checkbox' name=form_checkbox_name value=object.pk %}
+                        </td>
+                    {% endif %}
+
+                    {% for column in columns %}
+                        {% firstof object|datagrid_label:column.key '' as label %}
+                        <td class="datagrid__cell{% if column.key == modifier_column %} datagrid__cell--modifier{% endif %}">{% spaceless %}
+                                {% if forloop.counter0 == 0 and object.get_absolute_url %}
+                                    <a class="datagrid__link" href="{{ object.get_absolute_url }}">{{ object|get_attr:column.key }}</a>
+                                {% else %}
+                                    {% if urlize %}{{ label|urlize }}
+                                        {% elif urlizetrunc %}{{ label|urlizetrunc:urlizetrunc }}
+                                    {% else %}{{ label }}{% endif %}
+                                {% endif %}
+                            {% endspaceless %}</td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% if not object_list %}
+                    <tr class="datagrid__row datagrid__row--placeholder">
+                        <td class="datagrid__cell" colspan="{% if form %}{{ columns|length|add:1 }}{% else %}{{ columns|length }}{% endif %}">{{ label_no_results }}</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if is_paginated %}
+            <footer class="datagrid__footer">
+                <div class="toolbar toolbar--justify">
+                    <ul class="toolbar__list">
+                        {% if form_buttons and toolbar_position in 'bottom,both' %}
+                            {% for item in form_buttons %}
+                                <li class="toolbar__list-item">
+                                    {% firstof item.class 'button--transparent' as item_class %}
+                                    {% button class='button--small '|add:item_class name=item.name label=item.label title=item.title|default:None icon=item.icon|default:None %}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+
+                    <ul class="toolbar__list">
+                        <li class="toolbar__list-item">{% paginator is_paginated=is_paginated paginator=paginator page_obj=page_obj form=False %}</li>
+                    </ul>
+                </div>
+            </footer>
+        {% endif %}
+
+        {% if form %}
+            </form>
+        {% endif %}
+    </div>
+{% endspaceless %}

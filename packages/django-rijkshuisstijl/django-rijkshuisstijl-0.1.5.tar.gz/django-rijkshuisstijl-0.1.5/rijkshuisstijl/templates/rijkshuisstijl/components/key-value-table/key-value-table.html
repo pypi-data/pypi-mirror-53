@@ -1,0 +1,12 @@
+{% spaceless %}
+    <table class="key-value-table">
+        <tbody class="key-value-table__body">
+        {% for key, value in data %}
+            <tr class="key-value-table__row">
+                <th class="key-value-table__key">{{ key }}</th>
+                <td class="key-value-table__value">{{ value }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endspaceless %}

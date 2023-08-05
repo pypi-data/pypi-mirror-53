@@ -1,0 +1,18 @@
+{% spaceless %}{% load rijkshuisstijl_utils %}
+{% capture as base_attrs %} name="{{ name }}"{% if multiple %} multiple{% endif %}{% endcapture %}
+{% capture as valdation_atrs %}{% if disabled%} disabled{% endif %}{% if required %} required{% endif %}{% endcapture %}
+{% capture as meta_atrs %}{% if id %} id="{{ id }}"{% endif %}{% endcapture %}
+    <select class="select{% if errors %} select--error{% endif %}{% if multiple %} select--multiple{% endif %}{% if class %} {{ class }}{% endif %}"{{ base_attrs }}{{ valdation_atrs }}{{ meta_atrs }}>
+        {% for choice in choices %}
+            {% if choice.is_group %}
+            <optgroup label="{{ choice.value }}">
+                {% for val, display in choice %}
+                    <option class="select__option" value="{{ choice.value }}" {% if choice.value == value|default:None or multiple and choice.value in value %}selected{% endif %}>{{ choice.display }}</option>
+                {% endfor %}
+            </optgroup>
+            {% else %}
+                <option class="select__option" value="{{ choice.value }}" {% if choice.value == value|default:None or multiple and choice.value in value %}selected{% endif %}>{{ choice.display }}</option>
+            {% endif %}
+    {% endfor %}
+    </select>
+{% endspaceless %}

@@ -1,0 +1,50 @@
+{% spaceless %}{% load i18n sniplates rijkshuisstijl rijkshuisstijl_filters %}
+    {% load_widgets form=sniplates|default:'rijkshuisstijl/components/form/sniplates.html' %}
+    <form class="form{% if class %} {{ class }}{% endif %}" method="{{ method|default:'post' }}" enctype="{{ enctype|default:'multipart/form-data' }}"{% if id %} id="{{ id }}"{% endif %}>
+        <header class="form__header">
+            {% if title %}<h1 class="form__title">{{ title }}</h1>{% endif %}
+            <p class="form__text">* {{ _('verplichte velden') }}</p>
+            {% if text %}{% textbox text=text status=status %}{% endif %}
+        </header>
+
+        <div class="form__body">
+            {% csrf_token %}
+
+            {% for error in form.non_field_errors %}
+                {% include './errors.html' with class='errors--non-field' errors=error only %}
+            {% endfor %}
+
+            {% if form.fieldsets %}
+                {% for fieldset in form.fieldsets %}
+                    {% if fieldset.0 %}<h2 class="form__subtitle" aria-hidden="true">{{ fieldset.0 }}</h2>{% endif %}
+                    <fieldset class="form__fieldset{% if fieldset.1.classes %} {{ fieldset.1.classes|join:' ' }}{% endif %}">
+                        {% if fieldset.0 %}<legend class="form__legend">{{ fieldset.0 }}</legend>{% endif %}
+
+                         {# TODO: Possible candidate for optimisation #}
+                        {% for field in form %}
+                            {% if  field.name in fieldset.1.fields %}
+                                {% form_field field %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if forloop.last %}
+                            <div class="form__actions">
+                                <button class="button {{ button_class|default:'button--primary' }}" type="submit">{{ label|default:_('Verzenden') }}</button>
+                            </div>
+                        {% endif %}
+                    </fieldset>
+                {% endfor %}
+            {% else %}
+                <fieldset class="form__fieldset">
+                    {% for field in form %}
+                        {% form_field field %}
+                    {% endfor %}
+
+                    <div class="form__actions">
+                        <button class="button {{ button_class|default:'button--primary' }}" type="submit">{{ label|default:_('Verzenden') }}</button>
+                    </div>
+                </fieldset>
+            {% endif %}
+        </div>
+    </form>
+{% endspaceless %}

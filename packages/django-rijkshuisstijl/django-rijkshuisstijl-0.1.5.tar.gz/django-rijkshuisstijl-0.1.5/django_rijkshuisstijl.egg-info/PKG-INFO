@@ -1,0 +1,117 @@
+Metadata-Version: 2.1
+Name: django-rijkshuisstijl
+Version: 0.1.5
+Summary: Rijkshuisstijl boilerplate for Django.
+Home-page: https://github.com/maykinmedia/django-rijkshuisstijl
+Author: Maykin Media
+Author-email: support@maykinmedia.nl
+License: MIT
+Description: =====================
+        django-rijkshuisstijl
+        =====================
+        
+        Rijkshuisstijl boilerplate for Django.
+        
+        :Version: 0.1.1
+        :Source: https://github.com/maykinmedia/django-rijkshuisstijl
+        :Keywords: ``Django, rijkshuisstijl``
+        :PythonVersion: 3.6
+        
+        
+        .. contents::
+        
+        .. section-numbering::
+        
+        Features
+        ========
+        
+        * Basic rijkshuisstijl (Dutch government branding) layout including headers, footer, buttons, forms and more.
+        * Modular setup using inclusion tags.
+        * Responsive
+        
+        Installation
+        ============
+        
+        Requirements
+        ------------
+        
+        * Python 3.6 or above
+        * setuptools 30.3.0 or above
+        * Django 1.11 or above
+        
+        
+        Install
+        -------
+        
+        Install from PyPI with pip:
+        
+        .. code-block:: bash
+        
+            pip install django-rijkshuisstijl
+        
+        
+        Then add "sitetree" and "rijkshuisstijl" to INSTALLED_APPS
+        
+        Usage
+        =====
+        
+        Add CSS/JS/icons to your main template:
+        
+        .. code-block:: html
+        
+            {% load rijkshuisstijl %}
+            <!DOCTYPE html>
+            <html lang="nl" class="views">
+            <head>
+                {% meta_css %}
+                {% meta_icons %}
+            </head>
+            <body class="view__body">
+                {% meta_js %}
+            </body>
+        
+        Then add the basic structure, supply the current urls for various urls (depending on your project):
+        
+        .. code-block:: html
+        
+            {% load rijkshuisstijl %}
+            <!DOCTYPE html>
+            <html lang="nl" class="views">
+            <head>
+                {% meta_css %}
+                {% meta_icons %}
+            </head>
+            <body class="view__body">
+                {% skiplink %}
+                {% login_bar details_url='#' logout_url='#' login_url='#' registration_url='#' %}
+                {% header %}
+                {% navigation_bar details_url='#' logout_url='#' login_url='#' registration_url='#' %}
+        
+                <main class="view__content">
+                    {% skiplink_target %}
+                </main>
+        
+                {% footer %}
+                {% meta_js %}
+            </body>
+        
+        See the documentation for further information about logos, navigation, forms and datagrids.
+        
+Keywords: TODO
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.0
+Classifier: Framework :: Django :: 2.1
+Classifier: Framework :: Django :: 2.2
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: tests
+Provides-Extra: release
+Provides-Extra: docs
+Provides-Extra: pep8
+Provides-Extra: coverage

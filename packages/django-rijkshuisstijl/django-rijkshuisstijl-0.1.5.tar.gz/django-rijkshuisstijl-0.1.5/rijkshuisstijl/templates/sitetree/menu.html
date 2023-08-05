@@ -1,0 +1,7 @@
+{% spaceless %}
+    <ul class="menu">
+        {% for item in sitetree_items %}
+            {% include './menu-item.html' with item=item only %}
+        {% endfor %}
+    </ul>
+{% endspaceless %}
