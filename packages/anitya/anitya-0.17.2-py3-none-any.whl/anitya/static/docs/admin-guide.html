@@ -1,0 +1,273 @@
+<!--
+	Overriding Alabaster Theme to replace link to static page source
+	with a link to GitHub. Using instructions from official guide.
+
+	https://www.sphinx-doc.org/en/master/templating.html#jinja-sphinx-templating-primer
+-->
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Administration Guide &#8212; Anitya 0.16.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Documentation" href="api.html" />
+    <link rel="prev" title="Glossary" href="glossary.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="administration-guide">
+<h1>Administration Guide<a class="headerlink" href="#administration-guide" title="Permalink to this headline">¶</a></h1>
+<p>This guide is intended for administrators of an Anitya deployment.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Anitya is not currently available in any distribution’s default repository.
+To install it from PyPI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install anitya
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>If the <code class="docutils literal notranslate"><span class="pre">ANITYA_WEB_CONFIG</span></code> environment variable is set to a file system path
+Anitya can read, the configuration is loaded from that location. Otherwise, the
+configuration is read from <code class="docutils literal notranslate"><span class="pre">/etc/anitya/anitya.toml</span></code>. If neither can be read,
+Anitya will log a warning and use its configuration defaults.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The default configuration for Anitya includes a secret key for
+web sessions. It is <em>not</em> safe to use the default configuration in a
+production environment.</p>
+</div>
+<p>Anitya uses TOML as its configuration format. A complete configuration file
+with inline documentation is below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This is a TOML-format file. For the spec, see https://github.com/toml-lang/toml#spec
+
+# Secret key used to generate the CSRF token in the forms.
+secret_key = &quot;changeme please&quot;
+
+# The lifetime of the session, in seconds.
+permanent_session_lifetime = 3600
+
+# URL to the database
+db_url = &quot;sqlite:////var/tmp/anitya-dev.sqlite&quot;
+
+# List of web administrators. The values should be the value of the &quot;id&quot; column
+# for the user in the &quot;users&quot; table of the database. They need to log in before
+# this record is created. An example value would be
+# &quot;65536ed7-bdd3-4a1e-8252-10d874fd706b&quot;
+anitya_web_admins = []
+
+# The email to use in the &#39;From&#39; header when sending emails.
+admin_email = &quot;admin@fedoraproject.org&quot;
+
+# The SMTP server to send mail through
+smtp_server = &quot;smtp.example.com&quot;
+
+# Whether or not to send emails to MAIL_ADMIN via SMTP_SERVER when HTTP 500
+# errors occur.
+email_errors = false
+
+# List of users that are not allowed to sign in, by &quot;id&quot; from the &quot;users&quot; table.
+blacklisted_users = []
+
+# The type of session protection used by social-auth.
+session_protection = &quot;strong&quot;
+
+# The authentication backends to use. For valid values, see social-auth&#39;s
+# documentation.
+social_auth_authentication_backends = [
+    &quot;social_core.backends.fedora.FedoraOpenId&quot;,
+    &quot;social_core.backends.gitlab.GitLabOAuth2&quot;,
+    &quot;social_core.backends.github.GithubOAuth2&quot;,
+    &quot;social_core.backends.google.GoogleOAuth2&quot;,
+    &quot;social_core.backends.yahoo.YahooOpenId&quot;,
+    &quot;social_core.backends.open_id.OpenIdAuth&quot;
+]
+
+# Force the application to require HTTPS on authentication redirects.
+social_auth_redirect_is_https = true
+
+# List of platforms for which Anitya should automatically create new projects
+# when Libraries.io announces a new version. See https://libraries.io/ for the
+# list of valid platforms. By default, Anitya will only update existing projects
+# via Libraries.io.
+librariesio_platform_whitelist = []
+sse_feed = &quot;http://firehose.libraries.io/events&quot;
+
+# Default regular expression used for backend
+default_regex = &quot;&quot;&quot;\
+                (?i)%(name)s(?:[-_]?(?:minsrc|src|source))?[-_]([^-/_\\s]+?)(?:[-_]\
+                (?:minsrc|src|source|asc|release))?\\.(?:tar|t[bglx]z|tbz2|zip)\
+                &quot;&quot;&quot;
+
+# Github access token
+# This is used by GitHub API for github backend
+github_access_token = &quot;foobar&quot;
+
+# The logging configuration, in Python dictConfig format.
+[anitya_log_config]
+    version = 1
+    disable_existing_loggers = true
+
+    [anitya_log_config.formatters]
+        [anitya_log_config.formatters.simple]
+            format = &quot;[%(name)s %(levelname)s] %(message)s&quot;
+
+    [anitya_log_config.handlers]
+        [anitya_log_config.handlers.console]
+            class = &quot;logging.StreamHandler&quot;
+            formatter = &quot;simple&quot;
+            stream = &quot;ext://sys.stdout&quot;
+
+    [anitya_log_config.loggers]
+        [anitya_log_config.loggers.anitya]
+            level = &quot;WARNING&quot;
+            propagate = false
+            handlers = [&quot;console&quot;]
+
+    [anitya_log_config.root]
+        level = &quot;ERROR&quot;
+        handlers = [&quot;console&quot;]
+</pre></div>
+</div>
+</div>
+<div class="section" id="services">
+<h2>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h2>
+<p>Anitya is made up of a WSGI application, an update script that should be run at
+regular intervals via cron or similar, an optional fedmsg consumer, and requires
+a database.</p>
+<div class="section" id="wsgi-application">
+<h3>WSGI Application<a class="headerlink" href="#wsgi-application" title="Permalink to this headline">¶</a></h3>
+<p>The WSGI application is located at <code class="docutils literal notranslate"><span class="pre">anitya.wsgi</span></code>. This application handles the
+web interface for creating, updating, and viewing projects. It also offers a
+REST API.</p>
+</div>
+<div class="section" id="update-script">
+<h3>Update Script<a class="headerlink" href="#update-script" title="Permalink to this headline">¶</a></h3>
+<p>The script that checks for project updates is located at
+<code class="docutils literal notranslate"><span class="pre">files/anitya_cron.py</span></code> in the git repository and Python package.</p>
+</div>
+<div class="section" id="libraries-io-fedmsg-consumer">
+<h3>Libraries.io fedmsg Consumer<a class="headerlink" href="#libraries-io-fedmsg-consumer" title="Permalink to this headline">¶</a></h3>
+<p>This optional service listens to a ZeroMQ socket for messages published by the
+<a class="reference external" href="https://libraries.io/">libraries.io</a> service. This requires that a bridge from Server-Sent Events
+(SSE) to ZeroMQ be running.</p>
+<p>To run this, set the <code class="docutils literal notranslate"><span class="pre">anitya.libraryio.enabled</span></code> key to <code class="docutils literal notranslate"><span class="pre">True</span></code> in your fedmsg
+configuration and run the <code class="docutils literal notranslate"><span class="pre">fedmsg-hub</span></code> service.</p>
+</div>
+<div class="section" id="database">
+<h3>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h3>
+<p>Anitya should work with any SQL database, but it is only tested with SQLite
+and PostgreSQL. It is recommended to use PostgreSQL in a production deployment.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Anitya</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=release-monitoring&repo=anitya&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Administration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#services">Services</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database models</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="glossary.html" title="previous chapter">Glossary</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" style="text-align: center">
+      &copy;2019, Red Hat, Inc. and others.|
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      (<a href="https://github.com/release-monitoring/anitya/tree/master/docs/_templates">customized</a>)
+      |
+      <a href="https://github.com/release-monitoring/anitya/tree/master/docs/admin-guide.rst"
+          rel="nofollow">View source</a>
+    </div>
+  </body>
+</html>
