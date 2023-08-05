@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: tap2junit
+Version: 0.1.5
+Summary: Tap13 to jUnit
+Home-page: https://github.com/nodejs/tap2junit
+Author: Node.js contributors
+Author-email: cclauss@me.com
+License: UNKNOWN
+Keywords: tap13 junit
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Build Tools
+Description-Content-Type: text/markdown
+Requires-Dist: junit-xml
+Requires-Dist: yamlish
+
+A utility that converts [TAP version 13](https://testanything.org/) to [JUnit](https://junit.org/junit5/). That's it.
+
+The syntax expected is currently pretty custom-tailored for use at https://ci.nodejs.org.
+
+Improvements welcome.
+
+To install:
+
+`pip install tap2junit`
+
+To run:
+
+`tap2junit -i file.tap -o file.xml`
+
+Suggested code hygiene:
+```
+$ flake8 --max-line-length=88 .
+$ isort -rc .
+$ black .
+```
+
