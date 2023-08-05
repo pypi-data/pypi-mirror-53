@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}User: {{ user.username }}{% endblock %}
+
+{% block content %}
+  <div class="user-profile">
+      {% if user.is_authenticated %}
+      <h1>
+          {% trans "Welcome" %}
+          {{ user.username }}
+      </h1>
+
+      <div class="row">
+
+        <div class="col-sm-12">
+          <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">
+            {% trans "Change E-mail" %}
+          </a>
+        </div>
+
+        <div class="col-sm-12">
+          <a class="btn btn-primary" href="{% url 'profile_update' %}" role="button">
+            {% trans "Update profile" %}
+          </a>
+        </div>
+
+        <div class="col-sm-12">
+          <a class="btn btn-primary" href="{% url 'account_logout' %}" role="button">
+            {% trans "Logout" %}
+          </a>
+        </div>
+
+      </div>
+      {% else %}
+      <h1>
+          {% blocktrans %}You are not logged in.{% endblocktrans %}
+      </h1>
+
+      <div class="row">
+
+        <div class="col-sm-12">
+          <a class="btn btn-primary" href="{% url 'account_login' %}" role="button">
+            {% trans "Login" %}
+          </a>
+        </div>
+
+        <div class="col-sm-12">
+          <a class="btn btn-primary" href="{% url 'account_signup' %}" role="button">
+            {% trans "Register" %}
+          </a>
+        </div>
+
+      </div>
+      {% endif %}
+  </div>
+{% endblock content %}
