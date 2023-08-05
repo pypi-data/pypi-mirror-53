@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: MCEq
+Version: 1.0.5
+Summary: Numerical cascade equation solver
+Home-page: https://github.com/afedynitch/MCEq
+Author: Anatoli Fedynitch
+Author-email: afedynitch@gmail.com
+License: BSD 3-Clause License
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Intended Audience :: Science/Research
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: BSD License
+Requires: numpy
+Requires: scipy
+Requires: particletools
+Requires: crflux
+Requires: h5py
+Provides-Extra: MKL
+Provides-Extra: CUDA
