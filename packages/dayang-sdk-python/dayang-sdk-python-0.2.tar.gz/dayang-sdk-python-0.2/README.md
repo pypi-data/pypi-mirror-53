@@ -1,0 +1,723 @@
+#  dayang-sdk-python  documents
+
+dayang-sdk-python 是一个大洋的第三方 Python SDK, 实现了平台账号查询，事件跟踪，传播分析等 API。
+
+
+
+## 安装
+
+dayang-sdk-python 可以使用pip从pypi安装
+
+```
+pip install dayang-sdk-python
+```
+
+## 下载
+
+dayang-sdk-python 在pypi上可用 https://pypi.org/project/dayang-sdk-python/
+
+文档托管在:
+
+## 代码
+
+代码和问题跟踪托管在github上: 
+
+
+
+## 更新日志
+
+
+
+## 示例
+
+### 内容
+
+- Client examples
+  - [Platform examples](#Platform examples)
+  - [News examples](#News examples)
+  - [Tracker examples](#Tracker examples)
+  - [Hotspot examples](#Hotspot examples)
+  - [Spread examples](#Spread examples)
+  - [Rank examples](#Rank examples)
+
+#### Platform examples
+
+
+
+#### News examples
+
+
+
+#### Tracker examples
+
+
+
+#### Hotspot examples
+
+
+
+#### Spread examples
+
+
+
+#### Rank examples
+
+
+
+## Platform
+
+#### 网站账号查询
+
+用途：账号列表查询-网站
+
+```python
+Client.platform.get_website(self, **kwargs)
+```
+
+**Parameters** :
+
+- name  - 站点名称模糊查询
+- page - 页号，默认值1
+- page_size - 每页条目数，默认值10，最大值50
+
+**Return** :
+
+#### 微信账号查询
+
+用途：账号列表查询-微信
+
+```python
+Client.platform.get_wechat(self, **kwargs)
+```
+
+**Parameters** :
+
+- name - 站点名称模糊查询
+- page - 页号，默认值1
+- page_size - 每页条目数，默认值10，最大值50
+
+**Return** :
+
+
+
+#### 微博账号查询
+
+用途：账号列表查询-微博
+
+```
+Client.platform.get_weibo(self, **kwargs)
+```
+
+**Parameters** :
+
+- name  - 站点名称模糊查询
+- page - 页号，默认值1
+- page_size -  每页条目数，默认值10，最大值50
+
+**Return** :
+
+
+
+#### 区域列表查询
+
+用途：区域列表查询
+
+```
+Client.platform.get_area(self, area_id)
+```
+
+**Parameters** :
+
+- - area_id - 父级别id，0：表示全国
+
+**return** :
+
+
+
+## News
+
+#### 新闻搜索
+
+用途：新闻搜索
+
+```python
+Client.news.search(self, **kwargs)
+```
+
+**Parameters** :
+
+- account_ids - 帐号id集合（站点、微博、微信帐号id）,最多支持传递50个, Set<String>类型
+- location_names - 线索地域 线索地域，不传递表示不限制地域,最多支持传递50个, Set<String>类型
+- media_types -  媒体类型：对应关系 网站:0, 微博:1, 微信:2, Set<String>类型
+- content_classifys -  内容分类集合,  Set<String>类型
+- title_like - 标题检索内容
+- latest_timestamp - 最大时间戳
+- latest_days - 发布时间天数
+- page - 页号，默认值1
+- page_size - 每页条目数，默认值10，最大值50
+
+**Retrun** :
+
+
+
+#### 新闻详情获取
+
+用途：新闻详情获取
+
+```
+Client.news.get_detail(self, area_id)
+```
+
+**Parameters** :
+
+- area_id - 新闻的id
+
+**return** :
+
+
+
+## Tracker
+
+#### 创建事件跟踪
+
+用途：
+
+```python
+Client.tracker.create(self, tracker_type, tracker_name, contain_words, exclude_words=None)
+```
+
+**Parameters** :
+
+- tracker_type - 事件跟踪类型(1:人物,2:机构,3:产品,4:品牌,5:事件,6:其他)
+- tracker_name - 事件名称
+- contain_words - 检测词(自定义事件的监测词,用逗号分隔,逗号之间是或的关系,如[a+b+c,d+e],词组1中a+b+c是AND关系，词组2中d+e是AND关系，词组1和词组2是OR关系)
+- exclude_words - 排除词集合(自定义事件的排除词,用逗号分隔,逗号之间是或的关系,如fff,ggg,hhh)
+
+**return** :
+
+
+
+#### 事件跟踪列表查询
+
+用途：事件跟踪列表查询
+
+```python
+Client.tracker.list(self, **kwargs)
+```
+
+**Parameters** :
+
+- page - 页号，默认值1
+- page_size - 每页条目数，默认值10
+
+**return** :
+
+
+
+#### 删除事件跟踪
+
+用途：删除事件跟踪
+
+```
+Client.tracker.delete(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 查询新闻汇总接口
+
+用途：查询新闻汇总接口
+
+```
+Client.tracker.get_event_tracker_news(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件热度趋势
+
+用途：获取事件热度趋势
+
+```
+Client.tracker.get_yuqing_trend(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件文章类型分布
+
+用途：获取事件文章类型分布
+
+```
+Client.tracker.get_content_type(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件的相关热词
+
+用途：获取事件的相关热词
+
+```
+Client.tracker.get_hotwords(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件中媒体传播分布
+
+用途：获取事件中媒体传播分布
+
+```
+Client.tracker.get_media(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件发布热区
+
+用途：获取事件发布热区
+
+```
+Client.tracker.get_pub_area(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件情感属性
+
+用途：获取事件情感属性
+
+```
+Client.tracker.get_emotion_attr(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件类型的基本信息
+
+用途：获取事件类型的基本信息
+
+```
+Client.tracker.get_profile(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件类型的基本信息
+
+用途：获取事件类型的基本信息
+
+```
+Client.tracker.get_profile(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件重要文章
+
+用途：获取事件重要文章
+
+```
+Client.tracker.get_important_news(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件活跃媒体
+
+用途：获取事件活跃媒体
+
+```
+Client.tracker.get_active_media(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件提及热区
+
+用途：获取事件提及热区
+
+```
+Client.tracker.get_refer_area(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件情感趋势
+
+用途：获取事件情感趋势
+
+```
+Client.tracker.get_emotion_trend(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件文章列表
+
+用途：获取事件文章列表
+
+```
+Client.tracker.get_event_news(self, tracker_id)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+
+**return** :
+
+
+
+#### 获取事件文章详情
+
+用途：获取事件文章详情
+
+```
+Client.tracker.get_event_news_detail(self, tracker_id, news_uuid)
+```
+
+**Parameters** :
+
+- tracker_id - 事件跟踪的id
+- news_uuid - 新闻的id
+
+**return** :
+
+
+
+## Hotspot
+
+#### 获取热点列表
+
+用途：获取热点列表
+
+```python
+Client.hotspot.list(self,sort_name,**kwargs)
+```
+
+**Parameters** :
+
+- sort_name - 排序字段(poi:热度,posttime:文章发布时间)
+- location - 热点地域，地域标签/河北省/石家庄市
+- category_id - 事件分类id
+- scroll_id - 上次查询获取的最新游标
+- latest_days - 发布时间天数
+- full_text - 全文检索内容，检索字段，title、summary
+- size - 每次获取条目数，默认值10
+- sort_type - 排序规则(desc:降序,asc:升序) 默认值：desc
+
+**return** :
+
+
+
+#### 获取热点类型
+
+用途：获取热点类型
+
+```python
+Client.hotspot.get_classify(self)
+```
+
+**return** :
+
+
+
+#### 地域热点地图统计
+
+用途：地域热点地图统计
+
+```python
+Client.hotspot.get_area_heat(self, **kwargs)
+```
+
+**Parameters** :
+
+- area_id - 地域id，不传默认传递0，即查询全国各省，传递指定areaId，默认查询下一级的地域的当天数据量统计
+- latest_days - 发布时间天数
+
+**return** :
+
+
+
+#### 热词排行列表
+
+用途：热词排行列表
+
+```python
+Client.hotspot.get_hotwords(self, **kwargs)
+```
+
+**Parameters** :
+
+- content_classify_id - 内容分类id，不传返回所有
+- top_num - 请求条数
+- latest_days - 发布时间天数
+- location - 提及地域名称
+
+**return** :
+
+
+
+## Spread 
+
+#### 批量创建分析任务
+
+用途：批量创建分析任务
+
+```python
+Client.spread.create(self, origin_id, title, content)
+```
+
+**Parameters** :
+
+- origin_id - 外系统id
+- title - 文章标题
+- content - 文章正文
+
+**return** :
+
+
+
+#### 批量查询任务结果
+
+用途：批量查询任务结果
+
+```python
+Client.spread.get_detail(self, task_id)
+```
+
+**Parameters** :
+
+- task_id - 任务id，多个以,分隔
+
+**return** :
+
+
+
+#### 单篇文章传播分析查询
+
+用途：单篇文章传播分析查询
+
+```
+Client.spread.get_analysis(self, title, **kwargs)
+```
+
+**Parameters** :
+
+- title - 文章标题
+- content - 文章正文
+
+**return** :
+
+
+
+## Rank
+
+#### 热搜榜单
+
+用途：热搜榜单
+
+```python
+Client.rank.get_hotsearch(self, site_id, classify, **kwargs)
+```
+
+**Parameters** :
+
+- site_id - 热搜站点名称，可选360_so 、baidu_so 、sogou_so
+- classify - 热搜榜数据类型  详见目录4对照表
+- size - 返回的条目数，默认值10条
+
+**return** :
+
+
+
+#### 微信榜单
+
+用途：微信榜单
+
+```python
+Client.rank.get_wechat(self, sort_name, **kwargs)
+```
+
+**Parameters** :
+
+- billboard_time_type - 日榜(day)、周榜(week)、月榜(month)
+- billboard_time - 榜单时间，格式yyyy-dd-MM
+
+- classify_id - 分类id
+- name_like - 模糊查询公众号
+- location - 热点地域，地域标签/河北省/石家庄市
+- scroll_id - Scroll分页id
+- size - 每次获取条目数，默认值10
+- sort_name - 排序字段(poi:热度,posttime:文章发布时间)
+- sort_type - 排序规则(desc:降序,asc:升序) 默认值：desc
+
+**return** :
+
+
+
+#### 微博榜单
+
+用途：微博榜单
+
+```python
+Client.rank.get_weibo(self, sort_name, **kwargs)
+```
+
+**Parameters** :
+
+- billboard_time_type - 日榜(day)、周榜(week)、月榜(month)
+- billboard_time - 榜单时间，格式yyyy-dd-MM
+
+- name_like - 模糊查询公众号
+- location - 热点地域，地域标签/河北省/石家庄市
+- scroll_id - Scroll分页id
+- size - 每次获取条目数，默认值10
+- sort_name - 排序字段(poi:热度,posttime:文章发布时间)
+- sort_type - 排序规则(desc:降序,asc:升序) 默认值：desc
+
+**return** :
+
+
+
+#### 头条榜单
+
+用途：头条榜单
+
+```python
+Client.rank.get_toutiao(self, sort_name, **kwargs )
+```
+
+**Parameters** :
+
+- billboard_time_type - 日榜(day)、周榜(week)、月榜(month)
+- billboard_type - 头条榜单类型--0:媒体,1:自媒体,2:视频
+- latest_days - 发布时长
+- name_like - 支持模糊查询（支持字段：nickName 和uid）
+- scroll_id - scroll分页id
+- size - 每次获取条目数，默认值10
+- sort_name - 排序字段(poi:热度,posttime:文章发布时间)
+- sort_type - 排序规则(desc:降序,asc:升序)默认值：desc
+
+**return** :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
