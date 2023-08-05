@@ -1,0 +1,99 @@
+Metadata-Version: 2.1
+Name: bcdc-apitests-dev
+Version: 0.2.17
+Summary: API testing for BC Data Catalog
+Home-page: https://github.com/bcgov/bcdc-test
+Author: Kevin Netherton
+Author-email: kevin.netherton@gov.bc.ca
+License: UNKNOWN
+Description: # Automated BCDC API Testing 
+        
+        Intention is to test the CKAN API after deployment.
+        
+        Current tests include:
+         - verification of preconfigured orgs required for testing
+         - CRUD tests for packages.
+         
+        # OC Build
+        
+        how to create new build without starting
+          
+        ```
+        oc create -f https://raw.githubusercontent.com/bcgov/bcdc-test/dev/k8s/bcdc-test-buildconfig.yaml
+        ```
+        
+        start build after created or start future incremental builds.
+        
+        ```
+        oc start-build bcdc-test
+        ```
+        
+        # OC Job 
+        
+        each environment will have its own defined .yaml file within the k8s dir. 
+        
+        * test-dwelf-job-template.yaml
+        * test-toyger-job-template.yaml
+        * test-puma-job-template.yaml
+        
+        how to run job from yaml as template, so we can change the name using a Generated value appended to name
+        ```
+        oc process -f https://raw.githubusercontent.com/bcgov/bcdc-test/dev/k8s/test-dwelf-job-template.yaml | oc create -f -
+        ```
+        
+        
+        # Run Tests locally
+        
+        ```
+        pip install bcdc_apitests
+        pytest --pyargs bcdc_apitests --junitxml=<xml report name.xml>
+        ```
+          
+        # Packaging
+        
+        [packaging docs](docs/packaging.md)
+        
+        # Configure Dev Env and Running Tests
+        
+        ### clone
+        `git clone <repo>`
+        
+        ### virtualenv 
+        ```
+        python -m virtualenv ve_bcdctest
+        ./ve_bcdctest/Scripts/activate
+        python -m pip install -r requirements.txt
+        ```
+        
+        * make SRC dir part of python path
+        ```
+        export PYTHONPATH=./src
+        set PYTHONPATH=./src
+        ```
+        
+        ### configure secrets
+        set the following env vars:
+        
+        ```
+        BCDC_API_KEY = <api key>
+        BCDC_URL = <URL>
+        ```
+        
+        ### run tests
+        ```
+        cd src
+        pytest
+        ```
+        
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Pytest
+Classifier: Programming Language :: Python :: 2.7
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Testing
+Classifier: Operating System :: OS Independent
+Requires-Python: >=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4
+Description-Content-Type: text/markdown
