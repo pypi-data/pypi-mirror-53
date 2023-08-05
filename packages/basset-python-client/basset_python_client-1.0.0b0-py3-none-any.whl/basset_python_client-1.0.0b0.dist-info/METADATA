@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: basset-python-client
+Version: 1.0.0b0
+Summary: Python client for submitting snapshots to basset
+Home-page: https://basset.io
+Author: Jeremy Gonzalez
+Author-email: jeremy@jeremyg.net
+License: MIT
+Project-URL: Source Code, https://github.com/basset/python-client
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+
+# basset-python-client
+
+> Python client for submitting snapshots to basset
+
+## Documentation
+
+Check out [basset.io](https://basset.io/docs/python-client) for instructions on usage
+
+## Install from pip
+
+```sh
+pip install basset-python-client
+```
+
+## Install source
+
+```sh
+pipenv install
+```
+
+> This package uses pipenv, you can get instructions on installing pipenv [here](https://docs.pipenv.org)
+
+## Run tests
+
+```sh
+pipenv run python -m unittest discover tests -v
+```
+
+
