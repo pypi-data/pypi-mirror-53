@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ ! -f "$HOME/.config/fish/config.fish" ]; then
+	mkdir -p ~/.config/fish
+	echo "export LC_ALL=es_CO.UTF-8" >> ~/.config/fish/config.fish 
+	echo "export EDITOR=vim" >> ~/.config/fish/config.fish 
+fi
