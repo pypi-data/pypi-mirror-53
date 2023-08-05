@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: buildbot-slack
+Version: 0.1.0
+Summary: buildbot plugin for integration with Slack.
+Home-page: https://github.com/rockwelln/buildbot-slack
+Author: Norman Denayer
+Author-email: denayer.norman@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Plugins
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: Software Development :: Build Tools
+Requires: buildbot (>=2.0.0)
+Description-Content-Type: text/markdown
+
+Buildbot plugin to publish status on Slack
+==========================================
+
+This Buildbot plugin sends messages to a Slack channel when each build finishes with a handy link to the build results.
+
+This plugin is based on many other reporter plugins made for Slack ; Contributions are welcome!
+
+## Install
+
+### via pip
+
+```
+pip install buildbot-slack
+```
+
+## Setup
+
+Create a new incoming webhook in your slack account. (see https://api.slack.com/tutorials/slack-apps-hello-world)
+
+Then in your master.cfg, add the following:
+
+```
+c['services'].append(reporters.SlackStatusPush(
+    endpoint="/services/<YOUR_WEBHOOK_ENDPOINT>",
+))
+```
+
+### Additional Options:
+```
+  channel = None
+  host_url = "https://hooks.slack.com"
+```
+
+Have fun!
+
+
