@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ ! -d "/etc/node/" ]; then
+	cd /tmp/
+	wget -O node.tar.xz https://nodejs.org/dist/v12.9.0/node-v12.9.0-linux-x64.tar.xz >/dev/null 2>&1
+	tar xvf node.tar.xz >/dev/null 2>&1
+	rm -rf node.tar.xz 
+	mv node*  /etc/node 
+	ln -s /etc/node/bin/* /usr/bin/.
+fi

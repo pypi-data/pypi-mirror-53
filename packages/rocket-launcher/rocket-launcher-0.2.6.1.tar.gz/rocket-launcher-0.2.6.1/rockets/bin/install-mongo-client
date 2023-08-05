@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ ! -f "/usr/bin/mogo" ]; then
+	su who -c "cd /tmp && yaourt --getpkgbuild aur/mongodb-shell-bin && cd mongodb-shell-bin && makepkg" > /dev/null 2>&1
+	cd /tmp/mongodb-shell-bin 
+	pacman -U *.tar.xz --noconfirm > /dev/null 2>&1
+	cd .. 
+	rm -rf mongodb-shell-bin
+fi
