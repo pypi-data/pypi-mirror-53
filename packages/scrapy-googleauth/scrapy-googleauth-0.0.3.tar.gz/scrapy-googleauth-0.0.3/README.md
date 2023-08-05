@@ -1,0 +1,1 @@
+google auth downloader middleware for scrapy
