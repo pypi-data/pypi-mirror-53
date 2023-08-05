@@ -1,0 +1,82 @@
+Metadata-Version: 2.1
+Name: EITRI
+Version: 1.8
+Summary: SDK for EITRI Blockchain
+Home-page: https://github.com/bitrustkr/CLT-Blockchain-SDK-PY
+Author: JeongTae Park
+Author-email: pjt3591oo@gmail.com
+License: UNKNOWN
+Keywords: blockchain,sdk,eitri,EITRI
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Python: >=3
+Description-Content-Type: text/markdown
+Requires-Dist: jsonrpc2
+
+![logo](https://raw.githubusercontent.com/bitrustkr/CLT-Blockchain-SDK-PY/master/docs/images/logo.png)
+
+# CLT-Blockchain-SDK
+
+* [usage](#usage)
+* [development](#development)
+* [interface](https://github.com/bitrustkr/CLT-Blockchain-SDK-PY/blob/master/docs/API.md)
+
+## usage
+
+```bash
+$ pip install EITRI
+```
+
+```python
+from EITRI.eitri import eitri
+
+if __name__ == "__main__":
+  # eitri 노드 연결정보 전달
+  e = eitri(
+    ip = "127.0.0.1",
+    port = "3000",
+    user = "user",
+    password = "password"
+  )
+
+  last_block = e.block.get_last_block()
+  print(last_block)
+
+  block = e.block.get_block(0)
+  print(block)
+
+  node = e.node.get_info()
+  print(node)
+
+  txhash = e.transaction.get_transaction('0x123')
+  print(txhash)
+
+  validators = e.validator.get_validators()
+  print(validators)
+```
+
+## development
+
+* test
+
+test 코드를 실행하기 위해 `test.py` 실행
+
+```bash
+$ python test.py
+```
+
+* deploy
+
+```bash
+$ ./publish.sh
+```
+
+배포하기 위해 **`setup.py`**의 **`version`** 변경
+
+[pip](https://pypi.org/project/EITRI) 배포
+
