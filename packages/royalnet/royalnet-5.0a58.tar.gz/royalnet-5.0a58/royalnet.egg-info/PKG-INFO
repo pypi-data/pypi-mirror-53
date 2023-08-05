@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: royalnet
+Version: 5.0a58
+Summary: The great bot network of the Royal Games community
+Home-page: https://github.com/royal-games/royalnet
+Author: Stefano Pigozzi
+Author-email: ste.pigozzi@gmail.com
+License: UNKNOWN
+Description: # `royalnet` [![PyPI](https://img.shields.io/pypi/v/royalnet.svg)](https://pypi.org/project/royalnet/)
+        
+        The fifth rewrite of the Royal Network!
+        
+        It has a lot of submodules, many of which may be used in other bots.
+        
+        [Documentation available here](https://royal-games.github.io/royalnet/html/index.html).
+        
+        ## Installation for the Royal Games community
+        
+        With `python3.7` and `pip` installed, run:
+        
+        ```bash
+        pip install royalnet
+        pip install websockets --upgrade
+        export TG_AK="Telegram API Key"
+        export DS_AK="Discord API Key"
+        export DB_PATH="sqlalchemy database path to postgresql"
+        export MASTER_KEY="A secret password to connect to the network"
+        python3.7 -m royalnet.royalgames -OO
+        ```
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet
+Classifier: Topic :: Database
+Classifier: Topic :: Multimedia :: Sound/Audio
+Classifier: Topic :: Multimedia :: Video
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
