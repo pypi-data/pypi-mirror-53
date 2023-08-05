@@ -1,0 +1,61 @@
+Metadata-Version: 2.1
+Name: requests-etag-cache
+Version: 2019.9.25
+Summary: requests etag cache
+Home-page: https://github.com/andrewp-as-is/requests-etag-cache.py
+License: UNKNOWN
+Description: <!--
+        https://pypi.org/project/readme-generator/
+        https://pypi.org/project/python-readme-generator/
+        -->
+        
+        [![](https://img.shields.io/pypi/pyversions/requests-etag-cache.svg?longCache=True)](https://pypi.org/project/requests-etag-cache/)
+        
+        #### Installation
+        ```bash
+        $ [sudo] pip install requests-etag-cache
+        ```
+        
+        #### How it works
+        ```
+        $REQUESTS_ETAG_CACHE/<url_hash>
+        ```
+        
+        `$XDG_CACHE_HOME/requests-etag-cache/<url_hash>` by default
+        
+        #### Functions
+        function|`__doc__`
+        -|-
+        `requests_etag_cache.clear()` |remove all cache keys
+        `requests_etag_cache.get(response)` |get cached etag value
+        `requests_etag_cache.rm(response)` |remove response cache
+        `requests_etag_cache.save(response)` |save response etag value
+        `requests_etag_cache.uptodate(response)` |return True if response is cached, else False
+        
+        #### Examples
+        ```python
+        import requests
+        import requests_etag_cache
+        
+        r = requests.get('https://pypi.org/project/requests/')
+        if not requests_etag_cache.uptodate(r):
+            ...
+            requests_etag_cache.save(r)
+        ```
+        
+        <p align="center">
+            <a href="https://pypi.org/project/python-readme-generator/">python-readme-generator</a>
+        </p>
+Keywords: requests cache
+Platform: UNKNOWN
+Classifier: License :: Public Domain
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
