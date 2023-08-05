@@ -1,0 +1,177 @@
+#!/usr/bin/env python
+
+import os
+import re
+import argparse
+
+
+__version__ = "0.3.2"
+
+
+class DirTree:
+    def __init__(self, path, parent=None):
+        self.path = path
+        self.parent = parent
+        self.children = []
+
+    @staticmethod
+    def tokenize(string):
+        """Returns a list of tokens separated by one of . , or /"""
+        token = ""
+        escape = ""
+        for i, char in enumerate(string):
+            if i == len(string) - 1:
+                yield token + char
+            elif char in (".", ",", "/"):
+                if escape:
+                    token += char
+                    escape = ""
+                else:
+                    yield token
+                    yield char
+                    token = ""
+                    escape = ""
+            elif char == "\\" and not escape:
+                escape += char
+            else:
+                token += char
+                escape = ""
+
+    @staticmethod
+    def load(descriptions):
+        """Builds the directory tree from the given description.
+
+        Args:
+            descriptions (list): A list of tree string descriptions.
+
+        Returns:
+            The directory tree.
+        """
+        root = DirTree("")
+        for description in descriptions:
+            current = root
+            for token in DirTree.tokenize(description):
+                if not token or token == ",":
+                    continue
+                elif token == "/":
+                    if current.children:
+                        current = current.children[-1]
+                elif token == ".":
+                    if current.parent:
+                        current = current.parent
+                else:
+                    node = DirTree(os.path.join(current.path, token), parent=current)
+                    current.children.append(node)
+        return root
+
+    def __iter__(self):
+        """Returns all the directory tree paths (leaves). """
+        unvisited = list(reversed(self.children))
+        while unvisited:
+            current = unvisited.pop()
+            if current.children:
+                unvisited.extend(reversed(current.children))
+            else:
+                yield current.path
+
+    def pprint(self):
+        """Pretty-print the directory tree."""
+
+        def _pprint(dir, padding, last_child):
+
+            curr_padding = ""
+            next_padding = padding
+
+            if dir.parent:
+                curr_padding = padding + ("└─ " if last_child else "├─ ")
+                next_padding = padding + ("   " if last_child else "│  ")
+                print(curr_padding + os.path.basename(dir.path))
+            elif dir.children:
+                print(".")
+
+            for i, child in enumerate(dir.children):
+                _pprint(child, next_padding, i == len(dir.children) - 1)
+
+        _pprint(self, "", 0)
+
+    def __str__(self):
+        return f"<{self.__class__.__name__} {self.path}>"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(path={self.path!r})"
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("-h", action="help", help="Print help information.")
+    parser.add_argument(
+        "-V",
+        action="version",
+        version=f"%(prog)s {__version__}",
+        help="Print version information.",
+    )
+    parser.add_argument(
+        "-v", action="store_true", help="Print a message for each created directory."
+    )
+    parser.add_argument(
+        "-p",
+        action="store_true",
+        help="Preview the directory tree as a list of directories.",
+    )
+    parser.add_argument("-P", action="store_true", help="Preview the directory tree.")
+    parser.add_argument(
+        "-i",
+        action="store_true",
+        help="Ask before creating the directory tree. Implies -p.",
+    )
+    parser.add_argument(
+        "trees",
+        metavar="TREE",
+        nargs="+",
+        default="",
+        help="The directory tree description.",
+    )
+    return parser.parse_args()
+
+
+def print_tree(tree, pretty=False):
+    if pretty:
+        tree.pprint()
+    else:
+        for path in tree:
+            print(path)
+
+
+def make_tree(tree, verbose=False):
+    for path in tree:
+        try:
+            os.makedirs(path)
+            if verbose:
+                print(f"created directory {path!r}")
+        except FileExistsError:
+            pass
+
+
+def main():
+
+    args = parse_args()
+    tree = DirTree.load(args.trees)
+
+    if args.p or args.P or args.i:
+        print_tree(tree, pretty=args.P)
+        if not args.i:
+            raise SystemExit
+
+    if args.i:
+        try:
+            resp = input("\nAre you sure? [Yn] ")
+            if not re.match("^(|y|yes|yep)$", resp, flags=re.IGNORECASE):
+                raise SystemExit(1)
+        except KeyboardInterrupt:
+            raise SystemExit(1)
+
+    make_tree(tree, verbose=args.v)
+
+
+if __name__ == "__main__":
+    main()
