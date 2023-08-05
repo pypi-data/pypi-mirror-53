@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: bmondata
+Version: 1.0.2
+Summary: Allows retrieval and storage of data on BMON Servers.
+Home-page: https://github.com/alanmitchell/bmondata
+Author: Alan Mitchell
+Author-email: tabb99@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests (>=2.18.4)
+Requires-Dist: pandas (>=0.23.2)
+
+# bmondata
+Allows easy access to sensor data residing on a [BMON Server](https://github.com/alanmitchell/bmon).
+
+This package provides a wrapper around the the BMON API, version 2.  It allows retrieval
+of key data stored in the BMON database, including sensor readings, sensor metadata, building
+information, and organization information.  It is not comprehensive as some BMON information is
+not available.  It also allows for storage of new sensor readings in a BMON
+sensor reading database.
+
+Usage examples are [shown here](http://web.analysisnorth.com.s3-us-west-2.amazonaws.com/bmondata/usage_examples.html).
+The docstring for each method gives additional information.
+
+Install with pip:
+
+    pip install --upgrade bmondata
+
+This package is only compatible with BMON Servers running the BMON software version
+equal to or greater than:  Mon Jul 29 16:06:14 2019 -0800 (shown on the footer of the 
+BMON Graphs/Reports page.)
+
+
