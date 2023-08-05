@@ -1,0 +1,55 @@
+from airflow.models import DAG
+from airflow.operators.python_operator import PythonOperator
+from datetime import datetime,timedelta
+
+from zltask import task_quyu
+from zlgp import add_quyu_src
+from zlgp import add_quyu_greenplum
+from zlapp import add_quyu_app
+
+
+
+
+tag='##cdc##'
+
+
+default_args = {'owner': 'root',
+                'depends_on_past': False,
+                'start_date': datetime##(2019,1,1)##, }
+
+d = DAG('##quyuName##'
+        , default_args=default_args
+        , schedule_interval="##0 0/12 * * *##"
+        ,max_active_runs=1)
+
+
+t1a=PythonOperator(task_id="##anqing_a1##",python_callable=task_quyu,dag=d
+        ,op_kwargs={"quyu":"##task_anqing##","loc":"##kunming##"}
+        ,pool="##abc_a##"
+        ,execution_timeout=timedelta(##minutes=60##))
+
+t2b=PythonOperator(task_id="##anqing_b2##",python_callable=add_quyu_src
+                ,op_kwargs={"quyu":"##anhui_anqing##","tag":tag,"loc":"##kunming##"}
+                ,dag=d
+                ,trigger_rule="all_done"
+                ,pool="abc_b"
+                ,depends_on_past=False
+                ,execution_timeout=timedelta(minutes=20))
+
+t3c=PythonOperator(task_id="##anqing_c3##",python_callable=add_quyu_greenplum
+                ,op_kwargs={"quyu":"##anhui_anqing##","tag":tag,"loc":"##kunming##"}
+                ,dag=d
+                ,trigger_rule="all_done"
+                ,pool="abc_c"
+                ,depends_on_past=False
+                ,execution_timeout=timedelta(minutes=20))
+
+t4d=PythonOperator(task_id="##anqing_d4##",python_callable=add_quyu_app
+                ,op_kwargs={"quyu":"##anhui_anqing##","loc":"##kunming##"}
+                ,dag=d
+                ,trigger_rule="all_done"
+                ,pool="abc_d"
+                ,depends_on_past=False
+                ,execution_timeout=timedelta(minutes=20))
+
+t1a>>t2b>>t3c>>t4d
