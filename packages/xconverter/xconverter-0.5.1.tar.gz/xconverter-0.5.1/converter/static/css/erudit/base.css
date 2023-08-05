@@ -1,0 +1,663 @@
+@charset "UTF-8";
+
+p {
+    text-align: justify;
+    line-height: 18pt;
+}
+
+img {
+    max-width: 80%;
+    max-height: 20cm;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.body {
+   
+}
+
+.cover {
+    display: none;
+}
+
+.document {
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.article {
+    font-family: arial;
+    font-size: 15px;
+}
+.article .title-group {
+    width: 100%;
+    font-size: 20pt;
+    text-align: center;
+}
+
+.article .title-group .subtitle {
+    color: #555555;
+    font-size: 17pt;
+}
+
+.article .title-group .reviewed-product {
+    width: 100%;
+    font-size: 15pt;
+    text-align: center;
+}
+
+.article-id {
+    font-size: 10pt;
+    text-align: center;
+}
+
+.contrib-group {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 10pt;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.contrib-group .contrib {
+    text-align: center;
+    padding: 3px;
+}
+
+.contrib-group .contrib .name {
+    font-weight: bold;
+}
+
+.contrib-group .contrib .alias::before {
+    content: "alias: ";
+    
+}
+
+.contrib-group .contrib .alias {
+    font-style: italic;
+}
+
+.contrib-group .contrib .institution {
+    font-size: 80%;
+}
+
+.contrib-group .contrib .email {
+    font-size: 80%;
+}
+
+.abstract-group {
+    width: 80%;
+    margin: auto;
+}
+
+.abstract {
+    margin-top: 10px;
+}
+
+.abstract .title {
+    font-weight: bold;
+    break-after: avoid;
+}
+
+.kwd-group {
+    font-size: 90%;
+}
+
+.kwd-group .title::after {
+    content: ":";
+
+}
+
+.kwd-group * {
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+}
+
+.kwd-group ul {
+}
+
+
+.kwd-group ul li {
+    display: inline;
+}
+
+.ref-list {
+    margin-top: 10px;
+}
+
+.ref-list .title {
+    font-weight: bold;
+    break-after: avoid;
+    margin: 10px;
+}
+
+
+.ref-list .ref {
+    text-align: justify;
+    margin-bottom: 10px;
+    break-inside: avoid !important;
+}
+
+.annexes {
+    margin-top: 10px;
+}
+
+.annexes .title {
+    font-weight: bold;
+    break-after: avoid;
+    margin: 10px;
+}
+
+.footnotes .title {
+    font-weight: bold;
+    break-after: avoid;
+    margin: 10px;
+}
+
+.footnote * {
+    display: inline;
+}
+
+.footnote {
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.ack-group {
+    margin-top: 10px;
+}
+
+.ack-group .title {
+    font-weight: bold;
+    break-after: avoid;
+    margin: 10px;
+}
+
+.bio-notes {
+    margin-top: 10px;
+}
+
+.bio-notes .title {
+    font-weight: bold;
+    break-after: avoid;
+    margin: 10px;
+}
+
+
+.block-citation {
+    width: 95%;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    border-left: solid 1px #CCCCCC;
+    color: #888888;
+    break-inside: avoid !important;
+}
+
+.block-citation p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.disp-quote {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #888888;
+    break-inside: avoid !important;
+}
+
+.disp-quote p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.verbatim {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #888888;
+    break-inside: avoid;
+}
+
+.verbatim p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.dedicatory {
+    width: 50%;
+    margin-left: 40%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #888888;
+    font-style: italic;
+    break-inside: avoid !important;
+}
+
+.dedicatory p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.epigraph {
+    width: 50%;
+    margin-left: 40%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #888888;
+    break-inside: avoid !important;
+}
+
+.epigraph p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.attrib {
+    text-align: right;
+    margin-left: 30%;
+    font-size: 90%;
+    color: #888888;
+}
+
+.sec .title {
+    font-size: 22pt;
+    font-weight: bold;
+    break-after: avoid;
+}
+
+.sec .sec .title {
+    font-size: 18pt;
+    font-weight: bold;
+    break-after: avoid;
+}
+
+.sec .sec .sec .title {
+    font-size: 12pt;
+    font-weight: bold;
+    break-after: avoid;
+}
+
+.sec .sec .sec .sec .title {
+    font-size: 12pt;
+    font-weight: bold;
+    font-style: italic;
+    break-after: avoid;
+}
+
+.sec .sec .sec .sec .sec .title {
+    font-size: 12pt;
+    color: #555555;
+    font-style: italic;
+    break-after: avoid;
+}
+
+.xref {
+    font-size: 9pt;
+}
+
+.article ul li {
+    margin-bottom: 5px;
+    line-height: 18pt;
+}
+
+.article ol li {
+    margin-bottom: 5px;
+    line-height: 18pt;
+}
+
+.boxed-text {
+    background-color: #EEEEEE;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: solid 2px #DDDDDD;
+    padding: 10px;
+}
+
+.boxed-text .boxed-header {
+    border-bottom: solid 1px #DDDDDD;
+    padding-bottom: 5px;
+    break-after: avoid;
+}
+
+.boxed-text .boxed-header * {
+    display: inline;
+
+}
+
+.boxed-text .boxed-header .label {
+    color: #666666;
+}
+
+.boxed-text .boxed-header .caption .title {
+    font-size: 16px;
+    font-weight: normal;
+    break-after: avoid;
+}
+
+.boxed-text .boxed-content {
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.boxed-text .boxed-content .sec .title {
+    font-weight: bold;
+    break-after: avoid;
+}
+
+.inline-graphic {
+    display: inline-block;
+}
+
+.inline-graphic img {
+    vertical-align: bottom;
+    margin: 0px;
+    padding: 0px;
+}
+
+.inline-formula {
+    display: inline-block;
+}
+
+.inline-formula img {
+    vertical-align: bottom;
+    margin: 0px;
+    padding: 0px;
+}
+
+.media-audio-group {
+    break-inside: avoid !important;
+    margin-bottom: 10px
+}
+
+.media-audio-group .media-audio-group-caption {
+    font-size: 16px;
+    text-align: center;
+}
+
+.media-audio-group .media-audio-group-caption * {
+    font-size: 16px;
+    display: inline;
+}
+
+.media-audio-group .media-audio-group-caption .label {
+    font-weight: bold;
+}
+
+.media-audio-group .media-audio-group-caption .caption {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.media-audio-group .media_print_note {
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+}
+
+video {
+    width: 80%;
+    margin: auto;
+}
+
+.media-video-group {
+    break-inside: avoid !important;
+    margin-bottom: 10px;
+}
+
+.media-video-group .media-video-group-content {
+    text-align: center;
+}
+
+
+.media-video-group .media-video-group-caption {
+    font-size: 16px;
+    text-align: center;
+}
+
+.media-video-group .media-video-group-caption * {
+    font-size: 16px;
+    display: inline;
+}
+
+.media-video-group .media-video-group-caption .label {
+    font-weight: bold;
+}
+
+.media-video-group .media-video-group-caption .caption {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.media-video-group .media_print_note {
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.fig-group {
+    margin-bottom: 10px
+}
+
+.fig-group .fig-group-header {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.fig-group .fig-group-header * {
+    font-size: 16px;
+    display: inline;
+}
+
+.fig-group .fig-group-header .label {
+    font-weight: bold;
+}
+
+.fig-group .fig-group-header .caption .title {
+    font-size: 16px;
+    font-weight: normal;
+    break-after: avoid;
+}
+
+.fig {
+    margin-bottom: 10px
+}
+
+.fig .fig-header {
+    font-size: 16px;
+    text-align: center;
+    break-after: avoid;
+    margin-bottom: 10px;
+}
+
+.fig .fig-header * {
+    font-size: 16px;
+    display: inline;
+}
+
+.fig .fig-header .label {
+    font-weight: bold;
+}
+
+.fig .fig-header .caption .title {
+    font-size: 16px;
+    font-weight: normal;
+    break-after: avoid;
+}
+
+.fig .fig-content {
+    font-size: 16px;
+    text-align: center;
+}
+
+.table-wrap {
+    margin-bottom: 20px;
+}
+
+.table-wrap .table-wrap-header {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+    break-after: avoid;
+}
+
+.table-wrap .table-wrap-header * {
+    font-size: 16px;
+    display: inline;
+}
+
+.table-wrap .table-wrap-header .label {
+    font-weight: bold;
+}
+
+.table-wrap .table-wrap-header .caption .title {
+    font-size: 16px;
+    font-weight: normal;
+    break-after: avoid;
+}
+
+.table-wrap .table-wrap-content {
+    font-size: 16px;
+}
+
+.table-wrap .table-wrap-content table {
+    margin: auto;
+    font-size: 10px;
+
+}
+
+.table-wrap .table-notes .note  * {
+    display: inline;
+}
+
+.table-wrap .table-notes .note {
+    font-size: 12px;
+}
+
+.table-wrap .table-notes .note .label {
+    vertical-align: super;
+    font-size: 11px;
+}
+
+table {
+    width: 95%;
+}
+table th {
+    border-bottom: solid 1px #000000;
+    border-top: solid 1px #CCCCCC;
+    padding: .25em;
+    margin: 0;
+    color: #888888;
+    white-space: nowrap;
+}
+
+table td {
+    border-bottom: solid 1px #CCCCCC;
+    padding: .25em;
+    margin: 0;
+}
+
+.image-float {
+    text-align: center;
+}
+
+.image-float img {
+
+}
+
+.disp-formula-group {
+
+}
+
+.disp-formula {
+
+}
+
+.disp-formula .label {
+    color: #888888;
+
+}
+
+.disp-formula * {
+    display: inline;
+    vertical-align: middle;
+}
+
+.example {
+    background-color: #EEEEEE;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: solid 2px #DDDDDD;
+    color: #888888;
+    break-inside: avoid !important;
+
+}
+
+.example .label {
+    border-bottom: solid 1px #DDDDDD;
+    color: #666666;
+
+}
+
+/* Common def lists */
+
+.article .def-list { 
+    width: 100%;
+    color: #000000;
+ }
+
+.article .def-list th {
+    border: 0px;
+    margin: 0px;
+}
+
+.article .def-list tr {
+    break-inside: avoid !important;
+}
+
+.article .def-list td {
+    border: 0px;
+    margin: 0px;
+    vertical-align: top;
+}
+
+.article .def-list td p {
+    border: 0px;
+    margin: 0px;
+}
+
+/* Type1 def lists */
+
+
+.article .def-list-type1 {
+    width: 100%;
+}
+
+.text-strike {
+    text-decoration: line-through;
+}
+
+.text-overline {
+    text-decoration: overline;
+}
