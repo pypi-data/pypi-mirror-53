@@ -1,0 +1,21 @@
+tmg = [
+    "edc_adverse_event.view_aeclassification",
+    "edc_adverse_event.view_causeofdeath",
+    "edc_adverse_event.view_saereason",
+    "meta_ae.add_aetmg",
+    "meta_ae.add_deathreporttmg",
+    "meta_ae.change_aetmg",
+    "meta_ae.change_deathreporttmg",
+    "meta_ae.delete_aetmg",
+    "meta_ae.delete_deathreporttmg",
+    "meta_ae.view_aefollowup",
+    "meta_ae.view_aeinitial",
+    "meta_ae.view_aesusar",
+    "meta_ae.view_aetmg",
+    "meta_ae.view_deathreport",
+    "meta_ae.view_deathreporttmg",
+    "meta_ae.view_historicalaesusar",
+    "meta_ae.view_historicalaetmg",
+    "meta_ae.view_historicaldeathreporttmg",
+]
+tmg.sort()
