@@ -1,0 +1,12 @@
+concurrent-utils~=0.2.0
+hedgehog-protocol~=0.10.0rc2
+hedgehog-utils[protobuf,zmq]~=0.7.0rc1
+pycreate2
+
+[dev]
+pytest
+pytest-runner
+pytest-asyncio
+pytest-cov
+pytest-timeout
+mypy
