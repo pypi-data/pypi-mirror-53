@@ -1,0 +1,126 @@
+# THIS REPOSITORY IS A WORK IN PROGRESS
+**IF YOU SEE THIS MESSAGE DO NOT UNDER ANY CIRCUMSTANCE DELETE INFRASTRUCTURE HOPING THAT WINTERGREEN CAN REBUILD IT**
+We're working on it.
+
+## Purpose
+
+Automate device registry in AWS IoT because it sucks. `wintergreen` is a command line utility that provides mechanisms to automate cumbersome tasks related to signing and registering AWS IoT Thing device certificates.
+
+## Install
+This project uses [poetry](https://poetry.eustace.io/) to manage and install dependencies.
+```
+poetry install
+```
+
+This will install the required dependencies as well as the `wintergreen` cli, which can be invoked by running `poetry run wintergreen`
+
+
+### Using with direnv
+Follow this [layout_poetry](https://github.com/direnv/direnv/wiki/Python#poetry) example
+
+## Run
+
+## Initialize
+Initialization means
+- Creating a ThingType
+- Creating a RootCA cert/key pair
+- Registering that RootCA with AWS
+- Creating a Just-in-time Provisioning role
+
+Example:
+`poetry run wintergreen init -t my-cool-thing`
+Check your `~/.wintergreen` directory to see a subdirectory for `my-cool-thing`
+
+```bash
+$  wintergreen init --help
+Usage: wintergreen init [OPTIONS]
+
+  Creates a custom root CA and registers it with the cloud provider for
+  automatic provisioning.
+
+Options:
+  -t, --thing-type TEXT       AWS IoT thing type  [required]
+  -c, --country TEXT          Country code (2-letter) to use for provisioning
+                              certs i.e. US  [required]
+  -f, --fqdn TEXT             Domain of the organization to use in the CA e.g.
+                              verypossible.com
+  -o, --organization TEXT     Organization name i.e. Very
+  -s, --state TEXT            State or Province code (2-letter) to use for
+                              provisioning certs i.e. TN
+  -l, --locality TEXT         Locality to use for provisioning certs i.e.
+                              Chattanooga
+  -u, --unit TEXT             Organizational unit to use for provisioning
+                              certs i.e. Engineering
+  -d, --root-ca-days INTEGER  Days until CA will expire  [default: 365]
+  -k, --key-size INTEGER      [default: 2048]
+  --log-level TEXT
+  --help                      Show this message and exit.
+
+Outputs:
+{
+    jitpRoleArn: "arn:to:role",
+    rootCACertPath: "${HOME}/.wintergreen/things/Widget/rootCA.crt",
+    rootCAKeyPath: "${HOME}/.wintergreen/things/Widget/rootCA.key",
+    certificateArn:"arn:aws:iot:account:region:cacert/1234"
+}
+```
+
+## Provision a new device
+
+Provisioning a device means generating a certificate/key pair to be used for the device to authenticate with AWS IoT.
+
+```bash
+$ wintergreen provision --help
+Usage: wintergreen provision [OPTIONS]
+
+  Creates a new device key and certificate that is signed by a custom root
+  CA.
+
+Options:
+  -t, --thing-type TEXT    Same as the thing-type that was chosen in the
+                           `init` step.
+  --root-ca-path PATH      Required if thing-type from a previous run of
+                           `init` is not provided.
+  --root-ca-key-path PATH  Required if thing-type from a previous run of
+                           `init` is not provided.
+  -c, --common-name TEXT   Defaults to a UUIDv4
+  -c, --country TEXT       [required]
+  -o, --organization TEXT
+  -s, --state TEXT
+  -l, --locality TEXT
+  -u, --unit TEXT
+  -d, --days INTEGER       Days until certificate will expire  [default: 365]
+  -k, --key-size INTEGER   [default: 2048]
+  -n, --number             Number of certificates to provision
+  --help                   Show this message and exit.
+
+Outputs:
+{
+    deviceCert: "-----BEGIN CERTIFICATE-----....",
+    deviceCertPlusCACert: "-----BEGIN CERTIFICATE-----....",
+    deviceKey: "------BEGIN RSA PRIVATE KEY----...",
+    commonName: "thing-name"
+}
+```
+
+These will be written as files scoped by date into your `.wintergreen` directory. If you use the `-n` argument, it will generate a unique uuid for each cert and put all of the certs generated in their own folder. You'll also see an output.csv which contains a table of all the certs generated on this run.
+
+### Example provisioning cert example (AWS)
+After running the `provision` command the cert/key will be saved in a directory named after the thing-type as `deviceCertPlusCACert-{common_name}.crt` and `deviceKey-{common_name}.key`
+You'll also need to grab the `aws-root-ca.pem` from [AWS Trust](https://www.amazontrust.com/repository/).
+Lastly to test, you'll need to get your ATS endpoint by running `aws iot describe-endpoint --endpoint-type iot:Data-ATS --region us-east-1`
+If you have an mqtt client (`brew install mosquitto`) installed, you can verify that a generated device will provision correctly by running something like
+
+```
+mosquitto_pub --cafile aws-root-ca.pem \
+ --cert path/to/deviceCertPlusCACert-my-thing-common-name.crt \
+ --key path/to/deviceKey-my-thing-common-name.key \
+ -h your-endpoint-for-ats.iot.us-east-1.amazonaws.com \
+ --tls-version tlsv1.2 \
+ -p 8883 \
+ -q 1 \
+ -t /my-thing-type/my-thing-common-name/events \
+ -I anyclientID -m "{Hello}" -d
+```
+
+Eventually, you will see a device `my-thing-common-name` in the Things menu.

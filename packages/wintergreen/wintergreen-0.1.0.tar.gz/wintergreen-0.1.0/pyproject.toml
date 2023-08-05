@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "wintergreen"
+version = "0.1.0"
+description = "A tool for dealing with AWS IoT certificates"
+authors = ["Dan Lindeman <lindemda@gmail.com>"]
+license = "MIT"
+readme = 'README.md'
+repository = "https://github.com/verypossible/wintergreen"
+homepage = "https://github.com/verypossible/wintergreen"
+keywords = ['certs', 'openssl', 'aws', 'iot', 'device', 'provisioning']
+
+
+[tool.poetry.dependencies]
+python = "^3.7"
+cryptography = "^2.6"
+boto3 = "^1.9"
+click = "^7.0"
+pytest = "^4.5"
+mock = "^3.0"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+wintergreen = "wintergreen.cli:cli"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
