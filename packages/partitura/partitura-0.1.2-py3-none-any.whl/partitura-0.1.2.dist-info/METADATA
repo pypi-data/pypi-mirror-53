@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: partitura
+Version: 0.1.2
+Summary: A package to handle musicXML, match, worm and MIDI files
+Home-page: https://github.com/mgrachten/partitura
+Author: Maarten Grachten, Carlos Cancino-Chacón, and Thassilo Gadermaier
+Author-email: partitura-users@googlegroups.com
+License: Apache 2.0
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: lxml
+Requires-Dist: lark-parser
+Requires-Dist: xmlschema
+Requires-Dist: mido
+
+A package to handle musicXML, match, worm and MIDI files
+
+
