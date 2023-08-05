@@ -1,0 +1,10 @@
+from django.conf.urls import path, include
+from rest_framework import routers, 
+from {app_name}.views import {model_capitalize}ViewSet
+
+router = routers.DefaultRouter()
+router.register('{model_name}/', {model_capitalize}ViewSet)
+
+urlpatterns = [
+    path('/', include(router.urls)),
+]
