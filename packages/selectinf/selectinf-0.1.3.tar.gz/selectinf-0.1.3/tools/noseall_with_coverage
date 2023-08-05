@@ -1,0 +1,7 @@
+#! /usr/bin/python
+
+import os
+
+os.system("""
+env USE_TEST_SEED=1 USE_SMALL_SAMPLES=1 nosetests --with-coverage --cover-package=selection --verbose selection
+""")

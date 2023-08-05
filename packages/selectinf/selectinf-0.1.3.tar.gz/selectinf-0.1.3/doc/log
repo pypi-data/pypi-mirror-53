@@ -1,0 +1,1778 @@
+mkdir -p source/api/generated
+python ../tools/build_modref_templates.py
+WARNING: Empty - selectinf
+WARNING: Empty - selectinf.algorithms
+WARNING: Empty - selectinf.algorithms.api
+WARNING: Empty - selectinf.api
+WARNING: Empty - selectinf.constraints
+WARNING: Empty - selectinf.constraints.api
+WARNING: Empty - selectinf.distributions
+WARNING: Empty - selectinf.distributions.api
+WARNING: Empty - selectinf.info
+WARNING: Empty - selectinf.learning
+WARNING: Empty - selectinf.learning.keras_fit
+WARNING: Empty - selectinf.randomized
+WARNING: Empty - selectinf.randomized.api
+WARNING: Empty - selectinf.sampling
+WARNING: Empty - selectinf.sampling.api
+WARNING: Empty - selectinf.truncated
+WARNING: Empty - selectinf.truncated.api
+WARNING: Empty - selectinf.utils
+49 files written
+Build API docs finished.
+mkdir -p build/html build/doctrees
+sphinx-build -b html -d build/doctrees   source build/html
+Running Sphinx v2.2.0
+loading pickled environment... done
+building [mo]: targets for 0 po files that are out of date
+building [html]: targets for 52 source files that are out of date
+updating environment: 0 added, 110 changed, 0 removed
+reading sources... [  0%] algorithms/index
+reading sources... [  1%] algorithms/spacings
+reading sources... [  2%] api/generated/gen
+reading sources... [  3%] api/generated/selectinf.algorithms.change_point
+reading sources... [  4%] api/generated/selectinf.algorithms.covtest
+reading sources... [  5%] api/generated/selectinf.algorithms.cv
+reading sources... [  6%] api/generated/selectinf.algorithms.cv_glmnet
+reading sources... [  7%] api/generated/selectinf.algorithms.debiased_lasso
+reading sources... [  8%] api/generated/selectinf.algorithms.forward_step
+reading sources... [  9%] api/generated/selectinf.algorithms.lasso
+reading sources... [ 10%] api/generated/selectinf.algorithms.pca
+reading sources... [ 10%] api/generated/selectinf.algorithms.screening
+reading sources... [ 11%] api/generated/selectinf.algorithms.softmax
+reading sources... [ 12%] api/generated/selectinf.algorithms.sqrt_lasso
+reading sources... [ 13%] api/generated/selectinf.algorithms.stopping_rules
+reading sources... [ 14%] api/generated/selectinf.base
+reading sources... [ 15%] api/generated/selectinf.constraints.affine
+reading sources... [ 16%] api/generated/selectinf.constraints.base
+reading sources... [ 17%] api/generated/selectinf.constraints.estimation
+reading sources... [ 18%] api/generated/selectinf.constraints.intervals
+reading sources... [ 19%] api/generated/selectinf.constraints.quadratic
+reading sources... [ 20%] api/generated/selectinf.constraints.quasi_affine
+reading sources... [ 20%] api/generated/selectinf.distributions.chain
+reading sources... [ 21%] api/generated/selectinf.distributions.chisq
+reading sources... [ 22%] api/generated/selectinf.distributions.discrete_family
+reading sources... [ 23%] api/generated/selectinf.distributions.discrete_multiparameter
+reading sources... [ 24%] api/generated/selectinf.distributions.intervals
+reading sources... [ 25%] api/generated/selectinf.distributions.pvalue
+reading sources... [ 26%] api/generated/selectinf.glm
+reading sources... [ 27%] api/generated/selectinf.learning.Rfitters
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/numpydoc/docscrape.py:139: UserWarning: Unknown section Based On R Code:
+  warn("Unknown section %s" % key)
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/numpydoc/docscrape.py:139: UserWarning: Unknown section Based On R Code:
+  warn("Unknown section %s" % key)
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/numpydoc/docscrape.py:139: UserWarning: Unknown section Note
+  warn("Unknown section %s" % key)
+R[write to console]: Loaded gbm 2.1.5
+
+R[write to console]: randomForest 4.6-14
+
+R[write to console]: Type rfNews() to see new features/changes/bug fixes.
+
+reading sources... [ 28%] api/generated/selectinf.learning.Rutils
+reading sources... [ 29%] api/generated/selectinf.learning.core
+reading sources... [ 30%] api/generated/selectinf.learning.fitters
+reading sources... [ 30%] api/generated/selectinf.learning.learners
+reading sources... [ 31%] api/generated/selectinf.learning.samplers
+reading sources... [ 32%] api/generated/selectinf.learning.utils
+reading sources... [ 33%] api/generated/selectinf.randomized.cv_view
+reading sources... [ 34%] api/generated/selectinf.randomized.group_lasso
+reading sources... [ 35%] api/generated/selectinf.randomized.lasso
+reading sources... [ 36%] api/generated/selectinf.randomized.modelQ
+reading sources... [ 37%] api/generated/selectinf.randomized.query
+reading sources... [ 38%] api/generated/selectinf.randomized.randomization
+reading sources... [ 39%] api/generated/selectinf.randomized.screening
+reading sources... [ 40%] api/generated/selectinf.randomized.slope
+reading sources... [ 40%] api/generated/selectinf.sampling.langevin
+reading sources... [ 41%] api/generated/selectinf.sampling.sequential
+reading sources... [ 42%] api/generated/selectinf.truncated.F
+reading sources... [ 43%] api/generated/selectinf.truncated.T
+reading sources... [ 44%] api/generated/selectinf.truncated.base
+reading sources... [ 45%] api/generated/selectinf.truncated.chi
+reading sources... [ 46%] api/generated/selectinf.truncated.gaussian
+reading sources... [ 47%] api/generated/selectinf.utils.tools
+reading sources... [ 48%] api/generated/selection.adjusted_MLE.cv_MLE
+reading sources... [ 49%] api/generated/selection.adjusted_MLE.risk_comparisons
+reading sources... [ 50%] api/generated/selection.adjusted_MLE.sampler_based_quantiles
+reading sources... [ 50%] api/generated/selection.algorithms.change_point
+reading sources... [ 51%] api/generated/selection.algorithms.covtest
+reading sources... [ 52%] api/generated/selection.algorithms.cv
+reading sources... [ 53%] api/generated/selection.algorithms.cv_glmnet
+reading sources... [ 54%] api/generated/selection.algorithms.debiased_lasso
+reading sources... [ 55%] api/generated/selection.algorithms.forward_step
+reading sources... [ 56%] api/generated/selection.algorithms.lasso
+reading sources... [ 57%] api/generated/selection.algorithms.pca
+reading sources... [ 58%] api/generated/selection.algorithms.screening
+reading sources... [ 59%] api/generated/selection.algorithms.softmax
+reading sources... [ 60%] api/generated/selection.algorithms.sqrt_lasso
+reading sources... [ 60%] api/generated/selection.algorithms.stopping_rules
+reading sources... [ 61%] api/generated/selection.base
+reading sources... [ 62%] api/generated/selection.constraints.affine
+reading sources... [ 63%] api/generated/selection.constraints.base
+reading sources... [ 64%] api/generated/selection.constraints.estimation
+reading sources... [ 65%] api/generated/selection.constraints.intervals
+reading sources... [ 66%] api/generated/selection.constraints.quadratic
+reading sources... [ 67%] api/generated/selection.constraints.quasi_affine
+reading sources... [ 68%] api/generated/selection.distributions.chain
+reading sources... [ 69%] api/generated/selection.distributions.chisq
+reading sources... [ 70%] api/generated/selection.distributions.discrete_family
+reading sources... [ 70%] api/generated/selection.distributions.discrete_multiparameter
+reading sources... [ 71%] api/generated/selection.distributions.intervals
+reading sources... [ 72%] api/generated/selection.distributions.pvalue
+reading sources... [ 73%] api/generated/selection.glm
+reading sources... [ 74%] api/generated/selection.learning.Rfitters
+reading sources... [ 75%] api/generated/selection.learning.Rutils
+reading sources... [ 76%] api/generated/selection.learning.core
+reading sources... [ 77%] api/generated/selection.learning.fitters
+reading sources... [ 78%] api/generated/selection.learning.keras_fit
+reading sources... [ 79%] api/generated/selection.learning.learners
+reading sources... [ 80%] api/generated/selection.learning.samplers
+reading sources... [ 80%] api/generated/selection.learning.tensorflow_fit
+reading sources... [ 81%] api/generated/selection.learning.tensorflow_test
+reading sources... [ 82%] api/generated/selection.learning.utils
+reading sources... [ 83%] api/generated/selection.randomized.cv_view
+reading sources... [ 84%] api/generated/selection.randomized.group_lasso
+reading sources... [ 85%] api/generated/selection.randomized.lasso
+reading sources... [ 86%] api/generated/selection.randomized.modelQ
+reading sources... [ 87%] api/generated/selection.randomized.query
+reading sources... [ 88%] api/generated/selection.randomized.randomization
+reading sources... [ 89%] api/generated/selection.randomized.screening
+reading sources... [ 90%] api/generated/selection.randomized.slope
+reading sources... [ 90%] api/generated/selection.sampling.langevin
+reading sources... [ 91%] api/generated/selection.sampling.sequential
+reading sources... [ 92%] api/generated/selection.truncated.F
+reading sources... [ 93%] api/generated/selection.truncated.T
+reading sources... [ 94%] api/generated/selection.truncated.base
+reading sources... [ 95%] api/generated/selection.truncated.chi
+reading sources... [ 96%] api/generated/selection.truncated.gaussian
+reading sources... [ 97%] api/generated/selection.utils.tools
+reading sources... [ 98%] documentation
+reading sources... [ 99%] index
+reading sources... [100%] randomized/index
+
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/importlib/_bootstrap.py:205: RuntimeWarning: numpy.ufunc size changed, may indicate binary incompatibility. Expected 216, got 192
+  return f(*args, **kwds)
+Using TensorFlow backend.
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:455: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:456: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:457: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:458: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:459: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:462: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/importlib/_bootstrap.py:205: RuntimeWarning: numpy.ufunc size changed, may indicate binary incompatibility. Expected 216, got 192
+  return f(*args, **kwds)
+/Users/jonathantaylor/git-repos/selectinf/doc/source/algorithms/spacings.rst:: WARNING: Anonymous hyperlink mismatch: 1 references but 0 targets.
+See "backrefs" attribute for IDs.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.change_point'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.covtest'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.cv'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.cv_glmnet'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.debiased_lasso'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.forward_step'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.lasso'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.pca'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.screening'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.softmax'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.sqrt_lasso'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.algorithms.stopping_rules'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.base'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.constraints.affine'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.constraints.base'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.constraints.estimation'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.constraints.intervals'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.constraints.quadratic'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.constraints.quasi_affine'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.distributions.chain'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.distributions.chisq'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.distributions.discrete_family'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.distributions.discrete_multiparameter'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.distributions.intervals'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.distributions.pvalue'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.glm'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.Rfitters'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.Rutils'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.core'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.fitters'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.learners'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.samplers'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.learning.utils'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.cv_view'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.group_lasso'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.lasso'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.modelQ'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.query'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.randomization'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.screening'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.randomized.slope'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.sampling.langevin'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.sampling.sequential'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.truncated.F'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.truncated.T'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.truncated.base'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.truncated.chi'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.truncated.gaussian'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst:3: WARNING: toctree contains reference to nonexisting document 'api/generated/source/generated/selectinf.utils.tools'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.change_point.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.change_point
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/covtest.py:docstring of selectinf.algorithms.covtest:13: WARNING: Unknown target name: "selected_covtest".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/covtest.py:docstring of selectinf.algorithms.covtest.covtest:38: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/covtest.py:docstring of selectinf.algorithms.covtest.selected_covtest:46: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.cv.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.cv
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.cv_glmnet.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.cv_glmnet
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/debiased_lasso.py:docstring of selectinf.algorithms.debiased_lasso.debiased_lasso_inference:4: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/debiased_lasso.py:docstring of selectinf.algorithms.debiased_lasso.debiased_lasso_inference:5: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/debiased_lasso.py:docstring of selectinf.algorithms.debiased_lasso.debiased_lasso_inference:15: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/debiased_lasso.py:docstring of selectinf.algorithms.debiased_lasso.debiased_lasso_inference:16: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.forward_step.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.forward_step
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/forward_step.py:docstring of selectinf.algorithms.forward_step.forward_step.__init__:25: WARNING: Inline emphasis start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.lasso
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI:5: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI:7: WARNING: Literal block ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.__init__:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.__init__:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.fit:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.fit:13: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.fit:19: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.fit:20: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.summary:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.gaussian:11: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.gaussian:12: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.gaussian:29: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.gaussian:30: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.logistic:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.logistic:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.logistic:33: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.logistic:34: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.poisson:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.poisson:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.poisson:28: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.poisson:29: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.coxph:14: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.coxph:15: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.coxph:31: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.coxph:32: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.sqrt_lasso:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.sqrt_lasso:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.sqrt_lasso:35: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.sqrt_lasso:36: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ:8: WARNING: Literal block ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.__init__:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.fit:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.fit:13: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.fit:15: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.fit:16: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.summary:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.summary:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.summary:11: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.summary:12: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.coxph:14: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.coxph:15: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.coxph:31: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.coxph:32: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.gaussian:11: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.gaussian:12: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.gaussian:29: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.gaussian:30: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.logistic:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.logistic:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.logistic:33: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.logistic:34: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.poisson:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.poisson:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.poisson:28: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.poisson:29: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.sqrt_lasso:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.sqrt_lasso:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.sqrt_lasso:35: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.sqrt_lasso:36: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.__init__:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.__init__:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.__init__:13: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.__init__:14: WARNING: Unexpected section title.
+
+Notes
+-----
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.gaussian:11: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.gaussian:12: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.gaussian:29: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.gaussian:30: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.logistic:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.logistic:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.logistic:33: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.logistic:34: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.poisson:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.poisson:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.poisson:28: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.poisson:29: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.coxph:14: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.coxph:15: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.coxph:31: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.coxph:32: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.sqrt_lasso:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.sqrt_lasso:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.sqrt_lasso:35: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.sqrt_lasso:36: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.fit:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.fit:13: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.fit:15: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.fit:16: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.__init__:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.__init__:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.__init__:13: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.__init__:14: WARNING: Unexpected section title.
+
+Notes
+-----
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.fit:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.fit:13: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.fit:15: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.fit:16: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.coxph:14: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.coxph:15: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.coxph:31: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.coxph:32: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.gaussian:11: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.gaussian:12: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.gaussian:29: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.gaussian:30: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.logistic:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.logistic:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.logistic:33: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.logistic:34: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.poisson:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.poisson:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.poisson:28: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.poisson:29: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.sqrt_lasso:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.sqrt_lasso:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.sqrt_lasso:35: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.sqrt_lasso:36: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso:5: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso:7: WARNING: Literal block ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.__init__:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.__init__:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.__init__:13: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.__init__:14: WARNING: Unexpected section title.
+
+Notes
+-----
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.fit:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.fit:13: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.fit:15: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.fit:16: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.gaussian:11: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.gaussian:12: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.gaussian:29: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.gaussian:30: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.logistic:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.logistic:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.logistic:33: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.logistic:34: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.coxph:14: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.coxph:15: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.coxph:31: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.coxph:32: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.poisson:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.poisson:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.poisson:28: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.poisson:29: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.sqrt_lasso:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.sqrt_lasso:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.sqrt_lasso:35: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.sqrt_lasso:36: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.additive_noise:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.additive_noise:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.glm_parametric_estimator:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.glm_parametric_estimator:17: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.glm_sandwich_estimator:7: WARNING: Explicit markup ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.glm_sandwich_estimator:13: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.split_model:9: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.split_model:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.split_model:23: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.split_model:24: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.standard_lasso:8: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.standard_lasso:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.standard_lasso:17: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.standard_lasso:18: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.gaussian:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.logistic:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.poisson:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.coxph:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI.sqrt_lasso:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.coxph:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.gaussian:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.logistic:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.poisson:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.ROSI_modelQ.sqrt_lasso:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.gaussian:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.logistic:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.poisson:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.coxph:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_carving.sqrt_lasso:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.coxph:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.gaussian:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.logistic:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.poisson:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.data_splitting.sqrt_lasso:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.gaussian:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.logistic:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.coxph:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.poisson:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso.lasso.sqrt_lasso:2: WARNING: Undefined substitution referenced: "beta_i".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/lasso.py:docstring of selectinf.algorithms.lasso:1: WARNING: Unknown target name: "post selection lasso".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.screening.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.screening
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.softmax.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.softmax
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.sqrt_lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.algorithms.sqrt_lasso
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.sqlasso_objective.hessian:2: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.sqlasso_objective.hessian:3: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.sqlasso_objective_skinny:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.solve_sqrt_lasso:6: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.solve_sqrt_lasso_fat:6: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.solve_sqrt_lasso_skinny:6: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.solve_sqrt_lasso:5: WARNING: Undefined substitution referenced: "eta".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.solve_sqrt_lasso_fat:5: WARNING: Undefined substitution referenced: "eta".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/sqrt_lasso.py:docstring of selectinf.algorithms.sqrt_lasso.solve_sqrt_lasso_skinny:5: WARNING: Undefined substitution referenced: "eta".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/stopping_rules.py:docstring of selectinf.algorithms.stopping_rules:3: WARNING: Unknown target name: "http://arxiv.org/abs/1309.5352".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/stopping_rules.py:docstring of selectinf.algorithms.stopping_rules.forward_stop:2: WARNING: Unknown target name: "http://arxiv.org/abs/1309.5352".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/algorithms/stopping_rules.py:docstring of selectinf.algorithms.stopping_rules.strong_stop:2: WARNING: Unknown target name: "http://arxiv.org/abs/1309.5352".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.affine.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.constraints.affine
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/affine.py:docstring of selectinf.constraints.affine.gibbs_test:8: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/affine.py:docstring of selectinf.constraints.affine.sample_from_constraints:7: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/affine.py:docstring of selectinf.constraints.affine.sample_from_sphere:10: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/affine.py:docstring of selectinf.constraints.affine.stack:8: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/affine.py:docstring of selectinf.constraints.affine.stack:14: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.base.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.constraints.base
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.estimation.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.constraints.estimation
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant_conjugate:14: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant_conjugate:24: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant_conjugate:26: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant_conjugate_known:11: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant_conjugate_known:18: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.gaussian_cumulant_known:11: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.softmax:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/estimation.py:docstring of selectinf.constraints.estimation.softmax_conjugate:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.intervals.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.constraints.intervals
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.quadratic.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.constraints.quadratic
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.quasi_affine.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.constraints.quasi_affine
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/quasi_affine.py:docstring of selectinf.constraints.quasi_affine.sample_from_constraints:7: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/quasi_affine.py:docstring of selectinf.constraints.quasi_affine.sample_from_sphere:10: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/quasi_affine.py:docstring of selectinf.constraints.quasi_affine.stack:8: WARNING: Unknown target name: "selection.affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/constraints/quasi_affine.py:docstring of selectinf.constraints.quasi_affine.stack:14: WARNING: Unknown target name: "selection.quasi_affine.constraints".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.chain.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.distributions.chain
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/distributions/chisq.py:docstring of selectinf.distributions.chisq.quadratic_bounds:21: WARNING: Unknown target name: "kac rice".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/distributions/chisq.py:docstring of selectinf.distributions.chisq.quadratic_bounds:35: WARNING: Unknown target name: "selection.constraints.constraints".
+/Users/jonathantaylor/git-repos/selectinf/selectinf/distributions/chisq.py:docstring of selectinf.distributions.chisq.quadratic_test:20: WARNING: Unknown target name: "selection.constraints.constraints".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.discrete_family.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.distributions.discrete_family
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.discrete_multiparameter.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.distributions.discrete_multiparameter
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.intervals.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.distributions.intervals
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/distributions/intervals.py:docstring of selectinf.distributions.intervals.intervals_from_sample.confidence_interval:2: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.pvalue.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.distributions.pvalue
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_bootstrap_glm:2: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_bootstrap_glm:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_bootstrap_score:2: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_bootstrap_score:4: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_bootstrap_score:10: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_bootstrap_score:9: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_inactive_score_glm:2: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.pairs_inactive_score_glm:5: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/glm.py:docstring of selectinf.glm.set_alpha_matrix:41: WARNING: Unexpected section title or transition.
+
+???????
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.Rutils.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.learning.Rutils
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.learners.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.learning.learners
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.samplers.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.learning.samplers
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.cv_view.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.cv_view
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.group_lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.group_lasso
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/group_lasso.py:docstring of selectinf.randomized.group_lasso.polynomial_gaussian_sampler.__init__:15: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.lasso
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.modelQ.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.modelQ
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.query.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.query
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/query.py:docstring of selectinf.randomized.query.affine_gaussian_sampler.__init__:15: WARNING: Inline interpreted text or phrase reference start-string without end-string.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/query.py:docstring of selectinf.randomized.query.optimization_intervals.pivot:4: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/query.py:docstring of selectinf.randomized.query.optimization_intervals.pivot:5: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.randomization.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.randomization
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant.smooth_objective:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant.smooth_objective:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant.smooth_objective:13: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant.smooth_objective:14: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant_conjugate.smooth_objective:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant_conjugate.smooth_objective:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant_conjugate.smooth_objective:13: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.cumulant_conjugate.smooth_objective:14: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.from_grad_func.smooth_objective:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.from_grad_func.smooth_objective:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.from_grad_func.smooth_objective:13: WARNING: Definition list ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.from_grad_func.smooth_objective:14: WARNING: Unexpected section title.
+
+Returns
+-------
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.isotropic_gaussian:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.isotropic_gaussian:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.gaussian:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.laplace:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.laplace:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.logistic:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.randomization.logistic:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.gaussian:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.isotropic_gaussian:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.isotropic_gaussian:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.laplace:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.laplace:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.logistic:6: WARNING: Unexpected indentation.
+/Users/jonathantaylor/git-repos/selectinf/selectinf/randomized/randomization.py:docstring of selectinf.randomized.randomization.split.logistic:7: WARNING: Block quote ends without a blank line; unexpected unindent.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.screening.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.screening
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.slope.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.randomized.slope
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.sampling.langevin.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.sampling.langevin
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/selectinf/sampling/langevin.py:docstring of selectinf.sampling.langevin:1: WARNING: Unknown target name: "http://arxiv.org/abs/1507.02564".
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.F.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.truncated.F
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.T.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.truncated.T
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.base.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.truncated.base
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.chi.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.truncated.chi
+   :parts: 3
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.gaussian.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selectinf.truncated.gaussian
+   :parts: 3
+WARNING: autodoc: failed to import module 'adjusted_MLE.cv_MLE' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.BHfilter' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.compare_sampler_MLE' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.comparison_cvmetrics_debiased' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.comparison_cvmetrics_full' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.comparison_cvmetrics_selected' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.coverage' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.glmnet_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.relative_risk' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.selInf_R' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.cv_MLE.sim_xy' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'adjusted_MLE.risk_comparisons' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.risk_comparisons.glmnet_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.risk_comparisons.relative_risk' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.risk_comparisons.risk_comparison' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.risk_comparisons.sim_xy' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'adjusted_MLE.sampler_based_quantiles' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'adjusted_MLE.sampler_based_quantiles.compute_sampler_quantiles' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.change_point.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.change_point
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.change_point' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.change_point.change_point' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.change_point.one_jump_instance' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'algorithms.covtest' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.covtest.covtest' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.covtest.selected_covtest' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.cv.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.cv
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.cv' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.cv.CV' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.cv.main' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.cv_glmnet.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.cv_glmnet
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.cv_glmnet' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.cv_glmnet.CV_glmnet' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'algorithms.debiased_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.debiased_lasso.debiased_lasso_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.debiased_lasso.debiasing_matrix' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.debiased_lasso.pseudoinverse_debiasing_matrix' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.forward_step.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.forward_step
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.forward_step' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.forward_step.forward_step' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.forward_step.data_carving_IC' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.forward_step.info_crit_stop' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.forward_step.mcmc_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.lasso
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.lasso.ROSI' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.lasso.ROSI_modelQ' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.lasso.data_carving' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.lasso.data_splitting' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.lasso.lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.lasso.additive_noise' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.lasso.glm_parametric_estimator' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.lasso.glm_sandwich_estimator' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.lasso.nominal_intervals' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.lasso.split_model' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.lasso.standard_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'algorithms.pca' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.pca.pvalue' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.screening.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.screening
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.screening' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.screening.topK' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.screening.test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.softmax.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.softmax
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.softmax' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.softmax.softmax_objective' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.sqrt_lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.algorithms.sqrt_lasso
+   :parts: 3
+WARNING: autodoc: failed to import module 'algorithms.sqrt_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.sqrt_lasso.l2norm_saturated' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.sqrt_lasso.sqlasso_objective' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'algorithms.sqrt_lasso.sqlasso_objective_skinny' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.choose_lambda' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.estimate_sigma' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.goodness_of_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.l2norm_glm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.solve_sqrt_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.solve_sqrt_lasso_fat' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.sqrt_lasso.solve_sqrt_lasso_skinny' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'algorithms.stopping_rules' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.stopping_rules.forward_stop' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.stopping_rules.simple_stop' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'algorithms.stopping_rules.strong_stop' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'base' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'base.restricted_estimator' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.affine.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.constraints.affine
+   :parts: 3
+WARNING: autodoc: failed to import module 'constraints.affine' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.affine.constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.affine.gaussian_hit_and_run' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.affine.gibbs_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.affine.interval_constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.affine.sample_from_constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.affine.sample_from_sphere' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.affine.selection_interval' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.affine.stack' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.base.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.constraints.base
+   :parts: 3
+WARNING: autodoc: failed to import module 'constraints.base' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.base.cons_op' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.base.constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.base.noConstraint' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.estimation.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.constraints.estimation
+   :parts: 3
+WARNING: autodoc: failed to import module 'constraints.estimation' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.gaussian_cumulant' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.gaussian_cumulant_conjugate' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.gaussian_cumulant_conjugate_known' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.gaussian_cumulant_known' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.optimal_tilt' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.softmax' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.estimation.softmax_conjugate' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.intervals.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.constraints.intervals
+   :parts: 3
+WARNING: autodoc: failed to import module 'constraints.intervals' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.intervals.intervals' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.quadratic.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.constraints.quadratic
+   :parts: 3
+WARNING: autodoc: failed to import module 'constraints.quadratic' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.quadratic.constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.quadratic.constraints_vecnorm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quadratic.roots_poly2' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quadratic.stack' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.quasi_affine.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.constraints.quasi_affine
+   :parts: 3
+WARNING: autodoc: failed to import module 'constraints.quasi_affine' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.quasi_affine.constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'constraints.quasi_affine.orthogonal' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.constraints_unknown_sigma' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.gibbs_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.intersection' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.quadratic_inequality_solver' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.sample_from_constraints' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.sample_from_sphere' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.sqrt_inequality_solver' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'constraints.quasi_affine.stack' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.chain.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.distributions.chain
+   :parts: 3
+WARNING: autodoc: failed to import module 'distributions.chain' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'distributions.chain.markov_chain' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'distributions.chain.reversible_markov_chain' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.chain.parallel_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.chain.serial_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'distributions.chisq' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.chisq.quadratic_bounds' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.chisq.quadratic_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.chisq.tangent_space' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.discrete_family.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.distributions.discrete_family
+   :parts: 3
+WARNING: autodoc: failed to import module 'distributions.discrete_family' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'distributions.discrete_family.discrete_family' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.discrete_family.crit_func' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.discrete_multiparameter.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.distributions.discrete_multiparameter
+   :parts: 3
+WARNING: autodoc: failed to import module 'distributions.discrete_multiparameter' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'distributions.discrete_multiparameter.multiparameter_family' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.intervals.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.distributions.intervals
+   :parts: 3
+WARNING: autodoc: failed to import module 'distributions.intervals' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'distributions.intervals.intervals_from_sample' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.pvalue.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.distributions.pvalue
+   :parts: 3
+WARNING: autodoc: failed to import module 'distributions.pvalue' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'distributions.pvalue.SelectionInterval' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.chi_pvalue' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.gauss_poly' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.general_pvalue' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.norm_interval' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.norm_pdf' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.norm_q' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'distributions.pvalue.truncnorm_cdf' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'glm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.bootstrap_cov' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.glm_nonparametric_bootstrap' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.glm_parametric_covariance' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.pairs_bootstrap_glm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.pairs_bootstrap_score' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.pairs_inactive_score_glm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.parametric_cov' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.resid_bootstrap' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.set_alpha_matrix' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'glm.standard_split_ci' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.Rfitters' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rfitters.gbm_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rfitters.logit_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rfitters.probit_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rfitters.random_forest_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.Rutils.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.learning.Rutils
+   :parts: 3
+WARNING: autodoc: failed to import module 'learning.Rutils' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'learning.Rutils.generic_method' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'learning.Rutils.lasso_glmnet' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rutils.cv_glmnet_lam' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rutils.factor_knockoffs' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.Rutils.null_print' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.core' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.core.cross_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.core.infer_full_target' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.core.infer_general_target' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.core.infer_set_target' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.core.repeat_selection' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.fitters' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.fitters.gbm_fit_sk' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.fitters.random_forest_fit_sk' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.keras_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.keras_fit.keras_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.keras_fit.keras_fit_multilabel' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.learners.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.learning.learners
+   :parts: 3
+WARNING: autodoc: failed to import module 'learning.learners' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'learning.learners.mixture_learner' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'learning.learners.sparse_mixture_learner' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.samplers.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.learning.samplers
+   :parts: 3
+WARNING: autodoc: failed to import module 'learning.samplers' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'learning.samplers.normal_sampler' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'learning.samplers.split_sampler' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.tensorflow_fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_fit.create_l2_loss' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_fit.create_logit_loss' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_fit.create_optimizer' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_fit.extract_weights' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_fit.fit' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_fit.predict' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.tensorflow_test' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_test.algorithm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_test.create_network' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_test.fit_algorithm' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_test.pivot1' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.tensorflow_test.simulate' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'learning.utils' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.full_model_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.lee_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.liu_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.naive_full_model_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.naive_partial_model_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.partial_model_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.split_full_model_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'learning.utils.split_partial_model_inference' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.cv_view.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.cv_view
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.cv_view' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.cv_view.CV_view' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.cv_view.projection' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.group_lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.group_lasso
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.group_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.group_lasso.group_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.group_lasso.polynomial_gaussian_sampler' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.group_lasso.debiased_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.group_lasso.form_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.group_lasso.full_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.group_lasso.selected_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.lasso.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.lasso
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.lasso.lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.lasso.split_lasso' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.lasso.debiased_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.lasso.form_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.lasso.full_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.lasso.selected_targets' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.modelQ.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.modelQ
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.modelQ' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.modelQ.modelQ' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.query.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.query
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.query' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.query.affine_gaussian_sampler' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.query.gaussian_query' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.query.multiple_queries' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.query.optimization_intervals' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.query.optimization_sampler' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.query.query' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.query.naive_confidence_intervals' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.query.naive_pvalues' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.query.normalizing_constant' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.query.selective_MLE' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.randomization.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.randomization
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.randomization' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.randomization.cumulant' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.randomization.cumulant_conjugate' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.randomization.from_grad_func' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.randomization.randomization' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.randomization.split' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.randomization.isotropic_gaussian_CGF' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.randomization.isotropic_gaussian_CGF_conjugate' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.randomization.laplace_CGF' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.randomization.laplace_CGF_conjugate' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.screening.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.screening
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.screening' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.screening.marginal_screening' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.screening.screening' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.screening.stepup' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.screening.topK' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'randomized.screening.stepup_selection' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.slope.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.randomized.slope
+   :parts: 3
+WARNING: autodoc: failed to import module 'randomized.slope' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'randomized.slope.slope' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.sampling.langevin.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.sampling.langevin
+   :parts: 3
+WARNING: autodoc: failed to import module 'sampling.langevin' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'sampling.langevin.projected_langevin' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'sampling.sequential' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'sampling.sequential.sample' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.F.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.truncated.F
+   :parts: 3
+WARNING: autodoc: failed to import module 'truncated.F' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.F.truncated_F' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.F.null_f' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.F.sf_F' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.T.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.truncated.T
+   :parts: 3
+WARNING: autodoc: failed to import module 'truncated.T' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.T.truncated_T' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.T.sf_T' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.base.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.truncated.base
+   :parts: 3
+WARNING: autodoc: failed to import module 'truncated.base' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.base.truncated' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.base.find_root' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.chi.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.truncated.chi
+   :parts: 3
+WARNING: autodoc: failed to import module 'truncated.chi' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.chi.truncated_chi' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.chi.truncated_chi2' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.gaussian.rst:10: WARNING: Unknown directive type "inheritance-diagram".
+
+.. inheritance-diagram:: selection.truncated.gaussian
+   :parts: 3
+WARNING: autodoc: failed to import module 'truncated.gaussian' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.gaussian.TruncatedGaussianError' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.gaussian.truncated_gaussian' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import class 'truncated.gaussian.truncated_gaussian_old' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.gaussian.G' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.gaussian.dG' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'truncated.gaussian.find_root' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import module 'utils.tools' from module 'selection'; the following exception was raised:
+No module named 'selection'
+WARNING: autodoc: failed to import function 'utils.tools.timethis' from module 'selection'; the following exception was raised:
+No module named 'selection'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/documentation.rst:7: WARNING: Unknown directive type "htmlonly".
+
+.. htmlonly::
+
+   :Release: |version|
+   :Date: |today|
+
+   Download `PDF <selection.pdf>`_
+
+   Contents:
+/Users/jonathantaylor/git-repos/selectinf/doc/source/documentation.rst:16: WARNING: toctree contains reference to nonexisting document 'license'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/documentation.rst:22: WARNING: Unknown directive type "htmlonly".
+
+.. htmlonly::
+
+  * :ref:`genindex`
+  * :ref:`modindex`
+  * :ref:`search`
+/Users/jonathantaylor/git-repos/selectinf/doc/source/index.rst:25: WARNING: toctree contains reference to nonexisting document 'algorithms'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/index.rst:25: WARNING: toctree contains reference to nonexisting document 'randomized'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/index.rst:25: WARNING: toctree contains reference to nonexisting document 'learning'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/index.rst:36: WARNING: Problems with "include" directive path:
+InputError: [Errno 2] No such file or directory: 'links_names.txt'.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/index.rst:5: WARNING: duplicate label about_selection, other instance in /Users/jonathantaylor/git-repos/selectinf/doc/source/randomized/index.rst
+/Users/jonathantaylor/git-repos/selectinf/doc/source/randomized/index.rst:7: WARNING: Problems with "include" directive path:
+InputError: [Errno 2] No such file or directory: 'source/randomized/links_names.txt'.
+/Users/jonathantaylor/git-repos/selectinf/doc/source/randomized/index.rst:12: WARNING: toctree contains reference to nonexisting document 'randomized/covtest'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/randomized/index.rst:12: WARNING: toctree contains reference to nonexisting document 'randomized/spacings'
+/Users/jonathantaylor/git-repos/selectinf/doc/source/randomized/index.rst:5: WARNING: duplicate label about_selection, other instance in /Users/jonathantaylor/git-repos/selectinf/doc/source/index.rst
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jonathantaylor/git-repos/selectinf/doc/source/algorithms/index.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/gen.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.change_point.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.covtest.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.cv.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.cv_glmnet.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.debiased_lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.forward_step.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.pca.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.screening.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.softmax.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.sqrt_lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.algorithms.stopping_rules.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.base.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.affine.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.base.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.estimation.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.intervals.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.quadratic.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.constraints.quasi_affine.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.chain.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.chisq.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.discrete_family.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.discrete_multiparameter.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.intervals.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.distributions.pvalue.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.glm.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.Rfitters.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.Rutils.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.core.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.fitters.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.learners.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.samplers.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.learning.utils.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.cv_view.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.group_lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.modelQ.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.query.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.randomization.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.screening.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.randomized.slope.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.sampling.langevin.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.sampling.sequential.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.F.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.T.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.base.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.chi.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.truncated.gaussian.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selectinf.utils.tools.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.adjusted_MLE.cv_MLE.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.adjusted_MLE.risk_comparisons.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.adjusted_MLE.sampler_based_quantiles.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.change_point.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.covtest.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.cv.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.cv_glmnet.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.debiased_lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.forward_step.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.pca.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.screening.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.softmax.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.sqrt_lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.algorithms.stopping_rules.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.base.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.affine.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.base.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.estimation.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.intervals.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.quadratic.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.constraints.quasi_affine.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.chain.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.chisq.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.discrete_family.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.discrete_multiparameter.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.intervals.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.distributions.pvalue.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.glm.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.Rfitters.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.Rutils.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.core.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.fitters.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.keras_fit.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.learners.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.samplers.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.tensorflow_fit.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.tensorflow_test.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.learning.utils.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.cv_view.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.group_lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.lasso.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.modelQ.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.query.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.randomization.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.screening.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.randomized.slope.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.sampling.langevin.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.sampling.sequential.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.F.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.T.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.base.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.chi.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.truncated.gaussian.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/api/generated/selection.utils.tools.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/learning/.ipynb_checkpoints/Learning1-checkpoint.ipynb: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/learning/.ipynb_checkpoints/Learning2-checkpoint.ipynb: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/learning/index.rst: WARNING: document isn't included in any toctree
+/Users/jonathantaylor/git-repos/selectinf/doc/source/randomized/index.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+writing output... [  0%] algorithms/index
+writing output... [  1%] algorithms/spacings
+writing output... [  2%] api/generated/gen
+writing output... [  3%] api/generated/selectinf.algorithms.change_point
+writing output... [  4%] api/generated/selectinf.algorithms.covtest
+writing output... [  5%] api/generated/selectinf.algorithms.cv
+writing output... [  6%] api/generated/selectinf.algorithms.cv_glmnet
+writing output... [  7%] api/generated/selectinf.algorithms.debiased_lasso
+writing output... [  8%] api/generated/selectinf.algorithms.forward_step
+writing output... [  9%] api/generated/selectinf.algorithms.lasso
+writing output... [ 10%] api/generated/selectinf.algorithms.pca
+writing output... [ 10%] api/generated/selectinf.algorithms.screening
+writing output... [ 11%] api/generated/selectinf.algorithms.softmax
+writing output... [ 12%] api/generated/selectinf.algorithms.sqrt_lasso
+writing output... [ 13%] api/generated/selectinf.algorithms.stopping_rules
+writing output... [ 14%] api/generated/selectinf.base
+writing output... [ 15%] api/generated/selectinf.constraints.affine
+writing output... [ 16%] api/generated/selectinf.constraints.base
+writing output... [ 17%] api/generated/selectinf.constraints.estimation
+writing output... [ 18%] api/generated/selectinf.constraints.intervals
+writing output... [ 19%] api/generated/selectinf.constraints.quadratic
+writing output... [ 20%] api/generated/selectinf.constraints.quasi_affine
+writing output... [ 20%] api/generated/selectinf.distributions.chain
+writing output... [ 21%] api/generated/selectinf.distributions.chisq
+writing output... [ 22%] api/generated/selectinf.distributions.discrete_family
+writing output... [ 23%] api/generated/selectinf.distributions.discrete_multiparameter
+writing output... [ 24%] api/generated/selectinf.distributions.intervals
+writing output... [ 25%] api/generated/selectinf.distributions.pvalue
+writing output... [ 26%] api/generated/selectinf.glm
+writing output... [ 27%] api/generated/selectinf.learning.Rfitters
+writing output... [ 28%] api/generated/selectinf.learning.Rutils
+writing output... [ 29%] api/generated/selectinf.learning.core
+writing output... [ 30%] api/generated/selectinf.learning.fitters
+writing output... [ 30%] api/generated/selectinf.learning.learners
+writing output... [ 31%] api/generated/selectinf.learning.samplers
+writing output... [ 32%] api/generated/selectinf.learning.utils
+writing output... [ 33%] api/generated/selectinf.randomized.cv_view
+writing output... [ 34%] api/generated/selectinf.randomized.group_lasso
+writing output... [ 35%] api/generated/selectinf.randomized.lasso
+writing output... [ 36%] api/generated/selectinf.randomized.modelQ
+writing output... [ 37%] api/generated/selectinf.randomized.query
+writing output... [ 38%] api/generated/selectinf.randomized.randomization
+writing output... [ 39%] api/generated/selectinf.randomized.screening
+writing output... [ 40%] api/generated/selectinf.randomized.slope
+writing output... [ 40%] api/generated/selectinf.sampling.langevin
+writing output... [ 41%] api/generated/selectinf.sampling.sequential
+writing output... [ 42%] api/generated/selectinf.truncated.F
+writing output... [ 43%] api/generated/selectinf.truncated.T
+writing output... [ 44%] api/generated/selectinf.truncated.base
+writing output... [ 45%] api/generated/selectinf.truncated.chi
+writing output... [ 46%] api/generated/selectinf.truncated.gaussian
+writing output... [ 47%] api/generated/selectinf.utils.tools
+writing output... [ 48%] api/generated/selection.adjusted_MLE.cv_MLE
+writing output... [ 49%] api/generated/selection.adjusted_MLE.risk_comparisons
+writing output... [ 50%] api/generated/selection.adjusted_MLE.sampler_based_quantiles
+writing output... [ 50%] api/generated/selection.algorithms.change_point
+writing output... [ 51%] api/generated/selection.algorithms.covtest
+writing output... [ 52%] api/generated/selection.algorithms.cv
+writing output... [ 53%] api/generated/selection.algorithms.cv_glmnet
+writing output... [ 54%] api/generated/selection.algorithms.debiased_lasso
+writing output... [ 55%] api/generated/selection.algorithms.forward_step
+writing output... [ 56%] api/generated/selection.algorithms.lasso
+writing output... [ 57%] api/generated/selection.algorithms.pca
+writing output... [ 58%] api/generated/selection.algorithms.screening
+writing output... [ 59%] api/generated/selection.algorithms.softmax
+writing output... [ 60%] api/generated/selection.algorithms.sqrt_lasso
+writing output... [ 60%] api/generated/selection.algorithms.stopping_rules
+writing output... [ 61%] api/generated/selection.base
+writing output... [ 62%] api/generated/selection.constraints.affine
+writing output... [ 63%] api/generated/selection.constraints.base
+writing output... [ 64%] api/generated/selection.constraints.estimation
+writing output... [ 65%] api/generated/selection.constraints.intervals
+writing output... [ 66%] api/generated/selection.constraints.quadratic
+writing output... [ 67%] api/generated/selection.constraints.quasi_affine
+writing output... [ 68%] api/generated/selection.distributions.chain
+writing output... [ 69%] api/generated/selection.distributions.chisq
+writing output... [ 70%] api/generated/selection.distributions.discrete_family
+writing output... [ 70%] api/generated/selection.distributions.discrete_multiparameter
+writing output... [ 71%] api/generated/selection.distributions.intervals
+writing output... [ 72%] api/generated/selection.distributions.pvalue
+writing output... [ 73%] api/generated/selection.glm
+writing output... [ 74%] api/generated/selection.learning.Rfitters
+writing output... [ 75%] api/generated/selection.learning.Rutils
+writing output... [ 76%] api/generated/selection.learning.core
+writing output... [ 77%] api/generated/selection.learning.fitters
+writing output... [ 78%] api/generated/selection.learning.keras_fit
+writing output... [ 79%] api/generated/selection.learning.learners
+writing output... [ 80%] api/generated/selection.learning.samplers
+writing output... [ 80%] api/generated/selection.learning.tensorflow_fit
+writing output... [ 81%] api/generated/selection.learning.tensorflow_test
+writing output... [ 82%] api/generated/selection.learning.utils
+writing output... [ 83%] api/generated/selection.randomized.cv_view
+writing output... [ 84%] api/generated/selection.randomized.group_lasso
+writing output... [ 85%] api/generated/selection.randomized.lasso
+writing output... [ 86%] api/generated/selection.randomized.modelQ
+writing output... [ 87%] api/generated/selection.randomized.query
+writing output... [ 88%] api/generated/selection.randomized.randomization
+writing output... [ 89%] api/generated/selection.randomized.screening
+writing output... [ 90%] api/generated/selection.randomized.slope
+writing output... [ 90%] api/generated/selection.sampling.langevin
+writing output... [ 91%] api/generated/selection.sampling.sequential
+writing output... [ 92%] api/generated/selection.truncated.F
+writing output... [ 93%] api/generated/selection.truncated.T
+writing output... [ 94%] api/generated/selection.truncated.base
+writing output... [ 95%] api/generated/selection.truncated.chi
+writing output... [ 96%] api/generated/selection.truncated.gaussian
+writing output... [ 97%] api/generated/selection.utils.tools
+writing output... [ 98%] documentation
+writing output... [ 99%] index
+writing output... [100%] randomized/index
+
+generating indices...  genindex py-modindexdone
+highlighting module code... [  1%] regreg.problems.composite
+highlighting module code... [  3%] regreg.smooth
+highlighting module code... [  5%] selectinf.algorithms.change_point
+highlighting module code... [  7%] selectinf.algorithms.covtest
+highlighting module code... [  9%] selectinf.algorithms.cv
+highlighting module code... [ 11%] selectinf.algorithms.cv_glmnet
+highlighting module code... [ 13%] selectinf.algorithms.debiased_lasso
+highlighting module code... [ 15%] selectinf.algorithms.forward_step
+highlighting module code... [ 17%] selectinf.algorithms.lasso
+highlighting module code... [ 19%] selectinf.algorithms.pca
+highlighting module code... [ 21%] selectinf.algorithms.screening
+highlighting module code... [ 23%] selectinf.algorithms.softmax
+highlighting module code... [ 25%] selectinf.algorithms.sqrt_lasso
+highlighting module code... [ 26%] selectinf.algorithms.stopping_rules
+highlighting module code... [ 28%] selectinf.base
+highlighting module code... [ 30%] selectinf.constraints.affine
+highlighting module code... [ 32%] selectinf.constraints.base
+highlighting module code... [ 34%] selectinf.constraints.estimation
+highlighting module code... [ 36%] selectinf.constraints.intervals
+highlighting module code... [ 38%] selectinf.constraints.quadratic
+highlighting module code... [ 40%] selectinf.constraints.quasi_affine
+highlighting module code... [ 42%] selectinf.distributions.chain
+highlighting module code... [ 44%] selectinf.distributions.chisq
+highlighting module code... [ 46%] selectinf.distributions.discrete_family
+highlighting module code... [ 48%] selectinf.distributions.discrete_multiparameter
+highlighting module code... [ 50%] selectinf.distributions.intervals
+highlighting module code... [ 51%] selectinf.distributions.pvalue
+highlighting module code... [ 53%] selectinf.glm
+highlighting module code... [ 55%] selectinf.learning.Rfitters
+highlighting module code... [ 57%] selectinf.learning.Rutils
+highlighting module code... [ 59%] selectinf.learning.core
+highlighting module code... [ 61%] selectinf.learning.fitters
+highlighting module code... [ 63%] selectinf.learning.learners
+highlighting module code... [ 65%] selectinf.learning.samplers
+highlighting module code... [ 67%] selectinf.learning.utils
+highlighting module code... [ 69%] selectinf.randomized.cv_view
+highlighting module code... [ 71%] selectinf.randomized.group_lasso
+highlighting module code... [ 73%] selectinf.randomized.lasso
+highlighting module code... [ 75%] selectinf.randomized.modelQ
+highlighting module code... [ 76%] selectinf.randomized.query
+highlighting module code... [ 78%] selectinf.randomized.randomization
+highlighting module code... [ 80%] selectinf.randomized.screening
+highlighting module code... [ 82%] selectinf.randomized.slope
+highlighting module code... [ 84%] selectinf.sampling.langevin
+highlighting module code... [ 86%] selectinf.sampling.sequential
+highlighting module code... [ 88%] selectinf.truncated.F
+highlighting module code... [ 90%] selectinf.truncated.T
+highlighting module code... [ 92%] selectinf.truncated.base
+highlighting module code... [ 94%] selectinf.truncated.chi
+highlighting module code... [ 96%] selectinf.truncated.gaussian
+highlighting module code... [ 98%] selectinf.utils.tools
+highlighting module code... [100%] traitlets.traitlets
+
+writing additional pages...  searchdone
+copying images... [ 14%] algorithms/spacings_files/spacings_4_0.png
+copying images... [ 28%] algorithms/spacings_files/spacings_6_0.png
+copying images... [ 42%] algorithms/spacings_files/spacings_9_0.png
+copying images... [ 57%] algorithms/spacings_files/spacings_25_0.png
+copying images... [ 71%] algorithms/spacings_files/spacings_27_0.png
+copying images... [ 85%] algorithms/spacings_files/spacings_29_0.png
+copying images... [100%] algorithms/spacings_files/spacings_31_0.png
+
+copying static files... ... done
+copying extra files... done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 786 warnings.
+
+The HTML pages are in build/html.
+/Users/jonathantaylor/anaconda/envs/py36/lib/python3.6/site-packages/sphinx_rtd_theme/search.html:20: RemovedInSphinx30Warning: To modify script_files in the theme is deprecated. Please insert a <script> tag directly in your theme instead.
+  {{ super() }}
+
+Build finished. The HTML pages are in build/html.
+ln -s build manual
+ln: manual/build: File exists
+make: [html] Error 1 (ignored)
+Build HTML and API finished.
