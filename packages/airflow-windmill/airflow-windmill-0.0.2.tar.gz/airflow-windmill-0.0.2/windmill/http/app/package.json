@@ -1,0 +1,42 @@
+{
+  "name": "windmill-ui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "homepage": "https://github.com/mayansalama/windmill",
+  "repository": "git@github.com:mayansalama/windmill.git",
+  "scripts": {
+    "start": "parcel public/index.html",
+    "prebuild": "rm -rf dist",
+    "build": "parcel build public/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.137",
+    "@types/react-onclickoutside": "^6.7.3",
+    "lodash": "^4.17.15",
+    "parcel-bundler": "^1.12.3",
+    "styled-components": "^4.3.2",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@mrblenny/react-flow-chart": "0.0.7",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-resizable": "^1.7.1",
+    "@types/react-textarea-autosize": "^4.3.4",
+    "@types/react-tooltip": "^3.9.3",
+    "@types/styled-components": "^4.1.18",
+    "axios": "^0.19.0",
+    "gh-pages": "^2.1.1",
+    "local-storage": "^2.0.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-icons": "^3.7.0",
+    "react-onclickoutside": "^6.9.0",
+    "react-textarea-autosize": "^7.1.0",
+    "react-tooltip": "^3.10.0"
+  }
+}
