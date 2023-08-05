@@ -1,0 +1,140 @@
+#%RAML 1.0 Library
+(meta.module): keras.layers
+uses:
+  meta: meta.raml
+types:
+  Layer:
+    (meta.abstract): true
+    type: object
+    properties:
+      name?: string
+      inputs?:
+        (meta.custom): true
+        type: string[]
+  Input:
+    type: Layer
+    properties:
+      shape:
+        type: array
+        items:
+          type: integer
+        (meta.positional): true
+  GaussianNoise:
+    type : Layer
+    properties:
+      stddev:
+        type: float
+        (meta.positional): true
+  Dropout:
+    type: Layer
+    properties:
+      rate:
+        type: float
+        (meta.positional): true
+      seed?:
+        type: integer
+        (meta.positional): true
+  SpatialDropout1D:
+    type: Dropout
+  LSTM:
+    type: Layer
+    properties:
+      units:
+        type: integer
+        (meta.positional): true
+      
+      return_sequences?:
+        (meta.positional): true
+        type: boolean
+      recurrent_activation?:
+        type: string  
+      activation?:
+        type: string
+      return_state?:
+        type: boolean
+      stateful?:
+        type: boolean
+      use_bias?:
+        type: string
+      kernel_initializer?:
+        type: string
+      recurrent_initializer?:
+        type: string
+      bias_initializer?:
+        type: string
+  GlobalMaxPool1D:
+    type: Layer
+  GlobalAveragePooling1D:
+    type: Layer
+  BatchNormalization:
+    type: Layer
+  Concatenate:
+    type: Layer
+  Add:
+    type: Layer
+  Substract:
+    type: Layer
+  Mult:
+    type: Layer
+  Max:
+    type: Layer
+  Min:
+    type: Layer
+  Conv1D:
+    type: Layer
+    properties:
+      filters:
+         type: number
+         (meta.positional): true
+      kernel_size:
+         type: number | array
+         (meta.positional): true
+      activation:
+         type: string
+         (meta.positional): true
+      padding:
+        type: string
+        enum: [ valid, causal , same]
+      dilation_rate: number | array
+
+      strides: number | array
+  Conv2D:
+    type: Conv1D
+  MaxPool1D:
+     type: Layer
+     properties:
+       pool_size:
+         type: number
+         (meta.positional): true
+  MaxPool2D:
+    type: MaxPool1D
+  AveragePooling1D:
+    type: Layer
+    properties:
+
+      pool_size:
+        type: number
+        (meta.positional): true
+  CuDNNLSTM:
+    type: LSTM
+  Dense:
+    type: Layer
+    properties:
+      units:
+        type: integer
+        (meta.positional): true     
+      activation?:
+        (meta.positional): true
+        type: string
+  Flatten: Layer
+  Wrapper:
+    type: Layer
+    properties:
+      layer:
+        (meta.positional): true
+        type: Layer
+
+  Bidirectional: Wrapper
+
+
+
