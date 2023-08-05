@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "django-static-markdown-blog"
+version = "0.1.2"
+description = "Django application to create a blog based on local Markdown files"
+authors = ["Aloha68 <dev@aloha.im>"]
+license = "ISC"
+readme = "README.md"
+homepage = "https://gitlab.com/aloha68/django-static-markdown-blog"
+repository = "https://gitlab.com/aloha68/django-static-markdown-blog"
+
+[tool.poetry.dependencies]
+python = "^3.5"
+django = "^2.2"
+markdown = "^2.6"
+beautifulsoup4 = "^4.6"
+redis = "^2.10"
+django-leaflet-gpx = "^0.1"
+#django-leaflet-gpx = {path = "../leaflet-gpx/"}
+
+[tool.poetry.dev-dependencies]

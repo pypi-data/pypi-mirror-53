@@ -1,0 +1,85 @@
+Metadata-Version: 2.1
+Name: django-static-markdown-blog
+Version: 0.1.2
+Summary: Django application to create a blog based on local Markdown files
+Home-page: https://gitlab.com/aloha68/django-static-markdown-blog
+License: ISC
+Author: Aloha68
+Author-email: dev@aloha.im
+Requires-Python: >=3.5,<4.0
+Classifier: License :: OSI Approved
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: beautifulsoup4 (>=4.6,<5.0)
+Requires-Dist: django (>=2.2,<3.0)
+Requires-Dist: django-leaflet-gpx (>=0.1,<0.2)
+Requires-Dist: markdown (>=2.6,<3.0)
+Requires-Dist: redis (>=2.10,<3.0)
+Project-URL: Repository, https://gitlab.com/aloha68/django-static-markdown-blog
+Description-Content-Type: text/markdown
+
+# Django static Markdown blog
+
+The purpose of this application is to provide an Internet blog based on local files. Those files can be Markdown formatted to add some style to your notes. This app has to be integrated into an existing django website.
+
+## Quick start
+
+1. Add "django_static_markdown_blog" to your INSTALLED_APPS setting like this:
+```
+INSTALLED_APPS = [  
+    ...  
+    'django_static_markdown_blog',
+]
+```
+
+2. In the settings file, add two variables
+```
+BLOG_FOLDER = '/tmp/markdown-files/'
+BLOG_INDEX_FILE = 'main.md'
+```
+
+3. Include the django_static_markdown_blog URLconf in your project urls.py like this:
+```
+path('blog/', include(('django_static_markdown_blog.urls', 'blog'))),
+```
+
+4. It is useless to migrate database because it is based on local files
+
+5. Start the development server and visit http://127.0.0.1:8000/blog to check if everything is ok.
+
+## How to use
+
+To use the software, you must have defined the variable *BLOG_FOLDER* which indicates the name of the directory where the Markdown files are located, as well as the variable *BLOG_INDEX_FILE* which corresponds to the main file of each directory (it is possible to create an unlimited tree structure).
+
+### Write your first page
+
+Your first file is the one at the root of the *BLOG_FOLDER* directory and must be named as the *BLOG_INDEX_FILE* variable. This is the entry point of your blog, the page seen by your visitors when they arrive on your blog.
+
+To write a Markdown file, the principle is very simple. It is divided into two parts separated by at least one empty line. The first part contains the metadata of the file which are filled a little lower. The second part is the content of your page, formattable with Markdown.
+
+There is an exemple of a home page:
+
+    title: Welcome on my blog
+
+    Hello everyone, and welcome to my **blog**. 
+    Feel free to visit my project page on [PyPI](https://pypi.org/project/django-static-markdown-blog/) or directly on [GitLab](https://gitlab.com/aloha68/django-static-markdown-blog/).
+
+    Enjoy your visit!
+
+### Supported metadata
+
+There is the full list of the supported metadata:
+
+- **title**: set the title of your page
+- **date**: set a custom date for your page, else we will use the datetime of the file
+- **groups**: define a group list that can access the page. It means that unauthorized people will not see the page
+- **icons**: define an icon that will be display in the article list for a page
+
+## TODO
+
+- Remove all BeautifulSoup4 components
+- Remove all libaloha components
+
+

@@ -1,0 +1,163 @@
+.blog-header h1 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.blog-header small {
+    float: right;
+    margin-top: 0.3rem;
+}
+
+.blog-content img {
+    display: block;
+    margin: auto;
+}
+
+.blog-content table {
+    margin: 10px 0 20px;
+}
+
+.blog-content table th, .blog-content table td {
+    padding: 5px 10px;
+    text-align: center;
+    border: 1px solid #999;
+}
+
+/*
+ * GPX RELATED THINGS
+ */
+
+.gpx {
+    border: 1px #999 solid;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 1px #ccc;
+    width: 95%;
+    margin: 10px auto;
+}
+
+.gpx header {
+    padding: 5px;
+    padding-top: 8px;
+}
+
+.gpx header h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.gpx header .start {
+    font-size: smaller;
+    color: #444;
+}
+
+.gpx .map {
+    border: 1px #999 solid;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    height: 500px;
+}
+
+.gpx footer {
+    padding: 5px;
+}
+
+.gpx ul.info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.gpx ul.info li {
+    color: #444;
+    padding: 2px;
+    display: inline;
+}
+
+.gpx ul.info li span {
+    color: black;
+}
+
+/*
+ * HIGHLIGHTING RELATED THINGS
+ */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  border: 1px solid #CCC;
+  color: #657b83;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #93a1a1;
+}
+
+/* Solarized Green */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #859900;
+}
+
+/* Solarized Cyan */
+.hljs-number,
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
+.hljs-doctag,
+.hljs-regexp {
+  color: #2aa198;
+}
+
+/* Solarized Blue */
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #268bd2;
+}
+
+/* Solarized Yellow */
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #b58900;
+}
+
+/* Solarized Orange */
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #cb4b16;
+}
+
+/* Solarized Red */
+.hljs-built_in,
+.hljs-deletion {
+  color: #dc322f;
+}
+
+.hljs-formula {
+  background: #eee8d5;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
