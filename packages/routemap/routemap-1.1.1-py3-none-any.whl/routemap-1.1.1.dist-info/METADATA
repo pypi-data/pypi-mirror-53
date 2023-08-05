@@ -1,0 +1,111 @@
+Metadata-Version: 2.1
+Name: routemap
+Version: 1.1.1
+Summary: Generate route maps from various sources.
+Home-page: https://gitlab.com/vascowhite/routemap
+Author: Paul White
+Author-email: routemap@vascowhite.co.uk
+License: MIT
+Platform: UNKNOWN
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: Pillow
+Requires-Dist: requests
+Requires-Dist: vincenty
+Requires-Dist: geographiclib
+
+Routemap
+========
+
+.. image:: https://gitlab.com/vascowhite/routemap/badges/master/pipeline.svg
+
+Generates a nice looking map of a route from various sources. Here is an 
+example.
+
+.. image:: https://gitlab.com/vascowhite/routemap/raw/master/docs/example.png
+
+Requires python >= 3.5
+
+Requires libgeos and tkinter to be installed. On Debian::
+
+    sudo apt install libgeos-dev python3-tk
+
+If running headless on a server, then python3-tk is not needed.
+
+Also requires Basemap to be installed manually.::
+
+    pip3 install numpy git+https://github.com/matplotlib/basemap.git#egg=basemap
+
+Finally install routemap.::
+
+    pip3 install routemap
+
+Usage
+-----
+::
+
+    routemap [-h] [-t TITLE] [-o OUTPUT] [-c CURRENT] [-cl CURRENT_LABEL] [-d] [-st STARTTAG] [-et ENDTAG] [-q QUALITY] [--dpi DPI] [--paper PAPER] [--version]        file
+
+**positional arguments:**
+::
+
+    file Input file. rtx or bvs files accepted.
+         Also accepts a url that returns a json formatted list of positions.
+         e.g.
+        {
+            "positions": [
+                "2019-09-17 00:00:01,41.37,2.187",
+                "2019-09-17 01:00:02,41.37,2.187",
+                "2019-09-17 02:00:02,41.37,2.187",
+                "2019-09-17 03:00:01,41.37,2.187",
+                "2019-09-17 04:00:02,41.37,2.187",
+                "2019-09-17 05:00:02,41.37,2.187",
+                "2019-09-17 06:00:01,41.37,2.187",
+                "2019-09-17 07:00:02,41.37,2.187",
+                "2019-09-17 08:00:02,41.37,2.187"
+            ]
+        }
+
+**optional arguments:**
+::
+
+   -h, --help            show this help message and exit
+   -t TITLE, --title TITLE 
+                        A custom title for the chart if the generated one is crap
+   -o OUTPUT, --output OUTPUT
+                        Output file. Defaults to current directory
+   -c CURRENT, --current CURRENT
+                       Indicate current position.
+                       Pass the position with the option as a string representing the position or a url. eg:-
+                       -c "52 23.5N 36 18.1W"
+                       or
+                       -c http://some.url.com/positions
+
+   -cl CURRENT_LABEL, --current_label CURRENT_LABEL
+                       A label for the current position
+    -d, --display      Display image in window. Defaults to no image displayed
+
+    -st STARTTAG, --starttag STARTTAG
+                       A custom tag for the first position
+
+    -et ENDTAG, --endtag ENDTAG
+                       A custom tag for the last position
+
+    -q QUALITY, --quality QUALITY
+                       The quality of the rendered map, defaults to 'i':-
+                         c = crude,
+                         l = low,
+                         i = intermediate,
+                         h = high,
+                         f = full.
+                       Be warned, anything higher than -i takes a long time to render
+
+    --dpi DPI          The DPI of the saved map, defaults to 600 (pretty big)
+    --paper PAPER         
+                       Size of paper saved map is intended to be printed on.
+                       Accepts standard sizes such as a4, a3, letter etc.
+                       Default is a3
+
+    --version          Print the version and exit
+
+
