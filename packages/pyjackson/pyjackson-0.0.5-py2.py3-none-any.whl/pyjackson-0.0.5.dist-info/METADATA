@@ -1,0 +1,102 @@
+Metadata-Version: 2.1
+Name: pyjackson
+Version: 0.0.5
+Summary: PyJackson is a serialization library based on type hinting 
+Home-page: https://github.com/mike0sv/pyjackson
+Author: Mikhail Sveshnikov
+Author-email: mike0sv@gmail.com
+License: Apache-2.0
+Project-URL: Documentation, https://pyjackson.readthedocs.io/
+Project-URL: Changelog, https://pyjackson.readthedocs.io/en/latest/changelog.html
+Project-URL: Issue Tracker, https://github.com/mike0sv/pyjackson/issues
+Keywords: pyjackson,jackson,serialization
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: Unix
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
+
+========
+Overview
+========
+
+
+
+PyJackson is a serialization library based on type hinting
+
+Example
+==========
+
+Just type hint `__init__` and you are ready to go::
+
+    import pyjackson
+
+
+    class MyPayload:
+        def __init__(self, string_field: str, int_field: int):
+            self.string_field = string_field
+            self.int_field = int_field
+
+
+    pyjackson.serialize(MyPayload('value', 10))  # {'string_field': 'value', 'int_field': 10}
+
+    pyjackson.deserialize({'string_field': 'value', 'int_field': 10}, MyPayload)  # MyPayload('value', 10)
+
+..
+
+More features and examples `here
+<https://pyjackson.readthedocs.io/en/latest/usage/index.html>`_ and in examples dir.
+
+
+
+Installation
+============
+
+::
+
+    pip install pyjackson
+
+Documentation
+=============
+
+
+https://pyjackson.readthedocs.io/
+
+
+Development
+===========
+
+To run all tests run::
+
+    tox
+
+..
+
+Licence
+=======
+
+* Free software: Apache Software License 2.0
+
+Changelog
+=========
+
+0.0.4 (2019-09-17)
+--------------------------
+
+* Added some examples and minor fixes
+
+0.0.3 (2019-09-17)
+--------------------------
+
+* First release on PyPI.
+
+
