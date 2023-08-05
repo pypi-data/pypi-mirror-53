@@ -1,0 +1,64 @@
+Metadata-Version: 2.1
+Name: pyRAPL
+Version: 0.1.0
+Summary: UNKNOWN
+Home-page: UNKNOWN
+Author: Arthur d'Azémar, Guillaume Fieni, Chakib Belgaid , Romain Rouvoy
+Author-email: powerapi-staff@inria.fr
+License: MIT License
+Project-URL: Homepage, http://powerapi.org/
+Project-URL: Source, https://github.com/powerapi-ng/pyRAPL
+Keywords: energy
+Platform: linux
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >= 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: psutil (>=5.0.0)
+Provides-Extra: docs
+Requires-Dist: sphinx (>=1.8.1) ; extra == 'docs'
+Requires-Dist: sphinx-autodoc-typehints (>=1.6.0) ; extra == 'docs'
+
+# Basic usage
+
+## Measure the energy consumption during a function execution
+
+To measure the energy consumed during the execution of the function `fun()` run the following code
+
+	import pyRAPL
+
+	sensor = pyRAPL.PyRAPL()
+	sensor.record([pyRAPL.Device.PKG, pyRAPL.Device.DRAM])
+	fun()
+	sensor.stop()
+	energy_pkg = sensor.recorded_energy(pyRAPL.Device.PKG)
+    energy_dram = sensor.recorded_energy(pyRAPL.Device.DRAM)
+
+
+# TODO 
+- [ ] add decorator 
+- [X] add time measure 
+MIT License
+
+Copyright (c) 2018, INRIA
+Copyright (c) 2018, University of Lille
+All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
