@@ -1,0 +1,78 @@
+{
+  "section_name": "Name",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "Name",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "bullet_list",
+      "bullet_list": [
+        {
+          "template": "is a required field.",
+          "params": {
+            "column": "Name",
+            "column_index": null
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "template": "values must match this regular expression: $regex, at least $mostly_pct % of the time.",
+          "params": {
+            "regex": "[A-Z][a-z]+(?: \\([A-Z][a-z]+\\))?, ",
+            "column": "Name",
+            "mostly": 0.95,
+            "mostly_pct": "95.0"
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,784 @@
+{
+  "section_name": "Age",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "Age",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "value types must belong to this set: $v__0 $v__1 $v__2 $v__3 $v__4 $v__5 $v__6 $v__7.",
+              "params": {
+                "column": "Age",
+                "type_list": [
+                  "DOUBLE_PRECISION",
+                  "DoubleType",
+                  "FLOAT",
+                  "FLOAT4",
+                  "FLOAT8",
+                  "FloatType",
+                  "NUMERIC",
+                  "float"
+                ],
+                "result_format": "SUMMARY",
+                "mostly": null,
+                "v__0": "DOUBLE_PRECISION",
+                "v__1": "DoubleType",
+                "v__2": "FLOAT",
+                "v__3": "FLOAT4",
+                "v__4": "FLOAT8",
+                "v__5": "FloatType",
+                "v__6": "NUMERIC",
+                "v__7": "float"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "float64"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "may have any number of unique values.",
+              "params": {
+                "column": "Age",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY",
+                "mostly": null
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "75"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "may have any percentage of unique values.",
+              "params": {
+                "column": "Age",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "0.0992063492063492"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "values must not be null, at least $mostly_pct % of the time.",
+              "params": {
+                "column": "Age",
+                "mostly": 0.5,
+                "result_format": "SUMMARY",
+                "mostly_pct": "50.0"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "557 null"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "tag": "i",
+                    "classes": [
+                      "fas",
+                      "fa-times",
+                      "text-danger"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          [
+            {
+              "content_block_type": "string_template",
+              "string_template": {
+                "template": "values must belong to this set: [ ].",
+                "params": {
+                  "column": "Age",
+                  "value_set": [],
+                  "result_format": "SUMMARY",
+                  "mostly": null,
+                  "parse_strings_as_datetimes": null
+                },
+                "styling": {
+                  "default": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary"
+                    ]
+                  },
+                  "params": {
+                    "column": {
+                      "classes": [
+                        "badge",
+                        "badge-primary"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "content_block_type": "string_template",
+              "string_template": {
+                "template": "\n\n$unexpected_count unexpected values found. $unexpected_percent of $element_count total rows.",
+                "params": {
+                  "unexpected_count": 756,
+                  "unexpected_percent": "57.58%",
+                  "element_count": 1313
+                },
+                "tag": "strong",
+                "styling": {
+                  "classes": [
+                    "text-danger"
+                  ]
+                }
+              }
+            },
+            {
+              "content_block_type": "table",
+              "table": [
+                [
+                  22.0,
+                  35
+                ],
+                [
+                  21.0,
+                  31
+                ],
+                [
+                  30.0,
+                  31
+                ],
+                [
+                  18.0,
+                  30
+                ],
+                [
+                  36.0,
+                  29
+                ],
+                [
+                  24.0,
+                  27
+                ],
+                [
+                  26.0,
+                  27
+                ],
+                [
+                  27.0,
+                  24
+                ],
+                [
+                  28.0,
+                  24
+                ],
+                [
+                  19.0,
+                  23
+                ],
+                [
+                  20.0,
+                  23
+                ],
+                [
+                  23.0,
+                  23
+                ],
+                [
+                  25.0,
+                  23
+                ],
+                [
+                  32.0,
+                  22
+                ],
+                [
+                  45.0,
+                  20
+                ],
+                [
+                  29.0,
+                  15
+                ],
+                [
+                  31.0,
+                  14
+                ],
+                [
+                  33.0,
+                  14
+                ],
+                [
+                  35.0,
+                  14
+                ],
+                [
+                  39.0,
+                  14
+                ]
+              ],
+              "header_row": [
+                "Unexpected Value",
+                "Count"
+              ],
+              "styling": {
+                "body": {
+                  "classes": [
+                    "table-bordered",
+                    "table-sm",
+                    "mt-3"
+                  ]
+                }
+              }
+            }
+          ],
+          "--"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "minimum value may have any numerical value.",
+              "params": {
+                "column": "Age",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY",
+                "parse_strings_as_datetimes": null
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "0.17"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "maximum value may have any numerical value.",
+              "params": {
+                "column": "Age",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY",
+                "parse_strings_as_datetimes": null
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "71.0"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "mean may have any numerical value.",
+              "params": {
+                "column": "Age",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "30.397989417989418"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "median may have any numerical value.",
+              "params": {
+                "column": "Age",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "28.0"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "styling": {
+              "parent": {
+                "classes": [
+                  "alert",
+                  "alert-warning"
+                ]
+              }
+            },
+            "string_template": {
+              "template": "$expectation_type(**$kwargs)",
+              "params": {
+                "expectation_type": "expect_column_quantile_values_to_be_between",
+                "kwargs": {
+                  "column": "Age",
+                  "quantile_ranges": {
+                    "quantiles": [
+                      0.05,
+                      0.25,
+                      0.5,
+                      0.75,
+                      0.95
+                    ],
+                    "value_ranges": [
+                      [
+                        null,
+                        null
+                      ],
+                      [
+                        null,
+                        null
+                      ],
+                      [
+                        null,
+                        null
+                      ],
+                      [
+                        null,
+                        null
+                      ],
+                      [
+                        null,
+                        null
+                      ]
+                    ]
+                  },
+                  "result_format": "SUMMARY"
+                }
+              },
+              "styling": {
+                "params": {
+                  "expectation_type": {
+                    "classes": [
+                      "badge",
+                      "badge-warning"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "OrderedDict([('quantiles', [0.05, 0.25, 0.5, 0.75, 0.95]), ('values', [6.0, 21.0, 28.0, 39.0, 57.0])])"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Kullback-Leibler (KL) divergence with respect to a given distribution must be lower than a provided threshold but no distribution was specified.",
+              "params": {
+                "column": "Age",
+                "partition_object": null,
+                "threshold": null,
+                "result_format": "SUMMARY"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "sparklines_histogram": {
+                    "styles": {
+                      "font-family": "serif !important"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "--"
+        ]
+      ],
+      "styling": {
+        "body": {
+          "classes": [
+            "table"
+          ]
+        },
+        "classes": [
+          "m-3",
+          "table-responsive"
+        ]
+      },
+      "header_row": [
+        "Status",
+        "Expectation",
+        "Observed Value"
+      ]
+    }
+  ]
+}

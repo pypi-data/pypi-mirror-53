@@ -1,0 +1,472 @@
+{
+  "section_name": "PClass",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "PClass",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "value types must belong to this set: $v__0 $v__1 $v__2 $v__3 $v__4 $v__5.",
+              "params": {
+                "column": "PClass",
+                "type_list": [
+                  "CHAR",
+                  "StringType",
+                  "TEXT",
+                  "VARCHAR",
+                  "str",
+                  "string"
+                ],
+                "result_format": "SUMMARY",
+                "mostly": null,
+                "v__0": "CHAR",
+                "v__1": "StringType",
+                "v__2": "TEXT",
+                "v__3": "VARCHAR",
+                "v__4": "str",
+                "v__5": "string"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "--"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "may have any number of unique values.",
+              "params": {
+                "column": "PClass",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY",
+                "mostly": null
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "4"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "may have any percentage of unique values.",
+              "params": {
+                "column": "PClass",
+                "min_value": null,
+                "max_value": null,
+                "result_format": "SUMMARY"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "0.0030464584920030465"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "values must not be null, at least $mostly_pct % of the time.",
+              "params": {
+                "column": "PClass",
+                "mostly": 0.5,
+                "result_format": "SUMMARY",
+                "mostly_pct": "50.0"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "0 null"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "tag": "i",
+                    "classes": [
+                      "fas",
+                      "fa-times",
+                      "text-danger"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          [
+            {
+              "content_block_type": "string_template",
+              "string_template": {
+                "template": "values must belong to this set: [ ].",
+                "params": {
+                  "column": "PClass",
+                  "value_set": [],
+                  "result_format": "SUMMARY",
+                  "mostly": null,
+                  "parse_strings_as_datetimes": null
+                },
+                "styling": {
+                  "default": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary"
+                    ]
+                  },
+                  "params": {
+                    "column": {
+                      "classes": [
+                        "badge",
+                        "badge-primary"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "content_block_type": "string_template",
+              "string_template": {
+                "template": "\n\n$unexpected_count unexpected values found. $unexpected_percent of $element_count total rows.",
+                "params": {
+                  "unexpected_count": 1313,
+                  "unexpected_percent": "100.00%",
+                  "element_count": 1313
+                },
+                "tag": "strong",
+                "styling": {
+                  "classes": [
+                    "text-danger"
+                  ]
+                }
+              }
+            },
+            {
+              "content_block_type": "table",
+              "table": [
+                [
+                  "3rd",
+                  711
+                ],
+                [
+                  "1st",
+                  322
+                ],
+                [
+                  "2nd",
+                  279
+                ],
+                [
+                  "*",
+                  1
+                ]
+              ],
+              "header_row": [
+                "Unexpected Value",
+                "Count"
+              ],
+              "styling": {
+                "body": {
+                  "classes": [
+                    "table-bordered",
+                    "table-sm",
+                    "mt-3"
+                  ]
+                }
+              }
+            }
+          ],
+          "--"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "values must not match this regular expression: $regex.",
+              "params": {
+                "column": "PClass",
+                "regex": "^\\s+|\\s+$",
+                "result_format": "SUMMARY",
+                "mostly": null
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "--"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "$icon",
+              "params": {
+                "icon": ""
+              },
+              "styling": {
+                "params": {
+                  "icon": {
+                    "classes": [
+                      "fas",
+                      "fa-check-circle",
+                      "text-success"
+                    ],
+                    "tag": "i"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "distinct values must belong to a set, but that set is not specified.",
+              "params": {
+                "column": "PClass",
+                "value_set": null,
+                "result_format": "SUMMARY"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-secondary"
+                  ]
+                },
+                "params": {
+                  "column": {
+                    "classes": [
+                      "badge",
+                      "badge-primary"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "['*', '1st', '2nd', '3rd']"
+        ]
+      ],
+      "styling": {
+        "body": {
+          "classes": [
+            "table"
+          ]
+        },
+        "classes": [
+          "m-3",
+          "table-responsive"
+        ]
+      },
+      "header_row": [
+        "Status",
+        "Expectation",
+        "Observed Value"
+      ]
+    }
+  ]
+}

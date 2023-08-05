@@ -1,0 +1,102 @@
+{
+  "section_name": "Age",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "Age",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "bullet_list",
+      "bullet_list": [
+        {
+          "template": "is a required field.",
+          "params": {
+            "column": "Age",
+            "column_index": null
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "template": "mean must be between $min_value and $max_value.",
+          "params": {
+            "column": "Age",
+            "max_value": 40,
+            "min_value": 20
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "template": "values must always be between $min_value and $max_value.",
+          "params": {
+            "column": "Age",
+            "max_value": 80,
+            "min_value": 0,
+            "mostly": null
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "section_name": "Name",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": {
+        "template": "Name",
+        "tooltip": {
+          "content": "expect_column_to_exist",
+          "placement": "top"
+        }
+      },
+      "sub_header": {
+        "template": "Type: None",
+        "tooltip": {
+          "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+        }
+      },
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "bullet_list",
+      "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+      "bullet_list": [
+        {
+          "template": "$expectation_type $is_passing",
+          "params": {
+            "expectation_type": "expect_column_to_exist",
+            "is_passing": "True"
+          },
+          "styling": {
+            "classes": [
+              "list-group-item",
+              "d-flex",
+              "justify-content-between",
+              "align-items-center"
+            ],
+            "params": {
+              "is_passing": {
+                "classes": [
+                  "badge",
+                  "badge-secondary",
+                  "badge-pill"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "template": "$expectation_type $is_passing",
+          "params": {
+            "expectation_type": "expect_column_values_to_match_regex",
+            "is_passing": "True"
+          },
+          "styling": {
+            "classes": [
+              "list-group-item",
+              "d-flex",
+              "justify-content-between",
+              "align-items-center"
+            ],
+            "params": {
+              "is_passing": {
+                "classes": [
+                  "badge",
+                  "badge-secondary",
+                  "badge-pill"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        },
+        "header": {
+          "classes": [
+            "collapsed"
+          ],
+          "attributes": {
+            "data-toggle": "collapse",
+            "href": "#{{content_block_id}}-body",
+            "role": "button",
+            "aria-expanded": "true",
+            "aria-controls": "collapseExample"
+          },
+          "styles": {
+            "cursor": "pointer"
+          }
+        },
+        "body": {
+          "classes": [
+            "list-group",
+            "collapse"
+          ]
+        }
+      }
+    }
+  ]
+}
