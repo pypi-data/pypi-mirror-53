@@ -1,0 +1,61 @@
+CHANGES
+=======
+
+0.3.1
+-----
+
+* Fix unicode support
+
+0.3.0
+-----
+
+* Support RP name in tree show command
+* Support python 3.6 and 3.7
+* Adapt synch script for test env
+* Fix the provider tree unit test class name
+* Write dot files using mode 'w' not 'wb'
+
+0.2.0
+-----
+
+* Support using the package from nova and placement func test env
+
+0.1.0
+-----
+
+* Filling blanks in setup.cfg
+* Clean up LICENCE file
+* Decorate the label of the allocation edges
+* Update example
+* Do func test setup once to gain speed
+* Add resource usages to the RP nodes
+* Fix travis config
+* Run black in check mode during pep8 target
+* Reformat the codebase with black
+* Add black automatic code formatting
+* Support showing consumers on the output
+* Refactor internals to accomodate consumer nodes
+* Update the example file in the repo
+* Add traits and aggregates to functional test
+* Left align traits list
+* Make the field filtering work for embedded fields
+* Add proper names for the RPs in the functional test
+* Hide some fields from the output by default
+* Label the parent arrow in the graph
+* Refactor droping fields from the model
+* Sort the field names in the nodes
+* Change the arrow direction to point to parent
+* Allow saving the dot output of the func tests
+* Handle non existent RP in show
+* Support field filter in show and list commands
+* Add usage example to the README.rst
+* Add travis-CI badge in README.rst
+* Add travis-CI config to run unit test and pep8
+* Remove filter call from tree building code
+* Migrate to stestr runner
+* Add dev script that sync and install to devstack
+* Implement resource provider tree list
+* Add functional test for resource provider tree show
+* Add unit test for tree.make\_rp\_tree
+* Implement resource provider tree show <uuid>
+* Setup base repo and osc plugin structure
