@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: nowyou-vstitcher-script-python
+Version: 0.1.42
+Summary: Nowyou VStitcher script python
+Home-page: https://bitbucket.org/inventilabs/nowyou-vstitcher-script-python/
+Author: Alex Mensak
+Author-email: alexander.mensak@ilabs.cz
+License: proprietary
+Description: # NowYou Grafits script python
+        
+        ## Create new version to Pypi
+        1. Increase version in `setup.py` file
+        1. Build: `python setup.py sdist bdist_wheel`
+        2. Upload: `python -m twine upload --skip-existing dist/*`
+        
+        ### Virtualenv
+        You can use `pipenv` tool for development: 
+         - create virtualenv: `pipenv --python /path/to/python`
+         - install dependencies: `pipenv lock && pipenv install`
+         - open virtualenv shell: `pipenv shell` (optional)
+Keywords: nowyou python
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
