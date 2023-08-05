@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: data-extractor
+Version: 0.4.0.dev2
+Summary: Combine XPath, CSS Selector and JSONPath for Web data extracting.
+Home-page: https://github.com/linw1995/data_extractor
+License: MIT
+Author: linw1995
+Author-email: linw1995@icloud.com
+Requires-Python: >=3.7,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: cssselect (>=1.0.3,<2.0.0)
+Requires-Dist: jsonpath-rw (>=1.4.0,<2.0.0)
+Requires-Dist: jsonpath-rw-ext (>=1.2,<2.0)
+Requires-Dist: lxml (>=4.3.0,<5.0.0)
+Project-URL: Documentation, https://linw1995.com/data_extractor
+Project-URL: Repository, https://github.com/linw1995/data_extractor
+Description-Content-Type: text/markdown
+
+[![license](https://img.shields.io/github/license/linw1995/data_extractor.svg)](https://github.com/linw1995/data_extractor/blob/master/LICENSE)
+[![Pypi Status](https://img.shields.io/pypi/status/data_extractor.svg)](https://pypi.org/project/data_extractor)
+[![Python version](https://img.shields.io/pypi/pyversions/data_extractor.svg)](https://pypi.org/project/data_extractor)
+[![Package version](https://img.shields.io/pypi/v/data_extractor.svg)](https://pypi.org/project/data_extractor)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/data-extractor.svg)](https://pypi.org/project/data_extractor)
+[![GitHub last commit](https://img.shields.io/github/last-commit/linw1995/data_extractor.svg)](https://github.com/linw1995/data_extractor)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Build Status](https://travis-ci.org/linw1995/data_extractor.svg?branch=master)](https://travis-ci.org/linw1995/data_extractor)
+[![codecov](https://codecov.io/gh/linw1995/data_extractor/branch/master/graph/badge.svg)](https://codecov.io/gh/linw1995/data_extractor)
+[![Docs](https://img.shields.io/badge/docs-gh--pages-brightgreen.svg)](https://linw1995.com/data_extractor)
+
+# Data Extractor
+
+Combine **XPath**, **CSS Selector** and **JSONPath** for Web data extracting.
+
