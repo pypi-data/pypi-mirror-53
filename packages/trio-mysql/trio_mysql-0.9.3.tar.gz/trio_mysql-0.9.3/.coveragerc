@@ -1,0 +1,16 @@
+[run]
+branch = True
+source = trio_mysql
+omit = tests/*
+       tests/thirdparty/test_MySQLdb/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    except ImportError:
+    if DEBUG:
+    def __repr__
+    def __str__
+    raise NotImplementedError
+    def __getattr__
+    raise ValueError

@@ -1,0 +1,74 @@
+# vim: sw=2 ts=2 sts=2 expandtab
+
+sudo: required
+language: python
+services:
+  - docker
+
+cache: pip
+
+matrix:
+  include:
+    - env:
+        - DB=mariadb:5.5
+      python: "3.5"
+    - env:
+        - DB=mariadb:10.0
+      python: "3.6"
+    - env:
+        - DB=mariadb:10.1
+      python: "pypy"
+    - env:
+        - DB=mariadb:10.3
+      python: "3.7-dev"
+    - env:
+        - DB=mysql:5.5
+      python: "3.5"
+    - env:
+        - DB=mysql:5.6
+      python: "3.6"
+    - env:
+        - DB=mysql:5.7
+      python: "3.4"
+    - env:
+        - DB=mysql:8.0
+        - TEST_AUTH=yes
+      python: "3.7-dev"
+
+# different py version from 5.6 and 5.7 as cache seems to be based on py version
+# http://dev.mysql.com/downloads/mysql/5.7.html has latest development release version
+# really only need libaio1 for DB builds however libaio-dev is whitelisted for container builds and liaio1 isn't
+install:
+  - export PASSWORD=travis;
+  - pip install -U coveralls unittest2 coverage cryptography pytest pytest-cov pytest-trio trustme
+
+before_script:
+  - ./.travis/initializedb.sh
+  - python -VV
+  - mysql -e 'create database test_trio_mysql  DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;'
+  - mysql -e 'create database test_trio_mysql2 DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;'
+  - mysql -u root -e "create user travis_pass identified by 'some password'; grant all on test_trio_mysql2.* to travis_pass;"
+  - mysql -u root -e "create user travis_pass@localhost identified by 'some password'; grant all on test_trio_mysql2.* to travis_pass@localhost;"
+  - mysql -u travis_pass -p'some password' -e 'show databases'
+  - mysql -e 'select VERSION()'
+  - python -VV
+  - rm -f ~/.my.cnf # set in .travis.initialize.db.sh for the above commands - we should be using database.json however
+  - export COVERALLS_PARALLEL=true
+
+script:
+  - .travis/run.sh
+  - if [ "${TEST_AUTH}" = "yes" ];
+    then pytest -v --cov-config .coveragerc tests;
+    fi
+  - if [ ! -z "${DB}" ];
+    then docker logs mysqld;
+    fi
+
+after_success:
+  - coveralls
+  - cat /tmp/mysql.err
+
+after_failure:
+  - cat /tmp/mysql.err
+
+# vim: sw=2 ts=2 sts=2 expandtab

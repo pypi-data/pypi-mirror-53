@@ -1,0 +1,33 @@
+Source: trio-mysql
+Maintainer: Matthias Urlichs <matthias@urlichs.de>
+Section: python
+Priority: optional
+Build-Depends: dh-python, python3-setuptools, python3-all, debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://github.com/python-trio/trio-mysql/
+
+Package: python3-trio-mysql
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}
+Description: Pure Python MySQL Driver
+ .. image:: https://readthedocs.org/projects/trio_mysql/badge/?version=latest
+     :target: http://trio_mysql.readthedocs.io/en/latest/?badge=latest
+     :alt: Documentation Status
+ .
+ .. image:: https://travis-ci.org/python-trio/trio-mysql.svg?branch=master
+     :target: https://travis-ci.org/python-trio/trio-mysql
+ .
+ .. image:: https://coveralls.io/repos/python-trio/trio-mysql/badge.svg?branch=master&service=github
+     :target: https://coveralls.io/github/python-trio/trio-mysql?branch=master
+ .
+ .. image:: https://img.shields.io/badge/license-MIT-blue.svg
+     :target: https://github.com/python-trio/trio-mysql/blob/master/LICENSE
+ .
+ .
+ Trio-MySQL
+ ==========
+ .
+ .. contents:: Table of Contents
+    :local:
+ .
+
