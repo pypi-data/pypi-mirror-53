@@ -1,0 +1,25 @@
+stages:
+  - test
+  - build
+
+make_test:
+  image: docker.gitlab.silicann.systems:443/urwerk/docker-recipes/debbuild-python:buster
+  stage: test
+  script:
+    - make test
+
+make_deb_package:
+  image: docker.gitlab.silicann.systems:443/urwerk/docker-recipes/debbuild-python:buster
+  stage: build
+  only:
+    - tags
+    - triggers
+    - schedules
+    - merge_requests
+    - web
+  script:
+    - make dist-deb DEBIAN_BUILDPACKAGE_COMMAND="dpkg-buildpackage --no-sign"
+  artifacts:
+    paths:
+      - build/debian
+    expire_in: 1w

@@ -1,0 +1,16 @@
+Source: python-docbrown
+Section: python
+Priority: optional
+Maintainer: Konrad Mohrfeldt <konrad.mohrfeldt@farbdev.org>
+Build-Depends: debhelper (>= 9), dh-python, python3-all
+Standards-Version: 4.4.0
+
+Package: python3-docbrown
+Architecture: all
+Depends:
+ ${python3:Depends},
+ ${misc:Depends},
+ python3,
+Description: An empirical progress library
+ docbrown determines the overall duration and progression of a process
+ by looking at the time it took in the past.
