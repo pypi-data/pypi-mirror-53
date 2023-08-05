@@ -1,0 +1,77 @@
+CHANGES
+=======
+
+0.1.28
+------
+
+* using pbr
+* add install in README
+* add docstr
+* add badge
+* remove detail functions info from README
+* add requirements.txt
+* change sphinx-apidoc -o to source
+* fix sphinx contents.rst not found error
+* add sphinx and format docstring to google style
+* fix not defined min\_obj\_size
+* fix not defined width and height
+* fix resize\_tuple\_by\_rate in resize
+* 增加数据集的尺度变化
+* add an new function replace\_name; fix a save error
+* format
+* format file
+* add voc\_eval\_files
+* add description
+* add description
+* fix
+* remove voc\_label
+* format
+* format
+* add xml reader and writer in parser
+* add func
+* add some func
+* add format
+* add description
+* add description; add DarknetDataset
+* add darknet\_config; add anchors\_kmeans
+* fix np.max error
+* change c nms to python nms
+* add nms
+* add Evaluater class
+* change version
+* add AnnotationTools class
+* change xmlreader class format
+* fix xmlread func load one object can not generate a list
+* fix save func can not save image size
+* change new version
+* add include\_package\_data=True in setup
+* add MANIFEST.in
+* write readme
+* add compile push script
+* add augment
+* change annotation.xml
+* chang save xml dict
+* change version
+* add load func
+* add pascal generator;\nadd function parse annotations
+* add image annotation split
+* add split func
+* fix split\_by\_rate
+* add version number
+* v0.1.2
+* fix 0<test\_rate<1
+* add import random
+* change README
+* fix no path error in datasplit
+* fix assert path error
+* rm require shuil, add path datasplit
+* add split data
+* add resize by rate
+* add relative path
+* rename
+* verson 0.0.3
+* add xmlReader
+* add long\_description\_content\_type="text/markdown"
+* fix no module named pascal\_voc\_writer
+* version 0.0.1
+* Initial commit

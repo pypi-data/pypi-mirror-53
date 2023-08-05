@@ -1,0 +1,32 @@
+Metadata-Version: 1.1
+Name: pascal-voc-tools
+Version: 0.1.28
+Summary: Some PascalVOC dataset tools
+Home-page: https://github.com/wang-tf/pascal_voc_tools
+Author: ternence wang
+Author-email: ternencewang2015@outlook.com
+License: MIT
+Description: # Pascal VOC Tools
+        
+        This package includes some tools about pascal voc format dataset like read xml, write xml, resize image.
+        
+        [![Documentation Status](https://readthedocs.org/projects/pascal-voc-tools/badge/?version=latest)](https://pascal-voc-tools.readthedocs.io/en/latest/?badge=latest)
+        
+        # Functions
+        - annotations file laod, edit and save;
+        - dataset resize;
+        - dataset argument(function from [link](https://github.com/Paperspace/DataAugmentationForObjectDetection));
+        - darknet anchors k-means;
+        
+        # Install
+        ```bash
+        pip install pascal-voc-tools
+        ```
+        
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
