@@ -1,0 +1,137 @@
+Metadata-Version: 2.1
+Name: tonyfast
+Version: 2019.9.25.22.46
+Summary: UNKNOWN
+Home-page: https://github.com/tonyfast/gists
+Author: tonyfast
+License: BSD-3-Clause
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: IPython
+Classifier: Framework :: Jupyter
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: ipywidgets
+Requires-Dist: matplotlib
+Requires-Dist: requests
+Requires-Dist: idna
+Requires-Dist: strict-rfc3339
+Requires-Dist: rdflib
+Requires-Dist: pyyaml
+Requires-Dist: pyld
+Requires-Dist: jsonpointer
+Requires-Dist: jupyter-client
+Requires-Dist: pandas
+Requires-Dist: pytest
+Requires-Dist: hypothesis
+Requires-Dist: requests-cache
+Requires-Dist: rfc3986
+Requires-Dist: nest-asyncio
+Requires-Dist: GitPython
+Requires-Dist: wheel
+Requires-Dist: networkx
+Requires-Dist: qrcode
+Requires-Dist: nbconvert
+Requires-Dist: importnb
+Requires-Dist: webcolors
+Requires-Dist: toolz
+Requires-Dist: rfc3987
+Requires-Dist: rdflib-jsonld
+Requires-Dist: jsonschema
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tonyfast/gists/master)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tonyfast)
+
+
+```python
+%reload_ext tonyfast
+```
+
+
+```python
+from tonyfast import jschema; import pandas, requests
+```
+
+
+```python
+df = jschema.Dict(
+    (x.name, F"""{x.url.replace(
+        'https://gist.github.com/tonyfast/', 'https://api.github.com/gists/'
+    )}""") for x in "".git().submodules).series().apply(jschema.Uri.json).apply(pandas.Series)
+df[[x for x in df.columns if x.endswith('_at')]] = df[[x for x in df.columns if x.endswith('_at')]].apply(pandas.to_datetime)
+df = df.loc[df.updated_at.sort_values(ascending=False).index]
+```
+
+
+```python
+series.
+```
+
+
+
+
+    url             https://api.github.com/gists/646e4f4f216286c6a...
+    forks_url       https://api.github.com/gists/646e4f4f216286c6a...
+    commits_url     https://api.github.com/gists/646e4f4f216286c6a...
+    id                               646e4f4f216286c6aa0a17fadba2c505
+    node_id         MDQ6R2lzdDY0NmU0ZjRmMjE2Mjg2YzZhYTBhMTdmYWRiYT...
+    git_pull_url    https://gist.github.com/646e4f4f216286c6aa0a17...
+    git_push_url    https://gist.github.com/646e4f4f216286c6aa0a17...
+    html_url        https://gist.github.com/646e4f4f216286c6aa0a17...
+    files           {'QR.ipynb': {'filename': 'QR.ipynb', 'type': ...
+    public                                                       True
+    created_at                              2019-09-12 02:10:16+00:00
+    updated_at                              2019-09-20 13:15:49+00:00
+    description                                                      
+    comments                                                        1
+    user                                                         None
+    comments_url    https://api.github.com/gists/646e4f4f216286c6a...
+    owner           {'login': 'tonyfast', 'id': 4236275, 'node_id'...
+    forks                                                          []
+    history         [{'user': {'login': 'tonyfast', 'id': 4236275,...
+    truncated                                                   False
+    Name: tonyfast/qr, dtype: object
+
+
+
+
+```python
+export = nbformat.v4.new_notebook(cells=[])
+for path, series in df.iterrows(): 
+    export['cells'].append(nbformat.NotebookNode(F"""## {}
+
+    * > {series.description}
+
+    """.json()['cells'][0]))
+    for file, row in jschema.List(
+        series.files.values()
+    ).pipe(pandas.DataFrame).pipe(lambda df: df[df.language=="Jupyter Notebook"]).set_index('filename').iterrows():
+
+        export['cells'][-1].source = ''.join(export['cells'][-1].source)
+```
+
+
+```python
+__import__('IPython').display.Markdown(nbconvert.get_exporter('markdown')(exclude_input=True).from_notebook_node(export)[0])
+```
+
+
+
+
+Automatically generate interactive widgets for functions.
+
+
+
+
+
+```python
+
+```
+
+
