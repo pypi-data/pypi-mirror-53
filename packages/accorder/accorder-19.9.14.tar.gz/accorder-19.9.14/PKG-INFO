@@ -1,0 +1,17 @@
+Metadata-Version: 1.2
+Name: accorder
+Version: 19.9.14
+Summary: Accorder makes Calibre library portable as standalone webapp and ready to be shared at Memory of the World Library.
+Home-page: UNKNOWN
+Author: Marcell Mars
+Author-email: ki.ber@kom.uni.st
+License: UNKNOWN
+Description: Accorder takes care of various tasks which Memory of the World amateur librarians do in order to maintain their shared catalogs online. It builds searchable, standalone, portable webapp which one could then just copy to USB disk and open BROWSE_LIBRARY.html in her web browser. It uploads all of the books and metadata from local Calibre's library (together with portable webapp) to the server. It helps a librarian to maintain and share her catalog at https://library.memoryoftheworld.org together with other amateur librarians. It does all of above in one go by typing: accorder release PROFILE. The configuration file will keep information about one or more PROFILE. Under every PROFILE's configuration section there will be information about the directory path of local Calibre's library, librarian's name, credentials needed to upload the files to the destination server etc.
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Other Audience
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Environment :: Console
+Classifier: Topic :: Communications :: File Sharing
+Requires-Python: >=3.6
