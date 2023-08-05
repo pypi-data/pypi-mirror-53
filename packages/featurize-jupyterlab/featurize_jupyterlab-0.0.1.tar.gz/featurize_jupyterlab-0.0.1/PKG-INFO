@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: featurize_jupyterlab
+Version: 0.0.1
+Summary: A server extension for JupyterLab's featurize extension
+Home-page: UNKNOWN
+Author: 
+License: UNKNOWN
+Description: # featurize-jupyterlab
+        
+        A JupyterLab extension.
+        
+        
+        ## Prerequisites
+        
+        * JupyterLab
+        
+        ## Installation
+        
+        ```bash
+        jupyter labextension install featurize-jupyterlab
+        ```
+        
+        ## Development
+        
+        For a development install (requires npm version 4 or later), do the following in the repository directory:
+        
+        ```bash
+        npm install
+        npm run build
+        jupyter labextension link .
+        ```
+        
+        To rebuild the package and the JupyterLab app:
+        
+        ```bash
+        npm run build
+        jupyter lab build
+        ```
+        
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
