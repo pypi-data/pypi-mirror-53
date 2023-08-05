@@ -1,0 +1,57 @@
+#!python
+
+from flutter_debugger import *
+from os import *
+
+project_name = 'test_project'
+archive_folder = 'debug_archives'
+port = '8006'
+logger = create_logger()
+
+# 运行flutter的打包代码
+if not check_shcommand_exist("flutter"):
+    logger.error("Flutter命令不存在，无法打包")
+    exit
+else:
+    logger.info("准备打包Flutter项目")
+run_command("flutter build bundle --debug")
+
+# 将flutter的打包产物压缩成zip包
+archive_dir = path.abspath(archive_folder)
+archive_file_name = project_name + '_debug'
+if not path.exists(archive_dir):
+    mkdir(archive_dir)
+flutter_assets_dirs = [path.abspath('./ios/Flutter/App.framework/flutter_assets'), path.abspath('./.ios/Flutter/App.framework/flutter_assets')]
+
+flutter_assets_archive_path = path.abspath('./' + archive_folder + '/' + archive_file_name + '.zip')
+have_avaliable_flutter_dir = False
+for flutter_assets_dir in flutter_assets_dirs:
+    if path.exists(flutter_assets_dir):
+        have_avaliable_flutter_dir = True
+        logger.info("开始归档flutter_assets目录")
+        logger.info("flutter_assets目录位置：{0}".format(flutter_assets_dir))
+        archive_file_path = archive(flutter_assets_dir, flutter_assets_archive_path)
+        logger.info(str.format("归档flutter_assets目录结束，路径：{0}", archive_file_path))
+        break
+        
+if not have_avaliable_flutter_dir:
+    logger.error("打包Flutter项目失败，不存在可用的flutter_assets目录")
+    exit
+
+# 生成zip包地址的二维码
+host_ip = get_host_ip()
+logger.info(str.format("本机ip为 : {0}", host_ip))
+debug_archive_url = str.format("{0}:{1}", host_ip, port, archive_file_name)
+os.system("echo {0} | pbcopy".format(debug_archive_url))
+logger.info(str.format("================ 在Flutter调试入口填写以下地址(地址已经拷贝到剪切板) ================", debug_archive_url))
+logger.info("")
+logger.info(str.format("                  {0}  ", debug_archive_url))
+logger.info("")
+logger.info(str.format("======================================================================================", debug_archive_url))
+
+# 启动http服务
+flutter_assets_archive_dir = path.abspath('./' + archive_folder)
+http_server(flutter_assets_archive_dir, int(port))
+
+# # Startup Flutter attach server
+# run_command("flutter attach")
