@@ -1,0 +1,33 @@
+"""LICENSE
+Copyright 2019 Hermann Krumrey <hermann@krumreyh.com>
+
+This file is part of bundesliga-tippspiel-reminder (btr).
+
+btr is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+btr is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with btr.  If not, see <http://www.gnu.org/licenses/>.
+LICENSE"""
+
+from bokkichat.connection.impl.TelegramBotConnection import \
+    TelegramBotConnection
+from kudubot.helper import cli_bot_start
+from bundesliga_tippspiel_reminder import sentry_dsn
+from bundesliga_tippspiel_reminder.BundesligaTippspielReminderBot import \
+    BundesligaTippspielReminderBot
+
+
+if __name__ == "__main__":
+    cli_bot_start(
+        BundesligaTippspielReminderBot,
+        TelegramBotConnection,
+        sentry_dsn
+    )
