@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: meta-form-validators
+Version: 0.1.3
+Summary: Form validators for meta/edc project
+Home-page: https://github.com/meta-trial/meta-form-validators
+Author: Erik van Widenfelt
+Author-email: ew2789@gmail.com
+License: GPL license, see LICENSE
+Keywords: django meta
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.7
+Requires-Dist: edc-appointment
+Requires-Dist: edc-constants
+Requires-Dist: edc-form-validators
+Requires-Dist: edc-lab
+Requires-Dist: edc-reportable
+Requires-Dist: meta-consent
+Requires-Dist: meta-screening
+
+|pypi| |travis| |codecov| |downloads|
+
+meta-form-validators
+--------------------
+
+.. |pypi| image:: https://img.shields.io/pypi/v/meta-form-validators.svg
+    :target: https://pypi.python.org/pypi/meta-form-validators
+
+.. |travis| image:: https://travis-ci.com/meta-trial/meta-form-validators.svg?branch=develop
+    :target: https://travis-ci.com/meta-trial/meta-form-validators
+
+.. |codecov| image:: https://codecov.io/gh/meta-trial/meta-form-validators/branch/develop/graph/badge.svg
+  :target: https://codecov.io/gh/meta-trial/meta-form-validators
+
+.. |downloads| image:: https://pepy.tech/badge/meta-form-validators
+   :target: https://pepy.tech/project/meta-form-validators
+
+
