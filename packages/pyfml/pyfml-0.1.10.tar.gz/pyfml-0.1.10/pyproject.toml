@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "pyfml"
+version = "0.1.10"
+description = "python factory meta language"
+authors = ["Ben G <ben.gordon@toasttab.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+toml = "^0.10.0"
+purl = "^1.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+pylint = "^2.3"
+yapf = "^0.28.0"
+
+[[tool.poetry.source]]
+name = "pypi-internal"
+url="https://nexus.eng.toasttab.com/repository/pypi-internal/"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
