@@ -1,0 +1,58 @@
+Metadata-Version: 2.1
+Name: zeropy
+Version: 0.3
+Summary: zerolevel blockchain's api bind.
+Home-page: UNKNOWN
+Author: zerolevel team
+Author-email: zerolevel@gmail.com
+License: UNKNOWN
+Description: # zeroPy
+        
+        [![PyPI version](https://badge.fury.io/py/zeropy.svg)](https://badge.fury.io/py/zeroPy)
+        [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+        [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+        
+        Blockchain's api bind, python3.5+
+        
+        
+        # Requirements 
+         - racrypt
+         - crcPy(now part, but it will be changed)
+        
+        # Tests
+        
+        Default tests: 
+        ```sh
+         sh tests.sh
+        ```
+        Testing Api: 
+        ```sh 
+        cd tests
+        vim node.ini
+        change ip, port
+        python3 -m unittest test_client.py
+        ```
+        
+        
+        # Start
+        ```python
+        import zeropy
+        
+        client = zeropy.apiClient()
+        client.connect('127.0.0.1', 5000)
+        
+        tmp_key = b'any 64 symbols'
+        #Blockchain should know with whom he works
+        client.send_info(tmp_key)
+        
+        counters = client.get_counters()
+        print('blocks\n', counters.blocks, 'transactions\n', counters.transactions,
+        'binary data \n',counters)
+        
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
