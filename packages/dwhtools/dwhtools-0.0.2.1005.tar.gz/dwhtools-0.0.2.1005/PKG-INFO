@@ -1,0 +1,17 @@
+Metadata-Version: 1.0
+Name: dwhtools
+Version: 0.0.2.1005
+Summary: Dies ist eine kurze Beschreibung
+Home-page: UNKNOWN
+Author: Bejamin Weber
+Author-email: b.weber@oraylis.de
+License: UNKNOWN
+Description: # Entwicklung und testen
+        Test erfolgt Ã¼ber den Upload nach Pypi  
+        In Databricks kann dann mit folgendem Code getestet werden:  
+        <br>
+        import pkg_resources  
+        dbutils.library.installPyPI("dwhtools")  
+        dbutils.library.restartPython()  
+        pkg_resources.get_distribution("dwhtools").version
+Platform: UNKNOWN
