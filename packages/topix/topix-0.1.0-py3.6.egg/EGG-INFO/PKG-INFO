@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: topix
+Version: 0.1.0
+Summary: Topix is a microframework for creating event streams in Redis
+Home-page: https://github.com/madelyneriksen/topix
+Author: Madelyn Eriksen
+Author-email: hello@madelyneriksen.com
+License: UNKNOWN
+Description: Topix - Microframework for Redis Streams
+        =======
+        
+        Topix is a microframework to create event streams in Redis
+        
+        ## Get Started 🚀
+        
+        Install Topix with the following commands:
+        
+        ```bash
+        virtualenv .env
+        source .env/bin/activate # Linux/OSX
+        .env\scripts\activate # Windows
+        pip install -r requirements.txt
+        python setup.py install
+        
+        ```
+        
+        
+        ## Development
+        
+        To get started hacking on Topix, be sure to install it in development mode.
+        
+        ```bash
+        virtualenv .env
+        source .env/bin/activate # Linux/OSX
+        .env\scripts\activate # Windows
+        pip install -r requirements.dev.txt
+        python setup.py develop
+        ```
+        
+        Tests are provided by Pytest. Plugins for `pylint` and `coverage` are directly integrated:
+        
+        ```bash
+        pytest # or python setup.py test
+        # Pytest Output
+        
+        Coverage Report:
+        
+        ...
+        
+        ====== X Passed, X Skipped in .38 seconds =====
+        ```
+        
+        
+        Topix checks types with MyPy. Type check your code like this:
+        
+        ```bash
+        mypy topix
+        ```
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
