@@ -1,0 +1,138 @@
+- job:
+    name: monascalog-tempest-base
+    parent: devstack-tempest
+    description: |
+      Job for running tempest tests on monasca-log-api devstack plugin.
+    timeout: 7800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/monasca-agent
+      - openstack/monasca-api
+      - openstack/monasca-common
+      - openstack/monasca-grafana-datasource
+      - openstack/monasca-notification
+      - openstack/monasca-persister
+      - openstack/monasca-statsd
+      - openstack/monasca-thresh
+      - openstack/monasca-ui
+      - openstack/python-monascaclient
+      - openstack/tempest
+      - openstack/monasca-log-api
+      - openstack/monasca-kibana-plugin
+      - openstack/monasca-tempest-plugin
+    vars:
+      tox_envlist: all
+      tempest_test_regex: monasca_tempest_tests.tests.log_api
+      devstack_plugins:
+        monasca-api: https://opendev.org/openstack/monasca-api
+        monasca-log-api: https://opendev.org/openstack/monasca-log-api
+      devstack_services:
+        # Disable unneeded services.
+        etcd3: false
+        g-api: false
+        g-reg: false
+        n-api: false
+        n-api-meta: false
+        n-cauth: false
+        n-cond: false
+        n-cpu: false
+        n-novnc: false
+        n-obj: false
+        n-sch: false
+        placement-api: false
+        s-account: false
+        s-container: false
+        s-object: false
+        s-proxy: false
+        c-api: false
+        c-bak: false
+        c-sch: false
+        c-vol: false
+        cinder: false
+        horizon: false
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^.*\.md$
+      - ^doc/.*$
+      - ^releasenotes/.*$
+
+- job:
+    name: monascalog-python2-tempest
+    parent: monascalog-tempest-base
+    vars:
+      devstack_localrc:
+        TEMPEST_PLUGINS: /opt/stack/monasca-tempest-plugin
+
+- job:
+    name: monascalog-python3-tempest
+    parent: monascalog-tempest-base
+    vars:
+      devstack_localrc:
+        USE_PYTHON3: true
+        TEMPEST_PLUGINS: /opt/stack/monasca-tempest-plugin
+
+- project:
+    templates:
+      - check-requirements
+      - openstack-cover-jobs
+      - openstack-lower-constraints-jobs
+      - openstack-python-jobs
+      - openstack-python3-train-jobs
+      - publish-openstack-docs-pti
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - monascalog-python2-tempest
+        - monascalog-python3-tempest
+        - build-monasca-docker-image
+    gate:
+      queue: monasca
+      jobs:
+        - monascalog-python2-tempest
+        - monascalog-python3-tempest
+    post:
+      jobs:
+        - publish-monasca-log-api-docker-image
+    periodic:
+      jobs:
+        - publish-monasca-log-api-docker-image
+    release:
+      jobs:
+        - publish-monasca-log-api-docker-image
+
+- job:
+    name: publish-monasca-log-api-docker-image
+    parent: build-monasca-docker-image
+    post-run: playbooks/docker-publish.yml
+    required-projects:
+      - openstack/monasca-common
+    vars:
+      publisher: true
+    secrets:
+      - doker_hub_login_log_api
+
+- secret:
+    name: doker_hub_login_log_api
+    data:
+      user: !encrypted/pkcs1-oaep
+        - mR5DkiEi0lGjpUHgFYlt779KdX0UhPK7+/uJIiawmM5ASJSx90s/DMMDUrPbGc9cpJrOH
+          zRxBRryUrXuLGpKwQvLAC8uQC3rd9rGrlTVwjszl3nDNFYxKJ3tBMjppG6dBTIo58v6Go
+          Xo9GdNmaeS3jh6wh9hUqmMlHF4fzaX49GUpZyxTwufA0Y4h/pbq1r7ImbOCLiNUEwxWqH
+          dPJ9aJMQ5u8qus2r8cs7EHU/KAsFfPEteNtOz3egDSb1/SFYs5oI0VeIs4RvidHe6M56v
+          vEYx2KjzKKIE4s5TAiU8jU2Qs0RROv+6s7Y23ciqOfFBhVKJg+0PAoge1AwmL6g3FNrW0
+          sy0uEslPltkbF3Pae9zFe0VU6ZIxYC62kAIBEJj96zc0TIfFYHx4NRbIvkoKopnun7dqF
+          6hg5k8lZ1kN5RMT2nPNemj9esh0eqCBvLjf4ljy7veYLN9M/GSKSP5A+2chBWFxloWuwB
+          7PRf9GbDbHA+H+Y6WASK38haHlo9zsoi/D7oJK02LHTwgj4ED3qN34Z9zCVBBr1jN3TUH
+          9aVOsm+OT1OsUszLQ3BM1HqBZLszrOxuPoqDQ5CURrxEtzrSnX+fsoLyv1tzT/vVnrbAT
+          /zJxBXGiiE5/3H0isFkK6GUVwsmnLUFYCq5ye6NyLpwdWfTEx6eQDlO5OIE/Qo=
+      password: !encrypted/pkcs1-oaep
+        - DALBrHoOI3iZAKArnbPL59d3Mk1OHeDNREq9CJXs601l70AwPmNnK0y1XixbUoAmB8y9C
+          hkadR+a2s8Lc2+xCzRvr+4tt8vZ+gjgl77WTs43mpb+DfssdP6s5847t6cnE1WKI7GgCS
+          4as41aOz4HDIdLG6Oe5Jq8HYDx+qcBZhQaeCzObLnbmxdDop6SkpjfziV8+TWxag56joE
+          V7masPLtYofzQpqB0hRhD3RF7T5fW8uOUlKKzSKhjYuwul1sbOKn6izjufxQs0iimhJpI
+          HkWCPSj9emr889BfO2DR9/OvTjwSdWZmEtup3RAyWcd6JUESa3oLkG1OFqB0vp6hgx9/F
+          zFXhBxtEyvs1Odj1ecudr7l+zO4kPVG9cIMHHzd7Tlg1XX2O1/+houVmXd3I1GtxwRYZa
+          B3Q+yecTLleR1coMM4nZgGtbiky5q6zcttTQCxeUEeCpTUWbxhnLPZyXV+pdFMxsLeUjP
+          9GcnjuNCgOKHYHyHcXwDoytsqgoTaAS4O+FR5tCmc9dREWsaRCd0dBMy6Xx+ynVJE/1jp
+          XwtKG/yaFdHyTXwXGQ6ZlW9XnesBejLmetZHx8j7atiMOtKqmM4+N9i0O+1wbl3A2Glxs
+          K1orRrDJBdLNYVdczq/TUvzl4XBXi+36f1i6auL/WqHUmQy62w1S9WvaqGzEKM=
