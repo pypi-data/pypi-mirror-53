@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: gridfinder
+Version: 1.1.1
+Summary: Algorithm for guessing MV grid network based on night time lights
+Home-page: https://github.com/carderne/gridfinder
+Author: Chris Arderne
+Author-email: chris@rdrn.me
+License: UNKNOWN
+Description: 
+        gridfinder uses NASA night time lights imagery to as an indicator of 
+        settlements/towns with grid electricity access. Then a minimum spanning 
+        tree is calculated for these connect points, using the Dijkstra 
+        algorithm and using existing road networks as a cost function. 
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
