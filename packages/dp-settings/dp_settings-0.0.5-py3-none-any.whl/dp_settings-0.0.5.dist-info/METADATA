@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: dp-settings
+Version: 0.0.5
+Summary: A table for storing settings
+Home-page: https://gitlab.com/hoka/dp_settings
+Author: Kai Hoppert
+Author-email: kai.hoppert@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Framework :: Django :: 2.0
+Classifier: Framework :: Django :: 2.1
+Classifier: Framework :: Django :: 2.2
+Description-Content-Type: text/markdown
+Requires-Dist: Django
+
+Information
+===========
+Provides a table "dp_settings" to store settings in a general way.
+You can store strings and integers (most common settings) values by using the model.
+
+String is provided through value_string (TextField).
+Integer is provided through value_int (IntegerField).
+
+Installation
+============
+
+pip install dp-settings
+
+Example Code
+============
+
+```
+object_ = DpSettings.objects.create()
+object_.app_name = 'dp_settings'
+object_.key = 'active'
+object_.value_int = 1
+
+object_ = DpSettings.objects.create()
+object_.app_name = 'dp_settings'
+object_.key = 'email_from'
+object_.value_string = 'test@test.de'
+```
+
