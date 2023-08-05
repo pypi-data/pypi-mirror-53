@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include .flake8 mypy.ini requirements.txt requirements-dev.txt pyproject.toml
+recursive-include data *
+recursive-include tests *.py
+

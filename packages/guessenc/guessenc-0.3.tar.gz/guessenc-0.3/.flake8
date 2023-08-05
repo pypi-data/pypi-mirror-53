@@ -1,0 +1,5 @@
+[flake8]
+max-line-length = 120
+hang-closing = False
+
+format = '%(path)s:   row %(row)d:   %(code)s %(text)s'
