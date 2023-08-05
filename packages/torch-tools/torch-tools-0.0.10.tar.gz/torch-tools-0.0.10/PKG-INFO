@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: torch-tools
+Version: 0.0.10
+Summary: A library of helpers to train, evaluate and visualize deep nets with PyTorch.
+Home-page: https://github.com/mgharbi/ttools
+Author: Michaël Gharbi
+Author-email: mgharbi@adobe.com
+License: MIT
+Description: Readme
+        ======
+        
+        A library of helpers for PyTorch.
+        
+        Michaël Gharbi <mgharbi@adobe.com>
+        
+        
+        Installation
+        ------------
+        
+        From pip:
+        ``pip install torch-tools``
+        
+        From source:
+        ``python setup.py install``
+        
+        
+        Documentation
+        =============
+        
+        The documentation webpage can be found `here https://torch-tools.readthedocs.io/en/latest/`
+        
+        
+        Demo
+        ----
+        
+        For a simple demo, look at the MNIST example in `examples/train_mnist.py`:
+        
+        ``python examples/train_mnist.py data out``
+        
+        
+        Contributors
+        ------------
+        
+        Dima Smirnov implemented the tensorboard hooks and callbacks.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Provides-Extra: dev
+Provides-Extra: docs
+Provides-Extra: tests
