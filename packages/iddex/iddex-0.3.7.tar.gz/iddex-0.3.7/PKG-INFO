@@ -1,0 +1,47 @@
+Metadata-Version: 1.2
+Name: iddex
+Version: 0.3.7
+Summary: Python library for iddex
+Home-page: https://gitlab.com/id.dex-pub/python-iddex
+Author: Graham Rogen
+Author-email: grogen@id-chain.org
+Maintainer: Graham Rogen
+Maintainer-email: grogen@id-chain.org
+License: UNKNOWN
+Download-URL: https://gitlab.com/id.dex-pub/python-iddex/tarball/0.3.7 
+Description: # Python Library for IDDEX
+        ---
+        
+        
+        ## Installation
+        
+        ### Install with pip3:
+        
+            $ sudo apt-get install libffi-dev libssl-dev python-dev python3-dev python3-pip
+            $ pip3 install iddex
+        
+        ### Manual installation:
+        
+            $ git clone https://gitlab.com/id.dex-pub/python-iddex
+            $ cd python-iddex
+            $ python3 setup.py install --user
+        
+        ### Upgrade
+        
+            $ pip3 install --user --upgrade iddex
+        
+        
+        ### License
+        
+        A copy of the license is available in the repository's
+        [LICENSE](LICENSE.txt) file.
+        
+Keywords: iddex,library,api,rpc
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Topic :: Office/Business :: Financial
