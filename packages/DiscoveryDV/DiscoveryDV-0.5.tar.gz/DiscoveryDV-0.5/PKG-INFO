@@ -1,0 +1,211 @@
+Metadata-Version: 2.1
+Name: DiscoveryDV
+Version: 0.5
+Summary: Python package for interfacing with DiscoveryDV using its API
+Home-page: https://www.decisionvis.com/ddv/
+Author: DecisionVis LLC
+Author-email: team@decisionvis.com
+License: UNKNOWN
+Description: This library interacts with DiscoveryDV, a data visualization suite,
+        over a ZMQ-based API.  In order to use all features of this software, 
+        DiscoveryDV must be installed and run.
+        
+        
+        # License
+        
+        Please see LICENSE.md for information about use, redistribution, and 
+        modification of this library.
+        
+        The DiscoveryDV application (not included with this package) and the 
+        DiscoveryDV name are copyright DecisionVis LLC.
+        
+        
+        # Requirements
+        
+        * PyZMQ (pyzmq>=17.0.0)
+        * MessagePack (msgpack-python>=0.4.8)
+        * Python >= 3.6
+        
+        
+        # Usage
+        
+        The DiscoveryDV Python module has 3 main components:
+        
+        1.  `Connection`
+            * This class provides an interface with DiscoveryDV.
+            * It is a "Context Manager" and ideally should be used within Python's `with` statement.
+            * If used outside of a `with` statement, the connection object must be connected 
+            first (`connection_obj.connect()`), and must be closed when finished (`connection_obj.close()`).
+            * The connection can be re-connected with `connection_obj.connect()`; optionally a different 
+            TCP/IP address, and/or different ports can be passed as arguments.
+            * The current application state for DiscoveryDV can be retrieved with `connection_obj.state`; 
+            it can be resynchronized by calling `connection_obj.reload()` and accessing `connection_obj.state` again.
+        
+        2.  `State`
+            * This class represents a DiscoveryDV "state" object.
+            * It is analogous to Python's `namedtuple`.
+            * It contains `_fields`, which is a tuple of strings containing field names
+            * Fields may be accessed using dot-notation (e.g. `state.name`) or by subscripting (e.g. `state['name']`).
+            * Values may be `State` objects, `Collection` objects, or Python values (`int`, `float`, `bool`, `str`)
+            * Fields may be set using `=` (e.g. `state.name = "New Name"`, `state['name'] = "New Name"`).
+            * Fields may be reset to defaults by deletion (e.g. `del state.name`, `del state['name']`).
+            * Printing this object will provide an API path and a list of valid fields.
+            * This object supplies a `repr` that "pretty prints" the `State` recursively
+        
+        3.  `Collection`
+            * This class represents a DiscoveryDV "collection" object.
+            * It is analogous to Python's `tuple`, but can also be queried by an child's 
+            name (similar to Python's `dict`).
+            * Internally in DiscoveryDV these are referred to as `OrderedLookup` or `NameLookup`; 
+            the main difference is that a `NameLookup` requires children names to be unique.
+            * Children are always `State` objects that contain a `name` field
+            * Children may be accessed by subscripting, either using a numerical index 
+            (e.g. `0`, `-1`) or a string name (e.g. `'Page 001`).
+            * Children may be added by calling `collection_obj.insert(index)` or `collection_obj.add()`; 
+            an optional name argument may be supplied to create a child with a specified name.
+            * Children may be deleted by calling `collection_obj.delete(index/name)` or `del collection_obj[index/name]`.
+            * Printing this object will provide an API path and a list of children's names.
+            * This object supplies a `repr` that "pretty prints" the `Collection` recursively
+            
+            
+        # Example
+        
+        
+        ## Making a Connection
+        
+        You will first need to make a connection to DiscoveryDV.  It is best to use the 
+        `Connection` class in a `with` statement:
+        
+        ```
+        with Connection('127.0.0.1', 33929, 33930) as ddv:
+            # Commands applied to the "ddv" connection object
+            ...
+            
+        ```
+        
+        Python's `with` clause will create the connection, connect it to DiscoveryDV, 
+        and properly close the connection outside the scope of the `with` clause, and 
+        in the event of an exception. 
+        
+        Alternately, an instance of a `Connection` can be created, but must be connected 
+        before performing actions, and closed afterward:
+        
+        ```
+        ddv = Connection('127.0.0.1', 33929, 33930)
+        ddv.connect()
+        # Commands applied to the "ddv" connection object
+        ...
+        ddv.close()
+        ```
+        
+        You may wish to include the `ddv.close()` command in a `finally` clause to ensure 
+        that the connection is properly closed in the event of an exception.
+        
+        ## Working with the DiscoveryDV application state
+        
+        Once connected, the application state can be retrieved as a `State` object.  
+        This object is an abstraction of the API commands that can be performed in 
+        DiscoveryDV.
+        
+        For example, the following DVS script creates a page, adds a file, 
+        creates a PCPlot, and sets up some axes:
+        
+        ```
+        add /page/ "LTM"
+        add /page/LTM/file/ "LTM"
+        set /page/LTM/file/LTM/path/ "ltm.xlsx"
+        set /page/LTM/file/LTM/type/ excel
+        add /page/LTM/pcplot/ "PCPlot"
+        add /page/LTM/pcplot/PCPlot/parallel/ "Cost" "Error" "Risk" "Mass"
+        set /page/LTM/pcplot/PCPlot/axis/c/name/ "Cost"
+        ```
+        
+        We can replicate this script with the DiscoveryDV Python module:
+        
+        ```
+        with Connection('127.0.0.1', 33929, 33930) as ddv:
+            ddv.state.page.add("LTM")
+            ddv.state.page["LTM"].file.add("LTM")
+            ddv.state.page["LTM"].file["LTM"].path = "ltm.xlsx"
+            ddv.state.page["LTM"].file["LTM"].type = "excel"
+            ddv.state.page["LTM"].pcplot.add("PCPlot")
+            ddv.state.page["LTM"].pcplot["PCPlot"].parallel.add("Cost")
+            ddv.state.page["LTM"].pcplot["PCPlot"].parallel.add("Error")
+            ddv.state.page["LTM"].pcplot["PCPlot"].parallel.add("Risk")
+            ddv.state.page["LTM"].pcplot["PCPlot"].parallel.add("Mass")
+            ddv.state.page["LTM"].pcplot["PCPlot"].axis.c.name = "Cost"
+        ```
+        
+        We could write this is a more Pythonic approach: 
+        
+        ```
+        with Connection('127.0.0.1', 33929, 33930) as ddv:
+            state = ddv.state
+            page = state.page.add("LTM")
+            file = page.file.add("LTM")
+            file.path = "ltm.xlsx"
+            file.type = "excel"
+            pcplot = page.pcplot.add("PCPlot")
+            for name in ("Cost", "Error", "Risk", "Mass"):
+                _ = pcplot.parallel.add(name)
+            pcplot.axis.c.name = "Cost"
+        ```
+        
+        ## Performing "actions"
+        
+        The DiscoveryDV API has several commands that do not modify the state.  These 
+        "actions" can also be performed using this module.
+        
+        You can see a list of commands you can run by querying the connection object's 
+        `commands`: `print(connection_obj.commands)`.
+        
+        Try running `print(connection_obj.help("verb")` to see information from DiscoveryDV 
+        on a particular command.  Actions for the `Connection` object take the same arguments 
+        as API commands in DiscoveryDV.
+        
+        You can also perform state modification commands directly using the connection 
+        object.  For these commands, you will need to provide a full path.  Paths in 
+        this module are specified using Python tuples rather than "/"-separated as they 
+        are in the DiscoveryDV API.  For example, `/page/0/name/` would be `('page', 0, 'name')`. 
+        
+        
+        # Troubleshooting
+        
+        It is often useful to `print` the `Connection` object and any relevant `State`/`Collection` 
+        objects, or for more detailed information, `print` their `repr` (e.g. `print(repr(connection_obj.state))`).
+        
+        * `ValueError` with no response from DiscoveryDV: 
+            * Ensure that DiscoveryDV is running
+            * Ensure that the module's `Connection` object has been connected if not using a with statement
+                1. `connection_instance.connect()`
+            * Check that the `Connection` object's address and ports match DiscoveryDV
+                1. `print(connection_instance)`
+                2. Compare address and ports to the log message when starting DiscoveryDV
+                3. Reconnect and specify address and ports `connection_instance.connect('127.0.0.1', 33929, 33930)` 
+        
+        * `KeyError` or `IndexError` when performing state changes
+            * Confirm that the name or index are correct
+                *  `print(collection_obj)` and compare names/positions
+                *  `print(state_obj)` and compare field names
+            * Ensure that the module's `State` object is synchronized with DiscoveryDV
+                1. `connection_instance.reload()`
+                2. `state_obj = connection_instance.state`
+           
+        * `ValueError` when trying to set a `State` field
+            * DiscoveryDV only allows certain types/ranges of values based on a path
+            * It may be useful to `print` the output from `obj.help()` (for `State` or `Collection`),
+            or call `Connection`'s `help` method using a full path (e.g. `connection_obj.help(path)`).
+         
+            
+        # Release Notes
+        
+        ## Version 0.1 - (August 9, 2019):
+        
+        - Initial release.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
