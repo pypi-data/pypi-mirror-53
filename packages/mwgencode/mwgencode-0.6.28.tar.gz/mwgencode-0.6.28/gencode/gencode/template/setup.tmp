@@ -1,0 +1,40 @@
+from distutils.core import setup
+from Cython.Build import cythonize
+
+def get_package_datas(pathname):
+    from pathlib import Path
+    dirs = []
+    def get_dir(pathname,dirs):
+        pth = Path(pathname)
+        paths = [x for x in pth.iterdir() if x .is_dir()]
+        for p in paths:
+            if p.name in ('.git', '.idea', '__pycache__'):
+                continue
+            dirs.append(p.parts)
+            get_dir(str(p),dirs)
+    get_dir(pathname,dirs)
+    # 不需要包含 app
+    return ['/'.join(d[1:])+'/*' for d in  dirs]+[Path(pathname).parts[-1]+'/*']
+
+try:
+    setup(
+        # 指定package，可以copy package data，但会包含py源码，需在安装后删除py文件
+        # packages=['app'],
+        ext_modules=cythonize('/var/{{swagger.name}}/app/*.py')+
+                    cythonize('/var/{{swagger.name}}/app/api/*.py')+
+                    cythonize('/var/{{swagger.name}}/app/api/v1_0/*.py'),
+        # package_data={'app': get_package_datas('/var/{{swagger.name}}/app/static')},
+        data_files=[
+                    # ('/usr/local/lib/python3.6/site-packages/app/translations/en/LC_MESSAGES/',
+                    #          ['/var/{{swagger.name}}/app/translations/en/LC_MESSAGES/messages.mo']),
+                    # ('/usr/local/lib/python3.6/site-packages/app/translations/zh_Hans_CN/LC_MESSAGES/',
+                    #          ['/var/{{swagger.name}}/app/translations/zh_Hans_CN/LC_MESSAGES/messages.mo']),
+                    # ('/usr/local/lib/python3.6/site-packages/app/translations/zh_Hant_TW/LC_MESSAGES/',
+                    #          ['/var/{{swagger.name}}/app/translations/zh_Hant_TW/LC_MESSAGES/messages.mo']),
+                    ('/usr/local/lib/python3.6/site-packages/swagger/v1_0',
+                     ['/var/{{swagger.name}}/swagger/v1_0/{{swagger.name}}.yaml'])
+                    ]
+        )
+except Exception as e:
+    print (e)
+
