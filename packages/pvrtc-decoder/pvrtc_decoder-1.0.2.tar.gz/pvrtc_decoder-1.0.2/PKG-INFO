@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: pvrtc_decoder
+Version: 1.0.2
+Summary: A PVRTC decoder for PIL
+Home-page: https://github.com/K0lb3/pvrtc_decoder/
+Author: K0lb3
+License: MIT
+Download-URL: https://github.com/K0lb3/pvrtc_decoder/tarball/master
+Description: # PVRTC Decoder
+        A PVRTC decoder for PIL.
+        
+        The decoder uses PVRTDecompress from [PVRCore](https://github.com/powervr-graphics/Native_SDK/tree/master/framework/PVRCore) to decompress the data.
+        
+        
+        ## Installation
+        - Cython required
+        ### PIP
+        ```
+        pip install pvrtc_decoder
+        ```
+        ### Manual
+        ```cmd
+        python setup.py install
+        ```
+        
+        
+        ## Usage
+        do2bit_mode:
+        - 0 - PVRTC2 (8 bit)
+        - 1 - PVRTC4 (16 bit)
+        
+        ### PIL.Image decoder
+        ```python
+        from PIL import Image
+        import pvrtc_decoder 
+        #needs to be imported once in the active code, so that the codec can register itself
+        
+        raw_pvrtc_image_data : bytes
+        do2bit_mode = 0 # see above
+        img = Image.frombytes('RGBA', size, raw_pvrtc_image_data, 'pvrtc', (do2bit_mode))
+        ```
+        
+        ### raw decoder
+        ```python
+        from pvrtc_decoder import decompress_pvrtc, decompress_etc
+        
+        # compressed PVRTC image bytes to RGBA bytes
+        rgba_data = decompress_pvrtc(compressed_data : bytes, do2bit_mode : int, width : int, height : int)
+        
+        # compressed ETC image bytes to RGBA bytes
+        # mode seems to be unused, so use any value you want
+        rgba_data = decompress_etc(src_data : bytes, width : int, height : int, mode : int)
+        ```
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: zlib/libpng License
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Multimedia :: Graphics
+Description-Content-Type: text/markdown
