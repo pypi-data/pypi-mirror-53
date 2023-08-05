@@ -1,0 +1,54 @@
+{% extends 'tom_common/base.html' %}
+{% load bootstrap4 static tom_education_extras %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'tom_education/css/gallery.css' %}">
+{% endblock %}
+
+{% block title %}Data Product Gallery{% endblock %}
+
+{% block content %}
+
+<h2>Add data products to group</h2>
+
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if show_form %}
+    <form method="POST" action="{% url 'tom_education:gallery' %}">
+        {% csrf_token %}
+        <input type="hidden" name="product_pks" value="{{ product_pks }}" />
+
+        {% buttons %}
+            <input type="submit" class="btn btn-primary" value="Add to group" />
+            {% dataproduct_selection_buttons false %}
+        {% endbuttons %}
+
+        {% bootstrap_field form.group %}
+        <div class="container">
+            <div class="row">
+            {% for product in products %}
+                <div class="col-sm thumbnail">
+                    <label>
+                        {% dataproduct_checkbox product %}
+                        {{ product.data.name }}
+                        <br />
+                        <img class="img-fluid" src="{{ product.get_preview }}" />
+                    </label>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+
+        <br />
+    </form>
+{% endif %}
+
+<script type='text/javascript' src='{% static 'tom_education/dataproduct_checklist_utils.js' %}'></script>
+
+{% endblock %}
