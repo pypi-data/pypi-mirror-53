@@ -1,0 +1,19 @@
+#!/bin/sh
+DOCKER_STACK_NAME=$1
+
+# docker_volumes=$(docker volume ls -q --filter label=com.docker.stack.namespace=$DOCKER_STACK_NAME)
+# if [ -n "$docker_volumes" ]; then
+#   docker volume rm -f $docker_volumes
+# fi
+
+docker_volumes=$(docker volume ls -q --filter label=com.docker.stack.namespace=$DOCKER_STACK_NAME)
+if [ -n "$docker_volumes" ]; then
+  for docker_volume in "$docker_volumes"; do
+    echo "waiting while volume '$docker_volume' is in use"
+    until [ -z "$(docker ps -q -f "volume=${docker_volume}")" ]; do
+      sleep 1;
+    done
+    echo "volume '$docker_volume' is not anymore in use and will be deleted"
+    docker volume rm -f $docker_volume
+  done
+fi
