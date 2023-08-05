@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: meta-consent
+Version: 0.1.11
+Summary: Subject/Participant consent models and classes for meta/edc.
+Home-page: https://github.com/meta-trial/meta-consent
+Author: Erik van Widenfelt
+Author-email: ew2789@gmail.com
+License: GPL license, see LICENSE
+Keywords: django meta edc
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.7
+Requires-Dist: edc-action-item
+Requires-Dist: edc-appointment
+Requires-Dist: edc-consent
+Requires-Dist: edc-form-describer
+Requires-Dist: edc-form-label
+Requires-Dist: edc-model-admin
+Requires-Dist: edc-notification
+Requires-Dist: edc-offstudy
+Requires-Dist: edc-reportable
+Requires-Dist: edc-subject-dashboard
+Requires-Dist: edc-randomization
+Requires-Dist: meta-permissions
+Requires-Dist: meta-screening
+Requires-Dist: meta-subject
+
+|pypi| |travis| |codecov| |downloads|
+
+meta-consent
+------------
+
+Consent classes and modules
+
+
+.. |pypi| image:: https://img.shields.io/pypi/v/meta-consent.svg
+    :target: https://pypi.python.org/pypi/meta-consent
+
+.. |travis| image:: https://travis-ci.com/meta-trial/meta-consent.svg?branch=develop
+    :target: https://travis-ci.com/meta-trial/meta-consent
+
+.. |codecov| image:: https://codecov.io/gh/meta-trial/meta-consent/branch/develop/graph/badge.svg
+  :target: https://codecov.io/gh/meta-trial/meta-consent
+
+.. |downloads| image:: https://pepy.tech/badge/meta-consent
+    :target: https://pepy.tech/project/meta-consent
+
+
