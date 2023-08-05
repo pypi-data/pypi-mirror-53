@@ -1,0 +1,46 @@
+environment:
+  n_semitones: 13
+  n_roll_steps: 31
+  n_observed_roll_steps: 6
+  max_n_stalled_episode_steps: 5
+  scoring_coefs:
+    horizontal_variance: 10
+    vertical_variance: 5
+    absence_of_long_sounds: 1
+    noncyclicity: 250
+    consonances: 1
+    conjunct_motion: 1
+  scoring_fn_params:
+    consonances:
+      interval_consonances:
+        0: 2
+        1: -3
+        2: -3
+        3: 1
+        4: 1
+        5: 0
+        6: -5
+        7: 2
+        8: 1
+        9: 1
+        10: -3
+        11: -3
+      distance_weights:
+        0: 1
+  rendering_params:
+    dir: rlmusician_data
+    lowest_note: C4
+    step_in_seconds: 0.75
+    midi:
+      instrument: 0
+      velocity: 100
+    sinethesizer:
+      timbre: default_timbre
+      volume: 0.2
+agent:
+  population_size: 128
+  elite_fraction: 0.1
+  n_episodes_per_candidate: 10
+  aggregation_fn: mean
+  smoothing_coef: 0.25
+  weights_std: 2.0
