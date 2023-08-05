@@ -1,0 +1,227 @@
+======
+README
+======
+
+Pichi is a small, cross-platform, fast pcap indexer using only standard libraries.
+
+Where pichi shines is in pulling select traffic out of indexes pcaps. This is done by specifying one or more filters
+(see below) during extraction. On average, pichi is 10 times as fast as sancp, and 5 times as fast as using tshark.
+
+Pichi can write index data in two forms:
+
+- text
+   slower to write and read and larger, but easily parsable with standard command line tools and human-readable
+- binary
+   faster and smaller, but unusable without Pichi's tools
+
+Additionally, pichi has two output modes. These don't change the format of the files written, only the number:
+
+- individual
+   Write one index file per input pcap, and use the ``output_path`` name directly
+- combined
+   Write one index file for all input pcaps, with index names based on the input file name and ``output_path`` as the
+   output directory
+
+
+-----
+Usage
+-----
+
+Pichi can be invoked from the command line, or it can be imported and used in python scripts as a library. The input is
+one or more pcap files. If they are gzipped, Pichi will handle decompression transparently.
+
+
+~~~~~~~~~~~~
+As a Library
+~~~~~~~~~~~~
+
+
+Indexing a pcap
+***************
+
+>>> from pichi import PichiBinaryIndexer
+>>> indexer = PichiBinaryIndexer(input_pcaps=['demo_traffic.pcap'], index_name='Demo Pichi Index')
+>>> indexer.index()
+Mode is set to combined
+Indexing `demo_traffic.pcap` . . .
+Indexing completed: 1 file with 514 packets
+>>>
+
+
+Reading Index Data
+******************
+
+>>> from pichi import PichiParser
+>>> parser = PichiParser(index_file='pichi.pi')
+>>> parser.parse_whole()
+Parsing index `Demo Pichi Index`
+Found file `demo_traffic.pcap`
+Found 514 packets
+>>>
+
+``parser`` is also an iterable that yields a ``PichiBinaryFileIndex`` or ``PichiTextFileIndex`` object describing the
+originally indexed file. This object is itself an iterable which yields a ``PichiTextRecordRow`` object for each record.
+
+When using ``parser`` as an iterable, the files and record rows are NOT saved in memory, so it is the preferred method
+when dealing with large indexes. However, if the PichiParser is provided the ``store=True`` argument, this is
+overwritten and already parsed files will be kept in ``parser.input_files``, and rows will be kept in
+``input_file.rows``. Once an index has been parsed in it's entirety, ``parser.completed_index`` is set to ``True``. When
+calling PichiParser.parse_whole(), ``store`` is always set to ``True``.
+
+
+Extracting Traffic with an Index
+********************************
+
+>>> from pichi import PichiExtractor
+>>> extractor = PichiExtractor(input_index='pichi.pi', output_pcap='pichi_demo.pcap')
+>>> extractor.extract()
+Extracting packets from index `Demo Pichi Index`
+Writing to `pichi_demo.pcap`
+Extracting from file 1: `demo_traffic.pcap`
+Working . . .
+Extracted 514 packets
+>>>
+
+
+~~~~~~~~~~~~~~~~~~~~~
+From the Command Line
+~~~~~~~~~~~~~~~~~~~~~
+
+
+Indexing a pcap
+***************
+::
+
+  $ pichi index -i demo_traffic.pcap -o pib.pi -f bin -m combined
+  Format is set to binary
+  Mode is set to combined
+  Indexing `demo_traffic.pcap` . . .
+  Indexing completed: 1 file(s) with 514 packets
+  $
+
+
+Extracting Traffic with an Index
+********************************
+::
+
+  $ pichi extract -i pib.pi -o pichi_demo.pcap
+  Extracting packets from index `Demo Pichi Index`
+  Writing to `pichi_demo.pcap`
+  Extracting from file 1: `demo_traffic.pcap`
+  Working . . .
+  Extracted 514 packets
+  $
+
+
+~~~~~~~~~~~~~
+Using Filters
+~~~~~~~~~~~~~
+
+When extracting packets using an index, one or more filter statements (a filter set) can be provided to limit the
+packets written to those matching the statements. The 'language' is very basic, and a packet only gets written if it
+passes ALL filter statements. Statements take the form of::
+
+  {variable}{comparator}{value}
+
+Variables refer to fields in the index rows (outlined below).
+Comparator must be one of:
+
+- ``==``
+   Equal. The values must match, or the value in the index must be a subset of the value given (i.e., when value is
+   10.0.0.0/8 and the index value is 10.0.0.41, this will match true)
+- ``!=``
+   Not equal. The opposite of the above.
+- ``>=``
+   Greater than or equal to. mostly useful for ports, but can be applied to any numeric variable.
+- ``<=``
+   Less than or equal to, opposite of the above.
+
+Valid variables and values are:
+
+- ``host``
+   An IPv4 or IPv6 host or CIDR format network, or a domain name. If EITHER the source or destination host matches this
+   value, the statement is true. For a CIDR format network, the statement is true if EITHER source or destination host
+   falls within the given network.
+- ``src_host``
+   The same as ``host``, but only looking at the source host.
+- ``dst_host``
+   The same as ``host``, but only looking at the destination host.
+- ``port``
+   A port number or service name (from /etc/services or your OS's equivalent). Note that for EtherTypes where there is
+   no concept of a port (ICMP, ARP, etc.), this field is set to 0. If EITHER the source or destination port matches this
+   value, the statement is true.
+- ``src_port``
+   The same as ``port``, but only looking at the source port.
+- ``dst_port``
+   The same as ``port``, but only looking at the destination port.
+- ``eth_type``
+   The EtherType of the packet, must be a number. See
+   https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml for reference.
+- ``l2_proto``
+   The L2 protocol number or name of the packet. See
+   https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml for reference.
+
+
+-----------
+File Format
+-----------
+
+As stated above, Pichi can write in two formats: text and binary. Both formats can also be compressed using gzip
+on-the-fly by passing the indexer the ``output_compressed=True`` option.
+
+
+~~~~~~~~~~~
+Text Format
+~~~~~~~~~~~
+
+The text format is very simple and easy to send to tools like ``awk``, ``sed``, ``cut``, etc.
+
+There is no header or footer, and every packet record is contained on its own line with fields pipe-delimited::
+
+   {epoch}.{ms}|{in_filename}|{start}|{end}|{eth_proto}|{ip_proto}|{src_host}|{dst_host}|{src_port}|{dst_port}\n
+
+- ``{in_filename}`` is the name of the input pcap
+- ``{start}`` is the first byte of the packet
+- ``{end}`` is the last byte of the packet
+
+
+~~~~~~~~~~~~~
+Binary Format
+~~~~~~~~~~~~~
+
+The binary file format is also relatively simple. It was created to make writing as fast as possible, and parsing easy.
+
+Remember that indexes may or may not be compressed with Gzip.
+
+For an in-depth look at the binary format, please see `the format spec`_. One small, handy trick to note, though:
+
+>>> import struct
+>>> with open('pichi.pi', 'rb') as fp:
+...     fp.seek(-5, 2)
+...     file_count = struct.unpack('B', fp.read(1))[0]
+...     packet_count = struct.unpack('I', fp.read(4))[0]
+
+
+-----
+To-Do
+-----
+
+- Potentially store field values that have already passed a filter with text records and check against them first, to
+  speed up filter testing?
+- Have ``PichiIndexerBase`` objects optionally yield a ``PichiParser`` object when ``.index()`` is completed
+- PCAPNG Support (eek)
+- multithreaded indexing and extraction
+- Implement a bloom filter for checking existence of traffic in a given capture
+- Utilize mmap for index writing?
+- Allow specifying alternate pcap for extraction
+
+
+----------------
+Acknowledgements
+----------------
+
+The original idea comes from SANCP, which is a fantastic project that died too early:
+http://sancp.sourceforge.net/
+
+
+.. _the format spec: docs/FILE_FORMAT.rst
