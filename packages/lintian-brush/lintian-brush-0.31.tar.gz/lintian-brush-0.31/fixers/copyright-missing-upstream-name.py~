@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+from lintian_brush.copyright import update_copyright
+
+upstream_metadata = {}
+
+def add_upstream_metadata(copyright):
+    if (not copyright.header.upstream_name and
+            'Name' in upstream_metadata):
+        copyright.header.upstream_name = upstream_metadata['Name']
+
+    if (not copyright.header.upstream_contact and
+            'Contact' in upstream_metadata):
+        copyright.header.upstream_contact = upstream_metadata['Contact']
+
+
+update_copyright(add_upstream_metadata)
+
+print('Added %s fields to debian/copyright')

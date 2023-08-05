@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+import sys
+
+from lintian_brush.control import update_control
+from lintian_brush.upstream_metadata import get_python_pkg_info
+
+
+if os.path.exists('debian/tests/control'):
+    sys.exit(0)
+
+
+def add_testsuite():
+    if (os.environ.get('TRUST_PACKAGE') == 'true' and
+            os.path.exists('setup.py')):
+        try:
+            subprocess.check_call(
+                ['./setup.py', 'test', '--help'],
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        except subprocess.CalledProcessError:
+            return 'autopkgtest-pkg-python'
+        else:
+            os.mkdir('debian/tests')
+            with open('debian/tests/control', 'w') as f:
+                f.write('Tests: all\n')
+                f.write('Depends: @\n')
+            with open('debian/tests/all', 'w') as f:
+                f.write('#!/bin/sh\n')
+                f.write('./setup.py test\n')
+            os.chmod('debian/tests/all', 0o755)
+            return 'autopkgtest'
+
+
+def check_testsuite(control):
+    if 'Testsuite' in control:
+        return
+    testsuite_kind = add_testsuite()
+    if testsuite_kind:
+        control['Testsuite'] = testsuite_kind
+
+
+update_control(source_package_cb=check_testsuite)
+
+
+print('Add a basic testsuite.')
+print('Certainty: possible')
+print('Fixed-Lintian-Tags: testsuite-autopkgtest-missing')
