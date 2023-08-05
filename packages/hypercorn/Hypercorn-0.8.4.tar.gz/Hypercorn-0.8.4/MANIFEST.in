@@ -1,0 +1,16 @@
+include CHANGELOG.rst
+include hypercorn/py.typed
+include LICENSE
+include pyproject.toml
+include README.rst
+include setup.cfg
+recursive-include artwork *
+recursive-include hypercorn *.py
+recursive-include tests *.py
+recursive-include tests *.toml
+recursive-include tests *.pem
+recursive-exclude compliance *
+recursive-exclude docs *
+exclude .gitlab-ci.yml
+exclude compliance
+exclude docs
