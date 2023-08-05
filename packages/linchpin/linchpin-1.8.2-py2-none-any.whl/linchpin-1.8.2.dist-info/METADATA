@@ -1,0 +1,95 @@
+Metadata-Version: 2.1
+Name: linchpin
+Version: 1.8.2
+Summary: Ansible-based multi-cloud provisioner
+Home-page: http://linchpin.readthedocs.io/
+Author: samvaran kashyap rallabandi
+Author-email: linchpin@redhat.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: setuptools (>=40.8.0)
+Requires-Dist: pyopenssl (>=17.5.0)
+Requires-Dist: boto (>=2.49.0)
+Requires-Dist: boto3 (>=1.9.96)
+Requires-Dist: apache-libcloud (>=0.20.1)
+Requires-Dist: click (>=7.0)
+Requires-Dist: yamlordereddictloader (>=0.4.0)
+Requires-Dist: ansible (<=2.8.4,>=2.7.1)
+Requires-Dist: six (>=1.10.0)
+Requires-Dist: shade (>=1.30.0)
+Requires-Dist: naked (>=0.1.31)
+Requires-Dist: Cerberus (>=1.2)
+Requires-Dist: tinydb (>=3.12.2)
+Requires-Dist: requests (>=2.21.0)
+Requires-Dist: ipaddress (>=1.0.17)
+Requires-Dist: urllib3 (<1.25,>=1.23)
+Requires-Dist: PyYAML (>=5.1)
+Requires-Dist: jinja2 (>=2.10)
+Requires-Dist: configparser (>=3.5.0)
+Requires-Dist: openshift (<0.8.8,>=0.8.6)
+Requires-Dist: pyasn1 (>=0.1.9)
+Requires-Dist: gitpython (==2.1.11)
+Requires-Dist: future
+Provides-Extra: beaker
+Requires-Dist: beaker-client (>=23.3) ; extra == 'beaker'
+Requires-Dist: python-krbV ; extra == 'beaker'
+Provides-Extra: docker
+Requires-Dist: docker-py (>=1.7.0) ; extra == 'docker'
+Provides-Extra: docs
+Requires-Dist: docutils ; extra == 'docs'
+Requires-Dist: sphinx ; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme ; extra == 'docs'
+Requires-Dist: sphinx-automodapi ; extra == 'docs'
+Provides-Extra: krbv
+Requires-Dist: python-krbV ; extra == 'krbv'
+Provides-Extra: libvirt
+Requires-Dist: libvirt-python (>=3.0.0) ; extra == 'libvirt'
+Requires-Dist: lxml ; extra == 'libvirt'
+Provides-Extra: tests
+Requires-Dist: nose ; extra == 'tests'
+Requires-Dist: mock ; extra == 'tests'
+Requires-Dist: coverage ; extra == 'tests'
+Requires-Dist: flake8 ; extra == 'tests'
+Requires-Dist: pytest (<=4.4.0) ; extra == 'tests'
+Provides-Extra: vmware
+Requires-Dist: PyVmomi (>=6.7.1) ; extra == 'vmware'
+
+LinchPin
+--------
+
+LinchPin provides a command-line interface and Python API for provisioning and
+managing resources across multiple infrastructures. Where multiple
+infrastructure resource types can be defined with a single topology file.
+
+LinchPin can also generate inventory files for use with additional Ansible
+playbooks. These are applied using an inventory layout file.
+
+Contributing and Community Participation
+++++++++++++++++++++++++++++++++++++++++
+
+Developers are encouraged to contribute to the LinchPin project. Please visit
+`Contributing <http://github.com/CentOS-PaaS-SIG/linchpin/tree/develop/CONTRIBUTING.rst>`_
+for details.
+
+* Subscribe and participate on the `LinchPin Mailing List <https://www.redhat.com/mailman/listinfo/linchpin>`_
+* Join the `#linchpin` IRC chat channel on `freenode <https://webchat.freenode.net/?channels=#linchpin>`_
+
+Installation
+++++++++++++
+
+`Installation documentation <http://linchpin.readthedocs.io/en/develop/installation.html>`_
+
+QuickStart
+++++++++++
+
+The `Getting Started Guide <http://linchpin.readthedocs.io/en/develop/getting_started.html>`_ is a quick guide for LinchPin from the Command-Line.
+
+Using LinchPin
++++++++++++++++
+
+Check out the `Getting Started Guide <http://linchpin.readthedocs.io/en/develop/getting_started.html>`_ for a quick guide on how to use LinchPin from the Command-Line.
+
+For API documentation, check out the `Python API Reference <http://linchpin.readthedocs.io/en/develop/libdocs.html>`_.
+
+
+

@@ -1,0 +1,171 @@
+{
+    "res_defs": {
+        "type": "list",
+        "schema": {
+            "anyof": [
+                {
+                    "type": "dict",
+                    "schema": {
+                        "role": {
+                            "type": "string",
+                            "required": true,
+                            "allowed": [
+                                "azure_virtual_network"
+                            ]
+                        },
+                        "resource_group": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "virtual_network_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "address_prefixes": {
+                            "type": "string",
+                            "required": false
+                        }
+                    }
+                },
+                {
+                    "type": "dict",
+                    "schema": {
+                        "role": {
+                            "type": "string",
+                            "required": true,
+                            "allowed": [
+                                "azure_virtual_subnet"
+                            ]
+                        },
+                        "virtual_network_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "subnet_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "resource_group": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "address_prefix": {
+                            "type": "string",
+                            "required": false
+                        }
+                    }
+                },
+                {
+                    "type": "dict",
+                    "schema": {
+                        "role": {
+                            "type": "string",
+                            "required": true,
+                            "allowed": [
+                                "azure_virtual_subnet"
+                            ]
+                        },
+                        "virtual_network_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "subnet_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "resource_group": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "address_prefix": {
+                            "type": "string",
+                            "required": false
+                        }
+                    }
+                },
+                {
+                    "type": "dict",
+                    "schema": {
+                        "role": {
+                            "type": "string",
+                            "required": true,
+                            "allowed": [
+                                "azure_vm"
+                            ]
+                        },
+                        "vm_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "resource_group": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "public_image": {
+                            "type": "dict",
+                            "required": false,
+                            "schema": {
+                                "offer": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "publisher": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "sku": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "required": true
+                                }
+                            }
+                        },
+                        "vm_username": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "vm_size": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "vm_password": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "private_image": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "virtual_network_name": {
+                            "type": "string",
+                            "required": false
+                        }
+                    }
+                },
+                {
+                    "type": "dict",
+                    "schema": {
+                        "role": {
+                            "type": "string",
+                            "required": true,
+                            "allowed": [
+                                "azure_resource_group"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "location": {
+                            "type": "string",
+                            "required": true
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
