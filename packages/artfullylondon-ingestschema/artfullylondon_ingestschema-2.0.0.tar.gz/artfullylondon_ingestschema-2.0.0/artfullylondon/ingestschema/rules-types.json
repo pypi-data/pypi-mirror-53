@@ -1,0 +1,224 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/rules-types.json",
+    "definitions": {
+        "openingOrClosingRuleType": {
+            "type": "string",
+            "enum": [
+                "Day",
+                "Date",
+                "Preset"
+            ]
+        },
+        "openingRules": {
+            "type": "array",
+            "items": {
+                "title": "Opening Rule",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "title": "Rule Type",
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/openingOrClosingRuleType"
+                            }
+                        ]
+                    },
+                    "dateForType": {
+                        "title": "Date Value for Rule Type"
+                    },
+                    "timeFrom": {
+                        "title": "Time From",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/time"
+                            }
+                        ]
+                    },
+                    "timeTo": {
+                        "title": "Time To",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/time"
+                            }
+                        ]
+                    }
+                },
+                "allOf": [
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "Day"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "dateForType": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "basic-types.json#/definitions/day"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "Date"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "dateForType": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "basic-types.json#/definitions/date"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "Preset"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "dateForType": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "basic-types.json#/definitions/datePreset"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "required": [
+                    "type",
+                    "dateForType",
+                    "timeFrom",
+                    "timeTo"
+                ],
+                "additionalProperties": false
+            },
+            "minItems": 1
+        },
+        "closingRules": {
+            "type": "array",
+            "items": {
+                "title": "Closure Rule",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "title": "Rule Type",
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/openingOrClosingRuleType"
+                            }
+                        ]
+                    },
+                    "dateForType": {
+                        "title": "Date Value for Rule Type"
+                    },
+                    "timeFrom": {
+                        "title": "Time From",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/time"
+                            }
+                        ]
+                    },
+                    "timeTo": {
+                        "title": "Time To",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/time"
+                            }
+                        ]
+                    }
+                },
+                "allOf": [
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "Day"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "dateForType": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "basic-types.json#/definitions/day"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "Date"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "dateForType": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "basic-types.json#/definitions/date"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "if": {
+                            "properties": {
+                                "type": {
+                                    "const": "Preset"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "dateForType": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "basic-types.json#/definitions/datePreset"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "required": [
+                    "type",
+                    "dateForType"
+                ],
+                "additionalProperties": false
+            },
+            "minItems": 1
+        }
+    }
+}

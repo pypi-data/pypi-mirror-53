@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/venue-status.json",
+    "type": "object",
+    "properties": {
+        "id": {
+            "title": "Venue ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "version": {
+            "title": "Version",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/version"
+                }
+            ]
+        },
+        "currentVenueEventIds": {
+            "title": "Current Venue Event IDs",
+            "type": "array",
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "basic-types.json#/definitions/pathSegment"
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "id",
+        "version",
+        "currentVenueEventIds"
+    ]
+}
