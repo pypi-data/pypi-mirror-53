@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "mif_input",
+  "title": "Multiplex Immunofluorescence Input Files",
+  "type": "object",
+  "description": "mIF assay input files.",
+  "properties": {
+    "whole_slide_imaging_file": {
+      "$comment": "Digital slide produced from the scanning of conventional glass slides.",
+      "$ref": "artifacts/artifact_image.json"
+    },
+    "roi_annotations": {
+      "$comment": "Text describing region of interest for experiment.",
+      "$ref": "artifacts/artifact_text.json"
+    },
+    "mif_output_summary": {
+      "$comment": "Summary of the results of the experiment.",
+      "$ref": "artifacts/artifact_csv.json"
+    },
+    "regions_of_interest": {
+      "description": "A region of interest (ROI) is a portion of an image which has been analyzed using image processing software.",
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "assays/components/mapping.json" },
+          { "$ref": "assays/components/composite_image.json" }
+        ]
+      }
+    }
+  },
+  "required": ["whole_slide_imaging_file"]
+}
