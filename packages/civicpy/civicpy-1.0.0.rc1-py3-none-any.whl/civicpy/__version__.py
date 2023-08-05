@@ -1,0 +1,10 @@
+__title__ = 'civicpy'
+__description__ = 'CIViC variant knowledgebase analysis toolkit.'
+__url__ = 'http://civicpy.org'
+__short_version__ = '1.0'
+__version__ = '{}.0-rc1'.format(__short_version__)
+# __build__ = 0x021901
+__authors__ = ['Alex H. Wagner', 'Susanna Kiwala']
+__author_email__ = 'help@civicpy.org'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2018-2019 The Griffith Lab'
