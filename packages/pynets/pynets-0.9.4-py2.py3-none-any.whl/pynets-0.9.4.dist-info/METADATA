@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: pynets
+Version: 0.9.4
+Summary: A Fully-Automated Workflow for Reproducible Ensemble Graph Analysis of Functional and Structural Connectomes
+Home-page: https://github.com/dPys/pynets
+Author: Derek Pisner
+Author-email: dpisner@utexas.edu
+License: GNU General Public License v3
+Keywords: pynets
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: Click (>=6.0)
+Requires-Dist: Sphinx (>=1.4.8)
+Requires-Dist: sphinx-argparse (>=0.2.5)
+Requires-Dist: sphinx-rtd-theme (>=0.4.3)
+Requires-Dist: numpydoc (>=0.8.0)
+Requires-Dist: scipy (>=0.19.0)
+Requires-Dist: nipype (>=1.1.0)
+Requires-Dist: numpy (>=1.12.1)
+Requires-Dist: seaborn (>=0.7.1)
+Requires-Dist: matplotlib (>=2.0.0)
+Requires-Dist: nilearn (>=0.5.0)
+Requires-Dist: pandas (>=0.24.2)
+Requires-Dist: networkx (>=2.0)
+Requires-Dist: nibabel (>=2.1.0)
+Requires-Dist: scikit-learn (>=0.18.2)
+Requires-Dist: pathlib (>=1.0.1)
+Requires-Dist: setuptools (>=39.0.1)
+Requires-Dist: configparser (>=3.5.0)
+Requires-Dist: PyYAML (>=3.12)
+Requires-Dist: boto3 (>=1.9.111)
+Requires-Dist: colorama (>=0.3.9)
+Requires-Dist: pybids (>=0.6.4)
+Requires-Dist: graspy (>=0.0.2)
+Requires-Dist: python-louvain (>=0.13)
+Provides-Extra: datalad
+Requires-Dist: datalad ; extra == 'datalad'
+Provides-Extra: doc
+Requires-Dist: nbsphinx ; extra == 'doc'
+Requires-Dist: packaging ; extra == 'doc'
+Requires-Dist: pydot (>=1.2.3) ; extra == 'doc'
+Requires-Dist: pydotplus ; extra == 'doc'
+Requires-Dist: sphinx (>=1.5.3) ; extra == 'doc'
+Requires-Dist: sphinx-argparse ; extra == 'doc'
+Requires-Dist: sphinx-rtd-theme ; extra == 'doc'
+
+UNKNOWN
+
+
