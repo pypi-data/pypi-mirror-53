@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "sushi-allergy-parser"
+version = "0.1.2"
+description = "sushi-allergy-parser is a parser for allergy infomation document of japanese conveyor-belt sushi chain. "
+readme = "README.md"
+authors = ["t3yamoto <3yamoto.dev@gmail.com>"]
+homepage = "https://github.com/t3yamoto/sushi-allergy-parser"
+repository = "https://github.com/t3yamoto/sushi-allergy-parser"
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    'Programming Language :: Python :: 3',
+    "Programming Language :: Python :: 3.7",
+    "Topic :: Utilities",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+tabula-py = "^1.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+black = { version="*", allows-prereleases = true }
+pylint = "^2.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
