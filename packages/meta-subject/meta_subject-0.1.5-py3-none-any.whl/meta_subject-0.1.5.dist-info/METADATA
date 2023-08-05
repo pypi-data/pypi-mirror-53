@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: meta-subject
+Version: 0.1.5
+Summary: Subject/Participant models for meta/edc.
+Home-page: https://github.com/meta-trial/meta-subject
+Author: Erik van Widenfelt
+Author-email: ew2789@gmail.com
+License: GPL license, see LICENSE
+Keywords: django meta edc
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.7
+Requires-Dist: django-collect-offline
+Requires-Dist: django-collect-offline-files
+Requires-Dist: edc-action-item
+Requires-Dist: edc-appointment
+Requires-Dist: edc-consent
+Requires-Dist: edc-form-describer
+Requires-Dist: edc-form-label
+Requires-Dist: edc-model-admin
+Requires-Dist: edc-notification
+Requires-Dist: edc-offstudy
+Requires-Dist: edc-reportable
+Requires-Dist: edc-subject-dashboard
+Requires-Dist: meta-lists
+
+|pypi| |travis| |codecov| |downloads|
+
+meta-subject
+------------
+
+
+Subject/Participant models
+
+.. |pypi| image:: https://img.shields.io/pypi/v/meta-subject.svg
+    :target: https://pypi.python.org/pypi/meta-subject
+
+.. |travis| image:: https://travis-ci.com/meta-trial/meta-subject.svg?branch=develop
+    :target: https://travis-ci.org/meta-trial/meta-subject
+
+.. |codecov| image:: https://codecov.io/gh/meta-trial/meta-subject/branch/develop/graph/badge.svg
+  :target: https://codecov.io/gh/meta-trial/meta-subject
+
+.. |downloads| image:: https://pepy.tech/badge/meta-subject
+   :target: https://pepy.tech/project/meta-subject
+
+
+
