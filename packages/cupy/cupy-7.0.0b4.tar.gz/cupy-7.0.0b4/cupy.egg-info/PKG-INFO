@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: cupy
+Version: 7.0.0b4
+Summary: CuPy: NumPy-like API accelerated with CUDA
+Home-page: https://docs-cupy.chainer.org/
+Author: Seiya Tokui
+Author-email: tokui@preferred.jp
+License: MIT License
+Description: .. image:: https://raw.githubusercontent.com/cupy/cupy/master/docs/image/cupy_logo_1000px.png
+           :width: 400
+        
+        CuPy : NumPy-like API accelerated with CUDA
+        ===========================================
+        
+        `CuPy <https://cupy.chainer.org/>`_ is an implementation of NumPy-compatible multi-dimensional array on CUDA.
+        
+        This package (``cupy``) is a source distribution.
+        For most users, use of pre-build wheel distributions are recommended:
+        
+        - `cupy-cuda101 <https://pypi.org/project/cupy-cuda101/>`_ (for CUDA 10.1)
+        - `cupy-cuda100 <https://pypi.org/project/cupy-cuda100/>`_ (for CUDA 10.0)
+        - `cupy-cuda92 <https://pypi.org/project/cupy-cuda92/>`_ (for CUDA 9.2)
+        - `cupy-cuda91 <https://pypi.org/project/cupy-cuda91/>`_ (for CUDA 9.1)
+        - `cupy-cuda90 <https://pypi.org/project/cupy-cuda90/>`_ (for CUDA 9.0)
+        - `cupy-cuda80 <https://pypi.org/project/cupy-cuda80/>`_ (for CUDA 8.0)
+        
+        Please see `Installation Guide <https://docs-cupy.chainer.org/en/latest/install.html>`_ for the detailed instructions.
+        
+Platform: UNKNOWN
+Provides-Extra: doctest
+Provides-Extra: appveyor
+Provides-Extra: travis
+Provides-Extra: stylecheck
+Provides-Extra: setup
+Provides-Extra: docs
+Provides-Extra: test
