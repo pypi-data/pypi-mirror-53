@@ -1,0 +1,10 @@
+add_library(cgshop2020_trivial_triangulation_solver STATIC solver.cpp)
+set_visibility(cgshop2020_trivial_triangulation_solver)
+set_target_properties(cgshop2020_trivial_triangulation_solver PROPERTIES POSITION_INDEPENDENT_CODE On)
+target_link_libraries(cgshop2020_trivial_triangulation_solver PUBLIC
+        CGAL::CGAL CGAL::CGAL_Core Boost::thread cgshop2020_verifier)
+
+add_library(cgshop2020_trivial_triangulation_solver_module MODULE python_interface.cpp)
+set_visibility(cgshop2020_trivial_triangulation_solver_module)
+target_link_libraries(cgshop2020_trivial_triangulation_solver_module
+        PUBLIC CGAL::CGAL CGAL::CGAL_Core Boost::thread cgshop2020_verifier cgshop2020_trivial_triangulation_solver)
