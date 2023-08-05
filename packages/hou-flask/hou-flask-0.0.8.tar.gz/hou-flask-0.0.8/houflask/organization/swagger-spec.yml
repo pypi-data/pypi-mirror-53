@@ -1,0 +1,309 @@
+openapi: 3.0.0
+
+servers:
+  - description: For local dev only
+    url: /v1
+
+info:
+  description: A cool tool
+  title: OKR Tool
+  version: 0.1.0
+
+paths:
+  /account-self/organization-accounts:
+    get:
+      operationId: houflask.organization.views.organization.get_organization_accounts_for_own_account
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountOrganizationList'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /account-self/organizations:
+    get:
+      operationId: houflask.organization.views.organization.get_organizations_for_own_account
+      responses:
+        '200':
+          $ref: '#/components/responses/OrganizationList'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /organization:
+    get:
+      operationId: houflask.organization.views.organization.get_all
+      parameters:
+        - in: query
+          name: name_filter
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrganizationList'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      summary: Get All Organizations
+    post:
+      operationId: houflask.organization.views.organization.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrganization'
+        description: An organization sans id
+        required: true
+      responses:
+        '201':
+          $ref: '#/components/responses/Organization'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      summary: Create a new organization
+  /organization/name:
+    get:
+      operationId: houflask.organization.views.organization.organization_name_available
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            $ref: '#/components/schemas/OrganizationName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  available:
+                    type: boolean
+                required:
+                  - available
+                type: object
+          description: Whether the org name is available
+        '500':
+          $ref: '#/components/responses/ServerError'
+  '/organization/{organization_id}':
+    get:
+      operationId: houflask.organization.views.organization.get_org
+      parameters:
+        - $ref: '#/components/parameters/OrganizationId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Organization'
+    put:
+      operationId: houflask.organization.views.organization.update
+      parameters:
+        - $ref: '#/components/parameters/OrganizationId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+        description: The updated organization
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Organization'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /organization/{organization_id}/members:
+    get:
+      operationId: houflask.organization.views.organization.get_accounts_for_org
+      parameters:
+        - in: query
+          name: name_filter
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/OrganizationId'
+        - $ref: '#/components/parameters/PaginationPageSize'
+        - $ref: '#/components/parameters/PaginationPage'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountOrganizationList'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      summary: Gets all of the accounts for an organization
+  '/organization/{organization_id}/members/{account_id}':
+    put:
+      operationId: houflask.organization.views.organization.upsert_account_org
+      summary: Add an account to an organization
+      parameters:
+        - $ref: '#/components/parameters/OrganizationId'
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationMember'
+      responses:
+        '200':
+          $ref: '#/components/responses/OrganizationMember'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      operationId: houflask.organization.views.organization.remove_account_org
+      summary: Remove an account from an organization
+      parameters:
+        - $ref: '#/components/parameters/OrganizationId'
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '204':
+          description: Successfully removed an account from an organization
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  parameters:
+    OrganizationId:
+      in: path
+      name: organization_id
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+    PaginationPage:
+      in: query
+      name: page
+      required: true
+      schema:
+        minimum: 0
+        type: integer
+    PaginationPageSize:
+      in: query
+      name: page_size
+      required: true
+      schema:
+        maximum: 1000
+        minimum: 1
+        type: integer
+    AccountId:
+      in: path
+      name: account_id
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+  responses:
+    AccountOrganizationList:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountOrganizationList'
+      description: A List of Accounts
+    Organization:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Organization'
+      description: An Organization
+    OrganizationList:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationList'
+      description: A list of organizations
+    OrganizationMember:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrganizationMember'
+      description: A relationship between an account and an organization
+    ServerError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServerErrorMessage'
+      description: Something went wrong.  Please try again later
+  schemas:
+    AccountOrganization:
+      properties:
+        account_id:
+          $ref: '#/components/schemas/UUID'
+        organization_id:
+          $ref: '#/components/schemas/UUID'
+        username:
+          type: string
+        role_name:
+          $ref: '#/components/schemas/RoleName'
+      required:
+        - account_id
+        - username
+        - organization_id
+        - role_name
+      type: object
+    AccountOrganizationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountOrganization'
+    DepartmentHierarchy:
+      properties:
+        children:
+          items:
+            $ref: '#/components/schemas/DepartmentHierarchy'
+          type: array
+        id:
+          $ref: '#/components/schemas/UUID'
+      required:
+        - id
+        - children
+      type: object
+    NewOrganization:
+      properties:
+        active:
+          title: Active
+          type: boolean
+        name:
+          $ref: '#/components/schemas/OrganizationName'
+      required:
+        - name
+        - active
+      type: object
+    ObjectWithId:
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+      required:
+        - id
+      type: object
+    Organization:
+      allOf:
+        - $ref: '#/components/schemas/NewOrganization'
+        - $ref: '#/components/schemas/ObjectWithId'
+    OrganizationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Organization'
+    OrganizationMember:
+      type: object
+      required:
+        - organization_id
+        - account_id
+        - role_name
+      properties:
+        organization_id:
+          $ref: '#/components/schemas/UUID'
+        account_id:
+          $ref: '#/components/schemas/UUID'
+        username:
+          type: string
+        role_name:
+          $ref: '#/components/schemas/RoleName'
+    OrganizationName:
+      pattern: '^[0-9a-zA-Z._''-]{2,32}$'
+      title: Name
+      type: string
+    RoleName:
+      title: Role
+      type: string
+      pattern: '^[0-9a-zA-Z._-]{4,32}$'
+    ServerErrorMessage:
+      properties:
+        error_type:
+          type: string
+        message:
+          type: string
+      required:
+        - message
+        - error_type
+      type: object
+    UUID:
+      format: uuid
+      type: string
