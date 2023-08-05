@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: HeliosEthernetSilaaCooling
+Version: 1.0.2
+Summary: This package is designed to control a Helios KWL EC 170 W via Modbus TCP/IP
+Home-page: https://gogs.es-lab.de/SilaaCooling/Simulationsmodell_SilaaCooling/src/master/Helios%20Modbus
+Author: ['Alexander Teubert', 'Stefanie Fiedler']
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Requires-Python: >=3.5.2
+Description-Content-Type: text/markdown
+Requires-Dist: EasyModbusSilaaCooling
+Requires-Dist: pyserial
+
+# HeliosEthernetSilaaCooling
+
+This package was written to set and read the different control-values of a
+Helios KWL EC 170 W over Modbus TCP/IP.
+
+It uses the module "easymodbus_SilaaCooling" which is a modified package based
+on the package "EasyModbus" by Stefan Rossmann from "Rossmann Engneering".
+
+If you want to support the original release by Stefan Rossmann, check out his
+github under
+[Github-flavored Markdown](https://github.com/rossmann-engineering/EasyModbusTCP.PY)
+or his website http://easymodbustcp.net/en/
+
+For more information and support visit the given gogs-repository under "https://gogs.es-lab.de/SilaaCooling/Simulationsmodell_SilaaCooling/src/master/Helios%20Modbus"
+
+
