@@ -1,0 +1,14 @@
+{
+    "PROJECT_NAME": "web_app_sanhe",
+    "STAGE": "dev",
+    "AWS_PROFILE": "rdso_sandbox",
+    "AWS_ACCOUNT_ALIAS": "rdso-lab",
+    "S3_BUCKET_FOR_CF": "rdso-lab-cf-template",
+    "VPC_CIDR_ID": "100",
+    "N_PUBLIC_SUBNET": 3,
+    "N_PRIVATE_SUBNET": 3,
+    "USE_NAT_GW_PER_PRIVATE_SUBNET_FLAG": false,
+    "TIER_LIST_TO_DEPLOY": [
+        "T1VPC"
+    ]
+}
