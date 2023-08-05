@@ -1,0 +1,130 @@
+[tool.poetry]
+name = "scrap2rst"
+version = "0.3.0"
+description = "Converting scrapbox syntax into reStructuredText"
+authors = ["shimizukawa <shimizukawa@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+include = ["CHANGELOG.rst"]
+homepage = "https://github.com/shimizukawa/scrap2rst"
+repository = "https://github.com/shimizukawa/scrap2rst"
+documentation = "https://github.com/shimizukawa/scrap2rst/blob/master/README.rst"
+keywords = ["markup", "scrapbox", "reStructuredText", "reST"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Developers",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: BSD",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Unix",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Topic :: Utilities",
+    "Topic :: Text Processing :: Markup",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = ">=3.0"
+twine = ">=1.13"
+towncrier = ">=19.2"
+tox = "^3.12"
+
+[tool.poetry.scripts]
+scrap2rst = "scrap2rst.cmd:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.towncrier]
+package = "scrap2rst"
+package_dir = "."
+filename = "CHANGELOG.rst"
+directory = "changelog/"
+title_format = "{version} ({project_date})"
+template = "changelog/_template.rst"
+
+  [[tool.towncrier.type]]
+  directory = "removal"
+  name = "Feature Removed"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "deprecation"
+  name = "Deprecation"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "feature"
+  name = "New Feature"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "bugfix"
+  name = "Bug Fix"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "vendor"
+  name = "Dependencies Update"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "doc"
+  name = "Documentation"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "trivial"
+  name = "Trivial"
+  showcontent = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = flake8,mypy,py37
+skipsdist = True
+
+[testenv]
+skip_install = true
+
+[testenv:py37]
+basepython = python3.7
+whitelist_externals = poetry
+commands =
+    poetry install -v
+    poetry run pytest {posargs}
+
+[testenv:mypy]
+deps = mypy
+basepython = python3.7
+commands = mypy scrap2rst
+
+[testenv:flake8]
+deps =
+    flake8>=3.7.7,<3.8
+    flake8-blind-except
+    flake8-import-order
+    mccabe
+    radon
+setenv =
+    PYTHONDONTWRITEBYTECODE = 1
+commands = flake8 scrap2rst
+
+[testenv:readme]
+basepython = python3.7
+whitelist_externals =
+    poetry
+    twine
+commands =
+    poetry build -f wheel
+    twine check dist/*
+"""
