@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: ade-cli
+Version: 3.5.1
+Summary: Agile Development Environment
+Home-page: https://gitlab.com/ApexAI/ade-cli
+Author: Ternaris
+Author-email: team@ternaris.com
+Maintainer: Apex.AI
+Maintainer-email: tooling@apex.ai
+License: Apache-2.0
+Project-URL: Code, https://gitlab.com/ApexAI/ade-cli
+Project-URL: Issue tracker, https://gitlab.com/ApexAI/ade-cli/issues
+Description: ===========================
+        ADE Development Environment
+        ===========================
+        
+        The ADE Development Environment (ADE) uses docker and gitlab to
+        manage environments of per project development tools and optional
+        volume images. Volume images may contain additional development tools
+        or released software versions. It enables easy switching of branches
+        for all images.
+        
+        For a public project using ADE as an example, see `Autoware.Auto
+        <https://gitlab.com/AutowareAuto/AutowareAuto>`_.
+        
+Platform: UNKNOWN
+Requires-Python: >=3.5.2
+Provides-Extra: develop
