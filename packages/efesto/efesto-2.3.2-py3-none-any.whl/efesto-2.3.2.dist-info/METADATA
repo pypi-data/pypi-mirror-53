@@ -1,0 +1,116 @@
+Metadata-Version: 2.1
+Name: efesto
+Version: 2.3.2
+Summary: RESTful (micro)server that can generate an API in minutes.
+Home-page: https://github.com/strangemachines/efesto
+License: GPL-3.0
+Author: Jacopo Cascioli
+Author-email: jacopo@jacopocascioli.com
+Requires-Python: >=3.6,<4.0
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Dist: bassoon (>=1.0,<1.1)
+Requires-Dist: click (>=7.0,<7.1)
+Requires-Dist: falcon (>=2.0,<2.1)
+Requires-Dist: falcon-cors (>=1.1.7,<1.2.0)
+Requires-Dist: loguru (>=0.3,<0.4)
+Requires-Dist: msgpack (>=0.6,<0.7)
+Requires-Dist: peewee (>=3.9,<3.10)
+Requires-Dist: psycopg2-binary (>=2.7,<2.8)
+Requires-Dist: pyjwt (>=1.6.4,<1.7.0)
+Requires-Dist: python-rapidjson (>=0.6,<0.7)
+Requires-Dist: ruamel.yaml (>=0.15,<0.16)
+Project-URL: Repository, https://github.com/strangemachines/efesto
+Description-Content-Type: text/markdown
+
+# Efesto
+
+[![Pypi](https://img.shields.io/pypi/v/efesto.svg?maxAge=600&style=for-the-badge)](https://pypi.python.org/pypi/efesto)
+[![Travis build](https://img.shields.io/travis/strangemachines/efesto.svg?maxAge=600&style=for-the-badge)](https://travis-ci.org/strangemachines/efesto)
+[![Codacy grade](https://img.shields.io/codacy/grade/9a18a3f98f654fef8b6ff86e93f31b56.svg?style=for-the-badge)](https://app.codacy.com/app/strangemachines/efesto)
+[![Codacy coverage](https://img.shields.io/codacy/coverage/9a18a3f98f654fef8b6ff86e93f31b56.svg?style=for-the-badge)](https://app.codacy.com/app/strangemachines/efesto)
+[![Docs](https://img.shields.io/badge/docs-docs-brightgreen.svg?style=for-the-badge&cacheSeconds=3600)](https://efesto.strangemachines.io)
+
+A micro REST API meant to be used almost out of the box with other
+microservices.
+
+It kickstarts you by providing a simple way to build a backend and expose it.
+Efesto uses PostgreSQL and JWTs for authentication.
+
+Efesto follows the UNIX principle of doing one thing and well, leaving you the
+freedom of choice about other components (authentication, caching, rate-limiting,
+load balancer).
+
+## Installing
+Install efesto, possibly in a virtual environment:
+
+```sh
+pip install efesto
+```
+
+Create a postgresql database and export the database url:
+
+```sh
+export DB_URL=postgres://postgres:postgres@localhost:5432/efesto
+```
+
+Export the jwt secret:
+
+```sh
+export JWT_SECRET=secret
+```
+
+Populate the db:
+
+```sh
+efesto install
+```
+
+Create an admin:
+
+```sh
+efesto create users tofu --superuser
+```
+
+Now you can start efesto, with either uwsgi or gunicorn:
+
+```sh
+gunicorn "efesto.App:App.run()"
+```
+
+Efesto should now be running:
+
+
+```sh
+curl http://localhost:8000/version
+```
+
+Read the complete [documentation](http://efesto.strangemachines.io) to find out more.
+
+## Docker
+
+Docker images are available in the hub:
+
+- `strangemachines/efesto:latest`
+- `strangemachines/efesto:2.3`
+- `strangemachines/efesto:2.2`
+- `strangemachines/efesto:2.1`
+
+## Performance
+
+Efesto performs at about 200 requests/second on a small digital ocean
+droplet, for requests that include JWT authentication, fetching data and
+printing out JSON.
+
+You have seen 100k requests benchmarks, but don't be fooled:
+most benchmarks from authors are made so that their package comes to the top
+and do not reflect real conditions.
+
