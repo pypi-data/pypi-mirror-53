@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: xe2layout
+Version: 2019.9.30
+Summary: UNKNOWN
+Home-page: https://gitlab.com/guichet-entreprises.fr/libs/layout
+Author: Christian Cougourdan
+Author-email: florent.tournois@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Description-Content-Type: text/markdown
+Requires-Dist: pymdtools
+Requires-Dist: pyyaml
+Requires-Dist: beautifulsoup4
+Requires-Dist: jinja2
+Requires-Dist: html5lib
+Requires-Dist: md2py
+Requires-Dist: polib
+Requires-Dist: appdirs
+Requires-Dist: upref
+Requires-Dist: python-gitlab
+
+
+# Layout
+
+Layout template for all our applications.
+
+## Working with static base layout
+
+To build static base layout, without scripts, styles and other resources for each domain, execute command line :
+```
+npm install
+```
+
+To start local server, execute command line :
+```
+npm start
+```
+
+It will load three web server :
+- base HTTPS redirection server on local port [9001](http://localhost:9001/)
+- main developpement server on local HTTPS port [443](https://localhost/) whose base directory is `dist`
+- static resource server on local port [1443](https://localhost:1443/) whose base directory is `dist/assets/<xxx>` where `<xxx>` matches the domain. The domain is present into HTTP header `X-GE-Domain`
+
+
+
