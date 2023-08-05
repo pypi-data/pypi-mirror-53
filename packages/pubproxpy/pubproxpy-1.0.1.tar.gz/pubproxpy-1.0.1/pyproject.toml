@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "pubproxpy"
+version = "1.0.1"
+description = "An easy to use Python wrapper for pubproxy.com"
+license = "GPL-3.0"
+authors = ["LovecraftianHorror <LovecraftianHorror@pm.me>"]
+readme = "README.md"
+repository = "https://github.com/LovecraftianHorror/pubproxpy"
+keywords = ["proxy api", "pubproxy", "public proxy", "pubproxy api", "scraping"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+requests = "^2.22"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 79
