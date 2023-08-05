@@ -1,0 +1,6 @@
+[console_scripts]
+gqlmod = gqlmod.cli:cli
+
+[graphql_providers]
+starwars = gqlmod_starwars:StarWarsProvider
+
