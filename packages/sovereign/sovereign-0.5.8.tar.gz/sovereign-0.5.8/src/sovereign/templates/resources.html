@@ -1,0 +1,54 @@
+{%- extends 'base.html' %}
+{%- import 'ul_filter.html' as filter %}
+{% block title %}{{ resource_type|capitalize }}{% endblock %}
+
+{% block head %}
+{{ filter }}
+{% endblock %}
+
+
+{%- block body %}
+<h1>{{ resource_type|capitalize }}</h1>
+<label for="search_filter">
+    <input
+            type="text"
+            id="search_filter"
+            onkeyup="filter_results('search_filter', 'resources')"
+            placeholder="Filter resources by any string"
+    >
+</label>
+<ul id="resources">
+  {% for resource in resources|selectattr('get') %}
+      {% set name = resource.get('name') or resource['cluster_name'] %}
+    <li id="resources">
+        <a href="/ui/{{ resource_type }}/{{ name }}">
+            <strong>{{ name }}</strong>
+        </a>
+    </li>
+  {% endfor %}
+</ul>
+
+{% if resource_type == 'routes' %}
+    <h3>Virtual Hosts</h3>
+    <label for="search_filter">
+        <input
+                type="text"
+                id="search_filter_virtual_hosts"
+                onkeyup="filter_results('search_filter_virtual_hosts', 'resources_virtual_hosts')"
+                placeholder="Filter resources by any string"
+        >
+    </label>
+        <ul id="resources_virtual_hosts">
+          {% for resource in resources|selectattr('get') %}
+              {% for virtualhost in resource['virtual_hosts'] %}
+                  <li id="resources_virtual_hosts">
+                      <a href="/ui/routes/{{ resource['name'] }}/{{ virtualhost['name'] }}">
+                          <strong>{{ virtualhost['name'] }}</strong>
+                      </a>
+                  </li>
+              {% endfor %}
+          {% endfor %}
+        </ul>
+{% endif %}
+{% endblock -%}
+
