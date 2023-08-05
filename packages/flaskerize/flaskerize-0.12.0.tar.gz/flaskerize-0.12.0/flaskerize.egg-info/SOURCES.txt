@@ -1,0 +1,130 @@
+LICENSE
+MANIFEST.in
+README.md
+app.py
+pytest.ini
+setup.py
+bin/fz
+flaskerize/__init__.py
+flaskerize/attach.py
+flaskerize/custom_functions.py
+flaskerize/exceptions.py
+flaskerize/fileio.py
+flaskerize/generate.py
+flaskerize/parser.py
+flaskerize/render.py
+flaskerize/utils.py
+flaskerize.egg-info/PKG-INFO
+flaskerize.egg-info/SOURCES.txt
+flaskerize.egg-info/dependency_links.txt
+flaskerize.egg-info/requires.txt
+flaskerize.egg-info/top_level.txt
+flaskerize/__pycache__/__init__.cpython-37.pyc
+flaskerize/__pycache__/attach.cpython-37.pyc
+flaskerize/__pycache__/attach_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/custom_functions.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/custom_functions.cpython-37.pyc
+flaskerize/__pycache__/custom_functions_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/exceptions.cpython-37.pyc
+flaskerize/__pycache__/fileio.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/fileio.cpython-37.pyc
+flaskerize/__pycache__/fileio_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/fs.cpython-37.pyc
+flaskerize/__pycache__/fs_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/generate.cpython-37.pyc
+flaskerize/__pycache__/generate_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/parser.cpython-37.pyc
+flaskerize/__pycache__/parser_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/render.cpython-37.pyc
+flaskerize/__pycache__/render_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/__pycache__/renderer.cpython-37.pyc
+flaskerize/__pycache__/utils.cpython-37.pyc
+flaskerize/__pycache__/utils_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/global/__init__.py
+flaskerize/global/generate.json
+flaskerize/global/schema.json
+flaskerize/schematics/README.md
+flaskerize/schematics/__init__.py
+flaskerize/schematics/flask-api.png
+flaskerize/schematics/__pycache__/__init__.cpython-37.pyc
+flaskerize/schematics/__pycache__/test_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/schematics/app/run.py
+flaskerize/schematics/app/schema.json
+flaskerize/schematics/app/__pycache__/custom_functions.cpython-37.pyc
+flaskerize/schematics/app/__pycache__/run.cpython-37.pyc
+flaskerize/schematics/app/files/{{ name }}.py.template
+flaskerize/schematics/entity/custom_functions.py
+flaskerize/schematics/entity/run.py
+flaskerize/schematics/entity/schema.json
+flaskerize/schematics/entity/__pycache__/custom_functions.cpython-37.pyc
+flaskerize/schematics/entity/__pycache__/run.cpython-37.pyc
+flaskerize/schematics/entity/files/{{ name }}.template/__init__.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/controller.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/controller_test.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/interface.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/interface_test.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/model.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/model_test.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/schema.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/schema_test.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/service.py.template
+flaskerize/schematics/entity/files/{{ name }}.template/service_test.py.template
+flaskerize/schematics/flask-api/custom_functions.py
+flaskerize/schematics/flask-api/run.py
+flaskerize/schematics/flask-api/schema.json
+flaskerize/schematics/flask-api/__pycache__/custom_functions.cpython-37.pyc
+flaskerize/schematics/flask-api/__pycache__/run.cpython-37.pyc
+flaskerize/schematics/flask-api/files/.gitignore
+flaskerize/schematics/flask-api/files/.pytest_cache/.gitignore
+flaskerize/schematics/flask-api/files/.pytest_cache/CACHEDIR.TAG
+flaskerize/schematics/flask-api/files/.pytest_cache/README.md
+flaskerize/schematics/flask-api/files/.pytest_cache/v/cache/lastfailed
+flaskerize/schematics/flask-api/files/.pytest_cache/v/cache/nodeids
+flaskerize/schematics/flask-api/files/.pytest_cache/v/cache/stepwise
+flaskerize/schematics/flask-api/files/{{ name }}.template/README.md
+flaskerize/schematics/flask-api/files/{{ name }}.template/manage.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/requirements.txt
+flaskerize/schematics/flask-api/files/{{ name }}.template/wsgi.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/__init__.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/app-test.db
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/config.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/routes.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/__pycache__/__init__.cpython-37.pyc
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/test/__init__.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/test/fixtures.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/widget/__init__.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/widget/controller.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/widget/interface.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/widget/model.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/widget/schema.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/app/widget/service.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/commands/__init__.py
+flaskerize/schematics/flask-api/files/{{ name }}.template/commands/seed_command.py
+flaskerize/schematics/flask-plotly/custom_functions.py
+flaskerize/schematics/flask-plotly/run.py
+flaskerize/schematics/flask-plotly/schema.json
+flaskerize/schematics/flask-plotly/files/.gitkeep
+flaskerize/schematics/flask-plotly/files/requirements.txt
+flaskerize/schematics/flask-plotly/files/wsgi.py
+flaskerize/schematics/flask-plotly/files/app/__init__.py
+flaskerize/schematics/flask-plotly/files/app/config.py
+flaskerize/schematics/flask-plotly/files/app/main/__init__.py
+flaskerize/schematics/flask-plotly/files/app/main/view.py
+flaskerize/schematics/flask-plotly/files/app/templates/base.html
+flaskerize/schematics/flask-plotly/files/app/templates/plotly-chart.html
+flaskerize/schematics/schematic/run.py
+flaskerize/schematics/schematic/schema.json
+flaskerize/schematics/schematic/__pycache__/run.cpython-37.pyc
+flaskerize/schematics/schematic/__pycache__/schematic_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/schematics/schematic/files/{{ name }}.template/custom_functions.py.template
+flaskerize/schematics/schematic/files/{{ name }}.template/run.py.template
+flaskerize/schematics/schematic/files/{{ name }}.template/schema.json.template
+flaskerize/schematics/schematic/files/{{ name }}.template/files/.gitkeep
+flaskerize/schematics/setup/__init__.py
+flaskerize/schematics/setup/run.py
+flaskerize/schematics/setup/schema.json
+flaskerize/schematics/setup/__pycache__/__init__.cpython-37.pyc
+flaskerize/schematics/setup/__pycache__/run.cpython-37.pyc
+flaskerize/schematics/setup/__pycache__/schematic_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/schematics/setup/__pycache__/test_test.cpython-37-pytest-5.0.1.pyc
+flaskerize/schematics/setup/files/setup.py.template
