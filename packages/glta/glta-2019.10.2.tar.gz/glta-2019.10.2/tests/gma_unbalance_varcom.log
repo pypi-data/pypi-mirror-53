@@ -1,0 +1,29 @@
+########################################################################
+###Prepare the data for unbalanced longitudinal variances estimation.###
+########################################################################
+***Read the data file***
+Data file: ./tests/phe.unbalance.txt
+NA method: omit
+The column names of data file: ID Sex weak trait
+Note: Variates beginning with a capital letter is converted into factors.
+Individual column: ID
+Time points column: weak
+Trait column: trait
+Code factor variables of the data file: ID Sex
+***Build the design matrix for fixed effect***
+Time dependent fixed effect: Sex
+Time independent fix effect: None
+***Read the inversion of kinship matrix***
+***Build the dedign matrix for random effect***
+Legendre order for additive effects: 3
+Legendre order for permanent environmental effect: 3
+Running time: 8 seconds
+###########################################################
+###Start the unbalanced longitudinal variances estimation###
+###########################################################
+***prepare the MME**
+initial variances: 3.130727502629639 0.0 3.130727502629639 0.0 0.0 3.130727502629639 0.0 0.0 0.0 3.130727502629639 3.130727502629639 0.0 3.130727502629639 0.0 0.0 3.130727502629639 0.0 0.0 0.0 3.130727502629639 3.130727502629639
+***Start the iteration: 1 ***
+This is EM iteration: 1
+EM weight value: 0.82
+Updated variances: 3.0724950486576796 0.09943382378929591 2.808759735739366 -0.03316275261965776 -0.003344507533112074 2.7507211281212167 0.014687195362681526 -0.009419059234336237 -0.0026631470430095914 2.7430866398692064 4.281412977944228 1.3124977568919731 0.9833678387521325 -0.3791734248694953 -0.04012386983895858 0.20714037077371739 0.11612762691290691 -0.1440686937949942 -0.010634691692399991 0.09234798375990838 0.8309636874508728
