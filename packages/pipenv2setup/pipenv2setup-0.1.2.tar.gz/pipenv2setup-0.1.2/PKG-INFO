@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: pipenv2setup
+Version: 0.1.2
+Summary: Library to generate install_requires.py file from pipfile
+Home-page: https://github.com/alanbacon/pipenv2setup
+Author: Alan Bacon
+Author-email: alan@bacontowers.co.uk
+License: UNKNOWN
+Description: ## Description
+        
+        This module can be used to generate a `install_requires.py` file from a `Pipfile`. The array in this file can then be imported into your `setup.py` file and used as the `install_requires` arguments in the `setup` function.
+        
+        
+        ## Install
+        
+        	>>> pipenv install --dev pipenv2setup
+        
+        ## Run
+        
+        	>>> pipenv run python -m pipenv2setup
+        
+        ## Use
+        
+        Create a `setup.py` file that follows this format:
+        
+        ```
+        from setuptools import setup
+        from install_requires import install_requires
+        
+        
+        setup(
+           name='package_name',
+           version='0.1.0',
+           description='Library to do my cool thing',
+           author='Victoria Snellgrove',
+           packages=['package_name'],
+           install_requires=install_requires
+        )
+        ```
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
