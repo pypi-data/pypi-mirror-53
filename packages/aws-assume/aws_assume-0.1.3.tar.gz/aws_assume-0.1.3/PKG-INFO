@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: aws-assume
+Version: 0.1.3
+Summary: AWS session token refreshing daemon
+Author: Dick Marinus
+Author-email: dick@mrns.nl
+Requires-Python: >=3.7,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: boto3 (==1.9.101)
+Requires-Dist: click (==7.0)
+Requires-Dist: yubikey-manager (==2.1.0)
