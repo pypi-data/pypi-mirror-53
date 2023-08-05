@@ -1,0 +1,12 @@
+<div class="docs-actions">
+  {% if prev %}
+  <a href="{{ prev.link|e }}">
+    <i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="上一页：{{ prev.title|striptags }}"></i>
+  </a>
+  {% endif %}
+  {% if next %}
+  <a href="{{ next.link|e }}">
+    <i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="下一页：{{ next.title|striptags }}"></i>
+  </a>
+  {% endif %}
+</div>

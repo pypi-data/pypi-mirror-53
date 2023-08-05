@@ -1,0 +1,35 @@
+/*
+ * ustackdocs.css
+ * ~~~~~~~~~
+ *
+ * Sphinx stylesheet -- ustackdocs theme.
+ *
+ * :copyright: Copyright 2019 by William Huang.
+ * :license: Apache 2.0, see LICENSE for details.
+ *
+ */
+
+/* Header Navigation */
+a.navbar-brand {
+  background: url('../images/logo-full.svg') left no-repeat;
+  background-size: 100% 100%;
+  height: 35px;
+  width: 135px;
+}
+
+@media (min-width: 768px) and (max-width: 1025px) {
+  a.navbar-brand {
+    background: url('../images/logo-vert.svg') left no-repeat;
+    background-size: 100% 100%;
+    margin-left: 0px !important;
+    height: 54px;
+    width: 59px;
+  }
+}
+
+@media (max-width: 767px) {
+  a.navbar-brand {
+    margin-left: 15px;
+  }
+}
+/* End of Header Navigation */
