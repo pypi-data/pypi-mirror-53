@@ -1,0 +1,12 @@
+#!/home/terrencepreilly/.local/share/virtualenvs/darglint-y1wG7EEF/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'darglint==1.0.0a1','console_scripts','darglint'
+__requires__ = 'darglint==1.0.0a1'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('darglint==1.0.0a1', 'console_scripts', 'darglint')()
+    )
