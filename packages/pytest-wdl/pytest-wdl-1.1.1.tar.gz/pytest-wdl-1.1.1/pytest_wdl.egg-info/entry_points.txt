@@ -1,0 +1,15 @@
+[pytest11]
+pytest_wdl = pytest_wdl
+
+[pytest_wdl.data_types]
+bam = pytest_wdl.data_types.bam:BamDataFile
+json = pytest_wdl.data_types.json:JsonDataFile
+vcf = pytest_wdl.data_types.vcf:VcfDataFile
+
+[pytest_wdl.executors]
+cromwell = pytest_wdl.executors.cromwell:CromwellExecutor
+miniwdl = pytest_wdl.executors.miniwdl:MiniwdlExecutor
+
+[pytest_wdl.url_schemes]
+dx = pytest_wdl.url_schemes.dx:DxUrlHandler
+
