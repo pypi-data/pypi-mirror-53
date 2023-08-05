@@ -1,0 +1,167 @@
+stages:
+  - test
+  - package
+  - deploy
+
+
+.test_template: &test_definition
+  script:
+    - .ci/run_tests.sh
+    # The directory the coverage report is different on debian and centos
+    # It should be set by a variable instead
+    - mkdir -p cover_report && mv -f $COVERAGE_DIR cover_report/$CI_JOB_NAME
+  artifacts:
+    paths:
+      - cover_report
+      - public
+    when: always
+    expire_in: 1 week
+
+centos7:
+  <<: *test_definition
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:centos7
+  variables:
+    COVERAGE_DIR: python/cover
+
+slc6:
+  <<: *test_definition
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:slc6
+  variables:
+    COVERAGE_DIR: python/cover
+
+python2.7:
+  <<: *test_definition
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-2.7
+  variables:
+    COVERAGE_DIR: python/cover
+
+python3.5:
+  <<: *test_definition
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.5
+  variables:
+    COVERAGE_DIR: build/lib/cover
+
+python3.6:
+  <<: *test_definition
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.6
+  variables:
+    COVERAGE_DIR: build/lib/cover
+
+python3.7:
+  <<: *test_definition
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.7
+  variables:
+    COVERAGE_DIR: build/lib/cover
+
+# Singularity
+.singularity_template: &singularity_definition
+  <<: *test_definition
+  image: docker:latest
+  tags:
+    # "docker run --privileged" is required to use singularity
+    - docker-privileged
+  before_script:
+    # Mount CVMFS on the host
+    # See: https://cern.service-now.com/service-portal/article.do?n=KB0005851
+    - docker run -d --name cvmfs --pid=host --user 0 --privileged --restart always -v /cvmfsmounts:/cvmfsmounts:rshared gitlab-registry.cern.ch/vcs/cvmfs-automounter:master
+  script:
+    # Run the tests
+    - docker run --rm --privileged -v /cvmfsmounts/cvmfs:/cvmfs:rslave -v $CI_PROJECT_DIR:$CI_PROJECT_DIR -w $CI_PROJECT_DIR $IMAGE_FOR_TESTING .ci/run_tests.sh PATCH_COVERAGE
+
+slc6-singularity:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:slc6-singularity
+    COVERAGE_DIR: python/cover
+
+centos7-singularity:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:centos7-singularity
+    COVERAGE_DIR: python/cover
+
+slc6-singularity-latest:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:slc6-singularity-latest
+    COVERAGE_DIR: python/cover
+
+centos7-singularity-latest:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:centos7-singularity-latest
+    COVERAGE_DIR: python/cover
+
+python-2.7-singularity:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:python-2.7-singularity
+    COVERAGE_DIR: build/lib/cover
+
+python-3.5-singularity:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:python-3.5-singularity
+    COVERAGE_DIR: build/lib/cover
+
+python-3.6-singularity:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:python-3.6-singularity
+    COVERAGE_DIR: build/lib/cover
+
+python-3.7-singularity:
+  <<: *singularity_definition
+  variables:
+    IMAGE_FOR_TESTING: gitlab-registry.cern.ch/lhcb-docker/python-singularity:python-3.7-singularity
+    COVERAGE_DIR: build/lib/cover
+
+# Packaging step
+pack-py3:
+  stage: package
+  only: [tags]
+  dependencies: []
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.7
+  script:
+    - python setup.py sdist --dist-dir public/${CI_PROJECT_NAME,,}
+    - python setup.py bdist_wheel --dist-dir public/${CI_PROJECT_NAME,,}
+  artifacts:
+    paths:
+      - public
+    when: always
+    expire_in: 1 week
+
+pack-py2:
+  stage: package
+  only: [tags]
+  dependencies: []
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-2.7
+  script:
+    - python setup.py bdist_wheel --dist-dir public/${CI_PROJECT_NAME,,}
+  artifacts:
+    paths:
+      - public
+    when: always
+    expire_in: 1 week
+
+
+# see https://gitlab.cern.ch/gitlabci-examples/deploy_eos for the details
+# of the configuration
+deploy-packages:
+  stage: deploy
+  only:
+    - tags
+  dependencies:
+    - pack-py3
+    - pack-py2
+  image: gitlab-registry.cern.ch/ci-tools/ci-web-deployer:latest
+  variables:
+    EOS_PATH: /eos/project/l/lhcbwebsites/www/lhcb-pypi/pool
+  script:
+    - test -z "$EOS_ACCOUNT_USERNAME" -o -z "$EOS_ACCOUNT_PASSWORD" && exit 0 || true
+    # Script that performs the deploy to EOS. Makes use of the variables defined in the project
+    # It will copy the generated content to the folder in EOS
+    - deploy-eos
+  # do not run any globally defined before_script or after_script for this step
+  before_script: []
+  after_script: []
