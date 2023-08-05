@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+toolkity = "~=1.9.0"
+redis = "~=2.9.0"
+custom-redis = "~=3.2.0"
+parsel = "*"
+Scrapy = "~=1.7.0"
+Jinja2 = "*"
+
+[requires]
+python_version = "3.7"
