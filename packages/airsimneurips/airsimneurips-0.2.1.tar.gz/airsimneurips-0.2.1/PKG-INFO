@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: airsimneurips
+Version: 0.2.1
+Summary: Python package for Game of Drones - A NeurIPS 2019 Competition, built on Microsoft AirSim - an open source simulator based on Unreal Engine for autonomous vehicles from Microsoft AI & Research
+Home-page: https://github.com/microsoft/AirSim-NeurIPS2019-Drone-Racing
+Author: Ratnesh Madaan, Matthew Brown, Nicholas Gyde, Sai Vemprala, Shital Shah
+Author-email: ratnesh.madaan@microsoft.com, v-mattbr@microsoft.com, v-nigyde@microsoft.com, sai.vemprala@microsoft.com, shitals@microsoft.com
+License: MIT
+Description: # Python API for AirSim
+        
+        This package contains Python APIs for [Game of Drones: A NeurIPS 2019 Competition](https://github.com/microsoft/AirSim-NeurIPS2019-Drone-Racing), built on [Microsoft AirSim](https://github.com/microsoft/AirSim)
+        
+        ## Dependencies
+        This package depends on `msgpack` and would automatically install `msgpack-rpc-python` (this may need administrator/sudo prompt):
+        ```
+        pip install msgpack-rpc-python
+        ```
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
