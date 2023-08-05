@@ -1,0 +1,186 @@
+{
+    "cudnn": {
+        "benchmark": false,
+        "deterministic": true
+    },
+    "datasets": {
+        "cifar10_train": {
+            "type": "torchvision.datasets.CIFAR10",
+            "params": {
+                "root": "data/cifar/train",
+                "train": true,
+                "download": true
+            },
+            "task": {
+                "type": "thelper.tasks.Classification",
+                "params": {
+                    "class_names": [
+                        "airplane", "car", "bird", "cat", "deer",
+                        "dog", "frog", "horse", "ship", "truck"
+                    ],
+                    "input_key": "0",
+                    "label_key": "1"
+                }
+            }
+        },
+        "cifar10_test": {
+            "type": "torchvision.datasets.CIFAR10",
+            "params": {
+                "root": "data/cifar/test",
+                "train": false,
+                "download": true
+            },
+            "task": {
+                "type": "thelper.tasks.Classification",
+                "params": {
+                    "class_names": [
+                        "airplane", "car", "bird", "cat", "deer",
+                        "dog", "frog", "horse", "ship", "truck"
+                    ],
+                    "input_key": "0",
+                    "label_key": "1"
+                }
+            }
+        }
+    },
+    "loaders": {
+        "batch_size": 32,
+        "train_shuffle": true,
+        "valid_shuffle": true,
+        "test_shuffle": true,
+        "valid_seed": 0,
+        "test_seed": 0,
+        "torch_seed": 0,
+        "numpy_seed": 0,
+        "random_seed": 0,
+        "workers": 4,
+        "pin_memory": false,
+        "drop_last": false,
+        "train_scale": 2.0,
+        "train_augments": {
+            "append": false,
+            "transforms": [
+                {
+                    "operation": "thelper.transforms.Duplicator",
+                    "params": {
+                        "count": 4
+                    }
+                },
+                {
+                    "operation": "Augmentor.Pipeline",
+                    "params": {
+                        "rotate": {"probability": 1, "max_left_rotation": 5, "max_right_rotation": 5},
+                        "flip_left_right": {"probability": 0.5},
+                        "zoom_random": {"probability": 0.5, "percentage_area": 0.8}
+                    },
+                    "target_key": "0",
+                    "linked_fate": false
+                }
+            ]
+        },
+        "eval_augments": {
+            "append": false,
+            "transforms": [
+                {
+                    "operation": "thelper.transforms.Duplicator",
+                    "params": {
+                        "count": 4
+                    }
+                },
+                {
+                    "operation": "Augmentor.Pipeline",
+                    "params": {
+                        "flip_left_right": {"probability": 0.5}
+                    },
+                    "target_key": "0",
+                    "linked_fate": false
+                }
+            ]
+        },
+        "base_transforms": [
+            {
+                "operation": "thelper.transforms.NormalizeMinMax",
+                "params": {
+                    "min": [127, 127, 127],
+                    "max": [255, 255, 255]
+                },
+                "target_key": "0"
+            },
+            {
+                "operation": "thelper.transforms.Resize",
+                "params": {
+                    "dsize": [224, 224]
+                },
+                "target_key": "0"
+            },
+            {
+                "operation": "torchvision.transforms.ToTensor",
+                "target_key": "0"
+            }
+        ],
+        "train_split": {
+            "cifar10_train": 0.8
+        },
+        "valid_split": {
+            "cifar10_train": 0.2
+        },
+        "test_split": {
+            "cifar10_test": 1.0
+        }
+    },
+    "model": {
+        "type": "thelper.nn.mobilenet.MobileNetV2"
+    },
+    "trainer": {
+        "device": "cuda:all",
+        "epochs": 5,
+        "save_freq": 1,
+        "monitor": "accuracy",
+        "use_tbx": true,
+        "display_train": false,
+        "optimization": {
+            "loss": {
+                "type": "torch.nn.CrossEntropyLoss",
+                "params": {}
+            },
+            "optimizer": {
+                "type": "torch.optim.RMSprop",
+                "params": {
+                    "lr": 0.01,
+                    "weight_decay": 0.00004
+                }
+            },
+            "scheduler": {
+                "type": "torch.optim.lr_scheduler.ReduceLROnPlateau",
+                "params": {
+                    "mode": "max",
+                    "factor": 0.1,
+                    "patience": 10,
+                    "verbose": true,
+                    "threshold": 0.0001,
+                    "threshold_mode": "rel"
+                },
+                "step_metric": "accuracy"
+            }
+        },
+        "metrics": {
+            "accuracy": {
+                "type": "thelper.optim.Accuracy",
+                "params": {
+                    "top_k": 1
+                }
+            },
+            "confmat": {
+                "type": "thelper.train.ConfusionMatrix"
+            }
+        },
+        "test_metrics": {
+            "logger": {
+                "type": "thelper.train.ClassifLogger",
+                "params": {
+                    "top_k": 3
+                }
+            }
+        }
+    }
+}

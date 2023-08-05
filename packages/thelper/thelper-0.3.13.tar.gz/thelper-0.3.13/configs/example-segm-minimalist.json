@@ -1,0 +1,69 @@
+{
+    "datasets": {
+        "pascalvoc": {
+            "type": "thelper.data.PASCALVOC",
+            "params": {
+                "root": "data/pascalvoc",
+                "task": "segm",
+                "subset": "trainval",
+                "download": true,
+                "preload": false,
+                "target_labels": ["person"]
+            }
+        }
+    },
+    "loaders": {
+        "batch_size": 1,
+        "base_transforms": [
+            {
+                "operation": "thelper.transforms.NormalizeMinMax",
+                "params": {
+                    "min": [127, 127, 127],
+                    "max": [255, 255, 255]
+                },
+                "target_key": "image"
+            },
+            {
+                "operation": "torchvision.transforms.ToTensor",
+                "target_key": "image"
+            }
+        ],
+        "train_split": {
+            "pascalvoc": 0.9
+        },
+        "valid_split": {
+            "pascalvoc": 0.1
+        }
+    },
+    "model": {
+        "type" : "thelper.nn.fcn.FCN32s"
+    },
+    "trainer": {
+        "epochs": 100,
+        "save_freq": 10,
+        "monitor": "accuracy",
+        "optimization": {
+            "loss": {
+                "type": "torch.nn.CrossEntropyLoss",
+                "weight_distribution": {
+                    "background": 0.1
+                }
+            },
+            "optimizer": {
+                "type": "torch.optim.Adam",
+                "params": {
+                    "lr": 1e-4,
+                    "weight_decay": 1e-6
+                }
+            }
+        },
+        "metrics": {
+            "accuracy": {
+                "type": "thelper.optim.Accuracy",
+                "params": {
+                    "top_k": 1
+                }
+            }
+        }
+    }
+}

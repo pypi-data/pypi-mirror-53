@@ -1,0 +1,32 @@
+name: thelper
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - albumentations
+  - cython
+  - ddt
+  - gitdb
+  - gitpython
+  - lz4
+  - matplotlib
+  - mock
+  - numpy
+  - opencv
+  - pip
+  - pytest
+  - pytest-cov
+  - pytest-mock
+  - pytorch
+  - pyyaml
+  - scikit-learn
+  - shapely
+  - torchvision
+  - tqdm
+  - pip:
+    - augmentor
+    - h5py
+    - imgaug==0.2.5
+    - opencv-python
+    - pynput
+    - tensorboardX
