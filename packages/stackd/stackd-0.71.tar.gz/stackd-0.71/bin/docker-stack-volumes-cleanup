@@ -1,0 +1,7 @@
+#!/bin/sh
+DOCKER_STACK_NAME=$1
+
+docker_volumes=$(docker volume ls -q --filter label=com.docker.stack.namespace=$DOCKER_STACK_NAME)
+if [ -n "$docker_volumes" ]; then
+  docker volume rm -f $docker_volumes
+fi

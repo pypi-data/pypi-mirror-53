@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+   echo "Usage: $(basename "$0") service ..."
+   exit 1
+fi
+
+pids=()
+cleanup()
+{
+   kill "${pids[@]}"
+}
+
+trap cleanup EXIT
+
+while [ $# -ne 0 ]
+do
+    (docker service logs -f "$1")&
+    pids+=($!)
+    shift
+done
+wait

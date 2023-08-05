@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# time out auto kill
+timeoutHandler(){
+  local pid=$1
+  local timeout=$2
+  time=0
+  while [ "$time" -lt "$timeout" ] && [ -n "$pid" -a -e /proc/$pid ]; do
+    time=$((time+1))
+    sleep 1
+  done
+  if [ -n "$pid" -a -e /proc/$pid ]; then
+    (kill $pid 2>&1) >/dev/null
+  fi
+}
+if [ "$1" == "--timeoutHandler" ]; then
+  shift
+  timeoutHandler $@
+  exit
+fi
+trap 'exit 1' TERM
+export SCRIPT_PID=$$
+export SCRIPT_TIMEOUT=30
+$0 --timeoutHandler $SCRIPT_PID $SCRIPT_TIMEOUT &
+timeoutHandlerPID=$!
+
+# actual script
+
+docker stack rm $@
+
+# see https://github.com/moby/moby/issues/30942#issue-207070098
+DEPLOYMENT_NAMESPACE=$1
+
+until [ -z "$(docker service ls --filter label=com.docker.stack.namespace=$DEPLOYMENT_NAMESPACE -q)" ]; do
+  sleep 1
+done
+
+until [ -z "$(docker network ls --filter label=com.docker.stack.namespace=$DEPLOYMENT_NAMESPACE -q)" ]; do
+  sleep 1;
+done
+
+docker_volumes=$(docker volume ls -q --filter label=com.docker.stack.namespace=$DOCKER_STACK_NAME)
+if [ -n "$docker_volumes" ]; then
+  for docker_volume in "$docker_volumes"; do
+    until [ -z "$(docker ps -q -f "volume=${docker_volume}")" ]; do
+      sleep 1;
+    done
+  done
+fi
+
+kill -9 $timeoutHandlerPID
