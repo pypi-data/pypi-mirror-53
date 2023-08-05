@@ -1,0 +1,260 @@
+Metadata-Version: 2.1
+Name: pcb-tools-extension
+Version: 0.9.1
+Summary: Extension for pcb-tools package to panelize gerber files
+Home-page: http://github.com/opiopan/pcb-tools-extension
+Author: Hiroshi Murayama <opiopan@gmail.com>
+Author-email: opiopan@gmail.com
+License: Apache
+Description: pcb-tools-extension
+        ===
+        pcb-tools-extension is a Python library to panelize gerber files.
+        This library is designed based on [pcb-tools](https://github.com/curtacircuitos/pcb-tools) which provides cool functionality to handle PCB such as generationg PCB image from gerber files.
+        
+        pcb-tools-extension adds following function  to pcb-tools.
+        
+        - Rotate PCB data
+        - Write back loaded PCB data (original pcb-tools does not work in some condition)
+        - Merge multiple PCB data
+        - Translate DXF file to PCB data
+        
+        Only RS-274x format and Excellon drill format data can be handled by current version of this library.
+        
+        ## Installation
+        You can install a stable version by following step.
+        
+        ```shell
+        $ pip install pcb-tools-extension
+        ```
+        
+        If you have a intention to try latest developing version, please install as follows.
+        
+        ```shell
+        $ pip install git+https://github.com/opiopan/pcb-tools-extension.git
+        ```
+        
+        ## How to panelize
+        Following code is a example to panelize two top metal layer files.
+        
+        ``` python
+        import gerberex
+        
+        ctx = gerberex.GerberComposition()
+        
+        metal1 = gerberex.read('board1.gtl')
+        ctx.merge(metal1)
+        
+        metal2 = gerberex.read('board2.gtl')
+        metal2.to_metric()
+        metal2.rotate(-20)
+        metal2.offset(30, 0)
+        ctx.merge(metal2)
+        
+        ctx.dump('panelized-board.gtl')
+        ```
+        
+        ```rotate()``` method can be used to rotate PCB data counterclockwise. you have to specify angle in degree.<br>
+        ```offset()``` method can be used to move PCB data. Specified offset values are interpreted according to unit setting of PCB data. In case of the above code, ```board2.gtl``` move to 30mm left since ```to_metric()``` is called.
+        
+        In case of Excellon drill data, you have to use ```DrillCompositon``` instead of ```GerberComposition```.
+        
+        ```python
+        import gerberex
+        
+        ctx = gerberex.DrillComposition()
+        
+        drill1 = gerberex.read('board1.txt')
+        ctx.merge(drill1)
+        
+        drill2 = gerberex.read('board2.txt')
+        drill2.to_metric()
+        drill2.rotate(-20)
+        drill2.offset(30, 0)
+        ctx.merge(drill2)
+        
+        ctx.dump('panelized-board.txt')
+        ```
+        
+        ## DXF file translation
+        
+        ### PCB Outline
+        You can also load a dxf file and handle that as same as RX-274x gerber file or Excellon NC file.<br>
+        This function is useful to generate outline data of pnanelized PCB boad.
+        
+        ```python
+        import gerberex
+        
+        dxf = gerberex.read('outline.dxf')
+        ctx1 = gerberex.GerberComposition()
+        ctx1.merge(dxf)
+        ctx2 = gerberex.DrillComposition()
+        ctx2.merge(dxf)
+        ```
+        Circle object, Arc object, Line object and Polyline object are supported. Other kind of objects in DXF file are ignored when translating to gerber data.
+        
+        You can specify line width (default 0). PCB tools extension will translate DXF primitive shape to RX-274x line or arc sequense using circle aperture with diamater as same as specified line width. <br>
+        
+        ```python
+        import gerberex
+        
+        dxf = gerberex.read('outline.dxf')
+        dxf.to_inch()
+        dxf.width = 0.004
+        dxf.write('outline.gml')
+        ```
+        
+        If ```FT_EXCELLON``` is specified for ```filetype``` argument of ```write()```, Excellon NC data is generated. In this case, Excellon file consists of routing commands using a specified width drill.
+        
+        
+        ```python
+        import gerberex
+        
+        dxf = gerberex.read('outline.dxf')
+        dxf.to_metric()
+        dxf.width = 0.3
+        dxf.write('outline.txt', filetype=dxf.FT_EXCELLON)
+        ```
+        
+        
+        You can also translate DXF closed shape such as circle to RX-274x polygon fill sequence.<br>
+        In order to fill closed shape, ```DM_FILL``` has to be set to ```draw_mode``` property. In this mode, All object except closed shapes listed below are ignored.
+        
+        - circle
+        - closed polyline 
+        - closed path which consists of lines and arcs
+        
+        NOTE: ```DM_FILL``` can be used only to generate RX-274x data, it cannot be used to generate Excellon data.
+        
+        ```python
+        import gerberex
+        
+        dxf = gerberex.read('outline.dxf')
+        dxf.draw_mode = dxf.DM_FILL
+        dxf.write('outline.gml')
+        ```
+        
+        If you want to arrange simple rectangle for PCB outline, ```gerberex.rectangle()``` is better solution. This generate a object representing a rectangle compatible with DXF file object.<br>
+        
+        ```python
+        import gerberex
+        
+        outline = gerberex.rectangle(width=100, height=100, units='metric')
+        outline.write('outline.gml')
+        ```
+        
+        ### Mouse bites
+        
+        <img alt="mouse bites" src="https://raw.githubusercontent.com/wiki/opiopan/pcb-tools-extension/images/mousebites.png" width=200 align="right">
+        
+        
+        If ```DM_MOUSE_BITES``` is specified for ```draw_mode```, filled circles are arranged at equal intervals along a paths consisted of DXF line, arc, circle, and plyline objects. <br>
+        DXF file object in this state can be merged to excellon file also. That means you can arrange mouse bites easily.
+        
+        ```python
+        import gerberex
+        
+        ctx = gerberex.DrillComposition()
+        drill = gerberex.read('drill.txt')
+        ctx.merge(drill)
+        
+        dxf = gerberex.read('mousebites.dxf')
+        dxf.draw_mode = dxf.DM_MOUSE_BITES
+        dxf.to_metric()
+        dxf.width = 0.5
+        dxf.pitch = 1
+        ctx.merge(dxf)
+        
+        ctx.dump('merged_drill.txt')
+        ```
+        
+        ## Panelizing Example
+        This example board image is generated by following scripts from [these source data](https://github.com/opiopan/pcb-tools-extension/tree/master/examples/inputs).
+        
+        - [panelizing script](https://github.com/opiopan/pcb-tools-extension/blob/master/examples/panelize.py)
+        - [imaging script](https://github.com/opiopan/pcb-tools-extension/blob/master/examples/genimage.py)
+        
+        <p align="center">
+        <img alt="description" src="https://raw.githubusercontent.com/wiki/opiopan/pcb-tools-extension/images/panelized.jpg" width=600>
+        </p>
+        
+        ## Notes
+        
+        ### Equivalence of output
+        pcb-tools-extension generate data block stream to focus equivalence of final image, but not focus equivalence of data block sequence.
+        There are some difference between input data and output data as below.
+        
+        - **File Scope Modifier [RS-274x]**<br>
+            Commands that affect entire image and should be specified only once in a file, such as ```MI``` (Mirror Image) command, sometimes cause contradiction when multiple gerber file are merged.<br>
+            For example, when mergeing a file containing ```%MIA1B0*%``` command and a file containing ```%MIA0B1*``` command, which command should remain as output?
+            Of cause, it is impossible that generate correct merged image by specifiing any ```MI``` command.<br>
+            pcb-tools-extension translate coordinate data reflecting these file socpe modifier  to address this probrem, then ommit these modifier command.<br>
+            ```MI```, ```OF```, ```SF```, ```AS```, ```IP```, and ```IR``` are in a this category.
+        
+        - **Coodinate Normalizing [RS-274x, Excellon]**<br>
+            RS-274x specification and Excellon specification allow various notation to express a coordinate. However pcb-tools-extension normalize coordinate notation in order to correct deprecated notation and ease internal process as below.
+            
+            - Relative coordinates are translated to absolute coordinates.
+            - Ommited coordinate values are compensated.
+            - Leading zeros are ommited.
+        
+        - **Single Quadlant mode [RS-274x]**<br>
+            Cercular interpolation coordinate data in single quadlant is difficult to rotate, because circular arc may pass across two quadlants after rotation.<br>
+            In order to avoid this problem, pcb-tools-extension change single quadlant mode coordinates specification to multi quadlangt mode.
+        
+        - **NC controll command [Excellon]**<br>
+            Form histrical reason, Excellon NC controll format is used to specify drill information to PCB fabricator.<br>
+            On the other hand, from PCB fabricator point of view, they don't need information other than geometric information, such as drill speed. Because these NC controll sequence doesn't send to NC machine directly, PCB fabricator import customers excellon NC file to their CAD / CAM to pnaelize and check, then they export NC controll data for their NC machine.<br>
+            pcb-tools-extension ommit all NC command which do not contribute to geometry expression. Specifically, only tool definitions (diametor of drill), tool selections, drilling coordinates, and routing paths are output.
+        
+        - **Unimportant Command [RS-274x, Excellon]**<br>
+            Commands not affecting final image such as comment are ommited.
+        
+        ### Negative image polarity
+        Sometimes, ```%IPNEG*%``` is specified at header of RS-274x file to create negative image. <br>
+        As mentioned [above](#Equivalence%20of%20output), ```IP``` command is ommited when pcb-tools-extension generate output file. In this case, image polarity is nagated by using ```LP``` command. However this generated file doesn't equal to original image since it does'nt contain base dark image.<br>
+        Please merge base dark rectangle explicitly when you handle negative image file as below.
+        
+        ```python
+        import gerberex
+        
+        ctx = gerberex.GerberComposition()
+        base = gerberex.rectangle(width=30, height=30, left=-5, bottom=-5, units='metric')
+        base.draw_mode = base.DM_FILL
+        ctx.merge(base)
+        metal = gerberex.read('negative_image.gtl')
+        ctx.merge(metal)
+        ```
+        
+        ## Limitations
+        
+        ### RS-274x
+        pcb-tools-extension cannot handle all commands that the RS-274x parser implemented in
+        [pcb-tools](https://github.com/curtacircuitos/pcb-tools) doesn't handle so far.<br>
+        From the imaging point of view, pcb-tools-extension has following limitations.
+        
+        - Files contains ```IJ``` and ```IO``` commands, that affect entire image, cannot be handled correctly.
+        - Files contains ```SR``` command to specify repeated pattern cannot be handled correctly.
+        - Aperture block defined by ```AB``` command cannot be handled correctly.
+        
+        ### Excellon
+        pcb-tools-extension extends excellon parser in [pcb-tools](https://github.com/curtacircuitos/pcb-tools) to support routing operation. However following limitations still remain.
+        
+        - User defined stored pattern defined by ```M99``` command cannot be handled.
+        - Canned text specified by ```M97``` command cannot be handled.
+        - Patten defined by ```M25``` command cannot be handled.
+        
+        
+        
+Keywords: pcb gerber tools extension
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Description-Content-Type: text/markdown
