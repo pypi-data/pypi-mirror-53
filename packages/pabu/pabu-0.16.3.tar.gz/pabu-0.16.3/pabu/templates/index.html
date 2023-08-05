@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Pabu</title>
+        <link rel="icon" href="/static/images/pabu-head.png">
+
+        <link rel="stylesheet" href="/static/app.css" />
+    </head>
+    <body>
+        <div id="body"></div>
+
+        {% for desc in javascript_libraries %}
+            <script src="{{desc['url']}}" crossorigin="anonymous" integrity="{{desc['hash']}}"></script>
+        {% endfor %}
+
+        <script>
+            window.appData = {{data|tojson|safe}}
+        </script>
+        <script src="/static/bundle.js?v={{version}}"></script>
+
+        {% if dev_mode: %}
+            <script src="http://localhost:35729/livereload.js"></script>
+        {% endif %}
+    </body>
+</html>
