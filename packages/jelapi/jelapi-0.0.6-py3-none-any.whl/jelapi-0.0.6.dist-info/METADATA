@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: jelapi
+Version: 0.0.6
+Summary: jelapi: A Jelastic API Python library
+Home-page: https://github.com/liip/jelapi
+Author: Didier Raboud
+Author-email: didier.raboud@liip.ch
+License: GPLv3+
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Development Status :: 4 - Beta
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: requests (>=2.16.0)
+
+# jelapi
+
+A Jelastic API Python library
+
+## Installation
+
+    pip3 install jelapi
+
+## Usage
+
+    from jelapi import JelasticAPI
+
+    japi = JelasticAPI(apiurl='your.jelasticserver.test', apitoken='token')
+
+    japi.redeployContainersByGroup(env, dockertag=dockertag, nodeGroup="cp")
+
+
