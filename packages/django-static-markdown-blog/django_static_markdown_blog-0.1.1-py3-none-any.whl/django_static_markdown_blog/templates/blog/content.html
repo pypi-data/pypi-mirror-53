@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static leaflet_gpx %}
+
+{% block css_files %}
+        <link rel="stylesheet" href="{% static 'blog/css/static-markdown-blog.css' %}">
+{% if contains_code %}
+        <link rel="stylesheet" href="{% static 'blog/css/highlight-js/solarized-light.css' %}">
+{% endif %}
+{% if contains_gpx %}{% leaflet_gpx_css %}{% endif %}{% endblock %}
+
+{% block javascript_files %}
+{% if contains_code %}
+        <script src="{% static 'blog/js/highlight-9.15.8.pack.js' %}"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+{% endif %}
+{% if contains_gpx %}{% leaflet_gpx_js %}{% endif %}{% endblock %}
+
+{% block title %}
+{% if breadcrumb %}
+<div class="container-fluid my-4">
+    <nav aria-labelledby="" role="navigation">
+        <ol class="breadcrumb">
+            {% for bc in breadcrumb %}
+            <li class="breadcrumb-item">
+                <a href="{% url 'blog:content' bc.url %}">
+                {{ bc.title }}
+                </a>
+            </li>
+            {% endfor %}
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ content.title }}
+            </li>
+        </ol>
+    </nav>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if content %}
+
+<div class="card blog">
+
+    <div class="card-header blog-header">
+        <h1>{{ content.title }}</h1>
+
+        {% if not content.children %}
+        <small>
+            {{ content.date|date:"d M Y"|lower }}
+        </small>
+        {% endif %}
+    </div>
+
+    <div class="card-body">
+
+        {% if content.content %}
+        <div class="card-text blog-content">
+            {{ content.content|safe }}
+        </div>
+        {% endif %}
+
+        {% if content.children %}
+
+        <ul class="list-group">
+            {% for child in content.children %}
+
+            <li class="list-group-item">
+                <a href="{% url 'blog:content' child.url %}">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <span>
+                            {% if child.icon %}
+                            {% with 'icons/'|add:child.icon|add:'.png' as icon %}
+                            <img src="{% static icon %}" alt="icon" class="icone-16">
+                            {% endwith %}
+                            {% endif %}
+
+                            <strong>
+                                {{ child.title }}
+                            </strong>
+                        </span>
+                        <span class="badge badge-info">
+                            {{ child.date|date:" d/m/Y" }}
+                        </span>
+                    </div>
+                </a>
+            </li>
+
+            {% endfor %}
+        </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% if previous_content or next_content %}
+    <div class="card-footer">
+        <div class="row justify-content-between">
+
+        <div class="col">
+            {% if previous_content %}
+            <a href="{% url 'blog:content' previous_content.url %}">
+                {{ previous_content.title }}
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="col text-right">
+            {% if next_content %}
+            <a href="{% url 'blog:content' next_content.url %}">
+            {{ next_content.title }}
+            </a>
+            {% endif %}
+        </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endif %}
+{% endblock %}
