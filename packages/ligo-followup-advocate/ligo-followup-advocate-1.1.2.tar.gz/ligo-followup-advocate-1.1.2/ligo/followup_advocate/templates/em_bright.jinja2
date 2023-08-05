@@ -1,0 +1,14 @@
+{% from 'macros.jinja2' import evidence_for, probability,
+                               citeskymap_number %}
+{% filter rewrap %}
+{% if subject == 'Update' %}Based on posterior support from parameter
+estimation {{citeskymap_number(skymaps[-1].pipeline, [], [skymaps[-1]])}}, under the
+assumption that the candidate {{gracedb_id}} is astrophysical in origin,
+{% else %}Assuming the candidate is astrophysical in origin, {% endif %}
+there is {{evidence_for(prob_has_ns)}} the lighter compact object having a mass
+< 3 solar masses (HasNS: {{probability(prob_has_ns)}}). Using the
+masses and spins inferred from the signal, there is
+{{evidence_for(prob_has_remnant)}} matter outside the final compact object
+(HasRemnant: {{probability(prob_has_remnant)}}).
+
+{% endfilter %}
