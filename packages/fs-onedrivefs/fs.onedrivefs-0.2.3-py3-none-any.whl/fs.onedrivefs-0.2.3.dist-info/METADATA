@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: fs.onedrivefs
+Version: 0.2.3
+Summary: Pyfilesystem2 implementation for OneDrive using Microsoft Graph API
+Home-page: https://github.com/rkhwaja/fs.onedrivefs
+License: MIT
+Keywords: filesystem,Pyfilesystem2,onedrive
+Author: Rehan Khwaja
+Author-email: rehan@khwaja.name
+Requires-Python: >=3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: fs (>=2.0.6)
+Requires-Dist: requests (>=2.20,<3.0)
+Requires-Dist: requests-oauthlib (>=1.0,<2.0)
+Description-Content-Type: text/x-rst
+
+fs.onedrivefs
+=============
+
+Implementation of pyfilesystem2 file system using OneDrive
+
+.. image:: https://travis-ci.org/rkhwaja/fs.onedrivefs.svg?branch=master
+   :target: https://travis-ci.org/rkhwaja/fs.onedrivefs
+
+.. image:: https://coveralls.io/repos/github/rkhwaja/fs.onedrivefs/badge.svg?branch=master
+   :target: https://coveralls.io/github/rkhwaja/fs.onedrivefs?branch=master
+
+Usage
+=====
+
+.. code-block:: python
+
+  onedriveFS = OneDriveFS(
+    clientId=<your client id>,
+    clientSecret=<your client secret>,
+    token=<token JSON saved by oauth2lib>,
+    SaveToken=<function which saves a new token string after refresh>)
+
+  # onedriveFS is now a standard pyfilesystem2 file system
+
