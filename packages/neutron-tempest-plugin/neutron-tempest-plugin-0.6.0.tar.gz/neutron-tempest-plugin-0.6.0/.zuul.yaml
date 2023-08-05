@@ -1,0 +1,970 @@
+- job:
+    name: neutron-tempest-plugin
+    parent: devstack-tempest
+    abstract: true
+    description: |
+      Perform setup common to all Neutron tempest tests
+    roles:
+      - zuul: openstack/devstack
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/neutron-tempest-plugin
+      - openstack/tempest
+    vars:
+      tempest_concurrency: 4
+      tox_envlist: all
+      network_api_extensions_common: &api_extensions_master
+        - address-scope
+        - agent
+        - allowed-address-pairs
+        - auto-allocated-topology
+        - availability_zone
+        - binding
+        - default-subnetpools
+        - dhcp_agent_scheduler
+        - dns-domain-ports
+        - dns-integration
+        - empty-string-filtering
+        - expose-port-forwarding-in-fip
+        - ext-gw-mode
+        - external-net
+        - extra_dhcp_opt
+        - extraroute
+        - extraroute-atomic
+        - filter-validation
+        - fip-port-details
+        - flavors
+        - floating-ip-port-forwarding
+        - floatingip-pools
+        - ip-substring-filtering
+        - l3-flavors
+        - l3-ha
+        - l3_agent_scheduler
+        - logging
+        - metering
+        - multi-provider
+        - net-mtu
+        - net-mtu-writable
+        - network-ip-availability
+        - network_availability_zone
+        - network-segment-range
+        - pagination
+        - port-resource-request
+        - port-mac-address-regenerate
+        - port-security
+        - port-security-groups-filtering
+        - project-id
+        - provider
+        - qos
+        - qos-bw-minimum-ingress
+        - qos-fip
+        - quotas
+        - quota_details
+        - rbac-policies
+        - rbac-security-groups
+        - router
+        - router-admin-state-down-before-update
+        - router_availability_zone
+        - security-group
+        - segment
+        - service-type
+        - sorting
+        - standard-attr-description
+        - standard-attr-revisions
+        - standard-attr-segment
+        - standard-attr-tag
+        - standard-attr-timestamp
+        - subnet_allocation
+        - subnetpool-prefix-ops
+        - trunk
+        - trunk-details
+        - uplink-status-propagation
+      network_api_extensions_tempest:
+        - dvr
+      devstack_localrc:
+        USE_PYTHON3: true
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_tempest) | join(',') }}"
+      devstack_plugins:
+        neutron: https://opendev.org/openstack/neutron.git
+        neutron-tempest-plugin: https://opendev.org/openstack/neutron-tempest-plugin.git
+      tempest_plugins:
+        - neutron-tempest-plugin
+      devstack_services:
+        tls-proxy: false
+        tempest: true
+        neutron-dns: true
+        neutron-qos: true
+        neutron-segments: true
+        neutron-trunk: true
+        neutron-uplink-status-propagation: true
+        neutron-network-segment-range: true
+        neutron-port-forwarding: true
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            QUOTAS:
+              quota_router: 100
+              quota_floatingip: 500
+              quota_security_group: 100
+              quota_security_group_rule: 1000
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          /$NEUTRON_CORE_PLUGIN_CONF:
+            ml2:
+              type_drivers: flat,geneve,vlan,gre,local,vxlan
+            ml2_type_vlan:
+              network_vlan_ranges: foo:1:10
+            ml2_type_vxlan:
+              vni_ranges: 1:2000
+            ml2_type_gre:
+              tunnel_id_ranges: 1:1000
+          $NEUTRON_L3_CONF:
+            agent:
+              availability_zone: nova
+          $NEUTRON_DHCP_CONF:
+            agent:
+              availability_zone: nova
+          /etc/neutron/api-paste.ini:
+            composite:neutronapi_v2_0:
+              use: call:neutron.auth:pipeline_factory
+              noauth: cors request_id catch_errors osprofiler extensions neutronapiapp_v2_0
+              keystone: cors request_id catch_errors osprofiler authtoken keystonecontext extensions neutronapiapp_v2_0
+        test-config:
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              provider_vlans: foo,
+              agent_availability_zone: nova
+              image_is_advanced: true
+              available_type_drivers: flat,geneve,vlan,gre,local,vxlan
+              provider_net_base_segm_id: 1
+    irrelevant-files: &tempest-irrelevant-files
+      - ^(test-|)requirements.txt$
+      - ^releasenotes/.*$
+      - ^doc/.*$
+      - ^setup.cfg$
+      - ^.*\.rst$
+      - ^neutron/locale/.*$
+      - ^neutron/tests/unit/.*$
+      - ^tools/.*$
+      - ^tox.ini$
+
+- job:
+    name: neutron-tempest-plugin-api
+    parent: neutron-tempest-plugin
+    vars:
+      tempest_test_regex: ^neutron_tempest_plugin\.api
+      devstack_services:
+        neutron-log: true
+      devstack_local_conf:
+        post-config:
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          /$NEUTRON_CORE_PLUGIN_CONF:
+            AGENT:
+              tunnel_types: gre,vxlan
+            network_log:
+              local_output_log_base: /tmp/test_log.log
+
+- job:
+    name: neutron-tempest-plugin-api-queens
+    nodeset: openstack-single-node-xenial
+    parent: neutron-tempest-plugin-api
+    override-checkout: stable/queens
+    vars:
+      branch_override: stable/queens
+      # TODO(slaweq): find a way to put this list of extensions in
+      # neutron repository and keep it different per branch,
+      # then it could be removed from here
+      network_api_extensions_common: &api_extensions_queens
+        - address-scope
+        - agent
+        - allowed-address-pairs
+        - auto-allocated-topology
+        - availability_zone
+        - binding
+        - default-subnetpools
+        - dhcp_agent_scheduler
+        - dns-domain-ports
+        - dns-integration
+        - ext-gw-mode
+        - external-net
+        - extra_dhcp_opt
+        - extraroute
+        - flavors
+        - ip-substring-filtering
+        - l3-flavors
+        - l3-ha
+        - l3_agent_scheduler
+        - logging
+        - metering
+        - multi-provider
+        - net-mtu
+        - net-mtu-writable
+        - network-ip-availability
+        - network_availability_zone
+        - pagination
+        - port-security
+        - project-id
+        - provider
+        - qos
+        - qos-fip
+        - quotas
+        - quota_details
+        - rbac-policies
+        - router
+        - router_availability_zone
+        - security-group
+        - segment
+        - service-type
+        - sorting
+        - standard-attr-description
+        - standard-attr-revisions
+        - standard-attr-timestamp
+        - standard-attr-tag
+        - subnet_allocation
+        - trunk
+        - trunk-details
+      network_api_extensions_tempest:
+        - dvr
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_tempest) | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-api-stein
+    parent: neutron-tempest-plugin-api
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+      # TODO(slaweq): find a way to put this list of extensions in
+      # neutron repository and keep it different per branch,
+      # then it could be removed from here
+      network_api_extensions_common: &api_extensions_stein
+        - address-scope
+        - agent
+        - allowed-address-pairs
+        - auto-allocated-topology
+        - availability_zone
+        - binding
+        - default-subnetpools
+        - dhcp_agent_scheduler
+        - dns-domain-ports
+        - dns-integration
+        - empty-string-filtering
+        - expose-port-forwarding-in-fip
+        - ext-gw-mode
+        - external-net
+        - extra_dhcp_opt
+        - extraroute
+        - filter-validation
+        - fip-port-details
+        - flavors
+        - floatingip-pools
+        - floating-ip-port-forwarding
+        - ip-substring-filtering
+        - l3-flavors
+        - l3-ha
+        - l3_agent_scheduler
+        - logging
+        - metering
+        - multi-provider
+        - net-mtu
+        - net-mtu-writable
+        - network-ip-availability
+        - network_availability_zone
+        - network-segment-range
+        - pagination
+        - port-resource-request
+        - port-mac-address-regenerate
+        - port-security
+        - port-security-groups-filtering
+        - project-id
+        - provider
+        - qos
+        - qos-bw-minimum-ingress
+        - qos-fip
+        - quotas
+        - quota_details
+        - rbac-policies
+        - rbac-security-groups
+        - router
+        - router_availability_zone
+        - security-group
+        - segment
+        - service-type
+        - sorting
+        - standard-attr-description
+        - standard-attr-revisions
+        - standard-attr-segment
+        - standard-attr-tag
+        - standard-attr-timestamp
+        - subnet_allocation
+        - trunk
+        - trunk-details
+        - uplink-status-propagation
+      network_api_extensions_tempest:
+        - dvr
+      devstack_localrc:
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_tempest) | join(',') }}"
+
+- job:
+    name: neutron-tempest-plugin-api-rocky
+    nodeset: openstack-single-node-xenial
+    parent: neutron-tempest-plugin-api
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+      # TODO(slaweq): find a way to put this list of extensions in
+      # neutron repository and keep it different per branch,
+      # then it could be removed from here
+      network_api_extensions_common: &api_extensions_rocky
+        - address-scope
+        - agent
+        - allowed-address-pairs
+        - auto-allocated-topology
+        - availability_zone
+        - binding
+        - default-subnetpools
+        - dhcp_agent_scheduler
+        - dns-domain-ports
+        - dns-integration
+        - empty-string-filtering
+        - expose-port-forwarding-in-fip
+        - ext-gw-mode
+        - external-net
+        - extra_dhcp_opt
+        - extraroute
+        - fip-port-details
+        - flavors
+        - floating-ip-port-forwarding
+        - ip-substring-filtering
+        - l3-flavors
+        - l3-ha
+        - l3_agent_scheduler
+        - logging
+        - metering
+        - multi-provider
+        - net-mtu
+        - net-mtu-writable
+        - network-ip-availability
+        - network_availability_zone
+        - pagination
+        - port-mac-address-regenerate
+        - port-security
+        - port-security-groups-filtering
+        - project-id
+        - provider
+        - qos
+        - qos-fip
+        - quotas
+        - quota_details
+        - rbac-policies
+        - router
+        - router_availability_zone
+        - security-group
+        - segment
+        - service-type
+        - sorting
+        - standard-attr-description
+        - standard-attr-revisions
+        - standard-attr-segment
+        - standard-attr-timestamp
+        - standard-attr-tag
+        - subnet_allocation
+        - trunk
+        - trunk-details
+      network_api_extensions_tempest:
+        - dvr
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_tempest) | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-scenario
+    parent: neutron-tempest-plugin
+    abstract: true
+    description: |
+      Perform setup common to all tempest scenario test jobs.
+    vars:
+      tempest_test_regex: ^neutron_tempest_plugin\.scenario
+      devstack_localrc:
+        PHYSICAL_NETWORK: default
+        DOWNLOAD_DEFAULT_IMAGES: false
+        IMAGE_URLS: "http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-i386-disk.img,https://cloud-images.ubuntu.com/releases/xenial/release/ubuntu-16.04-server-cloudimg-amd64-disk1.img"
+        DEFAULT_IMAGE_NAME: cirros-0.3.4-i386-disk
+        ADVANCED_IMAGE_NAME: ubuntu-16.04-server-cloudimg-amd64-disk1
+        ADVANCED_INSTANCE_TYPE: ds512M
+        ADVANCED_INSTANCE_USER: ubuntu
+        BUILD_TIMEOUT: 784
+      devstack_services:
+        cinder: true
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch
+    parent: neutron-tempest-plugin-scenario
+    timeout: 10000
+    vars:
+      network_api_extensions: *api_extensions_master
+      devstack_localrc:
+        Q_AGENT: openvswitch
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            DEFAULT:
+              enable_dvr: false
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          /$NEUTRON_CORE_PLUGIN_CONF:
+            agent:
+              tunnel_types: vxlan,gre
+            ovs:
+              tunnel_bridge: br-tun
+              bridge_mappings: public:br-ex
+        test-config:
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              available_type_drivers: flat,vlan,local,vxlan
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch-queens
+    parent: neutron-tempest-plugin-scenario-openvswitch
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/queens
+    vars:
+      branch_override: stable/queens
+      network_api_extensions: *api_extensions_queens
+      # TODO(slaweq): remove trunks subport_connectivity test from blacklist
+      # when bug https://bugs.launchpad.net/neutron/+bug/1838760 will be fixed
+      tempest_black_regex: "(^neutron_tempest_plugin.scenario.test_trunk.TrunkTest.test_subport_connectivity)"
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch-rocky
+    parent: neutron-tempest-plugin-scenario-openvswitch
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+      network_api_extensions: *api_extensions_rocky
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch-stein
+    parent: neutron-tempest-plugin-scenario-openvswitch
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+      network_api_extensions: *api_extensions_stein
+      devstack_localrc:
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid
+    parent: neutron-tempest-plugin-scenario
+    timeout: 10000
+    vars:
+      network_api_extensions: *api_extensions_master
+      # TODO(slaweq): remove trunks subport_connectivity test from blacklist
+      # when bug https://bugs.launchpad.net/neutron/+bug/1838760 will be fixed
+      tempest_black_regex: "(^neutron_tempest_plugin.scenario.test_trunk.TrunkTest.test_subport_connectivity)"
+      devstack_localrc:
+        Q_AGENT: openvswitch
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            DEFAULT:
+              enable_dvr: false
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          /$NEUTRON_CORE_PLUGIN_CONF:
+            agent:
+              tunnel_types: vxlan,gre
+            ovs:
+              tunnel_bridge: br-tun
+              bridge_mappings: public:br-ex
+            securitygroup:
+              firewall_driver: iptables_hybrid
+        test-config:
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              available_type_drivers: flat,vlan,local,vxlan
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid-rocky
+    parent: neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+      network_api_extensions: *api_extensions_rocky
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid-stein
+    parent: neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+      network_api_extensions: *api_extensions_stein
+      devstack_localrc:
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+
+- job:
+    name: neutron-tempest-plugin-scenario-linuxbridge
+    parent: neutron-tempest-plugin-scenario
+    timeout: 10000
+    vars:
+      network_api_extensions: *api_extensions_master
+      devstack_localrc:
+        Q_AGENT: linuxbridge
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            DEFAULT:
+              enable_dvr: false
+            AGENT:
+              debug_iptables_rules: true
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          /$NEUTRON_CORE_PLUGIN_CONF:
+            ml2:
+              type_drivers: flat,vlan,local,vxlan
+        test-config:
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              available_type_drivers: flat,vlan,local,vxlan
+              q_agent: linuxbridge
+
+- job:
+    name: neutron-tempest-plugin-scenario-linuxbridge-queens
+    parent: neutron-tempest-plugin-scenario-linuxbridge
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/queens
+    vars:
+      branch_override: stable/queens
+      network_api_extensions: *api_extensions_queens
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+      devstack_local_conf:
+        test-config:
+          # NOTE: ignores linux bridge's trunk delete on bound port test
+          # for queens branch (as https://review.opendev.org/#/c/605589/
+          # fix will not apply for queens branch)
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              q_agent: None
+
+- job:
+    name: neutron-tempest-plugin-scenario-linuxbridge-rocky
+    parent: neutron-tempest-plugin-scenario-linuxbridge
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+      network_api_extensions: *api_extensions_rocky
+      devstack_localrc:
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+      devstack_local_conf:
+        test-config:
+          # NOTE: ignores linux bridge's trunk delete on bound port test
+          # for rocky branch (as https://review.opendev.org/#/c/605589/
+          # fix will not apply for rocky branch)
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              q_agent: None
+
+- job:
+    name: neutron-tempest-plugin-scenario-linuxbridge-stein
+    parent: neutron-tempest-plugin-scenario-linuxbridge
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+      network_api_extensions: *api_extensions_stein
+      devstack_localrc:
+        NETWORK_API_EXTENSIONS: "{{ network_api_extensions | join(',') }}"
+
+- job:
+    name: neutron-tempest-plugin-dvr-multinode-scenario
+    parent: tempest-multinode-full
+    description: |
+        Perform setup for Neutron tempest tests in multinode with DVR scenario
+    roles:
+      - zuul: openstack/devstack
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/neutron-tempest-plugin
+      - openstack/tempest
+    pre-run: playbooks/dvr-multinode-scenario-pre-run.yaml
+    voting: false
+    vars:
+      tempest_concurrency: 4
+      tox_envlist: all
+      tempest_test_regex: ^neutron_tempest_plugin\.scenario
+      network_api_extensions_common: *api_extensions_master
+      network_api_extensions_dvr:
+        - dvr
+      devstack_localrc:
+        USE_PYTHON3: true
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_dvr) | join(',') }}"
+        PHYSICAL_NETWORK: default
+        DOWNLOAD_DEFAULT_IMAGES: false
+        IMAGE_URLS: "http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-i386-disk.img,https://cloud-images.ubuntu.com/releases/xenial/release/ubuntu-16.04-server-cloudimg-amd64-disk1.img"
+        DEFAULT_IMAGE_NAME: cirros-0.3.4-i386-disk
+        ADVANCED_IMAGE_NAME: ubuntu-16.04-server-cloudimg-amd64-disk1
+        ADVANCED_INSTANCE_TYPE: ds512M
+        ADVANCED_INSTANCE_USER: ubuntu
+        BUILD_TIMEOUT: 784
+      devstack_plugins:
+        neutron: https://opendev.org/openstack/neutron.git
+        neutron-tempest-plugin: https://opendev.org/openstack/neutron-tempest-plugin.git
+      tempest_plugins:
+        - neutron-tempest-plugin
+      devstack_services:
+        tls-proxy: false
+        tempest: true
+        neutron-dns: true
+        neutron-qos: true
+        neutron-segments: true
+        neutron-trunk: true
+        neutron-log: true
+        neutron-port-forwarding: true
+        cinder: true
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            quotas:
+              quota_router: 100
+              quota_floatingip: 500
+              quota_security_group: 100
+              quota_security_group_rule: 1000
+            DEFAULT:
+              router_distributed: True
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          "/$NEUTRON_CORE_PLUGIN_CONF":
+            ml2:
+              type_drivers: flat,geneve,vlan,gre,local,vxlan
+              mechanism_drivers: openvswitch,l2population
+            ml2_type_vlan:
+              network_vlan_ranges: foo:1:10
+            ml2_type_vxlan:
+              vni_ranges: 1:2000
+            ml2_type_gre:
+              tunnel_id_ranges: 1:1000
+            agent:
+              enable_distributed_routing: True
+              l2_population: True
+              tunnel_types: vxlan,gre
+            ovs:
+              tunnel_bridge: br-tun
+              bridge_mappings: public:br-ex
+          $NEUTRON_L3_CONF:
+            DEFAULT:
+              agent_mode: dvr_snat
+            agent:
+              availability_zone: nova
+          $NEUTRON_DHCP_CONF:
+            agent:
+              availability_zone: nova
+          "/etc/neutron/api-paste.ini":
+            "composite:neutronapi_v2_0":
+              use: "call:neutron.auth:pipeline_factory"
+              noauth: "cors request_id catch_errors osprofiler extensions neutronapiapp_v2_0"
+              keystone: "cors request_id catch_errors osprofiler authtoken keystonecontext extensions neutronapiapp_v2_0"
+        test-config:
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              provider_vlans: foo,
+              agent_availability_zone: nova
+              image_is_advanced: true
+              available_type_drivers: flat,geneve,vlan,gre,local,vxlan
+              l3_agent_mode: dvr_snat
+    group-vars:
+      subnode:
+        devstack_services:
+          tls-proxy: false
+          q-agt: true
+          q-l3: true
+          q-meta: true
+          neutron-qos: true
+          neutron-trunk: true
+          neutron-log: true
+          neutron-port-forwarding: true
+        devstack_local_conf:
+          post-config:
+            $NEUTRON_CONF:
+              DEFAULT:
+                router_distributed: True
+            # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+            # devstack-tempest job will be switched to use lib/neutron instead of
+            # lib/neutron-legacy
+            "/$NEUTRON_CORE_PLUGIN_CONF":
+              agent:
+                enable_distributed_routing: True
+                l2_population: True
+                tunnel_types: vxlan,gre
+              ovs:
+                tunnel_bridge: br-tun
+                bridge_mappings: public:br-ex
+            $NEUTRON_L3_CONF:
+              DEFAULT:
+                agent_mode: dvr_snat
+              agent:
+                availability_zone: nova
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-tempest-plugin-dvr-multinode-scenario-queens
+    parent: neutron-tempest-plugin-dvr-multinode-scenario
+    nodeset: openstack-two-node-xenial
+    override-checkout: stable/queens
+    vars:
+      branch_override: stable/queens
+      devstack_localrc:
+        USE_PYTHON3: false
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-dvr-multinode-scenario-rocky
+    parent: neutron-tempest-plugin-dvr-multinode-scenario
+    nodeset: openstack-two-node-xenial
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+      devstack_localrc:
+        USE_PYTHON3: false
+        TEMPEST_PLUGINS: /opt/stack/neutron-tempest-plugin
+
+- job:
+    name: neutron-tempest-plugin-dvr-multinode-scenario-stein
+    parent: neutron-tempest-plugin-dvr-multinode-scenario
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+
+- job:
+    name: neutron-tempest-plugin-designate-scenario
+    parent: neutron-tempest-plugin-scenario
+    description: Neutron designate integration scenario
+    required-projects:
+      - openstack/designate
+      - openstack/designate-dashboard
+      - openstack/designate-tempest-plugin
+    timeout: 3600
+    vars:
+      devstack_localrc:
+        DESIGNATE_BACKEND_DRIVER: bind9
+        DOWNLOAD_DEFAULT_IMAGES: false
+        IMAGE_URLS: http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-i386-disk.img,
+        # In this job advanced image is not needed, so it's name should be
+        # empty
+        ADVANCED_IMAGE_NAME: ""
+      devstack_plugins:
+        designate: https://opendev.org/openstack/designate.git
+      devstack_services:
+        cinder: false
+        designate: true
+      tempest_plugins:
+        - designate-tempest-plugin
+        - neutron-tempest-plugin
+      tempest_test_regex: ^neutron_tempest_plugin\.scenario\.test_dns_integration
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-tempest-plugin-designate-scenario-queens
+    parent: neutron-tempest-plugin-designate-scenario
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/queens
+    vars:
+      branch_override: stable/queens
+      devstack_localrc:
+        USE_PYTHON3: false
+        TEMPEST_PLUGINS: '"/opt/stack/designate-tempest-plugin /opt/stack/neutron-tempest-plugin"'
+
+- job:
+    name: neutron-tempest-plugin-designate-scenario-rocky
+    parent: neutron-tempest-plugin-designate-scenario
+    nodeset: openstack-single-node-xenial
+    override-checkout: stable/rocky
+    vars:
+      branch_override: stable/rocky
+      devstack_localrc:
+        USE_PYTHON3: false
+        TEMPEST_PLUGINS: '"/opt/stack/designate-tempest-plugin /opt/stack/neutron-tempest-plugin"'
+
+- job:
+    name: neutron-tempest-plugin-designate-scenario-stein
+    parent: neutron-tempest-plugin-designate-scenario
+    override-checkout: stable/stein
+    vars:
+      branch_override: stable/stein
+
+- job:
+    name: neutron-tempest-plugin-sfc
+    parent: neutron-tempest-plugin
+    timeout: 10800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/networking-sfc
+      - openstack/neutron
+      - openstack/neutron-tempest-plugin
+      - openstack/tempest
+    vars:
+      tempest_test_regex: ^neutron_tempest_plugin\.sfc
+      tox_envlist: all-plugin
+      devstack_plugins:
+        networking-sfc: https://opendev.org/openstack/networking-sfc
+        neutron-tempest-plugin: https://opendev.org/openstack/neutron-tempest-plugin
+      network_api_extensions_sfc:
+        - flow_classifier
+        - sfc
+      devstack_localrc:
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_sfc) | join(',') }}"
+
+- job:
+    name: neutron-tempest-plugin-bgpvpn-bagpipe
+    parent: neutron-tempest-plugin
+    required-projects:
+      - openstack/networking-bagpipe
+      - openstack/networking-bgpvpn
+    vars:
+      tempest_test_regex: ^neutron_tempest_plugin\.bgpvpn
+      network_api_extensions: *api_extensions_master
+      network_api_extensions_bgpvpn:
+        - bgpvpn
+        - bgpvpn-routes-control
+      devstack_localrc:
+        NETWORKING_BGPVPN_DRIVER: "BGPVPN:BaGPipe:networking_bgpvpn.neutron.services.service_drivers.bagpipe.bagpipe_v2.BaGPipeBGPVPNDriver:default"
+        BAGPIPE_DATAPLANE_DRIVER_IPVPN: "ovs"
+        BAGPIPE_BGP_PEERS: "-"
+        USE_PYTHON3: false
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions + network_api_extensions_bgpvpn) | join(',') }}"
+      devstack_plugins:
+        networking-bgpvpn: https://git.openstack.org/openstack/networking-bgpvpn
+        networking-bagpipe: https://git.openstack.org/openstack/networking-bagpipe
+
+- job:
+    name: neutron-tempest-plugin-fwaas
+    parent: neutron-tempest-plugin
+    timeout: 10800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron-fwaas
+      - openstack/neutron
+      - openstack/neutron-tempest-plugin
+      - openstack/tempest
+    vars:
+      tempest_test_regex: ^neutron_tempest_plugin\.fwaas
+      tox_envlist: all-plugin
+      devstack_plugins:
+        neutron-fwaas: https://opendev.org/openstack/neutron-fwaas.git
+        neutron-tempest-plugin: https://opendev.org/openstack/neutron-tempest-plugin.git
+      network_api_extensions_common: *api_extensions_master
+      network_api_extensions_fwaas:
+        - fwaas_v2
+      devstack_localrc:
+        NETWORK_API_EXTENSIONS: "{{ (network_api_extensions_common + network_api_extensions_fwaas) | join(',') }}"
+
+- project-template:
+    name: neutron-tempest-plugin-jobs
+    check:
+      jobs:
+        - neutron-tempest-plugin-api
+        - neutron-tempest-plugin-designate-scenario
+        - neutron-tempest-plugin-dvr-multinode-scenario
+        - neutron-tempest-plugin-scenario-linuxbridge
+        - neutron-tempest-plugin-scenario-openvswitch
+        - neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid
+    gate:
+      jobs:
+        - neutron-tempest-plugin-api
+        - neutron-tempest-plugin-scenario-linuxbridge
+        - neutron-tempest-plugin-scenario-openvswitch
+        - neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid
+
+- project-template:
+    name: neutron-tempest-plugin-jobs-queens
+    check:
+      jobs:
+        - neutron-tempest-plugin-api-queens
+        - neutron-tempest-plugin-designate-scenario-queens
+        - neutron-tempest-plugin-dvr-multinode-scenario-queens
+        - neutron-tempest-plugin-scenario-linuxbridge-queens
+        - neutron-tempest-plugin-scenario-openvswitch-queens
+    gate:
+      jobs:
+        - neutron-tempest-plugin-api-queens
+
+- project-template:
+    name: neutron-tempest-plugin-jobs-rocky
+    check:
+      jobs:
+        - neutron-tempest-plugin-api-rocky
+        - neutron-tempest-plugin-designate-scenario-rocky
+        - neutron-tempest-plugin-dvr-multinode-scenario-rocky
+        - neutron-tempest-plugin-scenario-linuxbridge-rocky
+        - neutron-tempest-plugin-scenario-openvswitch-rocky
+        - neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid-rocky
+    gate:
+      jobs:
+        - neutron-tempest-plugin-api-rocky
+
+- project-template:
+    name: neutron-tempest-plugin-jobs-stein
+    check:
+      jobs:
+        - neutron-tempest-plugin-api-stein
+        - neutron-tempest-plugin-designate-scenario-stein
+        - neutron-tempest-plugin-dvr-multinode-scenario-stein
+        - neutron-tempest-plugin-scenario-linuxbridge-stein
+        - neutron-tempest-plugin-scenario-openvswitch-stein
+        - neutron-tempest-plugin-scenario-openvswitch-iptables_hybrid-stein
+    gate:
+      jobs:
+        - neutron-tempest-plugin-api-stein
+
+- project:
+    templates:
+      - build-openstack-docs-pti
+      - neutron-tempest-plugin-jobs
+      - neutron-tempest-plugin-jobs-queens
+      - neutron-tempest-plugin-jobs-rocky
+      - neutron-tempest-plugin-jobs-stein
+      - check-requirements
+      - tempest-plugin-jobs
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - neutron-tempest-plugin-sfc
+        - neutron-tempest-plugin-bgpvpn-bagpipe
+        - neutron-tempest-plugin-fwaas
+    gate:
+      jobs:
+        - neutron-tempest-plugin-bgpvpn-bagpipe
+        - neutron-tempest-plugin-fwaas
