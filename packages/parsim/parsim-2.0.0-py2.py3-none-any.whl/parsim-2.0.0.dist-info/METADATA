@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: parsim
+Version: 2.0.0
+Summary: A tool for working with parameterized simulation models
+Home-page: https://gitlab.com/olwi/psm
+Author: Ola Widlund
+Author-email: ola.widlund@ri.se
+License: GPLv3
+Requires-Dist: pyexpander (>=1.6)
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: pyDOE2 (>=1.2.1)
+Requires-Dist: pandas
+Provides-Extra: dev
+Requires-Dist: sphinx ; extra == 'dev'
+Requires-Dist: sphinx-argparse ; extra == 'dev'
+Provides-Extra: doc
+Requires-Dist: sphinx ; extra == 'doc'
+Requires-Dist: sphinx-argparse ; extra == 'doc'
+
+Introduction
+
+
