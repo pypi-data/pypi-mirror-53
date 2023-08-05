@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: discord-msg-lite
+Version: 1
+Summary: A simple and lightweight Python PyPI module to send messages easily using Discord Webhooks.
+Home-page: https://github.com/YUChoe/discord_msg_lite
+Author: Tom YU Choe
+Author-email: yonguk.choe@gmail.com
+License: MIT
+Description: # Discord message lite
+        
+        This is a simple and lightweight Python PyPI module to send messages easily using Discord Webhooks.
+        
+        ## Installation
+        
+        Run the following to install:
+        
+        ```python
+        pip install discord_msg_lite
+        ```
+        
+        ## Usage
+        
+        ```python
+        from discord_msg_lite import Discord_msg
+        
+        webhook_url = 'https://discordapp.com/api/webhooks/123456789012345678/8xZhP4Zj-8KMVN7wLw6jE04VEK5BIfRxpzCwCwgHxpaNOQzZOTR95dPW53EMRjybXjAO'
+        dmsg = Discord_msg(webhook_url)
+        dmsg.send('test 12345 ㄱㄴㄷㄹ')
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
