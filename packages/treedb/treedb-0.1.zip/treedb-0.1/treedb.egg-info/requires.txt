@@ -1,0 +1,14 @@
+sqlalchemy>=1.0.14
+
+[:python_version < "3"]
+configparser
+
+[:python_version < "3.5"]
+pathlib2
+scandir
+
+[dev]
+flake8
+pep8-naming
+wheel
+twine
