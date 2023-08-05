@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: tcex
+Version: 1.1.4
+Summary: ThreatConnect Exchange App Framework
+Home-page: https://github.com/ThreatConnect-Inc/tcex
+Author: ThreatConnect (support@threatconnect.com)
+Author-email: support@threatconnect.com
+License: Apache License, Version 2
+Download-URL: https://github.com/ThreatConnect-Inc/tcex/tarball/1.1.4
+Platform: UNKNOWN
+Requires-Dist: colorama (>=0.3.9)
+Requires-Dist: future
+Requires-Dist: hvac (>=0.3.0)
+Requires-Dist: inflect (>=0.2.5)
+Requires-Dist: jsonschema (>=2.6.0)
+Requires-Dist: paho-mqtt
+Requires-Dist: parsedatetime
+Requires-Dist: python-dateutil (>=2.6.1)
+Requires-Dist: pytz
+Requires-Dist: redis (>=2.10.6)
+Requires-Dist: requests (>=2.18.4)
+Requires-Dist: six (>=1.11.0)
+Requires-Dist: stdlib-list
+Requires-Dist: tzlocal
+Provides-Extra: development
+Requires-Dist: deepdiff ; extra == 'development'
+Requires-Dist: jmespath ; extra == 'development'
+Requires-Dist: mako ; extra == 'development'
+Requires-Dist: pytest ; extra == 'development'
+Requires-Dist: pytest-cov ; extra == 'development'
+
+UNKNOWN
+
+
