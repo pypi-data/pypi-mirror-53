@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: VoltagePy
+Version: 0.5
+Summary: A Simple tool for acessing a page and scrap
+Home-page: https://github.com/Heroadn/VoltagePy
+Author: H. Kaiser
+Author-email: benbenjamin554@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: selenium (==3.141.0)
+
+# VoltagePy
+simple tool for access pages and interaction 
+
+<h1>Setup</h1>
+<pre><code>pip install VoltagePy - u</pre></code>
+after that you are ready, just download a drive for the browser 
+like https://sites.google.com/a/chromium.org/chromedriver/downloads 
+for chrome ones
+
+<h1>Exemple of usage</h1>
+<pre><code>
+import VoltagePy as voltage
+
+#take as parameter the path of the drive, and starts the browser
+start()
+
+#opens the page
+open("https://www.duckduckgo.com")
+
+#return the content
+print(copyContent())
+
+#and quit the browser
+quit()
+</code></pre>
+
+<h4>Next</h4>
+identify the user browser and os, downloading the drives, 
+so the user just need to install the lib, and run.
+<h4>caution high voltage.</h4>
+
+
