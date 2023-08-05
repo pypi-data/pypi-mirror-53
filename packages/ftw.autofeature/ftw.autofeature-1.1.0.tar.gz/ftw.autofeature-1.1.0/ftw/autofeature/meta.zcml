@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+
+    <meta:directive
+        namespace="http://namespaces.zope.org/autofeature"
+        name="extras"
+        schema=".extras.IDeclareExtrasFeaturesDirective"
+        handler=".extras.declare_extras_features"
+        />
+
+    <meta:directive
+        namespace="http://namespaces.zope.org/autofeature"
+        name="dump"
+        schema=".dump.IDumpFeaturesDirective"
+        handler=".dump.dump_features"
+        />
+
+</configure>
