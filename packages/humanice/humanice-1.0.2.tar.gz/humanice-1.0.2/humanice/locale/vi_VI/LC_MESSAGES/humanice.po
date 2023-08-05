@@ -1,0 +1,271 @@
+# Vietnamese translations for humanice
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-24 21:07+0400\n"
+"PO-Revision-Date: 2017-05-30 11:51+0700\n"
+"Last-Translator: Olivier Cortès <oc@1flow.io>\n"
+"Language-Team: vi_VI <sapd@vccloud.vn>\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Generated-By: Babel 0.9.6\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: humanice/number.py:20
+msgctxt "0"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:21
+msgctxt "1"
+msgid "st"
+msgstr "."
+
+#: humanice/number.py:22
+msgctxt "2"
+msgid "nd"
+msgstr "."
+
+#: humanice/number.py:23
+msgctxt "3"
+msgid "rd"
+msgstr "."
+
+#: humanice/number.py:24
+msgctxt "4"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:25
+msgctxt "5"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:26
+msgctxt "6"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:27
+msgctxt "7"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:28
+msgctxt "8"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:29
+msgctxt "9"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:55
+msgid "million"
+msgstr "%(value)s triệu"
+
+#: humanice/number.py:55
+msgid "billion"
+msgstr "tỷ"
+
+#: humanice/number.py:55
+msgid "trillion"
+msgstr "%(value)s nghìn tỷ"
+
+#: humanice/number.py:55
+msgid "quadrillion"
+msgstr "%(value)s triệu tỷ"
+
+#: humanice/number.py:56
+#, fuzzy
+msgid "quintillion"
+msgstr "%(value)s quintillion"
+
+#: humanice/number.py:56
+#, fuzzy
+msgid "sextillion"
+msgstr "%(value)s sextillion"
+
+#: humanice/number.py:56
+#, fuzzy
+msgid "septillion"
+msgstr "%(value)s septillion"
+
+#: humanice/number.py:57
+#, fuzzy
+msgid "octillion"
+msgstr "%(value)s octillion"
+
+#: humanice/number.py:57
+#, fuzzy
+msgid "nonillion"
+msgstr "%(value)s nonillion"
+
+#: humanice/number.py:57
+#, fuzzy
+msgid "decillion"
+msgstr "%(value)s décillion"
+
+#: humanice/number.py:57
+#, fuzzy
+msgid "googol"
+msgstr "%(value)s gogol"
+
+#: humanice/number.py:91
+msgid "one"
+msgstr "một"
+
+#: humanice/number.py:91
+msgid "two"
+msgstr "hai"
+
+#: humanice/number.py:91
+msgid "three"
+msgstr "ba"
+
+#: humanice/number.py:91
+msgid "four"
+msgstr "bốn"
+
+#: humanice/number.py:91
+msgid "five"
+msgstr "năm"
+
+#: humanice/number.py:91
+msgid "six"
+msgstr "sáu"
+
+#: humanice/number.py:92
+msgid "seven"
+msgstr "bảy"
+
+#: humanice/number.py:92
+msgid "eight"
+msgstr "tám"
+
+#: humanice/number.py:92
+msgid "nine"
+msgstr "chín"
+
+#: humanice/time.py:64 humanice/time.py:126
+msgid "a moment"
+msgstr "ngay lúc này"
+
+#: humanice/time.py:66
+msgid "a second"
+msgstr "một giây"
+
+#: humanice/time.py:68
+#, python-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d giây"
+msgstr[1] "%d giây"
+
+#: humanice/time.py:70
+msgid "a minute"
+msgstr "một phút"
+
+#: humanice/time.py:73
+#, python-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d phút"
+msgstr[1] "%d phút"
+
+#: humanice/time.py:75
+msgid "an hour"
+msgstr "một giờ"
+
+#: humanice/time.py:78
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d giờ"
+msgstr[1] "%d giờ"
+
+#: humanice/time.py:81
+msgid "a day"
+msgstr "một ngày"
+
+#: humanice/time.py:83 humanice/time.py:86
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d ngày"
+msgstr[1] "%d ngày"
+
+#: humanice/time.py:88
+msgid "a month"
+msgstr "một tháng"
+
+#: humanice/time.py:90
+#, python-format
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] "%d tháng"
+msgstr[1] "%d tháng"
+
+#: humanice/time.py:93
+msgid "a year"
+msgstr "một năm"
+
+#: humanice/time.py:95 humanice/time.py:103
+#, python-format
+msgid "1 year, %d day"
+msgid_plural "1 year, %d days"
+msgstr[0] "1 năm %d ngày"
+msgstr[1] "1 năm %d ngày"
+
+#: humanice/time.py:98
+msgid "1 year, 1 month"
+msgstr "1 năm 1 tháng"
+
+#: humanice/time.py:100
+#, python-format
+msgid "1 year, %d month"
+msgid_plural "1 year, %d months"
+msgstr[0] "1 năm %d tháng"
+msgstr[1] "un an et %d mois"
+
+#: humanice/time.py:105
+#, python-format
+msgid "%d year"
+msgid_plural "%d years"
+msgstr[0] "%d năm"
+msgstr[1] "%d năm"
+
+#: humanice/time.py:123
+#, python-format
+msgid "%s from now"
+msgstr "%s ngày tới"
+
+#: humanice/time.py:123
+#, python-format
+msgid "%s ago"
+msgstr "%s trước"
+
+#: humanice/time.py:127
+msgid "now"
+msgstr "ngay bây giờ"
+
+#: humanice/time.py:145
+msgid "today"
+msgstr "hôm nay"
+
+#: humanice/time.py:147
+msgid "tomorrow"
+msgstr "ngày mai"
+
+#: humanice/time.py:149
+msgid "yesterday"
+msgstr "ngày hôm qua"

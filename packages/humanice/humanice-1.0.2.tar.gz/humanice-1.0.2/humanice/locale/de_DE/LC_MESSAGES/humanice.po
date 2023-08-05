@@ -1,0 +1,264 @@
+# German translations for humanice
+# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the humanice package.
+# Christian Klein <chris@5711.org>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: humanice\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-18 11:49+0100\n"
+"PO-Revision-Date: 2019-09-29 01:07+0200\n"
+"Last-Translator: Christian Klein <chris@5711.org>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Christian Klein\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#: humanice/number.py:20
+msgctxt "0"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:21
+msgctxt "1"
+msgid "st"
+msgstr "."
+
+#: humanice/number.py:22
+msgctxt "2"
+msgid "nd"
+msgstr "."
+
+#: humanice/number.py:23
+msgctxt "3"
+msgid "rd"
+msgstr "."
+
+#: humanice/number.py:24
+msgctxt "4"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:25
+msgctxt "5"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:26
+msgctxt "6"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:27
+msgctxt "7"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:28
+msgctxt "8"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:29
+msgctxt "9"
+msgid "th"
+msgstr "."
+
+#: humanice/number.py:55
+msgid "million"
+msgstr "Million"
+
+#: humanice/number.py:55
+msgid "billion"
+msgstr "Milliarde"
+
+#: humanice/number.py:55
+msgid "trillion"
+msgstr "Billion"
+
+#: humanice/number.py:55
+msgid "quadrillion"
+msgstr "Billiarde"
+
+#: humanice/number.py:56
+msgid "quintillion"
+msgstr "Trillion"
+
+#: humanice/number.py:56
+msgid "sextillion"
+msgstr "Trilliarde"
+
+#: humanice/number.py:56
+msgid "septillion"
+msgstr "Quadrillion"
+
+#: humanice/number.py:57
+msgid "octillion"
+msgstr "Quadrillarde"
+
+#: humanice/number.py:57
+msgid "nonillion"
+msgstr "Quintillion"
+
+#: humanice/number.py:57
+msgid "decillion"
+msgstr "Quintilliarde"
+
+#: humanice/number.py:57
+msgid "googol"
+msgstr "Googol"
+
+#: humanice/number.py:91
+msgid "one"
+msgstr "eins"
+
+#: humanice/number.py:91
+msgid "two"
+msgstr "zwei"
+
+#: humanice/number.py:91
+msgid "three"
+msgstr "drei"
+
+#: humanice/number.py:91
+msgid "four"
+msgstr "vier"
+
+#: humanice/number.py:91
+msgid "five"
+msgstr "fünf"
+
+#: humanice/number.py:91
+msgid "six"
+msgstr "sechs"
+
+#: humanice/number.py:92
+msgid "seven"
+msgstr "sieben"
+
+#: humanice/number.py:92
+msgid "eight"
+msgstr "acht"
+
+#: humanice/number.py:92
+msgid "nine"
+msgstr "neun"
+
+#: humanice/time.py:64 humanice/time.py:126
+msgid "a moment"
+msgstr "ein Moment"
+
+#: humanice/time.py:66
+msgid "a second"
+msgstr "eine Sekunde"
+
+#: humanice/time.py:68
+#, python-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d Sekunde"
+msgstr[1] "%d Sekunden"
+
+#: humanice/time.py:70
+msgid "a minute"
+msgstr "eine Minute"
+
+#: humanice/time.py:73
+#, python-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d Minute"
+msgstr[1] "%d Minuten"
+
+#: humanice/time.py:75
+msgid "an hour"
+msgstr "eine Stunde"
+
+#: humanice/time.py:78
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d Stunde"
+msgstr[1] "%d Stunden"
+
+#: humanice/time.py:81
+msgid "a day"
+msgstr "ein Tag"
+
+#: humanice/time.py:83 humanice/time.py:86
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d Tag"
+msgstr[1] "%d Tage"
+
+#: humanice/time.py:88
+msgid "a month"
+msgstr "ein Monat"
+
+#: humanice/time.py:90
+#, python-format
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] "%d Monat"
+msgstr[1] "%d Monate"
+
+#: humanice/time.py:93
+msgid "a year"
+msgstr "ein Jahr"
+
+#: humanice/time.py:95 humanice/time.py:103
+#, python-format
+msgid "1 year, %d day"
+msgid_plural "1 year, %d days"
+msgstr[0] "ein Jahr und %d Tag"
+msgstr[1] "ein Jahr und %d Tage"
+
+#: humanice/time.py:98
+msgid "1 year, 1 month"
+msgstr "ein Monat"
+
+#: humanice/time.py:100
+#, python-format
+msgid "1 year, %d month"
+msgid_plural "1 year, %d months"
+msgstr[0] "ein Jahr und %d Monat"
+msgstr[1] "ein Jahr und %d Monate"
+
+#: humanice/time.py:105
+#, python-format
+msgid "%d year"
+msgid_plural "%d years"
+msgstr[0] "%d Jahr"
+msgstr[1] "%d Jahre"
+
+#: humanice/time.py:123
+#, python-format
+msgid "%s from now"
+msgstr "%s ab jetzt"
+
+#: humanice/time.py:123
+#, python-format
+msgid "%s ago"
+msgstr "vor %s"
+
+#: humanice/time.py:127
+msgid "now"
+msgstr "jetzt"
+
+#: humanice/time.py:145
+msgid "today"
+msgstr "heute"
+
+#: humanice/time.py:147
+msgid "tomorrow"
+msgstr "morgen"
+
+#: humanice/time.py:149
+msgid "yesterday"
+msgstr "gestern"
