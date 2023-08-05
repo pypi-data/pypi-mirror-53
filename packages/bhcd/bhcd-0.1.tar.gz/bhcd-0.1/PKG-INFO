@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: bhcd
+Version: 0.1
+Summary: Bayesian Hierarchical Community Discovery
+Home-page: https://github.com/zhaofeng-shu33/bhcd-python-wrapper
+Author: zhaofeng-shu33
+Author-email: 616545598@qq.com
+Maintainer: zhaofeng-shu33
+Maintainer-email: 616545598@qq.com
+License: Apache License Version 2.0
+Description: # bhcd: Bayesian Hierarchical Community Discovery
+        [![PyPI](https://img.shields.io/pypi/v/bhcd.svg)](https://pypi.org/project/bhcd)
+        
+        An efficient Bayesian nonparametric model for discovering hierarchical community structure in social networks. 
+        
+        ## Parameter Tuning
+        There are five parameters (alpha, beta, lambda, delta, gamma) to be tuned, lines within interval (0,1) and satisifies the following
+        constraint.
+        
+        alpha > beta
+        lambda > delta
+        
+        ## Usage
+        
+        Python wrapper. 
+        You can run `python bhcd.py` to get the hierachical tree.
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
