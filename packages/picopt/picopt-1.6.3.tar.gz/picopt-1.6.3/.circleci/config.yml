@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: ci/build.sh
+      - run: ci/test.sh
+      - store_test_results:
+            path: /tmp/test-results
+
