@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: fgread
+Version: 0.1.7
+Summary: Module for reading datasets shared on FASTGenomics
+Home-page: https://github.com/fastgenomics/jupyter-fgread-py
+License: UNKNOWN
+Author: FASTGenomics Team
+Author-email: contact@fastgenomics.org
+Requires-Python: ~=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: anndata >= 0.6
+Requires-Dist: get_version (~=2.0.6)
+Requires-Dist: tables >= 3.4
+Requires-Dist: loompy >= 2.0.12
+Requires-Dist: scanpy >= 1.4
+Requires-Dist: pytest >= 4; extra == "test"
+Provides-Extra: test
+
+[![Documentation Status](https://readthedocs.org/projects/fgread-py/badge/?version=latest)](https://fgread-py.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/FASTGenomics/fgread-py.svg?branch=master)](https://travis-ci.org/FASTGenomics/fgread-py)
+[![PyPi version](https://pypip.in/v/fgread/badge.png)](https://pypi.org/project/fgread)
+[![PyPi downloads](https://pypip.in/d/fgread/badge.png)](https://pypi.org/project/fgread)
+
+# FASTGenomics Reader Module for Python
+
