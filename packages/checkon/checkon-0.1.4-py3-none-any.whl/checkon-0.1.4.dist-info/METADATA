@@ -1,0 +1,119 @@
+Metadata-Version: 2.1
+Name: checkon
+Version: 0.1.4
+Summary: Support backward compatibility by running your users' test suites.
+License: GPL-3.0
+Author: Checkon contributors
+Author-email: checkon@cordaz.com
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Provides-Extra: docs
+Requires-Dist: attrs (==19.1.0)
+Requires-Dist: click (==7.0)
+Requires-Dist: hyperlink (>=19.0,<20.0)
+Requires-Dist: inflection (>=0.3.1,<0.4.0)
+Requires-Dist: junitparser (>=1.3,<2.0)
+Requires-Dist: marshmallow (>=3.0,<4.0)
+Requires-Dist: marshmallow-dataclass (==6.0.0rc5)
+Requires-Dist: pendulum (>=2.0,<3.0)
+Requires-Dist: pyrsistent (>=0.14.11,<0.15.0)
+Requires-Dist: requests (>=2.22,<3.0)
+Requires-Dist: requirements-parser (>=0.2.0,<0.3.0)
+Requires-Dist: sqlalchemy (>=1.3,<2.0)
+Requires-Dist: tabulate (>=0.8.3,<0.9.0)
+Requires-Dist: toml (>=0.10.0,<0.11.0)
+Requires-Dist: tox-run-command (>=0.4.0,<0.5.0)
+Requires-Dist: xmltodict (>=0.12.0,<0.13.0)
+Description-Content-Type: text/x-rst
+
+========
+Overview
+========
+
+.. start-badges
+
+.. list-table::
+    :stub-columns: 1
+
+    * - docs
+      - |docs|
+    * - tests
+      - | |travis|
+        |
+    * - package
+      - | |version| |wheel| |supported-versions| |supported-implementations|
+        | |commits-since|
+
+.. |docs| image:: https://readthedocs.org/projects/checkon/badge/?style=flat
+    :target: https://readthedocs.org/projects/checkon
+    :alt: Documentation Status
+
+
+.. |travis| image:: https://img.shields.io/travis/com/metatooling/checkon/master
+    :alt: Travis-CI Build Status
+    :target: https://travis-ci.com/metatooling/checkon
+
+.. |version| image:: https://img.shields.io/pypi/v/checkon.svg
+    :alt: PyPI Package latest release
+    :target: https://pypi.org/pypi/checkon
+
+.. |commits-since| image:: https://img.shields.io/github/commits-since/metatooling/checkon/v0.1.4.svg
+    :alt: Commits since latest release
+    :target: https://github.com/metatooling/checkon/compare/v0.1.4...master
+
+.. |wheel| image:: https://img.shields.io/pypi/wheel/checkon.svg
+    :alt: PyPI Wheel
+    :target: https://pypi.org/pypi/checkon
+
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/checkon.svg
+    :alt: Supported versions
+    :target: https://pypi.org/pypi/checkon
+
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/checkon.svg
+    :alt: Supported implementations
+    :target: https://pypi.org/pypi/checkon
+
+
+.. end-badges
+
+
+Checkon is a tool to help library maintainers ensure backward-compatibilty by running downstream applications' test suites with library pre-release versions.
+
+Supported meta-runners:
+
+- tox_
+
+Supported test-runners:
+
+- PyTest_
+- Trial_
+
+
+Currently missing support for:
+
+- unittest_
+- nose_
+
+
+Installation
+============
+
+::
+
+    pip install checkon
+
+Documentation
+=============
+
+
+https://checkon.readthedocs.io/
+
+
+.. _tox: https://tox.readthedocs.io/en/latest/index.html
+.. _PyTest: https://pytest.org
+.. _Trial: https://twistedmatrix.com/trac/wiki/TwistedTrial
+.. _unittest: https://docs.python.org/3/library/unittest.html
+.. _nose: https://nose.readthedocs.io/en/latest/
+
