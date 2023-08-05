@@ -1,0 +1,199 @@
+CHANGES
+=======
+
+3.4.1
+-----
+
+* [1LP][RFR] Azure iot client, create/add iothub (#419)
+* \_get\_resource method implemented
+* Fixed instance creation instantiation issue
+* Allow for unzipping archive on Powershell 4
+* Added SharedMethodsMixin for ec2
+* Added get\_quota method
+* replacing num\_sec with timeout
+
+3.4.0
+-----
+
+* Move to py3.7+ syntax
+* Add support for zip files
+* split name\_or\_id
+* [1LP][RFR] Added functinality to create vm folder in virtualcenter (#407)
+* Add a check to make sure the datastore-cluster has datastores on it (#410)
+* turn off cache\_discovery for gce default
+* more py2 and py3 compatibilityes
+* one more crucial fix
+* tiny py3 incompatibility issue
+* Added network entity and supporting methods for EC2
+* Adding installation section to enhance README.md
+* Use next() instead of calling .next()
+* Fix for disconnect\_dvd\_drives
+* Try to decode bytes string from run\_script
+* py3 compatibility for ip method
+* [RFR] Update travis to use different dist for py2 vs py3 (#401)
+
+3.3.1
+-----
+
+* Update msazure to avoid azure.mgmt.\*.models imports where deprecated
+* [RFR]Updating how auth\_url is handled, now parsing keystone\_version from it, added List\_keypair (#395)
+* Changing num\_sec to timeout as wait\_for expects an int for num\_sec
+* [RFR] Add a timezone mapping for windows to pytz and timezone property (#396)
+
+3.3.0
+-----
+
+* Change list\_hosts to list\_host
+
+3.2.2
+-----
+
+* Modify the Redfish resources' name
+* moving wrapnapi->scvmm to use our clone of pywinrm -> py3winrm
+
+3.2.1
+-----
+
+* EC2Instance change instance type method
+* Fix reference before assignment in rhevm VM.mark\_as\_template (#391)
+* Update rhevm add\_disk kwargs
+
+3.2.0
+-----
+
+* Add all\_ips method to VM entities
+* [RFR] Get volume attachment and server ports from osp instance (#383)
+* Adding SharedMethodsMixin class
+* Add in function for listing VHDs present in SCVMM library
+
+3.1.8
+-----
+
+* fixed set and unset tag for ec2
+
+3.1.7
+-----
+
+* [RFR] SCVMM: Removing generic refresh function as it is redundant and broken  (#380)
+
+3.1.6
+-----
+
+
+3.1.5
+-----
+
+* [RFR] Move creation\_time property to shared methods for rhv (#379)
+* [RFR] Add a helper function to download file/VHDs into the library (#378)
+* fixed count of templates for Azure
+
+3.1.4
+-----
+
+* [RFR] Add ability to create a snapshot for SCVirtualMachine (#374)
+
+3.1.3
+-----
+
+* Fix TypeError when listing IPs in rhv 4.3
+* Fixes required for test\_provision\_with\_boot\_volume
+
+3.1.2
+-----
+
+* [RFR] Add Support For Datastore Clusters for Vmware (#368)
+
+3.1.1
+-----
+
+* Adding new method for listing disks on RHV
+
+3.1.0
+-----
+
+* [1LP][RFR] Openstack: swift manger container and obj management (#360)
+* [1LP][RFR] ec2.py module changed from boto to boto3 (#362)
+* RHEVM updates for template upload
+* Fix issue with deleting a VM by removing Force kwarg
+
+3.0.44
+------
+
+* Fixed Typo
+* put in organized way
+* Add in some methods to get the vnic\_profiles on system, vm, template
+* decoding and parsing ecr creds
+
+3.0.43
+------
+
+* Update travis config to skip existing deployments
+* exception for VMInstanceNotStopped
+* Added method set hot add for cpu and memory
+* Update gce, set service\_account type by default
+
+3.0.42
+------
+
+* adding supplementary stuff for working with internal ec2 registry
+
+3.0.41
+------
+
+* get rid of azure enum in favor of using flavor value instead of name everywhere
+
+3.0.40
+------
+
+
+3.0.39
+------
+
+* added additional changes to support external db template deployment
+* async as reserved keyworkd in py3.7+
+* added disc delete in the vm cleanup
+
+3.0.38
+------
+
+* added missing doc string
+* added a bunch of methods necessary for testing external auth
+
+3.0.37
+------
+
+* some methods necessary to fix db backup tests related to job removal
+* wrongly updated method during wrapanapi 3.0 conversion
+* Add methods to fetch network object and list networks for Vmware
+
+3.0.36
+------
+
+* two new methods for sprout
+
+3.0.35
+------
+
+* sometimes vms are broken and cannot be stopped. We anyway need to try to kill them
+
+3.0.34
+------
+
+* [RFR]This PR will add \`list\_s3\_bucket\` method and forcefully remove the Bucket. (#345)
+* few methods for backup/restore tests
+* stopping pods using pvs get hung if those pvs are removed in OCP<=3.6. This happens even when ocp's rest api delete\_project is called
+
+3.0.33
+------
+
+* [RFR] Add API for Redfish chassis navigation (#335)
+
+3.0.32
+------
+
+* Filter out Backhaul subnet names the same way CloudForms does
+* Reworked sqs\_connection to boto3 and added list\_queues
+
+3.0.31
+------
+
