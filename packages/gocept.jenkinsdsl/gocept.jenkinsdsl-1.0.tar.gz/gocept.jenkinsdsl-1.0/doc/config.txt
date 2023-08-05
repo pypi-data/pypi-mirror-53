@@ -1,0 +1,340 @@
+=======================================
+The structure of the configuration file
+=======================================
+
+.. highlight:: ini
+
+[DEFAULT]
+=========
+
+Configuration for every job. Can be changed for each individual job later.
+
+For some options a prefix is included in the option name, e.g. ``svn`` for
+subversion, which represent a class in the resulting groovy code.
+
+General settings
+----------------
+
+maximum_nested_depth
+    The number of nested levels before a ``NestingError`` is raised. Nested
+    levels can occur when interpolation of options is used. The default is ``10``.
+
+description
+    Fills the description section of a job.
+
+disabled
+    If ``true`` the job config is created or modified but the job is disabled.
+    Defaults to ``false``.
+
+is_public
+    If ``true`` the job will be visible to the anonymous user. Prerequisite:
+    The ``Matrix Authorization Strategy Plugin`` is installed. The permission
+    ``hudson.model.Item.Read`` is granted  to anonymous. Defaults to ``false``.
+
+notification_credential_id
+    ID of the global credentials to be used for notification via the
+    notifications plug-in.
+
+
+Version control system
+----------------------
+
+vcs
+    VCS used, currently supported ``svn`` or ``hg``
+
+Subversion
+++++++++++
+
+svn_baseurl
+    root URL to find the project
+svn_group
+    Infix which bundles a group of repositories
+svn_name
+    Name of the repository, defaults to section name
+svn_postfix
+    Postfix to build the job for, defaults to ``trunk``
+svn_subdirectory
+    Path to the directory to clone the repository.
+
+The SVN URL is formed as
+``svn_baseurl + '/' [+ svn_group + '/'] + svn_name + '/' + svn_postfix``
+
+svn_credentials
+    UUID of the credentials
+svn_realm
+    BasicAuth realm for the svn server. When set, additional credentials will be configured.
+svn_scm_browser
+    System of SCM browser, for example ``hudson.plugins.redmine.RedmineRepositoryBrowser``
+
+Mercurial
++++++++++
+
+hg_baseurl
+    root URL to find the project
+hg_group
+    Infix which bundles a group of repositories (e.g. repository owner)
+hg_name
+    Name of the repository, defaults to section name
+hg_branch
+    Branch to build the job for, defaults to ``default``
+hg_subdirectory
+    Path to the directory to clone the repository.
+
+The HG URL is formed as
+``hg_baseurl + '/' [+ hg_group + '/'] + hg_name``
+
+hg_scm_browser
+    System of SCM browser, for example ``hudson.plugins.mercurial.browser.Kallithea``
+hg_scm_browser_url
+    Location, where the SCM browser can be found
+
+
+Git
++++
+
+git_baseurl
+    root URL to find the project
+git_group
+    Infix which bundles a group of repositories (e.g. repository owner)
+git_name
+    Name of the repository, defaults to section name
+git_branch
+    Branch to build the job for, defaults to ``default``
+git_subdirectory
+    Path to the directory to clone the repository.
+
+The GIT URL is formed as
+``git_baseurl + '/' [+ git_group + '/'] + git_name``
+
+
+Testbuilder
+-----------
+
+All options can be modified by applying .format templates_ , which get the
+content of the section passed. This is especially useful for build commands
+to reuse configuration.
+
+.. _templates: https://docs.python.org/3.5/library/string.html#format-string-syntax
+
+builder
+    Type of builder used, currently supported ``pytest``, ``integration``,
+    ``matrix`` or ``custom``.
+
+py.test builder
++++++++++++++++
+
+pytest_timeout
+    Time after which the build is aborted in minutes.
+pytest_python_name
+    Name of the Python installation in the Jenkins global config.
+pytest_base_commands
+    The basic buildout commands
+pytest_additional_commands
+    Additional commands when ``builder = pytest``. It should contain at least the ``--junitxml`` option to give out test results.
+pytest_junit_filename
+    Name of generated JUnit XML file. It is required when ``builder = pytest``.
+pytest_coverage_filename
+    Name of the possibly created coverage XML file.
+pytest_htmlcov_path
+    Name of the possibly created HTML coverage directory.
+pytest_pep8_filename
+    Name of the possibly created pep8 logfile. ``pep8`` should be called in commands.
+
+pytest_cloc_filename
+    Name of the possibly created cloc (Count Lines Of Code) output. Activates the slocCount publisher.
+
+pytest_log_days
+    Maximum days to keep the logs.
+pytest_log_builds
+    Maximum number of builds to keep logs from.
+pytest_trigger_cron
+    Cron trigger for the build in cron style (the default is  ``@daily``)
+pytest_trigger_scm
+    Cron trigger to fetch the scm in cron style (the default is ``H/5 * * * *``)
+pytest_slack_projectchannel
+    Name of Slack channel for the project for build notifications.
+pytest_builds_to_trigger
+    List of builds to trigger after successful build. It has to be a comma separated list without whitespaces.
+
+
+Integration builder
++++++++++++++++++++
+
+integration_timeout
+    Time after which the build is aborted in minutes.
+integration_python_name
+    Name of the Python installation in the Jenkins global config.
+
+integration_junit_filename
+    Name of generated JUnit XML file.
+integration_coverage_filename
+    Name of the possibly created coverage XML file.
+integration_htmlcov_path
+    Name of the possibly created HTML coverage directory.
+integration_pep8_filename
+    Name of the possibly created pep8 logfile. ``pep8`` should be called in commands.
+
+integration_cloc_filename
+    Name of the possibly created cloc (Count Lines Of Code) output. Activates the slocCount publisher.
+
+integration_throttle_category
+    Name of a valid throttle category enabled in the jenkins installation
+
+integration_shell_co_solr
+    Commands for a SoLR checkout.
+integration_shell_clean_env
+    Commands for cleaning up the old build environment.
+integration_shell_prepare_bo
+    Commands to prepare the buildout.
+integration_shell_shutdown
+    Commands for the shutdown after finishing tests.
+integration_virtualenv_solr
+    Commands for building the SoLR.
+integration_virtualenv_instance
+    Commands for building and testing the instance.
+
+integration_log_days
+    Maximum days to keep the logs.
+integration_log_builds
+    Maximum number of builds to keep logs from.
+integration_trigger_cron
+    Cron trigger for the build in cron style (the default is ``H 6-18/4 * * 1-5``)
+integration_trigger_scm
+    Cron trigger to fetch the scm in cron style (the default is ``H/5 * * * *``)
+integration_slack_projectchannel
+    Name of Slack channel for the project for build notifications.
+integration_builds_to_trigger
+    List of builds to trigger after successful build. It has to be a comma separated list without whitespaces.
+
+Matrix builds
+-------------
+
+A matrix build can be configured where the build job is executed with different python versions registered at the jenkins installation.
+
+matrix_timeout
+    Time after which the build is aborted in minutes.
+matrix_python_names
+    List of registered python version on the jenkins installation to use. It has to be a comma separated list without whitespaces, e.g. ``Python2.3,Python3.5,Pypy``
+matrix_buildout_configs
+    List of buildout configs which is turned into an axis and from which the current value can be used by ``$buildout_config`` in the commands later.
+matrix_virtualenv_commands
+    Commands to execute in the buildout.It should contain at least the ``--junitxml`` option to give out test results.
+matrix_run_sequentially
+    Flag to force sequential run of different matrix configurations.
+
+matrix_junit_filename
+    Name of generated JUnit XML file. It is required when ``builder = matrix``.
+matrix_coverage_filename
+    Name of the possibly created coverage XML file.
+matrix_htmlcov_path
+    Name of the possibly created HTML coverage directory.
+matrix_pep8_filename
+    Name of the possibly created pep8 logfile. ``pep8`` should be called in commands.
+
+matrix_cloc_filename
+    Name of the possibly created cloc (Count Lines Of Code) output. Activates the slocCount publisher.
+
+matrix_log_days
+    Maximum days to keep the logs.
+matrix_log_builds
+    Maximum number of builds to keep logs from.
+matrix_trigger_cron
+    Cron trigger for the build in cron style (the default is  ``@daily``)
+matrix_trigger_scm
+    Cron trigger to fetch the scm in cron style (the default is ``H/5 * * * *``)
+
+matrix_throttle_category
+    Name of a valid throttle category enabled in the jenkins installation
+matrix_slack_projectchannel
+    Name of Slack channel for the project for build notifications.
+matrix_builds_to_trigger
+    List of builds to trigger after successful build. It has to be a comma separated list without whitespaces.
+
+Custom builder
+++++++++++++++
+
+custom_timeout
+    Time after which the build is aborted in minutes.
+custom_python_name
+    Name of the Python installation in the Jenkins global config.
+custom_base_commands
+    The basic buildout commands
+custom_additional_commands
+    Additional command when ``builder = custom``
+
+custom_cloc_filename
+    Name of the possibly created cloc (Count Lines Of Code) output. Activates the slocCount publisher.
+
+custom_log_days
+    Maximum days to keep the logs.
+custom_log_builds
+    Maximum number of builds to keep logs from.
+custom_trigger_cron
+    Cron trigger for the build in cron style (the default is  ``@daily``)
+custom_trigger_scm
+    Cron trigger to fetch the scm in cron style (the default is ``H/5 * * * *``)
+custom_slack_projectchannel
+    Name of Slack channel for the project for build notifications.
+custom_builds_to_trigger
+    List of builds to trigger after successful build. It has to be a comma separated list without whitespaces.
+
+Redmine
+-------
+
+redmine_website_name
+    Name of a globally configured Redmine website
+redmine_project_name
+    Name of the project in the Redmine, where the repository browser is defined
+
+
+Individual job description
+==========================
+
+An individual job is configured in a separate section, where the section name
+is the name of the job in the jenkins. All configuration options from the
+defaults can be overwritten.
+
+
+Example
+=======
+
+Example configuration for this package::
+
+    [DEFAULT]
+    hg_baseurl = https://bitbucket.org
+    hg_group = gocept
+
+    builder = pytest
+    pytest_timeout = 40
+    pytest_base_commands =
+        \$PYTHON_EXE bootstrap.py
+        bin/buildout
+    pytest_additional_commands =
+        bin/test
+
+    [gocept.jenkinsdsl]
+    vcs = hg
+    builder = pytest
+
+
+Interpolation
+=============
+
+It is possible to reuse code or configuration snippets by referencing a section
+option with ``{}``. Nested snippets are basically supported, but the option
+referenced to should be defined before the reference. Otherwise the
+interpolation might run in a ``NestingError`` which is controlled by the
+``maximum_nested_depth`` option. Snippets should not start with a prefix
+already associated to a class in the groovy file, as these options would be
+given to the constructor of the groovy class.
+
+Example::
+
+    [DEFAULT]
+    pytest_base_commands =
+        bin/buildout -c {pytest_buildout_file}
+    pytest_buildout_file = blob.cfg
+    path = path/to/buildout_folder
+    combined_path = {path}/{pytest_buildout_file}
+    custom_base_commands =
+        bin/buildout -c {combined_path}
