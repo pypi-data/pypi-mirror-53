@@ -1,0 +1,71 @@
+{% extends "bee_django_crm/base.html" %}
+{% load bee_django_crm_filter %}
+{% load static %}
+{% block content %}
+    {% include 'bee_django_crm/logo.html' %}
+    {% include 'bee_django_crm/nav.html' %}
+    {% include 'bee_django_crm/messages.html' %}
+    <div style="margin:10px auto;">
+        <a href="{% url 'bee_django_crm:contract_update_agreement' contract.id %}">修改协议</a>
+    </div>
+    <h4>合同详情</h4>
+
+    <table class="table">
+        <tr>
+            <td>合同名称</td>
+            <td>{{ contract.name }}</td>
+        </tr>
+
+        <tr>
+            <td>合同时长</td>
+            <td>{{ contract.get_contract_days }}</td>
+        </tr>
+    <tr>
+            <td>合同类型</td>
+            <td>{{ contract.get_contract_type }}</td>
+        </tr>
+        <tr>
+            <td>合同金额</td>
+            <td>
+                {{ contract.price }}
+            </td>
+        </tr>
+        <tr>
+            <td>操作</td>
+            <td>
+
+                {% if contract.get_peruser|length == 0 %}
+                    {% if perms.bee_django_crm.change_contract %}
+                        <a class="btn btn-default" href="{% url 'bee_django_crm:contract_update' contract.id %}">编辑</a>
+                    {% endif %}
+                    {% if perms.bee_django_crm.delete_contract %}
+                        <a class="btn btn-danger" href="#" id="delete_{{ contract.id }}"
+                           data-confirm="{% url "bee_django_crm:contract_delete" contract.id %}"
+                           onclick="click_del(this)">删除</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'bee_django_crm:preuser_list' %}?contract={{ contract.id }}">{{ contract.get_peruser|length }}人使用此合同</a>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <hr>
+    {{ contract.agreement|default:""|safe }}
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        function click_del(_this) {
+            if (!confirm('确认要执行这个操作？')) {
+                return false;
+            }
+            var url = $(_this).attr('data-confirm');
+            $.post(url).done(function (data) {
+                alert('删除成功!');
+                location.href = "{% url 'bee_django_crm:contract_list' %}";
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+<style>
+    .nav {
+        background-color: #4B6788;
+        height: 40px;
+        color: #ffffff;
+        line-height: 40px;
+        padding: 0 10px;
+    }
+
+    .nav a {
+        color: #ffffff;
+    }
+</style>
+<div class="nav">
+    {% include 'bee_django_crm/_nav.html' %}
+
+    |
+    <a href="{% url 'bee_django_crm:referral_preuser_list' %}">转介效果</a> |
+    <a href="{% url 'bee_django_crm:user_poster' %}">我的海报图</a> |
+</div>

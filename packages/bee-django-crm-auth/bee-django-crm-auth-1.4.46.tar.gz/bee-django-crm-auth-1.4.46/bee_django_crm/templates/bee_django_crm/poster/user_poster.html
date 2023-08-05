@@ -1,0 +1,26 @@
+{% extends "bee_django_crm/custom_base.html" %}
+{% block styles %}
+    <style>
+        img {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+        }
+
+        .info_div {
+            margin: 10px;
+            line-height: 20px;
+            color: #999999;
+            font-size: 12px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+<div style="margin: auto">
+    {% if poster_id %}
+        <img src="{% url 'bee_django_crm:user_poster_image' poster_id request.user.id %}"/>
+    {% endif %}
+
+    <div class="info_div">长按海报，点击“储存图像”按钮。在朋友圈，微信群，微博等社交媒体分享。</div>
+</div>
+{% endblock %}
