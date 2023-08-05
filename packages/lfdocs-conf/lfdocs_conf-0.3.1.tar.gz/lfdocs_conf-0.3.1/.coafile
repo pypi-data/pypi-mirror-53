@@ -1,0 +1,30 @@
+[all]
+ignore = .tox/**,
+    .git/**,
+    .gitignore,
+    .gitreview,
+    .gitmodules,
+    node_modules/**
+
+[all.Documentation]
+bears = WriteGoodLintBear
+files = docs/**.rst
+
+[all.Python]
+bears = BanditBear,
+    PEP8Bear,
+    PyCommentedCodeBear,
+    PyDocStyleBear,
+    PyFlakesBear,
+    PyImportSortBear
+files = docs_conf/**.py
+known_first_party_imports = lftools
+known_third_party_imports = pytest, six, sphinx_bootstrap_theme
+pydocstyle_ignore = D203, D213, D301
+max_line_length = 120
+
+[all.YAML]
+bears = YAMLLintBear
+files = docs_conf/**.yaml
+document_start = True
+yamllint_config = yamllint.conf
