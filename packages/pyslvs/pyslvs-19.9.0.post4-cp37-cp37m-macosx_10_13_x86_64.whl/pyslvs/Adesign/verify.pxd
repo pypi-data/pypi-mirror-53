@@ -1,0 +1,55 @@
+# -*- coding: utf-8 -*-
+# cython: language_level=3
+
+"""The callable class of the validation in algorithm.
+The 'verify' module should be loaded when using sub-class.
+
+author: Yuan Chang
+copyright: Copyright (C) 2016-2019
+license: AGPL
+email: pyslvs@gmail.com
+"""
+
+from numpy cimport ndarray
+
+
+cdef enum stop_option:
+    MAX_GEN
+    MIN_FIT
+    MAX_TIME
+    SLOW_DOWN
+
+
+cdef double rand_v(double lower = *, double upper = *) nogil
+cdef int rand_i(int upper) nogil
+
+
+cdef class Chromosome:
+    cdef unsigned int n
+    cdef double f
+    cdef ndarray v
+    cdef void assign(self, Chromosome obj)
+
+
+cdef class Verification:
+    cdef ndarray[double, ndim=1] get_upper(self)
+    cdef ndarray[double, ndim=1] get_lower(self)
+    cdef double fitness(self, ndarray[double, ndim=1] v)
+    cpdef object result(self, ndarray[double, ndim=1] v)
+
+
+cdef class AlgorithmBase:
+
+    cdef unsigned int stop_at_i, gen, rpt
+    cdef double stop_at_f, time_start
+    cdef stop_option stop_at
+    cdef Verification func
+    cdef Chromosome last_best
+    cdef list fitness_time
+    cdef double[:] lb, ub
+    cdef object progress_fun, interrupt_fun
+
+    cdef void initialize(self)
+    cdef void generation_process(self)
+    cdef void report(self)
+    cpdef tuple run(self)
