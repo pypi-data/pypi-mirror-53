@@ -1,0 +1,17 @@
+{% spaceless %}
+<ul class="page-preview{% if instance.style %} {{ instance.style }}{% endif %}">
+{% for title in titles %}
+    <li class="child preview-item {{ title.teaserextension.extra_classes }}">
+        <a href="{{ title.page.attr.redirect_url|default:title.page.get_absolute_url }}">
+            {% if title.teaserextension.get_preview_image %}
+                <img src="{{ title.teaserextension.get_preview_image.url }}" alt="{{ title.menu_title }}" />
+            {% endif %}
+            <p class="title">{{ title.menu_title }}</p>
+            {% if title.teaserextension.teaser %}
+            <p class="teaser">{{ title.teaserextension.teaser }}</p>
+            {% endif %}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+{% endspaceless %}
