@@ -1,0 +1,80 @@
+Metadata-Version: 2.1
+Name: pydq
+Version: 0.1.4
+Summary: Python library for managing and persisting named Python Queues with a variety of backend choices
+Home-page: https://gitlab.com/anfreitas/dq
+Author: Andrew Freitas
+Author-email: andrewfreitas09@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Provides-Extra: aws
+Requires-Dist: boto3 ; extra == 'aws'
+Provides-Extra: pandas
+Requires-Dist: pandas ; extra == 'pandas'
+
+# dq
+A python library for managing and persisting named Python Queues
+
+### Installation
+```bash
+pip install pydq
+```
+Some backends may require extra packages:
+```bash
+pip install pydq[aws]
+```
+
+### Basic Usage
+```python
+with dq_provider('name') as dq:
+    # Query the last 10 entries with qid='item_id'
+    dq(qid='item_id', start_time=datetime(1, 1, 1), end_time=datetime.utcnow(), limit=10)
+    item = dq.get()
+    # queue items should be dictionaries with 3 keys: qid, ts, and val
+    dq.put({'qid': 'item_id', 'ts': '2019-09-11T03:23:54Z', 'val': 'foo'})
+```
+note: specifying `qid` in the query is optional, if omitted all items between the start and end time are returned
+### Supported Backends:
+#### Local Storage
+* SQLite:
+```python
+from dq.local import SQLite as dq_provider
+```
+
+#### Cloud Storage
+* Buffered DynamoDB
+```python
+from dq.cloud import BufferedDDB as dq_provider
+```
+note: cloud storage is created lazily; the first call to one of these providers will create the resources in the cloud. 
+
+#### Additional API
+Some queue methods accept a `forget` argument that will tell the queue object whether the operation should be persisted. This always defaults to `False`.
+```python
+dq.get(forget=True)  # the returned item will be deleted from persistence
+dq.put(item, forget=True)    # item will not be persisted
+dq.get_all(forget=True)  # Easy way to delete all items in a queue
+dq.put_all(items, forget=False)
+dq.get_to_dataframe()    # install with pandas extra. Returned items are not deleted
+dq.put_from_dataframe(df)    # items will be persisted
+dq.clear(forget=True)    # another way to delete all items in a queue
+```
+
+#### Configuration queues
+dq is great for managing simple JSON configuration too. And we get change tracking for free!
+
+```python
+from dq.helpers import DqConfig
+from dq.local import SQLite
+with DqConfig(name='ApplicationConfig', dq_provider=SQLite) as config:
+    app_id = config['app_id']
+    last_start = config['last_start']
+    config['app_status'] = '#1best'
+```
+
+
+
