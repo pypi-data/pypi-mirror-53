@@ -1,0 +1,1 @@
+from .funwithconsole import draw
