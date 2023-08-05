@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//ES//DTD journal article DTD version 5.5.0//EN//XML" "art550.dtd" [
+<!ENTITY fx001 SYSTEM "fx001" NDATA IMAGE>
+<!ENTITY fx002 SYSTEM "fx002" NDATA IMAGE>
+<!ENTITY fx003 SYSTEM "fx003" NDATA IMAGE>
+<!ENTITY fx004 SYSTEM "fx004" NDATA IMAGE>
+<!ENTITY fx005 SYSTEM "fx005" NDATA IMAGE>
+<!ENTITY gr001 SYSTEM "gr001" NDATA IMAGE>
+<!ENTITY gr002 SYSTEM "gr002" NDATA IMAGE>
+<!ENTITY gr003 SYSTEM "gr003" NDATA IMAGE>
+<!ENTITY gr004 SYSTEM "gr004" NDATA IMAGE>
+<!ENTITY gr005 SYSTEM "gr005" NDATA IMAGE>
+<!ENTITY gr006 SYSTEM "gr006" NDATA IMAGE>
+<!ENTITY gr007 SYSTEM "gr007" NDATA IMAGE>
+<!ENTITY gr008 SYSTEM "gr008" NDATA IMAGE>
+<!ENTITY gr009 SYSTEM "gr009" NDATA IMAGE>
+<!ENTITY gr010 SYSTEM "gr010" NDATA IMAGE>
+<!ENTITY gr011 SYSTEM "gr011" NDATA IMAGE>
+<!ENTITY gr012 SYSTEM "gr012" NDATA IMAGE>
+<!ENTITY gr013 SYSTEM "gr013" NDATA IMAGE>
+<!ENTITY gr014 SYSTEM "gr014" NDATA IMAGE>
+<!ENTITY gr015 SYSTEM "gr015" NDATA IMAGE>
+<!ENTITY gr016 SYSTEM "gr016" NDATA IMAGE>
+<!ENTITY gr017 SYSTEM "gr017" NDATA IMAGE>
+<!ENTITY gr018 SYSTEM "gr018" NDATA IMAGE>
+<!ENTITY gr019 SYSTEM "gr019" NDATA IMAGE>
+]>
+<article xmlns="http://www.elsevier.com/xml/ja/dtd" xmlns:ce="http://www.elsevier.com/xml/common/dtd" xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/dtd" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/dtd" xmlns:xlink="http://www.w3.org/1999/xlink" docsubtype="fla" xml:lang="en">
+  <item-info>
+    <jid>NUPHB</jid>
+    <aid>14512</aid>
+    <ce:pii>S0550-3213(18)30341-9</ce:pii>
+    <ce:doi>10.1016/j.nuclphysb.2018.12.001</ce:doi>
+    <ce:copyright year="2018" type="other">The Authors</ce:copyright>
+    <ce:doctopics>
+      <ce:doctopic id="doc0010">
+        <ce:text>High Energy Physics – Phenomenology</ce:text>
+      </ce:doctopic>
+    </ce:doctopics>
+  </item-info>
+  <head>
+    <ce:title id="ti0010">Revisiting RGEs for general gauge theories</ce:title>
+    <ce:author-group id="ag0010">
+      <ce:author id="au0010" author-id="S0550321318303419-6cca9d05bdc9e07bf63ff073eefd65c6">
+        <ce:given-name>Ingo</ce:given-name>
+        <ce:surname>Schienbein</ce:surname>
+        <ce:cross-ref refid="aff0010" id="crf0020">
+          <ce:sup>a</ce:sup>
+        </ce:cross-ref>
+        <ce:e-address type="email" xlink:href="mailto:ingo.schienbein@lpsc.in2p3.fr" id="ea0010">ingo.schienbein@lpsc.in2p3.fr</ce:e-address>
+      </ce:author>
+      <ce:author orcid="0000-0001-5911-5804" id="au0020" author-id="S0550321318303419-ecdddf2308b7caa1721725b4aa6c9c9b">
+        <ce:given-name>Florian</ce:given-name>
+        <ce:surname>Staub</ce:surname>
+        <ce:cross-ref refid="aff0020" id="crf0030">
+          <ce:sup>b</ce:sup>
+        </ce:cross-ref>
+        <ce:cross-ref refid="aff0030" id="crf0040">
+          <ce:sup>c</ce:sup>
+        </ce:cross-ref>
+        <ce:e-address type="email" xlink:href="mailto:florian.staub@kit.edu" id="ea0020">florian.staub@kit.edu</ce:e-address>
+      </ce:author>
+      <ce:author id="au0030" author-id="S0550321318303419-8710623e9bdf52c58754a29032137903">
+        <ce:given-name>Tom</ce:given-name>
+        <ce:surname>Steudtner</ce:surname>
+        <ce:cross-ref refid="aff0040" id="crf0050">
+          <ce:sup>d</ce:sup>
+        </ce:cross-ref>
+        <ce:e-address type="email" xlink:href="mailto:T.Steudtner@sussex.ac.uk" id="ea0030">T.Steudtner@sussex.ac.uk</ce:e-address>
+      </ce:author>
+      <ce:author orcid="0000-0002-2679-9020" id="au0040" author-id="S0550321318303419-10ccff8cf6ca0de00014b58064d17d9a">
+        <ce:given-name>Kseniia</ce:given-name>
+        <ce:surname>Svirina</ce:surname>
+        <ce:cross-ref refid="aff0010" id="crf0060">
+          <ce:sup>a</ce:sup>
+        </ce:cross-ref>
+        <ce:cross-ref refid="cr0010" id="crf0380">
+          <ce:sup>⁎</ce:sup>
+        </ce:cross-ref>
+        <ce:e-address type="email" xlink:href="mailto:kseniia.svirina@lpsc.in2p3.fr" id="ea0040">kseniia.svirina@lpsc.in2p3.fr</ce:e-address>
+      </ce:author>
+      <ce:affiliation id="aff0010" affiliation-id="S0550321318303419-2f4655eb54ebbad0a3aba6b1594c990c">
+        <ce:label>a</ce:label>
+        <ce:textfn>Laboratoire de Physique Subatomique et de Cosmologie, Université Grenoble Alpes, CNRS/IN2P3, 53 Avenue des Martyrs, F-38026 Grenoble, France</ce:textfn>
+        <sa:affiliation>
+          <sa:organization>Laboratoire de Physique Subatomique et de Cosmologie</sa:organization>
+          <sa:organization>Université Grenoble Alpes</sa:organization>
+          <sa:organization>CNRS/IN2P3</sa:organization>
+          <sa:address-line>53 Avenue des Martyrs</sa:address-line>
+          <sa:city>Grenoble</sa:city>
+          <sa:postal-code>F-38026</sa:postal-code>
+          <sa:country>France</sa:country>
+        </sa:affiliation>
+      </ce:affiliation>
+      <ce:affiliation id="aff0020" affiliation-id="S0550321318303419-d192c511065a038cf24282e4db3a97e4">
+        <ce:label>b</ce:label>
+        <ce:textfn>Institute for Theoretical Physics (ITP), Karlsruhe Institute of Technology, Engesserstraße 7, D-76128 Karlsruhe, Germany</ce:textfn>
+        <sa:affiliation>
+          <sa:organization>Institute for Theoretical Physics (ITP)</sa:organization>
+          <sa:organization>Karlsruhe Institute of Technology</sa:organization>
+          <sa:address-line>Engesserstraße 7</sa:address-line>
+          <sa:city>Karlsruhe</sa:city>
+          <sa:postal-code>D-76128</sa:postal-code>
+          <sa:country>Germany</sa:country>
+        </sa:affiliation>
+      </ce:affiliation>
+      <ce:affiliation id="aff0030" affiliation-id="S0550321318303419-89e16fa64777c28fe766dd31c045dbaf">
+        <ce:label>c</ce:label>
+        <ce:textfn>Institute for Nuclear Physics (IKP), Karlsruhe Institute of Technology, Hermann-von-Helmholtz-Platz 1, D-76344 Eggenstein-Leopoldshafen, Germany</ce:textfn>
+        <sa:affiliation>
+          <sa:organization>Institute for Nuclear Physics (IKP)</sa:organization>
+          <sa:organization>Karlsruhe Institute of Technology</sa:organization>
+          <sa:address-line>Hermann-von-Helmholtz-Platz 1</sa:address-line>
+          <sa:city>Eggenstein-Leopoldshafen</sa:city>
+          <sa:postal-code>D-76344</sa:postal-code>
+          <sa:country>Germany</sa:country>
+        </sa:affiliation>
+      </ce:affiliation>
+      <ce:affiliation id="aff0040" affiliation-id="S0550321318303419-ae8f9eb9677dcae4a34fd723a1cd71da">
+        <ce:label>d</ce:label>
+        <ce:textfn>Department of Physics and Astronomy, U Sussex, Brighton, BN1 9QH, UK</ce:textfn>
+        <sa:affiliation>
+          <sa:organization>Department of Physics and Astronomy</sa:organization>
+          <sa:organization>U Sussex</sa:organization>
+          <sa:city>Brighton</sa:city>
+          <sa:postal-code>BN1 9QH</sa:postal-code>
+          <sa:country>UK</sa:country>
+        </sa:affiliation>
+      </ce:affiliation>
+      <ce:correspondence id="cr0010">
+        <ce:label>⁎</ce:label>
+        <ce:text>Corresponding author.</ce:text>
+      </ce:correspondence>
+    </ce:author-group>
+    <ce:date-received day="12" month="10" year="2018"/>
+    <ce:date-accepted day="3" month="12" year="2018"/>
+    <ce:miscellaneous id="ms0010">Editor: Tommy Ohlsson</ce:miscellaneous>
+    <ce:abstract id="ab0010">
+      <ce:section-title id="st0010">Abstract</ce:section-title>
+      <ce:abstract-sec id="as0010">
+        <ce:simple-para id="sp0040">We revisit the renormalisation group equations (RGE) for general renormalisable gauge theories at one- and two-loop accuracy. We identify and correct various mistakes in the literature for the <ce:italic>β</ce:italic>-functions of the dimensionful Lagrangian parameters (the fermion mass, the bilinear and trilinear scalar couplings) as well as the dimensionless quartic scalar couplings. There are two sources for these discrepancies. Firstly, the known expressions for the scalar couplings assume a diagonal wave-function renormalisation which is not appropriate for models with mixing in the scalar sector. Secondly, the dimensionful parameters have been derived in the literature using a dummy field method which we critically re-examine, obtaining revised expressions for the <ce:italic>β</ce:italic>-function of the fermion mass. We perform an independent cross-check using well-tested supersymmetric RGEs which confirms our results. The numerical impact of the changes in the <ce:italic>β</ce:italic>-function for the fermion mass terms is illustrated using a toy model with a heavy vector-like fermion pair coupled to a scalar gauge singlet. Unsurprisingly, the correction to the running of the fermion mass becomes sizeable for large Yukawa couplings of the order of <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" altimg="si1.gif"><mml:mi mathvariant="script">O</mml:mi><mml:mo stretchy="false">(</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy="false">)</mml:mo></mml:math>. Furthermore, we demonstrate the importance of the correction to the <ce:italic>β</ce:italic>-functions of the scalar quartic couplings using a general type-III Two-Higgs-Doublet-Model. All the corrected expressions have been implemented in updated versions of the Mathematica package <ce:monospace>SARAH</ce:monospace> and the Python package <ce:monospace>PyR@TE</ce:monospace>.</ce:simple-para>
+      </ce:abstract-sec>
+    </ce:abstract>
+  </head>
+  <body>
+    <ce:sections>
+      <ce:section id="se0010" role="introduction">
+        <ce:label>1</ce:label>
+        <ce:section-title id="st0020">Introduction</ce:section-title>
+        <ce:para id="pr0010">Renormalisation Group Equations (RGEs) are important as they provide the necessary link between the physics at different energy scales. The two-loop RGEs for all dimensionless parameters in general gauge theories have been derived already more than 30 years ago <ce:cross-refs refid="br0010 br0020 br0030 br0040 br0050 br0060" id="crs0010">[1–6]</ce:cross-refs>. More recently, these results have been re-derived by Luo et al. <ce:cross-ref refid="br0070" id="crf0070">[7]</ce:cross-ref> including the <ce:italic>β</ce:italic>-functions for dimensionful parameters. The latter results are based on the <ce:italic>β</ce:italic>-functions of dimensionless couplings by applying a so called “dummy field” method <ce:cross-ref refid="br0080" id="crf0080">[8]</ce:cross-ref>. However, no independent direct calculation of the two-loop <ce:italic>β</ce:italic>-functions for scalar and fermion masses and scalar trilinear couplings exists so far in the literature. One of the aims of this paper is to provide a more detailed (pedagogical) discussion of the dummy field method and to critically examine the <ce:italic>β</ce:italic>-functions for the dimensionful parameters. As a result we will correct the <ce:italic>β</ce:italic>-functions for the fermion masses. We also find differences for the purely scalar couplings in certain models with respect to the literature. These differences arise from not always justified assumption about the properties of the wave-function renormalisation. We provide an independent cross-check using well tested supersymmetric RGEs which confirms our results. We believe that these corrections and validations are non-trivial and important in view of the wide use of the RGEs. Still, an independent direct calculation of the dimensionful <ce:italic>β</ce:italic>-functions would be useful.</ce:para>
+        <ce:para id="pr0020">The general equations have been implemented in the Mathematica package <ce:monospace>SARAH</ce:monospace> <ce:cross-refs refid="br0090 br0100 br0110 br0120 br0130" id="crs0020">[9–13]</ce:cross-refs> and in the Python package <ce:monospace>PyR@TE</ce:monospace> <ce:cross-refs refid="br0140 br0150" id="crs0030">[14,15]</ce:cross-refs>. More recent results which are (partially) included in these packages such as kinetic mixing <ce:cross-ref refid="br0160" id="crf0090">[16]</ce:cross-ref> or running VEVs <ce:cross-refs refid="br0170 br0180" id="crs0040">[17,18]</ce:cross-refs> will not be discussed in this paper. The overarching purpose is to present the current state-of-the art of the two-loop <ce:italic>β</ce:italic>-functions and to collect the corrected expressions such that all the relevant information is at hand in one place.</ce:para>
+      </ce:section>
+      <ce:section id="se0020">
+        <ce:label>2</ce:label>
+        <ce:section-title id="st0030">The Lagrangian for a general gauge theory</ce:section-title>
+        <ce:para id="pr0030">In this section we review .</ce:para>
+      </ce:section>
+    </ce:sections>
+    <ce:acknowledgment id="ac0010">
+      <ce:section-title id="st0150">Acknowledgements</ce:section-title>
+      <ce:para id="pr0540">We are grateful to Dominik Stöckinger who first pointed out mistakes in the literature. KS and IS would like to thank Steven Martin for very helpful discussions. FS is supported by the <ce:grant-sponsor id="gsp0010" sponsor-id="https://doi.org/10.13039/100010663">ERC</ce:grant-sponsor> Recognition Award <ce:grant-number refid="gsp0010">ERC-RA-0008</ce:grant-number> of the Helmholtz Association.</ce:para>
+    </ce:acknowledgment>
+    <ce:appendices>
+      <ce:section id="se0140">
+        <ce:label>Appendix A</ce:label>
+        <ce:section-title id="st0160">The dummy field method at two-loop</ce:section-title>
+        <ce:para id="pr0550">In this appendix, we list all two-loop vertex corrections which are needed to obtain the <ce:italic>β</ce:italic> functions for dimensionful parameters.</ce:para>
+      </ce:section>
+    </ce:appendices>
+  </body>
+  <tail>
+    <ce:bibliography id="bl0010">
+      <ce:section-title id="st0270">References</ce:section-title>
+      <ce:bibliography-sec id="bs0010">
+        <ce:bib-reference id="br0010">
+          <ce:label>[1]</ce:label>
+          <sb:reference id="bib4D6163686163656B3A31393833747As1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>M.E.</ce:given-name>
+                  <ce:surname>Machacek</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.T.</ce:given-name>
+                  <ce:surname>Vaughn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two loop renormalization group equations in a general quantum field theory. 1. Wave function renormalization</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Nucl. Phys. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>222</sb:volume-nr>
+                </sb:series>
+                <sb:date>1983</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>83</sb:first-page>
+              </sb:pages>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0020">
+          <ce:label>[2]</ce:label>
+          <sb:reference id="bib4D6163686163656B3A313938336669s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>M.E.</ce:given-name>
+                  <ce:surname>Machacek</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.T.</ce:given-name>
+                  <ce:surname>Vaughn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two loop renormalization group equations in a general quantum field theory. 2. Yukawa couplings</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Nucl. Phys. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>236</sb:volume-nr>
+                </sb:series>
+                <sb:date>1984</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>221</sb:first-page>
+              </sb:pages>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0030">
+          <ce:label>[3]</ce:label>
+          <sb:reference id="bib4D6163686163656B3A313938347A77s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>M.E.</ce:given-name>
+                  <ce:surname>Machacek</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.T.</ce:given-name>
+                  <ce:surname>Vaughn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two loop renormalization group equations in a general quantum field theory. 3. Scalar quartic couplings</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Nucl. Phys. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>249</sb:volume-nr>
+                </sb:series>
+                <sb:date>1985</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>70</sb:first-page>
+              </sb:pages>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0040">
+          <ce:label>[4]</ce:label>
+          <sb:reference id="bib4A61636B3A31393834766As1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Jack</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>H.</ce:given-name>
+                  <ce:surname>Osborn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>General background field calculations with Fermion fields</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Nucl. Phys. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>249</sb:volume-nr>
+                </sb:series>
+                <sb:date>1985</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>472</sb:first-page>
+              </sb:pages>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0050">
+          <ce:label>[5]</ce:label>
+          <sb:reference id="bib4A61636B3A313938327372s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Jack</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>H.</ce:given-name>
+                  <ce:surname>Osborn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>General two loop beta functions for gauge theories with arbitrary scalar fields</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>J. Phys. A</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>16</sb:volume-nr>
+                </sb:series>
+                <sb:date>1983</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>1101</sb:first-page>
+              </sb:pages>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0060">
+          <ce:label>[6]</ce:label>
+          <sb:reference id="bib4A61636B3A313938326866s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Jack</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>H.</ce:given-name>
+                  <ce:surname>Osborn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two loop background field calculations for arbitrary background fields</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Nucl. Phys. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>207</sb:volume-nr>
+                </sb:series>
+                <sb:date>1982</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>474</sb:first-page>
+              </sb:pages>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0070">
+          <ce:label>[7]</ce:label>
+          <sb:reference id="bib4C756F3A323030327469s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>M.-x.</ce:given-name>
+                  <ce:surname>Luo</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>H.-w.</ce:given-name>
+                  <ce:surname>Wang</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>Y.</ce:given-name>
+                  <ce:surname>Xiao</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two-loop renormalization group equations in general gauge field theories</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Rev. D</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>67</sb:volume-nr>
+                </sb:series>
+                <sb:date>2003</sb:date>
+              </sb:issue>
+              <sb:article-number>065019</sb:article-number>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:hep-ph/0211440" id="inf0190">arXiv:hep-ph/0211440</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0080">
+          <ce:label>[8]</ce:label>
+          <sb:reference id="bib4D617274696E3A313939337A6Bs1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>S.P.</ce:given-name>
+                  <ce:surname>Martin</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.T.</ce:given-name>
+                  <ce:surname>Vaughn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two loop renormalization group equations for soft supersymmetry breaking couplings</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Rev. D</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>50</sb:volume-nr>
+                </sb:series>
+                <sb:date>1994</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>2282</sb:first-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:hep-ph/9311340" id="inf0200">arXiv:hep-ph/9311340</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0090">
+          <ce:label>[9]</ce:label>
+          <sb:reference id="bib53746175623A32303038757As1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>SARAH</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:0806.0538" id="inf0210">arXiv:0806.0538</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0100">
+          <ce:label>[10]</ce:label>
+          <sb:reference id="bib53746175623A323030396269s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>From superpotential to model files for FeynArts and CalcHep/CompHep</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Comput. Phys. Commun.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>181</sb:volume-nr>
+                </sb:series>
+                <sb:date>2010</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>1077</sb:first-page>
+                <sb:last-page>1086</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:0909.2863" id="inf0220">arXiv:0909.2863</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0110">
+          <ce:label>[11]</ce:label>
+          <sb:reference id="bib53746175623A323031306A68s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Automatic calculation of supersymmetric renormalization group equations and self energies</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Comput. Phys. Commun.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>182</sb:volume-nr>
+                </sb:series>
+                <sb:date>2011</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>808</sb:first-page>
+                <sb:last-page>833</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1002.0840" id="inf0230">arXiv:1002.0840</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0120">
+          <ce:label>[12]</ce:label>
+          <sb:reference id="bib53746175623A323031327062s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>SARAH 3.2: Dirac Gauginos, UFO output, and more</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Comput. Phys. Commun.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>184</sb:volume-nr>
+                </sb:series>
+                <sb:date>2013</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>1792</sb:first-page>
+                <sb:last-page>1809</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1207.0906" id="inf0240">arXiv:1207.0906</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0130">
+          <ce:label>[13]</ce:label>
+          <sb:reference id="bib53746175623A32303133747461s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>SARAH 4: a tool for (not only SUSY) model builders</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Comput. Phys. Commun.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>185</sb:volume-nr>
+                </sb:series>
+                <sb:date>2014</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>1773</sb:first-page>
+                <sb:last-page>1790</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1309.7223" id="inf0250">arXiv:1309.7223</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0140">
+          <ce:label>[14]</ce:label>
+          <sb:reference id="bib4C796F6E6E65743A32303133646E61s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Lyonnet</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Schienbein</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>A.</ce:given-name>
+                  <ce:surname>Wingerter</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>PyR@TE: renormalization group equations for general gauge theories</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Comput. Phys. Commun.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>185</sb:volume-nr>
+                </sb:series>
+                <sb:date>2014</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>1130</sb:first-page>
+                <sb:last-page>1152</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1309.7030" id="inf0260">arXiv:1309.7030</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0150">
+          <ce:label>[15]</ce:label>
+          <sb:reference id="bib4C796F6E6E65743A3230313678697As1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Lyonnet</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Schienbein</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>PyR@TE 2: a Python tool for computing RGEs at two-loop</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Comput. Phys. Commun.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>213</sb:volume-nr>
+                </sb:series>
+                <sb:date>2017</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>181</sb:first-page>
+                <sb:last-page>196</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1608.0727" id="inf0270">arXiv:1608.0727</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0160">
+          <ce:label>[16]</ce:label>
+          <sb:reference id="bib466F6E736563613A32303133627561s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>R.M.</ce:given-name>
+                  <ce:surname>Fonseca</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.</ce:given-name>
+                  <ce:surname>Malinsky</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Renormalization group equations and matching in a general quantum field theory with kinetic mixing</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1308.1674" id="inf0280">arXiv:1308.1674</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0170">
+          <ce:label>[17]</ce:label>
+          <sb:reference id="bib537065726C696E673A32303133657661s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>M.</ce:given-name>
+                  <ce:surname>Sperling</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>D.</ce:given-name>
+                  <ce:surname>Stöckinger</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>A.</ce:given-name>
+                  <ce:surname>Voigt</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Renormalization of vacuum expectation values in spontaneously broken gauge theories</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>J. High Energy Phys.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>1307</sb:volume-nr>
+                </sb:series>
+                <sb:date>2013</sb:date>
+              </sb:issue>
+              <sb:article-number>132</sb:article-number>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1305.1548" id="inf0290">arXiv:1305.1548</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0180">
+          <ce:label>[18]</ce:label>
+          <sb:reference id="bib537065726C696E673A32303133787161s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>M.</ce:given-name>
+                  <ce:surname>Sperling</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>D.</ce:given-name>
+                  <ce:surname>Stöckinger</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>A.</ce:given-name>
+                  <ce:surname>Voigt</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Renormalization of vacuum expectation values in spontaneously broken gauge theories: two-loop results</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>J. High Energy Phys.</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>01</sb:volume-nr>
+                </sb:series>
+                <sb:date>2014</sb:date>
+              </sb:issue>
+              <sb:article-number>068</sb:article-number>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1310.7629" id="inf0300">arXiv:1310.7629</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0190">
+          <ce:label>[19]</ce:label>
+          <sb:reference id="bib59616D6164613A313939346964s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>Y.</ce:given-name>
+                  <ce:surname>Yamada</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Two loop renormalization group equations for soft SUSY breaking scalar interactions: supergraph method</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Rev. D</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>50</sb:volume-nr>
+                </sb:series>
+                <sb:date>1994</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>3537</sb:first-page>
+                <sb:last-page>3545</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:hep-ph/9401241" id="inf0310">arXiv:hep-ph/9401241</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0200">
+          <ce:label>[20]</ce:label>
+          <sb:reference id="bib4A61636B3A313939376568s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Jack</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>D.R.T.</ce:given-name>
+                  <ce:surname>Jones</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>A.</ce:given-name>
+                  <ce:surname>Pickering</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Renormalization invariance and the soft Beta functions</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Lett. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>426</sb:volume-nr>
+                </sb:series>
+                <sb:date>1998</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>73</sb:first-page>
+                <sb:last-page>77</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:hep-ph/9712542" id="inf0320">arXiv:hep-ph/9712542</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0210">
+          <ce:label>[21]</ce:label>
+          <sb:reference id="bib4A61636B3A31393934726Bs1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>I.</ce:given-name>
+                  <ce:surname>Jack</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>D.R.T.</ce:given-name>
+                  <ce:surname>Jones</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>S.P.</ce:given-name>
+                  <ce:surname>Martin</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.T.</ce:given-name>
+                  <ce:surname>Vaughn</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>Y.</ce:given-name>
+                  <ce:surname>Yamada</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Decoupling of the epsilon scalar mass in softly broken supersymmetry</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Rev. D</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>50</sb:volume-nr>
+                </sb:series>
+                <sb:date>1994</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>R5481</sb:first-page>
+                <sb:last-page>R5483</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:hep-ph/9407291" id="inf0330">arXiv:hep-ph/9407291</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0220">
+          <ce:label>[22]</ce:label>
+          <sb:reference id="bib4D617274696E3A313939337978s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>S.P.</ce:given-name>
+                  <ce:surname>Martin</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.T.</ce:given-name>
+                  <ce:surname>Vaughn</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>Regularization dependence of running couplings in softly broken supersymmetry</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Lett. B</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>318</sb:volume-nr>
+                </sb:series>
+                <sb:date>1993</sb:date>
+              </sb:issue>
+              <sb:pages>
+                <sb:first-page>331</sb:first-page>
+                <sb:last-page>337</sb:last-page>
+              </sb:pages>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:hep-ph/9308222" id="inf0340">arXiv:hep-ph/9308222</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0230">
+          <ce:label>[23]</ce:label>
+          <sb:reference id="bib427261617468656E3A323031376A7673s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>J.</ce:given-name>
+                  <ce:surname>Braathen</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.D.</ce:given-name>
+                  <ce:surname>Goodsell</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>M.E.</ce:given-name>
+                  <ce:surname>Krauss</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>T.</ce:given-name>
+                  <ce:surname>Opferkuch</ce:surname>
+                </sb:author>
+                <sb:author>
+                  <ce:given-name>F.</ce:given-name>
+                  <ce:surname>Staub</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle><ce:italic>N</ce:italic>-loop running should be combined with <ce:italic>N</ce:italic>-loop matching</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:issue>
+                <sb:series>
+                  <sb:title>
+                    <sb:maintitle>Phys. Rev. D</sb:maintitle>
+                  </sb:title>
+                  <sb:volume-nr>97</sb:volume-nr>
+                </sb:series>
+                <sb:issue-nr>1</sb:issue-nr>
+                <sb:date>2018</sb:date>
+              </sb:issue>
+              <sb:article-number>015011</sb:article-number>
+            </sb:host>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1711.0846" id="inf0350">arXiv:1711.0846</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+        <ce:bib-reference id="br0240">
+          <ce:label>[24]</ce:label>
+          <sb:reference id="bib4265646E79616B6F763A32303138636D78s1">
+            <sb:contribution>
+              <sb:authors>
+                <sb:author>
+                  <ce:given-name>A.V.</ce:given-name>
+                  <ce:surname>Bednyakov</ce:surname>
+                </sb:author>
+              </sb:authors>
+              <sb:title>
+                <sb:maintitle>On three-loop RGE for the Higgs sector of 2HDM</sb:maintitle>
+              </sb:title>
+            </sb:contribution>
+            <sb:host>
+              <sb:e-host>
+                <ce:inter-ref xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:href="arxiv:1809.0452" id="inf0360">arXiv:1809.0452</ce:inter-ref>
+              </sb:e-host>
+            </sb:host>
+          </sb:reference>
+        </ce:bib-reference>
+      </ce:bibliography-sec>
+    </ce:bibliography>
+  </tail>
+</article>
