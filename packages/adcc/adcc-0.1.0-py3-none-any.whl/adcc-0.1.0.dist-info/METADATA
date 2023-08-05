@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: adcc
+Version: 0.1.0
+Summary: adcc:  Seamlessly connect your host program to ADC
+Home-page: https://adc-connect.org
+Author: Michael F. Herbst, Maximilian Scheurer
+Author-email: adcc+developers@michael-herbst.com
+License: LGPL v3
+Platform: Linux
+Platform: Mac OS-X
+Classifier: Development Status :: 1 - Planning
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: License :: Free For Educational Use
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Topic :: Education
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Requires-Python: >=3.5
+
+adcc is a python-based framework for performing quantum-chemical simulations
+based upon the algebraic-diagrammatic construction (ADC) approach.
+
+As of now PP-ADC and CVS-PP-ADC methods are available to compute excited
+states on top of an MP2 ground state. The underlying Hartree-Fock reference
+is not computed inside adcc, much rather external packages should be used
+for this purpose. Interfaces to seamlessly interact with pyscf, psi4,
+VeloxChem or molsturm are available, but other SCF codes or even statically
+computed data can be easily used as well.
+
+Notice, that only the adcc python and C++ source code are released under the
+terms of the GNU Lesser General Public License v3 (LGPLv3) license. This
+license does not apply to the libadccore.so binary file contained inside
+the directory '/adcc/lib/' of the distributed tarball. For further details
+see the file LICENSE_adccore.
+
