@@ -1,0 +1,150 @@
+Metadata-Version: 2.1
+Name: pytest-pytestrail
+Version: 0.6.0
+Summary: Pytest plugin for interaction with TestRail
+Home-page: https://github.com/tolstislon/pytest-pytestrail
+Author: tolstislon
+Author-email: tolstislon@gmail.com
+License: MIT License
+Keywords: testrail,pytest,pytest-testrail,pytest-pytestrail,testrail_api,api
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Pytest
+Classifier: Environment :: Plugins
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Testing
+Requires-Python: >=3.6
+Requires-Dist: pytest (>=3.8.0)
+Requires-Dist: testrail-api (>=1.4.0)
+
+
+
+.. image:: https://img.shields.io/pypi/v/pytest-pytestrail?color=yellow&label=version
+   :target: https://img.shields.io/pypi/v/pytest-pytestrail?color=yellow&label=version
+   :alt: PyPI
+
+
+.. image:: https://pepy.tech/badge/pytest-pytestrail
+   :target: https://pepy.tech/project/pytest-pytestrail
+   :alt: Downloads
+
+
+.. image:: https://img.shields.io/pypi/pyversions/pytest-pytestrail.svg
+   :target: https://img.shields.io/pypi/pyversions/pytest-pytestrail.svg
+   :alt: PyPI - Python Version
+
+
+.. image:: https://img.shields.io/badge/pytest-%3E%3D3.8-blue.svg
+   :target: https://img.shields.io/badge/pytest-%3E%3D3.8-blue.svg
+   :alt: Pytest Version
+
+
+pytest-pytestrail
+=================
+
+Pytest plugin for interaction with TestRail
+
+Install
+^^^^^^^
+
+.. code-block:: shell
+
+   pip install pytest-pytestrail
+
+Example
+^^^^^^^
+
+.. code-block:: python
+
+   from pytest_pytestrail import pytestrail
+
+
+   @pytestrail.case('C32')
+   def test_one():
+       assert True
+
+   @pytestrail.case('C12')
+   def test_two():
+       assert True
+
+Steps
+#####
+
+.. code-block:: python
+
+   from pytest_pytestrail import pytestrail
+
+   case = pytestrail.steps_case('C3')
+
+   @case.step(1)
+   def test_step_one():
+       assert True
+
+
+   @case.step(2)
+   def test_step_two():
+       assert True
+
+Steps parametrize
+#################
+
+.. code-block:: python
+
+   from pytest_pytestrail import pytestrail
+   import pytest
+
+   @pytest.mark.parametrize('data', pytestrail.params('C84', [1, 23, 33, 1, 57]))
+   def test_five(data):
+       assert data
+
+   @pytest.mark.parametrize('data', [pytestrail.param(1, 'C55'), pytestrail.param(2, 'C56')])
+   def test_six(data):
+       assert data
+
+Configuration
+~~~~~~~~~~~~~
+
+Support environment variables
+
+
+* TESTRAIL_URL
+* TESTRAIL_EMAIL
+* TESTRAIL_PASSWORD
+
+Config file
+"""""""""""
+
+``pytest.ini`` or ``setup.cfg`` `pytest configuration <https://docs.pytest.org/en/latest/customize.html>`_
+
+.. code-block:: ini
+
+   [pytest]
+   pytestrail = True  
+   pytestrail-url = https://example.testrail.com
+   pytestrail-email = exemle@mail.com
+   pytestrail-password = password
+   pytestrail-test-run = 12
+   pytestrail-no-decorator-skip = True
+   pytestrail-report = True
+
+or
+
+Command line options
+""""""""""""""""""""
+
+.. code-block:: shell
+
+   --pytestrail            Enable plugin
+   --tr-url=URL            TestRail address
+   --tr-email=EMAIL        Email for the account on the TestRail
+   --tr-password=PASSWORD  Password for the account on the TestRail
+   --tr-test-run=12        ID testrun
+   --tr-no-decorator-skip  Skip tests without decorator
+   --tr-report             Enable report
+
+
