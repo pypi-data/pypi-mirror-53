@@ -1,0 +1,15 @@
+#!python
+import click
+
+from commands import create
+
+
+@click.group()
+@click.pass_context
+def cli(ctx):
+    pass
+
+
+if __name__ == '__main__':
+    cli.add_command(create)
+    cli()
