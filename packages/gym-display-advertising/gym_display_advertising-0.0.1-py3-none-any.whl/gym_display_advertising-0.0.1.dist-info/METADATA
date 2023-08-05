@@ -1,0 +1,66 @@
+Metadata-Version: 2.1
+Name: gym-display-advertising
+Version: 0.0.1
+Summary: An OpenAI Gym for Display Advertisment Reinforcement Learning
+Home-page: https://gitlab.com/winderresearch/gym-display-advertising
+Author: Phil Winder
+Author-email: phil@winderresearch.com
+License: MIT
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+Requires-Dist: gym (>=0.12.5)
+Requires-Dist: pandas (>=0.18.1)
+
+# gym-display-advertising
+
+An OpenAI Gym for Display Advertisment Reinforcement Learning
+
+## Installation
+
+`pip install gym-display-advertising`
+
+## Usage
+
+```python
+import gym_display_advertising
+
+env = gym.make("StaticDisplayAdvertising-v0")
+episode_over = False
+while not episode_over:
+    state, reward, episode_over, _ = env.step(env.action_space.sample())
+    print(state, reward)
+```
+
+```python
+import gym_display_advertising
+
+env = gym.make("DisplayAdvertising-v0")
+episode_over = False
+while not episode_over:
+    state, reward, episode_over, _ = env.step(env.action_space.sample())
+    print(state, reward)
+```
+
+## Real Ad Bidding Data
+
+The repository contains real-life bidding data from a single merchant and loads this by default. If you want to load more data follow the instructions in the [make-ipinyou-data repository](https://github.com/wnzhang/make-ipinyou-data) to create the data.
+
+Then use the helper class `ProcessedIPinYouData` to load the data and pass the dataframe into the `gym.make` command.
+
+```python
+import pathlib
+import gym
+import gym_display_advertising
+
+ipinyou = gym_display_advertising.data.ProcessedIPinYouData(directory=pathlib.Path("path/to/file"))
+training_data, _ = ipinyou.get_merchant_data(2997)
+env = gym.make("DisplayAdvertising-v0", data=training_data)
+state, reward, _, _ = env.step(env.action_space.sample())
+print(state, reward)
+```
+
+## Acknowledgements
+
+This is a project by [Winder Research](https://WinderResearch.com), a Cloud-Native Data Science consultancy.
+
+
