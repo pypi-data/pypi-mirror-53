@@ -1,0 +1,14 @@
+{
+  "columns":{},
+
+  "postprocess":[],
+
+  "intents":{
+    "TestNumericIntent":{
+      "single":[
+	      {"transformer": "Imputer", "name": "impute", "parameters": {"strategy":"mean"}}
+      ]
+    }
+  }
+
+}

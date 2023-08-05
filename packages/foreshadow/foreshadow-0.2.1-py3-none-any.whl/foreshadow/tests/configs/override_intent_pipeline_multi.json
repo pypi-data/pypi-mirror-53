@@ -1,0 +1,14 @@
+{
+  "columns":{},
+
+  "postprocess":[],
+
+  "intents":{
+    "TestNumericIntent":{
+      "multi":[
+	      {"transformer": "PCA", "name": "pca", "parameters": {"n_components":3}}
+      ]
+    }
+  }
+
+}
