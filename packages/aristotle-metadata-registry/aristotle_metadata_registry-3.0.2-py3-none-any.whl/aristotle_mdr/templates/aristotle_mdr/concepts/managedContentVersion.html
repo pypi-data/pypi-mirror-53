@@ -1,0 +1,34 @@
+{% extends 'aristotle_mdr/base.html' %}
+{% load util_tags humanize i18n %}
+
+{% block title %}
+    {{ item.name }}
+    {% if item.version %}
+        - v{{ item.version }}
+    {% endif %}
+    ( Previous Version )
+{% endblock %}
+
+{% block content %}
+<header class="row">
+    {% block concept_title %}
+    {% include "aristotle_mdr/concepts/titles/display_title.html" with item=current_item %}
+    {% endblock %}
+</header>
+<section class="managed row">
+    {% include "aristotle_mdr/concepts/versionInfobox.html" %}
+    {% include "aristotle_mdr/concepts/visibilityInfoBar.html" %}
+
+    {# Render version data #}
+    {% for field in item.item_fields %}
+      {% include 'aristotle_mdr/helpers/version_field.html' with field=field only %}
+    {% endfor %}
+
+
+</section>
+
+<p>
+  <span class="text-danger">*</span>
+  These links show the current name of the item, not the name at the time this version was created
+</p>
+{% endblock %}

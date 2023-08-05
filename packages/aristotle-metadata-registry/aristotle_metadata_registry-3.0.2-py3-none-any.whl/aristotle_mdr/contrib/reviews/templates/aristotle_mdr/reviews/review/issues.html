@@ -1,0 +1,20 @@
+{% extends "aristotle_mdr/reviews/review/base.html" %}
+{% load i18n humanize %}
+{% load aristotle_tags %}
+
+{% block title %}Issues for Review{{ item.name }}{% endblock %}
+{% block tabpanel %}
+<div v-pre role="tabpanel" class="tab-pane active" id="review_issues">
+  <h2>Open issues related to items in this review</h2>
+
+      {% regroup open_issues by item as issues %}
+      {% for issue_set in issues %}
+          <h3>{{ issue_set.grouper.name }}</h1>
+            {% include 'aristotle_mdr/issues/sublist.html' with issues=issue_set.list context_class="success" %}
+      {% empty %}
+        <p>No issues to display</p>
+      {% endfor %}
+
+</div>
+
+{% endblock %}
