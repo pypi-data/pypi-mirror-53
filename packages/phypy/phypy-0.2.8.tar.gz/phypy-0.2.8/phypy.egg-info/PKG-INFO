@@ -1,0 +1,118 @@
+Metadata-Version: 1.2
+Name: phypy
+Version: 0.2.8
+Summary: Library of tools for wireless, physical layer research, simulations, and testing.
+Home-page: https://github.com/ctarver/phypy
+Author: Chance Tarver
+Author-email: tarver.chance@gmail.com
+License: MIT license
+Description: =====
+        PhyPy
+        =====
+        
+        
+        .. image:: https://img.shields.io/pypi/v/phypy.svg
+                :target: https://pypi.python.org/pypi/phypy
+        
+        .. image:: https://img.shields.io/travis/ctarver/phypy.svg
+                :target: https://travis-ci.org/ctarver/phypy
+        
+        .. image:: https://readthedocs.org/projects/phypy/badge/?version=latest
+                :target: https://phypy.readthedocs.io/en/latest/?badge=latest
+                :alt: Documentation Status
+        
+        
+        .. image:: https://pyup.io/repos/github/ctarver/phypy/shield.svg
+             :target: https://pyup.io/repos/github/ctarver/phypy/
+             :alt: Updates
+        
+        
+        
+        Library of tools for wireless, physical layer research, simulations, and testing.
+        
+        
+        * Free software: MIT license
+        * Documentation: https://phypy.readthedocs.io.
+        
+        
+        Features
+        --------
+        
+        * TODO
+        
+        Credits
+        -------
+        
+        This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+        
+        
+        =======
+        History
+        =======
+        
+        0.2.8 (2019-09-26)
+        -------------------
+        * Critical fix for LS estimation regarding conjugate transpose
+        * Updated cookiecutter template to get new versions of things
+        * Started (but unfinished MIMO module)
+        
+        0.2.7 (2019-03-22)
+        ------------------
+        * Fix OFDM modulation and Demodulation dropping the middle subcarrier
+        * Fix EVM calculation 
+        
+        0.2.6 (2019-03-21)
+        ------------------
+        * Added Demodulation to OFDM
+        * Added EVM calculation to demodulation
+        
+        0.2.5 (2019-03-10)
+        ------------------
+        * Make it so the MemoryPolynomial is a superclass for PAs and DPDs
+        * Add a memory_stride parameter for memory polynomial modeling
+        
+        0.2.4 (2019-03-10)
+        -------------------
+        * Fix an issue where the DPD was limited to 7th order with 4 taps. 
+        
+        0.2.3 (2019-03-10)
+        --------------------
+        * Fix an issue where the memory taps in DPD were defaulting to "1" instead of 0.
+        * Change to plain LS since I didn't trust the regularization
+        
+        
+        0.2.2 (2019-03-01)
+        ------------------------
+        * Includes what is probably a working DPD
+        
+        0.2.1 (2019-02-18)
+        -----------------------
+        * Adds a random number seed to OFDM
+        
+        0.2.0 (2019-02-01)
+        --------------------
+        * Add a DSP module with a frequency shifter
+        
+        
+        0.1.1 (2019-01-23)
+        ---------------------
+        * Adds a working PA and OFDM modulator.
+        * Begins working on basic DPD
+        
+        
+        0.1.0 (2019-01-22)
+        ------------------
+        * First release on PyPI.
+        
+Keywords: phypy
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
