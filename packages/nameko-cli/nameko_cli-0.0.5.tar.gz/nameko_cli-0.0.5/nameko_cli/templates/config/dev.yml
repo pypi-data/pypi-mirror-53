@@ -1,0 +1,15 @@
+# Nameko RabbitMQ Setting
+AMQP_URI: &mq 'pyamqp://guest:guest@127.0.0.1'
+MS_HOST: {AMQP_URI: *mq}
+
+# ElasticSearch Setting
+ES_HOST: &es 'http://127.0.0.1:9200'
+ELASTICSEARCH:
+  HOSTS: [*es]
+
+# PostgreSQL Setting
+postgres: 'postgresql+psycopg2://dev:123@127.0.0.1:5432/base'
+
+# Service Setting
+# SERVICE:
+#   name:
