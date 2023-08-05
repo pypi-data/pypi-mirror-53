@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "videoComponent",
+  "description": "videoComponent",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "enum": [
+        null,
+        "pageEnter",
+        "pageExit"
+      ]
+    },
+    "page": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "video": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caption": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

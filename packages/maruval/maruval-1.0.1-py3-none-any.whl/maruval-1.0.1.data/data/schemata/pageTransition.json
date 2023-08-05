@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "pageTransition",
+  "description": "pageTransition",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "from": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "to": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "time": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "time": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "money": {
+      "type": "object",
+      "required": [
+        "amount"
+      ],
+      "properties": {
+        "amount": {
+          "type": [
+            "null",
+            "integer"
+          ]
+        }
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pageCriteria": {
+            "enum": [
+              null,
+              "visited",
+              "notVisited",
+              "visitedAny",
+              "notVisitedAny",
+              "timeExpiration"
+            ]
+          },
+          "exerciseCriteria": {
+            "enum": [
+              null,
+              "correctInput",
+              "incorrectInput",
+              "noInput"
+            ]
+          },
+          "mailCriteria": {
+            "enum": [
+              null,
+              "reply",
+              "read"
+            ]
+          },
+          "affectedExercise": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedDialogResponse": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedMail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedPage": {
+            "type": [
+              "array",
+              "null",
+              "string"
+            ]
+          },
+          "affectedPagesIds": {
+            "type": [
+              "null",
+              "array"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

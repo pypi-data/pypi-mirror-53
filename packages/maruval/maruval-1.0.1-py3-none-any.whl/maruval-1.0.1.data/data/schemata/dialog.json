@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "dialog",
+  "description": "dialog",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "from": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "receiveAfter": {
+      "type": "object",
+      "required": [
+        "time"
+      ],
+      "properties": {
+        "time": {
+          "type": "integer"
+        }
+      }
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "speech": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "null"
+    }
+  }
+}

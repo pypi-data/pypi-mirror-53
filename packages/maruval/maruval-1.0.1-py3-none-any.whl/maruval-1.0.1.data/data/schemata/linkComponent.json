@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "linkComponent",
+  "description": "linkComponent",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "enum": [
+        null,
+        "pageEnter",
+        "pageExit"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "icon": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "linkText": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "resource": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  }
+}
