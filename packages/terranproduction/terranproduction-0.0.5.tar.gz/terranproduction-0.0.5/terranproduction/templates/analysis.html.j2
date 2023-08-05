@@ -1,0 +1,159 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="static/styles/main.css">
+
+  <title>Terran Production Efficiency Visualiser</title>
+  <meta name="description" content="Terran Production Efficiency Visualiser">
+  <meta name="author" content="frugs">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js">
+  </script>
+</head>
+
+<body>
+
+  <div class="header">
+    <img class="logo" src="static/images/allin_official.png" alt="All Inspiration">
+  </div>
+
+  <h2 class="heading">
+    Terran Production Efficiency Visualiser
+  </h2>
+
+  <div class="subheading"><em id="replayName"></em></div>
+
+  <div class="subsubheading hidden">
+    <span id="player-name-0"></span>
+  </div>
+
+  <div class="chart-container hidden">
+    <canvas id="chart-0" width="1000" height="600"></canvas>
+  </div>
+
+  <div class="subsubheading hidden">
+    <span id="player-name-1"></span>
+  </div>
+
+  <div class="chart-container hidden">
+    <canvas id="chart-1" width="1000" height="600"></canvas>
+  </div>
+
+  <script type="text/javascript">
+    rawInputData = JSON.parse('{{analysis_data}}')
+
+    document.getElementById("replayName").innerHTML = rawInputData.replayName
+
+    for (var i = 0, len = Math.min(rawInputData.players.length, 2); i < len; i++) {
+      player = rawInputData.players[i]
+
+      var playerElementId = "player-name-" + i
+      var playerElement = document.getElementById(playerElementId)
+
+      playerElement.parentElement.classList.remove("hidden")
+
+      playerElement.innerHTML = player.name
+
+      chartData = {
+         datasets: player.chartData.map((data, index) => {
+
+           isSupplyBlock = index == player.chartData.length - 1
+           isCapacity = index % 3 == 2 && !isSupplyBlock
+           isUsage = index % 3 == 1 && !isSupplyBlock
+           colour = isCapacity ? "#498467" : (isSupplyBlock ? "rgba(224, 76, 108, 0.4)" : "#39A2AE")
+
+           return {
+             label: isCapacity ? "Production Capacity Available" : (isSupplyBlock ? "Supply Blocks": "Production Utilised"),
+             data: data.map((dataPoint) => { return {x: dataPoint[0], y: dataPoint[1] != "NaN" ? dataPoint[1] : NaN } }),
+             steppedLine: 'before',
+             fill: isUsage ? "-1" : (isSupplyBlock ? "origin" : false),
+             backgroundColor: colour,
+             pointRadius: 0,
+             borderColor: colour,
+             borderWidth: isCapacity ? 2 : 3
+           }
+         })
+      }
+
+      <!--chartData.datasets.splice(-1, 1)-->
+
+      var chartElementId = "chart-" + i
+      var chartElement = document.getElementById(chartElementId)
+
+      chartElement.parentElement.classList.remove("hidden")
+
+      var ctx = chartElement.getContext('2d');
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: chartData,
+          options: {
+            title: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                  type: 'time',
+                  position: 'bottom',
+                  time: {
+                    unit: 'minute',
+                    displayFormats: {
+                        minute: 'mm:ss'
+                    }
+                  }
+                }],
+                yAxes: [{
+                    display: false,
+                    ticks: {
+                      suggestedMin: -2,
+                      suggestedMax: Math.max(... player.chartData[player.chartData.length - 2].map((data) => data[1])) + 0.5,
+                      stepSize: 1,
+                      beginAtZero: false,
+                    }
+                }]
+            },
+            legend: {
+              display: true,
+              onClick: (e) => {},
+              labels: {
+                filter: (legendItem) => (legendItem.datasetIndex > 0 && legendItem.datasetIndex < 3) || legendItem.datasetIndex == chartData.datasets.length - 1
+              }
+            },
+            tooltip: {
+              enabled: false
+            },
+            layout: {
+              padding: 20
+            },
+            animation: {
+              easing: 'easeOutCubic'
+            },
+            annotation: {
+              annotations: player.structureTypes.map((structureType, index) => {
+                return {
+                  type: 'line',
+			      mode: 'horizontal',
+			      scaleID: 'y-axis-0',
+       			  value: Math.min(... player.chartData[index * 3].map((data) => data[1])) - 0.75,
+			      borderColor: 'rgba(0,0,0,0)',
+			      borderWidth: 0,
+			      label: {
+			        enabled: true,
+			        position: "left",
+			        xAdjust: 75,
+			        xPadding: 9,
+			        yPadding: 9,
+			        content: structureType.replace("Command", "Command ")
+			      }
+                }
+              })
+            }
+          }
+      });
+    }
+
+  </script>
+</body>
+</html>
