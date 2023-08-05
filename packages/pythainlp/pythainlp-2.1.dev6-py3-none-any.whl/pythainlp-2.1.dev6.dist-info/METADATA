@@ -1,0 +1,95 @@
+Metadata-Version: 2.1
+Name: pythainlp
+Version: 2.1.dev6
+Summary: Thai Natural Language Processing library
+Home-page: https://github.com/PyThaiNLP/pythainlp
+Author: PyThaiNLP
+Author-email: wannaphong@kkumail.com
+License: Apache Software License 2.0
+Keywords: pythainlp,NLP,natural language processing,text analytics,ThaiNLP,text processing,localization
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 3
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: Thai
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Text Processing
+Classifier: Topic :: Text Processing :: General
+Classifier: Topic :: Text Processing :: Linguistic
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: dill (<1,>=0.3.0)
+Requires-Dist: nltk (<4,>=3.4.5)
+Requires-Dist: requests (<3,>=2.22.0)
+Requires-Dist: tinydb (<4,>=3.13.0)
+Requires-Dist: tqdm (<5,>=4.35.0)
+Provides-Extra: artagger
+Requires-Dist: artagger (>=0.1.0.3) ; extra == 'artagger'
+Provides-Extra: attacut
+Requires-Dist: attacut (>=1.0.2) ; extra == 'attacut'
+Provides-Extra: benchmarks
+Requires-Dist: numpy (>=1.17.2) ; extra == 'benchmarks'
+Requires-Dist: pandas (>=0.25.1) ; extra == 'benchmarks'
+Provides-Extra: deepcut
+Requires-Dist: deepcut (>=0.6.1.0) ; extra == 'deepcut'
+Requires-Dist: keras (>=2.3.0) ; extra == 'deepcut'
+Requires-Dist: tensorflow (>=1.14.0) ; extra == 'deepcut'
+Provides-Extra: full
+Requires-Dist: artagger (>=0.1.0.3) ; extra == 'full'
+Requires-Dist: attacut (>=1.0.2) ; extra == 'full'
+Requires-Dist: deepcut (>=0.6.1.0) ; extra == 'full'
+Requires-Dist: epitran (>=1.1) ; extra == 'full'
+Requires-Dist: gensim (>=3.8.0) ; extra == 'full'
+Requires-Dist: keras (>=2.3.0) ; extra == 'full'
+Requires-Dist: numpy (>=1.17.2) ; extra == 'full'
+Requires-Dist: pyicu (>=2.3.1) ; extra == 'full'
+Requires-Dist: sklearn-crfsuite (>=0.3.6) ; extra == 'full'
+Requires-Dist: tensorflow (>=1.14.0) ; extra == 'full'
+Requires-Dist: torch (>=1.2.0) ; extra == 'full'
+Requires-Dist: ssg (>=0.0.4) ; extra == 'full'
+Requires-Dist: emoji (>=0.5.4) ; extra == 'full'
+Requires-Dist: pandas (>=0.25.1) ; extra == 'full'
+Provides-Extra: icu
+Requires-Dist: pyicu (>=2.3.1) ; extra == 'icu'
+Provides-Extra: ipa
+Requires-Dist: epitran (>=1.1) ; extra == 'ipa'
+Provides-Extra: ml
+Requires-Dist: keras (>=2.3.0) ; extra == 'ml'
+Requires-Dist: numpy (>=1.17.2) ; extra == 'ml'
+Requires-Dist: torch (>=1.2.0) ; extra == 'ml'
+Provides-Extra: ner
+Requires-Dist: sklearn-crfsuite (>=0.3.6) ; extra == 'ner'
+Provides-Extra: ssg
+Requires-Dist: ssg (>=0.0.4) ; extra == 'ssg'
+Provides-Extra: thai2fit
+Requires-Dist: emoji (>0.5.4) ; extra == 'thai2fit'
+Requires-Dist: gensim (>=3.8.0) ; extra == 'thai2fit'
+Requires-Dist: numpy (>=1.17.2) ; extra == 'thai2fit'
+Provides-Extra: thai2rom
+Requires-Dist: torch (>=1.2.0) ; extra == 'thai2rom'
+Requires-Dist: numpy (>=1.17.2) ; extra == 'thai2rom'
+
+
+![PyThaiNLP Logo](https://avatars0.githubusercontent.com/u/32934255?s=200&v=4)
+
+PyThaiNLP is a Python library for Thai natural language processing.
+The library provides functions like word tokenization, part-of-speech tagging,
+transliteration, soundex generation, and spell checking.
+
+## Install
+
+For stable version:
+
+```sh
+pip install pythainlp
+```
+
+Some functionalities, like word vector, required extra packages.
+See https://github.com/PyThaiNLP/pythainlp for installation options.
+
+**Note for Windows**: `marisa-trie` wheels can be obtained from
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#marisa-trie
+Install it with pip, for example: `pip install marisa_trie‑xxx.whl`
+
+
