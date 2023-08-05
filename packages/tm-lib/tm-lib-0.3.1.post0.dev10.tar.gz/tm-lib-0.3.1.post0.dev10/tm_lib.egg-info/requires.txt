@@ -1,0 +1,17 @@
+connexion[swagger-ui]==2.2.0
+pymongo==3.7.2
+gevent==1.4.0
+mongoengine==0.16.3
+pydantic==0.17
+pyjwt
+requests
+versioneer==0.18
+importlib-metadata==0.23
+
+[dev]
+ipdb
+
+[test]
+coverage
+pytest
+pytest-cov
