@@ -1,0 +1,187 @@
+openapi: 3.0.0
+
+servers:
+  - description: For local dev only
+    url: /flag
+
+info:
+  description: A cool tool
+  title: OKR Tool
+  version: 0.1.0
+
+paths:
+  '/feature_flag':
+    get:
+      operationId: 'houflask.feature_flag.views.feature_flag.get_feature_flags'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  feature_flags:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FeatureFlag'
+                  variants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FeatureVariant'
+                required:
+                  - feature_flags
+                  - variants
+          description: All of the current feature flags and variants in the system
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: 'houflask.feature_flag.views.feature_flag.create_feature_flag'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureFlag'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureFlag'
+          description: The new feature flag
+        '400':
+          description: The name is already in use
+        '500':
+          $ref: '#/components/responses/ServerError'
+  '/feature_variant':
+    post:
+      operationId: 'houflask.feature_flag.views.feature_flag.create_variant'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureVariantNew'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureVariant'
+          description: Succesfully created feature variant
+  '/feature_variant/{variant_id}':
+    delete:
+      operationId: 'houflask.feature_flag.views.feature_flag.delete_variant'
+      parameters:
+        - $ref: '#/components/parameters/VariantId'
+      responses:
+        '204':
+          description: Successfully deleted feature variant
+        '500':
+          $ref: '#/components/responses/ServerError'
+  '/feature_variant_organization/{organization_id}':
+    put:
+      operationId: 'houflask.feature_flag.views.feature_flag.set_organization_variant'
+      parameters:
+        - $ref: '#/components/parameters/OrganizationId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variant_id:
+                  $ref: '#/components/schemas/NullableUUID'
+                flag_name:
+                  $ref: '#/components/schemas/FeatureFlagName'
+              required:
+                - variant_id
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureVariantOrganization'
+          description: Successfully set organizations feature variant
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  parameters:
+    OrganizationId:
+      in: path
+      name: organization_id
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+    VariantId:
+      in: path
+      name: variant_id
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUID'
+  responses:
+    ServerError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServerErrorMessage'
+      description: Something went wrong.  Please try again later
+  schemas:
+    FeatureFlagName:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]{4,32}$'
+    FeatureVariantNew:
+      type: object
+      properties:
+        flag_name:
+          $ref: '#/components/schemas/FeatureFlagName'
+        variant: {}
+      required:
+        - flag_name
+        - variant
+    FeatureVariant:
+      allOf:
+        - $ref: '#/components/schemas/FeatureVariantNew'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/UUID'
+          required:
+            - id
+    FeatureVariantOrganization:
+      type: object
+      properties:
+        flag_name:
+          $ref: '#/components/schemas/FeatureFlagName'
+        variant: {}
+        organization_id:
+          $ref: '#/components/schemas/UUID'
+      required:
+        - flag_name
+        - variant
+        - organization_id
+    FeatureFlag:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FeatureFlagName'
+        default_value: {}
+      required:
+        - name
+        - default_value
+    NullableUUID:
+      format: uuid
+      nullable: true
+      type: string
+    ServerErrorMessage:
+      properties:
+        error_type:
+          type: string
+        message:
+          type: string
+      required:
+        - message
+        - error_type
+      type: object
+    UUID:
+      format: uuid
+      type: string

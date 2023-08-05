@@ -1,0 +1,35 @@
+openapi: 3.0.0
+
+servers:
+  - description: For local dev only
+    url: /v1
+
+info:
+  description: A cool tool
+  title: OKR Tool
+  version: 0.1.0
+
+paths:
+  /meta/status:
+    get:
+      operationId: houflask.meta.views.meta.status
+      responses:
+        '200':
+          description: The server is operational
+      summary: The operational status of the server
+  /meta/version:
+    get:
+      operationId: houflask.meta.views.meta.version
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  version:
+                    type: string
+                required:
+                  - version
+                type: object
+          description: The version of the server
+      summary: The version the server is currently running
