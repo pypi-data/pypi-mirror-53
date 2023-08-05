@@ -1,0 +1,456 @@
+# NOTE: In doc/source/contributor/testing/ci_scenario_jobs.rst file there is
+# document with summary of all tempest, neutron-tempest-plugin and grenade jobs
+# summary.
+# Please update this document always when any changes to jobs are made.
+- project:
+    templates:
+      - neutron-tempest-plugin-jobs
+      - openstack-cover-jobs
+      - openstack-lower-constraints-jobs
+      - openstack-python-jobs
+      - openstack-python3-train-jobs
+      - publish-openstack-docs-pti
+      - periodic-stable-jobs
+      - check-requirements
+      - integrated-gate-networking
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - neutron-functional
+        - neutron-functional-python27
+        - neutron-fullstack
+        - neutron-rally-task
+        - neutron-tempest-dvr
+        - neutron-tempest-linuxbridge
+        - neutron-grenade-multinode
+        - neutron-grenade-dvr-multinode
+        - tempest-multinode-full-py3:
+            voting: false
+            # We don't run the job on things like neutron docs-only changes
+            irrelevant-files: &tempest-irrelevant-files
+              - ^(test-|)requirements.txt$
+              - ^.*\.rst$
+              - ^doc/.*$
+              - ^neutron/locale/.*$
+              - ^neutron/tests/unit/.*$
+              - ^releasenotes/.*$
+              - ^setup.cfg$
+              - ^tools/.*$
+              - ^tox.ini$
+        - neutron-tempest-dvr-ha-multinode-full
+        - neutron-tempest-iptables_hybrid
+        - neutron-tempest-iptables_hybrid-fedora
+        - neutron-grenade
+        - ironic-tempest-ipa-wholedisk-bios-agent_ipmitool-tinyipa:
+            voting: false
+            irrelevant-files: *tempest-irrelevant-files
+        - tempest-slow-py3:
+            irrelevant-files: *tempest-irrelevant-files
+        - networking-ovn-tempest-dsvm-ovs-release:
+            irrelevant-files: *tempest-irrelevant-files
+        - networking-midonet-tempest-aio-ml2-centos-7:
+            voting: false
+            irrelevant-files: *tempest-irrelevant-files
+        - grenade-py3:
+            irrelevant-files: *tempest-irrelevant-files
+        - tempest-ipv6-only:
+            irrelevant-files: *tempest-irrelevant-files
+        - openstacksdk-functional-devstack-networking:
+            voting: false
+        - neutron-functional-with-uwsgi:
+            voting: false
+        - neutron-fullstack-with-uwsgi:
+            voting: false
+        - neutron-tempest-with-uwsgi:
+            voting: false
+        - neutron-centos-7-tripleo-standalone
+    gate:
+      jobs:
+        - neutron-functional
+        - neutron-functional-python27
+        - neutron-fullstack
+        - neutron-tempest-dvr
+        - neutron-tempest-linuxbridge
+        - neutron-tempest-iptables_hybrid
+        - neutron-grenade-multinode
+        - neutron-grenade-dvr-multinode
+        - neutron-grenade
+        - tempest-slow-py3:
+            irrelevant-files: *tempest-irrelevant-files
+        - grenade-py3:
+            irrelevant-files: *tempest-irrelevant-files
+        - tempest-ipv6-only:
+            irrelevant-files: *tempest-irrelevant-files
+    periodic:
+      jobs:
+        - neutron-functional
+        - neutron-tempest-postgres-full
+        - neutron-tempest-with-os-ken-master
+    experimental:
+      jobs:
+
+        # TODO(slaweq): we should consider to convert this job to "non-legacy"
+        # one and move it to check queue, at least as non-voting
+        - legacy-grenade-dsvm-neutron-linuxbridge-multinode:
+            irrelevant-files: *tempest-irrelevant-files
+
+        - legacy-tempest-dsvm-neutron-full-centos-7:
+            irrelevant-files: *tempest-irrelevant-files
+        - legacy-tempest-dsvm-neutron-dvr-multinode-full:
+            irrelevant-files: *tempest-irrelevant-files
+        - tempest-full-py3-opensuse150:
+            irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-functional
+    parent: devstack-minimal
+    description: Run neutron functional tests
+    timeout: 7800
+    required-projects:
+      - opendev.org/openstack/devstack
+      - openstack/neutron
+      - openstack/requirements
+    roles:
+      - zuul: openstack/devstack
+    pre-run: playbooks/configure_functional_job.yaml
+    run: playbooks/run_functional_job.yaml
+    post-run: playbooks/post_functional_job.yaml
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^neutron/locale/.*$
+      - ^releasenotes/.*$
+    vars:
+      devstack_services:
+        # Ignore any default set by devstack. Emit a "disable_all_services".
+        base: false
+      devstack_localrc:
+        USE_PYTHON3: true
+        INSTALL_TESTONLY_PACKAGES: true
+        DATABASE_PASSWORD: stackdb
+      tox_envlist: dsvm-functional
+      tox_install_siblings: false
+      tox_constraints_file: '{{ ansible_user_dir }}/src/opendev.org/openstack/requirements/upper-constraints.txt'
+      zuul_copy_output:
+        # We need to copy directory with logs to have it in job artifacts also,
+        # /opt/stack/logs is default logs directory defined in neutron's
+        # tox.ini file
+        '{{ devstack_base_dir }}/logs/dsvm-functional-logs': logs
+
+- job:
+    name: neutron-functional-python27
+    parent: neutron-functional
+    description: Run neutron functional tests with Python 2.7
+    vars:
+      devstack_localrc:
+        USE_PYTHON3: false
+      tox_envlist: dsvm-functional-python27
+
+- job:
+    name: neutron-fullstack
+    parent: neutron-functional
+    vars:
+      tox_envlist: dsvm-fullstack
+      zuul_copy_output:
+        # We need to copy directory with logs to have it in job artifacts also,
+        # /opt/stack/logs is default logs directory defined in neutron's
+        # tox.ini file
+        '{{ devstack_base_dir }}/logs/dsvm-fullstack-logs': logs
+
+- job:
+    name: neutron-rally-task
+    parent: rally-task-neutron
+    timeout: 10800
+    vars:
+      devstack_localrc:
+        USE_PYTHON3: true
+        OSPROFILER_COLLECTOR: redis
+        OSPROFILER_HMAC_KEYS: "neutron-hmac-key-used-in-zuul-ci"
+      rally_task: rally-jobs/task-neutron.yaml
+      devstack_plugins:
+        osprofiler: https://opendev.org/openstack/osprofiler
+        rally-openstack: https://opendev.org/openstack/rally-openstack
+        neutron: https://opendev.org/openstack/neutron
+      devstack_services:
+        neutron-trunk: true
+    required-projects:
+      - openstack/rally
+      - openstack/rally-openstack
+      - openstack/osprofiler
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^neutron/locale/.*$
+      - ^neutron/tests/unit/.*$
+      - ^releasenotes/.*$
+      - ^tools/.*$
+      - ^tox.ini$
+
+- job:
+    name: neutron-tempest-dvr
+    parent: tempest-integrated-networking
+    timeout: 10800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/tempest
+    vars:
+      tempest_concurrency: 4
+      devstack_localrc:
+        Q_DVR_MODE: dvr_snat
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-tempest-linuxbridge
+    parent: tempest-integrated-networking
+    timeout: 10800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/tempest
+    vars:
+      tempest_concurrency: 4
+      devstack_localrc:
+        Q_AGENT: linuxbridge
+    irrelevant-files:
+      - ^(test-|)requirements.txt$
+      - ^.*\.rst$
+      - ^doc/.*$
+      - ^neutron/locale/.*$
+      - ^neutron/tests/.*$
+      - ^neutron/tests/unit/.*$
+      - ^releasenotes/.*$
+      - ^setup.cfg$
+      - ^tools/.*$
+      - ^tox.ini$
+
+- job:
+    name: neutron-grenade-multinode
+    parent: legacy-dsvm-base-multinode
+    run: playbooks/legacy/neutron-grenade-multinode/run.yaml
+    post-run: playbooks/legacy/neutron-grenade-multinode/post.yaml
+    timeout: 10800
+    required-projects:
+      - openstack/grenade
+      - openstack/devstack-gate
+      - openstack/neutron
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-grenade-dvr-multinode
+    parent: legacy-dsvm-base-multinode
+    run: playbooks/legacy/neutron-grenade-dvr-multinode/run.yaml
+    post-run: playbooks/legacy/neutron-grenade-dvr-multinode/post.yaml
+    timeout: 7500
+    required-projects:
+      - openstack/grenade
+      - openstack/devstack-gate
+      - openstack/neutron
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-tempest-dvr-ha-multinode-full
+    parent: tempest-multinode-full-py3
+    nodeset: openstack-three-node-bionic
+    timeout: 10800
+    roles:
+      - zuul: openstack/neutron-tempest-plugin
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/tempest
+    pre-run: playbooks/dvr-multinode-scenario-pre-run.yaml
+    irrelevant-files: *tempest-irrelevant-files
+    voting: false
+    vars:
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            DEFAULT:
+              router_distributed: True
+              l3_ha: True
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          "/$NEUTRON_CORE_PLUGIN_CONF":
+            ml2:
+              mechanism_drivers: openvswitch,l2population
+            agent:
+              enable_distributed_routing: True
+              l2_population: True
+              tunnel_types: vxlan
+              arp_responder: True
+            ovs:
+              tunnel_bridge: br-tun
+              bridge_mappings: public:br-ex
+          $NEUTRON_L3_CONF:
+            DEFAULT:
+              agent_mode: dvr
+            agent:
+              availability_zone: nova
+          $NEUTRON_DHCP_CONF:
+            agent:
+              availability_zone: nova
+    group-vars:
+      subnode:
+        devstack_services:
+          q-agt: true
+          q-l3: true
+          q-meta: true
+        devstack_localrc:
+          USE_PYTHON3: true
+        devstack_local_conf:
+          post-config:
+            $NEUTRON_CONF:
+              DEFAULT:
+                router_distributed: True
+            # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+            # devstack-tempest job will be switched to use lib/neutron instead of
+            # lib/neutron-legacy
+            "/$NEUTRON_CORE_PLUGIN_CONF":
+              agent:
+                enable_distributed_routing: True
+                l2_population: True
+                tunnel_types: vxlan
+                arp_responder: True
+              ovs:
+                tunnel_bridge: br-tun
+                bridge_mappings: public:br-ex
+            $NEUTRON_L3_CONF:
+              DEFAULT:
+                agent_mode: dvr_snat
+              agent:
+                availability_zone: nova
+
+- job:
+    name: neutron-tempest-iptables_hybrid
+    parent: tempest-integrated-networking
+    timeout: 10800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/tempest
+    vars:
+      tempest_concurrency: 4
+      devstack_plugins:
+        neutron: https://opendev.org/openstack/neutron.git
+      devstack_services:
+        tls-proxy: false
+        tempest: true
+        neutron-dns: true
+        neutron-qos: true
+        neutron-segments: true
+        neutron-trunk: true
+        neutron-uplink-status-propagation: true
+      devstack_local_conf:
+        post-config:
+          $NEUTRON_CONF:
+            QUOTAS:
+              quota_router: 100
+              quota_floatingip: 500
+              quota_security_group: 100
+              quota_security_group_rule: 1000
+          # NOTE(slaweq): We can get rid of this hardcoded absolute path when
+          # devstack-tempest job will be switched to use lib/neutron instead of
+          # lib/neutron-legacy
+          "/$NEUTRON_CORE_PLUGIN_CONF":
+            ml2_type_vlan:
+              network_vlan_ranges: foo:1:10
+            agent:
+              enable_distributed_routing: True
+              l2_population: True
+              tunnel_types: vxlan,gre
+              arp_responder: True
+            securitygroup:
+              firewall_driver: iptables_hybrid
+          $NEUTRON_L3_CONF:
+            agent:
+              availability_zone: nova
+          $NEUTRON_DHCP_CONF:
+            agent:
+              availability_zone: nova
+        test-config:
+          $TEMPEST_CONFIG:
+            neutron_plugin_options:
+              provider_vlans: foo,
+              agent_availability_zone: nova
+              image_is_advanced: true
+              available_type_drivers: flat,geneve,vlan,gre,local,vxlan
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-tempest-iptables_hybrid-fedora
+    parent: neutron-tempest-iptables_hybrid
+    nodeset: devstack-single-node-fedora-latest
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-grenade
+    parent: legacy-dsvm-base
+    run: playbooks/legacy/neutron-grenade/run.yaml
+    post-run: playbooks/legacy/neutron-grenade/post.yaml
+    timeout: 10800
+    required-projects:
+      - openstack/grenade
+      - openstack/devstack-gate
+      - openstack/neutron
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-tempest-postgres-full
+    parent: legacy-dsvm-base
+    run: playbooks/legacy/neutron-tempest-postgres-full/run.yaml
+    post-run: playbooks/legacy/neutron-tempest-postgres-full/post.yaml
+    timeout: 7800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/tempest
+
+- job:
+    name: neutron-tempest-with-os-ken-master
+    parent: legacy-dsvm-base
+    run: playbooks/legacy/neutron-tempest-with-os-ken-master/run.yaml
+    post-run: playbooks/legacy/neutron-tempest-with-os-ken-master/post.yaml
+    timeout: 7800
+    required-projects:
+      - openstack/devstack-gate
+      - openstack/neutron
+      - openstack/tempest
+
+- job:
+    name: neutron-fullstack-with-uwsgi
+    parent: neutron-fullstack
+    vars:
+      devstack_localrc:
+        NEUTRON_DEPLOY_MOD_WSGI: true
+
+- job:
+    name: neutron-functional-with-uwsgi
+    parent: neutron-functional
+    vars:
+      devstack_localrc:
+        NEUTRON_DEPLOY_MOD_WSGI: true
+
+- job:
+    name: neutron-tempest-with-uwsgi
+    parent: tempest-integrated-networking
+    description: Run neutron Tempest tests with uwsgi
+    timeout: 8400
+    vars:
+      devstack_localrc:
+        NEUTRON_DEPLOY_MOD_WSGI: true
+    irrelevant-files: *tempest-irrelevant-files
+
+- job:
+    name: neutron-centos-7-tripleo-standalone
+    parent: tripleo-ci-base-standalone
+    nodeset: single-centos-7-node
+    voting: false
+    vars:
+      featureset: '052'
+      featureset_override:
+        standalone_environment_files:
+          - 'environments/services/neutron-ovs.yaml'
+        tempest_test_whitelist:
+          - 'tempest.scenario.test_network_basic_ops.TestNetworkBasicOps.test_network_basic_ops'
