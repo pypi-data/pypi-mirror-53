@@ -1,0 +1,28 @@
+stages:
+    - test
+
+.test_template: &test_definition
+    stage: test
+    image: rebasehelper/gitlab-ci
+    variables:
+        DOCKER_HOST: tcp://docker:2375
+        DOCKER_DRIVER: overlay
+    services:
+        - docker:dind
+    script:
+        - make PYTEST_ADDOPTS="-m 'not long_running'" test-docker
+
+test:f29:
+    <<: *test_definition
+    variables:
+        DISTRO: fedora-29
+
+test:latest:
+    <<: *test_definition
+    variables:
+        DISTRO: fedora-latest
+
+test:rawhide:
+    <<: *test_definition
+    variables:
+        DISTRO: fedora-rawhide
