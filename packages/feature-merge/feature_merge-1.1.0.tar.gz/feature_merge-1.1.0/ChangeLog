@@ -1,0 +1,62 @@
+CHANGES
+=======
+
+v1.1.0
+------
+
+* Add threshold merge criteria
+* Check first record in merged set against criteria
+* Add TODO items for tests
+* Add feature\_merge no\_children option
+
+v1.0.2
+------
+
+* sym-ver: fix version output code
+* Update README.rst
+
+v1.0.1
+------
+
+* Update readme
+* Add doi
+* Update licence
+* Use pbr for version
+* Add if name==main block
+* Add main() function for setuptools
+* Change to pbr
+* Fix dependency loop when loading version
+* Fix grouping test
+* Fix licence citation
+* Remove nose
+* Update README
+* Update CONTRIBUTING
+* add TODO
+* Fix header output before help text
+* Expand README and add shebang to setup.py
+* Add tests to setup.py and fix paths for test data
+* Fix setup.py script and format licence
+* Add bash launcher
+* Remove bin/ exclusion from gitignore
+* Change licence to have general citation rather than doi
+* Extend tests to validate Feature values. Split coordinate merge criteria to allow default to match previous merge functionality. Fix record creation logic
+* Refactor and add tests
+* Remove strand from merge order when ignored
+* Fix island merge boundary check
+* Update help output and fix source of merged records
+* Fix typo in variable name and add comments
+* fixup! Add merge\_strat argument
+* Add merge\_strat argument
+* Keep featuretype if same for all child records
+* Add empty input file handling
+* Add parse error handling. Clean up merge code
+* Add exact only and NONE merge options
+* Switch to iterator in merge and comment everything
+* Fix up correct sort order and output unmerged records
+* Fix some bugs and add better handling of ID's
+* Add merge by feature
+* Update README.rst
+* Restructure for setuptools
+* Create LICENSE
+* Create README.md
+* Initial commit
