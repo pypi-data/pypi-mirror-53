@@ -1,0 +1,65 @@
+<form class="center" action="/playlist/add/{{ escaped_path }}" method="post">
+  <input class="plus-btn" type="submit" value="&plus;" title="Add this track to the playlist.">
+  <input id="track-detail-no-slug" name="slug" type="hidden" value="track-detail-no-slug">
+</form>
+
+{% if unescaped_path in user_playlist %}
+  <p class="center">This track is currently in your playlist.</p>
+{% endif %}
+
+<h2 class="center">
+  <div>{% if title %}"{{ title }}"{% else %}{{ file_name }}{% endif %}</div>
+  {% if album %}<div class="initialsize">from</div><div>"{{ album }}"</div>{% endif %}
+  {% if artist %}<div class="initialsize">by</div><div>{{ artist  }}</div>{% endif %}
+</h2>
+
+<p class="center">Length: {{ length }}</p>
+
+<p class="center">
+  {% if track and not tracktotal %}Track: {{ track }}{% endif %}
+  {% if track and tracktotal %}Track: {{ track }}/{{ tracktotal }}{% endif %}
+  {% if track %} | {% endif %}
+  {% if date %}Released: {{ date }}{% endif %}
+  {% if genre %}{% if track or date %} |{% endif %} Genre: {{ genre }}{% endif %}
+</p>
+
+{% if item_type == "audio" %}
+<div class="center">
+  <audio id="single"{% if autoplay %} autoplay{% endif %} controls src="/serve/{{ escaped_path }}">
+    Your browser does not support the <code>audio</code> element.
+  </audio>
+</div>
+{% elif item_type == "video" %}
+<div class="center" style="margin: 0 auto; width: 100%;">
+  <video id="single"{% if autoplay %} autoplay{% endif %} controls>
+    {% if "mp4" in escaped_path %}
+      <source src="/serve/{{ escaped_path }}" type="video/mp4">
+    {% elif "webm" in escaped_path %}
+      <source src="/serve/{{ escaped_path }}" type="video/webm">
+    {% endif %}
+    <p>Your browser doesn't support HTML5 video. Here is
+      a <a href="/serve/{{ escaped_path }}">link to the video</a> instead.</p>
+  </video>
+</div>
+{% endif %}
+
+<div class="center">
+  {% if item_type == "video" %}
+    <button data-stat="off" id="video-theater-view" title='Click this button to toggle "theater view" on the video player.'>Theater View: Off{% if icons %}<span class="fa-stack"><i class="fas fa-theater-masks fa-stack-1x"></i><i class="fas fa-slash fa-stack-1x"></i></span>{% endif %}</button>
+  {% endif %}
+  <button id="time-link" title="Click this button to have a link to this track at the current time put into your clipboard.">
+    Current Time Link{% if icons %} <i class="fas fa-link"></i>{% endif %}
+  </button>
+</div>
+
+{% if comment %}
+  <p class="center"><span class="bold">Comment: </span>{{ comment }}</p>
+{% endif %}
+
+{% if encoded_by %}
+  <p class="center"><span class="bold">Encoded by: </span>{{ encoded_by }}</p>
+{% endif %}
+
+{% if lyrics %}
+  <p class="center"><span class="bold">Lyrics: </span>{{ lyrics }}</p>
+{% endif %}

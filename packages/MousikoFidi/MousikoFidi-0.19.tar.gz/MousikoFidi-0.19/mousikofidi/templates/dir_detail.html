@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h4 class="center mobile-big">{{ page_path|safe }}</h4>
+
+  {% if item_type == "dir" %}
+    {% include "directory_details.html" %}
+  {% elif item_type == "audio" or item_type == "video" %}
+    {% include "file_detail.html" %}
+  {% endif %}
+
+  {% if audio_player %}
+    {% include "audio_player.html" with context %}
+  {% endif %}
+
+  {% if video_player %}
+    {% include "video_player.html" with context %}
+  {% endif %}
+
+{% endblock %}

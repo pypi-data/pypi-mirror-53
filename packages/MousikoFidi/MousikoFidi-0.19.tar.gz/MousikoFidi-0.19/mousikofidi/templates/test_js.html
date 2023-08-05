@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if item_list and video_list %}
+  <div class="hidden">
+    {% include "item_table.html" with context %}
+    {% include "audio_player.html" with context %}
+    {% include "video_player.html" with context %}
+    <audio id="single"{% if autoplay %} autoplay{% endif %} controls src="/serve/{{ single_file_e }}">
+      Your browser does not support the <code>audio</code> element.
+    </audio>
+  </div>
+
+  <h1 class="center">{{ page_name }}</h1>
+
+  <p class="center">Tests begin below:</p>
+
+  <div data-nowplaying-num="0" id="now-playing-num"></div>
+  <div data-randorder="none" id="randorder"></div>
+
+  <div data-nowplaying-num="0" id="video-now-playing-num"></div>
+  <div data-randorder="none" id="vid-randorder"></div>
+
+  <p class="hidden" id="now-playing" title="The status of the current track.">Paused: <span class="bold" id="playing-title" title="The title of the current track."></span></p>
+  <!-- <audio class="hidden" data-nowplaying="none" id="audio"></audio> -->
+
+  <button class="hidden" data-cmd="prev" id="prev" title="Click to skip to the previous track in the list.">Previous</button>
+  <button class="hidden" data-cmd="fwd" id="next" title="Click to skip to the next track in the list.">Next</button>
+  <button class="hidden" data-stat="off" id="repeat" title="Click to toggle between no repeat, repeat one track, and repeat all tracks.">No Repeat</button>
+  <button class="hidden" data-stat="off" id="shuffle" title="Click to toggle between a shuffled track order on and off.">Shuffle Off</button>
+
+  <!-- <video class="hidden" id="video"></video> -->
+
+  <button class="hidden" data-cmd="prev" id="vid-prev" title="Click to skip to the previous track in the list.">Previous</button>
+  <button class="hidden" data-cmd="fwd" id="vid-next" title="Click to skip to the next track in the list.">Next</button>
+  <button class="hidden" data-stat="off" id="vid-repeat" title="Click to toggle between no repeat, repeat one track, and repeat all tracks.">No Repeat</button>  
+  <button class="hidden" data-stat="off" id="vid-shuffle" title="Click to toggle between a shuffled track order on and off.">Shuffle Off</button>
+
+  <!-- The below three elements are not required or used by the js that's being tested. -->
+  <div id="__results"></div>
+  <div id="__failed"></div>
+  <div id="__passed"></div>
+
+  {% endif %}
+  <h1 class="center"><a href="{{ url_for('.index') }}">Get me outta here!</a></h1>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="/static/js/tests.js"></script> 
+{% endblock %}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title id="title" data-sitename="{{ site_name }}">{{ page_name }} | {{ site_name }}</title>
+    <meta name="description" content="{{ meta_desc }}">
+    <meta name="author" content="{{ meta_author }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% if debug %}
+      <link rel="stylesheet" href="/static/css/normalize.css">
+
+      {% if icons %}
+        <link rel="stylesheet" href="/static/fa/css/fontawesome.css">
+        <link rel="stylesheet" href="/static/fa/css/solid.css">
+      {% endif %}
+
+      {% if "http" in theme and "//" in theme %}
+        <!-- Custom theme -->
+        <link rel="stylesheet" href="{{ theme }}">
+
+      {% else %}
+        <link rel="stylesheet" href="/static{{ theme }}.css">
+        <link rel="stylesheet" href="/static/css/fidi.css">
+      {% endif %}
+
+      {% if "nes" in theme %}
+        {# Style patch for the NES theme #}
+        <link rel="stylesheet" href="/static/css/fidi-nes.css">
+      {% endif %}
+
+    {% else %}
+      <link rel="stylesheet" href="/css/normalize.min.css">
+
+      {% if icons %}
+        <link rel="stylesheet" href="/static/fa/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/static/fa/css/solid.min.css">
+      {% endif %}
+
+      {% if "http" in theme and "//" in theme %}
+        <!-- Custom theme -->
+        <link rel="stylesheet" href="{{ theme }}">
+
+      {% else %}
+        <link rel="stylesheet" href="{{ theme }}.min.css">
+        <link rel="stylesheet" href="/css/fidi.min.css">
+      {% endif %}
+
+      {% if "nes" in theme %}
+        {# Style patch for the NES theme #}
+        <link rel="stylesheet" href="/static/css/fidi-nes.min.css">
+      {% endif %}
+
+    {% endif %}
+
+    <link rel="icon" href="{{ favicon_path }}">
+
+  </head>
+  <body>
+    {% if top_link %}
+      <div id="top"></div>
+    {% endif %}
+
+    <header>
+      <h2 class="center"><a href="{{ url_for('.index') }}" title="The site name, and a link to the main index page.">{{ site_name }}</a></h2>
+    </header>
+
+    {% if icons %}<div id="icons-enabled"></div>{% endif %}
+    <div data-theme="{{ theme }}" id="current-theme"></div>
+
+    <nav>
+      <ul>
+        <li><a href="/browse" title="A link to the browse page.">{% if icons %}<i class="fas fa-book-open"></i> {% endif %}Browse</a></li>
+        {% if secret_key %}
+          {% if playlists or user_playlist %}
+            <li><a href="{{ url_for('.playlist') }}" title="A link to the playlist page.">{% if icons %}<i class="fas fa-list"></i> {% endif %}Playlist</a></li>
+          {% endif %}
+        {% endif %}
+        {% if search %}
+          <li><a href="{{ url_for('.search') }}" title="A link to the search page.">{% if icons %}<i class="fas fa-search"></i> {% endif %}Search</a></li>
+        {% endif %}
+        {% if secret_key %}
+          <li><a href="{{ url_for('.settings') }}" title="A link to the settings page.">{% if icons %}<i class="fas fa-user-cog"></i> {% endif %}Settings</a></li>
+        {% endif %}
+        <li id="logo">
+          <a id="logo" href="{% if video_player or video_list %}#videoplayer{% elif audio_player or item_list %}#audio-time-link{% else %}/{% endif %}">
+            <img alt="Fidi Logo and {% if video_player or video_list %}video player{% elif audio_player %}player{% else %}home{% endif %} link" src="{{ logo_path }}" title="The MousikóFídi logo, and a link to the {% if video_player or video_list %}video player{% elif audio_player %}player{% else %}main index page{% endif %}.">
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <noscript>
+      <p class="center">
+        <span class="bold red">Javascript is required for the MousikóFídi player.</span>
+      </p>
+      <p class="center red">Please enable javascript for this domain in order to use it.</p>
+    </noscript>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          {{ message|safe }}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+
+    {% if top_link %}
+      <div id="top-link"><a class="bold" href="#top" title="Click this triangle to navigate back to the top of the current page without reloading it."></a></div> 
+    {% endif %}
+
+    <footer class="center">
+      <div>
+        <a href="{{ url_for('.about') }}">About MousikóFídi</a>{% if debug %} | <a href="{{ url_for('.test_js') }}">Run Javascript Tests</a>{% endif %}
+      </div>
+      <div>
+        <a href="https://git.sr.ht/~hristoast/mousikofidi">MουσικόΦίδι source code hosted by Sourcehut</a> | <a href="http://www.gnu.org/licenses/gpl-3.0.html">Licensed GPLv3</a>
+      </div>
+      <div>
+        <a href="https://watercss.netlify.com/">Dark and Light Theme</a> | <a href="https://nostalgic-css.github.io/NES.css/">NES Theme</a> | <a href="https://fillmyan.us/">Terminal Theme by ogenfald</a>
+      </div>
+    </footer>
+
+    {% if debug %}
+      <script src="/static/js/player.js"></script>
+    {% else %}
+      <script src="/js/player.min.js"></script>
+    {% endif %}
+    {% block extra_js %}{% endblock %}
+
+  </body>
+</html>

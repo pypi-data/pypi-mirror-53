@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  {% if not item_list and not video_list %}
+    {% if page_name == "Playlist" %}
+      {% if playlists %}
+        <h2 class="center"><a href="{{ url_for('.playlists') }}">{% if icons %}<i class="fas fa-list"></i> {% endif %}View All Playlists</a></h2>
+      {% else %}
+        <p class="bold center">There are no playlists.  You can create one by browsing and adding tracks with the "+" button.</p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if page_name == "Playlist" %}
+    {% if playlists %}
+      <form action="/playlist/load/%2Fload" class="center" id="playlistctl" method="post">
+        {% if playlist_save %}
+          <input class="center" id="delete" name="delete" title="Delete the selected playlist file." value="Delete Playlist" type="submit" /> 
+        {% endif %}
+        <input class="center" id="load" name="load" title="Load a playlist from a .m3u file." value="Load Playlist" type="submit" /> 
+        <select id="to-load" name="to-load" name="playlist" title="The name of the playlist to load.">
+          {% for name in playlist_names %}
+            <option value="{{ name }}">{{ name }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    {% endif %}
+  {% endif %}
+
+  {% if item_list or video_list %}
+    {% if page_name == "Playlist" %}
+      {% if playlistctl %}
+        <form  action="/playlist/clear/%2Fall" class="center" id="playlistctl" method="post">
+          <input class="center" id="clear" name="clear" title="Remove all tracks from your playlist." value="New Playlist" type="submit" />
+        </form>
+        {% if playlist_save %}
+          <form action="/playlist/save/%2Fsave" class="center" id="playlistctl" method="post">
+            <input class="center" id="save" name="save" title="Save this playlist as a .m3u file.  Note that doing so will reload the page, stopping any playback." value="Save Playlist" type="submit" /> 
+            <input id="file-name" name="file-name" type="text" placeholder="Playlist name" title="File name for the playlist to be saved.  Only alphanumeric charatcers, spaces, underscores, and plus signs are allowed." required/>
+            <input id="item-list" name="bulk-list" type="hidden" value="{{ file_list }}">
+          </form>
+        {% endif %}
+      {% endif %}
+      <h2 class="center"><a href="{{ url_for('.playlists') }}">{% if icons %}<i class="fas fa-list"></i> {% endif %}View All Playlists</a></h2>
+    {% endif %}
+
+    {% if playlist_detail %}
+      <h2 class="bold center">Playlist Name: {{ playlist_name }}</h2>
+      <form action="/playlist/load/%2Fload-with-redirect" class="center" id="playlistctl" method="post">
+        <input class="center" id="load" name="load" title="Load tracks from this playlist into your user session playlist.  This will redirect you to the playlist page." value="Load This Playlist" type="submit" /> 
+        <input id="to-load" name="to-load" type="hidden" value="{{ playlist_name }}">
+      </form>
+      <h2 class="center"><a href="{{ url_for('.playlists') }}">{% if icons %}<i class="fas fa-list"></i> {% endif %}View All Playlists</a></h2>
+    {% endif %}
+
+    {% include "item_table.html" with context %}
+
+    {% if item_list %}
+      {% include "audio_player.html" with context %}
+    {% endif %}
+
+    {% if video_list %}
+      {% include "video_player.html" with context %}
+    {% endif %}
+  {% endif %}
+
+  {% if not item_list and not video_list %}
+    {% if page_name == "Playlist" %}
+      <div class="center">
+        <img src="{% if debug %}/static{% endif %}/fidi.png">
+      </div>
+    {% endif %}
+  {% endif %}
+
+{% endblock %}

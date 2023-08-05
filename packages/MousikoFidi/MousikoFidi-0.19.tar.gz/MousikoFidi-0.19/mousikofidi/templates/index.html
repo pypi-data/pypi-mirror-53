@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h4 class="center">Welcome to {{ site_name }}!</h4>
+
+  {% if plists %}
+    <h3 class="center">Browse playlists below, click the "Browse" button above!</h3>
+    {% include 'plist_table.html' with context %}
+  {% endif %}
+
+  <div class="center">
+    <img src="{{ logo_path }}" title="The MousikóFídi logo, by Ogenfald.">
+  </div>
+
+{% endblock %}
