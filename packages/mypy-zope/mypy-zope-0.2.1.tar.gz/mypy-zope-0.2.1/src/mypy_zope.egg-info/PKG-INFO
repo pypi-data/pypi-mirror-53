@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: mypy-zope
+Version: 0.2.1
+Summary: Plugin for mypy to support zope interfaces
+Home-page: UNKNOWN
+Author: Andrey Lebedev
+Author-email: andrey.lebedev@gmail.com
+License: UNKNOWN
+Description: 
+        # Plugin for mypy to support zope.interface
+        
+        The goal is to be able to make zope interfaces to be treated as types in mypy
+        sense.
+        
+        For feature description and usage instructions, see
+        [mypy-zope github page](https://github.com/Shoobx/mypy-zope).
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development
+Description-Content-Type: text/markdown
+Provides-Extra: test
