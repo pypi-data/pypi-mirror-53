@@ -1,0 +1,15 @@
+include README.rst
+include LICENSE
+include requirements.txt
+
+graft exoplanet/theano_ops/lib/include
+graft exoplanet/theano_ops/lib/vendor/eigen_3.3.3
+
+include exoplanet/theano_ops/kepler/*.cc
+include exoplanet/theano_ops/contact/*.cc
+include exoplanet/theano_ops/celerite/*.cc
+
+include exoplanet/theano_ops/interp/*.cc
+include exoplanet/theano_ops/interp/include/*.h
+
+include exoplanet/theano_ops/starry/*.cc
