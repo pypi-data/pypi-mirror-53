@@ -1,0 +1,514 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/event.json",
+    "type": "object",
+    "definitions": {
+        "eventType": {
+            "type": "string",
+            "enum": [
+                "Exhibition",
+                "Performance"
+            ]
+        },
+        "ageDetails": {
+            "type": "object",
+            "properties": {
+                "minAge": {
+                    "title": "Minimum Age (Excluding Guardians)",
+                    "allOf": [
+                        {
+                            "$ref": "basic-types.json#/definitions/age"
+                        }
+                    ]
+                },
+                "maxAge": {
+                    "title": "Maximum Age (Excluding Guardians)",
+                    "allOf": [
+                        {
+                            "$ref": "basic-types.json#/definitions/age"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "minAge",
+                "maxAge"
+            ]
+        },
+        "costDetails": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Cost Type",
+                    "type": "string",
+                    "enum": [
+                        "Free",
+                        "Paid",
+                        "Unknown"
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "type": {
+                                "const": "Paid"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "minCost": {
+                                "title": "Minimum Cost",
+                                "allOf": [
+                                    {
+                                        "$ref": "basic-types.json#/definitions/money"
+                                    }
+                                ]
+                            },
+                            "maxCost": {
+                                "title": "Maximum Cost",
+                                "allOf": [
+                                    {
+                                        "$ref": "basic-types.json#/definitions/money"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
+            ]
+        },
+        "bookingDetails": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "title": "Booking Type",
+                    "type": "string",
+                    "enum": [
+                        "NotRequired",
+                        "Required",
+                        "Unknown"
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "type": {
+                                "const": "Required"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "dateBookingOpens": {
+                                "title": "Date Booking Opens",
+                                "allOf": [
+                                    {
+                                        "$ref": "basic-types.json#/definitions/date"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
+            ]
+        },
+        "performanceDetails": {
+            "type": "object",
+            "properties": {
+                "isWorkshop": {
+                    "title": "Is Workshop",
+                    "type": "boolean"
+                },
+                "performances": {
+                    "title": "Performances",
+                    "type": "array",
+                    "items": {
+                        "title": "Performance",
+                        "type": "object",
+                        "properties": {
+                            "date": {
+                                "title": "Performance Date",
+                                "allOf": [
+                                    {
+                                        "$ref": "basic-types.json#/definitions/date"
+                                    }
+                                ]
+                            },
+                            "time": {
+                                "title": "Performance Time",
+                                "allOf": [
+                                    {
+                                        "$ref": "basic-types.json#/definitions/time"
+                                    }
+                                ]
+                            },
+                            "isSoldOut": {
+                                "title": "Is Performance Sold Out",
+                                "type": "boolean"
+                            },
+                            "isCancelled": {
+                                "title": "Is Performance Cancelled",
+                                "type": "boolean"
+                            },
+                            "tags": {
+                                "title": "Performance-Specific Tags",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/tags"
+                                    }
+                                ]
+                            }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                            "date",
+                            "time",
+                            "isSoldOut",
+                            "isCancelled"
+                        ]
+                    },
+                    "minItems": 1
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "isWorkshop"
+            ]
+        },
+        "exhibitionDetails": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "dateFrom": {
+                            "title": "Date From (Inclusive)",
+                            "allOf": [
+                                {
+                                    "$ref": "basic-types.json#/definitions/date"
+                                }
+                            ]
+                        },
+                        "dateTo": {
+                            "title": "Date To (Inclusive)",
+                            "allOf": [
+                                {
+                                    "$ref": "basic-types.json#/definitions/date"
+                                }
+                            ]
+                        },
+                        "useVenueOpeningTimes": {
+                            "title": "Use Venue Opening Times",
+                            "const": true
+                        },
+                        "hasTimedEntry": {
+                            "title": "Has Timed Entry",
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "dateFrom",
+                        "dateTo",
+                        "useVenueOpeningTimes",
+                        "hasTimedEntry"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "dateFrom": {
+                            "title": "Date From (Inclusive)",
+                            "allOf": [
+                                {
+                                    "$ref": "basic-types.json#/definitions/date"
+                                }
+                            ]
+                        },
+                        "dateTo": {
+                            "title": "Date To (Inclusive)",
+                            "allOf": [
+                                {
+                                    "$ref": "basic-types.json#/definitions/date"
+                                }
+                            ]
+                        },
+                        "useVenueOpeningTimes": {
+                            "title": "Use Venue Opening Times",
+                            "const": false
+                        },
+                        "hasTimedEntry": {
+                            "title": "Has Timed Entry",
+                            "type": "boolean"
+                        },
+                        "openingRules": {
+                            "title": "Opening Rules",
+                            "allOf": [
+                                {
+                                    "$ref": "rules-types.json#/definitions/openingRules"
+                                }
+                            ]
+                        },
+                        "closingRules": {
+                            "title": "Closing Rules",
+                            "allOf": [
+                                {
+                                    "$ref": "rules-types.json#/definitions/closingRules"
+                                }
+                            ]
+                        }
+                    },
+                    "additionalItems": false,
+                    "required": [
+                        "dateFrom",
+                        "dateTo",
+                        "useVenueOpeningTimes",
+                        "hasTimedEntry",
+                        "openingRules"
+                    ]
+                }
+            ]
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "title": "Tag",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "title": "Tag Type",
+                        "type": "string",
+                        "enum": [
+                            "Audience",
+                            "Medium",
+                            "Style",
+                            "Geo"
+                        ]
+                    },
+                    "slug": {
+                        "title": "Tag Slug",
+                        "allOf": [
+                            {
+                                "$ref": "basic-types.json#/definitions/pathSegment"
+                            }
+                        ]
+                    },
+                    "label": {
+                        "title": "Tag Label",
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "type",
+                    "slug",
+                    "label"
+                ]
+            },
+            "minItems": 1
+        }
+    },
+    "properties": {
+        "venueId": {
+            "title": "Venue ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "venueEntityId": {
+            "title": "Venue Entity ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "version": {
+            "title": "Event Version",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/version"
+                }
+            ]
+        },
+        "entityStatus": {
+            "title": "Entity Status",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/entityStatus"
+                }
+            ]
+        },
+        "eventType": {
+            "title": "Event Type",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/eventType"
+                }
+            ]
+        },
+        "url": {
+            "title": "URL",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/url"
+                }
+            ]
+        },
+        "title": {
+            "title": "Title",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/title"
+                }
+            ]
+        },
+        "summary": {
+            "title": "Summary",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/prose"
+                }
+            ]
+        },
+        "ageDetails": {
+            "title": "Age Details",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ageDetails"
+                }
+            ]
+        },
+        "costDetails": {
+            "title": "Cost Details",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/costDetails"
+                }
+            ]
+        },
+        "bookingDetails": {
+            "title": "Booking Details",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/bookingDetails"
+                }
+            ]
+        },
+        "performanceDetails": {
+            "title": "Performance Details",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/performanceDetails"
+                }
+            ]
+        },
+        "exhibitionDetails": {
+            "title": "Exhibition Details",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/exhibitionDetails"
+                }
+            ]
+        },
+        "images": {
+            "title": "Images",
+            "allOf": [
+                {
+                    "$ref": "image-types.json#/definitions/images"
+                }
+            ]
+        },
+        "tags": {
+            "title": "Tags",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/tags"
+                }
+            ]
+        },
+        "currentWatchedContent": {
+            "title": "Current Watched Content",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/watchedContent"
+                }
+            ]
+        },
+        "publishedWatchedContent": {
+            "title": "Published Watched Content",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/watchedContent"
+                }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "eventType": {
+                        "const": "Performance"
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "venueId",
+                    "venueEntityId",
+                    "version",
+                    "entityStatus",
+                    "eventType",
+                    "url",
+                    "title",
+                    "ageDetails",
+                    "costDetails",
+                    "bookingDetails",
+                    "performanceDetails",
+                    "currentWatchedContent"
+                ]
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "eventType": {
+                        "const": "Exhibition"
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "venueId",
+                    "venueEntityId",
+                    "version",
+                    "entityStatus",
+                    "eventType",
+                    "url",
+                    "title",
+                    "ageDetails",
+                    "costDetails",
+                    "bookingDetails",
+                    "exhibitionDetails",
+                    "currentWatchedContent"
+                ]
+            }
+        }
+    ]
+}

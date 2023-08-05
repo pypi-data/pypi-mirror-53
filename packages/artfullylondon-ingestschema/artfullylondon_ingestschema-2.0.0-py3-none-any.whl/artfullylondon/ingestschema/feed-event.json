@@ -1,0 +1,180 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/feed-event.json",
+    "type": "object",
+    "properties": {
+        "feedType": {
+            "title": "Feed Type",
+            "const": "Entity"
+        },
+        "entity": {
+            "title": "Entity Type",
+            "const": "event"
+        },
+        "venueId": {
+            "title": "Venue ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "venueEntityId": {
+            "title": "Venue Entity ID",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/pathSegment"
+                }
+            ]
+        },
+        "version": {
+            "title": "Event Version",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/version"
+                }
+            ]
+        },
+        "eventType": {
+            "title": "Event Type",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/eventType"
+                }
+            ]
+        },
+        "url": {
+            "title": "URL",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/url"
+                }
+            ]
+        },
+        "title": {
+            "title": "Title",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/title"
+                }
+            ]
+        },
+        "summary": {
+            "title": "Summary",
+            "allOf": [
+                {
+                    "$ref": "basic-types.json#/definitions/prose"
+                }
+            ]
+        },
+        "ageDetails": {
+            "title": "Age Details",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/ageDetails"
+                }
+            ]
+        },
+        "costDetails": {
+            "title": "Cost Details",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/costDetails"
+                }
+            ]
+        },
+        "bookingDetails": {
+            "title": "Booking Details",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/bookingDetails"
+                }
+            ]
+        },
+        "performanceDetails": {
+            "title": "Performance Details",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/performanceDetails"
+                }
+            ]
+        },
+        "exhibitionDetails": {
+            "title": "Exhibition Details",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/exhibitionDetails"
+                }
+            ]
+        },
+        "imageUrls": {
+            "title": "Image URLs",
+            "allOf": [
+                {
+                    "$ref": "image-types.json#/definitions/imageUrls"
+                }
+            ]
+        },
+        "tags": {
+            "title": "Tags",
+            "allOf": [
+                {
+                    "$ref": "event.json#/definitions/tags"
+                }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "allOf": [
+        {
+            "if": {
+                "properties": {
+                    "eventType": {
+                        "const": "Performance"
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "feedType",
+                    "entity",
+                    "venueId",
+                    "venueEntityId",
+                    "version",
+                    "eventType",
+                    "url",
+                    "title",
+                    "ageDetails",
+                    "costDetails",
+                    "bookingDetails",
+                    "performanceDetails"
+                ]
+            }
+        },
+        {
+            "if": {
+                "properties": {
+                    "eventType": {
+                        "const": "Exhibition"
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "feedType",
+                    "entity",
+                    "venueId",
+                    "venueEntityId",
+                    "version",
+                    "eventType",
+                    "url",
+                    "title",
+                    "ageDetails",
+                    "costDetails",
+                    "bookingDetails",
+                    "exhibitionDetails"
+                ]
+            }
+        }
+    ]
+}
