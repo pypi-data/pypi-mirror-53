@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: DockerFeed
+Version: 1.0.1
+Summary: Docker Feed tool
+Home-page: https://github.com/DIPSAS/DockerFeed
+Author: DIPS AS
+Author-email: hha@dips.no,heh@dips.no
+License: UNKNOWN
+Requires-Dist: python-dotenv
+Requires-Dist: requests
+Requires-Dist: dohq-artifactory
+Requires-Dist: pyyaml (==5.1)
+Requires-Dist: DockerBuildSystem (>=1.1.30)
+Provides-Extra: dev
+Requires-Dist: check-manifest ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage ; extra == 'test'
+
+# Docker Feed
+
+
