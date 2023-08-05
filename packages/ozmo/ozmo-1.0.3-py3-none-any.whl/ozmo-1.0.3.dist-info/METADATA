@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: ozmo
+Version: 1.0.3
+Summary: a library for controlling certain robot vacuums
+Home-page: https://github.com/ligio/ozmo
+Author: Marco
+Author-email: ligioxx@gmail.com
+License: GPL-3.0
+Keywords: home automation vacuum robot
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Home Automation
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: click (>=6)
+Requires-Dist: paho-mqtt (>=1.4)
+Requires-Dist: pycountry-convert (>=0.5)
+Requires-Dist: pycryptodome (>=3.4)
+Requires-Dist: requests (>=2.18)
+Requires-Dist: sleekxmppfs (>=1.3.4)
+Requires-Dist: stringcase (>=1.2)
+Provides-Extra: dev
+Requires-Dist: nose ; extra == 'dev'
+Requires-Dist: requests-mock (>=1.3) ; extra == 'dev'
+
+UNKNOWN
+
+
