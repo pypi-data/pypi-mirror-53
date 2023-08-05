@@ -1,0 +1,87 @@
+Metadata-Version: 2.1
+Name: eRepublik
+Version: 0.16.0
+Summary: Python package for automated eRepublik playing
+Home-page: https://github.com/eeriks/erepublik/
+Author: Eriks Karls
+Author-email: eriks@72.lv
+License: MIT license
+Keywords: erepublik
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7.*, <4
+Requires-Dist: pytz (>=2019.2)
+Requires-Dist: requests (>=2.22)
+
+================
+eRepublik script
+================
+
+
+.. image:: https://img.shields.io/pypi/v/erepublik.svg
+        :target: https://pypi.python.org/pypi/erepublik
+
+.. image:: https://readthedocs.org/projects/erepublik/badge/?version=latest
+        :target: https://erepublik.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+
+Python package for automated eRepublik playing
+
+
+* Free software: MIT license
+* Documentation: https://erepublik.readthedocs.io/en/latest/
+
+
+Features
+--------
+
+* TODO
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+=======
+History
+=======
+
+* Telegram notification integration
+* Improved serialization to JSON
+* When failing to do WAM because of not enough food - buy food
+* Buy food buys 48h worth instead of 24h energy
+
+0.15.3 (2019-08-24)
+-------------------
+
+* Update after eRepublik changed campaign apis
+
+
+0.15.0 (2019-07-30)
+-------------------
+
+* CitizenAPI class methods renamed to "private", they are intended to be used internally.
+* TODO: None of the Citizen class's methods should return Response object - CitizenAPI is meant for that.
+
+
+0.14.4 (2019-07-23)
+-------------------
+
+* Wall post comment endpoints updated with comment create endpoints.
+
+0.1.0 (2019-07-19)
+------------------
+
+* First release on PyPI.
+
+
