@@ -1,0 +1,10 @@
+requests[security,socks]
+click
+python-dotenv
+python-dateutil
+
+[:platform_system == "Windows"]
+pyreadline
+
+[:python_version < "3.0"]
+pathlib2
