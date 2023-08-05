@@ -1,0 +1,401 @@
+#!python
+"""
+Signal Sciences CLI Tool
+
+API credentials must be exported to environment variables:
+export SIGSCI_EMAIL=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export SIGSCI_PASSWORD=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export SIGSCI_CORP=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export SIGSCI_SITE=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+API Token will take precedence over password
+export SIGSCI_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+"""
+
+from __future__ import print_function
+import os
+import sys
+import json
+import argparse
+from pysigsci import sigsciapi
+from pysigsci import powerrules
+from pysigsci import releases
+
+
+def print_json_data(json_data, pretty=False):
+    """
+    Print JSON data, with option of pretty printing
+    """
+    if pretty:
+        print(json.dumps(json_data, indent=4))
+    else:
+        print(json.dumps(json_data))
+
+
+def main():
+    """
+    Main function for Signal Sciences CLI tool
+    """
+
+    # Parse arguments
+    parser = argparse.ArgumentParser(
+        description="CLI tool for the Signal Sciences REST API \
+            (https://docs.signalsciences.net/api/).")
+
+    parser.add_argument(
+        '--get',
+        help='Get data from the API.',
+        choices=['corps', 'corp', 'corp-users', 'corp-user', 'overview-report',
+                 'corp-sites', 'corp-site', 'custom-alerts', 'custom-alert',
+                 'custom-signals', 'site-signals', 'corp-signals',
+                 'events', 'event', 'requests', 'request', 'request-feed',
+                 'request-rules', 'signal-rules', 'templated-rules', 'advanced-rules',
+                 'rule-lists', 'whitelist', 'blacklist', 'redactions', 'integrations',
+                 'integration', 'parameter-whitelist',
+                 'path-whitelist', 'activity',
+                 'header-links', 'header-link', 'site-members', 'site-member',
+                 'site-monitor', 'agents', 'agent', 'agent-logs',
+                 'suspicious-ips', 'top-attacks', 'timeseries-requests'])
+    parser.add_argument(
+        '--add',
+        help='Add data via the API.',
+        choices=['corp-user', 'custom-alert', 'whitelist', 'blacklist',
+                 'request-rules', 'signal-rules', 'custom-signals',
+                 'site-signals', 'corp-signals',
+                 'redaction', 'integration',
+                 'header-links', 'site-member'])
+    parser.add_argument(
+        '--update',
+        help='Update data via the API.',
+        choices=['corp', 'corp-site', 'corp-user', 'custom-alert', 'integration'])
+    parser.add_argument(
+        '--delete',
+        help='Delete data via the API.',
+        choices=['corp-user', 'custom-alert', 'whitelist', 'blacklist',
+                 'redaction', 'integration',
+                 'custom-signal', 'site-signals', 'corp-signals',
+                 'header-links', 'site-member'])
+    parser.add_argument(
+        '--power-rules',
+        help='Use the power rules repository.',
+        choices=['print-list', 'get-list', 'deploy-rule-pack'])
+    parser.add_argument(
+        '--rule-pack',
+        help='Specify a rule pack name.'
+    )
+    parser.add_argument(
+        '--expire-event',
+        help='Expire an event by ID.',
+        default=False,
+        action='store_true'
+    )
+    parser.add_argument(
+        '--expire-all-site-events',
+        help='Expire all events for a site.',
+        default=False,
+        action='store_true'
+    )
+    parser.add_argument(
+        '--generate-site-monitor-url',
+        help='Generate site monitor URL.',
+        default=False,
+        action='store_true'
+    )
+    parser.add_argument(
+        '--latest-modules',
+        help='Get latest module versions',
+        default=False,
+        action='store_true'
+    )
+    parser.add_argument(
+        '--latest-module',
+        help='Get latest version for module',
+        choices=releases.MODULES
+    )
+    parser.add_argument(
+        '--latest-agent',
+        help='Get latest agent version',
+        default=False,
+        action='store_true'
+    )
+    parser.add_argument(
+        '--enable',
+        help='Enable site monitor.',
+        choices=['site-monitor', 'agent-alerts', 'agent-alerts-all-sites']
+    )
+    parser.add_argument(
+        '--disable',
+        help='Disable site monitor.',
+        choices=['site-monitor', 'agent-alerts', 'agent-alerts-all-sites']
+    )
+    parser.add_argument(
+        '--from-time',
+        help='The POSIX Unix time to start.')
+    parser.add_argument(
+        '--until-time',
+        help='The POSIX Unix time to end.')
+    parser.add_argument(
+        '--tag',
+        help='Filter based on tag.')
+    parser.add_argument(
+        '--query',
+        help='Search query (syntax https://docs.signalsciences.net/faq/search-syntax/).')
+    parser.add_argument(
+        '--data',
+        help='Request data in JSON format.')
+    parser.add_argument(
+        '--email',
+        help='Corp user email address.')
+    parser.add_argument(
+        '--field',
+        help='Field specified for redactions.')
+    parser.add_argument(
+        '--site',
+        help='Corp site short name.')
+    parser.add_argument(
+        '--all-sites',
+        help='Command to be run against all sites in the corp.',
+        default=False,
+        action="store_true")
+    parser.add_argument(
+        '--id',
+        help='Record identfier.')
+    parser.add_argument(
+        '--alert-tag-name',
+        help='Specify an alert tagName.')
+    parser.add_argument(
+        '--status',
+        help='Specify a status.',
+        choices=['active', 'expired'])
+    parser.add_argument(
+        '--limit',
+        help='Specify a response records limit.',
+        type=int)
+    parser.add_argument(
+        '--pretty',
+        help='Print JSON in pretty format.',
+        default=False,
+        action="store_true")
+
+    args = parser.parse_args()
+
+    # Actions that do not require authn
+    if args.latest_modules:
+        print_json_data(releases.get_latest_module_versions(), args.pretty)
+        sys.exit()
+    elif args.latest_module is not None:
+        print_json_data(releases.get_latest_module_version(args.latest_module), args.pretty)
+        sys.exit()
+    elif args.latest_agent:
+        print_json_data(releases.get_latest_agent_version(), args.pretty)
+        sys.exit()
+
+    # Authenticate
+    try:
+        email = os.environ["SIGSCI_EMAIL"]
+
+    except KeyError as error:
+        print("Environment variable not set {}".format(str(error)))
+        sys.exit()
+
+    # Create sigsciapi object
+    # API token has precedence over password
+    if "SIGSCI_API_TOKEN" in os.environ:
+        sigsci = sigsciapi.SigSciApi(email=email, api_token=os.environ['SIGSCI_API_TOKEN'])
+    elif "SIGSCI_PASSWORD" in os.environ:
+        sigsci = sigsciapi.SigSciApi(email=email, password=os.environ['SIGSCI_PASSWORD'])
+
+        if sigsci.bearer_token is not None:
+            if 'message' in sigsci.bearer_token:
+                if 'Unauthorized' in sigsci.bearer_token['message']:
+                    print(sigsci.bearer_token['message'])
+                    sys.exit()
+
+                if 'Login failed' in sigsci.bearer_token['message']:
+                    print(sigsci.bearer_token['message'])
+                    sys.exit()
+    else:
+        print("API token or password not set.")
+        sys.exit()
+
+    if "SIGSCI_CORP" in os.environ:
+        sigsci.corp = os.environ['SIGSCI_CORP']
+    else:
+        print('SIGSCI_CORP required.')
+        sys.exit()
+
+    try:
+        if args.power_rules:
+            powerrulepack = powerrules.PowerRules()
+            method = getattr(powerrulepack, args.power_rules.replace("-", "_"))
+
+            if args.power_rules == 'deploy-rule-pack':
+                if args.rule_pack is None:
+                    print('--rule-pack is required.')
+                    sys.exit(0)
+
+                apply_to_sites = [args.site]
+
+                if args.all_sites:
+                    apply_to_sites.pop(0)
+                    for site in sigsci.get_corp_sites()['data']:
+                        apply_to_sites.append(site['name'])
+
+                for site in apply_to_sites:
+                    sigsci.site = site
+                    print('Deploying {} to {}.'.format(args.rule_pack, sigsci.site))
+
+                    response = method(sigsci, args.rule_pack, True)
+
+                    if not response['success']:
+                        print('Errors occured deploying {} on site {}\n'.format(args.rule_pack,
+                                                                                sigsci.site))
+
+            elif args.power_rules == 'print-list':
+                method()
+            else:
+                print_json_data(method(), args.pretty)
+
+            sys.exit(0)
+        elif args.get:
+            method = getattr(sigsci, 'get_' + args.get.replace("-", "_"))
+        elif args.add:
+            method = getattr(sigsci, 'add_' + args.add.replace("-", "_"))
+        elif args.update:
+            method = getattr(sigsci, 'update_' + args.update.replace("-", "_"))
+        elif args.delete:
+            method = getattr(sigsci, 'delete_' + args.delete.replace("-", "_"))
+        elif args.enable:
+            method = getattr(sigsci, 'enable_' + args.enable.replace("-", "_"))
+        elif args.disable:
+            method = getattr(
+                sigsci,
+                'disable_' +
+                args.disable.replace(
+                    "-",
+                    "_"))
+        elif args.expire_event:
+            method = getattr(sigsci, 'expire_event')
+        elif args.expire_all_site_events:
+            sigsci.site = args.site
+            expire_all_site_events(sigsci, args.site)
+            sys.exit()
+        elif args.generate_site_monitor_url:
+            method = getattr(sigsci, 'generate_site_monitor_url')
+        else:
+            parser.print_help()
+            sys.exit()
+
+    except AttributeError as error:
+        print(str(error))
+
+    else:
+        try:
+            params = dict()
+            identifier = None
+
+            if args.from_time:
+                params['from'] = args.from_time
+
+            if args.until_time:
+                params['until'] = args.until_time
+
+            if args.tag:
+                params['tag'] = args.tag
+
+            if args.query:
+                params['q'] = args.query
+
+            if args.status:
+                params['status'] = args.status
+
+            if args.limit:
+                params['limit'] = args.limit
+
+            if args.data:
+                data = json.loads(args.data)
+
+            if args.email:
+                identifier = args.email
+
+            if args.field:
+                identifier = args.field
+
+            if args.site:
+                if args.get == 'corp-site':
+                    identifier = args.site
+                else:
+                    sigsci.site = args.site
+
+            if args.id:
+                identifier = args.id
+
+            if args.alert_tag_name:
+                identifier = args.alert_tag_name
+
+            num_params = len(params)
+            apply_to_sites = [sigsci.site]
+
+            if args.all_sites:
+                apply_to_sites.pop(0)
+                for site in sigsci.get_corp_sites()['data']:
+                    apply_to_sites.append(site['name'])
+
+            for site in apply_to_sites:
+                sigsci.site = site
+
+                try:
+                    if num_params > 0:
+                        print_json_data(method(parameters=params), args.pretty)
+                    elif args.data:
+                        if identifier is not None:
+                            print_json_data(method(identifier, data=data), args.pretty)
+                        else:
+                            print_json_data(method(data=data), args.pretty)
+                    else:
+                        if identifier is not None:
+                            print_json_data(method(identifier), args.pretty)
+                        else:
+                            print_json_data(method(), args.pretty)
+
+                except Exception as error:
+                    print(str(error))
+
+        except Exception as error:
+            print(str(error))
+
+def expire_all_site_events(sigsci, site):
+    """
+    Expires all events for a site
+    """
+    if site is None:
+        print("Please specify a site.")
+        return
+
+    next_page = True
+    parameters = {
+        "status": "active",
+        "page": 1
+    }
+
+    while next_page:
+        events = sigsci.get_events(parameters=parameters)
+
+        for event in events['data']:
+            response = sigsci.expire_event(event['id'])
+
+            if 'message' in response:
+                print('{} with event id {}'.format(response['message'], event['id']))
+            else:
+                print('Expired event id {}'.format(event['id']))
+
+        if 'next' in events:
+            page_parameter = events['next']['uri'].split('&')[1]
+            page_number = page_parameter.split('=')[1]
+            parameters['page'] = page_number
+        else:
+            next_page = False
+
+
+if __name__ == '__main__':
+    main()
