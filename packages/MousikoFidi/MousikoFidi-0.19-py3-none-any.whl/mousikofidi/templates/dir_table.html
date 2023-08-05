@@ -1,0 +1,21 @@
+{% if dir_list %}
+  <h4 class="center">Dirs:</h4>
+  <table style="margin: 0 auto;">
+    <thead>
+      <tr>
+        <th>{# BLANK #}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dir in dir_list %}
+        <tr>
+          <td>
+            <a class="bold mobile-big" href="{{ dir.escaped_path }}">
+              {% if icons %}<i class="fas fa-folder"></i> {% endif %}{{ dir.dir_name }}
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}

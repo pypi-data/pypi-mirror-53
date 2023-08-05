@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: MousikoFidi
+Version: 0.19
+Summary: MousikoFidi: Your Music Cloud
+Home-page: https://git.sr.ht/~hristoast/mousikofidi
+Author: Hristos N. Triantafillou
+Author-email: me@hristos.co
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: License :: OSI Approved
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: JavaScript
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Browsers
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Content Management System
+Classifier: Topic :: Multimedia
+Classifier: Topic :: Multimedia :: Sound/Audio
+Classifier: Topic :: Multimedia :: Sound/Audio :: Mixers
+Classifier: Topic :: Multimedia :: Sound/Audio :: Players
+Classifier: Topic :: Multimedia :: Sound/Audio :: Players :: MP3
+Classifier: Topic :: Multimedia :: Video
+Classifier: Topic :: Multimedia :: Video :: Display
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: Flask (==1.0.3)
+Requires-Dist: mutagen (==1.42.0)
+Requires-Dist: uWSGI (==2.0.18)
+
+# MousikóFídi
+
+Arch Linux: [![builds.sr.ht status](https://builds.sr.ht/~hristoast/mousikofidi/archlinux.yml.svg)](https://builds.sr.ht/~hristoast/mousikofidi/archlinux.yml?)
+Debian: [![builds.sr.ht status](https://builds.sr.ht/~hristoast/mousikofidi/debian.yml.svg)](https://builds.sr.ht/~hristoast/mousikofidi/debian.yml?)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+MousikóFídi: Your Music Cloud
+
+MousikóFídi is a web application for streaming audio and video files from your personal collection.  It aims to be easy to install and use, with a minimal amount of dependencies.
+
+Logo by **[ogenfald](https://fillmyan.us/)**
+
+**[Demo](https://mousikofidi.info/)** | **[IRC](https://kiwiirc.com/client/irc.freenode.org/?nick=fidi|?#mousikofidi)** | **[Wiki](https://man.sr.ht/~hristoast/mousikofidi/)** | **[Known Issues](https://todo.sr.ht/~hristoast/mousikofidi?search=label:%22Bug%22%20status%3Aopen)** | **[Submit Issue](https://todo.sr.ht/~hristoast/mousikofidi)** | **[Planned Features](https://todo.sr.ht/~hristoast/mousikofidi?search=label:%22Enhancement%22%20status%3Aopen)** | **[PyPI](https://pypi.org/project/MousikoFidi/)**
+
+## Install And Configure
+
+See [the setup guide on the project wiki](https://man.sr.ht/~hristoast/mousikofidi/setup.md).
+
+## Using MousikóFídi
+
+See [the user guide on the project wiki](https://man.sr.ht/~hristoast/mousikofidi/user_guide.md).
+
+## Developing MousikóFídi
+
+See [the developer setup guide on the project wiki](https://man.sr.ht/~hristoast/mousikofidi/devel.md).
+
+## Project Goals
+
+* Maintain simple installation, setup, and usage processes.
+* Require minimal dependencies.
+* Use only vanilla javascript.
+* A responsive user interface that eliminates the need for any "app".
+
+
