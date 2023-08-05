@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: wg-pyutils
+Version: 0.0.1
+Summary: This is a Python package containing lots of small and useful functions for reuse
+Home-page: https://github.com/wugifer/wg-pyutils
+Author: wg
+Author-email: wugifer@pku.org.cn
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# wg-pyutils
+
+This is a Python package containing lots of small and useful functions for reuse
+
+## binary-mapping
+
+自动构造合适的函数，实现
+
+* 双界数值范围 (a,b)
+* 单界数值范围 (-inf, c) 或 (c, inf)
+* 无界数值范围 (-inf, inf)
+
+之间的一一映射
+
+基本用法
+
+`
+bm = BinaryMapping(x1=x1, x2=x2, y1=y1, y2=y2, refer_points=refer_points)
+
+print(bm(x))
+
+print(bm.f.plot())
+`
+
+
