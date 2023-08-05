@@ -1,0 +1,122 @@
+---
+version: '2.0'
+
+metadata:
+  apiVersion: '2016-07-01'
+  endpointPrefix: kcs
+  jsonVersion: '1.1'
+  serviceFullName: KCS Service
+  signatureVersion: v4
+  targetPrefix: kcs
+  protocol: kcs
+
+operations:
+  CreateCacheCluster:
+    name: CreateCacheCluster
+    http:
+      method: POST
+
+  DescribeCacheClusters:
+    name: DescribeCacheClusters
+    http:
+      method: GET
+
+  DescribeCacheCluster:
+    name: DescribeCacheCluster
+    http:
+      method: GET
+
+  FlushCacheCluster:
+    name: FlushCacheCluster
+    http:
+      method: PUT
+
+  RenameCacheCluster:
+    name: RenameCacheCluster
+    http:
+      method: PUT
+
+  ResizeCacheCluster:
+    name: ResizeCacheCluster
+    http:
+      method: PUT
+
+  DeleteCacheCluster:
+    name: DeleteCacheCluster
+    http:
+      method: DELETE
+
+  SetCacheParameters:
+    name: SetCacheParameters
+    http:
+      method: PUT
+
+  DescribeCacheParameters:
+    name: DescribeCacheParameters
+    http:
+      method: GET
+
+  SetCacheSecurityRules:
+    name: SetCacheSecurityRules
+    http:
+      method: PUT
+
+  DeleteCacheSecurityRule:
+    name: DeleteCacheSecurityRule
+    http:
+      method: DELETE
+
+  DescribeCacheSecurityRules:
+    name: DescribeCacheSecurityRules
+    http:
+      method: GET
+
+  DescribeRegions:
+    name: DescribeRegions
+    http:
+      method: GET
+
+  DescribeAvailabilityZones:
+     name: DescribeAvailabilityZones
+     http:
+       method: GET
+
+  CreateSnapshot:
+     name: CreateSnapshot
+     http:
+       method: POST
+
+  DeleteSnapshot:
+     name: DeleteSnapshot
+     http:
+       method: DELETE
+
+  RestoreSnapshot:
+     name: RestoreSnapshot
+     http:
+       method: PUT
+
+  DescribeSnapshot:
+     name: DescribeSnapshot
+     http:
+       method: GET
+
+  DownloadSnapshot:
+     name: DownloadSnapshot
+     http:
+       method: GET
+
+  ExportSnapshot:
+     name: ExportSnapshot
+     http:
+       method: GET
+
+  SetTimingSnapshot:
+     name: SetTimingSnapshot
+     http:
+       method: PUT
+
+  StatisticDBInstances:
+       name: StatisticDBInstances
+     http:
+       method: GET
