@@ -1,0 +1,78 @@
+Metadata-Version: 2.1
+Name: genewiz_template_validator
+Version: 0.0.11
+Summary: G001 data entry validation for Genewiz templates.
+Home-page: UNKNOWN
+Author: Greg Finak
+Author-email: gfinak@fredhutch.org
+License: MIT
+Description: ==========================
+        Genewiz Template Validator
+        ==========================
+        
+        Validate GENEWIZ template files, sample map templates and
+        container templates. 
+        
+        ------------
+        Installation
+        ------------
+        1. Install pip
+        ::
+        
+            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+            python get-pip.py
+        
+        2. Install the package
+        ::
+        
+            pip install -i https://test.pypi.org/simple/ genewiz-template-validator
+        
+        3. Check if it works.
+        ::
+        
+            validate_genewiz_templates -h
+        
+        To get help:
+        ------------
+        ::
+        
+            validate_genewiz_templates -h
+        
+            usage: validate_genewiz_templates [-h]
+                                          container_template_name.xlsx
+                                          sample_template_name.xlsx
+                                          [sample_template_name.xlsx ...]           
+            The following arguments are required:
+                container_template_name.xlsx, sample_template_name.xlsx
+        
+        
+        To run this validator:
+        ----------------------
+        
+        ::
+        
+            validate_genewiz_templates container_template.xlsx sample_template_1.xlsx sample_template_2.xlsx
+        
+        
+        The validator checks the following:
+        
+        1. That the provided sample map and container template can be found and are readable.
+        
+        2. That the sample map template files are listed in the container template.
+        
+        3. That there are no extraneous sample map entries in the container template.
+        
+        4. That the format of the sample id matches the expected naming scheme: **G0015[89]xxx_Vxx_Pxx_R2_[HKL]C_[A-H]xx**
+        
+        In the event that any of these validation checks fail, the validator
+        will exit with  an error message and produce a "log" file
+        **GENEWIZ_template_validation.log** in the current directory, that can be
+        inspected to identify the errors it found and to correct them.
+        
+Keywords: validation genewiz templates
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Utilities
+Description-Content-Type: text/x-rst
