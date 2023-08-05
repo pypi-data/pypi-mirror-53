@@ -1,0 +1,63 @@
+{% load form %}
+
+{% for field in form %}
+    <div class="form-group {% if field.errors %} has-error {% endif %}">
+        {% if field.name and field.name|form_field_group:groups %}
+            <div class="page-header">
+                <h4>
+                    {{ field.name|form_field_group:groups }}
+                </h4>
+            </div>
+        {% endif %}
+
+        {% if field|form_field_class == "CheckboxInput" %}
+            {% if field.label %}
+                <label class="checkbox-inline" for="id_{{ field.name }}">
+                    {{ field }}
+                    {{ field.label }}
+                </label>
+            {% endif %}
+        {% else %}
+            {% if field.label %}
+                <label for="id_{{ field.name }}">
+                    {{ field.label }}:
+                </label>
+            {% endif %}
+
+            {% if field.field.required %}
+                <span class="text-danger">
+                    <b>
+                        *
+                    </b>
+                </span>
+            {% endif %}
+
+            <div>
+                {{ field }}
+            </div>
+        {% endif %}
+
+        {% if field.help_text %}
+            <span class="mb-0">
+                {{ field.help_text }}
+            </span>
+        {% endif %}
+
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <span class="text-danger">
+                    {{ error }}
+                </s>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endfor %}
+
+<style>
+    .form-group ul {
+        list-style: none;
+        margin-top: 5px;
+        margin-left: 10px;
+        padding-left: 0;
+    }
+</style>
