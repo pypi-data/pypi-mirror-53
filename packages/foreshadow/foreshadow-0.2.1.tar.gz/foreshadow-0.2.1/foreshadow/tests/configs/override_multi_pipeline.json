@@ -1,0 +1,12 @@
+{
+  "columns":{},
+
+  "postprocess":[
+	  {"name": "pca","columns": ["crim","indus","nox"],"pipeline": [
+		  {"transformer": "PCA", "name": "PCA", "parameters": {"n_components":2}}
+    ]}
+  ],
+
+  "intents":{}
+
+}

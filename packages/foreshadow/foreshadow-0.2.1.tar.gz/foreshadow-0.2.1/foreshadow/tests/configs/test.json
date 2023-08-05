@@ -1,0 +1,23 @@
+{
+  "columns":{
+    "crim":["NumericalIntent",
+            [
+              ["StandardScaler", "Scaler", {"with_mean":true}]
+            ]]
+  },
+
+  "postprocess":[
+
+  ],
+
+  "intents":{
+    "TestNumericIntent":{
+      "single":[
+        ["Imputer", "Imputer", {"strategy":"mean"}]
+      ],
+      "multi":[]
+    }
+  }
+
+
+}

@@ -1,0 +1,32 @@
+{
+  "columns":{
+    "crim":{
+	    "intent": "TestGenericIntent",
+            "pipeline":[
+	    {"cls": "StandardScaler",
+	       "name": "Scaler", 
+	       "parameters": {"with_mean":false}
+	    }]},
+    "indus":{"intent": "TestGenericIntent"}
+  },
+
+  "postprocess":[
+	  {"name": "pca",
+     "columns": ["age"],
+     "pipeline": [
+	     {"transformer": "PCA", "name": "PCA", "parameters": {"n_components":2}}
+    ]}
+  ],
+
+  "intents":{
+    "TestNumericIntent":{
+      "single":[
+	      {"transformer": "Imputer", "name": "impute"}
+      ],
+      "multi":[
+	      {"transformer": "PCA", "name": "pca"}
+      ]
+    }
+  }
+
+}
