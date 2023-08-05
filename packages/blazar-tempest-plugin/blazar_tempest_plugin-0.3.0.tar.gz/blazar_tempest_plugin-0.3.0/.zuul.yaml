@@ -1,0 +1,12 @@
+- project:
+    templates:
+      - tempest-plugin-jobs
+      - check-requirements
+      - publish-openstack-docs-pti
+    check:
+      jobs:
+        - blazar-devstack-dsvm
+    gate:
+      queue: blazar
+      jobs:
+        - blazar-devstack-dsvm
