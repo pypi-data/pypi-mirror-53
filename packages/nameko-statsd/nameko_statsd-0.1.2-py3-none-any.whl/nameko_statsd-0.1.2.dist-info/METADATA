@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: nameko-statsd
+Version: 0.1.2
+Summary: StatsD dependency for nameko services.
+Home-page: https://github.com/sohonetlabs/nameko-statsd
+Author: Sohonet product team
+Author-email: fabrizio.romano@sohonet.com
+License: MIT License
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/x-rst
+Requires-Dist: nameko (>=2.6.0)
+Requires-Dist: statsd (>=3.2.1)
+Requires-Dist: six (>=1.10.0)
+Requires-Dist: mock (>=2.0.0)
+Requires-Dist: enum34 (>=1.1.6) ; python_version < "3.5"
+Provides-Extra: dev
+Requires-Dist: coverage ; extra == 'dev'
+Requires-Dist: flake8 ; extra == 'dev'
+Requires-Dist: pytest (<5.0.0) ; extra == 'dev'
+Requires-Dist: restructuredtext-lint ; extra == 'dev'
+Requires-Dist: Pygments ; extra == 'dev'
+
+StatsD dependency for nameko services.
+
+
