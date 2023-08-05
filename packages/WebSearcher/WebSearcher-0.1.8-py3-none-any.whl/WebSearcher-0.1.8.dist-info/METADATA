@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: WebSearcher
+Version: 0.1.8
+Summary: WebSearcher 0.1.8
+Home-page: http://github.com/gitronald/WebSearcher
+Author: Ronald E. Robertson
+Author-email: rer@ccs.neu.edu
+License: BSD-3-Clause
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: lxml
+Requires-Dist: bs4
+Requires-Dist: brotli
+Requires-Dist: tldextract
+Requires-Dist: emoji
+Requires-Dist: pandas
+
+# WebSearcher 0.1.8  
+## Tools for conducting, collecting, and parsing web search  
+[![PyPI version](https://badge.fury.io/py/WebSearcher.svg)](https://badge.fury.io/py/WebSearcher)  
+
+This package provides tools for conducting algorithm audits of web search and includes a scraper with tools for geolocating, conducting, and saving searches. It also includes a modular parser for decomposing a SERP into list of components with categorical classifications and position-based specifications.  
+
+
