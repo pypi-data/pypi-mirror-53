@@ -1,0 +1,58 @@
+Metadata-Version: 1.2
+Name: pydiffusion
+Version: 0.2.3
+Summary: A Python library for diffusion simulation and data analysis
+Home-page: https://github.com/zhangqi-chen/pyDiffusion
+Author: Zhangqi Chen
+Author-email: wshchzhq@gmail.com
+License: MIT
+Description: 
+        ===========
+        pyDiffusion
+        ===========
+        
+        .. image:: https://img.shields.io/pypi/status/pydiffusion.svg
+            :target: https://pypi.python.org/pypi/pydiffusion/
+            :alt: Development Status
+        
+        .. image:: https://img.shields.io/pypi/v/pydiffusion.svg
+            :target: https://pypi.python.org/pypi/pydiffusion/
+            :alt: Latest version
+        
+        .. image:: https://img.shields.io/pypi/pyversions/pydiffusion.svg
+            :target: https://pypi.python.org/pypi/pydiffusion/
+            :alt: Supported Python versions
+        
+        .. image:: https://img.shields.io/pypi/l/pydiffusion.svg
+            :target: https://pypi.python.org/pypi/pydiffusion/
+            :alt: License
+        
+        **pyDiffusion** combines tools like **diffusion simulation**, **diffusion data smooth**, **forward simulation analysis (FSA)**, etc. to help people analyze diffusion data efficiently.
+        
+        Dependencies
+        ------------
+        
+        * Python 3.5+
+        * numpy, matplotlib, scipy, pandas
+        
+        Installation
+        ------------
+        
+        Via pip (recommend):
+        
+        .. code-block::
+        
+            pip install pydiffusion
+        
+        
+Keywords: diffusion,simulation,python
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.5
