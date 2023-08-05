@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: dataiter
+Version: 0.1
+Summary: Classes for data manipulation
+Home-page: https://github.com/otsaloma/dataiter
+Author: Osmo Salomaa
+Author-email: otsaloma@iki.fi
+License: MIT
+Platform: UNKNOWN
+Requires-Python: >=3.1.0
+Description-Content-Type: text/markdown
+Requires-Dist: attd (>=0.2)
+
+Python Classes for Data Manipulation
+====================================
+
+[![Build Status](https://travis-ci.org/otsaloma/dataiter.svg)](https://travis-ci.org/otsaloma/dataiter)
+[![PyPI](https://img.shields.io/pypi/v/dataiter.svg)](https://pypi.org/project/dataiter/)
+
+dataiter currently includes `ListOfDicts`, a class useful for
+manipulating data from JSON APIs. Manipulation functions iterate over
+the data and return a shallow modified copy of the original.
+
+## Installation
+
+```bash
+pip install dataiter
+```
+
+## Documentation
+
+dataiter is not yet stable, documentation will be added later. For now,
+you can look at the tests to see usage examples.
+
+
