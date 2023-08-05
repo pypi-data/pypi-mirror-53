@@ -1,0 +1,94 @@
+Metadata-Version: 2.1
+Name: LOLComicGrabber
+Version: 0.0.3
+Summary: Download League of Legends comics for offline use
+Home-page: https://github.com/ShahriyarShawon/LOLComicGrabber
+Author: Shahriyar Shawon
+Author-email: ShahriyarShawon321@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: appdirs (==1.4.3)
+Requires-Dist: autopep8 (==1.4.4)
+Requires-Dist: beautifulsoup4 (==4.8.0)
+Requires-Dist: bs4 (==0.0.1)
+Requires-Dist: certifi (==2019.6.16)
+Requires-Dist: chardet (==3.0.4)
+Requires-Dist: cssselect (==1.1.0)
+Requires-Dist: fake-useragent (==0.1.11)
+Requires-Dist: idna (==2.8)
+Requires-Dist: lxml (==4.4.0)
+Requires-Dist: parse (==1.12.0)
+Requires-Dist: pep8 (==1.7.1)
+Requires-Dist: pycodestyle (==2.5.0)
+Requires-Dist: pyee (==6.0.0)
+Requires-Dist: pyppeteer (==0.0.25)
+Requires-Dist: pyquery (==1.4.0)
+Requires-Dist: requests (==2.22.0)
+Requires-Dist: requests-html (==0.10.0)
+Requires-Dist: six (==1.12.0)
+Requires-Dist: soupsieve (==1.9.2)
+Requires-Dist: tqdm (==4.33.0)
+Requires-Dist: urllib3 (==1.25.3)
+Requires-Dist: w3lib (==1.21.0)
+Requires-Dist: websockets (==8.0.2)
+
+# LOLComicGrabber
+
+LOLComicGrabber is a python package aimed at making downloading the League of Legends comic books possible. I made this because I didn't want to be limited to a browser and internet connection to read one of these comics. LOLComicGrabber aims to make the League of Legends comics accessible.
+
+# Installation
+Install from pip
+
+```bash 
+pip install LOLComicGrabber
+```
+
+or install from source
+
+```bash
+git clone https://github.com/ShahriyarShawon/LOLComicGrabber.git
+```
+```bash
+cd LOLComicGrabber
+```
+```bash
+python setup.py install 
+```
+
+
+# Usage
+
+Download Issue 3 of Ashe Warmother
+```python
+from LOLComicGrabber.ComicGrabber import LOLComicGrabber
+
+grabber = LOLComicGrabber()
+grabber.download("Warmother",3)
+```
+
+List one shots
+```python
+from LOLComicGrabber.ComicGrabber import LOLComicGrabber
+
+grabber = LOLComicGrabber()
+for key,value in grabber.get_one_shots().items():
+    print(key)
+```
+
+Download One Shot
+```python
+from LOLComicGrabber.ComicGrabber import LOLComicGrabber
+
+grabber = LOLComicGrabber()
+grabber.download("Nami: Into the Abyss", is_series=False)
+```
+
+
+# What's New?
+
+0.0.2 - Made filename and directory names friendly for Windows
+
