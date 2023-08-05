@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ ! -d "$HOME/.config/ranger" ]; then
+	export TERM=linux
+	export TERMINFO=/bin/sh 
+	ranger --copy-config=all > /dev/null 2>&1
+fi
