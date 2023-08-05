@@ -1,0 +1,12 @@
+
+[:sys_platform != "cygwin"]
+psutil>=4.0.0
+
+[docs]
+sphinx
+
+[tests]
+pytest==4.6.3
+pytest-cov==2.7.1
+mock==3.0.5
+python-daemon==2.2.3
