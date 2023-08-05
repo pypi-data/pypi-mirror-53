@@ -1,0 +1,8 @@
+[console_scripts]
+bayesmark-agg = bayesmark.experiment_aggregate:main
+bayesmark-anal = bayesmark.experiment_analysis:main
+bayesmark-baseline = bayesmark.experiment_baseline:main
+bayesmark-exp = bayesmark.experiment:main
+bayesmark-init = bayesmark.experiment_db_init:main
+bayesmark-launch = bayesmark.experiment_launcher:main
+
