@@ -1,0 +1,16 @@
+#!python
+#
+# Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# This software is distributed under the terms of the MIT License.
+#
+"""
+    Command-line script for uploading, monitoring, and reporting googletest
+    binaries in parallel.
+"""
+
+import sys
+
+
+if __name__ == "__main__":
+    import nanaimo
+    sys.exit(nanaimo.main())
