@@ -1,0 +1,191 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://schemas.artfully.london/v1/basic-types.json",
+    "definitions": {
+        "pathSegment": {
+            "description": "A value that is safe to use as a URL path segment",
+            "type": "string",
+            "pattern": "^([a-z0-9._~:@!$&'()*+,;=-]|(%[0-9A-Fa-f][0-9A-Fa-f]))+$"
+        },
+        "entity": {
+            "type": "string",
+            "enum": [
+                "event",
+                "venue"
+            ]
+        },
+        "feedType": {
+            "type": "string",
+            "enum": [
+                "EntityWatch",
+                "Entity"
+            ]
+        },
+        "version": {
+            "description": "A version timestamp",
+            "type": "integer",
+            "minimum": 1
+        },
+        "uuid": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{32}$"
+        },
+        "age": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 99
+        },
+        "date": {
+            "description": "A short date type",
+            "type": "string",
+            "pattern": "^[012]\\d\\d\\d-[01]\\d-[0123]\\d$",
+            "examples": [
+                "2018-01-14"
+            ]
+        },
+        "time": {
+            "description": "A short time type",
+            "type": "string",
+            "pattern": "^([01]\\d|2[0123]):[012345]\\d$",
+            "examples": [
+                "13:00"
+            ]
+        },
+        "hexColor": {
+            "description": "Color as an RGB hex value",
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{6}$",
+            "examples": [
+                "FF00AA"
+            ]
+        },
+        "money": {
+            "description": "A monetary value in pence",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100000
+        },
+        "entityStatus": {
+            "type": "string",
+            "enum": [
+                "NewPendingReview",
+                "Publishable",
+                "PublishablePendingReview"
+            ]
+        },
+        "watchedContent": {
+            "type": "string",
+            "minLength": 1
+        },
+        "title": {
+            "type": "string",
+            "minLength": 1
+        },
+        "disabledBathroom": {
+            "type": "string",
+            "enum": [
+                "Present",
+                "NotPresent",
+                "Unknown",
+                "NotApplicable"
+            ]
+        },
+        "hearingFacilities": {
+            "type": "string",
+            "enum": [
+                "HearingLoops",
+                "PartialHearingLoops",
+                "NoHearingLoops",
+                "Unknown",
+                "NotApplicable"
+            ]
+        },
+        "wheelchairAccess": {
+            "type": "string",
+            "enum": [
+                "FullAccess",
+                "PartialAccess",
+                "NoAccess",
+                "Unknown",
+                "NotApplicable"
+            ]
+        },
+        "areaOfLondon": {
+            "type": "string",
+            "enum": [
+                "Central",
+                "West",
+                "North",
+                "East",
+                "SouthEast",
+                "SouthWest"
+            ]
+        },
+        "url": {
+            "type": "string",
+            "format": "uri"
+        },
+        "ukPostcode": {
+            "type": "string",
+            "pattern": "^((GIR &0AA)|((([A-PR-UWYZ][A-HK-Y]?[0-9][0-9]?)|(([A-PR-UWYZ][0-9][A-HJKSTUVW])|([A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRV-Y]))) {0,}[0-9][ABD-HJLNP-UW-Z]{2}))$"
+        },
+        "day": {
+            "type": "string",
+            "enum": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+            ]
+        },
+        "datePreset": {
+            "type": "string",
+            "enum": [
+                "BankHolidays",
+                "BankHolidayWeekends",
+                "ChristmasEve",
+                "ChristmasDay",
+                "BoxingDay",
+                "NewYearsEve",
+                "NewYearsDay",
+                "ChristmasPeriod",
+                "EasterSunday",
+                "EasterHolidayPeriod",
+                "AugustSaturdays",
+                "August",
+                "RoshHashanah",
+                "YomKippur"
+            ]
+        },
+        "prose": {
+            "type": "object",
+            "properties": {
+                "mimeType": {
+                    "title": "Type",
+                    "type": "string",
+                    "enum": [
+                        "text/plain",
+                        "text/html"
+                    ]
+                },
+                "value": {
+                    "title": "Value",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "credit": {
+                    "title": "Credit",
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "required": [
+                "mimeType",
+                "value"
+            ]
+        }
+    }
+}
