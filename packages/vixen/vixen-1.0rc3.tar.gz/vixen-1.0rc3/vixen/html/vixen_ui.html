@@ -1,0 +1,673 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ViXeN media viewer</title>
+
+        <!-- Load the jigna script. -->
+        <script type='text/javascript' src='/jigna/jigna-vue.js'></script>
+
+        <!-- Once jigna is loaded, initialize it. -->
+        <script type='text/javascript'>
+            jigna.initialize({async: false, debug: false});
+        </script>
+
+        <script type='text/javascript' src='$HTML_ROOT/js/mousetrap.min.js'>
+        </script>
+
+        <script type='text/javascript' src='$HTML_ROOT/js/notify.min.js'>
+        </script>
+
+        <link href="$HTML_ROOT/css/style.css" rel="stylesheet">
+        <link rel="icon" href="$HTML_ROOT/images/logo_small.png" type="image/png">
+  </head>
+
+<body>
+<div id="app">
+    <h2 style="text-align:center; padding: 0px; margin: 0px;">
+        Welcome to ViXeN
+    </h2>
+
+    <div v-if="ui.mode === 'edit' && !editor.project"
+         style="float:right;" class="sans-third">
+        <img src="$HTML_ROOT/images/logo.png" align="center" width="50%" alt="logo"/>
+    </div>
+
+    <div style="position: absolute; bottom: 5px; right: 5px">
+        <p>Version: {{ui.version}}</p>
+    </div>
+
+  <div v-if="ui.is_busy" id="busy-overlay" class="busy-overlay">
+    <img src="$HTML_ROOT/images/loading.gif" class="loading" alt="loading..."/>
+    <p class="loading">Please wait...</p>
+  </div>
+
+  <!-- Menu on the top -->
+  <div style="position: absolute; top: 5px; margin-left: 5px;">
+      <img src="$HTML_ROOT/images/logo_small.png" height="30px" align="center" alt="logo"/>
+      <a href="#" v-on:click="ui.home()" class="menu">Home</a>
+      <a v-bind:href="ui.docs" target="_blank" class="menu">Help</a>
+      <a v-bind:href="$ROOTui.log_file" target="_blank" class="menu">Log</a>
+  </div>
+  <div style="position: absolute; top: 5px; right: 5px;">
+    <button v-on:click="halt()" id="halt">Stop ViXeN</button>
+  </div>
+  <!--  Menu end -->
+
+  <div v-if="ui.mode !== 'view'">
+   <section class='third' style="background:#ffe">
+    <h3>Available Projects</h3>
+    <ul>
+      <li v-for="(index, project) in ui.vixen.projects" v-if="project.name != '__hidden__'">
+        {{project.name}}
+          <button v-on:click="busy_call(ui, 'view', project)"
+                  v-bind:id="'view-' + index">View</button>
+          <button v-on:click="busy_call(ui, 'edit', project)"
+                  v-bind:id="'edit-' + index">Edit</button>
+          <button v-on:click="busy_call(ui, 'copy_project', project)"
+                  v-bind:id="'copy-' + index"
+                  title="Copies project config but not the data.">Copy</button>
+          <button v-on:click="remove_project(project)"
+                  v-bind:id="'remove-' + index">Remove</button>
+      </li>
+    </ul>
+    <button style="font-size:larger; margin:0.5rem" id="new-project"
+            v-on:click="ui.add_project()" type="button">New Project</button>
+   </section>
+  </div>
+
+  <div v-if="ui.mode === 'edit' && editor.project">
+    <section class="sans-third" style='background:#f0f0f0'>
+
+    <h3> Edit Project</h3>
+    <div class="tag-editor" style="float:left; padding: 5px">
+      <label> Name: </label> <input v-model="editor.name" id="edit-name"><br>
+      <label>
+        Description: </label> <input v-model="editor.description" id="edit-desc"><br>
+      <label> Path: </label>
+      <input v-bind:class="editor.valid_path ? 'success' : 'error'"
+             v-model="editor.path" debounce="500" id="edit-path">
+      <button v-on:click="editor.select_path()">Browse...</button>
+        <br>
+      <label> <b>Tags</b> </label> <br>
+      <div v-for="(index, tag) in editor.tags">
+        <label>{{tag.name}}</label>
+        <select v-model="tag.type" v-bind:id="'tag-type-' + index">
+          <option>string</option>
+          <option>text</option>
+          <option>int</option>
+          <option>float</option>
+          <option>bool</option>
+        </select>
+        <button v-on:click="editor.move_tag_up(parseInt(index))"
+                v-bind:id="'move-tag-up' + index">&uarr;</button>
+        <button v-on:click="editor.move_tag_down(parseInt(index))"
+                v-bind:id="'move-tag-down' + index">&darr;</button>
+        <button v-on:click="editor.remove_tag(parseInt(index))"
+                v-bind:id="'remove-tag-' + index">Remove</button>
+      </div>
+      <input v-model="editor.tag_name"
+             title="Enter a new tag. You may separate multiple tags by commas."
+             id="new-tag" lazy>
+      <button v-on:click="editor.add_tag(editor.tag_name)" id="add-tag">
+          Add tag
+      </button>
+      <br>
+      <br>
+      File extensions to index: <b v-if="editor.extensions.length == 0">All files.</b>
+      <ul>
+        <li v-for="(index, ext) in editor.extensions">
+          {{ext}}
+          <button v-on:click="editor.remove_extension(parseInt(index))"
+                  v-bind:id="'remove-ext-' + index">
+            Remove
+          </button>
+        </li>
+      </ul>
+      <input v-model="editor.ext_name" id="new-extension"
+             title="Case is not significant, use commas for multiple extensions. Examples: '.jpg' or '.jpg, .png'." lazy>
+      <button v-on:click="editor.add_extension(editor.ext_name)" id="add-extension">
+        Add extension
+      </button>
+      <br>
+      <br>
+      <div v-if="editor.available_exts">
+        Available extensions are: {{editor.available_exts}}
+      </div>
+      <button v-on:click="busy_call(editor, 'find_extensions')" id="find-extensions">
+        Find available extensions
+      </button>
+      <br>
+      <br>
+      <!-- Processors -->
+      <edit-processor :editor="editor"></edit-processor>
+
+      <br/>
+      <button style="font-size:larger; margin:0.5rem"
+              v-bind:disabled="!editor.valid_path"
+              v-on:click="busy_call(editor, 'apply')" id="apply">
+          Apply changes
+      </button>
+
+    </div>
+    </section>
+  </div>
+
+  <div v-if="ui.mode === 'view' && viewer.project">
+   <section class='third' style='background:#ffe'>
+
+    <h3 style="margin: 5px;"> View Project: {{viewer.name}}</h3>
+
+    <div v-if="viewer.project.processors.length > 0">
+      <view-processor :ui="ui" :processor="ui.processor"
+                      :project="viewer.project">
+        </view-processor>
+    </div>
+
+    This project has {{viewer.project.number_of_files}} files.
+    <button v-on:click="rescan()" id="rescan"
+            title="Rescan project for new files.">Rescan</button>
+    <br>
+
+    <input v-model="viewer.search" style="width:60%" placeholder="Search"
+           v-on:keyup.enter="busy_call(viewer, 'do_search')" id="search-text" lazy>
+    <button v-on:click="busy_call(viewer, 'do_search')" id="search">Search</button>
+    <button v-on:click="viewer.clear_search()" id="clear-search">Clear</button>
+
+    <div v-if="viewer.is_searching">
+        <div v-if="viewer.search_completed">
+        <view-search-results :viewer="viewer" :pager="viewer.search_pager">
+        </view-search-results>
+        </div>
+        <div v-else>
+            Press the "Search" button or hit "Enter/Return".
+        </div>
+    </div>
+    <div v-else>
+        <view-directory :viewer="viewer" :pager="viewer.pager"
+                        :current_dir="viewer.current_dir"></view-directory>
+    </div>
+
+
+    <div v-if="viewer.current_file || (viewer.search_completed && viewer.media)"
+         style="padding:5px;">
+        <edit-media :viewer="viewer" :media="viewer.media"></edit-media>
+    </div>
+    <div style="clear: left; padding: 10px;">
+      <hr/>
+
+      <button v-on:click="busy_call(viewer.project, 'save')" id="save">
+          Save
+      </button>
+      <button v-on:click="viewer.export_csv()" id="export-csv">Export CSV</button>
+      <button v-on:click="viewer.import_csv()"
+              title="Import tags from a CSV file" id="import-csv">Import CSV</button>
+      <br/>
+      Last saved at: {{viewer.last_save_time}}
+    </div>
+   </section>
+
+    <section class="sans-third"
+         style="background:#f0f0f0;box-shadow:inset 0 0 10px rgba(0,0,0,0.2)">
+
+        <div v-if="viewer.current_file || (viewer.search_completed && viewer.media)"
+             style="padding:5px;">
+          <view-media class="viewer" :media="viewer.media"></view-media>
+        </div>
+    </section>
+
+  </div>
+</div>
+</body>
+
+<!--  vue.js Components -->
+<!-- view-directory template -->
+  <script type="text/x-template" id="view-directory-template">
+    <div>
+      Current directory:
+      {{viewer.project.root.name}}/{{current_dir.relpath}}
+      <br>
+      <button v-on:click="viewer.go_to_parent()" id="go-to-parent">
+        Go to Parent
+      </button>
+      <div style="height:100px; width: 300px;"
+           class="resizable directory-browser">
+        <div v-for="path in pager.data | limitBy pager.limit pager.start">
+          <label v-if="path.directories" style="font-weight: bold;"
+                 v-bind:class="{'current-index': pager.rel_index == $index}"
+                 v-on:click="pager.select($index)"
+                 v-bind:id="'path-' + $index">{{path.name}}/</label>
+          <label v-else v-on:click="pager.select($index)"
+                 v-bind:class="{'current-index': pager.rel_index == $index,
+                               'selected': pager.selected == path}"
+                 v-bind:id="'path-' + $index">
+            {{path.name}}
+          </label>
+        </div>
+      </div>
+      {{current_dir.files.length}} files.
+      Page {{pager.page}}
+      <input v-show="pager.total_pages > 1" v-model="pager.page"
+             type="range" min="1" v-bind:max="pager.total_pages">
+       of {{pager.total_pages}}
+      <button v-on:click="pager.prev_page()"
+              v-bind:disabled="pager.page == 1" id="prev-page">Prev</button>
+      <button v-on:click="pager.next_page()"
+              v-bind:disabled="pager.page == pager.total_pages" id="next-page">Next</button>
+    </div>
+  </script>
+
+  <!-- view-search-results template -->
+  <script type="text/x-template" id="view-search-template">
+   <div>
+   <div style="height:100px; width: 300px;" class="resizable directory-browser">
+   <div v-for="media in pager.data | limitBy pager.limit pager.start">
+   <label v-on:click="pager.select($index)"
+          v-bind:class="{'current-index': pager.rel_index == $index,
+                  'selected': pager.selected[1] == media[1]}"
+          v-bind:id="'search-item-' + $index"
+       title="{{media[1]}}">
+   {{media[0]}}
+   </label>
+   </div>
+   </div>
+   {{pager.total}} results.
+   Page {{pager.page}}
+   <input v-show="pager.total_pages > 1" v-model="pager.page"
+   type="range" min="1" v-bind:max="pager.total_pages">
+   of {{pager.total_pages}}
+   <button v-on:click="pager.prev_page()"
+           v-bind:disabled="pager.page == 1" id="prev-page">Prev</button>
+   <button v-on:click="pager.next_page()"
+   v-bind:disabled="pager.page == pager.total_pages" id="next-page">Next</button>
+   </div>
+  </script>
+
+
+  <!-- edit-media template -->
+  <script type="text/x-template" id="edit-media-template">
+    <div class="tag-editor" style="float:left; padding: 5px">
+      <label> Name: </label>
+      <label title="Click to open with system viewer" style="color:blue;"
+             v-on:click="viewer.os_open(media.path)">
+        {{media.file_name}}</label>
+      <br>
+      <label> Time: </label> {{media.mtime}}
+      <br/>
+      <label> Size: </label> {{(media.size/1024).toFixed(1)}} (KB)
+      <br/>
+
+      <div v-for="tag in viewer.project.tags">
+        <label>{{tag.name}}</label>
+        <input v-if="tag.type == 'bool'" v-model="media.tags[tag.name]"
+               type="checkbox" v-bind:id="'tag-' + $index">
+        <input v-if="tag.type == 'string'"
+               v-model="media.tags[tag.name]" v-bind:id="'tag-' + $index" lazy>
+        <textarea v-if="tag.type == 'text'"
+               v-model="media.tags[tag.name]" v-bind:id="'tag-' + $index" lazy></textarea>
+         <input v-if="tag.type == 'int' || tag.type == 'float'"
+               v-model="media.tags[tag.name]" number v-bind:id="'tag-' + $index" lazy>
+      </div>
+    </div>
+  </script>
+
+  <!-- view-media template -->
+  <script type="text/x-template" id="view-media-template">
+    <div style="display: inline-block;">
+      <div v-if="media.type == 'image'" class="resizable" style="width: 500px;">
+        <a v-bind:href="$ROOTmedia.path">
+          <img v-bind:src="$ROOTmedia.path"
+               v-bind:alt="media.file_name" width="100%">
+        </a>
+      </div>
+      <!-- VIDEO -->
+      <div v-if="media.type == 'video'" class="resizable"
+           style="width: 500px;">
+        <video v-bind:src="$ROOTmedia.path" controls
+               preload="auto" style="width:100%;">
+        </video>
+      </div>
+      <!-- AUDIO -->
+      <div v-if="media.type == 'audio'" class="resizable"
+           style="width: 300px">
+        <audio v-bind:src="$ROOTmedia.path" controls>
+        </audio>
+      </div>
+      <!-- TEXT -->
+      <div v-if="media.type == 'text'" class="resizable"
+           style="width: 500px; height: 500px;">
+        <object v-bind:data="$ROOTmedia.path" type="text/plain"
+         width="100%" height="100%">
+       </object>
+      </div>
+      <!-- HTML -->
+      <div v-if="media.type == 'html'" class="resizable"
+           style="width: 500px; height: 500px;">
+          <object v-bind:data="$ROOTmedia.path" type="text/html"
+                  width="100%" height="100%">
+          </object>
+      </div>
+      <!-- PDF -->
+      <div v-if="media.type == 'pdf'" class="resizable"
+           style="width: 500px; height: 500px;">
+          <object v-bind:data="$ROOTmedia.path" type="application/pdf"
+                  width="100%" height="100%">
+          </object>
+      </div>
+      <!-- OTHER -->
+      <div v-if="media.type == 'unknown'" class="resizable"
+           style="width: 500px; height: 500px;">
+        <a v-bind:href="$ROOTmedia.path">{{media.file_name}}</a>
+      </div>
+    </div>
+  </script>
+
+  <!-- edit-processor template -->
+  <script type="text/x-template" id="edit-processor-template">
+    <div>
+      <label> <b>Processors</b></label><br/>
+      <div v-for="(index, proc) in editor.processors">
+
+        <!-- Command factory -->
+        <div v-if="proc.name === 'CommandFactory'" class="tag-editor">
+          <label>Processor {{index +1}} </label>
+          <button v-on:click="editor.remove_processor(parseInt(index))"
+                  v-bind:id="'remove-processor-' + index">
+            Remove
+          </button>
+          <br/>
+          <em>Run command:</em>
+          <br/>
+          <label>Destination path:</label>
+          <input v-model="proc.dest">
+          <button v-on:click="editor.select_destination_path(proc)">
+              Browse ...
+          </button>
+          <br/>
+          <label>Mirror tree:</label>
+          <input v-model="proc.mirror_tree" type="checkbox">
+          <br/>
+          <label>Copy timestamps:</label>
+          <input v-model="proc.copy_timestamps" type="checkbox">
+          <br/>
+          <label>Input extension:</label>
+          <input v-model="proc.input_extension">
+          <br/>
+          <label>Output extension:</label>
+          <input v-model="proc.output_extension">
+          <br/>
+          <label>Command:</label>
+          <input v-model="proc.command"
+                 title="Use $input for input file and $output for output file" lazy>
+          <br/>
+        </div>
+
+        <!-- Python factory -->
+        <div v-if="proc.name === 'PythonFunctionFactory'" class="tag-editor">
+          <label>Processor {{index +1}} </label>
+          <button v-on:click="editor.remove_processor(parseInt(index))"
+                  v-bind:id="'remove-processor-' + index">
+            Remove
+          </button>
+          <br/>
+          <em>Run Python code:</em>
+          <br/>
+          <label>Destination path:</label>
+          <input v-model="proc.dest">
+          <button v-on:click="editor.select_destination_path(proc)">
+            Browse ...
+          </button>
+          <br/>
+          <label>Code:</label>
+          <textarea style="width:500px; height:100px" v-model="proc.code"
+                    title="Write a Python function called process taking three"\
+                    "arguments (relpath, media, dest)">
+          </textarea>
+          <br/>
+        </div>
+
+        <!-- Tagger factory -->
+        <div v-if="proc.name === 'TaggerFactory'" class="tag-editor">
+          <label>Processor {{index +1}} </label>
+          <button v-on:click="editor.remove_processor(parseInt(index))"
+                  v-bind:id="'remove-processor-' + index">
+           Remove
+          </button>
+          <br/>
+          <em>Run tagging command:</em>
+          <br/>
+          <label>Command:</label>
+          <input v-model="proc.command"
+           title="Command to run, it will be passed the path to the media.">
+          <br/>
+        </div>
+
+        <button v-on:click="editor.check_processor(proc)"
+                v-bind:id="'check-proc-' + index">Test</button>
+        <button v-on:click="editor.clear_test_info(parseInt(index))"
+                v-bind:id="'clear-check-proc-' + index">Clear</button>
+        <view-job :job="editor.test_job[parseInt(index)]"
+                  :job_status="editor.test_job_status[parseInt(index)]"
+                  :project="editor.project">
+        </view-job>
+        <!-- End of for proc in processors -->
+      </div>
+      <br/>
+      <label>Add processor of type:</label>
+      <select v-model="editor.processor_type" id="select-processor">
+        <option selected>command</option>
+        <option>tagger</option>
+        <option>python</option>
+      </select>
+      <button v-on:click="editor.add_processor(editor.processor_type)" id="add-processor">
+        Add</button>
+      <br>
+    </div>
+  </script>
+
+  <!-- view-job template -->
+  <script type="text/x-template" id="view-job-template">
+    <div v-if="job && job.info">
+      <label>Info:</label>{{job.info}} <br/>
+      <label>Status:</label> {{job.status}} <br/>
+      <div v-if="job.error.length > 0" class="error">
+        <label>Error:</label>
+        <pre>{{job.error}}</pre>
+        <br/>
+      </div>
+    </div>
+    <div v-else v-if="job_status">
+      <div v-if="project && project.number_of_files == 0">
+        You need to apply changes once to scan the project before you
+        start processing.  Currently no files are available.
+      </div>
+      <div v-else>
+        Nothing to do!  Check your input extensions.
+      </div>
+    </div>
+  </script>
+
+  <!-- view-processor template -->
+  <script type="text/x-template" id="view-processor-template">
+    <div class="view-processor">
+    <b> Processor options </b>
+   <br/>
+   <div v-if="processor.status === 'running'">
+    Completed {{processor.completed.length}} of
+       {{processor.jobs.length}} jobs (see log for details)
+
+       <button v-if="processor.interrupt === 'pause'"
+               v-on:click="processor.resume()"
+               id="resume-processing">
+           Resume</button>
+       <button v-else
+               v-on:click="processor.pause()"
+               id="pause-processing">
+           Pause</button>
+       <button v-on:click="processor.stop()"
+               id="stop-processing">
+           Stop</button>
+   </div>
+   <button v-bind:disabled="processor.status === 'running'"
+           v-on:click="threaded(ui, 'process', project)"
+           id="run-processing">
+        Run processing</button>
+
+    <div v-if="processor.status === 'error'">
+      <label>Errors</label>
+      <div v-for="job in processor.errored_jobs"
+           class="error resizable" style="height:150px;">
+        <view-job :job="job"></view-job>
+      </div>
+    </div>
+    <br/>
+    </div>
+  </script>
+
+
+  <!-- Setting up vue.js -->
+  <script>
+  var busy_call = function(obj, method_name, args) {
+
+      // We do this as calling the function directly will block. Since the JS
+      // code is blocking, the UI will not update to show the busy status.  We
+      // therefore manually set the busy status and then call the method via
+      // setTimeout and set the status back once done.
+
+      // 'this' is bound to either the Vue instance or component.
+      this.ui.is_busy = true;
+
+      var self = this;
+      var args = Array.prototype.slice.call(arguments, 2);
+      setTimeout(function() {
+          obj[method_name].apply(obj, args);
+          self.ui.is_busy = false;
+      }, 50);
+  };
+
+  var threaded = function(obj, method_name, args) {
+      jigna.threaded.apply(jigna, arguments);
+  };
+
+  var vm = undefined;
+  jigna.ready.done(function() {
+      // Components.
+      Vue.component('view-directory', {
+          template: "#view-directory-template",
+          props: ['viewer', 'pager', 'current_dir'],
+      });
+
+      Vue.component('view-search-results', {
+          template: "#view-search-template",
+          props: ['viewer', 'pager'],
+      });
+
+      Vue.component('edit-media', {
+          template: "#edit-media-template",
+          props: ['viewer', 'media'],
+      });
+
+      Vue.component('view-media', {
+          template: "#view-media-template",
+          props: ['media'],
+      });
+
+      Vue.component('edit-processor', {
+          template: "#edit-processor-template",
+          props: ['editor'],
+      });
+
+      Vue.component('view-job', {
+          template: "#view-job-template",
+          props: ['job', 'job_status', 'project'],
+      });
+
+      Vue.component('view-processor', {
+          template: "#view-processor-template",
+          props: ['processor', 'ui', 'project'],
+          methods: {
+              threaded: threaded
+          },
+      });
+
+      jigna.models.ui.log('Browser information: ' +
+                          navigator.userAgent, 'info');
+
+      // The Vue instance.
+      var data = Object.assign({}, jigna.models);
+      data.window = window;
+
+      var vm = new Vue({
+          el: "#app", // Attach to the div with id="app".
+          data: data,
+          methods: {
+              threaded: threaded,
+              busy_call: busy_call,
+              remove_project: function(project) {
+                  var m = "This will remove all saved information about this "+
+                          "project, are you sure you want to delete it?";
+                  if (confirm(m)) {
+                      this.ui.remove(project);
+                  }
+              },
+              rescan: function() {
+                  var m = "Warning: this will remove entries for any deleted "+
+                          "or moved files. If you wish to retain those, "+
+                          "please first export the current tags to a CSV "+
+                          "file and then proceed. "+
+                          "Are you sure you want to rescan?";
+                  if (confirm(m)) {
+                      this.busy_call(this.viewer, 'rescan');
+                  }
+              },
+              halt: function() {
+                  this.ui.halt();
+                  var m = "ViXeN has been stopped, please close this tab/window.";
+                  this.window.alert(m);
+              }
+          }
+      });
+
+      // Useful when debugging.
+      window.vm = vm;
+
+      // Hook up any messages from the UI to display on the view.
+       vm.$watch('ui.message', function(new_val, old_val) {
+           if (new_val.length > 0 && new_val[0].length > 0 &&
+               new_val[2] !== old_val[2]) {
+              $.notify(new_val[0], new_val[1]);
+          }
+      });
+
+      // Keybindings using Mousetrap
+      Mousetrap.bind(['command+s', 'ctrl+s'], function(e) {
+          jigna.models.ui.save();
+          return false;
+      });
+      // Navigation keys.
+      Mousetrap.bind(['h', 'left'], function(e) {
+          if (jigna.models.ui.mode === 'view') {
+              jigna.models.viewer.go_to_parent();
+          }
+      });
+      Mousetrap.bind(['k', 'n', 'down'], function(e) {
+          if (jigna.models.ui.mode === 'view') {
+              jigna.models.viewer.active_pager.next();
+          }
+      });
+      Mousetrap.bind(['j', 'p', 'up'], function(e) {
+          if (jigna.models.ui.mode === 'view') {
+              jigna.models.viewer.active_pager.prev();
+          }
+      });
+      Mousetrap.bind(['l', 'enter', 'right'], function(e) {
+          if (jigna.models.ui.mode === 'view') {
+              jigna.models.viewer.active_pager.select();
+          }
+      });
+  });
+
+</script>
+</html>
