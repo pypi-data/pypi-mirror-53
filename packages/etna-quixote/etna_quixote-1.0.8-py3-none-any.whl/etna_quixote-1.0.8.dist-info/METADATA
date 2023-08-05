@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: etna-quixote
+Version: 1.0.8
+Summary: Front-end to write automated tests for Etna projects
+Home-page: https://github.com/etna-alternance/quixote
+Author: Clément Doumergue
+Author-email: doumer_c@etna-alternance.net
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: EtnaAPI
+Requires-Dist: GitPython
+Requires-Dist: requests
+
+# quixote
+Front-end pour configurer des moulinettes
+
+## Documentation
+
+To build the documentation:
+
+``` bash
+pip install -r docs/requirements.txt
+make -C docs html
+```
+
