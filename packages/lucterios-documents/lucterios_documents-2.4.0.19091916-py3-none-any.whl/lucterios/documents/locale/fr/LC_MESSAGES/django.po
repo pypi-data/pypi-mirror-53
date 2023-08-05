@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-23 14:43+0000\n"
+"PO-Revision-Date: 2016-01-14 21:49+0000\n"
+"Last-Translator: b'Paul ARULATEDA <paul531@orange.fr>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.7.8\n"
+
+#: __init__.py:42 views.py:605
+msgid "Lucterios documents"
+msgstr "Documents Lucterios "
+
+#: editors.py:68 editors.py:85
+msgid "File not found!"
+msgstr "Fichier non trouvé !"
+
+#: editors.py:100
+msgid "shared link"
+msgstr "Lien partagé"
+
+#: models.py:49 models_legacy.py:46
+msgid "parent"
+msgstr "parent"
+
+#: models.py:50 models_legacy.py:43 models_legacy.py:162
+msgid "name"
+msgstr "nom"
+
+#: models.py:51 models_legacy.py:44 models_legacy.py:163
+msgid "description"
+msgstr "description"
+
+#: models.py:53 models.py:93 models.py:199 models_legacy.py:50
+#: models_legacy.py:165
+msgid "modifier"
+msgstr "modificateur"
+
+#: models.py:54 models.py:200 models_legacy.py:167
+msgid "date modification"
+msgstr "date de modification"
+
+#: models.py:85
+msgid "container"
+msgstr "containeur"
+
+#: models.py:86
+msgid "containers"
+msgstr "containeurs"
+
+#: models.py:92 models_legacy.py:48
+msgid "viewer"
+msgstr "visionneur"
+
+#: models.py:97 models.py:102 models_legacy.py:58 models_legacy.py:62
+msgid "001@Info"
+msgstr "001@Info"
+
+#: models.py:98 models.py:103 models_legacy.py:58 models_legacy.py:62
+msgid "001@Permission"
+msgstr "001@Permission"
+
+#: models.py:191 models_legacy.py:154 models_legacy.py:161
+msgid "folder"
+msgstr "dossier"
+
+#: models.py:192 models_legacy.py:155
+msgid "folders"
+msgstr "dossiers"
+
+#: models.py:202 models_legacy.py:169
+msgid "creator"
+msgstr "créateur"
+
+#: models.py:203 models_legacy.py:171
+msgid "date creation"
+msgstr "date de création"
+
+#: models.py:303 models_legacy.py:249
+msgid "document"
+msgstr "document"
+
+#: models.py:304 models_legacy.py:250
+msgid "documents"
+msgstr "documents"
+
+#: models_legacy.py:52
+msgid "Available group viewers"
+msgstr "groupes de visionneurs disponibles"
+
+#: models_legacy.py:52
+msgid "Chosen group viewers"
+msgstr "groupes de visionneurs choisis"
+
+#: models_legacy.py:54
+msgid "Available group modifiers"
+msgstr "groupes de modificateurs disponibles"
+
+#: models_legacy.py:54
+msgid "Chosen group modifiers"
+msgstr "groupes de modificateurs choisis"
+
+#: views.py:58
+msgid "Document"
+msgstr "Gestion documentaire"
+
+#: views.py:61
+msgid "Management of document's folders"
+msgstr "Gestion des dossiers de documents"
+
+#: views.py:63
+msgid "Folders"
+msgstr "Dossiers"
+
+#: views.py:76 views.py:292
+msgid "Add folder"
+msgstr "Ajouter un dossier"
+
+#: views.py:77
+msgid "Modify folder"
+msgstr "Modifier le dossier"
+
+#: views.py:83
+msgid "Delete folder"
+msgstr "Supprimer le dossier"
+
+#: views.py:128 views.py:131
+msgid "Import"
+msgstr "Importer"
+
+#: views.py:137
+msgid "zip file"
+msgstr "fichier zip"
+
+#: views.py:164 views.py:167
+msgid "Extract"
+msgstr "Extraire"
+
+#: views.py:209
+msgid "Office"
+msgstr "Bureautique"
+
+#: views.py:209
+msgid "Office tools"
+msgstr "Ensemble d'outils de gestion génériques"
+
+#: views.py:212
+msgid "Documents management"
+msgstr "Gestion de fichiers et de documents"
+
+#: views.py:212
+msgid "Documents storage tools"
+msgstr ""
+"Ensemble d'actions permettant une gestion documentaire électronique.{[br/]}"
+"Vous avez la possibilité ici de stocker de façon centraliser des fichiers, "
+"de les consulter et de les modifier."
+
+#: views.py:218 views.py:229 views.py:375
+msgid "No allow to view!"
+msgstr "Visualisation non autorisée !"
+
+#: views.py:242 views.py:458
+msgid "Add document"
+msgstr "Ajouter un document"
+
+#: views.py:243
+msgid "Modify document"
+msgstr "Modifier le document"
+
+#: views.py:247 views.py:377
+msgid "No allow to write!"
+msgstr "Écriture non autorisée !"
+
+#: views.py:254
+msgid "Show document"
+msgstr "Afficher le document"
+
+#: views.py:260
+msgid "Editor"
+msgstr "Éditeur"
+
+#: views.py:264
+msgid "Edit document"
+msgstr "Editer un document"
+
+#: views.py:289
+msgid "Folder"
+msgstr "Dossier"
+
+#: views.py:308
+msgid "File"
+msgstr "Fichier"
+
+#: views.py:311
+msgid "Create document"
+msgstr "Créer un document"
+
+#: views.py:351
+msgid "document type"
+msgstr "type de document"
+
+#: views.py:360
+msgid "Delete document"
+msgstr "Supprimer le document"
+
+#: views.py:372
+msgid "No allow to delete folder!"
+msgstr "Suppression de dossier non autorisée !"
+
+#: views.py:382
+msgid "Management of documents"
+msgstr "Gestion de documents"
+
+#: views.py:384
+msgid "Documents"
+msgstr "Documents"
+
+#: views.py:423
+msgid "current folder:"
+msgstr "dossier courant"
+
+#: views.py:505
+msgid "To find a document following a set of criteria."
+msgstr "Pour trouver un document suivant un ensemble de critères."
+
+#: views.py:507
+msgid "Document search"
+msgstr "Recherche de document"
+
+#: views.py:526
+msgid "Select"
+msgstr "Sélection"
+
+#: views.py:530
+msgid "delete shared link"
+msgstr "supprimer le lien partagé"
+
+#: views.py:531
+msgid "create shared link"
+msgstr "créer le lien partagé"
+
+#: views.py:548
+msgid "Download document"
+msgstr "Télécharger le document"
+
+#: views.py:562
+msgid "File not found !"
+msgstr "Fichier non trouvé !"
+
+#: views.py:575
+msgid "Document management"
+msgstr "Gestion documentaire"
+
+#: views.py:585
+msgid "no file currently available"
+msgstr "aucun fichier actuellement accessible"
+
+#: views.py:587
+msgid "one file currently available"
+msgstr "un fichier actuellement accessible"
+
+#: views.py:589
+#, python-format
+msgid "%d files currently available"
+msgstr "%d fichiers actuellement accessibles"
+
+#: views.py:605
+msgid "Parameters"
+msgstr "Paramètres"

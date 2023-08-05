@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Editeur de documents &#8212; Documentation Lucterios documents 2.4.0.19091916</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Fichiers partagés" href="shared_document.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Documentation Lucterios documents 2.4.0.19091916</span></a></h1>
+        <h2 class="heading"><span>Editeur de documents</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="shared_document.html">Fichiers partagés</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="configuration.html">Configuration</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <div class="section" id="editeur-de-documents">
+<h1>Editeur de documents<a class="headerlink" href="#editeur-de-documents" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Il est possible de configurer l’outil afin de pouvoir éditer certain document directement via l’interface « en ligne ».</p>
+<p>Des outils d’édition, libres et gratuits, sont actuellement configurable afin de les utiliser pour consulter et modifier des documents.
+_Note:_ Ces outils sont gérés par des équipes complètement différentes, il se peux que certain de leur comportement ne correspondent pas à vos attentes.</p>
+<div class="section" id="etherpad">
+<h2>etherpad<a class="headerlink" href="#etherpad" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Editeur pour document textuel.</p>
+<dl>
+<dt>Site Web</dt><dd><p><a class="reference external" href="https://etherpad.org/">https://etherpad.org/</a></p>
+</dd>
+<dt>Installation</dt><dd><p>Le tutoriel de framasoft explique bien comment l’installer
+<a class="reference external" href="https://framacloud.org/fr/cultiver-son-jardin/etherpad.html">https://framacloud.org/fr/cultiver-son-jardin/etherpad.html</a></p>
+</dd>
+<dt>Configurer</dt><dd><p>Editer le fichier « settings.py » contenu dans le répertoire de votre instance.
+Ajouter et adapter la ligne ci-dessous:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>url : adresse d’accès d’etherpad</p></li>
+<li><p>apikey : contenu de la clef de sécurité (fichier APIKEY.txt contenu dans l’installation d’etherpad)</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># extra</span>
+<span class="n">ETHERPAD</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:9001&#39;</span><span class="p">,</span> <span class="s1">&#39;apikey&#39;</span><span class="p">:</span> <span class="s1">&#39;jfks5dsdS65lfGHsdSDQ4fsdDG4lklsdq6Gfs4Gsdfos8fs&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Usage</dt><dd><dl class="simple">
+<dt>Dans le gestionnaire de document, vous avez plusieurs action qui apparait alors</dt><dd><ul class="simple">
+<li><p>Un bouton « + Fichier » vous permettant de créer un document txt ou html</p></li>
+<li><p>Un bouton « Editeur » pour ouvrir l’éditeur etherpad.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<img alt="_images/etherpad.png" src="_images/etherpad.png" />
+</div>
+<div class="section" id="ethercalc">
+<h2>ethercalc<a class="headerlink" href="#ethercalc" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Editeur pour tableau de calcul.</p>
+<dl>
+<dt>Site Web</dt><dd><p><a class="reference external" href="https://ethercalc.net/">https://ethercalc.net/</a></p>
+</dd>
+<dt>Installation</dt><dd><p>Sur le site de l’éditeur, une petit explication indique comment l’installer.</p>
+</dd>
+<dt>Configurer</dt><dd><p>Editer le fichier « settings.py » contenu dans le répertoire de votre instance.
+Ajouter et adapter la ligne ci-dessous:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>url : adresse d’accès d’ethercal</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># extra</span>
+<span class="n">ETHERCALC</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Usage</dt><dd><dl class="simple">
+<dt>Dans le gestionnaire de document, vous avez plusieurs action qui apparait alors</dt><dd><ul class="simple">
+<li><p>Un bouton « + Fichier » vous permettant de créer un document csv, ods ou xmlx</p></li>
+<li><p>Un bouton « Editeur » pour ouvrir l’éditeur ethercalc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<img alt="_images/ethercalc.png" src="_images/ethercalc.png" />
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="shared_document.html">Fichiers partagés</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contenu</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="configuration.html">Configuration</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, sd-libre.
+    </div>
+  </body>
+</html>
