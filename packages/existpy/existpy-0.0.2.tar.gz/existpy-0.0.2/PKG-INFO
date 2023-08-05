@@ -1,0 +1,56 @@
+Metadata-Version: 1.1
+Name: existpy
+Version: 0.0.2
+Summary: CLI tool for checking if a given project name exists in `pipy`.
+Home-page: https://github.com/existpy
+Author: Monika Ilieva
+Author-email: hidden@hidden.com
+License: MIT License
+Description: Existpy
+        -------
+        
+        .. image:: https://i.postimg.cc/63snLMmg/exist.png
+        
+        CLI tool for checking if a given project name exists in `pipy`.
+        
+        Installation
+        ************
+        
+        >>> pip install existpy
+        
+        Example
+        *******
+        
+        >>> existpy [packagename]
+        TITLE               VERSION   DESCRIPTION
+        --------------------------------------------------
+        [packagename-like]  [version]
+        [packagename-like]  [version]
+        >>>
+        >>> existpy [packagename] --summary
+        TITLE               VERSION   DESCRIPTION
+        --------------------------------------------------
+        [packagename-like]  [version] [description]
+        [packagename-like]  [version] [description]
+        
+        
+        LICENSE
+        *******
+        
+        `MIT <https://github.com/monzita/existpy/blob/master/LICENSE>`_
+        
+        UPDATES
+        *******
+        
+        26/9/2019 Add option for possible solution, if `pypi` has a suggestion.
+        
+        
+        For example
+        
+        >>> existpy [packagename-with-typo]
+        There were no results for [packagename-with-typo] Did you mean [other-packagename] ?
+Keywords: existpy package pypi python
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
