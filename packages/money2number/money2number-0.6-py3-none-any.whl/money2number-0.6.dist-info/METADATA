@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: money2number
+Version: 0.6
+Summary: Convert a single money related term in a sentence in any format to float.
+Home-page: https://github.com/sarsiz/money_to_number
+Author: Sarsiz Chauhan
+Author-email: sarsiz97@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+
+## This library will convert any money related term in a string to numbers
+
+> from money2number import m2n<br>
+> m2n.m2n.process_money_tags('here is 120 million dollars '))<br>
+
+ will return >>> 120000000.0
+
+ <h3>Limitations</h3>
+ <p>
+ <ul>
+    <li>Only one money related term in a string can be identified.</li>
+    <li>Examples of inputs:
+
+    2.7 million
+    12 Billion
+    five hundred and seventy four million 
+ </ul>
+
+
+ </p>
+
