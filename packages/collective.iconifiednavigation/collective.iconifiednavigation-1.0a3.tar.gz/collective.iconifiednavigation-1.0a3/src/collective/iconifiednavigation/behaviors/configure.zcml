@@ -1,0 +1,16 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="collective.iconifiednavigation">
+
+  <include package="plone.behavior" file="meta.zcml" />
+
+
+  <plone:behavior
+    title="Navigation icon"
+    description="Icon to display on navbar"
+    provides=".behaviors.INaviagationIcon"
+  />
+
+
+</configure>

@@ -1,0 +1,118 @@
+Metadata-Version: 2.1
+Name: collective.iconifiednavigation
+Version: 1.0a3
+Summary: An add-on for Plone
+Home-page: https://pypi.python.org/pypi/collective.iconifiednavigation
+Author: Sebastien Sirtoli
+Author-email: sebastien.sirtoli@affinitic.be
+License: GPL version 2
+Description: .. This README is meant for consumption by humans and pypi. Pypi can render rst files so please do not use Sphinx features.
+           If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
+           This text does not appear on pypi or github. It is a comment.
+        
+        ==============================
+        collective.iconifiednavigation
+        ==============================
+        
+        This products allows your users to define icons (images or SVG) on contents to display them in ``portal_tabs`` next to titles.
+        
+        
+        Features
+        --------
+        
+        - The behavior can be defined on any content type
+        - SVG are specifically handled
+        
+        
+        Translations
+        ------------
+        
+        This product has been translated into
+        
+        - French
+        
+        
+        Installation
+        ------------
+        
+        Install collective.iconifiednavigation by adding it to your buildout::
+        
+            [buildout]
+        
+            ...
+        
+            eggs =
+                collective.iconifiednavigation
+        
+        
+        and then running ``bin/buildout``
+        
+        
+        Contribute
+        ----------
+        
+        - Issue Tracker: https://github.com/collective/collective.iconifiednavigation/issues
+        - Source Code: https://github.com/collective/collective.iconifiednavigation
+        
+        
+        License
+        -------
+        
+        The project is licensed under the GPLv2.
+        
+        
+        Credits
+        -------
+        
+        This package was developed by `Affinitic team <https://github.com/affinitic>`_.
+        
+        .. image:: http://www.affinitic.be/affinitic_logo.png
+           :alt: Affinitic website
+           :target: http://www.affinitic.be
+        
+        ``collective.iconifiednavigation`` is licensed under GNU General Public License, version 2.
+        
+        
+        Contributors
+        ============
+        
+        - Sébastien Sirtoli, sebastien.sirtoli@affinitic.be, Original Author [Affinitic]
+        - Aurore Mariscal, aurore.mariscal@affinitic.be [Affinitic]
+        - Laurent Lasudry, laurent.lasudry@affinitic.be [Affinitic]
+        
+        
+        Changelog
+        =========
+        
+        
+        1.0a3 (2019-09-27)
+        ------------------
+        
+        - Handle links (Link content type) in navigation
+          [laulaz]
+        
+        
+        1.0a2 (2018-09-20)
+        ------------------
+        
+        - Avoid error when there is no navigation icon
+          [laulaz]
+        
+        
+        1.0a1 (2018-09-19)
+        ------------------
+        
+        - Initial release.
+          [oxydedefer]
+        
+Keywords: Python Plone
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Plone
+Classifier: Framework :: Plone :: 5.0
+Classifier: Framework :: Plone :: 5.1
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Provides-Extra: test

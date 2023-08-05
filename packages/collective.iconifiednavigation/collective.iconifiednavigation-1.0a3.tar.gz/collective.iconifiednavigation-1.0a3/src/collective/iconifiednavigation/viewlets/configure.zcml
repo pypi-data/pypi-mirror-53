@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.iconifiednavigation">
+
+
+  <browser:viewlet
+    name="plone.global_sections"
+    manager="plone.app.layout.viewlets.interfaces.IMainNavigation"
+    class=".iconifiednavigationviewlet.IconifiedNavigationViewlet"
+    layer="..interfaces.ICollectiveIconifiednavigationLayer"
+    permission="zope2.View"
+  />
+
+
+
+</configure>

@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.iconifiednavigation">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="collective.iconifiednavigation.interfaces.ICollectiveIconifiednavigationLayer"
+      />
+
+  <browser:page
+      for="*"
+      name="portal_tabs_view"
+      class=".navigation.CatalogNavigationTabsHandlingLinks"
+      permission="zope.Public"
+      allowed_attributes="topLevelTabs"
+      layer="collective.iconifiednavigation.interfaces.ICollectiveIconifiednavigationLayer"
+      />
+
+  <!-- Publish static files -->
+  <plone:static
+      name="collective.iconifiednavigation"
+      type="plone"
+      directory="static"
+      />
+
+</configure>

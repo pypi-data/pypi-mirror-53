@@ -1,0 +1,56 @@
+<tal:sections
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  tal:define="portal_tabs view/portal_tabs"
+  tal:condition="portal_tabs"
+  i18n:domain="collective.iconifiednavigation">
+
+  <p class="hiddenStructure" i18n:translate="heading_sections">Navigation</p>
+  <nav class="plone-navbar" id="portal-globalnav-wrapper">
+    <div class="container">
+      <div class="plone-navbar-header">
+        <button type="button" class="plone-navbar-toggle" data-toggle="collapse"
+                data-target="#portal-globalnav-collapse">
+          <span class="sr-only" i18n:translate="toggle_navigation">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="plone-collapse plone-navbar-collapse" id="portal-globalnav-collapse">
+        <ul class="plone-nav plone-navbar-nav"
+            id="portal-globalnav"
+            tal:define="selected_tab python:view.selected_portal_tab">
+          <tal:tabs tal:repeat="tab portal_tabs">
+            <li tal:define="tid tab/id"
+                tal:attributes="id string:portaltab-${tid};
+                                  class python:selected_tab==tid and 'selected' or nothing">
+              <a href=""
+                 tal:attributes="href tab/url;
+                                     title tab/description|nothing;
+                                     target tab/link_target|nothing;">
+                  <div class="tab-img">
+                      <tal:image tal:define="image python: view.get_image(tab['object_url'])" tal:condition="image">
+                      <tal:svg tal:condition="python: image['ext'] == '.svg'" tal:content="structure image/data">
+                      svg
+                      </tal:svg>
+                      <tal:bitmap tal:condition="python: image['ext'] != '.svg'">
+                        <img tal:attributes="src image/path">
+                        <!--bitmap-->
+                      </tal:bitmap>
+                      </tal:image>
+                  </div>
+                  <div class="tab-name" tal:content="tab/name">
+                      Tab Name
+                  </div>
+              </a>
+
+            </li>
+          </tal:tabs>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</tal:sections>
