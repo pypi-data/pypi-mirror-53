@@ -1,0 +1,193 @@
+Metadata-Version: 1.2
+Name: xml2rfc
+Version: 2.31.0
+Summary: Xml2rfc generates RFCs and IETF drafts from document source in XML according to the IETF xml2rfc v2 and v3 vocabularies.
+Home-page: https://tools.ietf.org/tools/xml2rfc/trac/
+Author: Henrik Levkowetz, Josh Bothun
+Author-email: tools-discuss@ietf.org
+Maintainer: Henrik Levkowetz
+Maintainer-email: henrik@levkowetz.com
+License: BSD-3-Clause
+Download-URL: https://pypi.python.org/pypi/xml2rfc
+Description: Introduction
+        ============
+        
+        The IETF_ uses a specific format for the standards and other documents it
+        publishes as RFCs_, and for the draft documents which are produced when
+        developing documents for publications.  There exists a number of different
+        tools to facilitate the formatting of drafts and RFCs according to the
+        existing rules, and this tool, **xml2rfc**, is one of them.  It takes as input
+        an xml file which contains the text and meta-information about author names
+        etc., and transforms it into suitably formatted output.  The input xml file
+        should follow the grammars in RFC7749_ (for v2 documents) or RFC7991_ (for 
+        v3 documents). Note that the grammar for v3 is still being refined, and 
+        changes will eventually be captured in the `bis draft for 7991`_. 
+        Changes not yet captured can be seen in the xml2rfc source `v3.rng`_.
+        
+        **xml2rfc** provides a variety of output formats. See the command line
+        help for a full list of formats. It also provides conversion from v2 to
+        v3, and can run the preptool_ on its input.
+        
+        .. _IETF: https://www.ietf.org/
+        .. _RFCs: https://www.rfc-editor.org/
+        .. _RFC7749: https://tools.ietf.org/html/rfc7749
+        .. _RFC7991: https://tools.ietf.org/html/rfc7991
+        .. _bis draft for 7991: https://tools.ietf.org/html/draft-iab-rfc7991bis
+        .. _v3.rng: https://trac.tools.ietf.org/tools/xml2rfc/trac/browser/trunk/cli/xml2rfc/data/v3.rng
+        .. _preptool: https://tools.ietf.org/html/rfc7998
+        
+        Installation
+        ============
+        
+        Installation of the python package is done as usual with 'pip install xml2rfc',
+        using appropriate switches and/or sudo.
+        
+        Installation of support libraries for the PDF-formatter
+        -------------------------------------------------------
+        
+        In order to generate PDFs, xml2rfc uses the WeasyPrint module, which
+        depends on external libaries that must be installed as native packages
+        on your platform, separately from the xml2rfc install.
+        
+        First, install the Cairo, Pango, and GDK-PixBuf library files on your
+        system.  See installation instructions on the WeasyPrint Docs:
+        
+            https://weasyprint.readthedocs.io/en/stable/install.html
+        
+        (Python 3 is not needed if your system Python is 2.7, though).
+        
+        (On some OS X systems with System Integrity Protection active, you may
+        need to create a symlink from your home directory to the library installation
+        directory (often /opt/local/lib):
+        
+            ln -s /opt/local/lib ~/lib
+        
+        in order for weasyprint to find the installed cairo and pango libraries.
+        Whether this is needed or not depends on whether you used macports or homebrew
+        to install cairo and pango, and the homebrew / macport version.)
+        
+        Next, install the pycairo and weasyprint python modules using pip.
+        Depending on your system, you may need to use 'sudo' or install in
+        user-specific directories, using the --user switch.  On OS X in
+        particular, you may also need to install a newer version of setuptools
+        using --user before weasyprint can be installed.  If you install with 
+        the --user switch, you may need to also set PYTHONPATH, e.g.,
+        
+            PYTHONPATH=/Users/henrik/Library/Python/2.7/lib/python/site-packages
+        
+        for Python 2.7.
+        
+        The basic pip commands (modify as needed according to the text above)
+        are:
+        
+            pip install 'pycairo>=1.18' 'weasyprint<=0.42.3'
+        
+        With these installed and available to xml2rfc, the --pdf switch will be
+        enabled.
+        
+        For PDF output, you also need to install the Noto font set.  Download the full
+        set from https://noto-website-2.storage.googleapis.com/pkgs/Noto-unhinted.zip,
+        and install as appropriate for your platform.
+        
+        Usage
+        =====
+        
+        xml2rfc accepts a single XML document as input and outputs to one or more conversion formats.
+        
+        **Basic Usage**: ``xml2rfc SOURCE [options] FORMATS...``
+        
+        Run ``xml2rfc --help`` for a full listing of command-line options.
+        
+        
+        Changelog
+        =========
+        
+        
+        Version 2.31.0 (25 Sep 2019)
+        ------------------------------------------------
+        
+        
+          This release adds a feature to help with conditional line breaking
+          inside table cells, and tweaks the layout of text in cells slightly.  It
+          also fixes an incorrect line-break point and second-line indentation for
+          long section titles in the v3 text formatter.  From the commit log:
+        
+          * Fixed an issue with leading and trailing space padding in table cells, 
+            and refined it to consider the alignment setting.
+        
+          * Modified the text formatter to accept &zwsp; as a potential line-break 
+            point.
+        
+          * Included zwsp in allowed special characters (in addition to nbsp, nbhy, 
+            word-joiner and line-separator).
+        
+          * Fixed the line-breaking and second-line indentation of section titles 
+            in v3 text output.
+        
+          * The start of an emacs nXML mode schema which explicitly mentions 
+            xinclud in a couple of places.
+        
+          * Removed code left in pdf.py by mistake, and set options.pdf=True when 
+            in the PdfWriter.
+        
+        
+        
+        
+        
+        
+        
+        Version 2.30.0 (19 Sep 2019)
+        ------------------------------------------------
+        
+        
+          * Added logging configuration for weasyprint.  This controls the logging
+            level based on the --quiet and --verbose flags, and should make
+            weasyprint logging ouput more consistent across systems.
+        
+          * Weasyprint reports ERROR if a CSS <link> URL isn't available, so we
+            won't insert a <link> for "rfc-local.css" when generating PDF if the
+            file doesn't exist.
+        
+          * Tweaked the Makefile to use --add-include in some cases, for regression 
+            testing.
+        
+          * Corrected the <xi:include> links produced during v2v3 conversion with
+            the --add-xinclude switch, 
+        
+          * Changed the code to not retain <!ENTITY> declarations after v2v3
+            conversion.
+        
+          * Changed BaseV3Writer.die() to raise an exception, rather than exit on 
+            the spot, in order to do the right thing when called as a library.
+        
+          * Tweaked the command-line messages when a fatal error is raised in a 
+            writer.
+        
+        
+        
+        
+        
+        
+        
+        Version 2.29.1 (18 Sep 2019)
+        ------------------------------------------------
+        
+        
+          * Fixed an issue with pagination that could occur if a table (or other 
+            block) longer than a page ended on the last page.
+        
+        
+        
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Topic :: Text Processing
+Classifier: Topic :: Text Processing :: Markup :: XML
+Classifier: License :: OSI Approved :: BSD License
