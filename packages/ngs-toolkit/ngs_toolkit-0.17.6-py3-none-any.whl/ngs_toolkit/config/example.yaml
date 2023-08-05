@@ -1,0 +1,119 @@
+username: arendeiro
+email: arendeiro@cemm.oeaw.ac.at
+website_root: http://biomedical-sequencing.at/bocklab/arendeiro/
+supported_data_types:
+  - ATAC-seq
+  - ChIP-seq
+  - RNA-seq
+  - CNV
+preferences:
+  # For the next item, environment variables are formatted if they are of the form ${VAR}
+  root_reference_dir: /home/${USER}/reference/
+  root_projects_dir: /home/${USER}/projects/
+  default_genome_assemblies:
+    - human: hg38
+    - mouse: mm10
+  # The next item is the default computing configuration to use from divvy
+  # options are: 'default', 'slurm', lsf', 'sge'
+  # see more here: http://code.databio.org/divvy/
+  computing_configuration: 'slurm'
+  report:
+    record_figures: True
+    record_csv: True
+    continuous_generation: True
+    timestamp_figures: True
+    timestamp_tables: True
+  graphics:
+    matplotlib:
+      backend: TkAgg # Agg
+      # key:values under rcParams are used to update matplotlib.rcParams
+      rcParams:
+        # this ensures text in plots is exported as text objects
+        svg.fonttype: "none"
+    seaborn:
+      # key:values under parameters are passed to seaborn.set
+      parameters:
+        context: "paper"
+        style: "white"
+        palette: "colorblind"
+        color_codes: True
+    figure_saving:
+      # these arguments are passed to matplotlib.pyplot.savefig
+      # https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html
+      format: svg
+      dpi: 300
+      bbox_inches: "tight"
+    close_saved_figures: True
+
+sample_input_files:
+  # values in this section can use string formatting
+  # of the form {variable} to be completed with variables from the sample objects
+  # Example:
+  # ATAC-seq:
+  #   aligned_filtered_bam:
+  #     "{data_dir}/{sample_name}/mapped/{sample_name}.trimmed.bowtie2.filtered.bam"
+  ATAC-seq:
+    aligned_filtered_bam: "{data_dir}/{sample_name}/mapped/{sample_name}.trimmed.bowtie2.filtered.bam"
+    peaks: "{data_dir}/{sample_name}/peaks/{sample_name}_peaks.narrowPeak"
+    summits: "{data_dir}/{sample_name}/peaks/{sample_name}_summits.bed"
+    log2_read_counts: "{data_dir}/{sample_name}/{sample_name}_{resolution}/CNAprofiles/log2_read_counts.igv"
+  ChIP-seq:
+    aligned_filtered_bam: "{data_dir}/{sample_name}/mapped/{sample_name}.trimmed.bowtie2.filtered.bam"
+  ChIPmentation:
+    aligned_filtered_bam: "{data_dir}/{sample_name}/mapped/{sample_name}.trimmed.bowtie2.filtered.bam"
+  CNV:
+    log2_read_counts: "{data_dir}/{sample_name}/{sample_name}_{resolution}/CNAprofiles/log2_read_counts.igv"
+  RNA-seq:
+    aligned_filtered_bam: "{data_dir}/{sample_name}/mapped/{sample_name}.trimmed.bowtie2.filtered.bam"
+    counts: "{data_dir}/{sample_name}/bowtie1_{genome}/bitSeq/{sample_name}.counts"
+
+resources:
+  lola:
+    region_databases:
+      # under each section, there should be a list of items
+      hg19:
+        - /data/groups/lab_bock/shared/resources/regions/LOLACore/hg19/
+        - /data/groups/lab_bock/shared/resources/regions/customRegionDB/hg19/
+      hg38:
+        - /data/groups/lab_bock/shared/resources/regions/LOLACore/hg38/
+        - /data/groups/lab_bock/shared/resources/regions/customRegionDB/hg38/
+      mm10:
+        - /data/groups/lab_bock/shared/resources/regions/LOLACore/mm10/
+        - /data/groups/lab_bock/shared/resources/regions/customRegionDB/mm10/
+  meme:
+    motif_databases:
+      human: /data/groups/lab_bock/shared/resources/motifs/motif_databases/HUMAN/HOCOMOCOv10.meme
+      mouse: /data/groups/lab_bock/shared/resources/motifs/motif_databases/MOUSE/uniprobe_mouse.meme
+      vertebrate: /home/arendeiro/workspace/homer_4.8/data/knownTFs/vertebrates/known.motifs
+    motif_id_mapping:
+      mouse: /data/groups/lab_bock/shared/resources/motifs/motif_databases/MOUSE/uniprobe_mouse.id_mapping.tsv
+  enrichr:
+    gene_set_libraries:
+      # this should be a list of items
+      - "GO_Biological_Process_2015"
+      - "ChEA_2015"
+      - "KEGG_2016"
+      - "ESCAPE"
+      - "Epigenomics_Roadmap_HM_ChIP-seq"
+      - "ENCODE_TF_ChIP-seq_2015"
+      - "ENCODE_and_ChEA_Consensus_TFs_from_ChIP-X"
+      - "ENCODE_Histone_Modifications_2015"
+      - "OMIM_Expanded"
+      - "TF-LOF_Expression_from_GEO"
+      - "Single_Gene_Perturbations_from_GEO_down"
+      - "Single_Gene_Perturbations_from_GEO_up"
+      - "Disease_Perturbations_from_GEO_down"
+      - "Disease_Perturbations_from_GEO_up"
+      - "Drug_Perturbations_from_GEO_down"
+      - "Drug_Perturbations_from_GEO_up"
+      - "WikiPathways_2016"
+      - "Reactome_2016"
+      - "BioCarta_2016"
+      - "NCI-Nature_2016"
+
+executables:
+  twoBitToFa: twoBitToFa
+  fasta-dinucleotide-shuffle: fasta-dinucleotide-shuffle
+  ame: ame
+  findMotifsGenome.pl: findMotifsGenome.pl
+  compareMotifs.pl: compareMotifs.pl

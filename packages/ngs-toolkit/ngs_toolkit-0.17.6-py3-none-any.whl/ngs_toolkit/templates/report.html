@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <title>ngs-toolkit report for '{{ analysis.name }}' project</title>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 65px;
+        }
+    </style>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="https://github.com/afrendeiro/toolkit">
+        <img src="/docs/4.3/assets/brand/bootstrap-solid.svg"
+             width="30" height="30" class="d-inline-block align-top" alt="">
+            ngs-toolkit
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#project-description">Project description</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="#"
+                   id="navbarDropdown"
+                   role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                Analysis report
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for section, fig_list in images.items() %}
+                    <a class="dropdown-item" href="#section-{{ section|replace(' ', '-') }}">{{ section }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#versioning">Versioning</a>
+            </li>
+      </ul>
+    </nav>
+
+    <!-- Jumbotron -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">{{ analysis.name }}</h1>
+        {% if analysis.description is not none %}
+        <p class="lead">{{ analysis.description }}</p>
+        {% endif %}
+        <p class="lead">
+            <a href="https://github.com/afrendeiro/toolkit">ngs-toolkit</a> analysis report.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="container">
+        <div class="row">
+
+            <div class="container"
+                 id="content">
+                <div class="container">
+                    <h1 id="project-description">Project description</h1>
+                    {% if analysis.description is not none %}
+                    <p>{{ analysis.description }}</p>
+                    {% endif %}
+                    {% if analysis.data_type is not none %}
+                    <p> The project main data type is {{ analysis.data_type }}.</p>
+                    {% endif %}
+                    {% if analysis.organism is not none %}
+                    <p> The project main organism is {{ analysis.organism }}.</p>
+                    {% endif %}
+                    {% if analysis.genome is not none %}
+                    <p> The project main genome assembly is {{ analysis.genome }}.</p>
+                    {% endif %}
+
+                    <p>
+                      <a class="btn btn-primary"
+                         data-toggle="collapse"
+                         href="#project"
+                         role="button"
+                         aria-expanded="false"
+                         aria-controls="project">
+                        More details
+                      </a>
+                    </p>
+                    <div class="collapse" id="project">
+                      <div class="card card-body">
+                        <ul>
+                            {% for key, value in project_repr.items() %}
+                            <li>
+                                {{ key }}: {{ value }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                    <hr>
+                    <p> Project contains {{ samples|length }} samples:</p>
+                    <div class="row-fluid">
+                      <p>
+                        <a class="btn btn-primary"
+                           data-toggle="collapse"
+                           href="#samples"
+                           role="button"
+                           aria-expanded="false"
+                           aria-controls="samples">
+                          Show all samples
+                        </a>
+                      </p>
+                      <div class="collapse" id="samples">
+                        <div class="card card-body">
+                          <ul>
+                              {% for sample in samples %}
+                                <a class="btn btn-primary"
+                                   data-toggle="collapse"
+                                   href="#sample-{{ sample.name }}"
+                                   role="button"
+                                   aria-expanded="false"
+                                   aria-controls="sample-{{ sample.name }}">
+                                {{ sample.name }}</a>
+                                <div class="collapse" id="sample-{{ sample.name }}">
+                                    <div class="card card-body">
+                                        <ul>
+                                            {% for key, value in sample.items() %}
+                                            <li>{{ key }}: {{ value }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                              {% endfor %}
+                          </ul>
+                        </div>
+                      </div>
+
+                    </div>
+                </div>
+
+                <div class="container" id="analysis-report">
+                    <h1>Analysis report</h1>
+                    {% for section, fig_list in images.items() %}
+                    <h3 id="section-{{ section|replace(' ', '-') }}">{{ section }}</h3>
+                    <div class="row">
+                        {% for caption, csv in csvs[section] %}
+                            <div id="csv-{{ caption }}" class="col-6">
+                                <p>
+                                    <a href="{{ csv }}">Download CSV file: {{ caption }}</a>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        {% for caption, fig in fig_list %}
+                            <div id="plot-{{ caption }}" class="col-6">
+                                <figure>
+                                    <a href="{{ fig }}">
+                                        <img class="rounded float-left" src="{{ fig }}" style="width: 100%"/>
+                                    </a>
+                                <figcaption class="figure-caption text-center">{{ caption }}</figcaption>
+                                </figure>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+
+                <div class="container" id="versioning">
+                    <h1>Versioning</h1>
+                    <ul>
+                        <li>Python version: {{ python_version }}</li>
+                        <li>ngs-toolkit version: {{ library_version }}</li>
+
+                        <p>
+                          <a class="btn btn-primary"
+                             data-toggle="collapse"
+                             href="#versioning-additional"
+                             role="button"
+                             aria-expanded="false"
+                             aria-controls="versioning-additional">
+                          Additional Python libraries</a>
+                        </p>
+                        <div class="row collapse" id="versioning-additional">
+                            {% for library in freeze %}
+                                <div id="versioning-{{library}}" class="col-2">
+                                    <li>{{ library }}</li>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </ul>
+                    <hr>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+        <p>Automatically generated by <a href="https://github.com/afrendeiro/toolkit">ngs-toolkit</a> at {{ time }}.</p>
+    </nav>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+  </body>
+</html>
