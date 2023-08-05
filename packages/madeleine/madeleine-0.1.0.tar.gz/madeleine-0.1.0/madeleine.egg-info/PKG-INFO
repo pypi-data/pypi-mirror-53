@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: madeleine
+Version: 0.1.0
+Summary: Configurable random text generation
+Home-page: https://gitlab.com/Lucidiot/madeleine
+Author: Lucidiot
+License: GNU General Public License 3
+Project-URL: Source Code, https://gitlab.com/Lucidiot/madeleine
+Project-URL: Bug Tracker, https://gitlab.com/Lucidiot/madeleine/issues
+Project-URL: GitHub Mirror, https://github.com/Lucidiot/madeleine
+Description: madeleine
+        =========
+        
+        Generate random text in Python using configuration files.
+        `Browse documentation`_
+        
+        .. _Browse documentation: https://lucidiot.gitlab.io/madeleine/
+        
+        TODO
+        ----
+        
+        * Documentation
+        * Unit tests
+        * Static typing
+        * Examples
+        * Custom probabilities on ``oneOf`` and ``pick``
+        * TOML support
+        
+Keywords: random text generation
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Text Processing
+Classifier: Topic :: Utilities
+Requires-Python: >=3.5
+Description-Content-Type: text/x-rst
+Provides-Extra: dev
+Provides-Extra: yaml
+Provides-Extra: toml
