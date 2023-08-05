@@ -1,0 +1,11 @@
+
+melopero-autostart instructions 
+
+To run a python script at startup you have to put it in the scripts directory:
+
+/home/melopero-autostart/scripts/
+
+For each script in this directory a log file will be created and the script 
+will print out to this file. The output to the file is unbuffered (be careful
+with print statements, they  may slow down your process). 
+Each script will be run in background in a separate shell with superuser privileges.
