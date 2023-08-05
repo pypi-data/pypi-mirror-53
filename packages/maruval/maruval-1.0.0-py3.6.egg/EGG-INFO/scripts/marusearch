@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+"""
+maruval: validate marugoto game
+
+Example
+
+$ marufind imageComponent,textExercise PlantationLives/
+"""
+
+from maruval.marusearch import searcher, _parse_cmdline_args
+
+searcher(**_parse_cmdline_args())

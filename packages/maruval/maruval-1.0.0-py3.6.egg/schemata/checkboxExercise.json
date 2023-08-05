@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "checkboxExercise",
+  "description": "checkboxExercise",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "descriptionForNotebook": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "options": {"type": "array"},
+    "solutionMode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "minimumSelected": {"type": "integer"}
+  }
+}

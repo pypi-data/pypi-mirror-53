@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "pageTransition",
+  "description": "pageTransition",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "from": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "to": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "time": {
+      "type": "object",
+      "required": [
+        "time",
+        "isAbsolute"
+      ],
+      "properties": {
+        "time": {
+          "type": "number"
+        },
+        "isAbsolute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "money": {
+      "type": "object",
+      "required": ["amount"],
+      "properties": {
+        "amount": {
+          "type": "integer"
+        }
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pageCriteria": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exerciseCriteria": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mailCriteria": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedExercise": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedDialogResponse": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedMail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "affectedPage": {
+            "type": [
+              "array",
+              "null",
+              "string"
+            ]
+          },
+          "affectedPagesIds": {
+            "type": [
+              "null",
+              "array"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

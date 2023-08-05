@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "mail",
+  "description": "mail",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "from": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "receiveAfter": {
+      "type": "object",
+      "required": [
+        "time",
+        "isAbsolute"
+      ],
+      "properties": {
+        "time": {
+          "type": "integer"
+        },
+        "isAbsolute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "subject": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "openOnReceive": {
+      "type": "boolean"
+    },
+    "pageTransition": {
+      "type": [
+        "null",
+        "integer",
+        "string"
+      ]
+    }
+  }
+}

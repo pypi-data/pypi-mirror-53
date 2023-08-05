@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "textExercise",
+  "description": "textExercise",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "descriptionForNotebook": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "maxLength": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "placeholderText": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "defaultText": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "textSolutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "minLength": {
+            "type": [
+              "null",
+              "integer"
+            ]
+          },
+          "textToCompare": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "imageComponent",
+  "description": "imageComponent",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "zoomable": {
+      "type": "boolean"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "regex": ".*\\.jpg$"
+      }
+    },
+    "caption": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

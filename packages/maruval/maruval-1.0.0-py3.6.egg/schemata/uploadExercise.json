@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "uploadExercise",
+  "description": "uploadExercise",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "descriptionForNotebook": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "isMandatory": {
+      "type": "boolean"
+    }
+  }
+}

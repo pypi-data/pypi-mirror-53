@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+"""
+maruval: validate marugoto game
+
+Example
+
+$ maruval --mkdocs=true/false --virtualenv=true/false junglebook
+"""
+
+from maruval.maruval import validate, _parse_cmdline_args
+
+validate(**_parse_cmdline_args())

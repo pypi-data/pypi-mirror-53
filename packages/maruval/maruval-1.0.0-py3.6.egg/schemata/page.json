@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "page",
+  "description": "page",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "continueRandomly": {
+      "type": "boolean"
+    },
+    "timerVisible": {
+      "type": "boolean"
+    },
+    "notebookVisible": {
+      "type": "boolean"
+    },
+    "endOfTopic": {
+      "type": "boolean"
+    },
+    "money": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "amount"
+          ],
+          "properties": {
+            "amount": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "time": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "isAbsolute",
+            "time"
+          ],
+          "properties": {
+            "isAbsolute": {
+              "type": "boolean"
+            },
+            "time": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "chapter": {
+      "type": "null"
+    }
+  }
+}

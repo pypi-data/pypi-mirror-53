@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "dateExercise",
+  "description": "dateExercise",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "descriptionForNotebook": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "solution": {
+      "type": "object",
+      "properties": {
+        "correctDate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "correctDate"
+      ],
+      "minProperties": 1,
+      "maxProperties": 1
+    }
+  }
+}
