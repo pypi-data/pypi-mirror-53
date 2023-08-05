@@ -1,0 +1,401 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-23 14:42+0000\n"
+"PO-Revision-Date: 2016-01-14 22:03+0000\n"
+"Last-Translator: b'Paul ARULATEDA <paul531@orange.fr>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.7.8\n"
+
+#: __init__.py:42 views.py:143
+msgid "Lucterios mailing"
+msgstr "Courrier Lucterios"
+
+#: editors.py:56
+msgid "model"
+msgstr "modèle"
+
+#: editors.py:57
+msgid "filter"
+msgstr "filtre"
+
+#: editors.py:86
+msgid "Remove"
+msgstr "Retirer"
+
+#: editors.py:88
+msgid "Insert"
+msgstr "Insérer"
+
+#: editors.py:95 views_message.py:172
+msgid "statistic"
+msgstr "statistique"
+
+#: functions.py:153
+msgid "Email not configure!"
+msgstr "Courriel non configuré !"
+
+#: functions.py:172
+msgid "Connection password"
+msgstr "Mot de passe de connexion"
+
+#: models.py:58
+msgid "id"
+msgstr "id"
+
+#: models.py:59
+msgid "line"
+msgstr "ligne"
+
+#: models.py:67 models.py:96
+msgid "body"
+msgstr "corps"
+
+#: models.py:68
+msgid "bodies"
+msgstr "corps"
+
+#: models.py:95
+msgid "subject"
+msgstr "sujet"
+
+#: models.py:97
+msgid "status"
+msgstr "status"
+
+#: models.py:97
+msgid "open"
+msgstr "ouvert"
+
+#: models.py:97
+msgid "valided"
+msgstr "validé"
+
+#: models.py:97
+msgid "sending"
+msgstr "envoi en cours"
+
+#: models.py:98
+msgid "recipients"
+msgstr "destinataires"
+
+#: models.py:99 models.py:372
+msgid "date"
+msgstr "date"
+
+#: models.py:100 models.py:370
+msgid "contact"
+msgstr "contact"
+
+#: models.py:101
+msgid "email to send"
+msgstr "courriel à envoyer"
+
+#: models.py:102 models.py:103
+msgid "documents"
+msgstr "documents"
+
+#: models.py:104
+msgid "documents in link"
+msgstr "document(s) ajouté(s) via liens dans le message"
+
+#: models.py:105
+msgid "number of recipients"
+msgstr "nombre de destinataires"
+
+#: models.py:106
+msgid "without email address"
+msgstr "sans adresse courriel"
+
+#: models.py:131
+msgid "001@Message"
+msgstr "001@Messages"
+
+#: models.py:132
+msgid "002@Recipients"
+msgstr "002@Destinataires"
+
+#: models.py:133
+msgid "003@Documents"
+msgstr "003@Documents"
+
+#: models.py:205
+msgid "Valid"
+msgstr "Valider"
+
+#: models.py:242
+msgid "Emails"
+msgstr "Courriels"
+
+#: models.py:272
+msgid "Shared documents"
+msgstr "Document(s) partagé(s)"
+
+#: models.py:354
+#, python-format
+msgid ""
+"Send = %(send)d at %(date)s - Error = %(error)d - Open = %(open)d => "
+"%(ratio).1f %%"
+msgstr ""
+"%(send)d message(s) envoyé(s) le %(date)s (dont %(error)d en erreur).{[br/]}"
+"Avec %(open)d message(s) ouvert(s) cela donne un taux de %(ratio).1f %% "
+"d'ouverture."
+
+#: models.py:363 models.py:369
+msgid "message"
+msgstr "message"
+
+#: models.py:364
+msgid "messages"
+msgstr "messages"
+
+#: models.py:371 views.py:109 views_message.py:126
+msgid "email"
+msgstr "courriel"
+
+#: models.py:373
+msgid "success"
+msgstr "succès"
+
+#: models.py:374
+msgid "error"
+msgstr "erreur"
+
+#: models.py:375
+msgid "last open date"
+msgstr "date de dernière ouverture"
+
+#: models.py:376
+msgid "number open"
+msgstr "nombre de messages ouverts"
+
+#: models.py:377
+msgid "sended item"
+msgstr "ref. d'envoie"
+
+#: models.py:485 models.py:486
+msgid "email sent info"
+msgstr "information des courriels envoyés"
+
+#: models.py:508
+msgid "mailing-smtpserver"
+msgstr "Serveur SMTP"
+
+#: models.py:509
+msgid "mailing-smtpport"
+msgstr "Port SMTP"
+
+#: models.py:511
+msgid "mailing-smtpsecurity"
+msgstr "Sécurité SMTP"
+
+#: models.py:512
+msgid "mailing-smtpsecurity.0"
+msgstr "Aucune"
+
+#: models.py:512
+msgid "mailing-smtpsecurity.1"
+msgstr "StartTLS"
+
+#: models.py:512
+msgid "mailing-smtpsecurity.2"
+msgstr "SSL/TLS"
+
+#: models.py:514
+msgid "mailing-smtpuser"
+msgstr "Utilisateur SMTP"
+
+#: models.py:516
+msgid "mailing-smtppass"
+msgstr "Mot de passe SMTP"
+
+#: models.py:517
+msgid "mailing-msg-connection"
+msgstr "Message de confirmation de connexion"
+
+#: models.py:518
+#, python-format
+msgid ""
+"Connection confirmation to your application:{[br/]} - User:"
+"%(username)s{[br/]} - Password:%(password)s{[br/]}"
+msgstr ""
+"Bienvenue{[br/]}{[br/]}Confirmation de connexion à votre application :"
+"{[br/]} - Alias : %(username)s{[br/]} - Mot de passe : %(password)s{[br/]}"
+"{[br/]}Salutations{[br/]}"
+
+#: models.py:519
+msgid "mailing-delay-batch"
+msgstr "durée (en min) d'un lot de courriel"
+
+#: models.py:520
+msgid "mailing-nb-by-batch"
+msgstr "nombre de courriels par lot"
+
+#: models.py:522
+msgid "mailing-dkim-private-path"
+msgstr "Fichier privé DKIM"
+
+#: models.py:523
+msgid "mailing-dkim-selector"
+msgstr "Sélecteur DKIM"
+
+#: views.py:44
+msgid "Change mailing parameters"
+msgstr "Modifier les paramétrages du courrier"
+
+#: views.py:47 views.py:143
+msgid "Mailing parameters"
+msgstr "Paramètres de courrier"
+
+#: views.py:51
+msgid "EMail configuration"
+msgstr "Configuration du courriel"
+
+#: views.py:64 views.py:82
+msgid "Modify"
+msgstr "Modifier"
+
+#: views.py:69
+msgid "Send"
+msgstr "Envoyer"
+
+#: views.py:72
+msgid "Default message"
+msgstr "Message par défaut"
+
+#: views.py:89 views.py:122 views_message.py:101 views_message.py:108
+msgid "EMail try"
+msgstr "Essai de courriel"
+
+#: views.py:93
+msgid "Bad email parameter!"
+msgstr "Mauvais paramètrage du courriel"
+
+#: views.py:120
+msgid "EMail sent to check configuration"
+msgstr "Courriel envoyé pour vérifier la configuration"
+
+#: views.py:125 views_message.py:134
+msgid "EMail send, check it."
+msgstr "Courriel envoyé, veuillez le vérifier."
+
+#: views.py:148
+msgid "email properly configured"
+msgstr "Courriel correctement configuré"
+
+#: views.py:150
+msgid "email not configured"
+msgstr "Courriel mal configuré"
+
+#: views_message.py:32
+msgid "Mailing"
+msgstr "Publipostage"
+
+#: views_message.py:32
+msgid "Create and send mailing to contacts."
+msgstr "Ensemble pour créer et envoyer un publipostage à des contacts."
+
+#: views_message.py:35
+msgid "Manage list of message for mailing."
+msgstr "Gestion de liste de messages pour publipostage"
+
+#: views_message.py:40
+msgid "Messages"
+msgstr "Messages"
+
+#: views_message.py:56 views_message.py:66
+msgid "Add message"
+msgstr "Ajout de message"
+
+#: views_message.py:57
+msgid "Modify message"
+msgstr "Modification d'un message"
+
+#: views_message.py:70
+msgid "This message can not be clone!"
+msgstr "Ce message ne peux pas être cloné !"
+
+#: views_message.py:92 views_message.py:107
+msgid "Show message"
+msgstr "Voir un message"
+
+#: views_message.py:146
+#, python-format
+msgid "Do you want to sent this message to %d contacts?"
+msgstr "Voulez-vous envoyer ce message à %d contacts ?"
+
+#: views_message.py:148
+msgid "This message is being transmitted"
+msgstr "Ce message est en cours de transmission"
+
+#: views_message.py:153
+msgid "Info"
+msgstr "Info"
+
+#: views_message.py:159 views_message.py:168
+msgid "Transmission report"
+msgstr "Rapport de transmission"
+
+#: views_message.py:171
+msgid "date begin of send"
+msgstr "début de l'envoi"
+
+#: views_message.py:171
+msgid "date end of send"
+msgstr "fin de l'envoi"
+
+#: views_message.py:184
+msgid "Show only failed"
+msgstr "Voir seulement les échecs"
+
+#: views_message.py:189
+msgid "Close"
+msgstr "Fermé"
+
+#: views_message.py:192
+msgid "Letters"
+msgstr "Lettres"
+
+#: views_message.py:198
+msgid "Write message"
+msgstr "Impression d'un message"
+
+#: views_message.py:215
+msgid "Delete message"
+msgstr "Suppression d'un message"
+
+#: views_message.py:223 views_message.py:235
+msgid "Add recipient to message"
+msgstr "Ajout d'un destinataire"
+
+#: views_message.py:245
+msgid "Delete recipient"
+msgstr "Supprimer un destinataire"
+
+#: views_message.py:248
+msgid "Do you want to delete this recipient?"
+msgstr "Voulez-vous supprimer ce destinataire ?"
+
+#: views_message.py:257 views_message.py:265
+msgid "Insert document to message"
+msgstr "Insérer un document"
+
+#: views_message.py:272
+msgid "Remove document to message"
+msgstr "Retirer un document"
+
+#: views_message.py:278
+msgid "Do you want to remove those documents ?"
+msgstr "Voulez-vous retirer ces documents ?"
