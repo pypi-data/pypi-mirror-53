@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: deepsegment
+Version: 2.2.0
+Summary: Sentence Segmentation with sequece tagging
+Home-page: https://github.com/bedapudi6788/Deep-Segmentation
+Author: BEDAPUDI PRANEETH
+Author-email: praneeth@bpraneeth.com
+License: GPLv3
+Description: 
+        # DeepSegment: A sentence segmenter that actually works!
+        Note: For the original implementation please use the "master" branch of this repo.
+        
+        This implementation is trained on data from various sources. (v1 or the model in master branch is trained only on Tatoeba data).
+        
+        The Demo is available at http://bpraneeth.com/projects
+        
+        # Installation:
+        ```
+        pip install --upgrade deepsegment
+        # please install tensorflow or tensorflow-gpu separately. Tested with tf and tf-gpu versions 1.8 to 2.0
+        ```
+        
+        # Supported languages:
+        en - english (Trained on data from various sources)
+        
+        fr - french (Only Tatoeba data)
+        
+        it - italian (Only Tatoeba data)
+        
+        
+        # Usage:
+        
+        ```
+        from deepsegment import DeepSegment
+        # The default language is 'en'
+        segmenter = DeepSegment('en')
+        segmenter.segment('I am Batman i live in gotham')
+        # ['I am Batman', 'i live in gotham']
+        
+        ```
+        
+        Training deepsegment on custom data: https://colab.research.google.com/drive/1CjYbdbDHX1UmIyvn7nDW2ClQPnnNeA_m
+        
+        # To Do:
+        2. Publish docker tf-serving image and deepsegment-client.
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.5.0
+Description-Content-Type: text/markdown
