@@ -1,0 +1,892 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Core modules &mdash; summer 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ORM – object relational mapping" href="api-orm.html" />
+    <link rel="prev" title="summer API doc" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> summer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">summer API doc</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Core modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.ex"><strong>ex</strong> – exception definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.domain"><strong>domain</strong> – domain model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.context"><strong>context</strong> – summer object container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-summer.l10n"><strong>l10n</strong> – localization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api-orm.html">ORM – object relational mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-ldap.html">LDAP – lightweight directory access)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-aop.html">AOP modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-pc.html">Producer–Consumer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-misc.html">Miscellaneous modules</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">summer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">summer API doc</a> &raquo;</li>
+        
+      <li>Core modules</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api-core.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="core-modules">
+<h1>Core modules<a class="headerlink" href="#core-modules" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-summer.ex">
+<span id="ex-exception-definitions"></span><h2><strong>ex</strong> – exception definitions<a class="headerlink" href="#module-summer.ex" title="Permalink to this headline">¶</a></h2>
+<p>Exception classes used in <em>summer</em> framework.  Some are suitable for
+inheritance.</p>
+<dl class="exception">
+<dt id="summer.ex.ApplicationException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">ApplicationException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#ApplicationException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.ApplicationException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base class for exceptions.  Suited for custom subclassing.</p>
+<dl class="method">
+<dt id="summer.ex.ApplicationException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#ApplicationException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.ApplicationException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.ex.ApplicationException.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#ApplicationException.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.ApplicationException.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.ex.ApplicationException.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.ex.ApplicationException.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.AbstractMethodException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">AbstractMethodException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#AbstractMethodException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.AbstractMethodException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.ex.AbstractMethodException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#AbstractMethodException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.AbstractMethodException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.UnsupportedMethodException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">UnsupportedMethodException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#UnsupportedMethodException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.UnsupportedMethodException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.ex.UnsupportedMethodException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#UnsupportedMethodException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.UnsupportedMethodException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.NotImplementedException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">NotImplementedException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#NotImplementedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.NotImplementedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.ex.NotImplementedException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#NotImplementedException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.NotImplementedException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.UnknownAttributeException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">UnknownAttributeException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#UnknownAttributeException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.UnknownAttributeException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.ex.UnknownAttributeException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#UnknownAttributeException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.UnknownAttributeException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.IllegalArgumentException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">IllegalArgumentException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#IllegalArgumentException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.IllegalArgumentException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.ex.IllegalArgumentException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#IllegalArgumentException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.IllegalArgumentException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.ResourceNotFoundException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">ResourceNotFoundException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#ResourceNotFoundException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.ResourceNotFoundException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<dl class="method">
+<dt id="summer.ex.ResourceNotFoundException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#ResourceNotFoundException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.ResourceNotFoundException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.SummerException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">SummerException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#SummerException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.SummerException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.ApplicationException</span></code></a></p>
+<p>Base summer framework exception.</p>
+<dl class="method">
+<dt id="summer.ex.SummerException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#SummerException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.SummerException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.SummerConfigurationException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">SummerConfigurationException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#SummerConfigurationException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.SummerConfigurationException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.SummerException" title="summer.ex.SummerException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.SummerException</span></code></a></p>
+<p>Raised when summer configuration is broken.</p>
+<dl class="method">
+<dt id="summer.ex.SummerConfigurationException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#SummerConfigurationException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.SummerConfigurationException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="summer.ex.NoObjectFoundException">
+<em class="property">exception </em><code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">NoObjectFoundException</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#NoObjectFoundException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.NoObjectFoundException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.ex.SummerException" title="summer.ex.SummerException"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.ex.SummerException</span></code></a></p>
+<p>Raised when required object is not found in context.</p>
+<dl class="method">
+<dt id="summer.ex.NoObjectFoundException.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">message: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#NoObjectFoundException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.NoObjectFoundException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.ex.ApplicationException" title="summer.ex.ApplicationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationException</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>str</em>) – message to be printed</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments are printed as are, suitable for
+providing some context (current values of important
+variables and such.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="summer.ex.exception_to_str">
+<code class="sig-prename descclassname">summer.ex.</code><code class="sig-name descname">exception_to_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/ex.html#exception_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.ex.exception_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert exception to stack trace.  Uses thread safe <code class="docutils literal notranslate"><span class="pre">sys.exc_info()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>the formatted unicode string containing the last exception</dt><dd><p>info.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.domain">
+<span id="domain-domain-model"></span><h2><strong>domain</strong> – domain model<a class="headerlink" href="#module-summer.domain" title="Permalink to this headline">¶</a></h2>
+<p>Basic support for domain classes, including persistent domain classes.</p>
+<dl class="class">
+<dt id="summer.domain.Domain">
+<em class="property">class </em><code class="sig-prename descclassname">summer.domain.</code><code class="sig-name descname">Domain</code><a class="reference internal" href="_modules/summer/domain.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-misc.html#summer.utils.Printable" title="summer.utils.Printable"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.utils.Printable</span></code></a></p>
+<p>Suitable class for generic domain objects.</p>
+<dl class="method">
+<dt id="summer.domain.Domain.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Domain.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Domain.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.domain.Filter">
+<em class="property">class </em><code class="sig-prename descclassname">summer.domain.</code><code class="sig-name descname">Filter</code><span class="sig-paren">(</span><em class="sig-param">page: int = 1</em>, <em class="sig-param">max_results: int = -1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.domain.Domain" title="summer.domain.Domain"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.Domain</span></code></a></p>
+<p>Base class for <em>filters</em> – ie. classes that support paging through a
+collection.  Used for example in <a class="reference internal" href="api-orm.html#summer.dao.EntityDao.find" title="summer.dao.EntityDao.find"><code class="xref py py-meth docutils literal notranslate"><span class="pre">summer.dao.EntityDao.find()</span></code></a></p>
+<ul class="simple">
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">page</span></code> sets the page of the result set, starting at 1
+(ie. first page)</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">max_results</span></code> sets the page limit (entities per page)</p></li>
+</ul>
+<p>Use <a class="reference internal" href="#summer.domain.Filter.get_offset" title="summer.domain.Filter.get_offset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Filter.get_offset()</span></code></a> to obtain the first record of the
+result set.  Use <a class="reference internal" href="#summer.domain.Filter.get_max_results" title="summer.domain.Filter.get_max_results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Filter.get_max_results()</span></code></a> to obtain the last
+record of the result set.</p>
+<dl class="method">
+<dt id="summer.domain.Filter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">page: int = 1</em>, <em class="sig-param">max_results: int = -1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Filter.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Filter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>page</strong> (<em>int</em>) – page in collection</p></li>
+<li><p><strong>max_results</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Filter.get_default">
+<em class="property">static </em><code class="sig-name descname">get_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Filter.get_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Filter.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>default filter instance, set for single page without
+limit per page (will show all the results)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#summer.domain.Filter" title="summer.domain.Filter">Filter</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Filter.get_offset">
+<code class="sig-name descname">get_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/summer/domain.html#Filter.get_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Filter.get_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the order of the first record, ie. the <em>offset</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>offset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Filter.get_max_results">
+<code class="sig-name descname">get_max_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/summer/domain.html#Filter.get_max_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Filter.get_max_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the order of the potential last record, ie. the <em>max_results</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>maximum number of results per page</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Filter.copy_limits">
+<code class="sig-name descname">copy_limits</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Filter.copy_limits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Filter.copy_limits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy the <code class="xref py py-attr docutils literal notranslate"><span class="pre">page</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">max_results</span></code> to <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#summer.domain.Filter" title="summer.domain.Filter"><em>Filter</em></a>) – filter object to be copied</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.domain.Entity">
+<em class="property">class </em><code class="sig-prename descclassname">summer.domain.</code><code class="sig-name descname">Entity</code><a class="reference internal" href="_modules/summer/domain.html#Entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.domain.Domain" title="summer.domain.Domain"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.Domain</span></code></a></p>
+<p>Suitable base class for <em>SqlAlchemy</em> persistent classes; defines the
+integer <code class="xref py py-attr docutils literal notranslate"><span class="pre">id</span></code> attribute.</p>
+<dl class="method">
+<dt id="summer.domain.Entity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Entity.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Entity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Entity.__eq__">
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Entity.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Entity.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equality is based on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">id</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Entity.__hash__">
+<code class="sig-name descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Entity.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Entity.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash is based on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">id</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.Entity.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#Entity.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.Entity.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return printable object string representation in unicode.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.domain.CodeEntity">
+<em class="property">class </em><code class="sig-prename descclassname">summer.domain.</code><code class="sig-name descname">CodeEntity</code><a class="reference internal" href="_modules/summer/domain.html#CodeEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.CodeEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.domain.Entity" title="summer.domain.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.Entity</span></code></a></p>
+<p>Suitable base class for <em>SqlAlchemy</em> persistent classes that have a
+unique string code attribute (ie. usually catalogs).  This
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">code</span></code> attribute should be considered as a string
+representation of an object, its natural id, not necessarily human
+friendly value.</p>
+<dl class="method">
+<dt id="summer.domain.CodeEntity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#CodeEntity.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.CodeEntity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.CodeEntity.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#CodeEntity.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.CodeEntity.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return printable object string representation in unicode.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="summer.domain.LdapEntity">
+<em class="property">class </em><code class="sig-prename descclassname">summer.domain.</code><code class="sig-name descname">LdapEntity</code><a class="reference internal" href="_modules/summer/domain.html#LdapEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.LdapEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#summer.domain.Domain" title="summer.domain.Domain"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.domain.Domain</span></code></a></p>
+<p>Suiable base class for LDAP persistent classes.  Defines the unique
+string <code class="xref py py-attr docutils literal notranslate"><span class="pre">dn</span></code> attribute.</p>
+<dl class="method">
+<dt id="summer.domain.LdapEntity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#LdapEntity.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.LdapEntity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.LdapEntity.__eq__">
+<code class="sig-name descname">__eq__</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#LdapEntity.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.LdapEntity.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equality is based on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">dn</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.LdapEntity.__hash__">
+<code class="sig-name descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#LdapEntity.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.LdapEntity.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash is based on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">dn</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.domain.LdapEntity.__str__">
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/domain.html#LdapEntity.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.domain.LdapEntity.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return printable object string representation in unicode.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.context">
+<span id="context-summer-object-container"></span><h2><strong>context</strong> – summer object container<a class="headerlink" href="#module-summer.context" title="Permalink to this headline">¶</a></h2>
+<p>Module <code class="docutils literal notranslate"><span class="pre">context</span></code> defines an application context (<a class="reference internal" href="#summer.context.Context" title="summer.context.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>
+class)– a container for (business) objects, that should be available
+throughout the application, application layer or module.</p>
+<dl class="class">
+<dt id="summer.context.Context">
+<em class="property">class </em><code class="sig-prename descclassname">summer.context.</code><code class="sig-name descname">Context</code><span class="sig-paren">(</span><em class="sig-param">session_provider: summer.sf.SessionProvider = None</em>, <em class="sig-param">ldap_connection_provider: summer.lsf.LdapConnectionProvider = None</em>, <em class="sig-param">localization: summer.l10n.Localization = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Context is intelligent container for your business objects, it is a core
+of <em>summer framework</em>.</p>
+<p>It is responsible for:</p>
+<ol class="arabic simple">
+<li><p>summer framework initialization</p></li>
+<li><p>instantiating your business classes with their interdependencies</p></li>
+<li><p>aop configuration</p></li>
+</ol>
+<p>Emulates mapping type, so you can access business objects by their name
+if required.</p>
+<p>Usually in medium sized applications, you define single global context
+somewhere in main entry point of your program.  Preferred approach is
+to define top level module attribute, see accompanying examples.</p>
+<p>Initialization of context is thread safe.</p>
+<dl class="method">
+<dt id="summer.context.Context.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">session_provider: summer.sf.SessionProvider = None</em>, <em class="sig-param">ldap_connection_provider: summer.lsf.LdapConnectionProvider = None</em>, <em class="sig-param">localization: summer.l10n.Localization = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and initializes context instance.  See <a class="reference internal" href="#summer.context.Context.init" title="summer.context.Context.init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init()</span></code></a> for more
+information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_provider</strong> (<a class="reference internal" href="api-orm.html#summer.sf.SessionProvider" title="summer.sf.SessionProvider"><em>sf.SessionProvider</em></a>) – object that provides
+SQLAlchemy sessions when
+requested</p></li>
+<li><p><strong>ldap_connection_provider</strong> (<a class="reference internal" href="api-ldap.html#summer.lsf.LdapConnectionProvider" title="summer.lsf.LdapConnectionProvider"><em>lsf.LdapConnectionProvider</em></a>) – object
+that
+provides
+LDAP
+connections
+when
+requested</p></li>
+<li><p><strong>localization</strong> (<a class="reference internal" href="#summer.l10n.Localization" title="summer.l10n.Localization"><em>l10n.Localization</em></a>) – localization object</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.__del__">
+<code class="sig-name descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.__del__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls <a class="reference internal" href="#summer.context.Context.shutdown" title="summer.context.Context.shutdown"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shutdown()</span></code></a> to properly shutdown the context.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.session_factory">
+<em class="property">property </em><code class="sig-name descname">session_factory</code><a class="headerlink" href="#summer.context.Context.session_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each context may have up to one instance of session factory – access to
+your database connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>session factory instance.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="api-orm.html#summer.sf.SessionFactory" title="summer.sf.SessionFactory">sf.SessionFactory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.ldap_session_factory">
+<em class="property">property </em><code class="sig-name descname">ldap_session_factory</code><a class="headerlink" href="#summer.context.Context.ldap_session_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each context may have up to one instance of LDAP session factory –
+access to your LDAP connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>LDAP session factory instance.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="api-ldap.html#summer.lsf.LdapSessionFactory" title="summer.lsf.LdapSessionFactory">lsf.LdapSessionFactory</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.l10n">
+<em class="property">property </em><code class="sig-name descname">l10n</code><a class="headerlink" href="#summer.context.Context.l10n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each context may have up to one instance of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">l10n.Localization</span></code>.  You usually do not need to access
+it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>localization instance.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#summer.l10n.Localization" title="summer.l10n.Localization">l10n.Localization</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main context initialization method.</p>
+<p>Context initialization is executed from constructor; it is
+separated into several steps:</p>
+<ol class="arabic simple">
+<li><p>call <a class="reference internal" href="#summer.context.Context.core_init" title="summer.context.Context.core_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">core_init()</span></code></a> (not indended to be overriden) which
+initializes core objects and internal AOP features</p></li>
+<li><p>call <a class="reference internal" href="#summer.context.Context.orm_init" title="summer.context.Context.orm_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">orm_init()</span></code></a> (intended to be overriden) which
+initializes ORM</p></li>
+<li><p>call <a class="reference internal" href="#summer.context.Context.context_init" title="summer.context.Context.context_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">context_init()</span></code></a> (intended to be overriden) – a
+place to define your business beans</p></li>
+</ol>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.core_init">
+<code class="sig-name descname">core_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.core_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.core_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes core objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.orm_init">
+<code class="sig-name descname">orm_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.orm_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.orm_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be overriden by subclasses to initialize ORM managed tables and
+class mappings.</p>
+<p>You should define your custom table definitions based on
+<a class="reference internal" href="api-orm.html#summer.sf.AbstractTableDefinitions" title="summer.sf.AbstractTableDefinitions"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.sf.AbstractTableDefinitions</span></code></a> and mappings based
+on <a class="reference internal" href="api-orm.html#summer.sf.AbstractClassMappings" title="summer.sf.AbstractClassMappings"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.sf.AbstractClassMappings</span></code></a>.</p>
+<p>Usually you have just those lines there:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">session_factory</span><span class="o">.</span><span class="n">table_definitions</span> <span class="o">=</span> <span class="n">MyTableDefinitions</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">session_factory</span><span class="o">.</span><span class="n">set_class_mappings</span> <span class="o">=</span> <span class="n">MyClassMappings</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.context_init">
+<code class="sig-name descname">context_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.context_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.context_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be overriden by subclasses to initialize custom objects in
+context.</p>
+<p>This is the last stage of context initialization, this method gets called after</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#summer.context.Context.core_init" title="summer.context.Context.core_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">core_init()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#summer.context.Context.orm_init" title="summer.context.Context.orm_init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">orm_init()</span></code></a></p></li>
+</ol>
+<p>are called.  You can safely access those properties:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#summer.context.Context.session_factory" title="summer.context.Context.session_factory"><code class="xref py py-attr docutils literal notranslate"><span class="pre">session_factory</span></code></a> (<a class="reference internal" href="api-orm.html#summer.sf.SessionFactory" title="summer.sf.SessionFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.sf.SessionFactory</span></code></a>
+instance) which provides thread-safe access to
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.session</span></code> – any data aware object (ie. each
+DAO at least) should probably have access to it – at least those
+derived from <code class="xref py py-class docutils literal notranslate"><span class="pre">dao.Dao</span></code> reference it.</p></li>
+<li><p><a class="reference internal" href="#summer.context.Context.ldap_session_factory" title="summer.context.Context.ldap_session_factory"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ldap_session_factory</span></code></a>
+(<a class="reference internal" href="api-ldap.html#summer.lsf.LdapSessionFactory" title="summer.lsf.LdapSessionFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.lsf.LdapSessionFactory</span></code></a> instance) which
+provides thread-safe access to
+<a class="reference internal" href="api-ldap.html#summer.lsf.LdapSessionFactory.Local" title="summer.lsf.LdapSessionFactory.Local"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.lsf.LdapSessionFactory.Local</span></code></a> instance – a
+simple wrapper around actual <code class="xref py py-class docutils literal notranslate"><span class="pre">ldap3.Connection</span></code></p></li>
+<li><p><a class="reference internal" href="#summer.context.Context.l10n" title="summer.context.Context.l10n"><code class="xref py py-attr docutils literal notranslate"><span class="pre">l10n</span></code></a> (<a class="reference internal" href="#summer.l10n.Localization" title="summer.l10n.Localization"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.l10n.Localization</span></code></a>) instance,
+not very interesting in itself, but summer’s localization module
+installs the famous <code class="xref py py-meth docutils literal notranslate"><span class="pre">_()</span></code> gettext function into global
+namespace (as normal gettext module does) and configures your
+localization based on whatever you have provided</p></li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.context.Context.shutdown">
+<code class="sig-name descname">shutdown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/context.html#Context.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.context.Context.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles context shutdown.  Called from <a class="reference internal" href="#summer.context.Context.__del__" title="summer.context.Context.__del__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code></a>.  Can be overriden.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.context.Context.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.context.Context.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-summer.l10n">
+<span id="l10n-localization"></span><h2><strong>l10n</strong> – localization<a class="headerlink" href="#module-summer.l10n" title="Permalink to this headline">¶</a></h2>
+<p>Based on <em>Python</em>’s <code class="xref py py-mod docutils literal notranslate"><span class="pre">gettext</span></code> module.</p>
+<dl class="class">
+<dt id="summer.l10n.Localization">
+<em class="property">class </em><code class="sig-prename descclassname">summer.l10n.</code><code class="sig-name descname">Localization</code><span class="sig-paren">(</span><em class="sig-param">domain: str</em>, <em class="sig-param">l10n_dir: str</em>, <em class="sig-param">languages: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/l10n.html#Localization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.l10n.Localization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Provides localization (l10n) services.</p>
+<p>If instance is provided to <a class="reference internal" href="#summer.context.Context" title="summer.context.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">summer.context.Context</span></code></a>, context
+will load all the defined languages and will install
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gettext._()</span></code> function into global namespace.</p>
+<dl class="method">
+<dt id="summer.l10n.Localization.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">domain: str</em>, <em class="sig-param">l10n_dir: str</em>, <em class="sig-param">languages: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/l10n.html#Localization.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.l10n.Localization.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates <a class="reference internal" href="#summer.l10n.Localization" title="summer.l10n.Localization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Localization</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> – gettext domain</p></li>
+<li><p><strong>l10n_dir</strong> – directory path for gettext compiled data</p></li>
+<li><p><strong>languages</strong> – list of supported languages</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="summer.l10n.Localization.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/summer/l10n.html#Localization.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#summer.l10n.Localization.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Installs defined languages.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="summer.l10n.Localization.__weakref__">
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#summer.l10n.Localization.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api-orm.html" class="btn btn-neutral float-right" title="ORM – object relational mapping" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api.html" class="btn btn-neutral float-left" title="summer API doc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2019, martinslouf@users.sourceforge.net
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
