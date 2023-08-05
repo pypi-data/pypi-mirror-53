@@ -1,0 +1,2 @@
+class ExpiredError(ValueError):
+    pass
