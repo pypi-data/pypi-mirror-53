@@ -1,0 +1,155 @@
+/*
+  TODO: move these classes to the tsx files
+*/
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+#body {
+  height: 100%;
+}
+
+.auth-list-text {
+  text-transform: capitalize;
+}
+
+.card-column {
+  flex-basis: 33.33%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 33.33%;
+}
+.card-column .droppable {
+  padding: 5px 4px;
+  border: 1px dashed transparent;
+  border-radius: 4px;
+  height: calc(100% - 50px);
+}
+.card-column .droppable.hovering {
+  border-color: grey;
+}
+
+.issue-view-dialog .title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 10px 5px 20px;
+}
+.issue-view-dialog .content {
+  padding: 20px;
+}
+.issue-view-dialog .controls {
+  padding: 10px 20px;
+}
+.issue-view-dialog .controls > * {
+  margin-right: 10px;
+}
+.issue-view-dialog .details {
+  margin: 10px 20px;
+}
+.issue-view-dialog .details td {
+  padding: 3px 0px;
+}
+.issue-view-dialog .details tr > td:first-child {
+  padding-right: 10px;
+}
+.issue-view-dialog .details tr > td:first-child > p {
+  font-weight: bold;
+}
+
+.card {
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 7px;
+  display: flex;
+  flex-direction: column;
+}
+.card > .header {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2em;
+  white-space: nowrap;
+}
+.card > .header > .title {
+  flex-grow: 1;
+  width: min-content;
+  max-height: 50px;
+  overflow: hidden;
+  font-size: 0.9em;
+  word-break: break-all;
+  margin-right: 10px;
+  text-overflow: ellipsis;
+}
+.card > .header > .title > a {
+  cursor: pointer;
+}
+.card > .footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.card > .footer > .issue-action-icons {
+  margin-right: -6px;
+  margin-bottom: -6px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card > .footer > .issue-action-icons.ticking {
+  opacity: 1;
+}
+.card:hover > .footer > .issue-action-icons {
+  opacity: 1;
+}
+
+.card-column-header {
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 10px !important;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.pb-tooltip {
+  padding: 5px 8px;
+}
+
+.version {
+  opacity: 0.6;
+  padding-left: 5px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.changelog-container {
+  margin: 10px;
+}
+.changelog-container .logblock-container:not(:last-child) {
+  margin-bottom: 15px;
+}
+.changelog-container .logblock-container > .title {
+  padding: 5px;
+  font-size: 1.5em;
+}
+.changelog-container .logblock-container > .date {
+  padding-left: 5px;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+.changelog-container .logblock-container > .logblock {
+  padding-left: 5px;
+}
+.changelog-container .logblock-container > .logblock > .title {
+  padding-left: 5px;
+}
+.changelog-container .logblock-container > .logblock > .item {
+  padding-left: 10px;
+}
