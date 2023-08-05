@@ -1,0 +1,17 @@
+allow_other_channels: True
+show_channel_urls: True
+
+conda-build:
+  output-folder: /opt/conda/conda-bld
+
+pkgs_dirs:
+  - /shared/conda/pkgs
+
+envs_dirs:
+  - /shared/conda/envs
+
+channels:
+  - defaults
+  - local
+  - https://repository-channel.ouroboros.info
+  - conda-forge
