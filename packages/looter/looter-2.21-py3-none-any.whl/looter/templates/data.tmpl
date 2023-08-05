@@ -1,0 +1,18 @@
+import looter as lt
+
+domain = ''
+
+
+def crawl(url):
+    tree = lt.fetch(url)
+    items = tree.css()
+    for item in items:
+        data = {}
+        # data[...] = item.css(...)
+        yield data
+
+
+if __name__ == '__main__':
+    tasklist = []
+    total = lt.crawl_all(crawl, tasklist)
+    lt.save(total)

@@ -1,0 +1,22 @@
+import asyncio
+import looter as lt
+
+domain = ''
+data = []
+
+
+async def crawl(url):
+    tree = await lt.async_fetch(url)
+    items = tree.css()
+    for item in items:
+        data = {}
+        # data[...] = item.css(...)
+        total.append(data)
+
+
+if __name__ == '__main__':
+    tasklist = []
+    loop = asyncio.get_event_loop()
+    result = [crawl(task) for task in tasklist]
+    loop.run_until_complete(asyncio.wait(result))
+    lt.save(data)
