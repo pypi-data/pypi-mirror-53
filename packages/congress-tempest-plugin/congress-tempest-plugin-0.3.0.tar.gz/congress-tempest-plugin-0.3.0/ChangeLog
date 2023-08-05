@@ -1,0 +1,175 @@
+CHANGES
+=======
+
+0.3.0
+-----
+
+* Bump the openstackdocstheme extension to 1.20
+* Add Python 3 Train unit tests
+* Fix unit tests for Train PTI add .stestr.conf
+* publish congress tempest plugin doc
+* Blacklist sphinx 2.1.0 (autodoc bug)
+* Update api-ref location
+* Sync Sphinx requirement
+* Changes for url transition to OpenDev
+* OpenDev Migration Patch
+* Replace openstack.org git:// URLs with https://
+
+0.2.0
+-----
+
+* Add python 3.6 to setup.cfg, in line with Stein target
+* Move legacy job to bionic and stable on xenial
+* Update nova server test for addiing created\_at field
+* Add test for servers.addresses table in nova driver
+* Resolve test\_datasource\_db\_sync\_add\_remove instability
+* disable murano scenario test in queens-py35 job
+* nova\_servers\_addresses\_table feature flag
+* Update home-page
+* Add policy eval tests to vitrage webhook driver
+* Change openstack-dev to openstack-discuss
+* Neutron driver test use admin
+* Update hacking version
+* Update CI jobs in sync with migration in congress repo
+* Fix queens py35 job
+* add z3 support\_builtins feature flag
+* Modify monasca-webhook test
+* Monasca webhook rocky schema feature flag
+* tempest test for z3 builtins
+* Add python 3.6 for test and remove pypy in tox
+* Removed older version of python added 3.5
+* Temporarily disable monasca webhook test
+* add queens & rocky check jobs
+* Revert "temporarily disable nova driver tests"
+* temporarily disable nova driver tests
+* skipping some tests for queens
+* import zuul job settings from project-config
+
+0.1.0
+-----
+
+* Test Monasca-Webhook data source
+* Revert "temporarily disable cfg validator test"
+* Test replica engine status retry on 503
+* Revert "temporarily disable monasca driver test"
+* Integration tests for Z3 engine in Congress
+* Test webhook to congress vitrage data source
+* temporarily disable cfg validator test
+* Correct the usage on listing neutron ports
+* temporarily disable monasca driver test
+* fix bad reference in error message
+* Add release notes link to README
+* fix tox python3 overrides
+* Remove volume v1 API service client usage
+* update hacking requirement to conform to conrgess repo
+* mistral tempest test
+* add minimal test for monasca integration
+* Update config validator test\_options\_sent
+* Updated from global requirements
+* Updated from global requirements
+* re-enable skipped HA test after workaround
+* Re-enable swift polling test along with fix
+* Use 'aodh' for aodh service availability
+* Zuul: Remove project name
+* Use an existing option in cfg\_validator test
+* Remove alarm\_rule from aodh tests
+* Updated from global requirements
+* Updated from global requirements
+* Enable HA and py35 mysql jobs
+* Updated from global requirements
+* Use executable from sys path
+* Updated from global requirements
+* Use telemetry-tempest-plugin for aodh tests
+* Update requirements for congress-tempest-plugin
+* Update README.rst
+* Updated from global requirements
+* Update tempest for neutron driver attach/detach security group action
+* Add Tempest test for Configuration file validation
+* Enable congress-devstack-mysql api tempest jobs
+* Initial setup changes of congress-tempest-plugin
+* Initial CookieCutter commit
+* Fix py3 failures and enable py3 dsvm job
+* Modify to use libraries compatible with python3
+* Replace the usage of some aliases in tempest
+* Remove ceilometer datasource driver from congress
+* Fix test mocking and disable ceilometer tempest test
+* Update tests to do not use deprecated test.services()
+* Replace the usage of some aliases in tempest
+* Add diagnostic output for replica test instability
+* add tempest test to activate library policies
+* Add Qos translator in neutron datasource drive
+* Fixed confusing cls param in instance methods
+* Final changes for pike RC1
+* Show replica error in replica HA test
+* fix and re-enable replica HA test
+* add encryption to secret datasource config fields
+* Replace deprecated test.attr with decorators.attr
+* Replace the usage of 'admin\_manager' with 'os\_admin'
+* Automatically load library policy files at start
+* policy library DB interface, DSE service, API
+* Replace the usage of 'manager' with 'os\_primary'
+* Replace assertEqual([], items) with assertEmpty(items)
+* Enable HA test
+* Add tempest tests for keystonev3 driver
+* Remove deprecated attrs usage in tempest plugin
+* Fix gate failures
+* check update error on tempest datasoure tests
+* Remove \_hotplug\_server() from test manager
+* Switch to use stable data\_utils
+* Keep local copy of tempest/scenario/manager.py
+* Pass network\_mask\_bits in assign\_static\_ip()
+* Switch using exec\_command() directly
+* delete "id" field in DoctorDriver
+* Remove logging import unused
+* Switch to use test\_utils.call\_until\_true
+* Don't use Tempest internal methods
+* Refactor policy synchronizer
+* Fix cinder driver all\_tenant typo
+* Add tempest tests for aodh driver
+* Minor change in HA test
+* Gate-Issue: Fix datasource sync period
+* tempest HAHT wait for sync
+* Add missing whitespaces to a few messages
+* Replace retrying with tenacity
+* Clean imports in code
+* Restore the DSE opt group
+* Sync datasources only on datasource node
+* use - instead of \_ in cli opts
+* Modify existing HA tempest test
+* Fix tempest.conf generation
+* Correct reraising of exception
+* Introduce 'lazy\_tables' flag to nova datasource driver
+* Fix string interpolation at logging call
+* Scrap testHA:test\_datasource\_db\_sync\_remove
+* Enable different deployment configurations for HA
+* Fix gate failure
+* Add congress to service\_available group
+* Remove use of deprecated network\_resources module
+* Working Hot Stanby HA on any driver of oslo.messaging
+* Use right method to get admin credential
+* Tempest for Push Type Driver
+* [Trivial] Remove unnecessary executable privilege
+* Fix gate failure
+* Resolve Gate failure
+* Switch to Ceilometer tempest plugin
+* Fixes Tempest error caused by tempest's changes
+* Enable Murano tempest tests
+* Enable congress HA tests
+* Use tempest.lib instead of tempest\_lib
+* Use routers\_client instead of neutron client
+* Retry tempest tests on any error
+* Enable basic\_ops tempest tests
+* Add retry to fix intermittent tempest failures
+* Fix keystone tempest test failure
+* use neutron security\_groups\_client
+* Use roles\_client in keystone
+* Fix gate failure - Use tenants\_client
+* Enable neutron tempest tests
+* Enable keystone, cinder, ceilometer tempest tests
+* Enable Nova and Glance tempest tests
+* Use skip\_checks to define class level skip condition
+* Fix tempest failures
+* Update readme on tox commands to run tempest tests
+* Migrate to tempest\_lib : exceptions
+* Remove ServiceClient from policy\_client
+* Change to use tempest plugin framework
