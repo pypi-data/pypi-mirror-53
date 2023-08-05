@@ -1,0 +1,7 @@
+<div class="col-lg-7 col-md-6 col-sm-7">{# assign members = (site.github.organization_members | sort: 'id') #}<h3 class="sidebar-title-left">Team Members</h3><ul class="flex-list">{# for member in members #}<li><header><span>{# member.login #}</span></header><a href="https://github.com/{# member.login #}" target="_blank"><img src="{# member.avatar_url #}" width="100%" height="100%"></a></li>{# endfor #}</ul>{# comment #} {# assign sorted_repos = (site.github.public_repositories | sort: 'stargazers_count') | reverse | where: "fork", "false" #}<script>var repos = {# sorted_repos | jsonify #};</script><script>var repos = [
+                   {# for repo in sorted_repos #}
+                       {# for contrib in repo.contributors_url #}
+                           {# contrib | jsonify #},
+                       {# endfor #}
+                   {# endfor #}
+                   ];</script>{# endcomment #}</div>
