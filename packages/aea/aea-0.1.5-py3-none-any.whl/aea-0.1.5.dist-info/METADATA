@@ -1,0 +1,141 @@
+Metadata-Version: 2.1
+Name: aea
+Version: 0.1.5
+Summary: Autonomous Economic Agent framework
+Home-page: https://github.com/fetchai/agents-aea.git
+Author: Fetch.AI Limited
+License: Apache 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: cryptography
+Requires-Dist: base58
+Provides-Extra: all
+Requires-Dist: PyYAML ; extra == 'all'
+Requires-Dist: colorlog ; extra == 'all'
+Requires-Dist: jsonschema ; extra == 'all'
+Requires-Dist: click-log ; extra == 'all'
+Requires-Dist: click ; extra == 'all'
+Requires-Dist: protobuf ; extra == 'all'
+Requires-Dist: oef ; extra == 'all'
+Requires-Dist: gym ; extra == 'all'
+Provides-Extra: cli
+Requires-Dist: click ; extra == 'cli'
+Requires-Dist: click-log ; extra == 'cli'
+Requires-Dist: PyYAML ; extra == 'cli'
+Requires-Dist: jsonschema ; extra == 'cli'
+Requires-Dist: protobuf ; extra == 'cli'
+Provides-Extra: default-protocol
+Provides-Extra: default-skill
+Provides-Extra: fipa-protocol
+Requires-Dist: protobuf ; extra == 'fipa-protocol'
+Provides-Extra: fipa-skill
+Requires-Dist: protobuf ; extra == 'fipa-skill'
+Provides-Extra: gym-connection
+Requires-Dist: gym ; extra == 'gym-connection'
+Provides-Extra: gym-protocol
+Provides-Extra: gym-skill
+Provides-Extra: local-connection
+Requires-Dist: colorlog ; extra == 'local-connection'
+Requires-Dist: oef ; extra == 'local-connection'
+Provides-Extra: oef-connection
+Requires-Dist: colorlog ; extra == 'oef-connection'
+Requires-Dist: oef ; extra == 'oef-connection'
+Provides-Extra: oef-protocol
+Requires-Dist: colorlog ; extra == 'oef-protocol'
+Requires-Dist: oef ; extra == 'oef-protocol'
+Provides-Extra: oef-skill
+Requires-Dist: colorlog ; extra == 'oef-skill'
+Requires-Dist: oef ; extra == 'oef-skill'
+Provides-Extra: tac-protocol
+Requires-Dist: protobuf ; extra == 'tac-protocol'
+Provides-Extra: tac-skill
+Requires-Dist: protobuf ; extra == 'tac-skill'
+
+# agents-aea
+A framework for autonomous economic agent (AEA) development
+
+## Get started
+
+First, install the package from [pypi](https://pypi.org/project/aea/):
+
+`
+pip install aea
+`
+
+Then, build your agent as described in the [AEA CLI readme](../master/aea/cli/README.md) or in the [examples](../master/examples).
+
+## Install from Source
+
+## Cloning
+
+This repository contains submodules. Clone with recursive strategy:
+
+	  git clone git@github.com:fetchai/agents-aea.git --recursive && cd agents-aea
+
+### Dependencies
+
+All python specific dependencies are specified in the Pipfile (and installed via the commands specified in 'Preliminaries').
+
+Or, you can have more control on the installed dependencies by leveraging the setuptools' extras mechanism (more details later). 
+
+### Preliminaries
+
+- Create and launch a virtual environment:
+
+      pipenv --python 3.7 && pipenv shell
+
+- Install the package from source:
+
+      pip install .[all]
+
+- To install only specific extra dependencies, e.g. `cli`:
+
+      pip install .[cli]
+
+## Contribute
+
+The following dependency is only relevant if you intend to contribute to the repository:
+- the project uses [Google Protocol Buffers](https://developers.google.com/protocol-buffers/) compiler for message serialization. A guide on how to install it is found [here](https://fetchai.github.io/oef-sdk-python/user/install.html#protobuf-compiler).
+
+The following steps are only relevant if you intend to contribute to the repository. They are not required for agent development.
+
+- Clear cache
+
+      pipenv --clear
+
+- Install development dependencies:
+
+	  pipenv install --dev
+
+- Install package in (development mode):
+
+	  pip install -e .
+
+- After changes to the protobuf schema run:
+
+	  python setup.py protoc
+
+- To run tests (ensure no oef docker containers are running):
+
+	  tox -e py37
+
+- To run linters (code style checks):
+
+	  tox -e flake8
+
+- To run static type checks:
+
+	  tox -e mypy
+
+- Docs:
+
+	* `mkdocs serve` - Start the live-reloading docs server.
+	* `mkdocs build --clean` - Build the documentation site.
+
+
