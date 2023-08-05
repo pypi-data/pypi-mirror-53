@@ -1,0 +1,71 @@
+version: 2.1
+
+executors:
+  py35:
+    docker: [image: circleci/python:3.5]
+  py36:
+    docker: [image: circleci/python:3.6]
+  py37: &default
+    docker: [image: circleci/python:3.7]
+  default: *default
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test:
+          python-version: py35
+          name: test-35
+      - test:
+          python-version: py36
+          name: test-36
+      - test:
+          python-version: py37
+          name: test-37
+  lint:
+    jobs:
+      - lint
+
+jobs:
+  test:
+    parameters:
+      python-version:
+        type: string
+        enum: [py35, py36, py37]
+    executor: '<<parameters.python-version>>'
+    steps:
+      - checkout
+      - test
+    environment:
+      # This is a regex pattern that allows us to target a specific python version.
+      # Annoyingly, Circle bundles python 3.7 with all of their python images.
+      # regex amounts to '^(?!py37.*$).*'. This is a bit backwards, since we need to
+      # do a double negative (skip, instead of include).
+      TOX_SKIP_ENV: '^(?!<<parameters.python-version>>.*$).*'
+  lint:
+    executor: default
+    steps:
+      - checkout
+      - lint
+
+commands:
+  setup:
+    steps:
+      - run: pip install --user -U pip wheel setuptools tox flit
+  install-local:
+    steps:
+      - run: make install
+  tox:
+    steps:
+      - run: tox --skip-missing-interpreters
+
+  test:
+    steps:
+      - setup
+      - tox
+
+  lint:
+    steps:
+      - setup
+      - install-local
+      - run: make lint

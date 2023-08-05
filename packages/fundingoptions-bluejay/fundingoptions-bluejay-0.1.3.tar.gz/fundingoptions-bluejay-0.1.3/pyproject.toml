@@ -1,0 +1,49 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "bluejay"
+dist-name = "fundingoptions-bluejay"
+author = "Funding Options"
+author-email = "techsupport@fundingoptions.com"
+home-page = "https://github.com/FundingOptions/bluejay-client"
+description-file = "README.md"
+
+classifiers = [
+    "License :: OSI Approved :: MIT License"
+]
+
+requires-python = '>=3.5'
+
+requires=[
+    "attrs",
+    "typing_extensions",
+]
+
+[tool.flit.metadata.requires-extra]
+sns = [
+    "boto3",
+]
+
+test = [
+    "faker",
+    "pytest",
+    "pytest-cov",
+    "pytest-randomly",
+]
+
+dev = [
+    "black",
+    "isort",
+    "autoflake",
+    "mypy",
+    "tox",
+]
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
