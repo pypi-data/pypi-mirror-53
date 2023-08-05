@@ -1,0 +1,24 @@
+[console_scripts]
+qinling-api = qinling.cmd.api:main
+qinling-db-manage = qinling.db.sqlalchemy.migration.cli:main
+qinling-engine = qinling.cmd.engine:main
+qinling-status = qinling.cmd.status:main
+
+[oslo.config.opts]
+qinling.config = qinling.config:list_opts
+
+[oslo.config.opts.defaults]
+qinling.config = qinling.config:set_cors_middleware_defaults
+
+[qinling.orchestrator]
+kubernetes = qinling.orchestrator.kubernetes.manager:KubernetesManager
+
+[qinling.storage.provider]
+local = qinling.storage.file_system:FileSystemStorage
+
+[tempest.test_plugins]
+qinling_test = qinling_tempest_plugin.plugin:QinlingTempestPlugin
+
+[wsgi_scripts]
+qinling-wsgi-api = qinling.api.app:init_wsgi
+
