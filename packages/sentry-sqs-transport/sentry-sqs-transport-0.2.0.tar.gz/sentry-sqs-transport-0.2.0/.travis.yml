@@ -1,0 +1,21 @@
+language: python
+dist: xenial
+python:
+- 3.7
+- 3.6
+- 3.5
+install: pip install -U tox-travis -r requirements_dev.txt
+script:
+# Check that the sdist is valid (pypi will complain about the README.rst if its invalid)
+  - ./setup.py sdist
+  - twine check dist/*
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: terrycain
+  password:
+    secure: Ex3vcxZR/BYbGUya2v9qc3vucC8gql3vGnInnx0zaHDm6VaBKBxU8j2MhihmxBZKZXLKd10fZTUNXQh+BvJhiL52ZbMmFarV4OosegFjFvETlKTP/pWtcZB/U5+sUze71DF72R/kZQ1wK/8RVZe5cWbYvLp2LakHpM0qtYdNHK7l/MwiPv3Kn0e5/idlkPhvv+CEyGj1DGRDJeVVtnC3JR5R0t2lxKsuLOv31DkL/xkm5xRoPf70E5WUV72wP/4LP2ht1g5ZCmjv5dw6UJVq1vQ/5bLsCWwJW84twEwXfa5EkvkqvA59pSp+4EiM66vYPzSoCb7DvDSyKNe+oxPDJsVTs7bopkGPqAfBUWw+GJAtsP5IEX5z86JfpJ4w1QqDgFRlO3f6o9oYlhzcXiF7kGKXe3goqMrioHpaUewWPbryvp3XsEVfQP4cPIxjhGnzXRuniSFjPvPV7ezdHZm1tuGHe8wWmuYqrPPta1+Agf+h8IRteqVyHd2NjqCPTmzXCk0DZVN5YV5YYayHXJbQr9XNNncbJasXZ4bOmMOeKiRVdu3j5cV/Rp6Xk+tnrRQbiq4qcxR+NbAfbkhAq+unR0jsTuPBaxRFUVWPbKB2fdFIm91JnrmlXxEaOuKx1UNnIaQgMRtIQNjSzJGcDjaiN5fOail+CdP4ImsETAK+D2w=
+  on:
+    python: 3.7
+    repo: terrycain/sentry-sqs-transport
+    tags: true
