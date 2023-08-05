@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        <a href="/">Home</a>
+        <a href="/uploadproject">Upload</a>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Project</th>
+            <th>Spider</th>
+        </tr>
+       {% for spider in spiders %}
+        <tr>
+            <td>
+                {{spider.project.name}}
+            </td>
+            <td>
+                <a href="/projects/{{spider.project.name}}/spiders/{{spider.name}}">{{spider.name}}</a>
+            </td>
+        </tr>
+       {% end %}
+    </table>
+{% end %}
