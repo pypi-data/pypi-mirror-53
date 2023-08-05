@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: psnap
+Version: 0.7.1
+Summary: Snapshot script output to json and expand keywords in source file.
+Home-page: https://github.com/hackermike/psnap
+Author: Michael Frandsen
+Author-email: wfrandsen@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# psnap
+Track Python script outputs over time along with keyword expansion in source code.
+
+Important script values can be saved to a dictionary and archived to a file.
+
+The output json file can be processed by psnap to augment special
+keywords in the source with their saved values. Syntax is similar to
+svn keyword substitution: $varname: value $
+
+See psnap_example for example usage and psnap_example2 for extensions.
+
+
