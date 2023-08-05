@@ -1,0 +1,122 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"oneOf": [{
+		"type": "object",
+		"properties": {
+			"type": {
+				"enum": ["parametric"]
+			},
+			"name": {
+				"type": "string"
+			},
+			"body_resolution": {
+				"enum": ["normal", "high", "max"]
+			},
+			"friction": {
+				"enum": ["plastic", "human", "cloth"]
+			},
+			"skin_tone": {
+				"type": "string",
+				"pattern": "^.+\\.mat$"
+			},
+			"hair_style": {
+				"type": "string",
+				"pattern": "^.+\\.3ds$"
+			}
+		}
+	}, {
+		"type": "object",
+		"properties": {
+			"type": {
+				"enum": ["imported"]
+			},
+			"vertical": {
+				"type": "integer",
+				"minimum": 1,
+				"maximum": 6
+			},
+			"facing": {
+				"enum": [0, 90, 180, 270]
+			},
+			"mirror": {
+				"type": "boolean"
+			},
+			"distance_from_ground": {
+				"type": "number",
+				"minimum": 0,
+				"maximum": 200
+			},
+			"texture": {
+				"type": "string"
+			},
+			"friction": {
+				"enum": ["plastic", "human", "cloth"]
+			},
+			"hanging_points": {
+				"type": "object",
+				"properties": {
+					"leftankle": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"leftarmpit": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"bellybutton": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"chest": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"chin": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"crutch": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"lefthip": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"leftknee": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightankle": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightarmpit": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"righthip": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightknee": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightelbow": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightribs": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightshoulder": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"rightwrist": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"leftelbow": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"leftribs": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"leftshoulder": {
+						"$ref": "common.json#definitions/vect3d"
+					},
+					"leftwrist": {
+						"$ref": "common.json#definitions/vect3d"
+					}
+				}
+			}
+		}
+	}]
+}
