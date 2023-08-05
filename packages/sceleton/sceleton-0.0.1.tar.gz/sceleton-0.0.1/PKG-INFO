@@ -1,0 +1,192 @@
+Metadata-Version: 1.1
+Name: sceleton
+Version: 0.0.1
+Summary: CLI tool for creating packages in python3.
+Home-page: https://github.com/monzita/sceleton
+Author: Monika Ilieva
+Author-email: email@example.com
+License: MIT License
+Description: SCELETON
+        --------
+        
+        .. image:: https://postimg.cc/w3NG59zm
+        
+        
+        INSTALLATION
+        ************
+        
+        >>> pip install sceleton
+        
+        
+        USAGE
+        *****
+        
+        Currently the following commands are supported:
+        
+        
+        >>> sceleton new [packagename]
+        """
+        It will create a folder with name `[packagename]`, including a `LICENSE` file, `README.rst`,
+        `.gitignore`, `setup.py`, `setup.cfg`
+        """
+        
+        
+        >>> sceleton new [packagename] --venv
+        """
+        It will do the same as above, but the `package` folder will include a virtualenv folder.
+        """
+        
+        
+        >>> sceleton new [packagename] --quick
+        """
+        It will create a package folder, without asking any questions
+        """
+        
+        
+        >>> sceleton new [packagename] --quick --venv
+        """
+        It will create a package folder, without asking any questions and initializing a virtual environment.
+        """
+        
+        
+        >>> sceleton init
+        """
+        It will initialize a `setup.py` file, and if such already exists, will ask the user
+        for replacing.
+        """
+        
+        
+        >>> sceleton init --path=path
+        """
+        Creates a `setup.py` file at the given path, and if such file already exists, it will
+        ask the user for replacement.
+        """
+        
+        
+        >>> sceleton init --quick
+        """
+        Creates a `setup.py` file, wtihout asking any questions, if such file exists, will ask
+        the user for replacing the file
+        """
+        
+        
+        >>> sceleton module [modulename]
+        """
+        It will create a new module in the parent module directory.
+        """
+        
+        
+        >>> sceleton module [modulename] --add file1.py file2.py file3.py
+        """
+        It will create a module with modulename in the parent directory, if such doesn't already exit and will add all files given as arguments. If a file exists in the given directory, it will raise an FileExistsError.
+        """
+        
+        
+        >>> sceleton module [modulename] --parentmodule=somemodule --add file1.py file2.py file3.py
+        """
+        It will create a new module under the given parent module, and will add all files given as
+        arguments. If such module already exists in the parent module, it will only add given files as arguments.
+        """
+        
+        
+        >>> sceleton add [packages]
+        """
+        Adds one or more package (must be divided with interval) to the setup.py file, without
+        installing any of them
+        """
+        
+        
+        >>> sceleton install
+        """
+        Installs all packages found in the `setup.py` file
+        """
+        
+        
+        >>> sceleton install [packages]
+        """
+        Installs one or more packages, and adds each of them in the `setup.py` file.
+        If more than one package is given, it must be splitted with interval.
+        """
+        
+        >>> sceleton install [packages] [--no-add]
+        """
+        Installs one or more packages, and doesn't add fiven packages in the `setup.py` file.
+        """
+        
+        
+        >>> sceleton remove [packages]
+        """
+        Removes one or more packages from `setup.py` file.
+        """
+        
+        
+        >>> sceleton classifiers
+        """
+        List the currently inserted classifiers in the `setup.py` file.
+        """
+        
+        
+        >>> scelecton classifiers --edit
+        """
+        Asks the user for new classifiers, erases the old chosen classifiers, and replaces them
+        with the new one.
+        """
+        
+        
+        >>> sceleton user
+        """
+        Shows the currently added `author` and `author_email` to the `setup.py` file.
+        """
+        
+        
+        >>> sceleton user --edit
+        """
+        Asks the user for new `author` and `author_name`.
+        """
+        
+        
+        >>> sceleton license
+        """
+        Shows the currently chosen license.
+        """
+        
+        
+        >>> sceleton license --edit
+        """
+        Asks the user for a new license.
+        """
+        
+        
+        >>> sceleton build
+        """
+        Calls the `python setup.py sdist`
+        """
+        
+        
+        >>> sceleton upload
+        """
+        Uploads the built package to `pypi` using `twine upload dist/*` command.
+        """
+        
+        
+        >>> sceleton local
+        """
+        Installs the package localy. If venv is activated, will install the package to current env, otherwise will install it to where `python3` is installed. It uses `python setup.py install` command.
+        """
+        
+        
+        LICENSE
+        *******
+        
+        `MIT License <https://github.com/monzita/sceleton/blob/master/LICENSE>`_
+        
+Keywords: python3 sceleton package manager
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: MIT License
