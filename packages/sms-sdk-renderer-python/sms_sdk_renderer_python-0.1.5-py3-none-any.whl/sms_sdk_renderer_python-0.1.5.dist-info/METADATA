@@ -1,0 +1,121 @@
+Metadata-Version: 2.1
+Name: sms-sdk-renderer-python
+Version: 0.1.5
+Summary: Sample Renderer for Symphony Elements
+Home-page: https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python
+Author: Reed Feldman
+Author-email: reed.feldman@symphony.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: pybars3 (==0.9.6)
+
+# sms-sdk-renderer-python
+
+SDK renders symphony messages using precompiled Handlebars templates both in bots and in applications.
+
+## User Guide
+
+Now, there are several message templates that you can choose:
+
+| Name          | Description                                         |
+| ------------  | --------------------------------------------------- |
+| SIMPLE        | Renders a message in simple format                  |
+| ALERT         | Renders a message formatted as an alert             |
+| INFORMATION   | Renders a general information messages              |
+| NOTIFICATION  | Renders a message formatted as a notification       |
+| TABLE         | Renders a collection of objects in the table format |
+| LIST_TEMPLATE | Renders a list of values                            |
+| BUTTON        | Renders a button element                            |
+| TEXTFIELD     | Renders a textfield element                         |
+| CHECKBOX      | Renders a checkbox element                          |
+| TEXTAREA      | Renders a textarea element                          |
+| RADIOBUTTON   | Renders a radio button element                      |
+| PERSONSELECTOR| Renders a person selector element                   |
+| DROPDOWN_MENU | Renders a dropdown menu element                     |
+| TABLE_SELECT  | Renders a table element                             |
+
+### Prerequisites
+
+Please make sure the following tools are installed:
+* pybars3==0.9.6
+
+### Install SDK
+
+$ pip install sms-sdk-renderer-python
+
+### How to use
+
+* Import the sdk:
+```
+import sms_sdk_renderer_python.lib.sms_sdk_renderer as SmsRenderer
+```
+* Create a message object like that, for the ALERT template:
+```
+alert_data = {
+    "title": 'Informaiton Title',
+    "content": 'This is a information message',
+    "description": 'Information message description'
+}
+```
+
+#### In the bot
+
+* In the code, compile your message using the command:
+```
+alert_message = SmsRenderer.renderInBot(alert_data, SmsRenderer.smsTypes['ALERT'])
+```
+* Send the message with Symphony API SDK:
+```
+self.bot_client.get_message_client().send_msg(msg['stream']['streamId'], alert_message)
+```
+
+#### In the client application
+
+* In the code, in the `render` function of the `entity` service, compile your message using the command:
+```
+compiledMessage = SmsRenderer.renderInApp(myMessageData, SmsRenderer.smsTypes.ALERT);
+```
+* In the same `render`method, return the message like that:
+```
+return {
+    template: compiledMessage
+};
+```
+
+### SDK API
+
+Template type names are accessible by `SmsRenderer.smsTypes` constant, like so:
+```
+simpleMessageTemplate = SmsRenderer.smsTypes.SIMPLE;
+```
+Possible values are `SIMPLE, ALERT, INFORMATION, NOTIFICATION, TABLE, LIST_TEMPLATE, BUTTON, TEXTFIELD, CHECKBOX, TEXTAREA,
+RADIOBUTTON, PERSONSELECTOR, DROPDOWN_MENU, TABLE_SELECT`.
+
+To get the compiled template in `MessageML` format, use the functions:
+
+| Syntax                    | Parameters               | Where to use          |
+| ------------------------- | ------------------------ | --------------------- |
+| SmsRenderer.renderInApp() | messageData, messageType | Extension application |
+| SmsRenderer.renderInBot() | messageData, messageType | Bot                   |
+
+The complete list of message data object properties can be seen in the test examples:
+
+* [SIMPLE message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/simple_example.py)
+* [ALERT message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/alert_example.py)
+* [INFORMATION message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/information_example.py)
+* [NOTIFICATION message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/notification_example.py)
+* [TABLE message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/table_example.py)
+* [LIST_TEMPLATE message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/list_example.py)
+* [BUTTON message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/button_example.py)
+* [TEXTFIELD message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/textfield_example.py)
+* [RADIOBUTTON message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/radiobutton_example.py)
+* [PERSONSELECTOR message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/personselector_example.py)
+* [DROPDOWN_MENU message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/dropdown_example.py)
+* [TABLE_SELECT message example](https://github.com/SymphonyPlatformSolutions/sms_sdk_renderer_python/blob/master/examples/tableselect_example.py)
+
+
