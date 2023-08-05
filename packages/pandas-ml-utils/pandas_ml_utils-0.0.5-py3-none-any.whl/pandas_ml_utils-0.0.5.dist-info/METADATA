@@ -1,0 +1,208 @@
+Metadata-Version: 2.1
+Name: pandas-ml-utils
+Version: 0.0.5
+Summary: Augment pandas DataFrame with methods for machine learning
+Home-page: https://github.com/KIC/pandas_ml_utils
+License: UNKNOWN
+Author: KIC
+Author-email: kic@mindbusters.com
+Requires-Python: >= 3.7
+Description-Content-Type: text/markdown
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 2 - Pre-Alpha
+Requires-Dist: pandas
+Requires-Dist: cachetools
+Requires-Dist: sortedcontainers
+Requires-Dist: scikit-learn
+Requires-Dist: dill
+Requires-Dist: vdom; extra == "jupyther"
+Requires-Dist: matplotlib; extra == "jupyther"
+Requires-Dist: seaborn; extra == "jupyther"
+Requires-Dist: yfinance; extra == "stock_prices"
+Provides-Extra: jupyther
+Provides-Extra: stock_prices
+
+![PyPI - Downloads](https://img.shields.io/pypi/dw/pandas-ml-utils)
+
+# pandas-ml-utils
+
+**A note of caution**: this is a one man show hobby project in pre-alpha state mainly 
+ serving my own needs. Be my guest and use it or extend it. 
+
+I was really sick of converting data frames to numpy arrays back and forth just to try out a 
+ simple logistic regression. So I have started a pandas ml utilities library where
+ everything should be reachable from the data frame itself. Check out the following examples
+ to see what I mean by that.
+
+## Fitting
+
+### Ordinary Binary Classification
+```python
+import pandas as pd
+import pandas_ml_utils as pmu
+from sklearn.datasets import load_breast_cancer
+from sklearn.linear_model import LogisticRegression
+
+bc = load_breast_cancer()
+
+df = pd.DataFrame(bc.data, columns = bc.feature_names)
+df["label"] = bc.target
+
+
+fit = df.fit_classifier(pmu.SkitModel(LogisticRegression(solver='lbfgs', max_iter=300),
+                                      pmu.FeaturesAndLabels(features=['mean radius', 'mean texture', 'mean perimeter', 'mean area', 
+                                                                      'worst concave points', 'worst fractal dimension'],
+                                                            labels=['label'])),
+                        test_size=0.4)
+``` 
+
+As a result you get a Fit object which holds the fitted model and two ClassificationSummary.
+ One for the training data and one for the test Data. In case of the classification was
+ executed in a notebook you get a nice table:
+
+![Fit](https://raw.githubusercontent.com/KIC/pandas_ml_utils/master/images/simple-fit.png)
+
+### Binary Classification with Loss
+As you can see in the above example are two confusion matrices the regular well known one 
+ and a "loss". The intend of loss matrix is to tell you if a miss classification has a cost
+ i.e. a loss in dollars. 
+```python
+import pandas as pd
+import pandas_ml_utils as pmu
+from sklearn.linear_model import LogisticRegression
+
+df = pd.fetch_yahoo(spy='SPY')
+df["label"] = df["spy_Close"] > df["spy_Open"]
+df["loss"] = (df["spy_Open"] / df["spy_Close"] - 1) * 100
+
+fit = df.fit_classifier(pmu.SkitModel(LogisticRegression(solver='lbfgs'),
+                                      pmu.FeaturesAndLabels(features=['spy_Open', 'spy_Low'],
+                                                            labels=['label'],
+                                                            loss_column='loss')),
+                        test_size=0.4)
+```
+
+![Fit with loss](https://raw.githubusercontent.com/KIC/pandas_ml_utils/master/images/fit-with-loss.png)
+         
+Now you can see the loss in % of dollars of your miss classification. The classification
+ probabilities are plotted on the very top of the plot.
+
+### Autoregressive Models and RNN Shape
+It is also possible to use the FeaturesAndLabels object to generate autoregressive 
+ features. By default lagging features results in an RNN shaped 3D array (in the format
+ as Keras likes it). However we can also use SkitModels the features will be implicitly 
+ transformed back into a 2D array (by using the `reshape_rnn_as_ar` function).  
+
+```python
+import pandas_ml_utils as pmu
+pmu.FeaturesAndLabels(features=['feature'],
+                      labels=['label'],
+                      feature_lags=range(0, 10))
+```
+
+One may like to use very long lags i.e. to catch seasonal effects. Since very long lags
+are a bit fuzzy I usually like to smooth them a bit by using simple averages.
+
+```python
+import pandas_ml_utils as pmu
+pmu.FeaturesAndLabels(features=['feature'], 
+                      labels=['label'], 
+                      target_columns=['strike'],
+                      loss_column='put_loss',
+                      feature_lags=[0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233],
+                      lag_smoothing={
+                          6: lambda df: df.SMA(3, price=df.columns[0]),
+                          35: lambda df: df.SMA(5, price=df.columns[0])
+                      })
+```
+
+Every lag from 6 onwards will be smoothed by a 3 period average, every lag from 35 onwards
+ with a 5 periods moving average.
+ 
+## Back-Testing a Model
+todo ... `df.backtest_classifier(...)`
+
+## Save, load reuse a Model
+To save a model you simply call the save method on the model inside of the fit.
+```
+fit.model.save('/tmp/foo.model')
+```
+
+Loading is as simply as calling load on the Model object. You can immediately apply
+ the model on the dataframe to get back the features along with the classification
+ (which is just another data frame).
+
+```python
+
+import pandas as pd
+import pandas_ml_utils as pmu
+from sklearn.datasets import load_breast_cancer
+
+bc = load_breast_cancer()
+df = pd.DataFrame(bc.data, columns = bc.feature_names)
+
+df.classify(pmu.Model.load('/tmp/foo.model')).tail()
+```  
+
+NOTE If you have a target level for your binary classifier like all houses cheaper then
+ 50k then you can define this target level to the FeaturesAndLabels object likes so:
+ `FeaturesAndLabels(target_columns=['House Price'])`. This target column is simply fed 
+ through to the classified dataframe as target columns.
+ 
+### Fitting other models then classifiers
+For non classification tasks use the regressor functions the same way as the classifier 
+ functions.
+ 
+* df.fit_regressor(...)
+* df.backtest_regressor(...)
+* df.regress(...)
+ 
+### Other utility objects
+#### LazyDataFrame
+Very often I need to do a lot of feature engineering. And very often I do not want to
+ treat averages or other engineering methods as part of the data(frame). For this use
+ case I have added a LazyDataFrame object wrapping around a regular DataFrame where
+ some columns will always be calculated on the fly.
+ 
+Here is an example:
+```python
+import pandas_ml_utils as pmu
+import pandas as pd
+import talib
+
+df = pd.fetch_yahoo(spy='SPY')
+ldf = pmu.LazyDataFrame(df,
+                        rolling_stddev=lambda x: talib.STDDEV(x['spy_Close'], timeperiod=30) / 100)
+
+ldf["rolling_stddev"].tail()  # Will always be calculated only the fly    
+```   
+
+#### HashableDataFrame
+The hashable dataframe is nothing which should be used directly. However this is just a 
+hack to allow caching of feature matrices. With heavy usage of LazyDataFrame and heavily 
+lagging of features for AR models the training data preparation might take a long time.
+To shorten this time i.e. for hyper parameter tuning a cache is very helpful (but keep
+in mind this is still kind of a hack).
+
+to set the cache size (default is 1) set the following environment variable before import
+ `os.environ["CACHE_FEATUES_AND_LABELS"] = "2"`. And to use the cache simply pass the 
+ argument to the fit_classifier method like so:`df.fit_classifier(..., cache_feature_matrix=True)`
+ 
+#### MultiModel
+TODO describe multi models ... 
+
+## TODO
+* provide better and more flexible option to do k folds or any other "optimization"
+  on training data like over-weighting certain events 
+* multi model is just another implementation of model
+* add keras model
+* add more tests
+
+## Wanna help?
+* currently I only need binary classification
+    * maybe you want to add a feature for multiple classes
+    * or you want to add non classification prediction models
+* write some tests
+* add different more charts for a better understanding/interpretation of the models
+* implement hyper parameter tuning
+* add feature importance 
