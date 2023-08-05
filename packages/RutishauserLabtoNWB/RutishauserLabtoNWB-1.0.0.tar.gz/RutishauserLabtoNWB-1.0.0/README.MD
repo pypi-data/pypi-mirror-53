@@ -1,0 +1,201 @@
+# A NWB-based Dataset and Processing Pipeline of Human Single-Neuron Activity During a Declarative Memory Task 
+
+
+![Cedars-Sinai Medical Center](https://raw.githubusercontent.com/rutishauserlab/recogmem-release-NWB/master/RutishauserLabtoNWB/assets/Cedars-Sinai.png)
+
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Generic badge](https://img.shields.io/badge/release-beta-red.svg)](https://github.com/rutishauserlab/recogmem-release-NWB/releases/)
+
+
+
+<!--- Add Introduction here ---> 
+## Introduction 
+
+
+This repository contains tools/methods to export human single neuron data into the [Neurodata Without Borders](https://www.nwb.org/) Format, and analyze such data in NWB. This dataset is entirely in the NWB Format, and the export and analysis scripts are in both Python and MATLAB. 
+
+The overall aim of our paper is summarized here: 
+
+>A challenge for data sharing in systems neuroscience is the multitude of different data formats used. Neurodata Without Borders: Neurophysiology 2.0 (NWB:N) has emerged as a standardized data format for the storage of cellular-level data together with meta-data, stimulus information, and behavior. A key next step to facilitate NWB:N adoption is to provide easy to use processing pipelines to import/export data from/to NWB:N. Here, we present a NWB-formatted dataset of 1863 single neurons recorded from the medial temporal lobes of 59 human subjects undergoing intracranial monitoring while they performed a recognition memory task. We provide code to analyze and export/import stimuli, behavior, and electrophysiological recordings to/from NWB in both MATLAB and Python. The data files are NWB:N compliant, which affords interoperability between programming languages and operating systems. This combined data and code release is a case study for how to utilize NWB:N for human single-neuron recordings and enables easy re-use of this hard-to-obtain data for both teaching and research on the mechanisms of human memory.
+
+<p align="center">
+  <img width="460" height="410" src="https://raw.githubusercontent.com/rutishauserlab/recogmem-release-NWB/master/RutishauserLabtoNWB/assets/BrainAreaLocations.png">
+</p>
+
+<!--- Add Data Descriptor Link here ---> 
+
+Data Descriptor: https://www.nature.com/articles/sdata201810 **(TODO: Change to Updated Publication)**
+
+NWB Data: https://datadryad.org/resource/doi:10.5061/dryad.46st5 **(TODO: Change to Updated Data Repository)**
+
+
+## Installation
+
+The code within this repository can be installed via `pip`:
+
+`pip install RutishauserLabtoNWB`
+
+Alternatively, the code can be downloaded via:
+
+`git clone https://github.com/rutishauserlab/recogmem-release-NWB.git`
+
+## Installation (pyNWB and matNWB)
+
+### [pyNWB](https://github.com/NeurodataWithoutBorders/pynwb)
+
+pyNWB can be installed via `pip`: 
+
+`pip install pynwb`
+
+Alternatively, the code can be downloaded via:
+
+`git clone https://github.com/NeurodataWithoutBorders/pynwb.git
+`
+
+*Note: We used pyNWB version 1.0.3* 
+
+### [matNWB](https://github.com/NeurodataWithoutBorders/matnwb)
+
+The matNWB API is provided in the same download as above (RutishauserLab2NWB) -- it can be found under 3rd Party. 
+
+*Note: We used matNWB version 0.2.1*
+
+## Python Export and Analysis
+
+Here, we will detail how to run the Python Export Code, which converts the native data into NWB, and the Single Neuron Analysis based on these NWB files. 
+
+### Python Export
+
+The main export script is `no2nwb_main.py`. Modify the following parameters:
+
+* exportFromDryad = 0 (Don't Export from Dryad) 
+* [pathtoNativeData](https://datadryad.org/stash/dataset/doi:10.5061/dryad.46st5): the path to native data (Faraut et al 2018).
+
+```python 
+import RutishauserLabtoNWB as RLab
+
+exportFromDryad = 0 #  1 = Export from Dryad Repository, 0 = Don't Export from Dryad Repository
+pathTONativeData = 'C:\\Users\\chandravadn1\\Desktop\\code\\data\\Faraut et al 2018'
+
+RLab.NO2NWB_export(exportFromDryad, pathTONativeData)
+```
+
+Once you have changed the the above parameters, run `NO2NWB_export`. This will begin the export of the native data into NWB:N. 
+
+*Note: Once run, `NO2NWB_export.py` will ask for an export directory. Supply a directory to save the NWB files.*
+
+
+
+### Python Analysis (Single Neuron Analysis) 
+
+The main analysis script is `main.py`. Modify the following parameters:
+
+* NWBFilePath: The path to the exported NWB files. 
+* list_of_patients_behavior: This signifies the NOID (Patient Identifier). See defineNOsessions.ini to see the NOID for all patients. Note: You can list more than one NOID. For example, ```list_of_patients = [5, 6, 144]```. You can also input ```list_of_patients = 'all'``` to examine the results for all patients. 
+* list_of_patients_neurons: This signifies the NOID (Patient Identifier). See defineNOsessions.ini to see the NOID for all patients. Note: You can list more than one NOID. For example, ```list_of_patients = [5, 6, 144]```
+
+```python 
+import RutishauserLabtoNWB as RLab
+
+NWBFilePath = 'V:\\LabUsers\\chandravadian\\NWB Data\\python'
+list_of_patients_behavior = [5, 6]
+list_of_patients_neurons = [144]
+
+RLab.NO2NWB_analysis(NWBFilePath,list_of_patients_behavior, list_of_patients_neurons)
+
+```
+Once you have changed the the above parameters, run `NO2NWB_analysis.py`. This will begin the analysis of the data in the NWB:N format. 
+
+<!--- Raster Plot Here (Python) ---> 
+<p align="center">
+  <img width="460" height="410" src="https://raw.githubusercontent.com/rutishauserlab/recogmem-release-NWB/master/RutishauserLabtoNWB/assets/Python_SingleNeuron.png">
+</p> 
+
+
+<!--- MATLAB ---> 
+## MATLAB Export and Analysis
+
+Here, we will detail how to run the MATLAB Export Code, which converts the native data into NWB, and the Single Neuron Analysis based on these NWB files. 
+
+
+### MATLAB Export
+
+The main export script is `exportNO2NWB_main.m`. Within `exportNO2NWB_main.m`, modify the following:
+
+**%% Section 1 -- Set Parameters - modify this section before running this code !**
+* basepath: the path to native data (Faraut et al 2018).
+* codePath: the path to the NWB:N code (main). TODO: Modify this once code is commited to Repo. 
+
+```matlab 
+%Input Base Path to Faraut et al base path 
+basepath = 'C:\Users\chandravadn1\Desktop\code\data\Faraut et al 2018\';
+
+%Add base code path (e.g., 'C:\svnwork\nwbsharing') 
+codePath = 'C:\svnwork\nwbsharing';
+```
+
+Once you have changed the the above parameters, run `exportNO2NWB_main.m`. This will begin the export of the native data into NWB:N. 
+
+*Note: Once run, `exportNO2NWB_main.m` will ask for an export directory. Supply a directory to save the NWB files.*
+
+### MATLAB Analysis
+
+The main analysis script is `NWBneural_main.m`. Witin `NWBneural_main.m`, modify the following:
+
+**%% Section 1: Set Parameters - modify this section before running this code !**
+* codePath: the path to the NWB:N MATLAB code (main).
+* basepathData: The path to the exported NWB files. 
+
+```matlab 
+%% Section 1: Set Parameters - modify this section before running this code !
+
+% Point this directory to where the downloaded code is located.
+codePath = 'C:\svnwork\nwbsharing\'; 
+
+% Point this directory to where the downloaded NWB data is located.
+basepathData = 'V:\LabUsers\chandravadian\NWB Data\matlab\'; 
+```
+
+**%% Section 2: Which sessions to process (modify only 'allSessionsToUse')**
+* allSessionsToUse: This signifies the NOID (Patient Identifier). See defineNOsessions.ini to see the NOID for all patients. Note: You can list more than one NOID. For example, ```list_of_patients = [5, 6, 144]```
+
+
+```matlab
+%% Section 2: Which sessions to process (modify only 'allSessionsToUse') 
+
+allSessionsToUse = [NWB_listOf_allUsable(:)]; %run all patients
+allSessionsToUse = [132]; %specifiy specific patients
+``` 
+
+Once you have changed the the above parameters, run `NWBneural_main.m`. This will begin the analysis of the data in the NWB:N format. 
+
+<!--- Raster Plot Here (MATLAB) ---> 
+<p align="center">
+  <img width="460" height="410" src="https://raw.githubusercontent.com/rutishauserlab/recogmem-release-NWB/master/RutishauserLabtoNWB/assets/MATLAB_SingleNeuron.png">
+</p> 
+
+
+## Contributors
+* [Nand Chandravadia](mailto:Nand.Chandravadia@cshs.org) 
+* [Andy Liang](mailto:liang134@mail.chapman.edu) 
+* [Ueli Rutishauser](mailto:Ueli.Rutishauser@cshs.org) (Principal Investigator)
+
+Feel free to ask questions and/or join the development discussion. You can post bug reports and feature requests. You are welcome to use/modify the code/data in this repository as you wish -- if you do, please cite our data descriptor: (**TODO: Add Data Descriptor**)
+
+## Funding
+
+Acquisition of this dataset has been supported by the National Institute of Neurological Disorders and Stroke (U01NS103792), the National Science Foundation (1554105), the National Institute of Mental Health (R01MH110831), the McKnight Endowment for Neuroscience, a NARSAD Young Investigator grant from the Brain & Behavior Research Foundation. Preparation of this dataset was made possible by a seed grant from the Kavli Foundation.
+
+## License 
+
+"RutishauserLabtoNWB" Copyright (c) 2019, Rutishauser Lab. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
