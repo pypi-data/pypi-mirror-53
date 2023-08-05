@@ -1,0 +1,1 @@
+test = 'not from __init__.py'
