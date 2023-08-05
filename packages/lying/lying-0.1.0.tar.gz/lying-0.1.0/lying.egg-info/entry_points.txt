@@ -1,0 +1,10 @@
+[console_scripts]
+lying = lying.cli:main
+
+[lying.register]
+cmd = lying.render.common:CmdRender
+input = lying.render.common:InputRender
+txt = lying.render.common:TextRender
+txt-status = lying.render.common:TextStatusRender
+wait = lying.render.common:WaitRender
+
