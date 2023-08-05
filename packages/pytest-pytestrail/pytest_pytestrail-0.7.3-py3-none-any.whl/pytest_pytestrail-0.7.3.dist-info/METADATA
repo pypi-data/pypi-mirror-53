@@ -1,0 +1,168 @@
+Metadata-Version: 2.1
+Name: pytest-pytestrail
+Version: 0.7.3
+Summary: Pytest plugin for interaction with TestRail
+Home-page: https://github.com/tolstislon/pytest-pytestrail
+Author: tolstislon
+Author-email: tolstislon@gmail.com
+License: MIT License
+Keywords: testrail,pytest,pytest-testrail,pytest-pytestrail,testrail_api,api
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Pytest
+Classifier: Environment :: Plugins
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Testing
+Requires-Python: >=3.6
+Requires-Dist: pytest (>=3.8.0)
+Requires-Dist: testrail-api (>=1.4.1)
+
+
+
+.. image:: https://img.shields.io/pypi/v/pytest-pytestrail?color=yellow&label=version
+   :target: https://img.shields.io/pypi/v/pytest-pytestrail?color=yellow&label=version
+   :alt: PyPI
+
+
+.. image:: https://pepy.tech/badge/pytest-pytestrail
+   :target: https://pepy.tech/project/pytest-pytestrail
+   :alt: Downloads
+
+
+.. image:: https://img.shields.io/pypi/pyversions/pytest-pytestrail.svg
+   :target: https://img.shields.io/pypi/pyversions/pytest-pytestrail.svg
+   :alt: PyPI - Python Version
+
+
+.. image:: https://img.shields.io/badge/pytest-%3E%3D3.8-blue.svg
+   :target: https://img.shields.io/badge/pytest-%3E%3D3.8-blue.svg
+   :alt: Pytest Version
+
+
+pytest-pytestrail
+=================
+
+Pytest plugin for interaction with TestRail
+
+Install
+^^^^^^^
+
+.. code-block:: shell
+
+   pip install pytest-pytestrail
+
+Example
+^^^^^^^
+
+.. code-block:: python
+
+   from pytest_pytestrail import pytestrail
+
+
+   @pytestrail.case('C32')
+   def test_one():
+       assert True
+
+   @pytestrail.case('C12')
+   def test_two():
+       assert True
+
+Steps
+#####
+
+.. code-block:: python
+
+   from pytest_pytestrail import pytestrail
+
+   case = pytestrail.steps_case('C3')
+
+   @case.step(1)
+   def test_step_one():
+       assert True
+
+
+   @case.step(2)
+   def test_step_two():
+       assert True
+
+Steps parametrize
+#################
+
+.. code-block:: python
+
+   from pytest_pytestrail import pytestrail
+   import pytest
+
+   @pytest.mark.parametrize('data', pytestrail.params('C84', [1, 23, 33, 1, 57]))
+   def test_five(data):
+       assert data
+
+   @pytest.mark.parametrize('data', [pytestrail.param(1, 'C55'), pytestrail.param(2, 'C56')])
+   def test_six(data):
+       assert data
+
+Configuration
+~~~~~~~~~~~~~
+
+Support environment variables
+
+
+* TESTRAIL_URL
+* TESTRAIL_EMAIL
+* TESTRAIL_PASSWORD
+
+Config file
+"""""""""""
+
+``pytest.ini`` or ``setup.cfg`` `pytest configuration <https://docs.pytest.org/en/latest/customize.html>`_
+
+.. code-block:: ini
+
+   [pytest]
+   pytestrail (bool):                       Enable plugin
+   pytestrail-url (string):                 TestRail address
+   pytestrail-email (string):               Email for the account on the TestRail
+   pytestrail-password (string):            Password for the account on the TestRail
+   pytestrail-test-run (string):            ID testrun
+   pytestrail-no-decorator-skip (bool):     Skip tests without decorator
+   pytestrail-report (bool):                Enable report
+   pytestrail-no-ssl-check (bool):          Do not check for valid SSL certificate on TestRail host
+   pytestrail-project-id (string):          ID of the project
+   pytestrail-suite-id (string):            ID of the test suite
+   pytestrail-testrun-name (string):        Name given to testrun, that appears in TestRail
+   pytestrail-date-format (string):         Name given to testrun, that appears in TestRail
+   pytestrail-tz-local (bool):              Use local time zone (Default: UTC)
+   pytestrail-close-on-complete (bool):     Close test run on completion
+   pytestrail-milestone-id (string):        Set test tun milestone
+   pytestrail-testrun-description (string): Description given to testrun, that appears in TestRail
+
+or
+
+Command line options
+""""""""""""""""""""
+
+.. code-block:: bash
+
+   --pytestrail                                    Enable plugin
+   --tr-url=TR_URL                                 TestRail address
+   --tr-email=TR_EMAIL                             Email for the account on the TestRail
+   --tr-password=TR_PASSWORD                       Password for the account on the TestRail
+   --tr-test-run=TR_TEST_RUN                       ID testrun
+   --tr-no-decorator-skip                          Skip tests without decorator
+   --tr-report                                     Enable report
+   --tr-no-ssl-check                               Do not check for valid SSL certificate on TestRail host
+   --tr-project-id=TR_PROJECT_ID                   ID of the project
+   --tr-suite-id=TR_SUITE_ID                       ID of the test suite
+   --tr-testrun-name=TR_TESTRUN_NAME               Name given to testrun, that appears in TestRail
+   --tr-date-format=TR_DATE_FORMAT                 Name given to testrun, that appears in TestRail
+   --tr-tz-local                                   Use local time zone (Default: UTC)
+   --tr-close-on-complete                          Close test run on completion
+   --tr-milestone-id=TR_MILESTONE_ID               Set test tun milestone
+   --tr-testrun-description=TR_TESTRUN_DESCRIPTION Description given to testrun, that appears in TestRail
+
+
