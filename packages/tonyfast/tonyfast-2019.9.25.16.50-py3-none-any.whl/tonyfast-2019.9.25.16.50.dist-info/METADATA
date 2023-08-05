@@ -1,0 +1,444 @@
+Metadata-Version: 2.1
+Name: tonyfast
+Version: 2019.9.25.16.50
+Summary: UNKNOWN
+Home-page: https://github.com/tonyfast/gists
+Author: tonyfast
+License: BSD-3-Clause
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: IPython
+Classifier: Framework :: Jupyter
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: idna
+Requires-Dist: rfc3986
+Requires-Dist: rdflib
+Requires-Dist: nbconvert
+Requires-Dist: requests
+Requires-Dist: nest-asyncio
+Requires-Dist: pandas
+Requires-Dist: rfc3987
+Requires-Dist: rdflib-jsonld
+Requires-Dist: matplotlib
+Requires-Dist: requests-cache
+Requires-Dist: networkx
+Requires-Dist: importnb
+Requires-Dist: GitPython
+Requires-Dist: toolz
+Requires-Dist: qrcode
+Requires-Dist: jsonpointer
+Requires-Dist: pytest
+Requires-Dist: pyyaml
+Requires-Dist: ipywidgets
+Requires-Dist: strict-rfc3339
+Requires-Dist: webcolors
+Requires-Dist: wheel
+Requires-Dist: jsonschema
+Requires-Dist: jupyter-client
+Requires-Dist: hypothesis
+Requires-Dist: pyld
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tonyfast/gists/master)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tonyfast)
+
+
+```python
+import git, IPython, operator, pandas
+```
+
+
+```python
+IPython.display.Markdown('# Original Gists\n'+'\n'.join(F"* [{x.path}]({x.url})" for x in git.Repo().submodules))
+```
+
+
+
+
+# Original Gists
+* [tonyfast/wypes](https://gist.github.com/tonyfast/6382152537773be2ffc208c3d4e526c2)
+* [tonyfast/gidget](https://gist.github.com/tonyfast/00ae53f59c9340f71b9605eca1d07019)
+* [tonyfast/qr](https://gist.github.com/tonyfast/646e4f4f216286c6aa0a17fadba2c505)
+* [tonyfast/jschema](https://gist.github.com/tonyfast/fee98e31e3da90c3606c5dc14a703f0c)
+
+
+
+
+```python
+## History
+```
+
+
+```python
+commit = []
+for submodule in git.Repo().submodules:
+    for notebook in git.Repo(submodule.path).iter_commits(paths='*.ipynb'):
+        commit.append(dict(notebook.stats.files))
+        [x.update({y: operator.attrgetter(y)(notebook) for y in 'committed_date authored_date'.split()
+        }) or x.update(path=submodule.url, name=k) for k, x in commit[-1].items()]
+pandas.DataFrame(commit).stack().apply(pandas.Series).reset_index(0, drop=True)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>insertions</th>
+      <th>deletions</th>
+      <th>lines</th>
+      <th>committed_date</th>
+      <th>authored_date</th>
+      <th>path</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>113</td>
+      <td>214</td>
+      <td>327</td>
+      <td>1568985821</td>
+      <td>1568985821</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>9</td>
+      <td>433</td>
+      <td>442</td>
+      <td>1568985540</td>
+      <td>1568985540</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>rdflib_patch.ipynb</td>
+      <td>84</td>
+      <td>0</td>
+      <td>84</td>
+      <td>1568985437</td>
+      <td>1568985437</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>rdflib_patch.ipynb</td>
+    </tr>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>8</td>
+      <td>8</td>
+      <td>16</td>
+      <td>1568837243</td>
+      <td>1568837243</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>7</td>
+      <td>11</td>
+      <td>18</td>
+      <td>1568584271</td>
+      <td>1568584271</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>229</td>
+      <td>41</td>
+      <td>270</td>
+      <td>1568583874</td>
+      <td>1568583874</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>62</td>
+      <td>38</td>
+      <td>100</td>
+      <td>1568568821</td>
+      <td>1568568821</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>namespaces.ipynb</td>
+      <td>548</td>
+      <td>0</td>
+      <td>548</td>
+      <td>1568568576</td>
+      <td>1568568576</td>
+      <td>https://gist.github.com/tonyfast/6382152537773...</td>
+      <td>namespaces.ipynb</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1568986544</td>
+      <td>1568986544</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>27</td>
+      <td>1278</td>
+      <td>1305</td>
+      <td>1568986423</td>
+      <td>1568986423</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>requirements.txt</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1568986423</td>
+      <td>1568986423</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>requirements.txt</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1568985669</td>
+      <td>1568985669</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>__init__.py</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1568985669</td>
+      <td>1568985669</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>__init__.py</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1568985024</td>
+      <td>1568985024</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>requirements.txt</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1568985024</td>
+      <td>1568985024</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>requirements.txt</td>
+    </tr>
+    <tr>
+      <td>__init__.py</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1568985024</td>
+      <td>1568985024</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>__init__.py</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>1</td>
+      <td>1227</td>
+      <td>1228</td>
+      <td>1568984789</td>
+      <td>1568984789</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>requirements.txt</td>
+      <td>1</td>
+      <td>6</td>
+      <td>7</td>
+      <td>1568984789</td>
+      <td>1568984789</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>requirements.txt</td>
+    </tr>
+    <tr>
+      <td>__init__.py</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1568984789</td>
+      <td>1568984789</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>__init__.py</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>2463</td>
+      <td>111</td>
+      <td>2574</td>
+      <td>1568816927</td>
+      <td>1568816927</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>requirements.txt</td>
+      <td>5</td>
+      <td>1</td>
+      <td>6</td>
+      <td>1568816927</td>
+      <td>1568816927</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>requirements.txt</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>0</td>
+      <td>9</td>
+      <td>9</td>
+      <td>1561649156</td>
+      <td>1561649156</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>73</td>
+      <td>61</td>
+      <td>134</td>
+      <td>1561559106</td>
+      <td>1561559106</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>await-gidgethub.ipynb</td>
+      <td>215</td>
+      <td>0</td>
+      <td>215</td>
+      <td>1561558779</td>
+      <td>1561558779</td>
+      <td>https://gist.github.com/tonyfast/00ae53f59c934...</td>
+      <td>await-gidgethub.ipynb</td>
+    </tr>
+    <tr>
+      <td>requirements.txt</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1568832308</td>
+      <td>1568832308</td>
+      <td>https://gist.github.com/tonyfast/646e4f4f21628...</td>
+      <td>requirements.txt</td>
+    </tr>
+    <tr>
+      <td>QR.ipynb</td>
+      <td>101</td>
+      <td>121</td>
+      <td>222</td>
+      <td>1568832308</td>
+      <td>1568832308</td>
+      <td>https://gist.github.com/tonyfast/646e4f4f21628...</td>
+      <td>QR.ipynb</td>
+    </tr>
+    <tr>
+      <td>QR.ipynb</td>
+      <td>228</td>
+      <td>0</td>
+      <td>228</td>
+      <td>1568254215</td>
+      <td>1568254215</td>
+      <td>https://gist.github.com/tonyfast/646e4f4f21628...</td>
+      <td>QR.ipynb</td>
+    </tr>
+    <tr>
+      <td>jchema.ipynb =&gt; jschema.ipynb</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1568905019</td>
+      <td>1568905019</td>
+      <td>https://gist.github.com/tonyfast/fee98e31e3da9...</td>
+      <td>jchema.ipynb =&gt; jschema.ipynb</td>
+    </tr>
+    <tr>
+      <td>drop-in-semantic-enrichment.ipynb</td>
+      <td>0</td>
+      <td>558</td>
+      <td>558</td>
+      <td>1568905012</td>
+      <td>1568905012</td>
+      <td>https://gist.github.com/tonyfast/fee98e31e3da9...</td>
+      <td>drop-in-semantic-enrichment.ipynb</td>
+    </tr>
+    <tr>
+      <td>jchema.ipynb</td>
+      <td>123</td>
+      <td>0</td>
+      <td>123</td>
+      <td>1568905012</td>
+      <td>1568905012</td>
+      <td>https://gist.github.com/tonyfast/fee98e31e3da9...</td>
+      <td>jchema.ipynb</td>
+    </tr>
+    <tr>
+      <td>drop-in-semantic-enrichment.ipynb</td>
+      <td>558</td>
+      <td>0</td>
+      <td>558</td>
+      <td>1565749459</td>
+      <td>1565749459</td>
+      <td>https://gist.github.com/tonyfast/fee98e31e3da9...</td>
+      <td>drop-in-semantic-enrichment.ipynb</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+from tonyfast import jschema, qr, wypes, gidget
+```
+
+```
+from tonyfast import jschema, qr, wypes, gidget
+```
+
+
