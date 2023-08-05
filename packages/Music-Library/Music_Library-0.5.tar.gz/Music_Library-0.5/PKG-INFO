@@ -1,0 +1,52 @@
+Metadata-Version: 1.1
+Name: Music_Library
+Version: 0.5
+Summary: Api to manage my music files
+Home-page: http://dadard.fr:8010/dadard/MusicLibraryApi.git
+Author: Florian Charpentier
+Author-email: florian.charpentier@epita.fr
+License: WTFPL
+Description: Music Library alias Hector Barbossa
+        -----------------------------------
+        
+        Api to manage my music library
+        
+        
+        File endpoints
+        ==============
+        
+        Manage the music file:
+        
+        - add a file (specify a **type** from the list), ID3 tags MUST be set up
+        - remove a file
+        - change its **type**
+        
+        
+        Type endpoints
+        ==============
+        
+        Manage the types of the music (blues, rock, etc)
+        
+        - add a type
+        - remove a type
+        - rename a type
+        - delete a type (no music file must be associated to this type when its deleted)
+        
+        
+        Sources
+        =======
+        
+        Barbossa_ image
+        
+        .. _Barbossa: https://www.pinterest.fr/pin/801148221193620417/
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Flask
+Classifier: Intended Audience :: Developers
+Classifier: License :: Freeware
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
