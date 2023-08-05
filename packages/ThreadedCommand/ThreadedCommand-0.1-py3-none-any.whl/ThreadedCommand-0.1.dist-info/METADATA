@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: ThreadedCommand
+Version: 0.1
+Summary: Runs a console command in multiple threads
+Home-page: https://github.com/mibexx/threaded_command
+Author: Mike Bertram
+Author-email: contact@mibexx.de
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# Threaded console command
+
+With this package you can run your console commands in threads.  This process can be used to run a command multiple times.
+
+## Usage
+```
+import ThreadedCommand as tc
+
+tc.run(['ls'], 2)
+```
+
+**Output:**
+```
+Enter ctrl+c to stop...
+Command:  ['ls']
+Status: 2/2 active threads
+```
+
