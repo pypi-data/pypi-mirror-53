@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
+<title>Code Style</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="code-style">
+<h1 class="title">Code Style</h1>
+
+<div class="section" id="formatting-tools">
+<h1>Formatting tools</h1>
+<p>The Synapse codebase uses a number of code formatting tools in order to
+quickly and automatically check for formatting (and sometimes logical) errors
+in code.</p>
+<p>The necessary tools are detailed below.</p>
+<ul>
+<li><p class="first"><strong>black</strong></p>
+<p>The Synapse codebase uses <a class="reference external" href="https://pypi.org/project/black/">black</a> as an
+opinionated code formatter, ensuring all comitted code is properly
+formatted.</p>
+<p>First install <tt class="docutils literal">black</tt> with:</p>
+<pre class="literal-block">
+pip install --upgrade black
+</pre>
+<p>Have <tt class="docutils literal">black</tt> auto-format your code (it shouldn't change any functionality)
+with:</p>
+<pre class="literal-block">
+black . --exclude=&quot;\.tox|build|env&quot;
+</pre>
+</li>
+<li><p class="first"><strong>flake8</strong></p>
+<p><tt class="docutils literal">flake8</tt> is a code checking tool. We require code to pass <tt class="docutils literal">flake8</tt> before being merged into the codebase.</p>
+<p>Install <tt class="docutils literal">flake8</tt> with:</p>
+<pre class="literal-block">
+pip install --upgrade flake8
+</pre>
+<p>Check all application and test code with:</p>
+<pre class="literal-block">
+flake8 synapse tests
+</pre>
+</li>
+<li><p class="first"><strong>isort</strong></p>
+<p><tt class="docutils literal">isort</tt> ensures imports are nicely formatted, and can suggest and
+auto-fix issues such as double-importing.</p>
+<p>Install <tt class="docutils literal">isort</tt> with:</p>
+<pre class="literal-block">
+pip install --upgrade isort
+</pre>
+<p>Auto-fix imports with:</p>
+<pre class="literal-block">
+isort -rc synapse tests
+</pre>
+<p><tt class="docutils literal"><span class="pre">-rc</span></tt> means to recursively search the given directories.</p>
+</li>
+</ul>
+<p>It's worth noting that modern IDEs and text editors can run these tools
+automatically on save. It may be worth looking into whether this
+functionality is supported in your editor for a more convenient development
+workflow. It is not, however, recommended to run <tt class="docutils literal">flake8</tt> on save as it
+takes a while and is very resource intensive.</p>
+</div>
+<div class="section" id="general-rules">
+<h1>General rules</h1>
+<ul>
+<li><p class="first"><strong>Naming</strong>:</p>
+<ul class="simple">
+<li>Use camel case for class and type names</li>
+<li>Use underscores for functions and variables.</li>
+</ul>
+</li>
+<li><p class="first"><strong>Docstrings</strong>: should follow the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings">google code style</a>.
+This is so that we can generate documentation with <a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.org/en/latest/">sphinx</a>. See the
+<a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">examples</a>
+in the sphinx documentation.</p>
+</li>
+<li><p class="first"><strong>Imports</strong>:</p>
+<ul>
+<li><p class="first">Imports should be sorted by <tt class="docutils literal">isort</tt> as described above.</p>
+</li>
+<li><p class="first">Prefer to import classes and functions rather than packages or modules.</p>
+<p>Example:</p>
+<pre class="literal-block">
+from synapse.types import UserID
+...
+user_id = UserID(local, server)
+</pre>
+<p>is preferred over:</p>
+<pre class="literal-block">
+from synapse import types
+...
+user_id = types.UserID(local, server)
+</pre>
+<p>(or any other variant).</p>
+<p>This goes against the advice in the Google style guide, but it means that
+errors in the name are caught early (at import time).</p>
+</li>
+<li><p class="first">Avoid wildcard imports (<tt class="docutils literal">from synapse.types import *</tt>) and relative
+imports (<tt class="docutils literal">from .types import UserID</tt>).</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuration-file-format">
+<h1>Configuration file format</h1>
+<p>The <a class="reference external" href="./sample_config.yaml">sample configuration file</a> acts as a reference to
+Synapse's configuration options for server administrators. Remember that many
+readers will be unfamiliar with YAML and server administration in general, so
+that it is important that the file be as easy to understand as possible, which
+includes following a consistent format.</p>
+<p>Some guidelines follow:</p>
+<blockquote>
+<ul>
+<li><p class="first">Sections should be separated with a heading consisting of a single line
+prefixed and suffixed with <tt class="docutils literal">##</tt>. There should be <strong>two</strong> blank lines
+before the section header, and <strong>one</strong> after.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Each option should be listed in the file with the following format:</dt>
+<dd><ul class="first last">
+<li><p class="first">A comment describing the setting. Each line of this comment should be
+prefixed with a hash (<tt class="docutils literal">#</tt>) and a space.</p>
+<p>The comment should describe the default behaviour (ie, what happens if
+the setting is omitted), as well as what the effect will be if the
+setting is changed.</p>
+<p>Often, the comment end with something like &quot;uncomment the
+following to &lt;do action&gt;&quot;.</p>
+</li>
+<li><p class="first">A line consisting of only <tt class="docutils literal">#</tt>.</p>
+</li>
+<li><p class="first">A commented-out example setting, prefixed with only <tt class="docutils literal">#</tt>.</p>
+<p>For boolean (on/off) options, convention is that this example should be
+the <em>opposite</em> to the default (so the comment will end with &quot;Uncomment
+the following to enable [or disable] &lt;feature&gt;.&quot; For other options,
+the example should give some non-default value which is likely to be
+useful to the reader.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<blockquote>
+<ul class="simple">
+<li>There should be a blank line between each option.</li>
+<li>Where several settings are grouped into a single dict, <em>avoid</em> the
+convention where the whole block is commented out, resulting in comment
+lines starting <tt class="docutils literal"># #</tt>, as this is hard to read and confusing to
+edit. Instead, leave the top-level config option uncommented, and follow
+the conventions above for sub-options. Ensure that your code correctly
+handles the top-level option being set to <tt class="docutils literal">None</tt> (as it will be if no
+sub-options are enabled).</li>
+<li>Lines should be wrapped at 80 characters.</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>Example:</p>
+<pre class="literal-block">
+## Frobnication ##
+
+# The frobnicator will ensure that all requests are fully frobnicated.
+# To enable it, uncomment the following.
+#
+#frobnicator_enabled: true
+
+# By default, the frobnicator will frobnicate with the default frobber.
+# The following will make it use an alternative frobber.
+#
+#frobincator_frobber: special_frobber
+
+# Settings for the frobber
+#
+frobber:
+   # frobbing speed. Defaults to 1.
+   #
+   #speed: 10
+
+   # frobbing distance. Defaults to 1000.
+   #
+   #distance: 100
+</pre>
+<p>Note that the sample configuration is generated from the synapse code and is
+maintained by a script, <tt class="docutils literal"><span class="pre">scripts-dev/generate_sample_config</span></tt>. Making sure
+that the output from this script matches the desired format is left as an
+exercise for the reader!</p>
+</div>
+</div>
+</body>
+</html>
