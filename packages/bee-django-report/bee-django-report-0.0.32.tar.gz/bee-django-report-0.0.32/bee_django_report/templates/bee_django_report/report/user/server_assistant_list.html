@@ -1,0 +1,60 @@
+{% extends "bee_django_report/base.html" %}
+{% load bee_django_report_filter %}
+{% block content %}
+    {% include 'bee_django_report/logo.html' %}
+    {% include 'bee_django_report/nav.html' %}
+    <div><h4></h4></div>
+    <div>
+
+    <form method="get">
+        {{ server_form }}
+        <input type="hidden" name="export" id="export">
+        {#    <input type="submit" value="查询"/>#}
+
+        <button class="" onclick="click_search()">查询</button>
+{#        <button class="" onclick="click_export()">导出</button>#}
+    </form>
+    </div>
+    <div style="margin: 10px 0;">
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th>助教</th>
+            </tr>
+            {% for user in assistant_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{{ user.get_user_search_link }}">{{ user.get_user_name }}</a>
+                    </td>
+
+
+
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+
+        });
+        function click_search() {
+            var $form = $("form");
+            var $export = $("#export");
+            $export.attr("value", "");
+            $form.submit()
+
+        }
+        function click_export() {
+            var $form = $("form");
+            var $export = $("#export");
+            $export.attr("value", "1");
+            $form.submit()
+
+        }
+    </script>
+
+{% endblock %}

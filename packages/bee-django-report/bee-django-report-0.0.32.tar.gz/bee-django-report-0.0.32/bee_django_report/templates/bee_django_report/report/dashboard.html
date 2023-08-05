@@ -1,0 +1,50 @@
+{% extends "bee_django_report/base.html" %}
+{% load bee_django_report_filter %}
+{% block styles %}
+    <style>
+        body {
+            background-color: #F2F2F2;
+        }
+
+        .panel {
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% include 'bee_django_report/logo.html' %}
+    {% include 'bee_django_report/nav.html' %}
+    <div style="margin: 20px auto;">
+        <div class="panel">
+            <div><h4>全部学生</h4></div>
+            <div>共{{ students|length }}人</div>
+            <div><a href="{% url 'bee_django_user:user_list' %}">学生列表</a> | <a
+                    href="{% url 'bee_django_report:user_section' %}">学习进度</a></div>
+        </div>
+        <div class="panel">
+            <div><h4>进行中的班级</h4></div>
+            <div>共{{ classes|length }}个</div>
+            <div><a href="{% url 'bee_django_user:class_list' %}?status=1">班级列表</a> | <a
+                    href="{% url 'bee_django_user:class_dashboard' %}?status=1&time=本周">班级统计</a></div>
+        </div>
+        <div class="panel">
+            <div><h4>学生录播</h4></div>
+            <div>今日：共 {{ today_lives|length }} 个录播，其中<span style="color: red">{{ unview_today_lives|length }}</span>个视频助教未观看
+                <a href="{% url 'bee_django_course:live_list' 0 %}?scope=day&offset=0">查看</a>
+            </div>
+            <div>昨日：共 {{ yesterday_lives|length }} 个录播，其中<span
+                    style="color: red">{{ unview_yesterday_lives|length }}</span>个视频助教未观看 <a
+                    href="{% url 'bee_django_course:live_list' 0 %}?scope=day&offset=-1">查看</a>
+            </div>
+        </div>
+    </div>
+{#    <div class="panel">#}
+{#        <div><h4>助教考核分数</h4></div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="panel">#}
+{#        <div><h4>WIKI</h4></div>#}
+{##}
+{#    </div>#}
+{% endblock %}
