@@ -1,0 +1,1 @@
+This module use for aimereception software base detector module only
