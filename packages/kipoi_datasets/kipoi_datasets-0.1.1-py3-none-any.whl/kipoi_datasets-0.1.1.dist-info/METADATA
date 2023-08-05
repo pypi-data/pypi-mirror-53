@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: kipoi-datasets
+Version: 0.1.1
+Summary: kipoi_datasets: training datasets for genomics
+Home-page: https://github.com/kipoi/datasets
+Author: Kipoi team
+Author-email: avsec@in.tum.de
+License: MIT license
+Keywords: model zoo,deep learning,computational biology,bioinformatics,genomics
+Platform: UNKNOWN
+Requires-Dist: kipoi-utils (>=0.1.12)
+Requires-Dist: kipoiseq
+Requires-Dist: genomelake
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: tqdm
+Provides-Extra: develop
+Requires-Dist: bumpversion ; extra == 'develop'
+Requires-Dist: wheel ; extra == 'develop'
+Requires-Dist: epc ; extra == 'develop'
+Requires-Dist: jedi ; extra == 'develop'
+Requires-Dist: pytest (>=3.3.1) ; extra == 'develop'
+Requires-Dist: pytest-xdist ; extra == 'develop'
+Requires-Dist: pytest-pep8 ; extra == 'develop'
+Requires-Dist: pytest-cov ; extra == 'develop'
+Requires-Dist: coveralls ; extra == 'develop'
+Requires-Dist: keras ; extra == 'develop'
+Requires-Dist: tensorflow ; extra == 'develop'
+Requires-Dist: pybedtools ; extra == 'develop'
+
+kipoi_datasets: training datasets for genomics
+
+
