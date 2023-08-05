@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "subby"
+version = "0.1.6"
+description = "Subprocesses simplified"
+license = "Apache-2.0"
+authors = ["John Didion <github@didion.net>"]
+readme = "README.md"
+homepage = "https://github.com/jdidion/subby"
+repository = "https://github.com/jdidion/subby.git"
+classifiers = ["Development Status :: 4 - Beta"]
+include = ["CHANGES.md"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.1"
+coverage = "^4.5"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
