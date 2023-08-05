@@ -1,0 +1,335 @@
+CHANGES
+=======
+
+0.5.0
+-----
+
+* Release 0.5.0
+* Increased pywbem to 0.14.5
+* Fixes issue #410, executing tests in verbose mode
+* Squash: Fixed test error on Windows with backslash path names
+* Improved error handling and messages, mostly in mock support
+* Fixed incorrect help text of --name general option
+* Removed remaining occurrence of 'connection add' command
+* Fix issue # 394 - Aborts session in interactive mode (#405)
+* Fixes issue # 396 - bad value to yaml causes load failure
+* Fixes issue #395 sequence with create interactive fails
+* Fixes issue #395 sequence with create interactive fails
+* Improved and fixed docs and help text for --propertylist
+* Made Travis LDFLAGS/CFLAGS consistent with pywbem
+* Fix issue #260 Dup instance failure on instance enumerate
+* Fixes issue #397, mask password on connection show display
+* Fixed docs issues found in another round of review
+* Proposal for replacing TODOs  in the pywbemclifeatures.py file section Specifying CIM property and parameter values
+* Fixes issue # 373, mock repository build error msgs formatting
+* Fixes issue #375 - resetting mock repo between interactive commands (#388)
+* Made set/non-empty behavior of boolean variables in makefile consistent
+* Generating help file on Windows without CR
+* Updated generated help file
+* Allow turning off --verbose in interactive mode by changing the long definition name to --verbose/--noverbose and the default for verbose to None on the cli function call
+* Docs: Improved INSTANCENAME section and fixed appendix
+* Fixed remaining occurrences of -i/-interactive
+* Changed help text of some commands and help intro in docs
+* Docs: Review of appendix
+* Fixes issue #349 consistency of prompting (#374)
+* Changed cmd name to centralinsts (#371)
+* Fixes issue # 358 Fix instance count command (#372)
+* Docs: Added error handling section
+* Fixes issue # 360 server connection vs connection show
+* Fixed errors in help text of class commands
+* Fixed errors in help text of class commands
+* Docs: Improvements on connection commands and repl/help
+* Change 'subcmd' to 'command' and command group in tests and code (#365)
+* Docs: Improvements on instance & qualifier commands
+* Docs: Improvements on server commands
+* Docs: Improvements to some terms in Appendix
+*  This is a combination of 5 commits
+* Squash: Resolved comments
+* Docs: Addressed editorial issues
+* Fix issue #339 Remove verify from connection save and connection delete
+* Fixes #335 #338: Modify so general opts work in interactive mode (#336)
+* Docs: Fixed examples in section 5 and made more consistent
+* Consolidated pywbem\_os\_setup.sh script
+* Docs: Improvements and fixes in section 2 and 3 overview
+* Fixed make builddoc and others
+* Fixed deprecation policy
+* Remove connection add command from documentation
+* Fixes # 337 Drop connect add command
+* Updated the pywbemclicmdshelp.rst file
+* Simplify installation on Python 3 re scripts
+* Fixed connection save that I missed earlier
+* Round 4 changes
+* Changes round 3
+* Changes after last review. See pr for commments
+* Fixes issue #261, inconsistent connection commands
+* Describe wget installation
+* Updated README and README\_PYPI
+* Added missing use of pywbem\_os\_setup scripts in install
+* Clarified purpose of namespace in INSTANCENAME
+* Add --sort option to class find
+* Minor improvements for pywbem\_os\_setup scripts
+* Correct an issue found in invokemethod with array parameters
+* Adds a new file pywbemclifeatures.rst
+* Fixes issue #313, modify command descriptions to use sections
+* Fixed format of INSTANCENAME and used historical format
+* Fixed incorrect long option names and commands
+* Replaced short options; Section on prop/psrm value syntax
+* Removed superflous moftabfiles variable in makefile
+* Fixed help file dependency in make build
+* Replaced print with click.echo in repl command
+* Updated help text of repl command and help
+* Added .pytest\_cache to make clean
+* Updated help of connection command group
+* Fixed file name of connections file in .gitignore
+* Fixes issue #298, MaxObjCount interpreted as string
+* Fixed some inconsistencies with new connections file name/format
+* Fixed some more of Andy's comments re underscore/dash
+* Second Andy Edits, change underscore to dash
+* Fixes issue #299, change connections file
+* Added section for specifying INSTANCENAME
+* Docs: Fixed Sphinx build warnings, broken links, typos
+* Second round of last 3 issues resolved
+* Edits from Andy's comments
+* WIP
+* Fixes issue #252 Restructure general options chapter
+* From earlier work
+* Docs: Improved Mock chapter
+* Docs: Updated Appendix section
+* Squash: Resolved 2nd round of comments
+* Improved help text of command and general options
+* Removed Makefile in docs
+* Docs: Updated development chapter
+* Removed display of mock repository with --verbose
+* Fixed Sphinx doc build warnings and command group blank
+* Modify all use of command-group to command group
+* Changed name subcommand to command
+* Fixes issue #271 error with class enumerate
+* Updated command descriptions
+* Fix issue #275 correct documentation/help for certfile, keyfile
+* Fixed chmod error on native Windows
+* Fixes issue #258, #259, table output of instance names
+* Added options to test; fixed option help texts
+* Karls Changes to Andy's PR/
+* Improved help text of pywbemcli, pt 1; Changed querylanguage option
+* Docs: Updated description of output formats
+* Fixed dependencies of generated help docs file
+* Per issue #257 change 3 env vars
+* Fixed issues in output format documentation
+* WIP
+* Issue # 264 - click\_help\_capture fails on windows
+* Improved checking of help text
+* Fix issues in issue # 253
+* Remove --sort option from class and instance  commands
+* Move section 2.2 to 3
+* Put -(dash) in multiword option names
+* Fixes part of Andy comments documentation comments, part 1
+* Change versions of pytest
+* Correct conflict in setup
+* Fixes and improvements in docs, part 1 (issue 242)
+* Mostly formal fixes in documentation and editorial fixes in Makefile
+* Update documentation
+* Change name of live\_unit directory to to manual
+* Remove special pywbem\_os\_setup.sh file
+* WIP
+* Fix issue #231 unhandled exception on startup
+* Fix issues in passing MaxObjCnt to the  operations
+* Refine tests for conflicting global parameters (#229)
+* Change the option for default namespace from useing \_ to - consinstent with all other options.  This applies to the use as a global and also in connection add
+* Add tests ffor common and cmd\_instance  to improve test coverage. In addition we made the changes noted below to the pywbemcli code: 1. \_common.py -   a. Fix issue with output of abort message on verify\_operation()   b. Refactor split\_str(...) and renamed to split\_str\_w\_exc(...)   c. Fixed issue were we were testing list item 1 and should have been 9   d. Reworded some comments
+* Part 2 - Improve Coverage
+* Improve coverage Part 0
+* Fixes a number of differences in the install files between pywbem and pywbemtools to keep them as closely aligned as follows
+* Modify one --names\_only option
+* Refactor cimobject sort function and use universally
+* Ks/fix filterquery exceptionmsg (#220)
+* Modify the short form values of some general options
+* Add ValueError exception for some operations
+* Clean up a number of pylint messages and change the word global to general when refering to the general options
+* Modify connection table
+* Clean up the includequalifiers option on instance enumerate, associators, and references subcommands
+* Add FilterQuery and FilterQueryLanguage options
+* Add FilterQuery and FilterQueryLanguage options
+* Removed pinning of docutils as new variant of 0.15 was released today
+* Fix a number of pylints in pywbemcli. As part of these changes I also modified the build\_repository exceptions to better output exceptions from the mof parser
+* Remove now worthless test
+* Pinned docutils to version 0.14
+* Fixed package name in setup.cfg
+* WIP
+* WIP
+* Extend and clean up the documentation.  This is a significant change to the documentation after reviewing it in preperation for the 0.5.0 release.  It cleans up spelling, and creates some new sections
+* Change the search algorithm for the class find command from regex to glob based.   Since this is a simple search a pattern matcher similiar to glob for files seemed easier for the user than the regex that we were using
+* Correct issues documented in review
+* FIXES
+* Update READEME.RST for 0.5.0 release
+* Fix Issues from discussion
+* Clean up README\_PYPI.rst
+* Fix class find subcommand
+* Extend and clean up the documentation.  This is a significant change to the documentation after reviewing it in preperation for the 0.5.0 release.  It cleans up spelling, and creates some new sections
+* Extend the general help messages to:
+* Refactor pywbemcli directory
+* Change general option --version to display both the pywbemcli version and the pywbem version. This also extends the tests to cover this extension
+* Updated DEVELOP.md to pywbemtools project
+* Modify table formats to match other project
+* Fix params
+* Fixed Git-ignoring pywbem\_os\_setup.sh/.bat
+* Added some missing tests to server tests
+* Remove superfulous file
+* Add tests for server subcommand
+* Extended tests for the class command and fixed issued in \_cmd\_class.py. Overall this moves coverage to about 79%
+* fix issue, mock and use-pulll-ops
+* Add tests to test\_globaloptions.py
+* Add DEVELOP.md doc to file
+* Fix  issues in the top level menu for pywbemcli (#174)
+* Removed pinning to xenial on Travis for py37
+* Excluded pywbem setup scripts from Git
+* Enable cygwin test in appveyor.yml and modify appveyor.yml to match the appveyor file in pywbem
+* Changes to \_common.py and \_test\_common.py as follows:
+* Fix tests for differences between windows and other platforms
+* Add function level test for interactive mode
+* Change test file names for consistency
+* Initial changes to sync pywbemtools setup to pywbem setup
+* Rewrite the methods that persist the repo of connections
+* Added repr as an output format for objects
+* Fix a number of test issues resulting primarily from changes to the mocker exception messages and operation processing (more tests on input validity).  All of the changes here execpt for the one involving an import to config.py which was just my booboo are things found when we moved the testing of pywbemcli forward from pywbem 0.12.0
+* Update the dev-requirements to account for the version differences between Python 2 and 3. Removes the requirements define for the components of flake8
+* Fix table output for instances, paths, and qualifier declarations. Pywbemcli allows for output of these objects in a table format with for example, properties as columns and the objects as rows. The original code was pure prototype and incomplete
+* Fix a number of test issues resulting primarily from changes to the mocker exception messages and operation processing (more tests on input validity).  All of the changes here execpt for the one involving an import to config.py which was just my booboo are things found when we moved the testing of pywbemcli forward from pywbem 0.12.0
+* fix
+* Fix issue with cli param in associators and fix doc
+* Add sort option to format\_table
+* Correct issue in log option usage
+* fix
+* Correct issues in class find subcommand and extend tests
+* Added support for pyup.io safety check
+* Added runs for Python 3.7 and increased pyzmq from 16.02 to 16.0.4
+* Synced minimum package versions with pywbem
+* Update requirements to 7.0 for click
+* Fix issues with the connection select subcommand (#149)
+* Fixed flake8 issues; removed dup flake8 config; Fixed pyzmq version exclusion
+* Extend pywbemcli tests to test env variables and stdin input
+* Fixed duplicated minimum version of prompt-toolkit
+* Added MacOS .DS\_Store files to .gitignore
+* Fixes #117, Update requirements.txt to remove limit on requirements.txt
+* (Review 2) Fixes #137: Fix issue click major version (#141)
+* Fix issue in test\_instances\_subcmd.py causing failue of tests
+* Removes remaining use of tocimobj in favor of cimvalue function  and fixes issues in invokemethod
+* Added fixes to order list of connections, and correct issue where connection select did not fully setup the next connection
+* add a number of tests to common
+* Fix version of pytest-cov to match pywbem and eliminate failure in tests
+* Add modify instance and refactor createinstance (#126)
+* Add basic logging to pywbemcli as cmd line option. (#125)
+* Ks/refactor instance create (#129)
+* Fix test in test\_quialdecl\_subcmd.py
+* Clean up documentation on the test tools in cli-test\_extensions.py
+* Add tests for the qualifier group (#122)
+*  Add mock tests for instance subcommand (#110)
+* Fixed issue where help changed on a command
+* This pr includes also a change in the original commit to simplify the option for including qualifiers in class operations.  The original was the click options --include-qualifiers/--no-include-qualifiers. This is confusing and also overkill since the majority of class level request will be with qualifiers (qualifiers being a key part of the class definitions) We simplified it to just a default of including qualifiers and --no-qualifiers if they are to be excluded
+* Add new method to use wbemuri on input of instancenames
+* Redo mock\_server option
+* Fix issues with messages in utils.py
+* Update requirements.txt to only use version 1 of prompt-toolkit
+* Fixed determination of package version for Linux
+* Makefile: Fixed prereqs in header, docum. env.vars in help
+* Added to .gitignore and cleaned it up
+* Eliminated confusing pbr import error message in make
+*  adjusted appveyor.yml to new choco req to have pkg checksums
+* Increased M2Crypto minimum version to 0.30.1
+* fix
+* Clean up tests
+* Refactor the pywbemcli executable tests to create a common base class for the tests  using the mock environment and modify the test for class to use this environment
+* Minor fixes to cmd\_class and common
+* Add mock server support to pywbemcli
+* Fix issue with stats\_enabled param of WBEMConnection
+* Increased the set of Python envs for Travis
+* Change output table formatting package to use tabulate
+* Fix documentation issues with pywbemcli arguments
+* Added pywbem\_os\_setup.sh script to make install
+* Added remove\_duplicate\_setuptools.py to fix build\_clib error on Travis
+* Removed 'make pylint' from Travis control file because part of 'check'
+* Fixes and improvements in click\_help\_capture.py tool
+* Updated pywbemclicmdshelp.rst
+* Fixed import order in pywbemcli/config.py reported by flake8
+* Fixes and improvements in Makefile and requirements files
+* Enabled building the documentation in Travis CI
+* Add the pytest\_extensions.py module from pywbem to pywbemtools
+* Added Python 2.7 minimum (disabled) to Travis CI control file
+* Resync Appveyor CI control file from pywbem project
+* Sync Travis CI control file from pywbem project
+* Fix issue with stats\_enabled param of WBEMConnection
+* This also changes the cmd help file
+* Clean up first line of subcomand descriptions
+* Fix documentation issues with pywbemcli arguments. We inconsitently used mixed, upper, and lower case for the names
+* Adjusted RTD project title
+* Fixed RTD build
+* Fixed RTD by adding rtd-requirements.txt
+* Fixes #80. Revert dev-requirements t0 pyzmq 16.0.2
+* Improvements in CI envs
+* Add apveyor.yml
+* Correct issues with output\_format definition
+* Add summary option for cim objects
+* Add versions to dev-requirements.txt
+* Reset requirements.txt pywbem
+* Move from Readme.md to README.rst and add documentation fixes issue #37 Create new README.rst Remove old README.md Fix references to README.md in setup.cfg and Makefile
+* Fix m2crypto to version 0.26.0
+* Modify requirements.txt to fix version of six per issue 76
+* Fix issues with output formatting
+* Updated cmdhelp in doc to add -h
+* Changes the doc also
+* Extend click so that -h and --help both call help function
+* Generate correct cmds rst file
+* Fixed help test
+* Fix ref and assoc options single char options
+* Clean up documentation
+* Fix issue with bad table print code
+* Update doc
+* Create a more general table output mechanism
+* Correction
+* Remove changes not core to this pr
+* Restore design doc
+* # This is a combination of 2 commits
+* Implement operation statistics with display
+* Fix error in cmd\_server.py
+* Correct issue with changed param name
+* Add unit test of pywbemcli script
+* Change repository to use json. Fix issue with -timeout option (was str, should be integerrange) Change PywbemServer to create dictionary of data to persist and to build instance from \*\*kwargs
+* Fix pywbemcli.py help doc issue
+* Fix error in flake8 noqa definitions
+* Add a  new help overview program based on the output strucuture of click --help output. This allows us to gather all help information without forgetting if something has changed.  It finds all subcommands and generates a recursive list of all help then displays it in .rst format
+* correct error with metaclass and correct some iteritem and six issues
+* Implement the pywbemcli extension of the iter methods that include the iteration and returns complete results for the request
+* Fix overview text file
+* Remove unused help lines from help\_overview and tests
+* Remove instance level names subcommand. Also generalize F403 flake8 error
+* Add minimun import version requirements
+* Add code to ignore python warnings for test execute pywbemcli
+* fixes #38, minor code errors
+* Found forgotten debug print
+* Remove a leftover command from the prototype
+* Fix issue  with issue 6 commit
+* Add password logic to get password only if needed
+* Move logic for save connection info
+* Extend changes.rst. Temp test in test\_helpmsgs.py
+* Add password logic to get password only if needed
+* Fixed the issue by doing a pip install --upgrade coverage after python-coveralls in installed.  That restores us to a valid coverage version
+* Add doc changes comment
+* Clean up the help\_overview
+* fixes #16 by adding delete class to pywbemcli
+* Number of cleanups, minor fixes, etc
+* Using M2Crypto master branch to pick up sslv2\_method fix
+* Add functionality of help, repl
+* Fix property code for instance create
+* Fix licnese statement on files and move use to pbr for versioning
+* Delete pywbemclidesign.md and update help\_overview
+* Modify License Add copyright Add tests Cleanup Makefile
+* # This is a combination of 9 commits. # The first commit's message is: Fix travis, commit Authors, etc
+* Temp add test output.  Fix test\_ops
+* Clean up temp tests etc
+* Correct minor issues and reorganize several commands and common functions
+* commit temp shell tests
+* Add tests for filter\_nameslist
+* temp save help displays
+* # This is a combination of 2 commits. # The first commit's message is:
+* Initial commit of code moved from pywbem
+* Update README.md
+* Initial commit
