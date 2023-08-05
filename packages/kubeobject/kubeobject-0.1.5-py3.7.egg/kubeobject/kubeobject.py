@@ -1,0 +1,255 @@
+from __future__ import annotations
+
+import yaml
+from datetime import datetime, timedelta
+from typing import Optional
+
+from kubernetes import client
+
+
+class CustomObject:
+    """CustomObject is an object mapping to a Custom Resource in Kubernetes. It
+    includes simple facilities to update the Custom Resource, save it and
+    reload its state in a object oriented manner.
+
+    It is meant to be used to apply changes to Custom Resources and watch their
+    state as it is updated by a controller; an Operator in Kubernetes parlance.
+
+    """
+
+    def __init__(
+        self,
+        name: str,
+        namespace: str,
+        plural: str = None,
+        kind: str = None,
+        api_version: str = None,
+    ):
+        self.name = name
+        self.namespace = namespace
+
+        crd = get_crd_names(plural=plural, kind=kind, api_version=api_version)
+
+        self.kind = crd.spec.names.kind
+        self.plural = crd.spec.names.plural
+        self.group = crd.spec.group
+        self.version = crd.spec.version
+
+        # True if this object is backed by a Kubernetes object, this is, it has
+        # been loaded or saved from/to Kubernetes API.
+        self.bound = False
+
+        # Set to True if the object needs to be updated every time one of its
+        # attributes is changed.
+        self.auto_save = False
+
+        # Set `auto_reload` to `True` if it needs to be reloaded before every
+        # read of an attribute. This considers the `auto_reload_period`
+        # attribute at the same time.
+        self.auto_reload = False
+
+        # If `auto_reload` is set, it will not reload if less time than
+        # `auto_reload_period` has passed since last read.
+        self.auto_reload_period = timedelta(seconds=2)
+
+        # Last time this object was updated
+        self.last_update: datetime = None
+
+        if not hasattr(self, 'backing_obj'):
+            self.backing_obj = {
+                "metadata": {"name": name, "namespace": namespace},
+                "kind": self.kind,
+                "apiVersion": "{}/{}".format(self.group, self.version),
+            }
+
+    def load(self) -> CustomObject:
+        """Loads this object from the API."""
+        api = client.CustomObjectsApi()
+
+        obj = api.get_namespaced_custom_object(
+            self.group, self.version, self.namespace, self.plural, self.name
+        )
+
+        self.backing_obj = obj
+        self.bound = True
+
+        self._register_updated()
+        return self
+
+    def create(self) -> CustomObject:
+        """Creates this object in Kubernetes."""
+        api = client.CustomObjectsApi()
+
+        obj = api.create_namespaced_custom_object(
+            self.group, self.version, self.namespace, self.plural, self.backing_obj
+        )
+
+        self.backing_obj = obj
+        self.bound = True
+
+        self._register_updated()
+        return self
+
+    def update(self) -> CustomObject:
+        """Updates the object in Kubernetes."""
+        api = client.CustomObjectsApi()
+
+        obj = api.patch_namespaced_custom_object(
+            self.group,
+            self.version,
+            self.namespace,
+            self.plural,
+            self.name,
+            self.backing_obj,
+        )
+
+        self.backing_obj = obj
+
+        self._register_updated()
+        return self
+
+    def _register_updated(self):
+        """Register the last time the object was updated from Kubernetes."""
+        self.last_update = datetime.now()
+
+    def _reload_if_needed(self):
+        """Reloads the object is `self.auto_reload` is set to `True` and more than
+        `self.auto_reload_period` time has passed since last reload."""
+        if not self.auto_reload:
+            return
+
+        if self.last_update is None:
+            self.reload()
+
+        if datetime.now() - self.last_update > self.auto_reload_period:
+            self.reload()
+
+    @classmethod
+    def from_yaml(cls, yaml_file, name=None, namespace=None):
+        """Creates a `CustomObject` from a yaml file. In this case, `name` and
+        `namespace` are optional in this function's signature, because they
+        might be passed as part of the `yaml_file` document.
+        """
+        doc = yaml.safe_load(open(yaml_file))
+
+        if "metadata" not in doc:
+            doc["metadata"] = dict()
+
+        if (name is None or name == "") and "name" not in doc["metadata"]:
+            raise ValueError(
+                "`name` needs to be passed as part of the function call "
+                "or exist in the `metadata` section of the yaml document."
+            )
+
+        if (namespace is None or namespace == "") and "namespace" not in doc["metadata"]:
+            raise ValueError(
+                "`namespace` needs to be passed as part of the function call "
+                "or exist in the `metadata` section of the yaml document."
+            )
+
+        if name is None:
+            name = doc["metadata"]["name"]
+        else:
+            doc["metadata"]["name"] = name
+
+        if namespace is None:
+            namespace = doc["metadata"]["namespace"]
+        else:
+            doc["metadata"]["namespace"] = namespace
+
+        kind = doc["kind"]
+        api_version = doc["apiVersion"]
+
+        obj = cls(name, namespace, kind=kind, api_version=api_version)
+        obj.backing_obj = doc
+
+        return obj
+
+    @classmethod
+    def define(cls, name, plural=None, api_version=None, kind=None):
+        """Defines a new class that will hold a particular type of object.
+
+        This is meant to be used as a quick replacement for
+        CustomObject if needed, but not extensive control or behaviour
+        needs to be implemented. If your particular use case requires more
+        control or more complex behaviour on top of the CustomObject class,
+        consider subclassing it.
+        """
+
+        class _defined(cls):
+            def __init__(self, name, namespace):
+                super(self.__class__, self).__init__(
+                    name, namespace, plural=plural, api_version=api_version, kind=kind
+                )
+
+            def __repr__(self):
+                return "{klass_name}({name}, {namespace})".format(
+                    klass_name=name,
+                    name=repr(self.name),
+                    namespace=repr(self.namespace),
+                )
+
+        if name is None:
+            raise ValueError("Need to pass a class name")
+
+        return _defined
+
+    def delete(self):
+        """Deletes the object from Kubernetes."""
+        api = client.CustomObjectsApi()
+        body = client.V1DeleteOptions()
+
+        api.delete_namespaced_custom_object(
+            self.group, self.version, self.namespace, self.plural, self.name, body
+        )
+
+        self._register_updated()
+
+    def reload(self):
+        """Reloads the object from the Kubernetes API."""
+        return self.load()
+
+    def __getitem__(self, key):
+        self._reload_if_needed()
+
+        return self.backing_obj[key]
+
+    def __setitem__(self, key, val):
+        self.backing_obj[key] = val
+
+        if self.bound and self.auto_save:
+            self.update()
+
+
+def get_crd_names(plural=None, kind=None, api_version=None) -> Optional[dict]:
+    """Gets the names, group and version by the identifier."""
+    api = client.ApiextensionsV1beta1Api()
+
+    if plural == kind == api_version is None:
+        return None
+
+    group = version = ""
+    if api_version is not None:
+        group, version = api_version.split("/")
+
+    crds = api.list_custom_resource_definition()
+    for crd in crds.items:
+        found = True
+        if group != "":
+            if crd.spec.group != group:
+                found = False
+
+        if version != "":
+            if crd.spec.version != version:
+                found = False
+
+        if kind is not None:
+            if crd.spec.names.kind != kind:
+                found = False
+
+        if plural is not None:
+            if crd.spec.names.plural != plural:
+                found = False
+
+        if found:
+            return crd
