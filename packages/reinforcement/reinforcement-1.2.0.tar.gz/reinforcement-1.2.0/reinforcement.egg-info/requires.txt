@@ -1,0 +1,16 @@
+
+[test]
+numpy<1.17
+tensorflow==1.14
+pytest
+pytest-rerunfailures
+matplotlib
+gym
+
+[tf_cpu]
+numpy<1.17
+tensorflow==1.14
+
+[tf_gpu]
+numpy<1.17
+tensorflow-gpu==1.14
