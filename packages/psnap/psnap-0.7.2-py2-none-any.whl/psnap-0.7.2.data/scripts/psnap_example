@@ -1,0 +1,96 @@
+#!python
+
+from __future__ import print_function
+
+import datetime
+import os.path
+import sys
+import random
+import time
+import traceback
+from psnap import state_tracker
+
+if __name__ == "__main__":
+    # Can use datetime.datetime.strftime formatting for dateformat
+    # and reference your dateformat with %D.
+    #   %Y=year, %m=month, %d=day, %H=hour, %M=minute, %S=second, etc.
+    dateformat = None
+    # Can override if a daily timestamp is enough
+    #dateformat = "%Y%m%d"
+    output_directory = "snapshots/%D"
+    st = state_tracker.StateTracker(os.path.join(output_directory, "results_%D.json"), dateformat=dateformat)
+
+    st.set("val1", "string 1")
+    # $val1$
+
+    st.set("val2", 2) # $val2$
+
+    st.set("val3", 3.0) # $val3$
+
+    # Might not be what you expect since only get final value
+    # and val4 gets changed. Use unique names to preserve.
+    st.set("val4", "this is lost") # $val4$
+
+    st.set("val4", "val4 final value") # $val4$
+
+    ts = time.time()
+    st.set("time_raw", ts) # Raw timestamp $time_raw$
+
+    ts_ctime = datetime.datetime.fromtimestamp(ts).ctime()
+    st.set("time_ctime", ts_ctime) # Time in ctime format $time_ctime$
+
+    if sys.version_info[0] > 2:
+        ts_iso = datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).isoformat()
+    else:
+        # Python 2
+        ts_iso = datetime.datetime.fromtimestamp(ts).isoformat()
+    st.set("time_iso", ts_iso) # iso time $time_iso$
+
+    # Let's get a random number (seeded with our time above)
+    random.seed(ts)
+    random_val = random.randint(1000000, 10000000)
+    st.set("random_val", random_val) # $random_val$
+
+    random_val2 = random.randint(1000000, 10000000)
+    st.set("deep.dotted.path", random_val2) # $deep.dotted.path$
+
+    # Expect won't be found or expanded $missing.variable$
+
+    # Save some other types
+
+    s1 = set(["foo", "bar", "foo"])
+    # set isn't json serializable by itself
+    st.set("s1", list(s1))
+    # $s1$
+
+    l1 = ["alpha", "2", 3, 3.14, {"five": "5"}]
+    st.set("l1", l1)
+    # $l1$
+
+    d1 = {"a": "string", "b": 5, "c": 2.7}
+    st.set("d1", d1)
+    # $d1$
+
+    elapsed_seconds = time.time() - ts
+    # str(timedelta) formats as [H]H:MM:SS[.UUUUUU]
+    # trim last 3 to get milliseconds instead of microseconds
+    time_elapsed = str(datetime.timedelta(seconds=elapsed_seconds))[:-3]
+    st.set("time_elapsed", time_elapsed)
+    # $time_elapsed$
+
+    # Save main json state
+    try:
+        json_output = st.save()
+        print("Saved history to: {}".format(json_output))
+    except Exception as e:
+        print("Error saving json: {}".format(str(e)))
+        traceback.print_stack()
+
+    # Process input file code_src to produce output file code_snap
+    try:
+        output = st.save_code_snap(output_directory=output_directory)
+        print("Saved code_snap to: {}".format(output['code_snap']))
+        print("Check differences with: diff -u {} {}".format(sys.argv[0], output['code_snap']))
+    except Exception as e:
+        print("Error saving code snapshot (usually problem finding code_src): {}".format(str(e)))
+        traceback.print_stack()
