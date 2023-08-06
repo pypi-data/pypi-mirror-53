@@ -1,0 +1,55 @@
+#!python
+
+from time import sleep
+import click
+from tqdm import tqdm
+from thermocouples_reference import thermocouples
+from sacada import SACADA
+
+typeR = thermocouples['R']
+
+@click.group()
+@click.option('--port', default="/dev/ttyACM0", help='serial port location eg.: /dev/ttyACM0 (default)')
+@click.pass_context
+def cli(ctx, port):
+    ctx.obj['s'] = SACADA(port)
+
+@cli.command()
+@click.pass_context
+def show(ctx):
+    click.echo(ctx.obj['s'].identify())
+
+@cli.command()
+@click.argument('channel')
+@click.pass_context
+def read(ctx, channel):
+    click.echo(ctx.obj['s'].readVoltage(channel))
+
+@cli.command()
+@click.argument('channel')
+@click.option('--interval', default=1000, help='interval bewteen readings (ms)')
+@click.option('--save', default='', help='file to save readings')
+@click.pass_context
+def monitor(ctx, channel, interval, save):
+    #with tqdm(total=256, desc="Channel {}".format(channel), bar_format="{desc}|{bar}|{n_fmt}mV") as bar:
+    #while True:
+    #    bar.n = int(ctx.obj['s'].readVoltage(channel) * 1000)
+    #        bar.refresh()
+    #        sleep(interval/1000.0)
+    if not save:
+        while True:
+            click.echo(ctx.obj['s'].readVoltage(channel))
+            sleep(interval/1000.0)
+    else:
+        f = open(save, 'w')
+        try:
+            while True:
+                voltage = ctx.obj['s'].readVoltage(channel)
+                click.echo(voltage)
+                f.write(str(voltage) + '\n')
+                sleep(interval/1000.0)
+        except KeyboardInterrupt:
+            f.close()
+
+if __name__ == '__main__':
+    cli(obj={})
