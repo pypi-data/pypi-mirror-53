@@ -1,0 +1,10 @@
+include README.rst
+include setup.cfg
+
+recursive-include atomicdataMB *
+recursive-include docs *
+
+prune build
+prune docs/_build
+
+global-exclude *.pyc 
