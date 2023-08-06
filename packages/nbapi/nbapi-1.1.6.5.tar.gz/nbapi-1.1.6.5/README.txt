@@ -1,0 +1,1 @@
+SFW api for anime. Soon to have animated results!
