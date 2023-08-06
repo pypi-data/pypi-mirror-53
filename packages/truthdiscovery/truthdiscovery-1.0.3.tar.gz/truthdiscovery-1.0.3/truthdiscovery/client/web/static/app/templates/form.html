@@ -1,0 +1,229 @@
+<form class="form-horizontal" ng-submit="$ctrl.run()">
+    <!--
+    Group everything inside a fieldset so that all inputs can be disabled/enabled at once
+    -->
+    <fieldset ng-disabled="$ctrl.service.state == 'loading'">
+
+        <!-- Algorithm selection -->
+        <div class="form-group">
+            <div class="col-3 col-sm-12">
+                <label class="form-label" for="algorithm">Algorithm(s):</label>
+            </div>
+            <div class="col-9 col-sm-12">
+                <select class="form-select" name="algorithm" id="algorithm"
+                        ng-model="$ctrl.algorithm"
+                        data-ng-attr-size="{{ $ctrl.num_algorithms }}" multiple required>
+                    <option ng-repeat="(label, display_name) in $ctrl.algorithm_labels"
+                            value="{{ label }}">
+                        {{ display_name }}
+                    </option>
+                </select>
+                <p class="text-gray">Hold Ctrl/Cmd to select multiple algorithms</p>
+            </div>
+        </div>
+
+        <!-- Matrix CSV -->
+        <div class="form-group">
+            <div class="col-3 col-sm-12">
+                <label class="form-label" for="matrix">Dataset:</label>
+            </div>
+            <div class="col-9 col-sm-12">
+                <table class="table striped matrix-table">
+                    <thead>
+                        <tr>
+                            <th></th>  <!-- First col is source labels -->
+                            <th ng-repeat="col in $ctrl.matrix.entries[0] track by $index">
+                                Variable {{ $index + 1 }}
+                                <i class="icon icon-cross delete"
+                                   ng-click="$ctrl.matrix.deleteVariable($index)"
+                                   ng-show="$ctrl.matrix.entries[0].length > 1">
+                                </i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in $ctrl.matrix.entries">
+                            <td>
+                                Source {{ $index + 1 }}
+                                <i class="icon icon-cross delete"
+                                   ng-click="$ctrl.matrix.deleteSource($index)"
+                                   ng-show="$ctrl.matrix.entries.length > 1">
+                                </i>
+                            </td>
+                            <td ng-repeat="col in row track by $index">
+                                <input ng-model="$ctrl.matrix.entries[$parent.$index][$index]"
+                                       class="form-input" type="number" placeholder="-"
+                                       step="0.001" onfocus="this.select()" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn" type="button" ng-click="$ctrl.matrix.addSource()">
+                    Add source
+                </button>
+                <button class="btn" type="button" ng-click="$ctrl.matrix.addVariable()">
+                    Add Variable
+                </button>
+                <button class="btn" type="button" ng-click="$ctrl.toggleCsvDialog()">
+                    Load from CSV
+                </button>
+                <button class="btn btn-link" type="button" ng-click="$ctrl.matrix.clear()"
+                        title="Clear entries" style="float: right;">
+                    <i class="icon icon-delete"></i>
+                </button>
+
+                <div class="divider text-center" data-content="OR"></div>
+
+                <!-- Preset dataset selection -->
+                <label class="form-label" for="preset-dataset">
+                    Choose a preset dataset:
+                </label>
+                <select class="form-select" id="preset-dataset" style="width: auto;"
+                        ng-model="$ctrl.selected_preset">
+                    <option value=""></option>
+                    <option ng-repeat="(label, obj) in $ctrl.preset_datasets"
+                            value="{{ label }}">
+                        {{ obj.name }}
+                    </option>
+                </select>
+                <button type="button" class="btn btn-primary"
+                        ng-click="$ctrl.loadPresetDataset($ctrl.selected_preset)">
+                    Load
+                </button>
+                <p class="text-gray">
+                    {{ $ctrl.preset_datasets[$ctrl.selected_preset].description }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Compare against previous results -->
+        <div class="form-group">
+            <label class="form-checkbox">
+                <input type="checkbox" ng-model="$ctrl.compare_results"
+                       ng-disabled="$ctrl.service.previous_results === null" />
+                <i class="form-icon"></i>
+                Compare against previous results
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label class="form-checkbox">
+                <input type="checkbox" ng-model="$ctrl.show_advanced" />
+                <i class="form-icon"></i>
+                Show advanced options
+            </label>
+        </div>
+
+        <div ng-show="$ctrl.show_advanced">
+            <!-- Algorithm parameters -->
+            <div class="form-group">
+                <!-- Iteration method -->
+                <div class="col-3 col-sm-12">
+                    <label class="form-label">Iteration method:</label>
+                </div>
+                <div class="col-9 col-sm-12">
+                    <label class="form-radio">
+                        <input type="radio" ng-model="$ctrl.iteration.type" value="fixed" />
+                        <i class="form-icon"></i>
+                        Fixed number of iterations
+                    </label>
+                    <label class="form-radio">
+                        <input type="radio" ng-model="$ctrl.iteration.type" value="convergence" />
+                        <i class="form-icon"></i>
+                        Until convergence
+                    </label>
+
+                    <!-- 'fixed' options -->
+                    <div ng-show="$ctrl.iteration.type == 'fixed'">
+                        <label class="form-label form-inline">
+                            Number of iterations:
+                            <input type="number" class="form-input" min="0" max="100"
+                                   step="1" ng-model="$ctrl.iteration.limit" />
+                        </label>
+                    </div>
+
+                    <!-- 'convergence' options -->
+                    <div ng-show="$ctrl.iteration.type == 'convergence'">
+                        <div class="text-gray">
+                            Iterate until the distance between successive trust
+                            scores becomes less than the given threshold
+                        </div>
+                        <label class="form-label form-inline">
+                            Distance measure:
+                            <select class="form-select" ng-model="$ctrl.iteration.measure">
+                                <option ng-repeat="measure in $ctrl.distance_measures"
+                                        value="{{ measure }}">
+                                    {{ measure | formatDistanceMeasure }}
+                                </option>
+                            </select>
+                        </label>
+
+                        <label class="form-label form-inline">
+                            Threshold:
+                            <input type="number" class="form-input" step="0.0000001"
+                                   ng-model="$ctrl.iteration.threshold" />
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Algorithm-specific parameters -->
+                <div class="col-3 col-sm-12">
+                    <label class="form-label">Algorithm parameters:</label>
+                </div>
+                <div class="col-9 col-sm-12">
+                    <textarea ng-model="$ctrl.alg_params" class="form-input"></textarea>
+                    <div class="text-gray">
+                        Algorithm-specific parameters in the form <code>key=value</code>
+                        (one per line)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Errors -->
+        <div class="has-error">
+            <p ng-show="$ctrl.error" class="form-input-hint">{{ $ctrl.error }}</p>
+        </div>
+
+        <!-- Submit button -->
+        <div class="form-group">
+            <div class="col-9 col-sm-12">
+                <button class="btn btn-primary">Run</button>
+            </div>
+        </div>
+
+        <!-- Load CSV modal dialog -->
+        <div class="modal active" id="modal-id" ng-show="$ctrl.load_csv.dialog_open">
+            <a href="#close" class="modal-overlay" aria-label="Close"></a>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <a href="#" class="btn btn-clear float-right"
+                       ng-click="$ctrl.toggleCsvDialog()">
+                    </a>
+                    <div class="modal-title h5">Load matrix from CSV</div>
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <p ng-show="$ctrl.load_csv.error" class="form-input-hint">
+                            {{ $ctrl.load_csv.error }}
+                        </p>
+                        <textarea ng-model="$ctrl.load_csv.textarea"
+                                  class="form-input"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                            ng-click="$ctrl.loadFromCSV()">
+                        Load
+                    </button>
+                    <button type="button" class="btn"
+                            ng-click="$ctrl.toggleCsvDialog()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

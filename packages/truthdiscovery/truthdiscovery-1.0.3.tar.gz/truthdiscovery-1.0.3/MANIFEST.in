@@ -1,0 +1,10 @@
+include README.md
+
+recursive-include doc *
+prune doc/_build
+prune doc/_static
+
+recursive-include truthdiscovery/client/web/templates *
+recursive-include truthdiscovery/client/web/static *
+
+prune truthdiscovery/examples

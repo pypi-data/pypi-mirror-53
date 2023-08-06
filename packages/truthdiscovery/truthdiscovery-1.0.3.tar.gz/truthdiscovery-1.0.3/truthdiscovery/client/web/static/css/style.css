@@ -1,0 +1,74 @@
+body {
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 50em;
+}
+
+h3 {
+    cursor: pointer;
+}
+
+/* Icons in h3 */
+h3 i.icon {
+    font-size: 0.6em;
+}
+
+table {
+    margin-bottom: 1em;
+}
+
+.matrix-table {
+    text-align: center;
+}
+
+.matrix-table td:first-child {
+    font-weight: bold;
+}
+
+.matrix-table td {
+    cursor: pointer;
+}
+
+.matrix-table input {
+    width: 5em;
+    background: inherit;
+    border: 0;
+    text-align: center;
+    margin: auto;
+}
+
+/*
+ * Note: implement our own striped table class here so we can have <tbody>s
+ * alternately coloured for claim belief table (spectre stripes <tr>s)
+ */
+table.claim-belief tbody:nth-of-type(odd) {
+    background: #f7f8f9;
+}
+table.striped tbody tr:nth-of-type(odd) {
+    background: #f7f8f9;
+}
+
+.add, .delete {
+    cursor: pointer;
+    font-size: 0.75em;
+}
+
+.add {
+    color: #32b643;
+}
+
+.delete {
+    visibility: hidden;
+    color: #e85600;
+}
+
+td:hover .delete, th:hover .delete {
+    visibility: visible;
+}
+
+.imagery-container canvas {
+    display: block;
+    margin: auto;
+    margin-bottom: 1em;
+    outline: none;
+}
