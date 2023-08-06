@@ -1,0 +1,122 @@
+*********
+SCADA API
+*********
+**Module:** ``typhoon.api.scada``
+
+SCADA API is collections of functions/methods that can be used for changing widget parameters.
+To use SCADA API to change widgets’ parameters, you must first load the HIL SCADA Panel file.
+
+.. note::
+    In case you try to use any other function then ``load_panel()`` before Panel file is loaded,
+    ``ScadaAPIException`` will be raised. The same exception will be raised in case any error occurs in any SCADA API function.
+
+Example::
+
+    from typhoon.api.scada import panel
+
+    # load a Panel file
+    panel.load_panel(r"C:\scada_file.cus")
+
+After the Panel whose widgets you want to change is loaded, you can access a particular widget by using the Widget ID.
+
+.. note::
+    To get the Widget ID open the Panel file in HIL SCADA, right-click on the desired widget and choose ``Copy Widget ID`` action.
+
+Example::
+
+    from typhoon.api.scada import panel
+
+    # load a Panel file
+    panel.load_panel(r"C:\scada_file.cus")
+
+    # get the widget handle
+    widget_handle = panel.get_widget_by_id("e18c3fe582d011e9bac3e0d55e6b2045")
+
+Once the desired widget is acquired, its properties can be changed.
+
+.. note::
+    Not all widget properties can be changed by SCADA API. For detailed information witch properties can be changed for a specific widget, please consult the :doc:`Available Widget Properties </widget_prop>` section.
+
+Example::
+
+    from typhoon.api.scada import panel
+    import typhoon.api.scada.const as api_const
+    from typhoon.api.scada.exception import ScadaAPIException
+
+    # load a Panel file
+    panel.load_panel(r"C:\scada_file.cus")
+
+    # get the widget handle
+    widget_handle = panel.get_widget_by_id("e18c3fe582d011e9bac3e0d55e6b2045")
+
+    # change the widget name
+    panel.set_property_value(widget_handle,
+                             api_const.PROP_NAME,
+                             "New widget name")
+
+    # in case we try to change an unsupported property or a new property
+    # value is not valid ``ScadaAPIException`` will be raised
+    try:
+        # the new property value is invalid
+        panel.set_property_value(widget_handle,
+                                 api_const.PROP_NAME,
+                                 [56, 28, 89])
+    except ScadaAPIException as ex:
+        print(ex)
+
+After you finish modifying the Panel and the Panel’s widget, the loaded Panel can be saved to an existing Panel file or as a new Panel file.
+
+Complete example::
+
+    from typhoon.api.scada import panel
+    import typhoon.api.scada.const as api_const
+    from typhoon.api.scada.exception import ScadaAPIException
+
+    # load a Panel file
+    panel.load_panel(r"C:\scada_file.cus")
+
+    # get the widget handle whose properties you want to change
+    widget_handle = panel.get_widget_by_id("e18c3fe582d011e9bac3e0d55e6b2045")
+
+    # change the widget name
+    panel.set_property_value(widget_handle,
+                             api_const.PROP_NAME,
+                             "New widget name")
+
+    # in case we try to change an unsupported property or a new property
+    # value is not valid ``ScadaAPIException`` will be raised
+    try:
+        # the new property value is invalid
+        panel.set_property_value(widget_handle,
+                                 api_const.PROP_NAME,
+                                 [56, 28, 89])
+    except ScadaAPIException as ex:
+        print(ex)
+
+    # save changes to the existing Panel file...
+    panel.save_panel()
+
+    # ...or save changes to a new Panel file
+    panel.save_panel_as(r"C:\new_scada_file.cus")
+
+.. _api_constants:
+
+SCADA API constants
+-------------------
+**Module:** ``typhoon.api.scada.const``
+
+Various SCADA API methods expect predefined constants for some of their parameters.
+
+Below is a listing (Python module) of all constants which are used
+in SCADA API methods.
+
+.. literalinclude:: ../../../typhoon/api/scada/const.py
+   :language: python
+   :lines: 26-
+
+`API references`_
+-----------------
+
+.. autoclass:: typhoon.api.scada.ScadaAPI
+    :members:
+    :member-order: bysource
