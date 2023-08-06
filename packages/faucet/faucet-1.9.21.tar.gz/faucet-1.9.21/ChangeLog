@@ -1,0 +1,253 @@
+CHANGES
+=======
+
+1.9.21
+------
+
+* Add DP key to InvalidConfigError exceptions
+* Stickler and test broken ring
+* Add test for ring of size 4
+* learn\_port.number
+* Don't prune unicast, handle multiple shortest paths of same length
+* add\_tagged\_interface: easier optional IP address
+* Cleanup tutorial helper scripts
+* helper-funcs: install all tutorial helpers
+* Clarify ACL 'allow' operation
+* Stickler
+* Stickler
+* Basic coprocessor docs
+* Unit test for coprocessor output
+* Allow coprocessor to output to ports directly bypassing pipeline
+* Simple input only coprocessor test
+* Mark global METER deletes as 'deleteglobal' kind
+* Update faucet/test-base Docker tag to v6
+
+1.9.20
+------
+
+* Upgrade to v6.0.0 of faucet/test-base
+* Update grafana/grafana-arm32v7-linux Docker tag to v6.3.6
+* Update grafana/grafana Docker tag to v6.3.6
+* Add FAUCET\_CONFIG\_AUTO\_REVERT to docs
+* pylint
+* Allow FAUCET to automatically revert a bad config
+* test\_config
+* Cache last known good config
+* dp\_parser returns file contents as well
+* Simplify router ref check
+* Add setting for AUTO\_REVERT
+* read\_config() can return file contents
+* Comment only updates to valve\_flood (also addresses Sphinx lint)
+* Gauge can put OFMeter stats in Prometheus
+* stickler
+* stickler
+* Preserve unretried events
+* pylint
+* Cleanup RBQ main()
+* Enable OVS meter testing
+* Update dependency pytype to v2019.9.17
+* Improve deploy\_deb.sh
+
+1.9.19
+------
+
+* Remove unnecessary duplicate "port" from LACP state change messages
+* pylint
+* Consider collecting/distributing state as well as sync to decide if LACP is up
+* Test full mesh of LACP failures
+* Test LAG connectivity when members down
+* Add test to show mirroring a port is a warm start
+* pytype
+* Stickler, avoid unnecessary eth\_type match in flood if not used
+* Docs
+* pylint
+* filter source broadcast port
+* Wrong init of restricted\_bcast\_arpnd
+* Correct restricted broadcast always on
+* Rename to restricted\_bcast\_arpnd
+* Configurable restricted broadcast
+* Experimental rules for restricted broadcast
+* DelPortTest now is a cold start with pipeline change
+* Now that TFM autosizer is more generous, adding/deleting VLANs does change flood table size
+* Stickler
+* Fix TFM autosizing underestimating flood and other tables, and added tests
+* stickler
+* recv\_data should be False if select fails
+* Revert "Adapter should retry socket connection (e.g if FAUCET restarted)."
+* Adapter should retry socket connection (e.g if FAUCET restarted)
+* Need to synchronize with FAUCET's state update time
+* Minor Aruba doc updates
+* MaxHosts background ping can interfere with other process
+* Adapter needs to catch OSError too
+
+1.9.18
+------
+
+* Test load/reload of invalid/valid config
+* Update config watcher on error
+* Gauge senses changes in FAUCET configs
+* Gauge unit tests
+* DPs can be a list
+* Gauge unit tests should log
+* Gauge config manager needs hashes and FAUCET config file names
+* Add TODO that multi DP routing needs to flood out stack ports
+* syntax
+* Disable targetted gw resolution for multi DP routing
+* multi DP no vlans test is flaky
+* Need to compare DONTCARE
+* Don't process packets with all zero MAC addresses
+* Speed up fping by skipping DNS and using standard fast retry timers
+* Add notes for use with Poseidon
+* 8021X periodic reauth test could still get out of sync
+* Stickler
+* Update dependency pytype to v2019.9.6
+* Increase code reuse in warm start config changes, ensure port and VLAN caches are kept on an ACL-only change
+* pylint
+* Incremental smoke test coverage for ryuapp
+* Re-do Stickler
+* Revert "Stickler."
+* Revert "Stickler."
+* Stickler
+* Stickler
+* Shard out Ryu app smoke test
+* Stickler
+* Shard out egress pipeline test
+* Shard out config tests
+* Shard out dot1x tests
+* Upgrade prometheus to 2.12.0
+* Update grafana/grafana-arm32v7-linux Docker tag to v6.3.5
+* Update grafana/grafana Docker tag to v6.3.5
+* Remove vendor specific details from Aruba config. Remove DNS dependant examples. Explain requirements for VLAN VIDs
+* Demote flakey call to warning
+* syntax
+* Don't sleep on last scrape try
+* Take less time scraping table IDs that aren't present
+* Update dependency pytype to v2019.8.29
+* Update grafana/grafana-arm32v7-linux Docker tag to v6.3.4
+* Update grafana/grafana Docker tag to v6.3.4
+* Filter other\_valves first
+* pytype
+* pylint
+* Simplify peer DP logic for size 2 stacks further
+
+1.9.17
+------
+
+* Add a profiling option to the integration tests
+* withing -> within
+* Implement away port pruning and re-enable separate broadcast/unicast testing
+* Split stacking class into reflection/non reflection implementations
+* force ARP transaction
+* Change 3DP unicast/broadcast test to simple ping
+* Add --loglevel option to set mininet log level
+* Tests for up to 48 ports
+* Don't need to check for learn reflection on stacks size <= 2
+* Add non-compliant match fields to FaucetBadFlowModTest
+* Update blog references
+
+1.9.16
+------
+
+* too many values
+* list index
+* Use topo introspection to discover int/ext hosts
+* Need int dpid
+* Map dpid port/host name assignment
+* Factor LACP health into stack root health
+* Separate health function
+* stickler
+* No longer need remote stack state
+* Don't need remote state
+* Simplify state machine
+* Missed stack state recovery DOWN -> UP
+
+1.9.15
+------
+
+* Include command output in switch.cmd() exception
+* xcast helper should wait longer (still too load sensitive)
+* Add test to use redundant link
+* tunnel tests belong with stacking
+* Split stack tests from test\_valve.py
+* Move base test classes to valve\_test\_lib.py
+* Move test configs to library
+* pylint, python 3 changes
+* Add exit code checking to FaucetSwitch.cmd()
+* Update prom/prometheus Docker tag to v2.12.0
+* Update dependency sphinx to v2.2.0
+* verify bcast and ucast helpers should use common, less load sensitive code
+* ebtables needs to be run before the controller starts to avoid learning test host MAC addresses
+* Update grafana/grafana-arm32v7-linux Docker tag to v6.3.3
+* Update grafana/grafana Docker tag to v6.3.3
+* Better to use less than rather than equality for debian version matches
+
+1.9.14
+------
+
+* Update faucet/dbuilder Docker tag to v3.0.3
+* verify\_broadcast() tests can flake because it did not check that a scapy originated UDP broadcast was sent
+* verify\_broadcast() helper doesn't actually send a broadcast
+* Ignore W1618
+* Upgrade chewie
+* Obsolete test
+* Use ordered host names everywhere
+* Need to check version comparators separately
+* host\_name\_ordered()
+* Open file as UTF8
+* self.host\_name\_ordered()
+* loop protection tests flakey due to host name order
+* Add unit test
+* Should handle empty graph
+* Fix unhandled exception when LLDP beacon ttl out of range
+* Use pyyaml 3.13 or older (avoid 5.x for now)
+* Add missing %s to format string in require\_host\_learned()
+* Deflake FaucetTaggedExtLoopProtectTest (should not use confusing ACL)
+* Add unit test for stacking external/loop protection (missing test coverage)
+* Fix recovery from a bad config
+* Need to catch no self.stack but stack\_ports
+* Stacking enables LLDP
+* Global LLDP beacon config not required anymore for stacking
+* Make builds more reproducible by locking versions
+* Correct standalone loop protect external case
+* pylint
+* stickler
+* Add test for size 3 stacked switches
+* stickler
+* pylint
+* all flood managers need canonical port ordering
+* Fix external loop protection for stacks of size 2
+* stickler
+* stack + route tests use a lot of DPs
+* Further simplification to external field matching
+* Refactor setting of external forwarding requested field to common functions
+* Move loop protect field definitions to valve\_of
+* Use common port number sort ordering
+* Seperate logic for LACP forwarding
+* Use PCP 2
+* Prototype stack redundancy
+* Stickler
+* Test tech debt
+* Fix lldp error
+* Make sure routers on each DP have the required VLANs to route
+* Update dependency pytype to v2019.8.9
+* Update faucet/prometheus-pi Docker tag to v2.11.1
+* Add timeout cmd and quote
+* Re-enable ARP fuzzing for scapy 2.4.3
+* Update grafana/grafana-arm32v7-linux Docker tag to v6.3.2
+* Update grafana/grafana Docker tag to v6.3.2
+* Update dependency scapy to v2.4.3
+* Make stack ACL tests more reliable by cleaning up nc and using a unique string per test
+* verify influx DB log should retry
+* hotfix: a split/controller stacked network will not learn from stack links
+* add basic adapter for faucetagent
+* Update prom/prometheus Docker tag to v2.11.1
+
+1.9.10
+------
+
+* Add Test Users to the Radius Config in Mininet\_tests
+* Add Dot1x RADIUS-selected ACLs
+* - Fix some tests to avoid some failures on Cisco C9K
+* update grafana to 6.2.4
+* err -> out
+* Pin exabgp to 4.0.10
