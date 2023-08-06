@@ -1,0 +1,70 @@
+Metadata-Version: 2.1
+Name: pegasuspy
+Version: 0.15.0
+Summary: scRNA-Seq analysis tools that scale to millions of cells
+Home-page: https://github.com/klarman-cell-observatory/pegasus
+Author: Bo Li, Joshua Gould, Yiming Yang, Siranush Sarkizova
+Author-email: sccloud@googlegroups.com, sccloud@broadinstitute.org
+License: UNKNOWN
+Keywords: single cell/nucleus genomics analysis
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Framework :: Jupyter
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Python: ~=3.5
+Requires-Dist: matplotlib (>=2.0.0)
+Requires-Dist: pandas (>=0.24)
+Requires-Dist: Cython
+Requires-Dist: scipy (<1.3)
+Requires-Dist: seaborn
+Requires-Dist: scikit-learn (>=0.21.3)
+Requires-Dist: statsmodels
+Requires-Dist: natsort
+Requires-Dist: anndata
+Requires-Dist: numba
+Requires-Dist: numpy
+Requires-Dist: tables
+Requires-Dist: xlsxwriter
+Requires-Dist: loompy
+Requires-Dist: docopt
+Requires-Dist: setuptools
+Requires-Dist: plotly
+Requires-Dist: pybind11
+Requires-Dist: joblib
+Requires-Dist: scikit-misc
+Requires-Dist: pyarrow
+Requires-Dist: umap-learn (>=0.3.9)
+Requires-Dist: lightgbm (==2.2.1)
+Requires-Dist: python-igraph
+Requires-Dist: MulticoreTSNE-modified
+Requires-Dist: hnswlib
+Requires-Dist: fisher-modified
+Requires-Dist: louvain-github
+Requires-Dist: leidenalg
+Requires-Dist: forceatlas2-python
+Requires-Dist: scplot
+Provides-Extra: fitsne
+Requires-Dist: fitsne ; extra == 'fitsne'
+Provides-Extra: mkl
+Requires-Dist: mkl ; extra == 'mkl'
+
+====================================
+Pegasus for Single Cell Analysis
+====================================
+
+Pegasus is a tool for analyzing transcriptomes of millions of single cells. It is a command line tool, a python package and a base for Cloud-based analysis workflows.
+
+`Read documentation <http://sccloudpy.readthedocs.io>`__
+
+
