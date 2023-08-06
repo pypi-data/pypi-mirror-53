@@ -1,0 +1,1142 @@
+<center><a href="power.c">Actual source code: power.c</a></center><br>
+
+<html>
+<head> <link rel="canonical" href="http://slepc.upv.es/documentation/current/src/eps/impls/power/power.c.html" />
+<title></title>
+<meta name="generator" content="c2html 0.9.4">
+<meta name="date" content="2019-09-30T13:38:21+00:00">
+</head>
+
+<body bgcolor="#FFFFFF">
+   <div id="version" align=right><b>slepc-3.12.0 2019-09-30</b></div>
+   <div id="bugreport" align=right><a href="mailto:slepc-maint@upv.es?subject=Typo or Error in Documentation &body=Please describe the typo or error in the documentation: slepc-3.12.0 v3.12 src/eps/impls/power/power.c.html "><small>Report Typos and Errors</small></a></div>
+<pre width="80">
+<a name="line1">  1: </a><font color="#B22222">/*</font>
+<a name="line2">  2: </a><font color="#B22222">   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</font>
+<a name="line3">  3: </a><font color="#B22222">   SLEPc - Scalable Library for Eigenvalue Problem Computations</font>
+<a name="line4">  4: </a><font color="#B22222">   Copyright (c) 2002-2019, Universitat Politecnica de Valencia, Spain</font>
+
+<a name="line6">  6: </a><font color="#B22222">   This file is part of SLEPc.</font>
+<a name="line7">  7: </a><font color="#B22222">   SLEPc is distributed under a 2-clause BSD license (see LICENSE).</font>
+<a name="line8">  8: </a><font color="#B22222">   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</font>
+<a name="line9">  9: </a><font color="#B22222">*/</font>
+<a name="line10"> 10: </a><font color="#B22222">/*</font>
+<a name="line11"> 11: </a><font color="#B22222">   SLEPc eigensolver: "power"</font>
+
+<a name="line13"> 13: </a><font color="#B22222">   Method: Power Iteration</font>
+
+<a name="line15"> 15: </a><font color="#B22222">   Algorithm:</font>
+
+<a name="line17"> 17: </a><font color="#B22222">       This solver implements the power iteration for finding dominant</font>
+<a name="line18"> 18: </a><font color="#B22222">       eigenpairs. It also includes the following well-known methods:</font>
+<a name="line19"> 19: </a><font color="#B22222">       - Inverse Iteration: when used in combination with shift-and-invert</font>
+<a name="line20"> 20: </a><font color="#B22222">         spectral transformation.</font>
+<a name="line21"> 21: </a><font color="#B22222">       - Rayleigh Quotient Iteration (RQI): also with shift-and-invert plus</font>
+<a name="line22"> 22: </a><font color="#B22222">         a variable shift.</font>
+
+<a name="line24"> 24: </a><font color="#B22222">       It can also be used for nonlinear inverse iteration on the problem</font>
+<a name="line25"> 25: </a><font color="#B22222">       A(x)*x=lambda*B(x)*x, where A and B are not constant but depend on x.</font>
+
+<a name="line27"> 27: </a><font color="#B22222">   References:</font>
+
+<a name="line29"> 29: </a><font color="#B22222">       [1] "Single Vector Iteration Methods in SLEPc", SLEPc Technical Report</font>
+<a name="line30"> 30: </a><font color="#B22222">           STR-2, available at http://slepc.upv.es.</font>
+<a name="line31"> 31: </a><font color="#B22222">*/</font>
+
+<a name="line33"> 33: </a><font color="#A020F0">#include &lt;slepc/private/epsimpl.h&gt;                </font><font color="#B22222">/*I "slepceps.h" I*/</font><font color="#A020F0"></font>
+<a name="line34"> 34: </a><font color="#A020F0">#include &lt;slepcblaslapack.h&gt;</font>
+<a name="line35"> 35: </a><font color="#B22222">/* petsc headers */</font>
+<a name="line36"> 36: </a><font color="#A020F0">#include &lt;petscdm.h&gt;</font>
+<a name="line37"> 37: </a><font color="#A020F0">#include &lt;petscsnes.h&gt;</font>
+
+<a name="line39"> 39: </a><strong><font color="#4169E1">static PetscErrorCode EPSPowerFormFunction_Update(SNES,Vec,Vec,void*)</font></strong>;
+<a name="line40"> 40: </a><strong><font color="#4169E1">static PetscErrorCode SNESLineSearchPostheckFunction(SNESLineSearch linesearch,Vec x,Vec y,Vec w,PetscBool *changed_y,PetscBool *changed_w,void *ctx)</font></strong>;
+<a name="line41"> 41: </a><strong><font color="#4169E1">PetscErrorCode EPSSolve_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>)</font></strong>;
+<a name="line42"> 42: </a><strong><font color="#4169E1">PetscErrorCode EPSSolve_TS_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>)</font></strong>;
+
+<a name="line44"> 44: </a><font color="#4169E1">typedef</font> <font color="#4169E1">struct</font> {
+<a name="line45"> 45: </a>  <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a> shift_type;
+<a name="line46"> 46: </a>  PetscBool         nonlinear;
+<a name="line47"> 47: </a>  PetscBool         update;
+<a name="line48"> 48: </a>  SNES              snes;
+<a name="line49"> 49: </a>  PetscErrorCode    (*formFunctionB)(SNES,Vec,Vec,void*);
+<a name="line50"> 50: </a>  void              *formFunctionBctx;
+<a name="line51"> 51: </a>  PetscErrorCode    (*formFunctionA)(SNES,Vec,Vec,void*);
+<a name="line52"> 52: </a>  void              *formFunctionActx;
+<a name="line53"> 53: </a>  PetscErrorCode    (*formFunctionAB)(SNES,Vec,Vec,Vec,void*);
+<a name="line54"> 54: </a>  PetscInt          idx;  <font color="#B22222">/* index of the first nonzero entry in the iteration vector */</font>
+<a name="line55"> 55: </a>  PetscInt          p;    <font color="#B22222">/* process id of the owner of idx */</font>
+<a name="line56"> 56: </a>} EPS_POWER;
+
+<a name="line58"> 58: </a><strong><font color="#4169E1"><a name="EPSSetUp_Power"></a>PetscErrorCode EPSSetUp_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line59"> 59: </a>{
+<a name="line61"> 61: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line62"> 62: </a>  PetscBool      flg,istrivial;
+<a name="line63"> 63: </a>  <a href="../../../../docs/manualpages/ST/STMatMode.html#STMatMode">STMatMode</a>      mode;
+<a name="line64"> 64: </a>  Mat            A,B;
+<a name="line65"> 65: </a>  Vec            res;
+<a name="line66"> 66: </a>  PetscContainer container;
+<a name="line67"> 67: </a>  PetscErrorCode (*formFunctionA)(SNES,Vec,Vec,void*);
+<a name="line68"> 68: </a>  PetscErrorCode (*formJacobianA)(SNES,Vec,Mat,Mat,void*);
+<a name="line69"> 69: </a>  void           *ctx;
+<a name="line70"> 70: </a>  SNESLineSearch linesearch;
+
+<a name="line73"> 73: </a>  <font color="#4169E1">if</font> (eps-&gt;ncv) {
+<a name="line74"> 74: </a>    <font color="#4169E1">if</font> (eps-&gt;ncv&lt;eps-&gt;nev) SETERRQ(PetscObjectComm((PetscObject)eps),1,<font color="#666666">"The value of ncv must be at least nev"</font>);
+<a name="line75"> 75: </a>  } <font color="#4169E1">else</font> eps-&gt;ncv = eps-&gt;nev;
+<a name="line76"> 76: </a>  <font color="#4169E1">if</font> (eps-&gt;mpd) { PetscInfo(eps,<font color="#666666">"Warning: parameter mpd ignored\n"</font>); }
+<a name="line77"> 77: </a>  <font color="#4169E1">if</font> (!eps-&gt;max_it) eps-&gt;max_it = PetscMax(1000*eps-&gt;nev,100*eps-&gt;n);
+<a name="line78"> 78: </a>  <font color="#4169E1">if</font> (!eps-&gt;which) { EPSSetWhichEigenpairs_Default(eps); }
+<a name="line79"> 79: </a>  <font color="#4169E1">if</font> (eps-&gt;which!=<a href="../../../../docs/manualpages/EPS/EPSWhich.html#EPSWhich">EPS_LARGEST_MAGNITUDE</a> &amp;&amp; eps-&gt;which !=<a href="../../../../docs/manualpages/EPS/EPSWhich.html#EPSWhich">EPS_TARGET_MAGNITUDE</a>) SETERRQ(PetscObjectComm((PetscObject)eps),1,<font color="#666666">"Wrong value of eps-&gt;which"</font>);
+<a name="line80"> 80: </a>  <font color="#4169E1">if</font> (power-&gt;shift_type != <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) {
+<a name="line81"> 81: </a>    <font color="#4169E1">if</font> (power-&gt;nonlinear) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Variable shifts not allowed in nonlinear problems"</font>);
+<a name="line82"> 82: </a>    PetscObjectTypeCompareAny((PetscObject)eps-&gt;st,&amp;flg,STSINVERT,STCAYLEY,<font color="#666666">""</font>);
+<a name="line83"> 83: </a>    <font color="#4169E1">if</font> (!flg) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Variable shifts only allowed in shift-and-invert or Cayley <a href="../../../../docs/manualpages/ST/ST.html#ST">ST</a>"</font>);
+<a name="line84"> 84: </a>    <a href="../../../../docs/manualpages/ST/STGetMatMode.html#STGetMatMode">STGetMatMode</a>(eps-&gt;st,&amp;mode);
+<a name="line85"> 85: </a>    <font color="#4169E1">if</font> (mode == <a href="../../../../docs/manualpages/ST/STMatMode.html#STMatMode">ST_MATMODE_INPLACE</a>) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"<a href="../../../../docs/manualpages/ST/ST.html#ST">ST</a> matrix mode inplace does not work with variable shifts"</font>);
+<a name="line86"> 86: </a>  }
+<a name="line87"> 87: </a>  <font color="#4169E1">if</font> (eps-&gt;extraction) { PetscInfo(eps,<font color="#666666">"Warning: extraction type ignored\n"</font>); }
+<a name="line88"> 88: </a>  <font color="#4169E1">if</font> (eps-&gt;balance!=<a href="../../../../docs/manualpages/EPS/EPSBalance.html#EPSBalance">EPS_BALANCE_NONE</a>) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Balancing not supported in this solver"</font>);
+<a name="line89"> 89: </a>  <font color="#4169E1">if</font> (eps-&gt;arbitrary) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Arbitrary selection of eigenpairs not supported in this solver"</font>);
+<a name="line90"> 90: </a>  <a href="../../../../docs/manualpages/RG/RGIsTrivial.html#RGIsTrivial">RGIsTrivial</a>(eps-&gt;rg,&amp;istrivial);
+<a name="line91"> 91: </a>  <font color="#4169E1">if</font> (!istrivial) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"This solver does not support region filtering"</font>);
+<a name="line92"> 92: </a>  <a href="../../../../docs/manualpages/EPS/EPSAllocateSolution.html#EPSAllocateSolution">EPSAllocateSolution</a>(eps,0);
+<a name="line93"> 93: </a>  EPS_SetInnerProduct(eps);
+
+<a name="line95"> 95: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line96"> 96: </a>    <font color="#4169E1">if</font> (eps-&gt;nev&gt;1) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Nonlinear inverse iteration cannot compute more than one eigenvalue"</font>);
+<a name="line97"> 97: </a>    <a href="../../../../docs/manualpages/EPS/EPSSetWorkVecs.html#EPSSetWorkVecs">EPSSetWorkVecs</a>(eps,4);
+
+<a name="line99"> 99: </a>    <font color="#B22222">/* set up SNES solver */</font>
+<a name="line100">100: </a>    <font color="#4169E1">if</font> (!power-&gt;snes) { <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a>(eps,&amp;power-&gt;snes); }
+<a name="line101">101: </a>    <a href="../../../../docs/manualpages/EPS/EPSGetOperators.html#EPSGetOperators">EPSGetOperators</a>(eps,&amp;A,&amp;B);
+
+<a name="line103">103: </a>    PetscObjectQueryFunction((PetscObject)A,<font color="#666666">"formFunction"</font>,&amp;formFunctionA);
+<a name="line104">104: </a>    <font color="#4169E1">if</font> (!formFunctionA) SETERRQ(PetscObjectComm((PetscObject)eps),1,<font color="#666666">"For nonlinear inverse iteration you must compose a callback function 'formFunction' in matrix A"</font>);
+<a name="line105">105: </a>    PetscObjectQuery((PetscObject)A,<font color="#666666">"formFunctionCtx"</font>,(PetscObject*)&amp;container);
+<a name="line106">106: </a>    <font color="#4169E1">if</font> (container) {
+<a name="line107">107: </a>      PetscContainerGetPointer(container,&amp;ctx);
+<a name="line108">108: </a>    } <font color="#4169E1">else</font> ctx = NULL;
+<a name="line109">109: </a>    MatCreateVecs(A,&amp;res,NULL);
+<a name="line110">110: </a>    power-&gt;formFunctionA = formFunctionA;
+<a name="line111">111: </a>    power-&gt;formFunctionActx = ctx;
+<a name="line112">112: </a>    <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line113">113: </a>      SNESSetFunction(power-&gt;snes,res,EPSPowerFormFunction_Update,ctx);
+<a name="line114">114: </a>      PetscObjectQueryFunction((PetscObject)A,<font color="#666666">"formFunctionAB"</font>,&amp;power-&gt;formFunctionAB);
+<a name="line115">115: </a>    }
+<a name="line116">116: </a>    <font color="#4169E1">else</font> { SNESSetFunction(power-&gt;snes,res,formFunctionA,ctx); }
+<a name="line117">117: </a>    VecDestroy(&amp;res);
+
+<a name="line119">119: </a>    PetscObjectQueryFunction((PetscObject)A,<font color="#666666">"formJacobian"</font>,&amp;formJacobianA);
+<a name="line120">120: </a>    <font color="#4169E1">if</font> (!formJacobianA) SETERRQ(PetscObjectComm((PetscObject)eps),1,<font color="#666666">"For nonlinear inverse iteration you must compose a callback function 'formJacobian' in matrix A"</font>);
+<a name="line121">121: </a>    PetscObjectQuery((PetscObject)A,<font color="#666666">"formJacobianCtx"</font>,(PetscObject*)&amp;container);
+<a name="line122">122: </a>    <font color="#4169E1">if</font> (container) {
+<a name="line123">123: </a>      PetscContainerGetPointer(container,&amp;ctx);
+<a name="line124">124: </a>    } <font color="#4169E1">else</font> ctx = NULL;
+<a name="line125">125: </a>    SNESSetJacobian(power-&gt;snes,A,A,formJacobianA,ctx);
+<a name="line126">126: </a>    SNESSetFromOptions(power-&gt;snes);
+<a name="line127">127: </a>    SNESGetLineSearch(power-&gt;snes,&amp;linesearch);
+<a name="line128">128: </a>    <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line129">129: </a>      SNESLineSearchSetPostCheck(linesearch,SNESLineSearchPostheckFunction,ctx);
+<a name="line130">130: </a>    }
+<a name="line131">131: </a>    SNESSetUp(power-&gt;snes);
+<a name="line132">132: </a>    <font color="#4169E1">if</font> (B) {
+<a name="line133">133: </a>      PetscObjectQueryFunction((PetscObject)B,<font color="#666666">"formFunction"</font>,&amp;power-&gt;formFunctionB);
+<a name="line134">134: </a>      PetscObjectQuery((PetscObject)B,<font color="#666666">"formFunctionCtx"</font>,(PetscObject*)&amp;container);
+<a name="line135">135: </a>      <font color="#4169E1">if</font> (power-&gt;formFunctionB &amp;&amp; container) {
+<a name="line136">136: </a>        PetscContainerGetPointer(container,&amp;power-&gt;formFunctionBctx);
+<a name="line137">137: </a>      } <font color="#4169E1">else</font> power-&gt;formFunctionBctx = NULL;
+<a name="line138">138: </a>    }
+<a name="line139">139: </a>  } <font color="#4169E1">else</font> {
+<a name="line140">140: </a>    <font color="#4169E1">if</font> (eps-&gt;twosided) {
+<a name="line141">141: </a>      <a href="../../../../docs/manualpages/EPS/EPSSetWorkVecs.html#EPSSetWorkVecs">EPSSetWorkVecs</a>(eps,3);
+<a name="line142">142: </a>    } <font color="#4169E1">else</font> {
+<a name="line143">143: </a>      <a href="../../../../docs/manualpages/EPS/EPSSetWorkVecs.html#EPSSetWorkVecs">EPSSetWorkVecs</a>(eps,2);
+<a name="line144">144: </a>    }
+<a name="line145">145: </a>    <a href="../../../../docs/manualpages/DS/DSSetType.html#DSSetType">DSSetType</a>(eps-&gt;ds,DSNHEP);
+<a name="line146">146: </a>    <a href="../../../../docs/manualpages/DS/DSAllocate.html#DSAllocate">DSAllocate</a>(eps-&gt;ds,eps-&gt;nev);
+<a name="line147">147: </a>  }
+<a name="line148">148: </a>  <font color="#B22222">/* dispatch solve method */</font>
+<a name="line149">149: </a>  <font color="#4169E1">if</font> (eps-&gt;twosided) {
+<a name="line150">150: </a>    <font color="#4169E1">if</font> (power-&gt;nonlinear) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Nonlinear inverse iteration does not have two-sided variant"</font>);
+<a name="line151">151: </a>    <font color="#4169E1">if</font> (power-&gt;shift_type == <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_WILKINSON</a>) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_SUP,<font color="#666666">"Two-sided variant does not support Wilkinson shifts"</font>);
+<a name="line152">152: </a>    eps-&gt;ops-&gt;solve = EPSSolve_TS_Power;
+<a name="line153">153: </a>  } <font color="#4169E1">else</font> eps-&gt;ops-&gt;solve = EPSSolve_Power;
+<a name="line154">154: </a>  <font color="#4169E1">return</font>(0);
+<a name="line155">155: </a>}
+
+<a name="line157">157: </a><font color="#B22222">/*</font>
+<a name="line158">158: </a><font color="#B22222">   Find the index of the first nonzero entry of x, and the process that owns it.</font>
+<a name="line159">159: </a><font color="#B22222">*/</font>
+<a name="line160">160: </a><strong><font color="#4169E1"><a name="FirstNonzeroIdx"></a>static PetscErrorCode FirstNonzeroIdx(Vec x,PetscInt *idx,PetscInt *p)</font></strong>
+<a name="line161">161: </a>{
+<a name="line162">162: </a>  PetscErrorCode    ierr;
+<a name="line163">163: </a>  PetscInt          i,first,last,N;
+<a name="line164">164: </a>  PetscLayout       map;
+<a name="line165">165: </a>  const PetscScalar *xx;
+
+<a name="line168">168: </a>  VecGetSize(x,&amp;N);
+<a name="line169">169: </a>  VecGetOwnershipRange(x,&amp;first,&amp;last);
+<a name="line170">170: </a>  VecGetArrayRead(x,&amp;xx);
+<a name="line171">171: </a>  <font color="#4169E1">for</font> (i=first;i&lt;last;i++) {
+<a name="line172">172: </a>    <font color="#4169E1">if</font> (PetscAbsScalar(xx[i-first])&gt;10*PETSC_MACHINE_EPSILON) <font color="#4169E1">break</font>;
+<a name="line173">173: </a>  }
+<a name="line174">174: </a>  VecRestoreArrayRead(x,&amp;xx);
+<a name="line175">175: </a>  <font color="#4169E1">if</font> (i==last) i=N;
+<a name="line176">176: </a>  <a href="http://www.mpich.org/static/docs/latest/www3/MPI_Allreduce.html#MPI_Allreduce">MPI_Allreduce</a>(&amp;i,idx,1,MPIU_INT,MPI_MIN,PetscObjectComm((PetscObject)x));
+<a name="line177">177: </a>  <font color="#4169E1">if</font> (*idx==N) SETERRQ(PetscObjectComm((PetscObject)x),1,<font color="#666666">"Zero vector found"</font>);
+<a name="line178">178: </a>  VecGetLayout(x,&amp;map);
+<a name="line179">179: </a>  PetscLayoutFindOwner(map,*idx,p);
+<a name="line180">180: </a>  <font color="#4169E1">return</font>(0);
+<a name="line181">181: </a>}
+
+<a name="line183">183: </a><font color="#B22222">/*</font>
+<a name="line184">184: </a><font color="#B22222">   Normalize a vector x with respect to a given norm as well as the</font>
+<a name="line185">185: </a><font color="#B22222">   sign of the first nonzero entry (assumed to be idx in process p).</font>
+<a name="line186">186: </a><font color="#B22222">*/</font>
+<a name="line187">187: </a><strong><font color="#4169E1"><a name="Normalize"></a>static PetscErrorCode Normalize(Vec x,PetscReal norm,PetscInt idx,PetscInt p,PetscScalar *sign)</font></strong>
+<a name="line188">188: </a>{
+<a name="line189">189: </a>  PetscErrorCode    ierr;
+<a name="line190">190: </a>  PetscScalar       alpha=1.0;
+<a name="line191">191: </a>  PetscInt          first,last;
+<a name="line192">192: </a>  PetscReal         absv;
+<a name="line193">193: </a>  const PetscScalar *xx;
+
+<a name="line196">196: </a>  VecGetOwnershipRange(x,&amp;first,&amp;last);
+<a name="line197">197: </a>  <font color="#4169E1">if</font> (idx&gt;=first &amp;&amp; idx&lt;last) {
+<a name="line198">198: </a>    VecGetArrayRead(x,&amp;xx);
+<a name="line199">199: </a>    absv = PetscAbsScalar(xx[idx-first]);
+<a name="line200">200: </a>    <font color="#4169E1">if</font> (absv&gt;10*PETSC_MACHINE_EPSILON) alpha = xx[idx-first]/absv;
+<a name="line201">201: </a>    VecRestoreArrayRead(x,&amp;xx);
+<a name="line202">202: </a>  }
+<a name="line203">203: </a>  <a href="http://www.mpich.org/static/docs/latest/www3/MPI_Bcast.html#MPI_Bcast">MPI_Bcast</a>(&amp;alpha,1,MPIU_SCALAR,p,PetscObjectComm((PetscObject)x));
+<a name="line204">204: </a>  <font color="#4169E1">if</font> (sign) *sign = alpha;
+<a name="line205">205: </a>  alpha *= norm;
+<a name="line206">206: </a>  VecScale(x,1.0/alpha);
+<a name="line207">207: </a>  <font color="#4169E1">return</font>(0);
+<a name="line208">208: </a>}
+
+<a name="line210">210: </a><strong><font color="#4169E1"><a name="EPSPowerUpdateFunctionB"></a>static PetscErrorCode EPSPowerUpdateFunctionB(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,Vec x,Vec Bx)</font></strong>
+<a name="line211">211: </a>{
+<a name="line213">213: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line214">214: </a>  Mat            B;
+
+<a name="line217">217: </a>  <a href="../../../../docs/manualpages/ST/STResetMatrixState.html#STResetMatrixState">STResetMatrixState</a>(eps-&gt;st);
+<a name="line218">218: </a>  <a href="../../../../docs/manualpages/EPS/EPSGetOperators.html#EPSGetOperators">EPSGetOperators</a>(eps,NULL,&amp;B);
+<a name="line219">219: </a>  <font color="#4169E1">if</font> (B) {
+<a name="line220">220: </a>    <font color="#4169E1">if</font> (power-&gt;formFunctionB) {
+<a name="line221">221: </a>      (*power-&gt;formFunctionB)(power-&gt;snes,x,Bx,power-&gt;formFunctionBctx);
+<a name="line222">222: </a>    } <font color="#4169E1">else</font> {
+<a name="line223">223: </a>      MatMult(B,x,Bx);
+<a name="line224">224: </a>    }
+<a name="line225">225: </a>  } <font color="#4169E1">else</font> {
+<a name="line226">226: </a>    VecCopy(x,Bx);
+<a name="line227">227: </a>  }
+<a name="line228">228: </a>  <font color="#4169E1">return</font>(0);
+<a name="line229">229: </a>}
+
+<a name="line231">231: </a><strong><font color="#4169E1"><a name="EPSPowerUpdateFunctionA"></a>static PetscErrorCode EPSPowerUpdateFunctionA(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,Vec x,Vec Ax)</font></strong>
+<a name="line232">232: </a>{
+<a name="line234">234: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line235">235: </a>  Mat            A;
+
+<a name="line238">238: </a>  <a href="../../../../docs/manualpages/ST/STResetMatrixState.html#STResetMatrixState">STResetMatrixState</a>(eps-&gt;st);
+<a name="line239">239: </a>  <a href="../../../../docs/manualpages/EPS/EPSGetOperators.html#EPSGetOperators">EPSGetOperators</a>(eps,&amp;A,NULL);
+<a name="line240">240: </a>  <font color="#4169E1">if</font> (A) {
+<a name="line241">241: </a>    <font color="#4169E1">if</font> (power-&gt;formFunctionA) {
+<a name="line242">242: </a>      (*power-&gt;formFunctionA)(power-&gt;snes,x,Ax,power-&gt;formFunctionActx);
+<a name="line243">243: </a>    } <font color="#4169E1">else</font> {
+<a name="line244">244: </a>      MatMult(A,x,Ax);
+<a name="line245">245: </a>    }
+<a name="line246">246: </a>  } <font color="#4169E1">else</font> SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_ARG_NULL,<font color="#666666">"Matrix A is required for an eigenvalue problem"</font>);
+<a name="line247">247: </a>  <font color="#4169E1">return</font>(0);
+<a name="line248">248: </a>}
+
+<a name="line250">250: </a><strong><font color="#4169E1"><a name="SNESLineSearchPostheckFunction"></a>static PetscErrorCode SNESLineSearchPostheckFunction(SNESLineSearch linesearch,Vec x,Vec y,Vec w,PetscBool *changed_y,PetscBool *changed_w,void *ctx)</font></strong>
+<a name="line251">251: </a>{
+<a name="line253">253: </a>  SNES           snes;
+<a name="line254">254: </a>  <a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>            eps;
+<a name="line255">255: </a>  Vec            oldx;
+
+<a name="line258">258: </a>  SNESLineSearchGetSNES(linesearch,&amp;snes);
+<a name="line259">259: </a>  PetscObjectQuery((PetscObject)snes,<font color="#666666">"eps"</font>,(PetscObject *)&amp;eps);
+<a name="line260">260: </a>  <font color="#4169E1">if</font> (!eps) SETERRQ(PetscObjectComm((PetscObject)snes),PETSC_ERR_ARG_NULL,<font color="#666666">"No composed <a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>"</font>);
+<a name="line261">261: </a>  oldx = eps-&gt;work[3];
+<a name="line262">262: </a>  VecCopy(x,oldx);
+<a name="line263">263: </a>  <font color="#4169E1">return</font>(0);
+<a name="line264">264: </a>}
+
+<a name="line266">266: </a><strong><font color="#4169E1"><a name="EPSPowerFormFunction_Update"></a>static PetscErrorCode EPSPowerFormFunction_Update(SNES snes,Vec x,Vec y,void *ctx)</font></strong>
+<a name="line267">267: </a>{
+<a name="line269">269: </a>  <a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>            eps;
+<a name="line270">270: </a>  PetscReal      bx;
+<a name="line271">271: </a>  Vec            Bx;
+<a name="line272">272: </a>  EPS_POWER      *power;
+
+<a name="line275">275: </a>  PetscObjectQuery((PetscObject)snes,<font color="#666666">"eps"</font>,(PetscObject *)&amp;eps);
+<a name="line276">276: </a>  <font color="#4169E1">if</font> (!eps) SETERRQ(PetscObjectComm((PetscObject)snes),PETSC_ERR_ARG_NULL,<font color="#666666">"No composed <a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>"</font>);
+<a name="line277">277: </a>  power = (EPS_POWER*)eps-&gt;data;
+<a name="line278">278: </a>  Bx = eps-&gt;work[2];
+<a name="line279">279: </a>  <font color="#4169E1">if</font> (power-&gt;formFunctionAB) {
+<a name="line280">280: </a>    (*power-&gt;formFunctionAB)(snes,x,y,Bx,ctx);
+<a name="line281">281: </a>  } <font color="#4169E1">else</font> {
+<a name="line282">282: </a>    EPSPowerUpdateFunctionA(eps,x,y);
+<a name="line283">283: </a>    EPSPowerUpdateFunctionB(eps,x,Bx);
+<a name="line284">284: </a>  }
+<a name="line285">285: </a>  VecNorm(Bx,NORM_2,&amp;bx);
+<a name="line286">286: </a>  Normalize(Bx,bx,power-&gt;idx,power-&gt;p,NULL);
+<a name="line287">287: </a>  VecAXPY(y,-1.0,Bx);
+<a name="line288">288: </a>  <font color="#4169E1">return</font>(0);
+<a name="line289">289: </a>}
+
+<a name="line291">291: </a><font color="#B22222">/*</font>
+<a name="line292">292: </a><font color="#B22222">   Use SNES to compute y = A^{-1}*B*x for the nonlinear problem</font>
+<a name="line293">293: </a><font color="#B22222">*/</font>
+<a name="line294">294: </a><strong><font color="#4169E1"><a name="EPSPowerApply_SNES"></a>static PetscErrorCode EPSPowerApply_SNES(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,Vec x,Vec y)</font></strong>
+<a name="line295">295: </a>{
+<a name="line297">297: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line298">298: </a>  Vec            Bx;
+
+<a name="line301">301: </a>  VecCopy(x,y);
+<a name="line302">302: </a>  <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line303">303: </a>    SNESSolve(power-&gt;snes,NULL,y);
+<a name="line304">304: </a>  } <font color="#4169E1">else</font> {
+<a name="line305">305: </a>    Bx = eps-&gt;work[2];
+<a name="line306">306: </a>    SNESSolve(power-&gt;snes,Bx,y);
+<a name="line307">307: </a>  }
+<a name="line308">308: </a>  <font color="#4169E1">return</font>(0);
+<a name="line309">309: </a>}
+
+<a name="line311">311: </a><font color="#B22222">/*</font>
+<a name="line312">312: </a><font color="#B22222">   Use nonlinear inverse power to compute an initial guess</font>
+<a name="line313">313: </a><font color="#B22222">*/</font>
+<a name="line314">314: </a><strong><font color="#4169E1"><a name="EPSPowerComputeInitialGuess_Update"></a>static PetscErrorCode EPSPowerComputeInitialGuess_Update(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line315">315: </a>{
+<a name="line316">316: </a>  <a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>            powereps;
+<a name="line317">317: </a>  Mat            A,B;
+<a name="line318">318: </a>  Vec            v1,v2;
+<a name="line319">319: </a>  SNES           snes;
+<a name="line320">320: </a>  DM             dm,newdm;
+
+<a name="line324">324: </a>  <a href="../../../../docs/manualpages/EPS/EPSCreate.html#EPSCreate">EPSCreate</a>(PetscObjectComm((PetscObject)eps),&amp;powereps);
+<a name="line325">325: </a>  <a href="../../../../docs/manualpages/EPS/EPSGetOperators.html#EPSGetOperators">EPSGetOperators</a>(eps,&amp;A,&amp;B);
+<a name="line326">326: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetType.html#EPSSetType">EPSSetType</a>(powereps,EPSPOWER);
+<a name="line327">327: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetOperators.html#EPSSetOperators">EPSSetOperators</a>(powereps,A,B);
+<a name="line328">328: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetTolerances.html#EPSSetTolerances">EPSSetTolerances</a>(powereps,1e-6,4);
+<a name="line329">329: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetOptionsPrefix.html#EPSSetOptionsPrefix">EPSSetOptionsPrefix</a>(powereps,((PetscObject)eps)-&gt;prefix);
+<a name="line330">330: </a>  <a href="../../../../docs/manualpages/EPS/EPSAppendOptionsPrefix.html#EPSAppendOptionsPrefix">EPSAppendOptionsPrefix</a>(powereps,<font color="#666666">"init_"</font>);
+<a name="line331">331: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetProblemType.html#EPSSetProblemType">EPSSetProblemType</a>(powereps,<a href="../../../../docs/manualpages/EPS/EPSProblemType.html#EPSProblemType">EPS_GNHEP</a>);
+<a name="line332">332: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetWhichEigenpairs.html#EPSSetWhichEigenpairs">EPSSetWhichEigenpairs</a>(powereps,<a href="../../../../docs/manualpages/EPS/EPSWhich.html#EPSWhich">EPS_TARGET_MAGNITUDE</a>);
+<a name="line333">333: </a>  <a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a>(powereps,PETSC_TRUE);
+<a name="line334">334: </a>  <a href="../../../../docs/manualpages/ST/STSetType.html#STSetType">STSetType</a>(powereps-&gt;st,STSINVERT);
+<a name="line335">335: </a>  <font color="#B22222">/* attach dm to initial solve */</font>
+<a name="line336">336: </a>  <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a>(eps,&amp;snes);
+<a name="line337">337: </a>  SNESGetDM(snes,&amp;dm);
+<a name="line338">338: </a>  <font color="#B22222">/* use  dmshell to temporarily store snes context */</font>
+<a name="line339">339: </a>  DMCreate(PetscObjectComm((PetscObject)eps),&amp;newdm);
+<a name="line340">340: </a>  DMSetType(newdm,DMSHELL);
+<a name="line341">341: </a>  DMSetUp(newdm);
+<a name="line342">342: </a>  DMCopyDMSNES(dm,newdm);
+<a name="line343">343: </a>  <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a>(powereps,&amp;snes);
+<a name="line344">344: </a>  SNESSetDM(snes,dm);
+<a name="line345">345: </a>  <a href="../../../../docs/manualpages/EPS/EPSSetFromOptions.html#EPSSetFromOptions">EPSSetFromOptions</a>(powereps);
+<a name="line346">346: </a>  <a href="../../../../docs/manualpages/EPS/EPSSolve.html#EPSSolve">EPSSolve</a>(powereps);
+<a name="line347">347: </a>  <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,0,&amp;v2);
+<a name="line348">348: </a>  <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(powereps-&gt;V,0,&amp;v1);
+<a name="line349">349: </a>  VecCopy(v1,v2);
+<a name="line350">350: </a>  <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(powereps-&gt;V,0,&amp;v1);
+<a name="line351">351: </a>  <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,0,&amp;v2);
+<a name="line352">352: </a>  <a href="../../../../docs/manualpages/EPS/EPSDestroy.html#EPSDestroy">EPSDestroy</a>(&amp;powereps);
+<a name="line353">353: </a>  <font color="#B22222">/* restore context back to the old nonlinear solver */</font>
+<a name="line354">354: </a>  DMCopyDMSNES(newdm,dm);
+<a name="line355">355: </a>  DMDestroy(&amp;newdm);
+<a name="line356">356: </a>  <font color="#4169E1">return</font>(0);
+<a name="line357">357: </a>}
+
+<a name="line359">359: </a><strong><font color="#4169E1"><a name="EPSSolve_Power"></a>PetscErrorCode EPSSolve_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line360">360: </a>{
+<a name="line361">361: </a><font color="#A020F0">#if defined(SLEPC_MISSING_LAPACK_LAEV2)</font>
+<a name="line363">363: </a>  SETERRQ(PETSC_COMM_SELF,PETSC_ERR_SUP,<font color="#666666">"LAEV2 - Lapack routine is unavailable"</font>);
+<a name="line364">364: </a><font color="#A020F0">#else</font>
+<a name="line365">365: </a>  PetscErrorCode      ierr;
+<a name="line366">366: </a>  EPS_POWER           *power = (EPS_POWER*)eps-&gt;data;
+<a name="line367">367: </a>  PetscInt            k,ld;
+<a name="line368">368: </a>  Vec                 v,y,e,Bx;
+<a name="line369">369: </a>  Mat                 A;
+<a name="line370">370: </a>  KSP                 ksp;
+<a name="line371">371: </a>  PetscReal           relerr,norm,norm1,rt1,rt2,cs1;
+<a name="line372">372: </a>  PetscScalar         theta,rho,delta,sigma,alpha2,beta1,sn1,*T,sign;
+<a name="line373">373: </a>  PetscBool           breakdown;
+<a name="line374">374: </a>  KSPConvergedReason  reason;
+<a name="line375">375: </a>  SNESConvergedReason snesreason;
+
+<a name="line378">378: </a>  e = eps-&gt;work[0];
+<a name="line379">379: </a>  y = eps-&gt;work[1];
+<a name="line380">380: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) Bx = eps-&gt;work[2];
+<a name="line381">381: </a>  <font color="#4169E1">else</font> Bx = NULL;
+
+<a name="line383">383: </a>  <font color="#4169E1">if</font> (power-&gt;shift_type != <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) { <a href="../../../../docs/manualpages/ST/STGetKSP.html#STGetKSP">STGetKSP</a>(eps-&gt;st,&amp;ksp); }
+<a name="line384">384: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line385">385: </a>    PetscObjectCompose((PetscObject)power-&gt;snes,<font color="#666666">"eps"</font>,(PetscObject)eps);
+<a name="line386">386: </a>    <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line387">387: </a>      EPSPowerComputeInitialGuess_Update(eps);
+<a name="line388">388: </a>    }
+<a name="line389">389: </a>  } <font color="#4169E1">else</font> {
+<a name="line390">390: </a>    <a href="../../../../docs/manualpages/DS/DSGetLeadingDimension.html#DSGetLeadingDimension">DSGetLeadingDimension</a>(eps-&gt;ds,&amp;ld);
+<a name="line391">391: </a>  }
+<a name="line392">392: </a>  <font color="#4169E1">if</font> (!power-&gt;update) {
+<a name="line393">393: </a>    EPSGetStartVector(eps,0,NULL);
+<a name="line394">394: </a>  }
+<a name="line395">395: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line396">396: </a>    <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,0,&amp;v);
+<a name="line397">397: </a>    EPSPowerUpdateFunctionB(eps,v,Bx);
+<a name="line398">398: </a>    VecNorm(Bx,NORM_2,&amp;norm);
+<a name="line399">399: </a>    FirstNonzeroIdx(Bx,&amp;power-&gt;idx,&amp;power-&gt;p);
+<a name="line400">400: </a>    Normalize(Bx,norm,power-&gt;idx,power-&gt;p,NULL);
+<a name="line401">401: </a>    <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,0,&amp;v);
+<a name="line402">402: </a>  }
+
+<a name="line404">404: </a>  <a href="../../../../docs/manualpages/ST/STGetShift.html#STGetShift">STGetShift</a>(eps-&gt;st,&amp;sigma);    <font color="#B22222">/* original shift */</font>
+<a name="line405">405: </a>  rho = sigma;
+
+<a name="line407">407: </a>  <font color="#4169E1">while</font> (eps-&gt;reason == <a href="../../../../docs/manualpages/EPS/EPSConvergedReason.html#EPSConvergedReason">EPS_CONVERGED_ITERATING</a>) {
+<a name="line408">408: </a>    eps-&gt;its++;
+<a name="line409">409: </a>    k = eps-&gt;nconv;
+
+<a name="line411">411: </a>    <font color="#B22222">/* y = OP v */</font>
+<a name="line412">412: </a>    <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line413">413: </a>    <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line414">414: </a>      VecCopy(v,eps-&gt;work[3]);
+<a name="line415">415: </a>      EPSPowerApply_SNES(eps,v,y);
+<a name="line416">416: </a>      VecCopy(eps-&gt;work[3],v);
+<a name="line417">417: </a>    } <font color="#4169E1">else</font> {
+<a name="line418">418: </a>      <a href="../../../../docs/manualpages/ST/STApply.html#STApply">STApply</a>(eps-&gt;st,v,y);
+<a name="line419">419: </a>    }
+<a name="line420">420: </a>    <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,k,&amp;v);
+
+<a name="line422">422: </a>    <font color="#B22222">/* purge previously converged eigenvectors */</font>
+<a name="line423">423: </a>    <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line424">424: </a>      EPSPowerUpdateFunctionB(eps,y,Bx);
+<a name="line425">425: </a>      VecNorm(Bx,NORM_2,&amp;norm);
+<a name="line426">426: </a>      Normalize(Bx,norm,power-&gt;idx,power-&gt;p,&amp;sign);
+<a name="line427">427: </a>    } <font color="#4169E1">else</font> {
+<a name="line428">428: </a>      <a href="../../../../docs/manualpages/DS/DSGetArray.html#DSGetArray">DSGetArray</a>(eps-&gt;ds,<a href="../../../../docs/manualpages/DS/DSMatType.html#DSMatType">DS_MAT_A</a>,&amp;T);
+<a name="line429">429: </a>      <a href="../../../../docs/manualpages/BV/BVSetActiveColumns.html#BVSetActiveColumns">BVSetActiveColumns</a>(eps-&gt;V,0,k);
+<a name="line430">430: </a>      <a href="../../../../docs/manualpages/BV/BVOrthogonalizeVec.html#BVOrthogonalizeVec">BVOrthogonalizeVec</a>(eps-&gt;V,y,T+k*ld,&amp;norm,NULL);
+<a name="line431">431: </a>    }
+
+<a name="line433">433: </a>    <font color="#B22222">/* theta = (v,y)_B */</font>
+<a name="line434">434: </a>    <a href="../../../../docs/manualpages/BV/BVSetActiveColumns.html#BVSetActiveColumns">BVSetActiveColumns</a>(eps-&gt;V,k,k+1);
+<a name="line435">435: </a>    <a href="../../../../docs/manualpages/BV/BVDotVec.html#BVDotVec">BVDotVec</a>(eps-&gt;V,y,&amp;theta);
+<a name="line436">436: </a>    <font color="#4169E1">if</font> (!power-&gt;nonlinear) {
+<a name="line437">437: </a>      T[k+k*ld] = theta;
+<a name="line438">438: </a>      <a href="../../../../docs/manualpages/DS/DSRestoreArray.html#DSRestoreArray">DSRestoreArray</a>(eps-&gt;ds,<a href="../../../../docs/manualpages/DS/DSMatType.html#DSMatType">DS_MAT_A</a>,&amp;T);
+<a name="line439">439: </a>    }
+
+<a name="line441">441: </a>    <font color="#4169E1">if</font> (power-&gt;nonlinear) theta = norm*sign;
+
+<a name="line443">443: </a>    <font color="#4169E1">if</font> (power-&gt;shift_type == <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) { <font color="#B22222">/* direct &amp; inverse iteration */</font>
+
+<a name="line445">445: </a>      <font color="#B22222">/* approximate eigenvalue is the Rayleigh quotient */</font>
+<a name="line446">446: </a>      eps-&gt;eigr[eps-&gt;nconv] = theta;
+
+<a name="line448">448: </a>      <font color="#B22222">/* compute relative error as ||y-theta v||_2/|theta| */</font>
+<a name="line449">449: </a>      VecCopy(y,e);
+<a name="line450">450: </a>      <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line451">451: </a>      VecAXPY(e,power-&gt;nonlinear?-1.0:-theta,v);
+<a name="line452">452: </a>      <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line453">453: </a>      VecNorm(e,NORM_2,&amp;relerr);
+<a name="line454">454: </a>      relerr /= PetscAbsScalar(theta);
+
+<a name="line456">456: </a>    } <font color="#4169E1">else</font> {  <font color="#B22222">/* RQI */</font>
+
+<a name="line458">458: </a>      <font color="#B22222">/* delta = ||y||_B */</font>
+<a name="line459">459: </a>      delta = norm;
+
+<a name="line461">461: </a>      <font color="#B22222">/* compute relative error */</font>
+<a name="line462">462: </a>      <font color="#4169E1">if</font> (rho == 0.0) relerr = PETSC_MAX_REAL;
+<a name="line463">463: </a>      <font color="#4169E1">else</font> relerr = 1.0 / (norm*PetscAbsScalar(rho));
+
+<a name="line465">465: </a>      <font color="#B22222">/* approximate eigenvalue is the shift */</font>
+<a name="line466">466: </a>      eps-&gt;eigr[eps-&gt;nconv] = rho;
+
+<a name="line468">468: </a>      <font color="#B22222">/* compute new shift */</font>
+<a name="line469">469: </a>      <font color="#4169E1">if</font> (relerr&lt;eps-&gt;tol) {
+<a name="line470">470: </a>        rho = sigma;  <font color="#B22222">/* if converged, restore original shift */</font>
+<a name="line471">471: </a>        <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(eps-&gt;st,rho);
+<a name="line472">472: </a>      } <font color="#4169E1">else</font> {
+<a name="line473">473: </a>        rho = rho + PetscConj(theta)/(delta*delta);  <font color="#B22222">/* Rayleigh quotient R(v) */</font>
+<a name="line474">474: </a>        <font color="#4169E1">if</font> (power-&gt;shift_type == <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_WILKINSON</a>) {
+<a name="line475">475: </a>          <font color="#B22222">/* beta1 is the norm of the residual associated with R(v) */</font>
+<a name="line476">476: </a>          <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line477">477: </a>          VecAXPY(v,-PetscConj(theta)/(delta*delta),y);
+<a name="line478">478: </a>          <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line479">479: </a>          <a href="../../../../docs/manualpages/BV/BVScaleColumn.html#BVScaleColumn">BVScaleColumn</a>(eps-&gt;V,k,1.0/delta);
+<a name="line480">480: </a>          <a href="../../../../docs/manualpages/BV/BVNormColumn.html#BVNormColumn">BVNormColumn</a>(eps-&gt;V,k,NORM_2,&amp;norm1);
+<a name="line481">481: </a>          beta1 = norm1;
+
+<a name="line483">483: </a>          <font color="#B22222">/* alpha2 = (e'*A*e)/(beta1*beta1), where e is the residual */</font>
+<a name="line484">484: </a>          <a href="../../../../docs/manualpages/ST/STGetMatrix.html#STGetMatrix">STGetMatrix</a>(eps-&gt;st,0,&amp;A);
+<a name="line485">485: </a>          <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line486">486: </a>          MatMult(A,v,e);
+<a name="line487">487: </a>          VecDot(v,e,&amp;alpha2);
+<a name="line488">488: </a>          <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,k,&amp;v);
+<a name="line489">489: </a>          alpha2 = alpha2 / (beta1 * beta1);
+
+<a name="line491">491: </a>          <font color="#B22222">/* choose the eigenvalue of [rho beta1; beta1 alpha2] closest to rho */</font>
+<a name="line492">492: </a>          PetscFPTrapPush(PETSC_FP_TRAP_OFF);
+<a name="line493">493: </a>          PetscStackCallBLAS(<font color="#666666">"LAPACKlaev2"</font>,LAPACKlaev2_(&amp;rho,&amp;beta1,&amp;alpha2,&amp;rt1,&amp;rt2,&amp;cs1,&amp;sn1));
+<a name="line494">494: </a>          PetscFPTrapPop();
+<a name="line495">495: </a>          <font color="#4169E1">if</font> (PetscAbsScalar(rt1-rho) &lt; PetscAbsScalar(rt2-rho)) rho = rt1;
+<a name="line496">496: </a>          <font color="#4169E1">else</font> rho = rt2;
+<a name="line497">497: </a>        }
+<a name="line498">498: </a>        <font color="#B22222">/* update operator according to new shift */</font>
+<a name="line499">499: </a>        KSPSetErrorIfNotConverged(ksp,PETSC_FALSE);
+<a name="line500">500: </a>        <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(eps-&gt;st,rho);
+<a name="line501">501: </a>        KSPGetConvergedReason(ksp,&amp;reason);
+<a name="line502">502: </a>        <font color="#4169E1">if</font> (reason) {
+<a name="line503">503: </a>          PetscInfo(eps,<font color="#666666">"Factorization failed, repeat with a perturbed shift\n"</font>);
+<a name="line504">504: </a>          rho *= 1+10*PETSC_MACHINE_EPSILON;
+<a name="line505">505: </a>          <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(eps-&gt;st,rho);
+<a name="line506">506: </a>          KSPGetConvergedReason(ksp,&amp;reason);
+<a name="line507">507: </a>          <font color="#4169E1">if</font> (reason) SETERRQ(PetscObjectComm((PetscObject)ksp),PETSC_ERR_CONV_FAILED,<font color="#666666">"Second factorization failed"</font>);
+<a name="line508">508: </a>        }
+<a name="line509">509: </a>        KSPSetErrorIfNotConverged(ksp,PETSC_TRUE);
+<a name="line510">510: </a>      }
+<a name="line511">511: </a>    }
+<a name="line512">512: </a>    eps-&gt;errest[eps-&gt;nconv] = relerr;
+
+<a name="line514">514: </a>    <font color="#B22222">/* normalize */</font>
+<a name="line515">515: </a>    <font color="#4169E1">if</font> (!power-&gt;nonlinear) { Normalize(y,norm,power-&gt;idx,power-&gt;p,NULL); }
+<a name="line516">516: </a>    <a href="../../../../docs/manualpages/BV/BVInsertVec.html#BVInsertVec">BVInsertVec</a>(eps-&gt;V,k,y);
+
+<a name="line518">518: </a>    <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line519">519: </a>      SNESGetConvergedReason(power-&gt;snes,&amp;snesreason);
+<a name="line520">520: </a>    }
+<a name="line521">521: </a>    <font color="#B22222">/* if relerr&lt;tol, accept eigenpair */</font>
+<a name="line522">522: </a>    <font color="#4169E1">if</font> (relerr&lt;eps-&gt;tol || (power-&gt;update &amp;&amp; snesreason &gt; 0)) {
+<a name="line523">523: </a>      eps-&gt;nconv = eps-&gt;nconv + 1;
+<a name="line524">524: </a>      <font color="#4169E1">if</font> (eps-&gt;nconv&lt;eps-&gt;nev) {
+<a name="line525">525: </a>        EPSGetStartVector(eps,eps-&gt;nconv,&amp;breakdown);
+<a name="line526">526: </a>        <font color="#4169E1">if</font> (breakdown) {
+<a name="line527">527: </a>          eps-&gt;reason = <a href="../../../../docs/manualpages/EPS/EPSConvergedReason.html#EPSConvergedReason">EPS_DIVERGED_BREAKDOWN</a>;
+<a name="line528">528: </a>          PetscInfo(eps,<font color="#666666">"Unable to generate more start vectors\n"</font>);
+<a name="line529">529: </a>          <font color="#4169E1">break</font>;
+<a name="line530">530: </a>        }
+<a name="line531">531: </a>      }
+<a name="line532">532: </a>    }
+<a name="line533">533: </a>    EPSMonitor(eps,eps-&gt;its,eps-&gt;nconv,eps-&gt;eigr,eps-&gt;eigi,eps-&gt;errest,PetscMin(eps-&gt;nconv+1,eps-&gt;nev));
+<a name="line534">534: </a>    (*eps-&gt;stopping)(eps,eps-&gt;its,eps-&gt;max_it,eps-&gt;nconv,eps-&gt;nev,&amp;eps-&gt;reason,eps-&gt;stoppingctx);
+<a name="line535">535: </a>  }
+
+<a name="line537">537: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line538">538: </a>    PetscObjectCompose((PetscObject)power-&gt;snes,<font color="#666666">"eps"</font>,NULL);
+<a name="line539">539: </a>  } <font color="#4169E1">else</font> {
+<a name="line540">540: </a>    <a href="../../../../docs/manualpages/DS/DSSetDimensions.html#DSSetDimensions">DSSetDimensions</a>(eps-&gt;ds,eps-&gt;nconv,0,0,0);
+<a name="line541">541: </a>    <a href="../../../../docs/manualpages/DS/DSSetState.html#DSSetState">DSSetState</a>(eps-&gt;ds,<a href="../../../../docs/manualpages/DS/DSStateType.html#DSStateType">DS_STATE_RAW</a>);
+<a name="line542">542: </a>  }
+<a name="line543">543: </a>  <font color="#4169E1">return</font>(0);
+<a name="line544">544: </a><font color="#A020F0">#endif</font>
+<a name="line545">545: </a>}
+
+<a name="line547">547: </a><strong><font color="#4169E1"><a name="EPSSolve_TS_Power"></a>PetscErrorCode EPSSolve_TS_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line548">548: </a>{
+<a name="line549">549: </a>  PetscErrorCode     ierr;
+<a name="line550">550: </a>  EPS_POWER          *power = (EPS_POWER*)eps-&gt;data;
+<a name="line551">551: </a>  PetscInt           k,ld;
+<a name="line552">552: </a>  Vec                v,w,y,e,z;
+<a name="line553">553: </a>  KSP                ksp;
+<a name="line554">554: </a>  PetscReal          relerr,relerrl,delta;
+<a name="line555">555: </a>  PetscScalar        theta,rho,alpha,sigma;
+<a name="line556">556: </a>  PetscBool          breakdown;
+<a name="line557">557: </a>  KSPConvergedReason reason;
+
+<a name="line560">560: </a>  e = eps-&gt;work[0];
+<a name="line561">561: </a>  v = eps-&gt;work[1];
+<a name="line562">562: </a>  w = eps-&gt;work[2];
+
+<a name="line564">564: </a>  <font color="#4169E1">if</font> (power-&gt;shift_type != <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) { <a href="../../../../docs/manualpages/ST/STGetKSP.html#STGetKSP">STGetKSP</a>(eps-&gt;st,&amp;ksp); }
+<a name="line565">565: </a>  <a href="../../../../docs/manualpages/DS/DSGetLeadingDimension.html#DSGetLeadingDimension">DSGetLeadingDimension</a>(eps-&gt;ds,&amp;ld);
+<a name="line566">566: </a>  EPSGetStartVector(eps,0,NULL);
+<a name="line567">567: </a>  <a href="../../../../docs/manualpages/BV/BVSetRandomColumn.html#BVSetRandomColumn">BVSetRandomColumn</a>(eps-&gt;W,0);
+<a name="line568">568: </a>  <a href="../../../../docs/manualpages/BV/BVBiorthonormalizeColumn.html#BVBiorthonormalizeColumn">BVBiorthonormalizeColumn</a>(eps-&gt;V,eps-&gt;W,0,NULL);
+<a name="line569">569: </a>  <a href="../../../../docs/manualpages/BV/BVCopyVec.html#BVCopyVec">BVCopyVec</a>(eps-&gt;V,0,v);
+<a name="line570">570: </a>  <a href="../../../../docs/manualpages/BV/BVCopyVec.html#BVCopyVec">BVCopyVec</a>(eps-&gt;W,0,w);
+<a name="line571">571: </a>  <a href="../../../../docs/manualpages/ST/STGetShift.html#STGetShift">STGetShift</a>(eps-&gt;st,&amp;sigma);    <font color="#B22222">/* original shift */</font>
+<a name="line572">572: </a>  rho = sigma;
+
+<a name="line574">574: </a>  <font color="#4169E1">while</font> (eps-&gt;reason == <a href="../../../../docs/manualpages/EPS/EPSConvergedReason.html#EPSConvergedReason">EPS_CONVERGED_ITERATING</a>) {
+<a name="line575">575: </a>    eps-&gt;its++;
+<a name="line576">576: </a>    k = eps-&gt;nconv;
+
+<a name="line578">578: </a>    <font color="#B22222">/* y = OP v, z = OP' w */</font>
+<a name="line579">579: </a>    <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;V,k,&amp;y);
+<a name="line580">580: </a>    <a href="../../../../docs/manualpages/ST/STApply.html#STApply">STApply</a>(eps-&gt;st,v,y);
+<a name="line581">581: </a>    <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;V,k,&amp;y);
+<a name="line582">582: </a>    <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;W,k,&amp;z);
+<a name="line583">583: </a>    VecConjugate(w);
+<a name="line584">584: </a>    <a href="../../../../docs/manualpages/ST/STApplyTranspose.html#STApplyTranspose">STApplyTranspose</a>(eps-&gt;st,w,z);
+<a name="line585">585: </a>    VecConjugate(w);
+<a name="line586">586: </a>    VecConjugate(z);
+<a name="line587">587: </a>    <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;W,k,&amp;z);
+
+<a name="line589">589: </a>    <font color="#B22222">/* purge previously converged eigenvectors */</font>
+<a name="line590">590: </a>    <a href="../../../../docs/manualpages/BV/BVBiorthogonalizeColumn.html#BVBiorthogonalizeColumn">BVBiorthogonalizeColumn</a>(eps-&gt;V,eps-&gt;W,k);
+
+<a name="line592">592: </a>    <font color="#B22222">/* theta = (w,y)_B */</font>
+<a name="line593">593: </a>    <a href="../../../../docs/manualpages/BV/BVSetActiveColumns.html#BVSetActiveColumns">BVSetActiveColumns</a>(eps-&gt;V,k,k+1);
+<a name="line594">594: </a>    <a href="../../../../docs/manualpages/BV/BVDotVec.html#BVDotVec">BVDotVec</a>(eps-&gt;V,w,&amp;theta);
+<a name="line595">595: </a>    theta = PetscConj(theta);
+
+<a name="line597">597: </a>    <font color="#4169E1">if</font> (power-&gt;shift_type == <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) { <font color="#B22222">/* direct &amp; inverse iteration */</font>
+
+<a name="line599">599: </a>      <font color="#B22222">/* approximate eigenvalue is the Rayleigh quotient */</font>
+<a name="line600">600: </a>      eps-&gt;eigr[eps-&gt;nconv] = theta;
+
+<a name="line602">602: </a>      <font color="#B22222">/* compute relative errors as ||y-theta v||_2/|theta| and ||z-conj(theta) w||_2/|theta|*/</font>
+<a name="line603">603: </a>      <a href="../../../../docs/manualpages/BV/BVCopyVec.html#BVCopyVec">BVCopyVec</a>(eps-&gt;V,k,e);
+<a name="line604">604: </a>      VecAXPY(e,-theta,v);
+<a name="line605">605: </a>      VecNorm(e,NORM_2,&amp;relerr);
+<a name="line606">606: </a>      <a href="../../../../docs/manualpages/BV/BVCopyVec.html#BVCopyVec">BVCopyVec</a>(eps-&gt;W,k,e);
+<a name="line607">607: </a>      VecAXPY(e,-PetscConj(theta),w);
+<a name="line608">608: </a>      VecNorm(e,NORM_2,&amp;relerrl);
+<a name="line609">609: </a>      relerr = PetscMax(relerr,relerrl)/PetscAbsScalar(theta);
+<a name="line610">610: </a>    }
+
+<a name="line612">612: </a>    <font color="#B22222">/* normalize */</font>
+<a name="line613">613: </a>    <a href="../../../../docs/manualpages/BV/BVSetActiveColumns.html#BVSetActiveColumns">BVSetActiveColumns</a>(eps-&gt;V,k,k+1);
+<a name="line614">614: </a>    <a href="../../../../docs/manualpages/BV/BVGetColumn.html#BVGetColumn">BVGetColumn</a>(eps-&gt;W,k,&amp;z);
+<a name="line615">615: </a>    <a href="../../../../docs/manualpages/BV/BVDotVec.html#BVDotVec">BVDotVec</a>(eps-&gt;V,z,&amp;alpha);
+<a name="line616">616: </a>    <a href="../../../../docs/manualpages/BV/BVRestoreColumn.html#BVRestoreColumn">BVRestoreColumn</a>(eps-&gt;W,k,&amp;z);
+<a name="line617">617: </a>    delta = PetscSqrtReal(PetscAbsScalar(alpha));
+<a name="line618">618: </a>    <font color="#4169E1">if</font> (delta==0.0) SETERRQ(PetscObjectComm((PetscObject)eps),1,<font color="#666666">"Breakdown in two-sided Power/RQI"</font>);
+<a name="line619">619: </a>    <a href="../../../../docs/manualpages/BV/BVScaleColumn.html#BVScaleColumn">BVScaleColumn</a>(eps-&gt;V,k,1.0/PetscConj(alpha/delta));
+<a name="line620">620: </a>    <a href="../../../../docs/manualpages/BV/BVScaleColumn.html#BVScaleColumn">BVScaleColumn</a>(eps-&gt;W,k,1.0/delta);
+<a name="line621">621: </a>    <a href="../../../../docs/manualpages/BV/BVCopyVec.html#BVCopyVec">BVCopyVec</a>(eps-&gt;V,k,v);
+<a name="line622">622: </a>    <a href="../../../../docs/manualpages/BV/BVCopyVec.html#BVCopyVec">BVCopyVec</a>(eps-&gt;W,k,w);
+
+<a name="line624">624: </a>    <font color="#4169E1">if</font> (power-&gt;shift_type == <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_RAYLEIGH</a>) { <font color="#B22222">/* RQI */</font>
+
+<a name="line626">626: </a>      <font color="#B22222">/* compute relative error */</font>
+<a name="line627">627: </a>      <font color="#4169E1">if</font> (rho == 0.0) relerr = PETSC_MAX_REAL;
+<a name="line628">628: </a>      <font color="#4169E1">else</font> relerr = 1.0 / PetscAbsScalar(delta*rho);
+
+<a name="line630">630: </a>      <font color="#B22222">/* approximate eigenvalue is the shift */</font>
+<a name="line631">631: </a>      eps-&gt;eigr[eps-&gt;nconv] = rho;
+
+<a name="line633">633: </a>      <font color="#B22222">/* compute new shift */</font>
+<a name="line634">634: </a>      <font color="#4169E1">if</font> (relerr&lt;eps-&gt;tol) {
+<a name="line635">635: </a>        rho = sigma;  <font color="#B22222">/* if converged, restore original shift */</font>
+<a name="line636">636: </a>        <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(eps-&gt;st,rho);
+<a name="line637">637: </a>      } <font color="#4169E1">else</font> {
+<a name="line638">638: </a>        rho = rho + PetscConj(theta)/(delta*delta);  <font color="#B22222">/* Rayleigh quotient R(v) */</font>
+<a name="line639">639: </a>        <font color="#B22222">/* update operator according to new shift */</font>
+<a name="line640">640: </a>        KSPSetErrorIfNotConverged(ksp,PETSC_FALSE);
+<a name="line641">641: </a>        <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(eps-&gt;st,rho);
+<a name="line642">642: </a>        KSPGetConvergedReason(ksp,&amp;reason);
+<a name="line643">643: </a>        <font color="#4169E1">if</font> (reason) {
+<a name="line644">644: </a>          PetscInfo(eps,<font color="#666666">"Factorization failed, repeat with a perturbed shift\n"</font>);
+<a name="line645">645: </a>          rho *= 1+10*PETSC_MACHINE_EPSILON;
+<a name="line646">646: </a>          <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(eps-&gt;st,rho);
+<a name="line647">647: </a>          KSPGetConvergedReason(ksp,&amp;reason);
+<a name="line648">648: </a>          <font color="#4169E1">if</font> (reason) SETERRQ(PetscObjectComm((PetscObject)ksp),PETSC_ERR_CONV_FAILED,<font color="#666666">"Second factorization failed"</font>);
+<a name="line649">649: </a>        }
+<a name="line650">650: </a>        KSPSetErrorIfNotConverged(ksp,PETSC_TRUE);
+<a name="line651">651: </a>      }
+<a name="line652">652: </a>    }
+<a name="line653">653: </a>    eps-&gt;errest[eps-&gt;nconv] = relerr;
+
+<a name="line655">655: </a>    <font color="#B22222">/* if relerr&lt;tol, accept eigenpair */</font>
+<a name="line656">656: </a>    <font color="#4169E1">if</font> (relerr&lt;eps-&gt;tol) {
+<a name="line657">657: </a>      eps-&gt;nconv = eps-&gt;nconv + 1;
+<a name="line658">658: </a>      <font color="#4169E1">if</font> (eps-&gt;nconv&lt;eps-&gt;nev) {
+<a name="line659">659: </a>        EPSGetStartVector(eps,eps-&gt;nconv,&amp;breakdown);
+<a name="line660">660: </a>        <font color="#4169E1">if</font> (breakdown) {
+<a name="line661">661: </a>          eps-&gt;reason = <a href="../../../../docs/manualpages/EPS/EPSConvergedReason.html#EPSConvergedReason">EPS_DIVERGED_BREAKDOWN</a>;
+<a name="line662">662: </a>          PetscInfo(eps,<font color="#666666">"Unable to generate more start vectors\n"</font>);
+<a name="line663">663: </a>          <font color="#4169E1">break</font>;
+<a name="line664">664: </a>        }
+<a name="line665">665: </a>        <a href="../../../../docs/manualpages/BV/BVSetRandomColumn.html#BVSetRandomColumn">BVSetRandomColumn</a>(eps-&gt;W,eps-&gt;nconv);
+<a name="line666">666: </a>        <a href="../../../../docs/manualpages/BV/BVBiorthonormalizeColumn.html#BVBiorthonormalizeColumn">BVBiorthonormalizeColumn</a>(eps-&gt;V,eps-&gt;W,eps-&gt;nconv,NULL);
+<a name="line667">667: </a>      }
+<a name="line668">668: </a>    }
+<a name="line669">669: </a>    EPSMonitor(eps,eps-&gt;its,eps-&gt;nconv,eps-&gt;eigr,eps-&gt;eigi,eps-&gt;errest,PetscMin(eps-&gt;nconv+1,eps-&gt;nev));
+<a name="line670">670: </a>    (*eps-&gt;stopping)(eps,eps-&gt;its,eps-&gt;max_it,eps-&gt;nconv,eps-&gt;nev,&amp;eps-&gt;reason,eps-&gt;stoppingctx);
+<a name="line671">671: </a>  }
+
+<a name="line673">673: </a>  <a href="../../../../docs/manualpages/DS/DSSetDimensions.html#DSSetDimensions">DSSetDimensions</a>(eps-&gt;ds,eps-&gt;nconv,0,0,0);
+<a name="line674">674: </a>  <a href="../../../../docs/manualpages/DS/DSSetState.html#DSSetState">DSSetState</a>(eps-&gt;ds,<a href="../../../../docs/manualpages/DS/DSStateType.html#DSStateType">DS_STATE_RAW</a>);
+<a name="line675">675: </a>  <font color="#4169E1">return</font>(0);
+<a name="line676">676: </a>}
+
+<a name="line678">678: </a><strong><font color="#4169E1"><a name="EPSStopping_Power"></a>PetscErrorCode EPSStopping_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscInt its,PetscInt max_it,PetscInt nconv,PetscInt nev,<a href="../../../../docs/manualpages/EPS/EPSConvergedReason.html#EPSConvergedReason">EPSConvergedReason</a> *reason,void *ctx)</font></strong>
+<a name="line679">679: </a>{
+<a name="line681">681: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line682">682: </a>  SNESConvergedReason snesreason;
+
+<a name="line685">685: </a>  <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line686">686: </a>    SNESGetConvergedReason(power-&gt;snes,&amp;snesreason);
+<a name="line687">687: </a>    <font color="#4169E1">if</font> (snesreason &lt; 0) {
+<a name="line688">688: </a>      *reason = <a href="../../../../docs/manualpages/EPS/EPSConvergedReason.html#EPSConvergedReason">EPS_DIVERGED_BREAKDOWN</a>;
+<a name="line689">689: </a>      <font color="#4169E1">return</font>(0);
+<a name="line690">690: </a>    }
+<a name="line691">691: </a>  }
+<a name="line692">692: </a>  <a href="../../../../docs/manualpages/EPS/EPSStoppingBasic.html#EPSStoppingBasic">EPSStoppingBasic</a>(eps,its,max_it,nconv,nev,reason,ctx);
+<a name="line693">693: </a>  <font color="#4169E1">return</font>(0);
+<a name="line694">694: </a>}
+
+<a name="line696">696: </a><strong><font color="#4169E1"><a name="EPSBackTransform_Power"></a>PetscErrorCode EPSBackTransform_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line697">697: </a>{
+<a name="line699">699: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line702">702: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) eps-&gt;eigr[0] = 1.0/eps-&gt;eigr[0];
+<a name="line703">703: </a>  <font color="#4169E1">else</font> <font color="#4169E1">if</font> (power-&gt;shift_type == <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) {
+<a name="line704">704: </a>    EPSBackTransform_Default(eps);
+<a name="line705">705: </a>  }
+<a name="line706">706: </a>  <font color="#4169E1">return</font>(0);
+<a name="line707">707: </a>}
+
+<a name="line709">709: </a><strong><font color="#4169E1"><a name="EPSSetFromOptions_Power"></a>PetscErrorCode EPSSetFromOptions_Power(PetscOptionItems *PetscOptionsObject,<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line710">710: </a>{
+<a name="line711">711: </a>  PetscErrorCode    ierr;
+<a name="line712">712: </a>  EPS_POWER         *power = (EPS_POWER*)eps-&gt;data;
+<a name="line713">713: </a>  PetscBool         flg,val;
+<a name="line714">714: </a>  <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a> shift;
+
+<a name="line717">717: </a>  PetscOptionsHead(PetscOptionsObject,<font color="#666666">"<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> Power Options"</font>);
+
+<a name="line719">719: </a>    PetscOptionsEnum(<font color="#666666">"-eps_power_shift_type"</font>,<font color="#666666">"Shift type"</font>,<font color="#666666">"<a href="../../../../docs/manualpages/EPS/EPSPowerSetShiftType.html#EPSPowerSetShiftType">EPSPowerSetShiftType</a>"</font>,EPSPowerShiftTypes,(PetscEnum)power-&gt;shift_type,(PetscEnum*)&amp;shift,&amp;flg);
+<a name="line720">720: </a>    <font color="#4169E1">if</font> (flg) { <a href="../../../../docs/manualpages/EPS/EPSPowerSetShiftType.html#EPSPowerSetShiftType">EPSPowerSetShiftType</a>(eps,shift); }
+
+<a name="line722">722: </a>    PetscOptionsBool(<font color="#666666">"-eps_power_nonlinear"</font>,<font color="#666666">"Use nonlinear inverse iteration"</font>,<font color="#666666">"<a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a>"</font>,power-&gt;nonlinear,&amp;val,&amp;flg);
+<a name="line723">723: </a>    <font color="#4169E1">if</font> (flg) { <a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a>(eps,val); }
+
+<a name="line725">725: </a>    PetscOptionsBool(<font color="#666666">"-eps_power_update"</font>,<font color="#666666">"Update residual monolithically"</font>,<font color="#666666">"<a href="../../../../docs/manualpages/EPS/EPSPowerSetUpdate.html#EPSPowerSetUpdate">EPSPowerSetUpdate</a>"</font>,power-&gt;update,&amp;val,&amp;flg);
+<a name="line726">726: </a>    <font color="#4169E1">if</font> (flg) { <a href="../../../../docs/manualpages/EPS/EPSPowerSetUpdate.html#EPSPowerSetUpdate">EPSPowerSetUpdate</a>(eps,val); }
+
+<a name="line728">728: </a>  PetscOptionsTail();
+<a name="line729">729: </a>  <font color="#4169E1">return</font>(0);
+<a name="line730">730: </a>}
+
+<a name="line732">732: </a><strong><font color="#4169E1"><a name="EPSPowerSetShiftType_Power"></a>static PetscErrorCode EPSPowerSetShiftType_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a> shift)</font></strong>
+<a name="line733">733: </a>{
+<a name="line734">734: </a>  EPS_POWER *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line737">737: </a>  <font color="#4169E1">switch</font> (shift) {
+<a name="line738">738: </a>    <font color="#4169E1">case</font> <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>:
+<a name="line739">739: </a>    <font color="#4169E1">case</font> <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_RAYLEIGH</a>:
+<a name="line740">740: </a>    <font color="#4169E1">case</font> <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_WILKINSON</a>:
+<a name="line741">741: </a>      <font color="#4169E1">if</font> (power-&gt;shift_type != shift) {
+<a name="line742">742: </a>        power-&gt;shift_type = shift;
+<a name="line743">743: </a>        eps-&gt;state = EPS_STATE_INITIAL;
+<a name="line744">744: </a>      }
+<a name="line745">745: </a>      <font color="#4169E1">break</font>;
+<a name="line746">746: </a><strong><font color="#FF0000">    default:</font></strong>
+<a name="line747">747: </a>      SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_ARG_OUTOFRANGE,<font color="#666666">"Invalid shift type"</font>);
+<a name="line748">748: </a>  }
+<a name="line749">749: </a>  <font color="#4169E1">return</font>(0);
+<a name="line750">750: </a>}
+
+<a name="line752">752: </a><font color="#B22222">/*@</font>
+<a name="line753">753: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerSetShiftType.html#EPSPowerSetShiftType">EPSPowerSetShiftType</a> - Sets the type of shifts used during the power</font>
+<a name="line754">754: </a><font color="#B22222">   iteration. This can be used to emulate the Rayleigh Quotient Iteration</font>
+<a name="line755">755: </a><font color="#B22222">   (RQI) method.</font>
+
+<a name="line757">757: </a><font color="#B22222">   Logically Collective on eps</font>
+
+<a name="line759">759: </a><font color="#B22222">   Input Parameters:</font>
+<a name="line760">760: </a><font color="#B22222">+  eps - the eigenproblem solver context</font>
+<a name="line761">761: </a><font color="#B22222">-  shift - the type of shift</font>
+
+<a name="line763">763: </a><font color="#B22222">   Options Database Key:</font>
+<a name="line764">764: </a><font color="#B22222">.  -eps_power_shift_type - Sets the shift type (either 'constant' or</font>
+<a name="line765">765: </a><font color="#B22222">                           'rayleigh' or 'wilkinson')</font>
+
+<a name="line767">767: </a><font color="#B22222">   Notes:</font>
+<a name="line768">768: </a><font color="#B22222">   By default, shifts are constant (<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_CONSTANT</a>) and the iteration</font>
+<a name="line769">769: </a><font color="#B22222">   is the simple power method (or inverse iteration if a shift-and-invert</font>
+<a name="line770">770: </a><font color="#B22222">   transformation is being used).</font>
+
+<a name="line772">772: </a><font color="#B22222">   A variable shift can be specified (<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_RAYLEIGH</a> or</font>
+<a name="line773">773: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPS_POWER_SHIFT_WILKINSON</a>). In this case, the iteration behaves rather like</font>
+<a name="line774">774: </a><font color="#B22222">   a cubic converging method such as RQI.</font>
+
+<a name="line776">776: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line778">778: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerGetShiftType.html#EPSPowerGetShiftType">EPSPowerGetShiftType</a>(), <a href="../../../../docs/manualpages/ST/STSetShift.html#STSetShift">STSetShift</a>(), <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a></font>
+<a name="line779">779: </a><font color="#B22222">@*/</font>
+<a name="line780">780: </a><strong><font color="#4169E1"><a name="EPSPowerSetShiftType"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerSetShiftType.html#EPSPowerSetShiftType">EPSPowerSetShiftType</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a> shift)</font></strong>
+<a name="line781">781: </a>{
+
+<a name="line787">787: </a>  PetscTryMethod(eps,<font color="#666666">"EPSPowerSetShiftType_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a>),(eps,shift));
+<a name="line788">788: </a>  <font color="#4169E1">return</font>(0);
+<a name="line789">789: </a>}
+
+<a name="line791">791: </a><strong><font color="#4169E1"><a name="EPSPowerGetShiftType_Power"></a>static PetscErrorCode EPSPowerGetShiftType_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a> *shift)</font></strong>
+<a name="line792">792: </a>{
+<a name="line793">793: </a>  EPS_POWER *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line796">796: </a>  *shift = power-&gt;shift_type;
+<a name="line797">797: </a>  <font color="#4169E1">return</font>(0);
+<a name="line798">798: </a>}
+
+<a name="line800">800: </a><font color="#B22222">/*@</font>
+<a name="line801">801: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerGetShiftType.html#EPSPowerGetShiftType">EPSPowerGetShiftType</a> - Gets the type of shifts used during the power</font>
+<a name="line802">802: </a><font color="#B22222">   iteration.</font>
+
+<a name="line804">804: </a><font color="#B22222">   Not Collective</font>
+
+<a name="line806">806: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line807">807: </a><font color="#B22222">.  eps - the eigenproblem solver context</font>
+
+<a name="line809">809: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line810">810: </a><font color="#B22222">.  shift - the type of shift</font>
+
+<a name="line812">812: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line814">814: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerSetShiftType.html#EPSPowerSetShiftType">EPSPowerSetShiftType</a>(), <a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a></font>
+<a name="line815">815: </a><font color="#B22222">@*/</font>
+<a name="line816">816: </a><strong><font color="#4169E1"><a name="EPSPowerGetShiftType"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerGetShiftType.html#EPSPowerGetShiftType">EPSPowerGetShiftType</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a> *shift)</font></strong>
+<a name="line817">817: </a>{
+
+<a name="line823">823: </a>  PetscUseMethod(eps,<font color="#666666">"EPSPowerGetShiftType_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,<a href="../../../../docs/manualpages/EPS/EPSPowerShiftType.html#EPSPowerShiftType">EPSPowerShiftType</a>*),(eps,shift));
+<a name="line824">824: </a>  <font color="#4169E1">return</font>(0);
+<a name="line825">825: </a>}
+
+<a name="line827">827: </a><strong><font color="#4169E1"><a name="EPSPowerSetNonlinear_Power"></a>static PetscErrorCode EPSPowerSetNonlinear_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool nonlinear)</font></strong>
+<a name="line828">828: </a>{
+<a name="line829">829: </a>  EPS_POWER *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line832">832: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear != nonlinear) {
+<a name="line833">833: </a>    power-&gt;nonlinear = nonlinear;
+<a name="line834">834: </a>    eps-&gt;useds = PetscNot(nonlinear);
+<a name="line835">835: </a>    eps-&gt;state = EPS_STATE_INITIAL;
+<a name="line836">836: </a>  }
+<a name="line837">837: </a>  <font color="#4169E1">return</font>(0);
+<a name="line838">838: </a>}
+
+<a name="line840">840: </a><font color="#B22222">/*@</font>
+<a name="line841">841: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a> - Sets a flag to indicate that the problem is nonlinear.</font>
+
+<a name="line843">843: </a><font color="#B22222">   Logically Collective on eps</font>
+
+<a name="line845">845: </a><font color="#B22222">   Input Parameters:</font>
+<a name="line846">846: </a><font color="#B22222">+  eps - the eigenproblem solver context</font>
+<a name="line847">847: </a><font color="#B22222">-  nonlinear - whether the problem is nonlinear or not</font>
+
+<a name="line849">849: </a><font color="#B22222">   Options Database Key:</font>
+<a name="line850">850: </a><font color="#B22222">.  -eps_power_nonlinear - Sets the nonlinear flag</font>
+
+<a name="line852">852: </a><font color="#B22222">   Notes:</font>
+<a name="line853">853: </a><font color="#B22222">   If this flag is set, the solver assumes that the problem is nonlinear,</font>
+<a name="line854">854: </a><font color="#B22222">   that is, the operators that define the eigenproblem are not constant</font>
+<a name="line855">855: </a><font color="#B22222">   matrices, but depend on the eigenvector: A(x)*x=lambda*B(x)*x. This is</font>
+<a name="line856">856: </a><font color="#B22222">   different from the case of nonlinearity with respect to the eigenvalue</font>
+<a name="line857">857: </a><font color="#B22222">   (use the <a href="../../../../docs/manualpages/NEP/NEP.html#NEP">NEP</a> solver class for this kind of problems).</font>
+
+<a name="line859">859: </a><font color="#B22222">   The way in which nonlinear operators are specified is very similar to</font>
+<a name="line860">860: </a><font color="#B22222">   the case of PETSc's SNES solver. The difference is that the callback</font>
+<a name="line861">861: </a><font color="#B22222">   functions are provided via composed functions "formFunction" and</font>
+<a name="line862">862: </a><font color="#B22222">   "formJacobian" in each of the matrix objects passed as arguments of</font>
+<a name="line863">863: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSSetOperators.html#EPSSetOperators">EPSSetOperators</a>(). The application context required for these functions</font>
+<a name="line864">864: </a><font color="#B22222">   can be attached via a composed PetscContainer.</font>
+
+<a name="line866">866: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line868">868: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerGetNonlinear.html#EPSPowerGetNonlinear">EPSPowerGetNonlinear</a>(), <a href="../../../../docs/manualpages/EPS/EPSSetOperators.html#EPSSetOperators">EPSSetOperators</a>()</font>
+<a name="line869">869: </a><font color="#B22222">@*/</font>
+<a name="line870">870: </a><strong><font color="#4169E1"><a name="EPSPowerSetNonlinear"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool nonlinear)</font></strong>
+<a name="line871">871: </a>{
+
+<a name="line877">877: </a>  PetscTryMethod(eps,<font color="#666666">"EPSPowerSetNonlinear_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,PetscBool),(eps,nonlinear));
+<a name="line878">878: </a>  <font color="#4169E1">return</font>(0);
+<a name="line879">879: </a>}
+
+<a name="line881">881: </a><strong><font color="#4169E1"><a name="EPSPowerGetNonlinear_Power"></a>static PetscErrorCode EPSPowerGetNonlinear_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool *nonlinear)</font></strong>
+<a name="line882">882: </a>{
+<a name="line883">883: </a>  EPS_POWER *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line886">886: </a>  *nonlinear = power-&gt;nonlinear;
+<a name="line887">887: </a>  <font color="#4169E1">return</font>(0);
+<a name="line888">888: </a>}
+
+<a name="line890">890: </a><font color="#B22222">/*@</font>
+<a name="line891">891: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerGetNonlinear.html#EPSPowerGetNonlinear">EPSPowerGetNonlinear</a> - Returns a flag indicating if the problem is nonlinear.</font>
+
+<a name="line893">893: </a><font color="#B22222">   Not Collective</font>
+
+<a name="line895">895: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line896">896: </a><font color="#B22222">.  eps - the eigenproblem solver context</font>
+
+<a name="line898">898: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line899">899: </a><font color="#B22222">.  nonlinear - the nonlinear flag</font>
+
+<a name="line901">901: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line903">903: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerSetUpdate.html#EPSPowerSetUpdate">EPSPowerSetUpdate</a>(), <a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a>()</font>
+<a name="line904">904: </a><font color="#B22222">@*/</font>
+<a name="line905">905: </a><strong><font color="#4169E1"><a name="EPSPowerGetNonlinear"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerGetNonlinear.html#EPSPowerGetNonlinear">EPSPowerGetNonlinear</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool *nonlinear)</font></strong>
+<a name="line906">906: </a>{
+
+<a name="line912">912: </a>  PetscUseMethod(eps,<font color="#666666">"EPSPowerGetNonlinear_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,PetscBool*),(eps,nonlinear));
+<a name="line913">913: </a>  <font color="#4169E1">return</font>(0);
+<a name="line914">914: </a>}
+
+<a name="line916">916: </a><strong><font color="#4169E1"><a name="EPSPowerSetUpdate_Power"></a>static PetscErrorCode EPSPowerSetUpdate_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool update)</font></strong>
+<a name="line917">917: </a>{
+<a name="line918">918: </a>  EPS_POWER *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line921">921: </a>  <font color="#4169E1">if</font> (!power-&gt;nonlinear) SETERRQ(PetscObjectComm((PetscObject)eps),PETSC_ERR_ARG_INCOMP,<font color="#666666">"This option does not make sense for linear problems"</font>);
+<a name="line922">922: </a>  power-&gt;update = update;
+<a name="line923">923: </a>  eps-&gt;state = EPS_STATE_INITIAL;
+<a name="line924">924: </a>  <font color="#4169E1">return</font>(0);
+<a name="line925">925: </a>}
+
+<a name="line927">927: </a><font color="#B22222">/*@</font>
+<a name="line928">928: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerSetUpdate.html#EPSPowerSetUpdate">EPSPowerSetUpdate</a> - Sets a flag to indicate that the residual is updated monolithically</font>
+<a name="line929">929: </a><font color="#B22222">   for nonlinear problems. This potentially has a better convergence.</font>
+
+<a name="line931">931: </a><font color="#B22222">   Logically Collective on eps</font>
+
+<a name="line933">933: </a><font color="#B22222">   Input Parameters:</font>
+<a name="line934">934: </a><font color="#B22222">+  eps - the eigenproblem solver context</font>
+<a name="line935">935: </a><font color="#B22222">-  update - whether the residual is updated monolithically or not</font>
+
+<a name="line937">937: </a><font color="#B22222">   Options Database Key:</font>
+<a name="line938">938: </a><font color="#B22222">.  -eps_power_update - Sets the update flag</font>
+
+<a name="line940">940: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line942">942: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerGetUpdate.html#EPSPowerGetUpdate">EPSPowerGetUpdate</a>(), <a href="../../../../docs/manualpages/EPS/EPSPowerGetNonlinear.html#EPSPowerGetNonlinear">EPSPowerGetNonlinear</a>(), <a href="../../../../docs/manualpages/EPS/EPSSetOperators.html#EPSSetOperators">EPSSetOperators</a>()</font>
+<a name="line943">943: </a><font color="#B22222">@*/</font>
+<a name="line944">944: </a><strong><font color="#4169E1"><a name="EPSPowerSetUpdate"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerSetUpdate.html#EPSPowerSetUpdate">EPSPowerSetUpdate</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool update)</font></strong>
+<a name="line945">945: </a>{
+
+<a name="line951">951: </a>  PetscTryMethod(eps,<font color="#666666">"EPSPowerSetUpdate_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,PetscBool),(eps,update));
+<a name="line952">952: </a>  <font color="#4169E1">return</font>(0);
+<a name="line953">953: </a>}
+
+<a name="line955">955: </a><strong><font color="#4169E1"><a name="EPSPowerGetUpdate_Power"></a>static PetscErrorCode EPSPowerGetUpdate_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool *update)</font></strong>
+<a name="line956">956: </a>{
+<a name="line957">957: </a>  EPS_POWER *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line960">960: </a>  *update = power-&gt;update;
+<a name="line961">961: </a>  <font color="#4169E1">return</font>(0);
+<a name="line962">962: </a>}
+
+<a name="line964">964: </a><font color="#B22222">/*@</font>
+<a name="line965">965: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerGetUpdate.html#EPSPowerGetUpdate">EPSPowerGetUpdate</a> - Returns a flag indicating if the residual is updated monolithically</font>
+<a name="line966">966: </a><font color="#B22222">   for nonlinear problems.</font>
+
+<a name="line968">968: </a><font color="#B22222">   Not Collective</font>
+
+<a name="line970">970: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line971">971: </a><font color="#B22222">.  eps - the eigenproblem solver context</font>
+
+<a name="line973">973: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line974">974: </a><font color="#B22222">.  update - the update flag</font>
+
+<a name="line976">976: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line978">978: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerSetUpdate.html#EPSPowerSetUpdate">EPSPowerSetUpdate</a>(), <a href="../../../../docs/manualpages/EPS/EPSPowerSetNonlinear.html#EPSPowerSetNonlinear">EPSPowerSetNonlinear</a>()</font>
+<a name="line979">979: </a><font color="#B22222">@*/</font>
+<a name="line980">980: </a><strong><font color="#4169E1"><a name="EPSPowerGetUpdate"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerGetUpdate.html#EPSPowerGetUpdate">EPSPowerGetUpdate</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscBool *update)</font></strong>
+<a name="line981">981: </a>{
+
+<a name="line987">987: </a>  PetscUseMethod(eps,<font color="#666666">"EPSPowerGetUpdate_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,PetscBool*),(eps,update));
+<a name="line988">988: </a>  <font color="#4169E1">return</font>(0);
+<a name="line989">989: </a>}
+
+<a name="line991">991: </a><strong><font color="#4169E1"><a name="EPSPowerSetSNES_Power"></a>static PetscErrorCode EPSPowerSetSNES_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,SNES snes)</font></strong>
+<a name="line992">992: </a>{
+<a name="line994">994: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line997">997: </a>  PetscObjectReference((PetscObject)snes);
+<a name="line998">998: </a>  SNESDestroy(&amp;power-&gt;snes);
+<a name="line999">999: </a>  power-&gt;snes = snes;
+<a name="line1000">1000: </a>  PetscLogObjectParent((PetscObject)eps,(PetscObject)power-&gt;snes);
+<a name="line1001">1001: </a>  eps-&gt;state = EPS_STATE_INITIAL;
+<a name="line1002">1002: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1003">1003: </a>}
+
+<a name="line1005">1005: </a><font color="#B22222">/*@</font>
+<a name="line1006">1006: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerSetSNES.html#EPSPowerSetSNES">EPSPowerSetSNES</a> - Associate a nonlinear solver object (SNES) to the</font>
+<a name="line1007">1007: </a><font color="#B22222">   eigenvalue solver (to be used in nonlinear inverse iteration).</font>
+
+<a name="line1009">1009: </a><font color="#B22222">   Collective on eps</font>
+
+<a name="line1011">1011: </a><font color="#B22222">   Input Parameters:</font>
+<a name="line1012">1012: </a><font color="#B22222">+  eps  - the eigenvalue solver</font>
+<a name="line1013">1013: </a><font color="#B22222">-  snes - the nonlinear solver object</font>
+
+<a name="line1015">1015: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line1017">1017: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a>()</font>
+<a name="line1018">1018: </a><font color="#B22222">@*/</font>
+<a name="line1019">1019: </a><strong><font color="#4169E1"><a name="EPSPowerSetSNES"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerSetSNES.html#EPSPowerSetSNES">EPSPowerSetSNES</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,SNES snes)</font></strong>
+<a name="line1020">1020: </a>{
+
+<a name="line1027">1027: </a>  PetscTryMethod(eps,<font color="#666666">"EPSPowerSetSNES_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,SNES),(eps,snes));
+<a name="line1028">1028: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1029">1029: </a>}
+
+<a name="line1031">1031: </a><strong><font color="#4169E1"><a name="EPSPowerGetSNES_Power"></a>static PetscErrorCode EPSPowerGetSNES_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,SNES *snes)</font></strong>
+<a name="line1032">1032: </a>{
+<a name="line1034">1034: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line1037">1037: </a>  <font color="#4169E1">if</font> (!power-&gt;snes) {
+<a name="line1038">1038: </a>    SNESCreate(PetscObjectComm((PetscObject)eps),&amp;power-&gt;snes);
+<a name="line1039">1039: </a>    PetscObjectIncrementTabLevel((PetscObject)power-&gt;snes,(PetscObject)eps,1);
+<a name="line1040">1040: </a>    SNESSetOptionsPrefix(power-&gt;snes,((PetscObject)eps)-&gt;prefix);
+<a name="line1041">1041: </a>    SNESAppendOptionsPrefix(power-&gt;snes,<font color="#666666">"eps_power_"</font>);
+<a name="line1042">1042: </a>    PetscLogObjectParent((PetscObject)eps,(PetscObject)power-&gt;snes);
+<a name="line1043">1043: </a>    PetscObjectSetOptions((PetscObject)power-&gt;snes,((PetscObject)eps)-&gt;options);
+<a name="line1044">1044: </a>  }
+<a name="line1045">1045: </a>  *snes = power-&gt;snes;
+<a name="line1046">1046: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1047">1047: </a>}
+
+<a name="line1049">1049: </a><font color="#B22222">/*@</font>
+<a name="line1050">1050: </a><font color="#B22222">   <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a> - Retrieve the nonlinear solver object (SNES) associated</font>
+<a name="line1051">1051: </a><font color="#B22222">   with the eigenvalue solver.</font>
+
+<a name="line1053">1053: </a><font color="#B22222">   Not Collective</font>
+
+<a name="line1055">1055: </a><font color="#B22222">   Input Parameter:</font>
+<a name="line1056">1056: </a><font color="#B22222">.  eps - the eigenvalue solver</font>
+
+<a name="line1058">1058: </a><font color="#B22222">   Output Parameter:</font>
+<a name="line1059">1059: </a><font color="#B22222">.  snes - the nonlinear solver object</font>
+
+<a name="line1061">1061: </a><font color="#B22222">   Level: advanced</font>
+
+<a name="line1063">1063: </a><font color="#B22222">.seealso: <a href="../../../../docs/manualpages/EPS/EPSPowerSetSNES.html#EPSPowerSetSNES">EPSPowerSetSNES</a>()</font>
+<a name="line1064">1064: </a><font color="#B22222">@*/</font>
+<a name="line1065">1065: </a><strong><font color="#4169E1"><a name="EPSPowerGetSNES"></a>PetscErrorCode <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a>(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,SNES *snes)</font></strong>
+<a name="line1066">1066: </a>{
+
+<a name="line1072">1072: </a>  PetscUseMethod(eps,<font color="#666666">"EPSPowerGetSNES_C"</font>,(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a>,SNES*),(eps,snes));
+<a name="line1073">1073: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1074">1074: </a>}
+
+<a name="line1076">1076: </a><strong><font color="#4169E1"><a name="EPSReset_Power"></a>PetscErrorCode EPSReset_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line1077">1077: </a>{
+<a name="line1079">1079: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line1082">1082: </a>  <font color="#4169E1">if</font> (power-&gt;snes) { SNESReset(power-&gt;snes); }
+<a name="line1083">1083: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1084">1084: </a>}
+
+<a name="line1086">1086: </a><strong><font color="#4169E1"><a name="EPSDestroy_Power"></a>PetscErrorCode EPSDestroy_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line1087">1087: </a>{
+<a name="line1089">1089: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+
+<a name="line1092">1092: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line1093">1093: </a>    SNESDestroy(&amp;power-&gt;snes);
+<a name="line1094">1094: </a>  }
+<a name="line1095">1095: </a>  PetscFree(eps-&gt;data);
+<a name="line1096">1096: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetShiftType_C"</font>,NULL);
+<a name="line1097">1097: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetShiftType_C"</font>,NULL);
+<a name="line1098">1098: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetNonlinear_C"</font>,NULL);
+<a name="line1099">1099: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetNonlinear_C"</font>,NULL);
+<a name="line1100">1100: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetUpdate_C"</font>,NULL);
+<a name="line1101">1101: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetUpdate_C"</font>,NULL);
+<a name="line1102">1102: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetSNES_C"</font>,NULL);
+<a name="line1103">1103: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetSNES_C"</font>,NULL);
+<a name="line1104">1104: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1105">1105: </a>}
+
+<a name="line1107">1107: </a><strong><font color="#4169E1"><a name="EPSView_Power"></a>PetscErrorCode EPSView_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps,PetscViewer viewer)</font></strong>
+<a name="line1108">1108: </a>{
+<a name="line1110">1110: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line1111">1111: </a>  PetscBool      isascii;
+
+<a name="line1114">1114: </a>  PetscObjectTypeCompare((PetscObject)viewer,PETSCVIEWERASCII,&amp;isascii);
+<a name="line1115">1115: </a>  <font color="#4169E1">if</font> (isascii) {
+<a name="line1116">1116: </a>    <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line1117">1117: </a>      PetscViewerASCIIPrintf(viewer,<font color="#666666">"  using nonlinear inverse iteration\n"</font>);
+<a name="line1118">1118: </a>      <font color="#4169E1">if</font> (power-&gt;update) {
+<a name="line1119">1119: </a>        PetscViewerASCIIPrintf(viewer,<font color="#666666">"  updating the residual monolithically\n"</font>);
+<a name="line1120">1120: </a>      }
+<a name="line1121">1121: </a>      <font color="#4169E1">if</font> (!power-&gt;snes) { <a href="../../../../docs/manualpages/EPS/EPSPowerGetSNES.html#EPSPowerGetSNES">EPSPowerGetSNES</a>(eps,&amp;power-&gt;snes); }
+<a name="line1122">1122: </a>      PetscViewerASCIIPushTab(viewer);
+<a name="line1123">1123: </a>      SNESView(power-&gt;snes,viewer);
+<a name="line1124">1124: </a>      PetscViewerASCIIPopTab(viewer);
+<a name="line1125">1125: </a>    } <font color="#4169E1">else</font> {
+<a name="line1126">1126: </a>      PetscViewerASCIIPrintf(viewer,<font color="#666666">"  %s shifts\n"</font>,EPSPowerShiftTypes[power-&gt;shift_type]);
+<a name="line1127">1127: </a>    }
+<a name="line1128">1128: </a>  }
+<a name="line1129">1129: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1130">1130: </a>}
+
+<a name="line1132">1132: </a><strong><font color="#4169E1"><a name="EPSComputeVectors_Power"></a>PetscErrorCode EPSComputeVectors_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line1133">1133: </a>{
+<a name="line1135">1135: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line1136">1136: </a>  PetscReal      norm;
+<a name="line1137">1137: </a>  PetscInt       i;
+
+<a name="line1140">1140: </a>  <font color="#4169E1">if</font> (eps-&gt;twosided) {
+<a name="line1141">1141: </a>    EPSComputeVectors_Twosided(eps);
+<a name="line1142">1142: </a>    <font color="#B22222">/* normalize (no need to take care of 2x2 blocks */</font>
+<a name="line1143">1143: </a>    <font color="#4169E1">for</font> (i=0;i&lt;eps-&gt;nconv;i++) {
+<a name="line1144">1144: </a>      <a href="../../../../docs/manualpages/BV/BVNormColumn.html#BVNormColumn">BVNormColumn</a>(eps-&gt;V,i,NORM_2,&amp;norm);
+<a name="line1145">1145: </a>      <a href="../../../../docs/manualpages/BV/BVScaleColumn.html#BVScaleColumn">BVScaleColumn</a>(eps-&gt;V,i,1.0/norm);
+<a name="line1146">1146: </a>      <a href="../../../../docs/manualpages/BV/BVNormColumn.html#BVNormColumn">BVNormColumn</a>(eps-&gt;W,i,NORM_2,&amp;norm);
+<a name="line1147">1147: </a>      <a href="../../../../docs/manualpages/BV/BVScaleColumn.html#BVScaleColumn">BVScaleColumn</a>(eps-&gt;W,i,1.0/norm);
+<a name="line1148">1148: </a>    }
+<a name="line1149">1149: </a>  } <font color="#4169E1">else</font> <font color="#4169E1">if</font> (!power-&gt;nonlinear) {
+<a name="line1150">1150: </a>    EPSComputeVectors_Schur(eps);
+<a name="line1151">1151: </a>  }
+<a name="line1152">1152: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1153">1153: </a>}
+
+<a name="line1155">1155: </a><strong><font color="#4169E1"><a name="EPSSetDefaultST_Power"></a>PetscErrorCode EPSSetDefaultST_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line1156">1156: </a>{
+<a name="line1158">1158: </a>  EPS_POWER      *power = (EPS_POWER*)eps-&gt;data;
+<a name="line1159">1159: </a>  KSP            ksp;
+<a name="line1160">1160: </a>  PC             pc;
+
+<a name="line1163">1163: </a>  <font color="#4169E1">if</font> (power-&gt;nonlinear) {
+<a name="line1164">1164: </a>    <a href="../../../../docs/manualpages/ST/STGetKSP.html#STGetKSP">STGetKSP</a>(eps-&gt;st,&amp;ksp);
+<a name="line1165">1165: </a>    KSPGetPC(ksp,&amp;pc);
+<a name="line1166">1166: </a>    PCSetType(pc,PCNONE);
+<a name="line1167">1167: </a>  }
+<a name="line1168">1168: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1169">1169: </a>}
+
+<a name="line1171">1171: </a><strong><font color="#4169E1"><a name="EPSCreate_Power"></a>SLEPC_EXTERN PetscErrorCode EPSCreate_Power(<a href="../../../../docs/manualpages/EPS/EPS.html#EPS">EPS</a> eps)</font></strong>
+<a name="line1172">1172: </a>{
+<a name="line1173">1173: </a>  EPS_POWER      *ctx;
+
+<a name="line1177">1177: </a>  PetscNewLog(eps,&amp;ctx);
+<a name="line1178">1178: </a>  eps-&gt;data = (void*)ctx;
+
+<a name="line1180">1180: </a>  eps-&gt;useds = PETSC_TRUE;
+<a name="line1181">1181: </a>  eps-&gt;hasts = PETSC_TRUE;
+<a name="line1182">1182: </a>  eps-&gt;categ = EPS_CATEGORY_OTHER;
+
+<a name="line1184">1184: </a>  eps-&gt;ops-&gt;setup          = EPSSetUp_Power;
+<a name="line1185">1185: </a>  eps-&gt;ops-&gt;setfromoptions = EPSSetFromOptions_Power;
+<a name="line1186">1186: </a>  eps-&gt;ops-&gt;reset          = EPSReset_Power;
+<a name="line1187">1187: </a>  eps-&gt;ops-&gt;destroy        = EPSDestroy_Power;
+<a name="line1188">1188: </a>  eps-&gt;ops-&gt;view           = EPSView_Power;
+<a name="line1189">1189: </a>  eps-&gt;ops-&gt;backtransform  = EPSBackTransform_Power;
+<a name="line1190">1190: </a>  eps-&gt;ops-&gt;computevectors = EPSComputeVectors_Power;
+<a name="line1191">1191: </a>  eps-&gt;ops-&gt;setdefaultst   = EPSSetDefaultST_Power;
+<a name="line1192">1192: </a>  eps-&gt;stopping            = EPSStopping_Power;
+
+<a name="line1194">1194: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetShiftType_C"</font>,EPSPowerSetShiftType_Power);
+<a name="line1195">1195: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetShiftType_C"</font>,EPSPowerGetShiftType_Power);
+<a name="line1196">1196: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetNonlinear_C"</font>,EPSPowerSetNonlinear_Power);
+<a name="line1197">1197: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetNonlinear_C"</font>,EPSPowerGetNonlinear_Power);
+<a name="line1198">1198: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetUpdate_C"</font>,EPSPowerSetUpdate_Power);
+<a name="line1199">1199: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetUpdate_C"</font>,EPSPowerGetUpdate_Power);
+<a name="line1200">1200: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerSetSNES_C"</font>,EPSPowerSetSNES_Power);
+<a name="line1201">1201: </a>  PetscObjectComposeFunction((PetscObject)eps,<font color="#666666">"EPSPowerGetSNES_C"</font>,EPSPowerGetSNES_Power);
+<a name="line1202">1202: </a>  <font color="#4169E1">return</font>(0);
+<a name="line1203">1203: </a>}
+
+</pre>
+</body>
+
+</html>
