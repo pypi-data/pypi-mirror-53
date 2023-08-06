@@ -1,0 +1,20 @@
+before_script:
+  - export MAKEFLAGS="-j2"
+
+test:
+  image: sagemath/sagemath-dev:8.7
+  script:
+    - sage -pip install .
+    # coverage
+    - sage -coverage --summary admcycles/*py | head -n1
+    # doctests
+    # NOTE: we do move since sage -t refuses to run doctests if
+    # other have write access to the repo
+    - export DIR=`pwd`
+    - cd
+    - sage -t --force-lib --long ${DIR}/admcycles
+    # unittests
+    - ${DIR}/tests/run_tests.sh
+    # build documentation
+    - sage -sh
+  coverage: '/^Global score: (\d+.\d+)\%/'
