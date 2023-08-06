@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: gubbins
+Version: 0.0.2
+Summary: Serial number generator/validator
+Home-page: https://github.com/ArgosyLabs/gubbins
+Author: Derrick Lyndon Pallas
+Author-email: derrick@argosylabs.com
+License: MIT
+Keywords: serial generator validator
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Classifier: Topic :: Security
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
+Requires-Dist: more-itertools
+Requires-Dist: anybase32
+Requires-Dist: pynumparser
+
+# gubbins
+Serial number generator/validator
+======
+
+A simple but powerful serial number generator and validator written in
+Python.  Given a Prefix and a 32-bit ID, produces a Serial.  Given a valid
+Serial, returns the Prefix and 32-bit ID.  Optionally takes Additional Data.
+
+```python
+from gubbins import Gubbins
+
+for i in range(10):
+	serial = Gubbins.generate("AX", i)
+	prefix, id = Gubbins.validate(serial)
+	assert prefix.lower() == "AX".lower()
+	assert id == i
+	print(i, serial)
+```
+
+or via the command-line,
+
+```bash
+python3 -m gubbins.generate 1-10 --solo --prefix AX | python3 -m gubbins.validate
+```
+
+Requires
+* [more_itertools](https://github.com/erikrose/more-itertools),
+* [anybase32](https://github.com/alanblevins/anybase32), &
+* [pynumparser](https://gitlab.com/n2vram/pynumparser).
+
+License: [MIT](https://opensource.org/licenses/MIT)
+
+
