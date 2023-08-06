@@ -1,0 +1,26 @@
+<div class="ui checkbox"
+     tal:define="oid oid|field.oid">
+  <input tal:define="name name|field.name;
+                     true_val true_val|field.widget.true_val;
+                     css_class css_class|field.widget.css_class;
+                     style style|field.widget.style;"
+         type="checkbox"
+         name="${name}" value="${true_val}"
+         id="${oid}"
+         tal:attributes="checked cstruct == true_val;
+                         class css_class;
+                         style style;
+                         attributes|field.widget.attributes|{};" />
+  <label tal:condition="hasattr(field, 'schema') and hasattr(field.schema, 'label')"
+         for="${oid}"
+         class="checkbox-label"
+         tal:content="field.schema.label" />
+  <script type="text/javascript">
+   deform.addCallback(
+       '${oid}',
+       function (oid) {
+           $('#item-' + oid + ' .ui.checkbox').checkbox();
+       }
+   );
+  </script>
+</div>

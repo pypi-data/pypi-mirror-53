@@ -1,0 +1,30 @@
+<div tal:define="css_class css_class|field.widget.css_class;
+                 style style|field.widget.style;
+                 oid oid|field.oid;
+                 inline getattr(field.widget, 'inline', False)"
+     tal:omit-tag="not inline">
+  ${field.start_sequence()}
+  <div tal:repeat="choice values | field.widget.values"
+       class="ui checkbox">
+    <input tal:attributes="checked choice[0] in cstruct;
+                           value choice[0];
+                           class css_class;
+                           style style;
+                           attributes|field.widget.attributes|{};"
+           type="checkbox"
+           name="checkbox"
+           id="${oid}-${repeat.choice.index}" />
+    <label for="${oid}-${repeat.choice.index}"
+           tal:attributes="class inline and 'checkbox-inline';"
+           tal:content="choice[1]" />
+  </div>
+  ${field.end_sequence()}
+  <script type="text/javascript">
+   deform.addCallback(
+       '${oid}',
+       function (oid) {
+           $('#item-' + oid + ' .ui.checkbox').checkbox();
+       }
+   );
+  </script>
+</div>
