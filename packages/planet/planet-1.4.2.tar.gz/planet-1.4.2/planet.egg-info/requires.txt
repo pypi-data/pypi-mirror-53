@@ -1,0 +1,24 @@
+click
+requests
+requests_futures
+
+[:platform_system == "Windows"]
+pywin32>=1.0
+
+[dev]
+mock
+pytest
+requests-mock
+flake8
+setuptools
+pex
+pytest-cov
+sphinx
+wheel
+mock
+requests-mock
+
+[test]
+mock
+pytest
+requests-mock
