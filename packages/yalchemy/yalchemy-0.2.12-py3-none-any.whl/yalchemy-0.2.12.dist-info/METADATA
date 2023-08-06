@@ -1,0 +1,51 @@
+Metadata-Version: 2.0
+Name: yalchemy
+Version: 0.2.12
+Summary: Convert SQLAlchemy table definitions to yaml and vice versa
+Home-page: https://github.com/CloverHealth/yalchemy
+Author: Clover Health
+Author-email: oss@cloverhealth.com
+License: BSD 3-Clause
+Platform: UNKNOWN
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Development Status :: 4 - Beta
+Classifier: Operating System :: OS Independent
+Requires-Dist: geoalchemy2 (>=0.4.2)
+Requires-Dist: sqlalchemy (>=1.1)
+Requires-Dist: pyyaml (>=3.12)
+Requires-Dist: attrs (<19.2.0,>=17.4.0)
+
+yalchemy
+########################################################################
+
+Documentation
+=============
+
+`View the yalchemy docs here <http://yalchemy.readthedocs.io/>`_.
+
+Installation
+============
+
+yalchemy can be installed with::
+
+    pip3 install yalchemy
+
+
+Primary Authors
+===============
+
+* Wes Kendall <wesleykendall@gmail.com>
+* Chris Hartfield <chris.hartfield@cloverhealth.com>
+
+Other contributors can be found in the AUTHORS file
+
+Contributing Guide
+==================
+
+For information on setting up yalchemy for development and contributing changes, view `CONTRIBUTING.rst <CONTRIBUTING.rst>`_.
+
+
+
