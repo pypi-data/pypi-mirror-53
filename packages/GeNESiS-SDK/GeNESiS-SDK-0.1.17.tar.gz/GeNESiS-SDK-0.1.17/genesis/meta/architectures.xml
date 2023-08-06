@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<architectures>
+  <architecture type="GPU" caption="GPU device">
+    <command>
+    </command>
+    <model name="C2050" family="Fermi">
+      <aliases>
+       <alias> Tesla C2050 </alias>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <memory> 3GB </memory>
+      <links>
+        <link> PCIe </link>
+      </links>
+      <capability> 2.0 </capability>
+    </model>
+
+    <model name="M2090" family="Fermi">
+      <aliases>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <memory> 6GB </memory>
+      <links>
+        <link> PCIe </link>
+      </links>
+      <capability> 2.0 </capability>
+    </model>
+
+    <model name="K80" family="Kepler">
+      <aliases>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <memory> 24GB </memory>
+      <links>
+        <link> PCIe </link>
+      </links>
+      <capability> 3.7 </capability>
+    </model>
+
+    <model name="V100" family="Volta">
+      <aliases>
+        <alias> Tesla V100-SXM2-16GB </alias>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <memory> 32GB </memory>
+      <links>
+        <link> PCIe </link>
+        <link> NVLink </link>
+      </links>
+      <capability> 7.1 </capability>
+    </model>
+  </architecture>
+
+  <architecture type="GP" caption="General purpose">
+    <command>
+    </command>
+
+    <model name="i7-8650U" family="Kabylake">
+      <aliases>
+        <alias>Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz </alias>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 4 </cores>
+      <cpus> 8 </cpus>
+    </model>
+
+    <model name="i7-5600U" family="Broadwell">
+      <aliases>
+        <alias>Intel(R) Core(TM) i7-5600U CPU @ 2.60GHz </alias>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 4 </cores>
+      <cpus> 8 </cpus>
+    </model>
+
+    <model name="i7-4600U" family="Haswell">
+      <aliases>
+        <alias> Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz </alias>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 2 </cores>
+      <cpus> 4 </cpus>
+    </model>
+
+    <model name="E5-2630V3" family="Haswell">
+      <aliases>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 16 </cores>
+      <cpus> 16 </cpus>
+    </model>
+
+    <model name="8160" family="Skylake">
+      <aliases>
+        <alias> Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz </alias>
+      </aliases>
+      <compatibles>
+        <compatible> Haswell </compatible>
+        <compatible> Sandybridge </compatible>
+      </compatibles>
+      <cores> 48 </cores>
+      <cpus> 48 </cpus>
+    </model>
+
+    <model name="E5-2670" family="Sandybridge">
+      <aliases>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 16 </cores>
+      <cpus> 16 </cpus>
+    </model>
+
+    <model name="E5649" family="Westmere">
+      <aliases>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 12 </cores>
+      <cpus> 12 </cpus>
+    </model>
+
+    <model name="8335-GTH" family="Power9">
+      <aliases>
+        <alias> 8335-GTG </alias>
+      </aliases>
+      <compatibles>
+      </compatibles>
+      <cores> 40 </cores>
+      <cpus> 160 </cpus>
+    </model>
+
+  </architecture>
+
+  <architecture type="FPGA" caption="Field-Programmable Gate Array">
+  </architecture>
+
+  <architecture type="MIC" caption="Intel® MIC Architecture">
+  </architecture>
+</architectures>
