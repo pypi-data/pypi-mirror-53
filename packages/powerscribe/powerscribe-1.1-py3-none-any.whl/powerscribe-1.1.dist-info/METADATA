@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: powerscribe
+Version: 1.1
+Summary: A simple REST API implementation for Radiology Nuance PowerScribe 360 dictation system
+Home-page: https://github.com/amin2997/PyPowerScribe
+Author: Amin
+Author-email: amin2997@yahoo.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: requests (>=2.21.0)
+
+This is a REST API implementation for Radiology Nuance PowerScribe 360 dictation system. This API will allow you to send and retrieve data points into pre-built custom fields that populates radiologist final report. For example, you can push radiation dose information into custom field that will populate the radiologist final report.
+
+
