@@ -1,0 +1,65 @@
+CHANGES
+=======
+
+* set pypi index version to 0.3.2
+* opening pickle file in binary mode
+* Scale: Changes to traffic\_elements, TrafficRecord source, retries
+* set pypi index version to 0.3.1
+* Add Retry in Axon Client and change the pickle to cPickle
+* Remove nsenter third party dependency
+* Remove requests dependency
+* Use standard library ipaddress module over third party ipaddr
+* Fix python3 incompatibility
+* Update WavefrontClient with correct WavefrontProxyClient params
+* Update requests package to 2.21.0
+* Fixing windows session issue
+* Update debian version
+* axon pypi setup version to 0.3.0
+* Add wavefront backend
+* Separate config and traffic DBs
+* update setup.cfg to make compatible for pypi upload
+* Fix datacenter traffic controller
+* Delete Riak Client and related code
+* Remove unecessary packages
+* Update requirements.txt
+* Update documentation to include tox installation
+* Fixing pep8
+* Add support for HTTP Server and Client
+* Some formatting around .rst
+* Some amendments around functional testing
+* Move NAMESPACE\_MODE to axon start up config
+* Modifying test to make it generic
+* Minor typo
+* Minor typo fixes
+* Minor syntax fix
+* Standard packaging for github upstream
+* Initial unit tests and style checks
+* Removing '#' from deb control file
+* Adding copyright and license info
+* Deleting pypi\_packer as it is not required
+* Revert "axon- Adding Riak integration for namespaces Reverting this as daemon process is not working for windows machine Creating DBManagerProcess daemon to read traffic record queues write record to the db recorder provided for AxonRootNamespace and AxonNamespace client"
+* axon- Adding Riak integration for namespaces Creating DBManagerProcess daemon to read traffic record queues write record to the db recorder provided for AxonRootNamespace and AxonNamespace client
+* axon- Datacenter traffic controller for on-prem Patch includes:- class WorkloadVifsMap that dumps,loads workload\_vif\_map in pkl file
+* Fix Axon breaking code
+* Syntax correction
+* Add contribution guide
+* Adding init upstart script for axon
+* Fix DFW bug and solve threading Issue in DB api calls
+* Small naming fix in super
+* Renaming traffic controller as its generic
+* Fixes errors in namespaces client and server interface name matching with  "veth" adding try except block in AxonController for start stop to avoid crash of axon daemon service occured due to any exception Change-Id: Ibc39998d7352098150de29f1224cc1ab8c4743c6
+* Adding some logging in installer
+* Some improvements across AXON installation
+* Fixing axon installer to work in integration
+* Add servers parameter to server/client start/stop in CloudTrafficController
+* Fix AXON Primary network interface issue
+* Implement RIAK DB support for AXON
+* Remote axon installer on windows/Linux
+* Add Rpyc Controller and Server/Client Mgmt APIs
+* Axon daemonization for windows
+* Debian packaging of axon
+* Renaming package to avoid public package conflict
+* Axon pypi packaging
+* axon: database api
+* Add traffic servers and clients to axon
+* Initial Commit for Axon
