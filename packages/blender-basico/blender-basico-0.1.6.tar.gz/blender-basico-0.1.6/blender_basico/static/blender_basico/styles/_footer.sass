@@ -1,0 +1,122 @@
+// List of flat pages.
+.footer-pages
+	background-color: $color-background-dark
+	font-size: $font-size-smaller
+
+	ul
+		display: flex
+		list-style: none
+		padding: 0
+
+		li
+			&:after
+				display: none
+
+			&:first-child a
+				padding-left: 0
+
+	a
+		color: $color-text-dark-secondary
+		display: inline-block
+		padding: 5px 7px
+
+		&:hover
+			text-decoration: underline
+
+	// Style footer-navigation when it's right after footer-pages.
+	&+.footer-navigation
+		padding-top: 5px
+
+
+// Sitemap links.
+.footer-navigation
+	font-size: $font-size-small
+	padding: 15px 0 30px
+
+	.sitemap-title
+		color: $color-text-dark-primary
+		font-size: $font-size-normal
+		display: block
+
+	ul
+		@extend .list-unstyled
+
+		a
+			color: $color-text-dark-secondary
+			display: block
+
+
+.social-icons
+	align-items: center
+	display: flex
+	justify-content: space-around
+
+	&:first-child
+		padding-top: 15px
+
+	a
+		fill: $color-text-dark-primary
+		flex: 1
+		padding-left: 5px
+		padding-right: 5px
+
+		svg
+			max-width: 30px
+			transition: fill 150ms ease-in-out
+
+	&__youtube i svg
+		min-width: 24px
+
+		&:hover
+			fill: #CD201F
+
+	&__twitter:hover svg
+		fill: #1dcaff
+
+	&__instagram i svg
+		max-width: 28px
+
+		&:hover
+			fill: #C13584
+
+	&__facebook i svg
+		max-width: 22px
+
+		&:hover
+			fill: #3b5998
+
+	&__linkedin i svg
+		max-width: 20px
+
+		&:hover
+			fill: #0077B5
+
+// Artistic freedom starts with Blender.
+.footer-note
+	color: $color-text-dark-secondary
+	display: block
+	font-size: $font-size-small
+	padding-bottom: 10px
+	text-align: center
+
+	i
+		+media-xs
+			svg
+				fill: $color-danger !important
+
+		padding: 0 5px
+
+		&:hover svg
+			fill: $color-danger
+
+		svg
+			fill: lighten($color-text-dark-primary, 20%)
+			max-width: 10px
+
+	a, a:visited
+		color: $color-text-dark-secondary
+		padding-left: 5px
+
+	span
+		+media-xs
+			display: block

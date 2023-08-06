@@ -1,0 +1,160 @@
+$table-background-color-hover: rgba($color-background-dark, .8)
+.table
+	+box-card
+	border-collapse: initial
+
+	thead
+		white-space: nowrap
+		+text-overflow-ellipsis
+
+	> thead > tr
+		box-shadow: inset 0 -2px 0 0 $color-background-dark
+
+	> tbody > tr:hover > td
+		background-color: $table-background-color-hover
+
+	&.table-striped
+		> tbody > tr:hover > td
+			background-color: $table-background-color-hover
+
+		> tbody > tr:nth-child(2n+1) > td
+			background-color: rgba($color-background, .5)
+
+		> tbody > tr:nth-child(2n+1):hover > td
+			background-color: $table-background-color-hover
+
+	/* Remove borders. */
+	> thead > tr > th, > tbody > tr > th,
+	> tfoot > tr > th, > thead > tr > td,
+	> tbody > tr > td, > tfoot > tr > td
+		border-top: thin solid transparent
+		border-bottom: thin solid transparent
+
+/* Only on mouse over */
+.table tr:hover td
+	border-top: thin solid $color-background-dark
+	border-bottom: thin solid $color-background-dark
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th
+	background-color: $color-background-page
+
+/* First odd, then even */
+.table-striped > tbody > tr:nth-child(2n+1):hover > td, .table-striped > tbody > tr:nth-child(2n+1):hover > th,
+.table-striped > tbody > tr:nth-child(2n):hover > td, .table-striped > tbody > tr:nth-child(2n):hover > th
+	background-color: darken($color-background, 4%)
+
+.table .table-row-link:hover > tr, .table .table-row-link:hover > td
+	color: $color-primary
+	cursor: pointer
+
+/* Tables with status */
+tbody > tr.danger > td a, tbody > tr.info > td a,
+tbody > tr.warning > td a, tbody > tr.success > td a
+	font-weight: bold
+
+tbody > tr.danger > td a:hover, tbody > tr.info > td a:hover,
+tbody > tr.warning > td a:hover, tbody > tr.success > td a:hover
+	text-decoration: underline !important
+
+tbody > tr.danger > td a, tbody > tr.info > td a
+	color: $color-text-light
+
+tbody > tr.warning > td a, tbody > tr.success > td a
+	color: $color-text
+
+.table tr.info:hover td
+	background-color: darken($color-info, 10%) !important
+	border-top: thin solid darken($color-info, 10%) !important
+	border-bottom: thin solid darken($color-info, 10%) !important
+
+.table tr.danger:hover td
+	background-color: darken($color-danger, 5%) !important
+	border-top: thin solid $color-danger !important
+	border-bottom: thin solid $color-danger !important
+
+.table tr.warning:hover td
+	background-color: darken($color-warning, 5%) !important
+	border-top: thin solid $color-warning !important
+	border-bottom: thin solid $color-warning !important
+
+.table tr.success:hover td
+	background-color: darken($color-success, 5%) !important
+	border-top: thin solid $color-success !important
+	border-bottom: thin solid $color-success !important
+
+.table-striped > tbody > tr.danger:nth-child(2n) > td, .table-striped > tbody > tr.danger:nth-child(2n) > th,
+.table-striped > tbody > tr.danger:nth-child(2n+1) > td, .table-striped > tbody > tr.danger:nth-child(2n+1) > th,
+.table-striped > tbody > tr.info:nth-child(2n) > td, .table-striped > tbody > tr.info:nth-child(2n) > th,
+.table-striped > tbody > tr.info:nth-child(2n+1) > td, .table-striped > tbody > tr.info:nth-child(2n+1) > th
+	color: $color-text-light
+
+.table > tbody > tr.success > td,
+.table-striped > tbody > tr.success:nth-child(2n) > td, .table-striped > tbody > tr.success:nth-child(2n) > th,
+.table-striped > tbody > tr.success:nth-child(2n+1) > td, .table-striped > tbody > tr.success:nth-child(2n+1) > th,
+.table-striped > tbody > tr.warning:nth-child(2n) > td, .table-striped > tbody > tr.warning:nth-child(2n) > th,
+.table-striped > tbody > tr.warning:nth-child(2n+1) > td, .table-striped > tbody > tr.warning:nth-child(2n+1) > th
+	color: $color-text
+
+/* Danger */
+.table-striped > tbody > tr.danger:nth-child(2n) > td,
+.table-striped > tbody > tr.danger:nth-child(2n) > th
+	background-color: lighten($color-danger, 5%)
+
+.table-striped > tbody > tr.danger:nth-child(2n+1) > td,
+.table-striped > tbody > tr.danger:nth-child(2n+1) > th
+	background-color: $color-danger
+
+/* Success */
+.table-striped > tbody > tr.success:nth-child(2n) > td,
+.table-striped > tbody > tr.success:nth-child(2n) > th
+	background-color: darken($color-success, 5%)
+
+.table > tbody > tr.success > td,
+.table-striped > tbody > tr.success:nth-child(2n+1) > td,
+.table-striped > tbody > tr.success:nth-child(2n+1) > th
+	background-color: $color-success
+
+/* Warning */
+.table-striped > tbody > tr.warning:nth-child(2n) > td,
+.table-striped > tbody > tr.warning:nth-child(2n) > th
+	background-color: lighten($color-warning, 10%)
+
+.table-striped > tbody > tr.warning:nth-child(2n+1) > td,
+.table-striped > tbody > tr.warning:nth-child(2n+1) > th
+	background-color: $color-warning
+
+/* Info */
+.table-striped > tbody > tr.info:nth-child(2n) > td,
+.table-striped > tbody > tr.info:nth-child(2n) > th
+	background-color: lighten($color-info, 10%)
+
+.table-striped > tbody > tr.info:nth-child(2n+1) > td,
+.table-striped > tbody > tr.info:nth-child(2n+1) > th
+	background-color: $color-info
+
+/* Data Tables */
+.dataTable .group
+	font-size: 200%
+	font-family: $font-headings
+	text-shadow: 1px 1px 0 rgba(black, .2)
+
+.dataTable .group td,
+.dataTable .group td:hover
+	background-color: $color-info !important
+	color: white !important
+	border: none !important
+	border-bottom: 2px solid darken($color-info, 10%) !important
+	padding-top: 7px
+	padding-bottom: 0
+
+.dataTable .sorting
+	position: relative
+
+.dataTable .fa-sort
+	font-size: 80%
+	position: absolute
+	color: lighten($color-text, 40%)
+	top: 12px
+	right: 2px
+
+/* // Data Tables */

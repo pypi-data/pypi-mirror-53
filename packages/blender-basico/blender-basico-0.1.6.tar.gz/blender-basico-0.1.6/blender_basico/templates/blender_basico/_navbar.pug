@@ -1,0 +1,55 @@
+nav.navbar.navbar-expand-md.navbar-primary.fixed-top(role='navigation')
+	.container
+		a.navbar-brand.navbar-logo-blender(
+			href='https://www.blender.org',
+			title='Go to blender.org')
+
+		button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar-collapse-menu')
+			span.sr-only Toggle navigation
+			span.navbar-toggler-icon
+				i.fa.fa-bars
+
+		#navbar-collapse-menu.collapse.navbar-collapse
+			ul.navbar-nav.ml-auto
+				li
+					a.nav-link(
+						href='https://www.blender.org/features/',
+						title="Features")
+						| Features
+
+				li
+					a.nav-link(
+						href='https://www.blender.org/download/',
+						title="Download")
+						| Download
+
+				li
+					a.nav-link(
+						href='https://www.blender.org/support/',
+						title="Support")
+						| Support
+
+				li
+					a.nav-link(
+						href='https://www.blender.org/get-involved/',
+						title="Get Involved")
+						| Get Involved
+
+				li
+					a.nav-link(
+						href='https://www.blender.org/about/',
+						title="About")
+						| About
+
+				li
+					a.nav-link(
+						href='https://store.blender.org/',
+						title="Store")
+						| Store
+
+				li.nav-cta
+					a.nav-link(
+						href='https://fund.blender.org/',
+						title="Donate")
+						i.fa.fa-heart
+						| Donate

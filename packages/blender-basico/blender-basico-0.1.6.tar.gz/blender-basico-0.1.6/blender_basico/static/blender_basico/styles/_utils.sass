@@ -1,0 +1,338 @@
+/* Helper classes, in a Bootstrap 4 fashion. */
+.cursor-pointer
+	cursor: pointer
+
+/*
+ ** CUSTOM MIXINS
+ ** This should be safe to use in other sites
+ */
+
+/*
+ * RESPONSIVE MIXINS. Mobile first.
+ * Start styling for mobile, then tweak
+ * specic breakpoints going up.
+ * e.g.
+ *   +media-sm
+ *   +media-md
+ *   +media-lg
+ */
+
+/* Smallest, like phones on portrait. */
+=media-xs
+	@include media-breakpoint-only(xs)
+		@content
+
+/* Small but wide. (phablets, iPads)
+ * Menu is collapsed, columns stack, no brand */
+=media-sm
+	@include media-breakpoint-up(sm)
+		@content
+
+=media-md
+	@include media-breakpoint-up(md)
+		@content
+
+=media-lg
+	@include media-breakpoint-up(lg)
+		@content
+
+=media-print
+	@media print
+		@content
+
+=clearfix
+	clear: both
+
+	&:after
+		// Basically same as .clearfix from bootstrap
+		clear: both
+		display: block
+		content: ' '
+
+=box-shadow-card
+	box-shadow: rgba(0,0,0,0.05) 0px 1px 4px 0px, rgba(0,0,0,0.025) 0px 15px 20px -1px
+
+=box-card
+	+box-shadow-card
+	background-color: $color-background-light
+	border-radius: $border-radius-lg
+
+=container-behavior
+	+media-lg
+		width: $container-width
+	max-width: $container-width
+	width: 100%
+
+=text-outline($width, $color)
+	text-shadow: -$width - $width 0 $color, $width - $width 0 $color, (-$width) $width 0 $color, $width $width 0 $color
+
+=text-outline-shadowed($width, $color, $style, $alpha)
+	text-shadow: -$width - $width 0 $color, $width - $width 0 $color, (-$width) $width 0 $color, $width $width 0 $color, $style rgba(0, 0, 0, $alpha)
+
+=text-overflow-ellipsis
+	overflow: hidden
+	white-space: nowrap
+	text-overflow: ellipsis
+
+=text-gradient($direction, $colorfrom, $colorto)
+	background: linear-gradient($direction, $colorfrom, $colorto)
+	background-clip: text
+	-webkit-background-clip: text
+	-webkit-text-fill-color: transparent
+
+=transition($prop: all, $time: 0.1s, $ease: ease-in)
+	transition: $prop $time $ease
+
+=transition-none
+	transition: none !important
+	transition-property: none !important
+	transform: none !important
+	animation: none !important
+
+=linear-gradient($origin: top, $start: darken($color-background, 15%), $stop: darken($color-background, 25%))
+	background-color: $start
+	background-image: -webkit-linear-gradient($origin, $start, $stop)
+	background-image: -moz-linear-gradient($origin, $start, $stop)
+	background-image: -o-linear-gradient($origin, $start, $stop)
+	background-image: -ms-linear-gradient($origin, $start, $stop)
+	background-image: linear-gradient($origin, $start, $stop)
+
+=border-radius($radius: 3px)
+	border-radius: $radius !important
+
+=background-dots($shape: circle, $from: white, $to: black, $after: pink, $size1: 10px, $size2: 20px)
+	background: -webkit-radial-gradient($shape, $from, $to), -webkit-radial-gradient($shape, $after, $to) $size1 $size1
+	background: -moz-radial-gradient($shape, $from, $to), -moz-radial-gradient($shape, $after, $to) $size1 $size1
+	background: radial-gradient($shape, $from, $to), radial-gradient($shape, $after, $to) $size1 $size1
+	background-size: $size1 $size2
+
+=background-gradient-linear($from: $color-primary, $from_percent: 50%, $to: $color-secondary, $to_percent: 50%)
+	background: $from
+	background: -moz-linear-gradient(top,  $from $from_percent, $to $to_percent)
+	background: -webkit-gradient(linear, left top, left bottom, color-stop($from_percent, $from), color-stop($to_percent, $to))
+	background: -webkit-linear-gradient(top,  $from $from_percent, $to $to_percent)
+	background: -o-linear-gradient(top, $from $from_percent, $to $to_percent)
+	background: -ms-linear-gradient(top, $from $from_percent, $to $to_percent)
+	background: linear-gradient(to bottom, $from $from_percent, $to $to_percent)
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=0 )
+
+=horizontal_flip
+	-moz-transform: scaleX(-1)
+	-o-transform: scaleX(-1)
+	-webkit-transform: scaleX(-1)
+	transform: scaleX(-1)
+	filter: FlipH
+	-ms-filter: "FlipH"
+
+=rotate($degrees: 0deg)
+	transform: rotate($degrees)
+
+=user-select-none
+	user-select: none !important
+
+=pointer-events-none
+	pointer-events: none !important
+
+@mixin text-background($text-color, $background-color, $roundness, $padding)
+	border-radius: $roundness
+	padding: $padding
+	background-color: $background-color
+	box-shadow: 0.5em 0 0 $background-color,-0.5em 0 0 $background-color
+	box-decoration-break: clone
+	color: $text-color
+
+=position-center-translate
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+=position-absolute-zero
+	bottom: 0
+	left: 0
+	position: absolute
+	right: 0
+	top: 0
+
+=list-bullets
+	ul
+		padding-left: 20px
+		list-style: none
+
+		li:before
+			content: '·'
+			font-weight: 400
+			position: relative
+			left: -10px
+
+
+@mixin button($background-color, $text-color, $filled: false, $type: false)
+	background-color: transparent
+	border: none
+	border-radius: $border-radius-lg
+	box-shadow: inset 0 0 0 2px $text-color
+	color: $text-color !important
+	display: inline-block
+	padding:
+		bottom: 7px
+		left: 20px
+		right: 20px
+		top: 7px
+	position: relative
+	text-decoration: none !important
+	transition: color 250ms ease-out, background-color 150ms ease-in-out, box-shadow 150ms ease-in-out
+	white-space: nowrap
+
+	@if $filled
+		background-color: $background-color
+		box-shadow: inset 0 0 0 2px darken($background-color, 6%)
+
+		&:focus
+			color: white !important
+
+	&:hover
+		background-color: rgba($background-color, .1)
+		box-shadow: inset 0 0 0 2px lighten($text-color, 10%)
+		color: lighten($text-color, 5%)
+		cursor: pointer
+		text-decoration: none
+
+		@if $filled
+			background-color: lighten($background-color, 10%)
+			box-shadow: inset 0 0 0 1px lighten($background-color, 5%)
+
+	&:active, &:focus
+		box-shadow: inset 0 0 0 1px lighten($background-color, 10%)
+		background-color: rgba($background-color, .3)
+		color: hsl(hue($text-color), 100%, 85%)
+
+		i
+			color: currentColor
+
+	&:active
+		background-color: darken($background-color, 15%)
+		outline: none
+
+	i
+		display: inline-block
+		margin-right: 10px
+		min-width: 16px
+
+		svg
+			max-width: 12px
+
+	small
+		font-size: .6em
+
+/* Bootstrap's img-responsive class */
+=img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+
+
+=input-text-generic
+	border: thin solid $color-background-dark
+	border-radius: 3px
+	padding: 10px
+
+=inputs-generic
+	textarea,
+	input[type='text'],
+	input[type='email'],
+	input[type='url']
+		+input-text-generic
+
+/* Adjust left/right padding every nth cards. */
+=make_cards_nth_child($cards-amount)
+	&:nth-child(n)
+		padding: 10px
+
+	&:nth-child(#{$cards-amount}n)
+		padding-right: 0
+
+	&:nth-child(#{$cards-amount}n+1)
+		padding-left: 0
+
+
+/* Animations */
+
+/* Blink */
+@keyframes blink
+	0%
+		opacity: 1
+	50%
+		opacity: 0
+	100%
+		opacity: 1
+
+@-webkit-keyframes blink
+	0%
+		opacity: 1
+	50%
+		opacity: 0
+	100%
+		opacity: 1
+
+@-moz-keyframes blink
+	0%
+		opacity: 1
+	50%
+		opacity: 0
+	100%
+		opacity: 1
+
+/* Fade-in-pause-out, used for alerts */
+@keyframes fade-in-pause-out
+	0%
+		visibility: hidden
+		opacity: 0
+	1%
+		visibility: visible
+	10%
+		opacity: 1
+	90%
+		opacity: 1
+	99%
+		opacity: 0
+		visibility: hidden
+	100%
+		visibility: hidden
+
+@-webkit-keyframes fade-in-pause-out
+	0%
+		visibility: hidden
+		opacity: 0
+	1%
+		visibility: visible
+	10%
+		opacity: 1
+	90%
+		opacity: 1
+	99%
+		opacity: 0
+		visibility: hidden
+	100%
+		visibility: hidden
+
+@-moz-keyframes fade-in-pause-out
+	0%
+		visibility: hidden
+		opacity: 0
+	1%
+		visibility: visible
+	10%
+		opacity: 1
+	90%
+		opacity: 1
+	99%
+		opacity: 0
+		visibility: hidden
+	100%
+		visibility: hidden
+
+@keyframes huerotate
+	0%
+		filter: hue-rotate(0deg)
+	100%
+		filter: hue-rotate(360deg)
