@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "aiohttp_light_utils"
+version = "0.1.6"
+description = ""
+authors = ["Khaziev Radik <xazrad@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+trafaret-config = "^2.0"
+ujson = "^1.35"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
