@@ -1,0 +1,153 @@
+Metadata-Version: 2.1
+Name: cortex-python-profiles
+Version: 1.0.0
+Summary: Profile of 1 Extension for the Base Python Module of the Cortex Cognitive Platform
+Home-page: https://github.com/CognitiveScale/cortex-python-profiles
+Author: CognitiveScale
+Author-email: info@cognitivescale.com
+License: Apache License Version 2.0
+Platform: linux
+Platform: osx
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3.6
+Description-Content-Type: text/markdown
+Requires-Dist: cortex-python[builders] (<1.2,>=1.0.0)
+Requires-Dist: pydash (<4.8,>=4.7.3)
+Requires-Dist: arrow (<0.13,>=0.12.1)
+Requires-Dist: pandas (>=0.23.4)
+Requires-Dist: attrs (==18.2.0)
+Requires-Dist: objectpath (==0.6.1)
+Requires-Dist: deprecation (==2.0.6)
+Provides-Extra: dev
+Requires-Dist: twine (<2,>=1.12.1) ; extra == 'dev'
+Requires-Dist: setuptools ; extra == 'dev'
+Requires-Dist: wheel ; extra == 'dev'
+Requires-Dist: pipdeptree ; extra == 'dev'
+Requires-Dist: mypy (==0.720) ; extra == 'dev'
+Requires-Dist: pylint (<3,>=2.3.0) ; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: Sphinx (<2,>=1.8.3) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-restbuilder (==0.2) ; extra == 'docs'
+Requires-Dist: nbconvert (==5.4.0) ; extra == 'docs'
+Provides-Extra: synthetic
+Requires-Dist: iso3166 (==1.0) ; extra == 'synthetic'
+Requires-Dist: Faker (==2.0.0) ; extra == 'synthetic'
+Provides-Extra: test
+Requires-Dist: mocket (<3,>=2.5.0) ; extra == 'test'
+Requires-Dist: mock (<3,>=2) ; extra == 'test'
+Requires-Dist: pipdeptree ; extra == 'test'
+Requires-Dist: tox (<3,>=2.9.1) ; extra == 'test'
+Requires-Dist: pytest-cov (==2.5.1) ; extra == 'test'
+Requires-Dist: pytest (<4,>=3.2.5) ; extra == 'test'
+Provides-Extra: viz
+Requires-Dist: cortex-python[jupyter] (<1.2,>=1.0.0) ; extra == 'viz'
+Requires-Dist: psutil ; extra == 'viz'
+
+# Profile of 1 Extension for the Base Python Module of the Cortex Cognitive Platform
+
+[cortex-python][https://github.com/CognitiveScale/cortex-python]
+The Cortex Python Profiles module extends the [Base Python Module of the Cortex Cognitive Platform](cortex-python) with Profile of 1 related functionality. 
+
+Refer to the Cortex documentation for details on how to use the library: 
+
+- Developer guide: https://docs.cortex.insights.ai/docs/developer-guide/overview/
+- Cortex Python references: https://docs.cortex.insights.ai/docs/developer-guide/reference-guides
+
+
+## Installation
+
+To install: 
+```
+  > pip install cortex-python-profiles
+```
+
+or from source code:
+```
+  > git clone git@github.com:CognitiveScale/cortex-python-profiles.git
+  > cd cortex-python-profiles
+  > pip install -e .
+```
+
+## Development 
+
+### Setup
+
+When developing, it's a best practice to work in a virtual environment. Create and activate a virtual environment:
+```
+  > virtualenv --python=python3.6 _venv
+  > source _venv/bin/activate
+```
+
+Install developer dependencies:
+
+```
+  > git clone git@github.com:CognitiveScale/cortex-python-profiles.git
+  > cd cortex-python-profiles
+  > make dev.install
+```
+
+There's a convenience `Makefile` that has commands to common tasks, such as build, test, etc. Use it!
+
+### Testing
+
+#### Unit Tests
+
+Follow above setup instructions (making sure to be in the virtual environment and having the necessary dependencies)
+
+- `make test` to run test suite
+
+To run an individual file or class method, use pytest. Example tests shown below:
+
+- file: `pytest test/unit/agent_test.py` 
+- class method: `pytest test/unit/agent_test.py::TestAgent::test_get_agent`
+
+#### Publishing an alpha build
+
+Suppose you want to release new functionality so it can be installed without releasing a new official version. We need to use an alpha version in PyPi.
+
+- we need to create and publish an alpha release:
+- get credentials to the `cortex-python` pypi CognitiveScale account (via lastpass)
+- run `make dev.push TAG=<alpha release number>`. Example: `make dev.push TAG=1`
+
+### Contribution 
+
+After contributing to the library, and before you submit changes as a PR, please do the following
+
+1. Run unit tests via `make test`
+2. Manually verification (i.e. try the new changes out in Cortex) to make sure everything is going well. Not required, but highly encouraged.
+3. Bump up `setup.py` version and update the `CHANGELOG.md` 
+
+### Documentation
+
+The package documentation is built with Sphinx. To build the documentation:
+
+```
+> make docs
+```
+The documentation will be rendered in HTML format under the `docs/_build/html` directory.
+
+Activate your virtual environment:
+```
+> source _venv/bin/activate
+```
+
+Setup your environment, if you have not done so:
+```
+> make dev.install 
+```
+
+### Pre-release to staging
+
+1. Create and push an alpha release:
+    ```
+    > make dev.push TAG=1
+    ```
+    Where `TAG` is the alpha version number. This will build an alpha-tagged package.
+2. Merge `develop` to `staging` branch:
+    ```
+    > make stage
+    ```
+3. In GitHub, create a pull request from `staging` to `master`.
+
+
