@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: cldfbench
+Version: 0.1.0
+Summary: Python library implementing a CLDF workbench
+Home-page: https://github.com/cldf/cldfbench
+Author: Robert Forkel
+Author-email: forkel@shh.mpg.de
+License: Apache 2.0
+Description: # cldfbench
+        Tooling to create CLDF datasets from existing data
+        
+        [![Build Status](https://travis-ci.org/cldf/cldfbench.svg?branch=master)](https://travis-ci.org/cldf/cldfbench)
+        [![codecov](https://codecov.io/gh/cldf/cldfbench/branch/master/graph/badge.svg)](https://codecov.io/gh/cldf/cldfbench)
+        [![PyPI](https://img.shields.io/pypi/v/cldfbench.svg)](https://pypi.org/project/cldfbench)
+        
+        
+        ## Overview
+        
+        With `pylexibank` we have a tool to create CLDF Wordlists from existing data
+        - hooking in data from Glottolog and Concepticon
+        - allowing for tight quality control.
+        
+        it would be useful to extract functionality that can also be used to create other
+        types of CLDF data, in particular StructureDatasets.
+        
+        
+        ## Specification
+        
+        Generally, partitioning that data of a lexibank dataset into
+        - `raw/`
+        - `etc/`
+        - `cldf/`
+        seems to work well and should be kept for a more generic tool as well.
+        
+Platform: any
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Provides-Extra: test
+Provides-Extra: dev
