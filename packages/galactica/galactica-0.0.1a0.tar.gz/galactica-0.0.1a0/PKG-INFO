@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: galactica
+Version: 0.0.1a0
+Summary: Galactic multiphase chemical evolution model
+Home-page: https://github.com/xuanxu/galactica
+Author: Juanjo Bazán
+Author-email: hello@juanjobazan.com
+License: MIT
+Download-URL: https://github.com/xuanxu/galactica
+Description: .. galactica
+        
+        .. |travis-badge| image:: https://travis-ci.com/xuanxu/galactica.svg?branch=master
+            :target: https://travis-ci.com/xuanxu/galactica
+            :alt: Build status
+        .. |license| image:: https://img.shields.io/badge/license-MIT-blue.svg
+           :target: https://github.com/xuanxu/galactica/blob/master/LICENSE
+           :alt: MIT License
+        .. |current_status| image:: https://img.shields.io/badge/current%20status-exploratory%2Fpre--alpha-red.svg
+           :target: https://github.com/xuanxu/galactica/
+           :alt: Current status: Pre-Alpha
+        
+        =========
+        Galactica
+        =========
+        
+        **Galactic multiphase chemical evolucion models**
+        
+        |travis-badge| |license| |current_status|
+        
+        Galactica code solves a system of first-order integro-differential equations for the chemical evolution of a spiral galaxy, assuming an analytical star formation (SF) law, an initial mass function (IMF), stellar lifetimes and nucleosynthetic yields.
+        
+Keywords: galaxies,models,astrophysics
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Education
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Python: >=3.6
+Provides-Extra: dev
