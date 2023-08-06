@@ -1,0 +1,20 @@
+click
+docker
+glob2  # Needed for Python < 3.5 recursive glob support
+defusedxml # Needed due to tox complains on parseString not safe
+jsonschema
+requests
+ruamel.yaml
+setuptools>=36.5.0
+six
+python-jenkins
+tqdm
+xdg~=3.0.0;python_version>='3' # xdg requires Python '>=3.6,<4.0' but the running Python is 3.5.7
+pygithub
+httplib2
+email_validator
+oauth2client
+pyyaml
+pygerrit2
+bs4
+lxml
