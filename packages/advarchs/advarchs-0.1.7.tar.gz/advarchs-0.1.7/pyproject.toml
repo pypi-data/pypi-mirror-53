@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "advarchs"
+version = "v0.1.7"
+description = "Data retrieval from remote archives"
+authors = [
+    "Dauren Sdykov <elessarelfstone@mail.ru>"
+]
+license = "Apache-2.0"
+
+readme = "README.rst"
+
+repository = "https://github.com/elessarelfstone/advarchs"
+
+keywords = ["archive", "transfer", "zip", "rar", "advarchs"]
+
+classifiers = [
+    "Topic :: System :: Archiving",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7"
+]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+requests = "^2.22"
+tomlkit = "^0.5.5"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
