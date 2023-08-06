@@ -1,0 +1,72 @@
+Metadata-Version: 2.1
+Name: googleparser
+Version: 0.2
+Summary: Module for parsing google search results without access to Google Search API
+Home-page: https://github.com/sidan93/googleparser
+Author: Sidorov A.B.
+Author-email: sidan93@gmail.com
+License: MIT
+Download-URL: https://github.com/sidan93/googleparser/archive/v0.1.tar.gz
+Description: # About
+        Module for parsing google search results without access to Google Search API
+        
+        # Simple Start for home project
+        
+        1. Install package from [pip](https://pypi.org/project/googleparser/)
+        ```
+        pip install googleparser
+        ```
+        
+        2. Use 
+        ```
+        from googleparser import GoogleParser
+        print(*['\n' + str(res) for res in GoogleParser().query('bitcoin_price')])
+        ```
+        
+        Results:
+        ```
+        #1. Bitcoin Price Chart (BTC) | Coinbase. Link: https://www.coinbase.com/price/bitcoin 
+        #2. BitcoinAverage: Bitcoin Price Index API & Exchange Rates. Link: https://bitcoinaverage.com/ 
+        #3. Bitcoin Price - Live Bitcoin Price in USD with No Ads. Link: https://www.bitcoinprice.com/ 
+        #4. Bitcoin Price Index вЂ” Real-time Bitcoin Price Charts вЂ” CoinDesk. Link: https://www.coindesk.com/price/bitcoin 
+        #5. Bitcoin Price Chart Today - Live BTC/USD - Gold Price. Link: https://goldprice.org/ru/cryptocurrency-price/bitcoin-price 
+        #6. $8,435.00 Bitcoin Price - Blockchain. Link: https://www.blockchain.com/de/prices 
+        #7. MUST SEE: This Bitcoin Price Action already happened 1:1 in 2016 .... Link: https://www.youtube.com/watch?v=JFo7NcokNPU 
+        #8. Bitcoin price targets & pivots LIVE STREAM - BTX, LTC & ETH .... Link: https://www.youtube.com/watch?v=87xi-5FRK5M 
+        #9. BitcoinPrice  DLive. Link: https://dlive.tv/BitcoinPrice
+        ```
+        
+        ## API
+        
+        ### GoogleParser
+        Class for search links
+        
+        #### query
+        Method for search and get results
+        
+        ###### Params
+        * search_string: str - Query for search
+        
+        ###### Result
+        * List of GoogleResult
+        
+        ### GoogleResult
+        Class for result from GooleParser
+        
+        ###### Variable:
+        * index: int - number of result
+        * title: str - result title
+        * link: str - result link
+        
+Keywords: google,parser,search,google search,google parser,googleparser,googlesearch
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
