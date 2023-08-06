@@ -1,0 +1,24 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/nedbat/coveragepy/blob/master/NOTICE.txt
+
+# Requirements for doing local development work on coverage.py.
+# https://requires.io/github/nedbat/coveragepy/requirements/
+
+pip==19.2.1
+virtualenv==16.5.0
+
+pluggy==0.12.0
+
+# PyPI requirements for running tests.
+-r tox.pip
+-r pytest.pip
+
+# for linting.
+greenlet==0.4.15
+pylint==2.3.1
+check-manifest==0.38
+readme_renderer==24.0
+
+# for kitting.
+requests==2.21.0
+twine==1.13.0

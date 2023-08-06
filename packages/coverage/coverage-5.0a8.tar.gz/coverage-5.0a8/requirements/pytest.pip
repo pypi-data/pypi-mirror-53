@@ -1,0 +1,18 @@
+# Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
+# For details: https://github.com/nedbat/coveragepy/blob/master/NOTICE.txt
+
+# The pytest specifics used by coverage.py
+
+pytest==4.6.2
+pytest-xdist==1.28.0
+flaky==3.5.3
+mock==3.0.5
+PyContracts==1.8.12
+hypothesis==4.32.1
+
+# Our testing mixins
+unittest-mixins==1.6
+#-e/Users/ned/unittest_mixins
+
+# Just so I have a debugger if I want it
+pudb==2019.1
