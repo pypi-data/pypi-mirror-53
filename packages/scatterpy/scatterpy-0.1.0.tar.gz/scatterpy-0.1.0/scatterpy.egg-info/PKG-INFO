@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: scatterpy
+Version: 0.1.0
+Summary: Electromagnetic scattering using T-matrix approach
+Home-page: https://github.com/TCvanLeth/ScatterPy
+Author: T.C. van Leth
+Author-email: tommy.vanleth@wur.nl
+License: UNKNOWN
+Description: Python module to calculate scattering amplitude and phase matrices of
+        rotationally symmetric particles based on the T-matrix method.
+        
+        Based on the original Fortran T-matrix code by Mishchenko.
+        Currently spheroids, Chebyshev shapes and generalized chebyshev shapes are
+        implemented. Also includes several empirical dropshapes.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
