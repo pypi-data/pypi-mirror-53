@@ -1,0 +1,29 @@
+Source: ligo-scald
+Maintainer: Patrick Godwin <patrick.godwin@ligo.org>
+Section: python
+Priority: optional
+Build-Depends: debhelper (>= 9), dh-python, python-all-dev, python3-all-dev, python-setuptools, python3-setuptools, python-six, python3-six,
+       help2man
+Standards-Version: 3.8.4
+X-Python-Version: >=2.7
+X-Python3-Version: >=3.4
+
+Package: python-ligo-scald
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-bottle, python-dateutil, python-numpy, python-yaml, python-h5py, python-ligo-common, python-urllib3
+Provides: ${python:Provides}
+Description: SCalable Analytics for Ligo/virgo/kagra Data
+ ligo-scald is a gravitational-wave monitoring and dynamic data visualization
+ tool.
+ .
+ This package provides Python support.
+
+Package: python3-ligo-scald
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3-bottle, python3-dateutil, python3-numpy, python3-yaml, python3-h5py, python3-ligo-common, python3-urllib3
+Provides: ${python3:Provides}
+Description: SCalable Analytics for Ligo/virgo/kagra Data
+ ligo-scald is a gravitational-wave monitoring and dynamic data visualization
+ tool.
+ .
+ This package provides Python support.
