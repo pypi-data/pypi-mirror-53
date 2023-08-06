@@ -1,0 +1,13 @@
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
+        课程列表
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        {% for uc in user_course_list %}
+            <li><a href="{% url 'bee_django_course:custom_user_course_detail' uc.id %}">{{ uc.course.name }}</a></li>
+        {% endfor %}
+
+    </ul>
+</div>

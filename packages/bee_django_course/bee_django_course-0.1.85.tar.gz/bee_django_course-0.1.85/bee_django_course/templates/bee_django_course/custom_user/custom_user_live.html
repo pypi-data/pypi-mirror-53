@@ -1,0 +1,102 @@
+{% extends "bee_django_course/user_base.html" %}
+{% load bee_django_course_filter %}
+{% block content %}
+    <div class="col-md-8 col-md-offset-2">
+
+        <h4>
+            {{ user_name }}的直播间
+        </h4>
+
+        <div>
+            {% if request.user == user %}
+                {% if user.userprofile.room_id and user.is_pause == False %}
+                    <a href="https://view.csslcloud.net/api/view/lecturer?roomid={{ user.userprofile.room_id }}&userid={{ cc_userid }}&publishname={{ user.username }}&publishpassword=111111"
+                       class="btn btn-success" target="_blank">
+                        开启C直播
+                    </a>
+                {% endif %}
+                {% if gensee_room and user.is_pause == False %}
+                    <div style="margin-top: 20px;">
+                        <a href="{{ gensee_room.organizerJoinUrl }}?nickName={{ user.username }}&token={{ gensee_room.organizerToken }}"
+                           target="_blank" class="btn btn-default">开启G直播</a>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+
+        <h4>
+            {{ user_name }}的历史录制
+        </h4>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>开始时间</th>
+                {#                <th>结束时间</th>#}
+                <th>时长</th>
+            </tr>
+            {% for l in live_list %}
+                <tr>
+                    <td>
+                        {% if l.coin_multiple >= 2 %}
+                            <span style="color: red"> ({{ l.coin_multiple }}倍{{ context_coin_name }}) </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button type="button" onclick="click_star('{{ l.id }}')">
+                            {% if l.is_star %}
+                                <span class="glyphicon glyphicon-star" style="color: red"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-star-empty" style="color: #666666"></span>
+                            {% endif %}
+
+                        </button>
+
+
+                        {{ l.start_time | default:'' }}
+                    </td>
+                    {#                    <td>{{ l.end_time | default:'' }}</td>#}
+                    <td>
+                        {% if l.record_status == '10' %}
+                            {{ l.duration }}秒
+                        {% elif l.record_status == '20' %}
+                            转码失败
+                        {% elif l.record_status == '30' %}
+                            直播过长
+                        {% else %}
+                            --
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if l.record_status == '10' %}
+                            {#                            <a href="{{ l.record_video_id | get_video_src }}">#}
+                            <a href="{% url 'bee_django_course:user_live_video_detail' user_live_id=l.id %}">
+                                观看
+                            </a>
+                        {% elif l.record_status == '20' %}
+                            录制失败
+                        {% elif l.record_status == '30' %}
+                            视频过长
+                        {% else %}
+                            转码中
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% include 'bee_django_course/paginator.html' %}
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script>
+        function click_star(live_id) {
+            $.post("{% url 'bee_django_course:user_live_star_update'%}", {'live_id': live_id}, function (res) {
+                alert(res.msg);
+                if (res.error == 0) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+{% endblock %}

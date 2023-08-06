@@ -1,0 +1,27 @@
+{% include 'bee_django_course/question/question-answer-template.html' %}
+    <div id="questions">
+        <question-answer v-for="question in questions" :key="question.id"
+                         :question="question"></question-answer>
+    </div>
+    <div id="submit_answers">
+        {% verbatim %}
+
+        <div v-if="result==false">
+            <button @click="check_answers()">提交</button>
+        </div>
+        <div v-else>恭喜你！全答对啦</div>
+        <div class="text-center">
+            <div v-if="return_link" style="display: inline-block">
+                <div class="text-center">
+                    <a :href="String(return_link)">返回</a>
+                </div>
+            </div>
+            <div v-if="next_link" style="display: inline-block">
+                <div class="text-center">
+                    <a :href="String(next_link)">下一节</a>
+                </div>
+            </div>
+        </div>
+        <div v-if="error_message">{{ error_message }}</div>
+        {% endverbatim %}
+    </div>
