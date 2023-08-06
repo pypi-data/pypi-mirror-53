@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: setupnovernormalize
+Version: 1.0.1
+Summary: Prevent version normalization when packaging Python projects with setuptools.
+Home-page: https://github.com/ccrisan/setup-no-ver-normalize
+Author: Calin Crisan
+Author-email: ccrisan@gmail.com
+License: UNLICENSE
+Description: 
+        ### About
+        
+        Prevent version normalization when packaging Python projects with [setuptools](https://setuptools.readthedocs.io/en/latest/). For more details, see https://github.com/pypa/setuptools/issues/308.
+        
+        
+        ### Usage
+        
+        Install `setupnovernormalize` using e.g. `pip`:
+        
+            pip install setupnovernormalize
+        
+        Then simply import `setupnovernormalize` in your `setup.py`:
+        
+            import setupnovernormalize
+            
+            ...
+            
+            setup(
+                name='Your Package',
+                version='version-that-will-not-be-touched',
+                ...
+            )
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
