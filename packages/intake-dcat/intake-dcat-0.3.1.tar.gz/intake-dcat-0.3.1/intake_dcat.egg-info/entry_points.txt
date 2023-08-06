@@ -1,0 +1,6 @@
+[console_scripts]
+intake-dcat = intake_dcat.cli:main
+
+[intake.drivers]
+dcat = intake_dcat.catalog:DCATCatalog
+
