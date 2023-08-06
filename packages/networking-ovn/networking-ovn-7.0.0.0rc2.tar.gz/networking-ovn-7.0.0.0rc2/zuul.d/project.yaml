@@ -1,0 +1,56 @@
+- project:
+    templates:
+      - openstack-python-jobs-neutron
+      - publish-openstack-docs-pti
+      - release-notes-jobs-python3
+      - check-requirements
+      - openstack-python3-train-jobs-neutron
+      - openstack-lower-constraints-jobs-neutron
+    check:
+      jobs:
+        - networking-ovn-tempest-dsvm-ovs-master:
+            voting: false
+        - networking-ovn-tempest-dsvm-ovs-release
+        - networking-ovn-tempest-dsvm-ovs-release-python2
+        - networking-ovn-rally-task
+        - networking-ovn-dsvm-functional-py27
+        - networking-ovn-dsvm-functional
+        # TripleO jobs that deploy OVN.
+        # Note we don't use a project-template here, so it's easier
+        # to disable voting on one specific job if things go wrong.
+        # In Stein and beyond, fs010 will run using
+        # networking-ovn-tripleo-ci-centos-7-containers-multinode.
+        # If you need any support to debug these jobs in case of
+        # failures, please reach us on #tripleo IRC channel.
+        # TODO(bcafarel): make voting again and add back to gate jobs
+        # when https://review.opendev.org/#/c/684260/ is merged
+        - networking-ovn-tripleo-ci-centos-7-containers-multinode:
+            voting: false
+        - networking-ovn-dsvm-grenade:
+            voting: false
+        - openstack-tox-cover:
+            required-projects:
+              - openstack/neutron
+        - networking-ovn-tempest-slow:
+            voting: false
+        - networking-ovn-tempest-full-multinode-ovs-master:
+            voting: false
+    gate:
+      jobs:
+        - networking-ovn-tempest-dsvm-ovs-release
+        - networking-ovn-tempest-dsvm-ovs-release-python2
+        - networking-ovn-rally-task
+        - networking-ovn-dsvm-functional-py27
+        - networking-ovn-dsvm-functional
+        - openstack-tox-cover:
+            required-projects:
+              - openstack/neutron
+    experimental:
+      jobs:
+        - networking-ovn-tempest-dsvm-multinode:
+            voting: false
+        - kuryr-kubernetes-tempest-ovn
+    periodic:
+      jobs:
+        - networking-ovn-tempest-dsvm-ovs-master-fedora
+
