@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: zx
+Version: 0.3.0
+Summary: ZX Spectrum Emulator
+Home-page: https://github.com/kosarev/zx/
+Author: Ivan Kosarev
+Author-email: ivan@kosarev.info
+License: MIT
+Description: [![Build Status](https://travis-ci.org/kosarev/zx.svg?branch=master)](https://travis-ci.org/kosarev/zx)
+        
+        # zx
+        ZX Spectrum Emulator written in a mix of Python and C++.
+        
+        
+        ### Features
+        * Fast and accurate emulation.
+        * Designed to be suitable for research and development purposes
+          such as unattended testing of Spectrum software, timing
+          analysis. etc.
+        * Meant to be easy to customize and re-use via Python interfaces.
+        * Based on the fast and flexible
+          [Z80 simulator](https://github.com/kosarev/z80).
+        
+        
+        ### Installation
+        
+        ```shell
+        pip install zx
+        ```
+        
+        
+        ### Running snapshots, recordings and tapes
+        
+        ```shell
+        zx elven.z80
+        ```
+        
+        ```shell
+        zx exolon.rzx
+        ```
+        
+        ```shell
+        zx eric.tap
+        ```
+        
+        
+        ### Converting tape files to the WAV format
+        
+        ```shell
+        zx jack.tzx jack.wav
+        ```
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: X11 Applications :: GTK
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: C++
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Games/Entertainment
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: System :: Emulators
+Description-Content-Type: text/markdown
