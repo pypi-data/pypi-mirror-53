@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data documentation compiled by Great Expectations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+    
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <style>
+      body {
+        position: relative;
+      }
+      .container {
+        padding-top: 50px;
+      }
+      .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        max-height: 90vh;
+        overflow-y: auto;
+        top: 15px;
+      }
+
+      .ge-section {
+        clear:both;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+      }
+
+      .triangle {
+        border: solid #222;
+        border-width: 0 1px 1px 0;
+        display: inline;
+        cursor: pointer;
+        padding: 3px;
+        position: absolute;
+        right: 0;
+        margin-top: 10px;
+
+        transform: rotate(40deg);
+        -webkit-transform: rotate(40deg);
+        transition: .3s transform ease-in-out;
+      }
+
+      .collapsed .triangle{
+        transform: rotate(-140deg);
+        -webkit-transform: rotate(-140deg);
+        transition: .3s transform ease-in-out;
+      }
+
+      .popover {
+        max-width: 100%;
+      }
+
+      .cooltip {
+        display:inline-block;
+        position:relative;
+        text-align:left;
+        cursor:pointer;
+      }
+
+      .cooltip .top {
+        min-width:200px;
+        top:-6px;
+        left:50%;
+        transform:translate(-50%, -100%);
+        padding:10px 20px;
+        color:#FFFFFF;
+        background-color:#222222;
+        font-weight:normal;
+        font-size:13px;
+        border-radius:8px;
+        position:absolute;
+        z-index:99999999 !important;
+        box-sizing:border-box;
+        box-shadow:0 1px 8px rgba(0,0,0,0.5);
+        display:none;
+        }
+
+        .cooltip:hover .top {
+            display:block;
+        }
+
+        .cooltip .top i {
+            position:absolute;
+            top:100%;
+            left:50%;
+            margin-left:-12px;
+            width:24px;
+            height:12px;
+            overflow:hidden;
+        }
+
+        .cooltip .top i::after {
+            content:'';
+            position:absolute;
+            width:12px;
+            height:12px;
+            left:50%;
+            transform:translate(-50%,-50%) rotate(45deg);
+            background-color:#222222;
+            box-shadow:0 1px 8px rgba(0,0,0,0.5);
+        }
+
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.3.5/build/vega.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.2.1/build/vega-lite.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@4.0.0/build/vega-embed.js"></script>
+  </head>
+
+  <body
+        data-spy="scroll"
+        data-target="#navigation"
+        data-offset="50"
+    >
+    
+
+    <div class="container-fluid px-3">
+      <div class="row">
+        <div class="col-2 navbar-collapse">
+          <nav id="navigation" class="navbar navbar-light bg-light sticky d-none d-sm-block">
+    <nav class="nav nav-pills flex-column">
+        <a class="navbar-brand" href="#" style="white-space: normal; word-break: break-all;overflow-wrap: normal; font-size: 1rem; font-weight: 500;"></a>
+        
+            <a class="nav-link" href="#section-1">Overview</a>
+        
+            <a class="nav-link" href="#section-2">Unnamed: 0</a>
+        
+            <a class="nav-link" href="#section-3">Name</a>
+        
+            <a class="nav-link" href="#section-4">PClass</a>
+        
+            <a class="nav-link" href="#section-5">Age</a>
+        
+            <a class="nav-link" href="#section-6">Sex</a>
+        
+            <a class="nav-link" href="#section-7">Survived</a>
+        
+            <a class="nav-link" href="#section-8">SexCode</a>
+        
+    </nav>
+</nav>
+        </div>
+        <div class="col-md-8 col-lg-8 col-xs-12">
+        
+          <div id="section-1" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-1-content-block-1" class="col-12" >
+    <div id="section-1-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            Overview
+        </h3></div>
+</div>
+        
+<div id="section-1-content-block-2" class="col-6 table-responsive" style="margin-top:20px;" >
+    <div id="section-1-content-block-2-header" >
+            <h4>
+                Dataset info
+            </h4></div>
+    <table id="section-1-content-block-2-body" class="table table-sm" >
+        <tr>
+            <td id="section-1-content-block-2-cell-1-1" >Number of variables</td><td id="section-1-content-block-2-cell-1-2" >7</td></tr><tr>
+            <td id="section-1-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Number of observations
+                <span class=top>
+                    expect_table_row_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-1-content-block-2-cell-2-2" >1313</td></tr><tr>
+            <td id="section-1-content-block-2-cell-3-1" >Missing cells</td><td id="section-1-content-block-2-cell-3-2" >6.06%</td></tr></table>
+</div>
+        
+<div id="section-1-content-block-3" class="col-6 table-responsive" style="margin-top:20px;" >
+    <div id="section-1-content-block-3-header" >
+            <h4>
+                Variable types
+            </h4></div>
+    <table id="section-1-content-block-3-body" class="table table-sm" >
+        <tr>
+            <td id="section-1-content-block-3-cell-1-1" >int</td><td id="section-1-content-block-3-cell-1-2" >3</td></tr><tr>
+            <td id="section-1-content-block-3-cell-2-1" >float</td><td id="section-1-content-block-3-cell-2-2" >1</td></tr><tr>
+            <td id="section-1-content-block-3-cell-3-1" >string</td><td id="section-1-content-block-3-cell-3-2" >3</td></tr><tr>
+            <td id="section-1-content-block-3-cell-4-1" >--</td><td id="section-1-content-block-3-cell-4-2" >0</td></tr></table>
+</div>
+        
+<div id="section-1-content-block-4" class="col-12" style="margin-top:20px;" >
+    <div id="section-1-content-block-4-header" class="collapsed" data-toggle="collapse" href="#section-1-content-block-4-body" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-1-content-block-4-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >7</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >7</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >7</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >7</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >7</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_distinct_values_to_be_in_set <span class="badge badge-secondary badge-pill" >4</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_match_regex <span class="badge badge-secondary badge-pill" >3</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_table_row_count_to_be_between <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_table_columns_to_match_ordered_list <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_unique <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_min_to_be_between <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_max_to_be_between <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_mean_to_be_between <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_median_to_be_between <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_quantile_values_to_be_between <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_kl_divergence_to_be_less_than <span class="badge badge-secondary badge-pill" >1</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-2" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-2-content-block-1" class="col-12" >
+    <div id="section-2-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                Unnamed: 0
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-2-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: int
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-2-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-2-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-2-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-2-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-2-content-block-2-cell-1-2" >1313</td></tr><tr>
+            <td id="section-2-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-2-content-block-2-cell-2-2" >100.0%</td></tr><tr>
+            <td id="section-2-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-2-content-block-2-cell-3-2" >0</td></tr><tr>
+            <td id="section-2-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-2-content-block-2-cell-4-2" >0.0%</td></tr></table>
+</div>
+        
+<div id="section-2-content-block-3" class="col-4" style="margin-top:20px;" >
+    <div id="section-2-content-block-3-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-2-content-block-3-body" >
+        
+            <span>
+                <span class="badge badge-info" >1</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >2</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >3</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >4</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >5</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >6</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >7</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >8</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >9</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >10</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >11</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >12</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >13</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >14</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >15</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >16</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >17</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >18</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >19</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >20</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-2-content-block-4" class="col-12" style="margin-top:20px;" >
+    <div id="section-2-content-block-4-header" class="collapsed" data-toggle="collapse" href="#section-2-content-block-4-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-2-content-block-4-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_unique <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-3" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-3-content-block-1" class="col-12" >
+    <div id="section-3-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                Name
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-3-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: string
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-3-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-3-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-3-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-3-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-3-content-block-2-cell-1-2" >1310</td></tr><tr>
+            <td id="section-3-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-3-content-block-2-cell-2-2" >99.8%</td></tr><tr>
+            <td id="section-3-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-3-content-block-2-cell-3-2" >0</td></tr><tr>
+            <td id="section-3-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-3-content-block-2-cell-4-2" >0.0%</td></tr></table>
+</div>
+        
+<div id="section-3-content-block-3" class="col-12" style="margin-top:20px;" >
+    <div id="section-3-content-block-3-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-3-content-block-3-body" >
+        
+            <span>
+                <span class="badge badge-info" >Carlsson, Mr Frans Olof</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Connolly, Miss Kate</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Kelly, Mr James</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Allen, Miss Elisabeth Walton</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Allison, Master Hudson Trevor</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Allison, Miss Helen Loraine</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Allison, Mr Hudson Joshua Creighton</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Allison, Mrs Hudson JC (Bessie Waldo Daniels)</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Anderson, Mr Harry</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Andrews, Miss Kornelia Theodosia</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Andrews, Mr Thomas, jr</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Appleton, Mrs Edward Dale (Charlotte Lamson)</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Artagaveytia, Mr Ramon</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Astor, Colonel John Jacob</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Astor, Mrs John Jacob (Madeleine Talmadge Force)</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Aubert, Mrs Leontine Pauline</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Barkworth, Mr Algernon H</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Baumann, Mr John D</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Baxter, Mr Quigg Edmond</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >Baxter, Mrs James (Helene DeLaudeniere Chaput)</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-3-content-block-4" class="col-12" style="margin-top:20px;" >
+    <div id="section-3-content-block-4-header" class="collapsed" data-toggle="collapse" href="#section-3-content-block-4-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-3-content-block-4-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_match_regex <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-4" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-4-content-block-1" class="col-12" >
+    <div id="section-4-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                PClass
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-4-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: string
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-4-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-4-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-4-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-4-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-4-content-block-2-cell-1-2" >4</td></tr><tr>
+            <td id="section-4-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-4-content-block-2-cell-2-2" >0.3%</td></tr><tr>
+            <td id="section-4-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-4-content-block-2-cell-3-2" >0</td></tr><tr>
+            <td id="section-4-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-4-content-block-2-cell-4-2" >0.0%</td></tr></table>
+</div>
+        
+<div id="section-4-content-block-3" class="col-4" style="margin-top:20px;" >
+    <div id="section-4-content-block-3-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-4-content-block-3-body" >
+        
+            <span>
+                <span class="badge badge-info" >3rd</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >1st</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >2nd</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >*</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-4-content-block-4" class="col-4" style="margin-top:20px;" >
+    <div id="section-4-content-block-4-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Value Counts
+                <span class=top>
+                    expect_column_distinct_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <div id="section-4-content-block-4-body" ></div>
+        <script>
+            // Assign the specification to a local variable vlSpec.
+            vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.3.0.json",
+  "autosize": "fit",
+  "config": {
+    "mark": {
+      "tooltip": null
+    },
+    "view": {
+      "height": 300,
+      "width": 400
+    }
+  },
+  "data": {
+    "name": "data-291df9be3b14fbee9cb1f91eb58e4499"
+  },
+  "datasets": {
+    "data-291df9be3b14fbee9cb1f91eb58e4499": [
+      {
+        "count": 1,
+        "value": "*"
+      },
+      {
+        "count": 322,
+        "value": "1st"
+      },
+      {
+        "count": 279,
+        "value": "2nd"
+      },
+      {
+        "count": 711,
+        "value": "3rd"
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "value",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative"
+    }
+  },
+  "height": 200,
+  "mark": {
+    "size": 20,
+    "type": "bar"
+  },
+  "width": 200
+};
+            // Embed the visualization in the container with id `vis`
+            vegaEmbed('#section-4-content-block-4-body', vlSpec, {
+                actions: false
+            }).then(result=>console.log(result)).catch(console.warn);
+        </script>
+</div>
+        
+<div id="section-4-content-block-5" class="col-12" style="margin-top:20px;" >
+    <div id="section-4-content-block-5-header" class="collapsed" data-toggle="collapse" href="#section-4-content-block-5-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-4-content-block-5-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_match_regex <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_distinct_values_to_be_in_set <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-5" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-5-content-block-1" class="col-12" >
+    <div id="section-5-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                Age
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-5-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: float
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-5-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-5-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-5-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-5-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-2-cell-1-2" >75</td></tr><tr>
+            <td id="section-5-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-2-cell-2-2" >9.9%</td></tr><tr>
+            <td id="section-5-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-5-content-block-2-cell-3-2" >557</td></tr><tr>
+            <td id="section-5-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-5-content-block-2-cell-4-2" >42.4%</td></tr></table>
+</div>
+        
+<div id="section-5-content-block-3" class="col-4" style="margin-top:20px;" >
+    <div id="section-5-content-block-3-header" >
+            <h4>
+                Quantiles
+            </h4></div>
+    <table id="section-5-content-block-3-body" class="table table-sm table-unbordered" >
+        <tr>
+            <td id="section-5-content-block-3-cell-1-1" >
+            <span class="cooltip">
+                0.05
+                <span class=top>
+                    expect_column_quantile_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-3-cell-1-2" >6.0</td></tr><tr>
+            <td id="section-5-content-block-3-cell-2-1" >
+            <span class="cooltip">
+                Q1
+                <span class=top>
+                    expect_column_quantile_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-3-cell-2-2" >21.0</td></tr><tr>
+            <td id="section-5-content-block-3-cell-3-1" >
+            <span class="cooltip">
+                Median
+                <span class=top>
+                    expect_column_quantile_values_to_be_between 
+ expect_column_median_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-3-cell-3-2" >28.0</td></tr><tr>
+            <td id="section-5-content-block-3-cell-4-1" >
+            <span class="cooltip">
+                Q3
+                <span class=top>
+                    expect_column_quantile_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-3-cell-4-2" >39.0</td></tr><tr>
+            <td id="section-5-content-block-3-cell-5-1" >
+            <span class="cooltip">
+                0.95
+                <span class=top>
+                    expect_column_quantile_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-3-cell-5-2" >57.0</td></tr></table>
+</div>
+        
+<div id="section-5-content-block-4" class="col-4" style="margin-top:20px;" >
+    <div id="section-5-content-block-4-header" >
+            <h4>
+                Statistics
+            </h4></div>
+    <table id="section-5-content-block-4-body" class="table table-sm table-unbordered" >
+        <tr>
+            <td id="section-5-content-block-4-cell-1-1" >
+            <span class="cooltip">
+                Mean
+                <span class=top>
+                    expect_column_mean_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-4-cell-1-2" >30.40</td></tr><tr>
+            <td id="section-5-content-block-4-cell-2-1" >
+            <span class="cooltip">
+                Minimum
+                <span class=top>
+                    expect_column_min_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-4-cell-2-2" >0.17</td></tr><tr>
+            <td id="section-5-content-block-4-cell-3-1" >
+            <span class="cooltip">
+                Maximum
+                <span class=top>
+                    expect_column_max_to_be_between
+                </span>
+            </span>
+        </td><td id="section-5-content-block-4-cell-3-2" >71.00</td></tr></table>
+</div>
+        
+<div id="section-5-content-block-5" class="col-4" style="margin-top:20px;" >
+    <div id="section-5-content-block-5-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-5-content-block-5-body" >
+        
+            <span>
+                <span class="badge badge-info" >22.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >21.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >30.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >18.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >36.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >24.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >26.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >27.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >28.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >19.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >20.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >23.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >25.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >32.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >45.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >29.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >31.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >33.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >35.0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >39.0</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-5-content-block-6" class="col-12" style="margin-top:20px;" >
+    <div id="section-5-content-block-6-header" class="collapsed" data-toggle="collapse" href="#section-5-content-block-6-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-5-content-block-6-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_min_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_max_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_mean_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_median_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_quantile_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_kl_divergence_to_be_less_than <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+<div id="section-5-content-block-7" class="col-12" style="margin-top:20px;" >
+    <div id="section-5-content-block-7-header" class="collapsed" data-toggle="collapse" href="#section-5-content-block-7-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Failed expectations <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-5-content-block-7-body" class="list-group collapse" >
+            <li class="list-group-item" >
+            <span>
+                <span class="text-monospace" >expect_column_kl_divergence_to_be_less_than</span> raised an exception: <span class="text-monospace" >Invalid partition object.</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-6" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-6-content-block-1" class="col-12" >
+    <div id="section-6-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                Sex
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-6-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: string
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-6-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-6-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-6-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-6-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-6-content-block-2-cell-1-2" >2</td></tr><tr>
+            <td id="section-6-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-6-content-block-2-cell-2-2" >0.2%</td></tr><tr>
+            <td id="section-6-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-6-content-block-2-cell-3-2" >0</td></tr><tr>
+            <td id="section-6-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-6-content-block-2-cell-4-2" >0.0%</td></tr></table>
+</div>
+        
+<div id="section-6-content-block-3" class="col-4" style="margin-top:20px;" >
+    <div id="section-6-content-block-3-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-6-content-block-3-body" >
+        
+            <span>
+                <span class="badge badge-info" >male</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >female</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-6-content-block-4" class="col-4" style="margin-top:20px;" >
+    <div id="section-6-content-block-4-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Value Counts
+                <span class=top>
+                    expect_column_distinct_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <div id="section-6-content-block-4-body" ></div>
+        <script>
+            // Assign the specification to a local variable vlSpec.
+            vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.3.0.json",
+  "autosize": "fit",
+  "config": {
+    "mark": {
+      "tooltip": null
+    },
+    "view": {
+      "height": 300,
+      "width": 400
+    }
+  },
+  "data": {
+    "name": "data-45d63c35cf141cfb27d06ce421c0fd3c"
+  },
+  "datasets": {
+    "data-45d63c35cf141cfb27d06ce421c0fd3c": [
+      {
+        "count": 462,
+        "value": "female"
+      },
+      {
+        "count": 851,
+        "value": "male"
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "value",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative"
+    }
+  },
+  "height": 200,
+  "mark": {
+    "size": 20,
+    "type": "bar"
+  },
+  "width": 200
+};
+            // Embed the visualization in the container with id `vis`
+            vegaEmbed('#section-6-content-block-4-body', vlSpec, {
+                actions: false
+            }).then(result=>console.log(result)).catch(console.warn);
+        </script>
+</div>
+        
+<div id="section-6-content-block-5" class="col-12" style="margin-top:20px;" >
+    <div id="section-6-content-block-5-header" class="collapsed" data-toggle="collapse" href="#section-6-content-block-5-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-6-content-block-5-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_match_regex <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_distinct_values_to_be_in_set <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-7" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-7-content-block-1" class="col-12" >
+    <div id="section-7-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                Survived
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-7-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: int
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-7-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-7-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-7-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-7-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-7-content-block-2-cell-1-2" >2</td></tr><tr>
+            <td id="section-7-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-7-content-block-2-cell-2-2" >0.2%</td></tr><tr>
+            <td id="section-7-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-7-content-block-2-cell-3-2" >0</td></tr><tr>
+            <td id="section-7-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-7-content-block-2-cell-4-2" >0.0%</td></tr></table>
+</div>
+        
+<div id="section-7-content-block-3" class="col-4" style="margin-top:20px;" >
+    <div id="section-7-content-block-3-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-7-content-block-3-body" >
+        
+            <span>
+                <span class="badge badge-info" >0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >1</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-7-content-block-4" class="col-4" style="margin-top:20px;" >
+    <div id="section-7-content-block-4-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Value Counts
+                <span class=top>
+                    expect_column_distinct_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <div id="section-7-content-block-4-body" ></div>
+        <script>
+            // Assign the specification to a local variable vlSpec.
+            vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.3.0.json",
+  "autosize": "fit",
+  "config": {
+    "mark": {
+      "tooltip": null
+    },
+    "view": {
+      "height": 300,
+      "width": 400
+    }
+  },
+  "data": {
+    "name": "data-9d14843c4c44622247aa86903b7aa379"
+  },
+  "datasets": {
+    "data-9d14843c4c44622247aa86903b7aa379": [
+      {
+        "count": 863,
+        "value": 0
+      },
+      {
+        "count": 450,
+        "value": 1
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "value",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative"
+    }
+  },
+  "height": 200,
+  "mark": {
+    "size": 20,
+    "type": "bar"
+  },
+  "width": 200
+};
+            // Embed the visualization in the container with id `vis`
+            vegaEmbed('#section-7-content-block-4-body', vlSpec, {
+                actions: false
+            }).then(result=>console.log(result)).catch(console.warn);
+        </script>
+</div>
+        
+<div id="section-7-content-block-5" class="col-12" style="margin-top:20px;" >
+    <div id="section-7-content-block-5-header" class="collapsed" data-toggle="collapse" href="#section-7-content-block-5-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-7-content-block-5-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_distinct_values_to_be_in_set <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-8" class="ge-section container-fluid">
+    <div class="row">
+        
+<div id="section-8-content-block-1" class="col-12" >
+    <div id="section-8-content-block-1-header" class="alert alert-secondary" >
+        <h3>
+            
+            <span class="cooltip">
+                SexCode
+                <span class=top>
+                    expect_column_to_exist
+                </span>
+            </span>
+        
+        </h3><h5 id="section-8-content-block-1-subheader" >
+            
+            <span class="cooltip">
+                Type: int
+                <span class=top>
+                    expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list
+                </span>
+            </span>
+        
+        </h5>
+        </div>
+</div>
+        
+<div id="section-8-content-block-2" class="col-4" style="margin-top:20px;" >
+    <div id="section-8-content-block-2-header" >
+            <h4>
+                Properties
+            </h4></div>
+    <table id="section-8-content-block-2-body" class="table table-sm table-unbordered" style="width:100%;" >
+        <tr>
+            <td id="section-8-content-block-2-cell-1-1" >
+            <span class="cooltip">
+                Distinct (n)
+                <span class=top>
+                    expect_column_unique_value_count_to_be_between
+                </span>
+            </span>
+        </td><td id="section-8-content-block-2-cell-1-2" >2</td></tr><tr>
+            <td id="section-8-content-block-2-cell-2-1" >
+            <span class="cooltip">
+                Distinct (%)
+                <span class=top>
+                    expect_column_proportion_of_unique_values_to_be_between
+                </span>
+            </span>
+        </td><td id="section-8-content-block-2-cell-2-2" >0.2%</td></tr><tr>
+            <td id="section-8-content-block-2-cell-3-1" >
+            <span class="cooltip">
+                Missing (n)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-8-content-block-2-cell-3-2" >0</td></tr><tr>
+            <td id="section-8-content-block-2-cell-4-1" >
+            <span class="cooltip">
+                Missing (%)
+                <span class=top>
+                    expect_column_values_to_not_be_null
+                </span>
+            </span>
+        </td><td id="section-8-content-block-2-cell-4-2" >0.0%</td></tr></table>
+</div>
+        
+<div id="section-8-content-block-3" class="col-4" style="margin-top:20px;" >
+    <div id="section-8-content-block-3-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Example Values
+                <span class=top>
+                    expect_column_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <p id="section-8-content-block-3-body" >
+        
+            <span>
+                <span class="badge badge-info" >0</span>
+            </span>
+        
+        
+            <span>
+                <span class="badge badge-info" >1</span>
+            </span>
+        
+        </p>
+</div>
+        
+<div id="section-8-content-block-4" class="col-4" style="margin-top:20px;" >
+    <div id="section-8-content-block-4-header" >
+            <h4>
+                
+            <span class="cooltip">
+                Value Counts
+                <span class=top>
+                    expect_column_distinct_values_to_be_in_set
+                </span>
+            </span>
+        
+            </h4></div>
+    <div id="section-8-content-block-4-body" ></div>
+        <script>
+            // Assign the specification to a local variable vlSpec.
+            vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.3.0.json",
+  "autosize": "fit",
+  "config": {
+    "mark": {
+      "tooltip": null
+    },
+    "view": {
+      "height": 300,
+      "width": 400
+    }
+  },
+  "data": {
+    "name": "data-150682aca135c7574dc44505db9fdb5e"
+  },
+  "datasets": {
+    "data-150682aca135c7574dc44505db9fdb5e": [
+      {
+        "count": 851,
+        "value": 0
+      },
+      {
+        "count": 462,
+        "value": 1
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "value",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative"
+    }
+  },
+  "height": 200,
+  "mark": {
+    "size": 20,
+    "type": "bar"
+  },
+  "width": 200
+};
+            // Embed the visualization in the container with id `vis`
+            vegaEmbed('#section-8-content-block-4-body', vlSpec, {
+                actions: false
+            }).then(result=>console.log(result)).catch(console.warn);
+        </script>
+</div>
+        
+<div id="section-8-content-block-5" class="col-12" style="margin-top:20px;" >
+    <div id="section-8-content-block-5-header" class="collapsed" data-toggle="collapse" href="#section-8-content-block-5-body" role="button" aria-expanded="true" aria-controls="collapseExample" style="cursor:pointer;" >
+            <h4>
+                Expectation types <span class="mr-3 triangle"></span>
+            </h4></div>
+    <ul id="section-8-content-block-5-body" class="list-group collapse" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_type_list <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_unique_value_count_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_proportion_of_unique_values_to_be_between <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_not_be_null <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_values_to_be_in_set <span class="badge badge-secondary badge-pill" >False</span>
+            </span>
+        </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" >
+            <span>
+                expect_column_distinct_values_to_be_in_set <span class="badge badge-secondary badge-pill" >True</span>
+            </span>
+        </li>
+            
+        </ul>
+</div>
+        
+    </div>
+</div>
+        
+        </div>
+        <div class="col-lg-2 col-md-2 col-xs-12 d-none d-md-block">
+              <div style="">
+    <div class="col-12">
+      <div class="row">
+        <img                src="https://great-expectations.readthedocs.io/en/latest/_images/generic_dickens_protagonist.png"
+          style="
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+          ">
+      </div>
+    </div>
+    <div class="col-12">
+      <p>
+        Documentation autogenerated using
+        <a href="https://greatexpectations.io">Great Expectations</a>.
+      </p>
+    </div>
+    <div class="alert alert-danger col-12" role="alert">
+        This is a beta feature! Expect changes in API, behavior, and design.
+    </div>
+  </div>
+  </div>
+        </div>
+        <div class="d-block d-sm-none col-12">
+            <div>
+              <div class="row">
+                <img
+                  src="https://great-expectations.readthedocs.io/en/latest/_images/generic_dickens_protagonist.png"
+                  style="
+                    width: 200px;
+                    margin-left: auto;
+                    margin-right: auto;
+                  ">
+              </div>
+            </div>
+            <div class="col-12">
+              <p>
+                Documentation autogenerated using
+                <a href="https://greatexpectations.io">Great Expectations</a>.
+              </p>
+            </div>
+            <div class="alert alert-danger col-12" role="alert">
+                This is a beta feature! Expect changes in API, behavior, and design.
+            </div>
+          </div>
+
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
