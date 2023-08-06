@@ -1,0 +1,47 @@
+Metadata-Version: 2.0
+Name: Mopidy-Lagukan
+Version: 0.2.3
+Summary: Mopidy extension for Lagukan
+Home-page: https://github.com/jacobobryant/mopidy-lagukan
+Author: Jacob O'Bryant
+Author-email: foo@jacobobryant.com
+License: Apache License, Version 2.0
+Platform: UNKNOWN
+Classifier: Environment :: No Input/Output (Daemon)
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Topic :: Multimedia :: Sound/Audio :: Players
+Requires-Dist: Mopidy (>=1.0)
+Requires-Dist: Pykka (>=1.1)
+Requires-Dist: setuptools
+
+# Mopidy-Lagukan
+
+Lagukan is a music recommendation service, and this extension allows it to
+control which songs Mopidy plays. Lagukan will learn your preferences based on
+what you skip. See https://lagukan.com.
+
+[![Lagukan Demo](https://lagukan.com/img/desktop_cropped.png)](https://youtu.be/Rr2R1fSZwPo)
+
+## Installation
+
+Install by running:
+
+```
+pip install Mopidy-Lagukan
+```
+
+## Configuration
+
+By default, Lagukan will open in your browser automatically when you start mopidy. This is because
+Lagukan will only work while the browser window is open. You can disable this by setting the `autorun`
+config option:
+
+```
+[lagukan]
+autorun = false
+```
+
+
