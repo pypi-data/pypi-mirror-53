@@ -1,0 +1,17 @@
+class RheaRequest {
+    text: string
+}
+
+class RheaResponse {
+    positive: float
+    negative: float
+}
+
+union RheaMessageType {
+    RheaRequest
+    RheaResponse
+}
+
+class RheaMessage(primary) {
+    message: RheaMessageType
+}
