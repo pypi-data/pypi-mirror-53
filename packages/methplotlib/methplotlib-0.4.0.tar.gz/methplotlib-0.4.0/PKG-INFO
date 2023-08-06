@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: methplotlib
+Version: 0.4.0
+Summary: Plot methylation data obtained from nanopolish
+Home-page: https://github.com/wdecoster/methplotlib
+Author: Wouter De Coster
+Author-email: decosterwouter@gmail.com
+License: MIT
+Description: # METHPLOTLIB
+        
+        This script takes data from nanopolish, either as methylation calls or methylation frequencies (as processed by calculate_methylation_frequency.py) to generate a genome browser view on a window.
+        
+        ## INSTALLATION
+        `pip install methplotlib`
+        
+        ## USAGE
+        ```
+        methplotlib [-h] -m METHYLATION [METHYLATION ...] -n NAMES [NAMES ...]
+                           -w WINDOW [-g GTF] [--simplify] [--split] [--smooth SMOOTH]
+        
+        Arguments:
+          -h, --help            show this help message and exit
+          -m METHYLATION [METHYLATION ...], --methylation METHYLATION [METHYLATION ...]
+                                nanoplish calls or frequency output
+          -n NAMES [NAMES ...], --names NAMES [NAMES ...]
+                                names of datasets in --methylation
+          -w, --window WINDOW   window (region) to which the visualisation has to be restricted
+          -g GTF, --gtf GTF     add annotation based on a gtf file
+          --simplify            simplify annotation track to show genes rather than transcripts
+          --split               split, rather than overlay the methylation tracks
+          --smooth SMOOTH       Smoothen the datapoints, but reduce the details (integer, default=5)
+        ```
+        
+        
+        ## TO DO - CONTRIBUTIONS WELCOME
+        - Differential methylation analysis (in windows) across groups of samples
+        - Outlier detection (in windows) across samples
+        
+Keywords: nanopore
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Python: >=3
+Description-Content-Type: text/markdown
