@@ -1,0 +1,28 @@
+<style>
+.watson-debug-toolbar__panel__debug {
+    width: 100%;
+}
+.watson-debug-toolbar__panel__debug th:first-of-type {
+    width: 80px;
+}
+</style>
+<table class="watson-debug-toolbar__panel__debug">
+    <thead>
+        <tr>
+            <th>Time</th><th>Query</th><th>Params</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for query in queries %}
+        <tr>
+            <td>{{ '{0:.2f}'.format(query['time']) }}ms</td>
+            <td>{{ query['statement'] }}</td>
+            <td>{{ query['parameters'] }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No queries executed.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
