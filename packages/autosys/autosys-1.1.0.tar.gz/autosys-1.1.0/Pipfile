@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+autopep8 = "*"
+coverage = "*"
+flake8 = "*"
+pylint = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-runner = "*"
+pytest-xdist = "*"
+yapf = "*"
+
+[packages]
+ansicolors = "*"
+Cython = "*"
+Flask = "*"
+requests = "*"
+setuptools = "*"
+ujson = "*"
+
+[requires]
+python_version = "3.7"
