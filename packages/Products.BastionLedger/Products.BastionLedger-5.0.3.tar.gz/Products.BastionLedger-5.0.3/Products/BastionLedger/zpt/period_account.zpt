@@ -1,0 +1,97 @@
+<html tal:replace="structure context/manage_page_header"
+      tal:define="foo python:context.saveSearch(request);"/>
+
+    <span tal:replace="structure context/manage_tabs"/>
+
+    <tal:main tal:define="ledgerid python: request.get('path', '').split('/')[0];
+                          accountid python: request.get('path', '').split('/')[1]">
+
+      <form tal:condition="accountid">
+          <div class="form-label">Account</div>
+          <select name="path">
+              <option tal:repeat="account context/accountValues"
+		      tal:attributes="value string:${account/ledgerId}/${account/getId}"
+		      tal:content="account/prettyTitle"/>
+          </select>
+          <input class="list-item" type="submit" name=" Go "/>
+      </form>
+
+    <tal:show tal:condition="accountid">
+       <table border="0" cellpadding="2" cellspacing="0" width="100%"
+	   tal:define="entries python: context.getAccountInfo(ledgerid, accountid)">
+           <tr class="list-header">
+               <td class="list-item">
+               </td>
+               <td class="list-item">
+               </td>
+               <td class="list-item">
+		   <strong>Effective</strong>
+              </td>
+               <td class="list-item" align="right">
+                   <strong>Opening</strong>
+               </td>
+               <td class="list-item" align="right">
+                   <strong>Change</strong>
+               </td>
+               <td class="list-item" align="right">
+                   <strong>Balance</strong>
+               </td>
+               <td class="list-item" align="right">
+	           <strong>Reported</strong></td>
+	       <td class="list-item" align="right">
+		     <strong>Actual</strong>
+	       </td>
+	       <td class="list-item">&nbsp;</td>
+               <td class="list-item">Last Modified</td>
+           </tr>
+           <tr class="" 
+               tal:repeat="item entries"
+               tal:attributes="class python: repeat['item'].index % 2 and 'row-normal' or 'row-hilite'">
+               <td class="list-item">
+                  <input type="checkbox" name="ids:list" value="" tal:attributes="value item/getId"/>
+               </td>
+               <td class="list-item" nowrap>
+                   <a href="" border="0" tal:attributes="href string:${item/absolute_url}/manage_main">
+                       <img src="" tal:attributes="src item/icon"/>
+                   </a>
+               </td>
+               <td class="list-item">
+		 <a href="" tal:attributes="href string:${ledgerid}/${accountid}/manage_statement?effective:list:date=${item/beginning}&effective:list:date=${item/ended}" tal:content="python: item.effective().strftime('%Y-%m-%d %H:%M')"/>
+	       </td>
+               <td class="list-item" align="right" tal:content="item/opening"/>
+               <td class="list-item" align="right" tal:content="item/total"/>
+               <td class="list-item" align="right">
+		   <a href="" tal:attributes="href string:${item/periodid}/${item/ledger}/manage_main"
+		              tal:content="item/balance"/>
+	       </td>
+               <td class="list-item" align="right" tal:content="item/reporting_balance"/>
+               <td class="list-item" align="right" tal:content="item/real_balance">
+	       <td class="list-item"/>
+               <td class="list-item" 
+                   tal:content="python: item.bobobase_modification_time().strftime('%Y-%m-%d %H:%M')"/>
+               <td>&nbsp;</td>
+           </tr>
+           <tr>
+               <td colspan="11">
+                   <input class="form-element" type="submit"  value=" Reverse " name="manage_reverse:method"/>
+                   <input class="form-element" type="submit"  value=" Cancel  " name="manage_cancel:method"/>
+                   <input class="form-element" type="submit"  value="  Post   " name="manage_post:method"/>
+                   <input class="form-element" type="submit"  value=" RePost  " name="manage_repost:method"/>
+                   <input class="form-element" type="submit"  value=" Delete  " name="manage_delObjects:method"/>
+                   <input class="form-element" type="submit"  value="  Merge  " name="manage_mergeTransactions:method"/>
+                   <input class="form-element" type="submit"  value="  View   " name="manage_transactions:method"/>
+
+                    &nbsp;&nbsp;
+               </td>
+           </tr>
+       </table>
+    </tal:show>
+
+    </tal:main>
+    
+<html tal:replace="structure context/manage_page_footer"/>
+
+
+
+
+

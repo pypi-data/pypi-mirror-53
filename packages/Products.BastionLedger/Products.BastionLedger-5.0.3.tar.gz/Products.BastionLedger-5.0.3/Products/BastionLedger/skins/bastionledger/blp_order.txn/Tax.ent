@@ -1,0 +1,28 @@
+##parameters=account=None,args=[],kw={}
+#
+# This script should return a list (possibly empty) of BLEntry objects
+#
+from Products.BastionBanking.ZCurrency import ZCurrency
+from Products.BastionLedger.BLEntry import BLEntry
+from Products.BastionLedger.BLSubsidiaryEntry import BLSubsidiaryEntry
+
+entries = []
+order = args[0]
+
+account = account or order.blAccount()
+receivable = account.isReceivable()
+sign = receivable and -1 or 1
+sales_tax = receivable and 'sales_tax_due' or 'sales_tax_paid'
+description = account.prettyTitle()
+
+if not order.taxincluded in (1, '1', True):
+   for tax_acct in context.Ledger.accountValues(tags=sales_tax):
+       entries.append(BLEntry(tax_acct.getId(),
+                              description,
+                              'Ledger/%s' % tax_acct.getId(),
+                              order.calculateTax(tax_acct) * sign,
+                              script.getId()))
+
+
+return entries
+

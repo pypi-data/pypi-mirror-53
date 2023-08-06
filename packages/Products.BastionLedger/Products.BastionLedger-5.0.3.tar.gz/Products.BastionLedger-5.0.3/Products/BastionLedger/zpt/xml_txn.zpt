@@ -1,0 +1,16 @@
+<transaction>
+   <id tal:content="context/getId"/>
+   <title tal:content="context/Title"/>
+   <effective tal:content="python: context.effective().strftime('%Y-%m-%d')"/>
+   <entered_by tal:content="context/entered_by"/>
+   <entered_date tal:content="context/creationTime"/>
+   <status tal:content="context/status"/>
+   <entries>
+      <entry tal:repeat="entry context/entryValues">
+          <title tal:content="entry/title"/>
+          <amount tal:content="entry/amount"/>
+          <fxamount tal:define="amt entry/foreignAmount" tal:condition="amt" tal:content="amt"/>
+          <account tal:content="entry/account"/>
+      </entry>
+   </entries>
+</transaction>

@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             workflow_id="blorder_workflow"
+             i18n:domain="bastionledger"
+             title="BLOrder Workflow"
+             state_variable="review_state"
+             initial_state="incomplete">
+
+ <permission>BastionLedger: Manage</permission>
+ <permission>BastionLedger: Oversee</permission>
+ <permission>BastionLedger: Operate</permission>
+ <permission>Access contents information</permission>
+ <permission>View</permission>
+ <permission>Modify portal content</permission>
+ <permission>List folder contents</permission>
+
+ <state state_id="incomplete" title="Incomplete">
+  <exit-transition transition_id="ordering"/>
+  <exit-transition transition_id="cancel"/>
+  <permission-map name="BastionLedger: Manage" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="open" title="Open">
+  <exit-transition transition_id="cancel"/>
+  <exit-transition transition_id="invoice"/>
+  <exit-transition transition_id="incomplete"/>
+  <exit-transition transition_id="reopen"/>
+  <permission-map name="BastionLedger: Manage" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="invoiced" title="Invoiced">
+  <exit-transition transition_id="cancel"/>
+  <exit-transition transition_id="dispatch"/>
+  <exit-transition transition_id="reconcile"/>
+  <exit-transition transition_id="reinvoice"/>
+  <exit-transition transition_id="reopen"/>
+  <exit-transition transition_id="outstanding"/>
+  <exit-transition transition_id="writeoff"/>
+  <permission-map name="BastionLedger: Manage" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="dispatched" title="Dispatched">
+  <exit-transition transition_id="reconcile"/>
+  <exit-transition transition_id="outstanding"/>
+  <permission-map name="BastionLedger: Manage" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="cancelled" title="Cancelled">
+  <permission-map name="BastionLedger: Manage" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="paid" title="Paid">
+  <permission-map name="BastionLedger: Operate" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="arrears" title="Arrears">
+  <exit-transition transition_id="outstanding"/>
+  <exit-transition transition_id="reconcile"/>
+  <exit-transition transition_id="writeoff"/>
+  <permission-map name="BastionLedger: Operate" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+ <state state_id="writtenoff" title="Written Off">
+  <permission-map name="BastionLedger: Manage" acquired="True">
+     <permission-role>Manager</permission-role>
+     <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information" acquired="True"/>
+  <permission-map name="List portal content" acquired="True"/>
+  <permission-map name="Modify portal content" acquired="True"/>
+  <permission-map name="View" acquired="True"/>
+ </state>
+
+
+ <transition transition_id="cancel"
+             title="Cancel"
+             new_state="cancelled" trigger="USER"
+             before_script="cancel" after_script="">
+  <action  url="%(content_url)s/manage_statusModify?workflow_action=cancel" category="workflow">Cancel</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="reconcile"
+             title="Reconcile"
+             new_state="paid" trigger="USER"
+             before_script="" after_script="">
+  <action  url="%(content_url)s/manage_statusModify?workflow_action=reconcile" category="workflow">Reconcile</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="reopen"
+             title="Reopen"
+             new_state="open" trigger="USER"
+             before_script="reopen" after_script="">
+  <action  url="%(content_url)s/manage_statusModify?workflow_action=reopen" category="workflow">Reopen</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="outstanding"
+             title="Outstanding"
+             new_state="arrears" trigger="USER"
+             before_script="" after_script="">
+  <action  url="%(content_url)s/manage_statusModify?workflow_action=outstanding" category="workflow">Outstanding</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+<transition transition_id="dispatch"
+             title="Dispatch"
+             new_state="dispatched" trigger="USER"
+             before_script="dispatch" after_script="">
+  <action  url="%(content_url)s/manage_statusModify?workflow_action=dispatch" category="workflow">Dispatch</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="invoice"
+             title="Invoice"
+             new_state="invoiced" trigger="USER"
+             before_script="invoice" after_script="">
+  <action  url="%(content_url)s/content_status_modify?workflow_action=invoice" category="workflow">Invoice</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="reinvoice"
+             title="Reinvoice"
+             new_state="invoiced" trigger="USER"
+             before_script="invoice" after_script="">
+  <action  url="%(content_url)s/content_status_modify?workflow_action=reinvoice" category="workflow">Reinvoice</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="ordering"
+             title="In progress"
+             new_state="open" trigger="AUTOMATIC"
+             before_script="" after_script="">
+  <action  url="%(content_url)s/content_status_modify?workflow_action=ordering" category="workflow">In progress</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="incomplete"
+             title="Incomplete"
+             new_state="incomplete" trigger="AUTOMATIC"
+             before_script="" after_script="">
+  <action  url="%(content_url)s/content_status_modify?workflow_action=incomplete" category="workflow">Incomplete</action>
+  <guard>
+   <guard-permission>BastionLedger: Operate</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="writeoff"
+             title="Write Off"
+             new_state="writtenoff" trigger="USER"
+             before_script="writeoff" after_script="">
+  <action  url="%(content_url)s/manage_statusModify?workflow_action=writeoff" category="workflow">Write Off</action>
+  <guard>
+   <guard-permission>BastionLedger: Manage</guard-permission>
+  </guard>
+ </transition>
+
+ <script script_id="cancel" type="Script (Python)" 
+         filename="workflows/blorder_workflow/cancel.py"/>
+
+ <script script_id="invoice" type="Script (Python)" 
+         filename="workflows/blorder_workflow/invoice.py"/>
+
+ <script script_id="dispatch" type="Script (Python)" 
+         filename="workflows/blorder_workflow/dispatch.py"/>
+
+ <script script_id="reopen" type="Script (Python)" 
+         filename="workflows/blorder_workflow/reopen.py"/>
+
+ <script script_id="writeoff" type="Script (Python)" 
+         filename="workflows/blorder_workflow/writeoff.py"/>
+ 
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description i18n:translate="">
+    Previous transition
+  </description>
+  <default>
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description i18n:translate="">
+    The ID of the user who performed the last transition
+  </description>
+  <default>
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description i18n:translate="">
+    Comment about the last transition
+  </description>
+  <default>
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description i18n:translate="">
+    Provides access to workflow history
+  </description>
+  <default>
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description i18n:translate="">
+    When the previous transition was performed
+  </description>
+  <default>
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+
+</dc-workflow>

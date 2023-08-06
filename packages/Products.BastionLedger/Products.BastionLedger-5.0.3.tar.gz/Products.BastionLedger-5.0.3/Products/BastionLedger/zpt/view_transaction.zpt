@@ -1,0 +1,302 @@
+<html tal:replace="structure context/manage_page_header"/>
+
+
+<div tal:replace="structure string:<script type=text/javascript>"/>
+
+    <span tal:omit-tag="" tal:repeat="jump python: range(0,8)">
+    function clearDebit<div tal:replace="jump"/>()
+    {
+        checkbox = document.getElementById("debit<div tal:replace="jump"/>");
+	checkbox.attributes.getNamedItem("checked").value = false;
+    }
+
+    function clearCredit<div tal:replace="jump"/>()
+    {
+        checkbox = document.getElementById("credit<div tal:replace="jump"/>");
+	checkbox.attributes.getNamedItem("checked").value = false;
+    }
+    </span>
+<div tal:replace="structure string:</script>"/>
+
+   <body tal:define="entries context/entryValues;
+                     actions context/actions;
+                     ledger python: context.blLedger();
+                     fx context/isFX;
+                     subsidiaryAccounts python: ledger.meta_type != 'BLLedger' and context.accountValues(sort_on='accno') or []">
+
+       <span tal:replace="structure context/manage_tabs"/>
+
+       <table border="0" cellspacing="0" cellpadding="0" width="100%"
+              tal:define="products context/filtered_meta_types">
+         <tr>
+	   <td align="left" valign="top" class="form-element">
+	     <form name="effective-form" action=""  tal:attributes="action request/URL" method="post">
+	       <span class="form-element">Effective</span>
+	       <input type="text" name="effective:date" size="10" maxlength="10" value=""
+		      tal:attributes="value request/effective|context/effective"/>
+	       <input class="form-element" type="submit" name="manage_editEffective:method" value=" Change "/>
+	     </form>
+	   </td>
+	   <td>
+                  <form name="status_form" action="manage_statusModify" tal:attributes="action request/URL" method="post">
+                      <span class="form-label">Status</span>&nbsp;
+                      <span class="form-element" tal:content="context/status"/>&nbsp;
+                      <tal:action tal:condition="actions">
+                          <select class="form-element"  name="workflow_action">
+                              <option tal:repeat="action actions" 
+                                      tal:attributes="value action/transition/id"
+                                      tal:content="action/title"/>
+                          </select>
+                          <input class="form-element" type="submit" name="manage_statusModify:method" value=" Change "/>
+                      </tal:action>
+                      <tal:ctl tal:define="control context/controlAccount | nothing"
+                               tal:condition="nocall: control">
+                         <span class="form-label">Control A/c</span>&nbsp;
+                             <select class="form-element" name="controlid">
+                                <option tal:repeat="c context/controlAccounts" 
+                                        tal:attributes="value c/getId;
+                                                        selected python: c == control and 1 or 0"
+                                        tal:content="c/prettyTitle"/>
+                             </select>
+                             <input class="form-element" type="submit" name="setControlAccount:method" value=" Change "/>
+                       </tal:ctl>
+                  </form>
+              </td>
+              <td align="right" valign="top" class="form-element">
+                 <form name="product_form" method="get" action="" tal:attributes="action request/URL1">
+                     <div tal:condition="python: len(products) > 1" tal:omit-tag="">
+                         <select class="form-element" name=":action"
+                                 onchange="" tal:attributes="onchange string:location.href='${request/URL1}/'+this.options[this.selectedIndex].value">
+                             <option value="manage_workspace" disabled>Select type to add...</option>
+                             <option tal:repeat="product products"
+                                     value="" tal:attributes="value product/action"
+                                     tal:content="product/name"/>
+                          </select>
+                          <input class="form-element" type="submit" value=" Add ">
+                      </div>
+                      <div tal:condition="python: len(products) == 1" tal:omit-tag="">
+                          <div tal:omit-tag="" tal:define="product python:products[0]">
+                             <input type="hidden" name=":method" value="" tal:attributes="value product/action"/>
+                             <input class="form-element" type="submit" name="submit" value=""
+                                     tal:attributes="value string: Add ${product/name}" />
+                          </div>
+                      </div>
+                 </form>
+
+                 <div align="right" tal:define="attachments context/attachmentValues" 
+                      tal:condition="attachments">
+                    <tal:block tal:repeat="attachment attachments">
+                       <img src="trombone.gif">
+                           <a href="" tal:attributes="href string:attachments/${attachment/getId}"
+                              tal:content="attachment/getId"/>
+                    </tal:block>
+                 </div>
+              </td>
+          </tr>
+       </table>
+
+       <br/>
+
+       <table border="0" cellpadding="2" cellspacing="0">
+           <tr>
+               <tal:ref tal:define="ref context/referenceObject" tal:condition="nocall: ref">
+                    <td class="form-label">Reference</td>
+                    <td class="form-element">
+                        <a href="" tal:attributes="href string:${context/referenceUrl}/manage_workspace"
+                                   tal:content="context/referenceId"/>
+                    </td>
+               </tal:ref>
+               <td class="form-label">Description</td>
+               <td class="form-element" tal:content="context/title"/>
+               <td>&nbsp;&nbsp;</td>
+               <td class="form-label">Base Currency</td>
+               <td class="form-element" tal:content="context/defaultCurrency"/>
+               <td>&nbsp;&nbsp;</td>
+               <td class="form-label">Entered By</td>
+               <td class="form-element" tal:content="context/entered_by"/>
+           </tr>
+	   <tr tal:define="notes context/notes" tal:condition="notes">
+	     <td class="form-element" colspan="8">
+	       <i tal:content="structure python: notes.replace('\n', '<br/>')"/>
+	     </td>
+	   </tr>
+       </table>
+
+       <br/>
+
+       <form name="edit_form" action="" method="post" tal:attributes="action request/URL1">
+       <table border="0" cellpadding="2" cellspacing="0" tal:condition="entries">
+           <tr class="list-header">
+               <td class="list-item">&nbsp;</td>
+               <td class="list-item">&nbsp;</td>
+               <td class="list-item">Account</td>
+               <td class="list-item">Description</td>
+               <td class="list-item" align="right">Debit</td>
+               <td class="list-item" align="right">Credit</td>
+	       <tal:fx tal:condition="fx">
+		 <td class="list-item">&nbsp</td>
+                 <td class="list-item">FX Rate</td>
+	       </tal:fx>	 
+           </tr>
+           <tr tal:repeat="entry entries"
+               tal:attributes="class python: repeat['entry'].index % 2 and 'row-hilite' or 'row-normal'">
+               <td class="list-item">
+                  <input type="checkbox" name="ids:list" value="" tal:attributes="value entry/getId">
+               </td>
+               <td class="list-item" nowrap>
+                  <a href="" border="0" tal:attributes="href string:${entry/getId}/manage_main">
+                      <img src="" border="0" tal:attributes="src entry/icon"/>
+                  </a>
+                  <img src="/misc_/BastionLedger/currency" 
+                       tal:define="fcamt entry/foreignAmount"
+                       tal:condition="fcamt" tal:attributes="title fcamt"/>
+               </td>
+               <td class="list-item">
+                   <a href="" tal:define="acct entry/blAccount"
+                              tal:attributes="href string:${acct/absolute_url}/manage_workspace"
+                              tal:content="acct/prettyTitle" tal:on-error="string:"/>
+               </td>
+               <td class="list-item">
+                   <input name="entries.title:records" size="40" tal:attributes="value entry/title | nothing"/>
+               </td>
+               <tal:block tal:define="debit entry/isDebit">
+                  <td class="list-item" tal:condition="not: debit">&nbsp;</td>
+                  <td class="list-item">
+		    <input type="hidden" name="entries.account:records"
+			   tal:attributes="value string:${entry/ledgerId}/${entry/accountId}"/>
+		    <input type="hidden" name="entries.credit:boolean:records" value=""
+			   tal:attributes="value python: debit and 'False' or 'True'"/>
+		    <input type="text" name="entries.amount:currency:records"
+			   style="text-align:right" size="15" nowrap tal:attributes="value entry/absAmount"/>
+		  </td>
+                  <td tal:condition="debit">&nbsp;</td>
+		</tal:block>
+		<tal:fx tal:define="rate entry/foreignRate" tal:condition="rate">
+		  <td class="list-item">&nbsp;</td>
+		  <td class="list-item">
+		    <input type="text" name="entries.fxrate:float:records" size="6" tal:attributes="value rate"/>
+		  </td>  
+		</tal:fx>
+           </tr>
+           <tal:totals tal:define="drs context/debitTotal;
+                                   crs context/creditTotal">
+              <tr class="list-header" tal:on-error="string:">
+                  <td class="list-item" align="right" colspan="5" nowrap>
+                       <strong tal:content="drs"/>
+                  </td>
+                  <td class="list-item" align="right" nowrap>
+                      <strong tal:content="crs"/>
+                  </td>
+		  <td colspan="2" class="list-item" tal:condition="fx">&nbsp;</td>
+              </tr>
+              <tr tal:define="balance python: drs + crs" 
+                  tal:on-error="string:"
+                  tal:condition="python: balance != 0">
+                  <td class="list-item" colspan="4" nowrap>&nbsp;</td>
+                  <td class="list-item" align="right" nowrap tal:condition="python: balance < 0">
+                       <strong tal:content="balance"/>
+                  </td>
+                  <td class="list-item" align="right" nowrap colspan="2" tal:condition="python: balance > 0">
+                       <strong tal:content="balance"/>
+                  </td>
+		  <td colspan="2" class="list-item" tal:condition="fx">&nbsp;</td>
+              </tr>
+           </tal:totals>
+           <tr tal:condition="context/modifiable">
+               <td  colspan="6">
+                   <input class="form-element" type="submit"  value="  Delete  " name="manage_delObjects:method"/>
+                   <input class="form-element" type="submit"  value="   Edit   " name="manage_editEntries:method"/>
+                   <input class="form-element" type="submit"  value="Toggle Dr/Cr" name="manage_toggleDRCR:method"/>
+                   &nbsp;&nbsp;&nbsp;&nbsp;
+                   <input type="checkbox" name="force" value="1">
+                   <span class="form-label">Force</span>&nbsp;&nbsp;
+                   <input class="form-element" type="submit" name="manage_repost:method" value=" Repost "/>
+		 </td>
+		 <td colspan="2" tal:condition="fx">
+		   <input class="form-element" type="submit" name="manage_bookFx:method" value=" Book FX "/>
+		 </td>
+           </tr>
+       </table>
+       </form>
+
+       <form name="add_form" action="" method="post" 
+             tal:attributes="action request/URL1" 
+             tal:condition="context/modifiable">
+          <table border="0" cellpadding="4" cellspacing="0">
+              <tr class="list-header">
+                  <td class="list-item">&nbsp;</td>
+                  <td class="list-item" align="center">DR/CR</td>
+                  <td class="list-item">Description</td>
+                  <td class="list-item">Account</td>
+                  <td class="list-item">Amount</td>
+              </tr>
+              <tr class="" tal:repeat="i python: range(0,4)"
+                  tal:attributes="class python: i % 2 and 'row-normal' or 'row-hilite'">
+                  <td>
+                    <img src="misc_/BastionLedger/blentry"/>
+                  </td>
+                  <td>
+                     <input type="checkbox" name="entries.credit:records:boolean:ignore_empty" 
+                            id="debitX" value="False" onclick="clearCreditX()" 
+                           tal:attributes="id string:debit${i};onclick string:clearCredit${i}()"/>/
+                     <input type="checkbox" name="entries.credit:records:boolean:ignore_empty" value="True"
+                            id="creditX"  onclick="clearDebitX()"
+                            tal:attributes="id string:credit${i};onclick string:clearDebit${i}()"/>
+                  </td>
+                  <td>
+                     <input type="text" name="entries.title:records" size="40"/>
+                  </td>
+                  <td>
+                     <select name="entries.account:records">
+                         <option tal:repeat="acct python: context.Ledger.accountValues(sort_on='accno')"
+                                 value="" tal:attributes="value acct/getId"
+                                 tal:content="acct/prettyTitle"/>
+                     </select>
+                  </td>
+                  <td>
+                     <input type="text" name="entries.amount:records:currency:ignore_empty" size="15"/>
+                  </td>
+              </tr>
+              <tr tal:condition="subsidiaryAccounts" tal:repeat="i python: range(4,8)"
+                  tal:attributes="class python: i % 2 and 'row-normal' or 'row-hilite'">
+                  <td>
+                    <img src="misc_/BastionLedger/blentry"/>
+                  </td>
+                  <td>
+                     <input type="checkbox" name="entries.credit:records:boolean:ignore_empty" 
+                            id="debitX" value="False" onclick="clearCreditX()" 
+                           tal:attributes="id string:debit${i};onclick string:clearCredit${i}()"/>/
+                     <input type="checkbox" name="entries.credit:records:boolean:ignore_empty" value="True"
+                            id="creditX"  onclick="clearDebitX()"
+                            tal:attributes="id string:credit${i};onclick string:clearDebit${i}()"/>
+                  </td>
+                  <td>
+                     <input type="text" name="entries.title:records" size="40"/>
+                  </td>
+                  <td>
+                     <input type="hidden" name="entries.subsidiary:records:boolean" value="True"/>
+                     <select name="entries.account:records">
+                         <option tal:repeat="acct subsidiaryAccounts"
+                                 value="" tal:attributes="value acct/getId"
+                                 tal:content="acct/prettyTitle"/>
+                     </select>
+                  </td>
+                  <td>
+                     <input type="text" name="entries.amount:records:currency:ignore_empty" size="15"/>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="form-element" colspan="5">
+                     <input type="submit" name="addEntries:method" value=" Add ">
+       		  </td>
+              </tr>
+          </table>
+
+       </form>
+   </body>
+<html tal:replace="structure context/manage_page_footer"/>
+
+
+
+
+

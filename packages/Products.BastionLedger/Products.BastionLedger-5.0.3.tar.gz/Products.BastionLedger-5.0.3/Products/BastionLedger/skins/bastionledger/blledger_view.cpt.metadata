@@ -1,0 +1,5 @@
+[actions]
+action.success..Search = traverse_to_action:string:view
+action.success..Delete = traverse_to:string:blledger_actions
+action.failure = traverse_to_action:string:view
+action.success = traverse_to_action:string:view

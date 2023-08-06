@@ -1,0 +1,51 @@
+<html tal:replace="structure context/manage_page_header"/>
+
+     <span tal:replace="structure context/manage_tabs"/>
+
+     <p class="form-help">
+     Enter variable values to pass to the process in the form below and
+     click <em>run process</em> to view the result of the call.
+     </p>
+
+
+     <form action="" tal:attributes="action request/URL1" method="post"
+	   tal:define="params context/parameterMap">
+      <table cellpadding="2" cellspacing="0" border="0">
+         <tr class="list-header">
+            <td align="left" valign="top" class="form-label">Parameter</td>
+            <td align="left" valign="top" class="form-label">Value</td>
+            <td align="left" valign="top" class="form-label">Type</td>
+            <td align="left" valign="top" class="form-label">Description</td>
+        </tr>
+        <tr tal:repeat="arg params/propertyMap">
+            <td align="left" valign="top" class="form-label" 
+                tal:content="arg/title | arg/id"/>
+            <td align="left" valign="top"  class="form-element"
+		tal:define="value python: params.getPropertyStr(arg['id'])">
+              <input name="" type="text"
+                     tal:condition="python: arg['type'] != 'boolean'"
+                     tal:attributes="name string:${arg/id}:${arg/type}:ignore_empty;
+                                     value value" />
+	      <input name="" type="checkbox" 
+                     tal:condition="python: arg['type'] == 'boolean'"
+		     tal:attributes="name string:${arg/id}:${arg/type};
+                                     checked python: value and '1' or '0'" />
+            </td>
+            <td align="left" valign="top" class="form-element" tal:content="arg/type"/>
+            <td align="left" valign="top"  class="form-element">
+	      <i tal:content="arg/description | nothing"/>
+	    </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" colspan="4">
+                 <input class="form-element" type="submit" name="manage_updateParams:method"
+                        value="Save Parameters" />
+                 <input class="form-element" type="submit" name="manage_run:method"
+                        value="Run Process" />
+            </td>
+        </tr>
+      </table>
+    </form>
+
+<html tal:replace="structure context/manage_page_footer"/>
+

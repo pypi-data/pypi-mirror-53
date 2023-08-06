@@ -1,0 +1,7 @@
+[validators]
+validators =
+validators..BookFx = validate_txn_entries
+
+[actions]
+action.success = redirect_to_action:string:view
+action.failure = redirect_to_action:string:edit

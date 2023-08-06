@@ -1,0 +1,12 @@
+<account>
+   <id tal:content="context/getId"/>
+   <title tal:content="context/Title"/>
+   <type tal:content="context/type"/>
+   <subtype tal:content="context/subtype"/>
+   <accno tal:content="context/accno"/>
+   <opened tal:content="context/creationTime"/>
+   <tags>
+      <value tal:repeat="tag context/tags" tal:content="tag"/>
+   </tags>
+   <status tal:content="context/status"/>
+</account>
