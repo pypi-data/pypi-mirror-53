@@ -1,0 +1,105 @@
+CHANGES
+=======
+
+0.6.8
+-----
+
+* Rds v3 (#50)
+* update for the new SDK release
+* Cce wait (#49)
+* fix: adjust spelling from 'redis' to 'Redis' as this is the expected value from the API. (#46)
+* Added option to delete cluster/node by name + small typo fix (#44)
+* move AK/SK deeper to the OBS proxy (#47)
+* Enhancing installation advices (#37)
+* fix test due to new sdk version
+
+0.6.7
+-----
+
+* fix code style
+* rework DNS
+* renice DNS part
+
+0.6.6
+-----
+
+* fix tests
+* repair corrupted file after vim crash
+* fix tests on macos
+* fix problem in osc plugin help loading
+* add support for assigning and removing DeH tags
+* Small changes to CCE module (#39)
+* Fix unittests
+* Fix #38
+
+0.6.5
+-----
+
+* Add oslo\_i18n to requirements
+
+0.6.4
+-----
+
+* Sdk0.29 (#36)
+* Add CCEv2 and CSS (#34)
+* update due to latest openstacksdk
+* Deh (#32)
+
+0.6.2
+-----
+
+* fix 2.7 failure
+* do some fixes to update openstacksdk version
+* cleanup py27 failures (#29)
+* update for openstacksdk v0.19
+
+0.6.1
+-----
+
+* exchange boto3 module with custom requests\_auth implementation
+
+0.6.0
+-----
+
+* add dns ptr osc
+* add dns recordset osc
+* enable dns zone nameserver cli
+* enable docs for dns cli
+* py2 does not support such big int, so don't check it
+* dns osc zone
+* initial dns osc support
+* fix py27 tests
+* implement SDK for DNS
+* fix typo
+* sort services
+
+0.5.0
+-----
+
+* remove osc from project explicit dependencies
+* cover anti\_ddos cli
+* rename method names
+* remove unnecessary log entry
+* anti\_ddos sdk docs
+* anti\_ddos sdk implementation
+* add cts service
+
+0.4.0
+-----
+
+* add remaining dcs ops
+* dcs change pwd
+* add dcs statistics
+* add dcs instance start/stop/restart ops
+* add dcs instance
+
+0.3.2
+-----
+
+* add properly DMS docs
+* update op
+* init only required service
+* spin up openstacksdk
+* fix pep errors
+* adapt loadbalancer healthmonitor to be octavia osc like
+* adapt pool member to be octavia osc compatible
