@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: reddit-downloader
+Version: 0.0.2
+Summary: Image downloader based on subreddit.
+Home-page: https://gitlab.com/jeffmc/reddit_image_downloader
+Author: Jeffrey McAthey
+Author-email: jeffmcathey@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+
+# reddit_image_downloader
+## Description:
+The script will pull the top posts from the subreddit you give it.
+
+It will look through the posts to find images and then download them to /images.
+
+You will need a bot login for Reddit. See: https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example#first-steps
+
+For praw config information see: https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html.  
+```
+Required praw.ini entries are:
+- [download_bot]
+- client_id=
+- client_secret=
+- user_agent='Python:reddit_image_downloader:0.0.2 (by /u/merchantjeff)'
+```
+## Usage
+```
+usage: main.py [-h] [-l LIMIT] [-a] [-s {new,hot,top,rising}] [-v]
+               sub [sub ...]
+
+Tool allowing the downloading of images and gifs from listed subreddit.
+
+positional arguments:
+  sub                   Input subreddit for downloading.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l LIMIT, --limit LIMIT
+                        Number of submissions to be downloaded.
+  -a, --album           Allow Imgur albums
+  -s {new,hot,top,rising}, --sort {new,hot,top,rising}
+                        Change default sort.
+  -v, --verbose         More verbose logging.
+```
+
+## Requirements
+as per requirements.txt
+
+```pip install -r requirements.txt```
+## Notes
+Logging is on at debug as default, it creates a main.log file on run.
+
