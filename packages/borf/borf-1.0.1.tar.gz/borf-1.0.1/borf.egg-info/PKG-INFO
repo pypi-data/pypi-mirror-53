@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: borf
+Version: 1.0.1
+Summary: ORF predictions from .fa files
+Home-page: https://github.com/betsig/borf
+Author: Beth Signal
+Author-email: bethany.signal@uts.edu.au
+License: MIT
+Description: ===============================
+        borf
+        ===============================
+        
+        .. image:: https://img.shields.io/travis/betsig/borf.svg
+                :target: https://travis-ci.org/betsig/borf
+        
+        .. image:: https://img.shields.io/pypi/v/borf.svg
+                :target: https://pypi.python.org/pypi/borf
+        
+        
+        **Better ORF predictions**
+        
+        Fast and flexible ORF prediction in python with appropriate defaults for *de novo* assembled transcripts.
+        
+        
+        * Free software: 3-clause BSD license
+        * Documentation: https://github.com/betsig/borf/wiki
+        
+        Installation
+        ------------
+        .. code-block:: console
+        
+                git clone https://github.com/betsig/borf.git
+                cd borf
+                python setup.py install
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.5
+Description-Content-Type: text/x-rst
