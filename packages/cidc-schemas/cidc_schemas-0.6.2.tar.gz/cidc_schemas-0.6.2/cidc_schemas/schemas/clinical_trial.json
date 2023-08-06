@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "clinical_trial",
+  "title": "Clinical Trial",
+  "description": "Encapsulates information regarding a clinical trial.",
+  "properties": {
+    "nct_id": {
+      "type": "string",
+      "description": "ClinicalTrials.gov identifier. Example: NCT03731260."
+    },
+    "nci_id": {
+      "type": "string",
+      "description": "NCI Trial Identifier. Example: NCI22345."
+    },
+    "protocol_identifier": {
+      "type": "string",
+      "description": "Trial identifier used by lead organization, ie. Center for Experimental Therapeutics Program (CTEP) ID or Industry Sponsored ID.  This is usually a short identifier. Example: E4412."
+    },
+    "trial_name": {
+      "description": "Name of clinical trial.",
+      "type": "string"
+    },
+    "trial_description": {
+      "description": "A brief description of the clinical trial.",
+      "type": "string"
+    },
+    "trial_organization": {
+      "description": "Name of the primary organization that oversees the clinical trial. Example: ECOG-ACRIN, SWOG, etc.",
+      "type": "string"
+    },
+    "shipments": {
+      "type": "array",
+      "items": {
+        "$ref": "shipping_core.json"
+      },
+      "mergeStrategy": "append"
+    },
+    "participants": {
+      "type": "array",
+      "description": "The collection of all data related to a specific participant in the context of a specific clinical trial.",
+      "items": {
+        "$ref": "participant.json"
+      },
+      "mergeStrategy": "arrayMergeById",
+      "mergeOptions": {
+        "idRef": "/cimac_participant_id"
+      }
+    },
+    "assays": {
+      "$comment": "Assays for this trial",
+      "$ref": "assays/components/available_assays.json"
+    }
+  },
+  "required": ["protocol_identifier", "participants"]
+}
