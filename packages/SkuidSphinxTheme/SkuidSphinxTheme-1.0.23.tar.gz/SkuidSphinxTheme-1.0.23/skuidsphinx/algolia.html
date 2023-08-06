@@ -1,0 +1,59 @@
+<!-- Algolia -->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+<!-- Algolia template-->
+    <script>
+      var client = algoliasearch('61R1U0YAQZ', '66f6a5ab961e9853c48afa683d800f92');
+      var index = client.initIndex('{{theme_search_version_index}}');
+      var autocompleteDebug
+      if (docs.env == 'local') {
+        autocompleteDebug = true
+      } else {
+        autocompleteDebug = false
+      }
+      // Transform URLs to reflect user's current versions
+      var fixURL = function (suggestion) {
+        if (docs.env == 'local') {
+            suggestion.url = suggestion.url.replace(/https:\/\/docs.skuid.com\/.*?\/.*?\//, window.location.origin + (typeof docs.apiVerNum !== "undefined" ? "/v" + docs.apiVerNum : "") + "/");
+          } else {
+            if (isLatest == true) {
+              suggestion.url = suggestion.url.replace(/docs.skuid.com\/.*?\//,"docs.skuid.com/latest/");
+            } else {
+              if (isLatest == false) {
+                if (docs.apiVerNum){
+                  suggestion.url = suggestion.url.replace(/docs.skuid.com\/.*?\//,"docs.skuid.com/v{{ theme_version }}/v{{theme_api_version}}/");
+                } else {
+                  suggestion.url = suggestion.url.replace(/docs.skuid.com\/.*?\//,"docs.skuid.com/v{{ theme_version }}/");
+                }
+              }
+            }
+          }
+      }
+      var fixedUrlSources = autocomplete.sources.hits(index, { hitsPerPage: 5 })
+      autocomplete('#navbar-search', { hint: false, debug: autocompleteDebug }, [
+        {
+          source: function(query, callback) {
+            fixedUrlSources(query, function (suggestions){
+              suggestions.forEach(function(s){fixURL(s)})
+              callback(suggestions);
+            })
+          },
+          displayKey: 'my_attribute',
+          templates: {
+            header: `<div id="moreResults">Press <strong>Enter</strong> to see all results.</div>`,
+            suggestion: function(suggestion) {
+              var sugTemplate = `<p class="hit-name"><a href="${suggestion.url}">${suggestion._highlightResult.hierarchy.lvl1.value}</a></p><p class="hit-text">${suggestion._highlightResult.content.value}</p>`
+              return sugTemplate;
+          }
+        }
+      }
+      ]).on('autocomplete:selected', function(event, suggestion, dataset) {
+          location.href = suggestion.url
+      })
+      .on('autocomplete:cursorchanged', function() {
+        $('#moreResults').html('Press <strong>Enter</strong> to go to result.')
+      })
+      .on('autocomplete:cursorremoved',function() {
+          $('#moreResults').html('Press <strong>Enter</strong> to see all results.')
+      });
+    </script>

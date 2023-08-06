@@ -1,0 +1,20 @@
+{% if theme_analytics_id %}
+<!-- Google Analytics -->
+  {%- include 'analytics/google-analytics.html' %}
+{% endif %}
+{% if theme_marketo_id %}
+<!-- Marketo -->
+  {%- include 'analytics/marketo.html' %}
+{% endif %}
+{% if theme_intercom_id %}
+<!-- Intercom -->
+  {%- include 'analytics/intercom-messenger.html' %}
+{% endif %}
+{% if theme_hubspot_id %}
+<!-- Hubspot -->
+  {%- include 'analytics/hubspot.html' %}
+{% endif %}
+{% if theme_fullstory_id %}
+<!-- Fullstory -->
+  {%- include 'analytics/fullstory.html' %}
+{% endif %}

@@ -1,0 +1,188 @@
+{% set title = _('Search') %}
+{% extends "basic/layout.html" %}
+
+{% set theme_css_files = [] %}
+
+{% set theme_css_files = theme_css_files + [
+    '_static/skuid.css',
+    '_static/skuid-ink-icons.css',
+    '_static/bootstrap.css'
+  ]
+%}
+
+{% set css_files = css_files + theme_css_files %}
+
+{% set script_files = script_files + [
+    '_static/js/jquery-1.11.0.min.js',
+    '_static/js/jquery-fix.js',
+    '_static/js/bootstrap.js',
+    '_static/js/skuid-sphinx.js'
+  ]
+%}
+
+{%- set render_sidebar = (not embedded) and (not theme_nosidebar|tobool) and sidebars %}
+
+{%- set bs_content_width = render_sidebar and "9" or "12"%}
+
+{%- block doctype -%}
+<!DOCTYPE html>
+{%- endblock %}
+
+{% macro navBar() %}
+{% include "navbar.html" %}
+{% endmacro %}
+
+{%- block extrahead %}
+<title>Search</title>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script src="https://use.fontawesome.com/685baec918.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+{%- include 'analytics/all-analytics.html' %}
+<!-- Algolia -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.4"></script>
+{% raw %}
+<!-- Algolia template-->
+<script type="text/html" id="hit-template">
+  <div class="hit">
+    <div class="hit-content">
+      <h2 class="hit-name"><a href="{{{fixedURL}}}">{{{_highlightResult.hierarchy.lvl1.value}}}</a></h2>
+      <p class="hit-text">{{{_highlightResult.content.value}}}</p>
+      <p class="hit-url">{{{fixedURL}}}</p>
+    </div>
+  </div>
+</script>
+{% endraw %}
+{%- include 'version-header-warnings.html' %}
+{% endblock %}
+
+{# Silence the sidebar's, relbar's #}
+{% block header %}{% endblock %}
+{% block relbar1 %}{% endblock %}
+{% block relbar2 %}{% endblock %}
+{% block sidebarsourcelink %}{% endblock %}
+
+{%- block content %}
+<div id="app">
+{{ navBar() }}
+  <div class="container">
+    <div id="main" class="search-body" style="max-width: 1172px">
+      {% block body %}
+      <div id="search-page-body">
+      <div id="stats"></div>
+      <div id="hits"> </div>
+      <div id="pagination"></div>
+      <script type="text/javascript">
+        var instantsearchOptions = {
+          appId: '61R1U0YAQZ',
+          apiKey: '66f6a5ab961e9853c48afa683d800f92',
+          indexName:  '{{theme_search_version_index}}' ,
+          routing: {
+            stateMapping: {
+              stateToRoute(uiState) {
+                return {
+                  query: uiState.q,
+                  page: uiState.page
+                };
+              },
+              routeToState(routeState) {
+                return {
+                  query: routeState.q,
+                  page: routeState.page
+                };
+              }
+            }
+          },
+          searchParameters: {
+            hitsPerPage:10
+          }
+        }
+        const search = instantsearch(instantsearchOptions);
+        // initialize SearchBox
+          search.addWidget(
+            instantsearch.widgets.searchBox({
+              container: '#navbar-search',
+              placeholder: 'Search Skuid docs'
+
+            })
+          );
+          // init stats widget
+          {% raw %}
+          search.addWidget(
+            instantsearch.widgets.stats({
+              container: '#stats',
+              templates: {
+                body: '{{nbHits}} results'
+              }
+            })
+          )
+          {% endraw %}
+          // initialize hits widget
+          search.addWidget(
+            instantsearch.widgets.hits({
+              container: '#hits',
+              templates: {
+                item: document.getElementById('hit-template').innerHTML,
+                empty: "We didn't find any results."
+              },
+              transformData: {
+                item: function(data) {
+                  // For local search results
+                  if (docs.env == 'local') {
+                    data.fixedURL = data.url.replace(/https:\/\/docs.skuid.com\/.*?\/.*?\//, window.location.origin + (typeof docs.apiVerNum !== "undefined" ? "/v" + docs.apiVerNum : "") + "/");
+                  } else {
+                    if (isLatest == true){
+                      data.fixedURL = data.url.replace(/docs.skuid.com\/.*?\//,"docs.skuid.com/latest/");
+                    }
+                    if (isLatest == false) {
+                      if (docs.apiVerNum){
+                        data.fixedURL = data.url.replace(/docs.skuid.com\/.*?\//,"docs.skuid.com/v{{ theme_version }}/v{{theme_api_version}}/");
+                      } else {
+                        data.fixedURL = data.url.replace(/docs.skuid.com\/.*?\//,"docs.skuid.com/v{{ theme_version }}/");
+                      }
+                    }
+                  }
+                  return data
+                }
+              }
+            })
+          );
+          // Pagination
+          search.addWidget(
+            instantsearch.widgets.pagination({
+              container: '#pagination',
+              showFirstLast: false,
+              labels: {
+                previous: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                next: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+              },
+              placeholder: 'Search Skuid docs'
+            })
+          );
+
+        var waitForVer = function() {
+          if (typeof isLatest !== "undefined") {
+            search.start();
+          } else {
+            setTimeout(waitForVer, 250)
+          }
+        }
+        waitForVer()
+      </script>
+
+      {% endblock %}
+    </div>
+  </div>
+  </div>
+
+
+{%- endblock %}
+
+{%- block footer %}
+  <footer>
+    {% include "footer.html" %}
+  </footer>
+</div>
+{%- endblock %}
