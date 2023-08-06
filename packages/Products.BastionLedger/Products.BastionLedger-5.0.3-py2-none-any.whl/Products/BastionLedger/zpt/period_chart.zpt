@@ -1,0 +1,161 @@
+<html tal:replace="structure context/manage_page_header"/>
+
+    <span tal:replace="structure context/manage_tabs"/>
+
+    <table width="100%">
+        <tr>
+           <td tal:define="prev context/prevPeriodInfo">
+              <small>
+                 <a tal:condition="nocall: prev"
+                    tal:attributes="href string:${prev/absolute_url}/manage_workspace">&larr;prev</a>
+              </small>
+           </td>
+           <td align="right" tal:define="next context/nextPeriodInfo">
+              <small>
+                 <a tal:condition="nocall: next"
+                    tal:attributes="href string:${next/absolute_url}/manage_workspace">next&rarr;</a>
+              </small>
+           </td>
+        </tr>
+    </table>
+
+    <form name="edit-form" action="" method="post" tal:attributes="action request/URL1"
+	  tal:define="real request/real | nothing">
+
+       <table border="0" cellpadding="2" cellspacing="0" width="100%" 
+              tal:define="infos python: context.getAccountInfos(real_balances=real);
+			  ledger_url python: context.bastionLedger().absolute_url();
+			  beginning python: context.beginning().strftime('%Y/%m/%d');
+			  ended python: context.ended().strftime('%Y/%m/%d');
+                          currency context/defaultCurrency;
+                          gl context/isGeneralLedger;
+                          global opening python: context.zeroAmount(currency);
+                          global total python: context.zeroAmount(currency);
+                          global change python: context.zeroAmount(currency);
+                          global balance python: context.zeroAmount(currency);
+                          global reported python: context.zeroAmount(currency);
+                          global next_opening python: context.zeroAmount(currency);
+			  global real_balance python: context.zeroAmount(currency)"
+              tal:condition="infos">
+           <tr class="list-header">
+               <td class="list-item"></td>
+               <td class="list-item">Number</td>
+               <td class="list-item">Title</td>
+               <td class="list-item">Type</td>
+               <td class="list-item" align="right">Opening</td>
+               <td class="list-item" align="right">Transactions</td>
+               <td class="list-item" align="right">Change</td>
+               <td class="list-item" align="right">Closing</td>
+               <td class="list-item" align="right">Reported</td>
+	       <td class="list-item" align="right" tal:condition="real">Actual</td>
+               <td class="list-item" align="right">Next Opening</td>
+           </tr>
+           <tr tal:repeat="info infos" class=""
+                   tal:attributes="class python: repeat['info'].index % 2 and 'row-hilite' or 'row-normal'">
+               <td class="list-item">
+                    <img src="" tal:attributes="src info/icon"/></td>
+               <td class="list-item">
+                   <a href="" tal:attributes="href string:${info/real_url}/manage_workspace"  
+                              tal:content="info/accno"/>
+               </td>
+               <td class="list-item" nowrap>
+                   <a href="" tal:attributes="href string:${info/absolute_url}/manage_workspace"  
+                              tal:content="info/title"/>
+               </td>
+               <td class="list-item" tal:content="info/type"/>
+               <td class="list-item" align="right" nowrap tal:content="info/opening" 
+                   tal:define="global opening python:info['opening'] + opening"/> 
+               <td class="list-item" align="right" nowrap
+                   tal:define="global total python:info['total'] + total;">
+	           <a href="" tal:content="info/total"
+		      tal:attributes="href string:${ledger_url}/${info/ledger}/manage_transactions?effective:list:date=${beginning}&effective:list:date=${ended}&accountId:tokens=${info/id}"/>
+	       </td>
+               <td class="list-item" align="right" nowrap 
+                   tal:define="global change python:info['change'] + change">
+	           <span style=""  tal:attributes="style python: info['change'] != info['total'] and 'color:red' or ''"
+			           tal:content="info/change" />
+	       </td>
+               <td class="list-item" align="right" nowrap 
+                   tal:define="global balance python:info['balance'] + balance"> 
+                   <span style="" tal:attributes="style python: info['tweaked'] and 'color:red' or ''"
+                                  tal:content="info/balance"/>
+               </td>
+               <td class="list-item" align="right" nowrap
+                   tal:define="global reported python:info['reporting_balance'] + reported">
+                   <input type="hidden" name="balances.id:records" tal:attributes="value info/id"/>
+                   <input type="text" size="15" style="text-align: right;" 
+                          name="balances.amount:currency:records" value=""
+                          tal:attributes="value info/reporting_balance"/>
+		 </td>
+		 <td class="list-item" align="right" nowrap tal:condition="real" >
+		   <span tal:define="global real_balance python: info['real_balance'] + real_balance"
+			 tal:replace="info/real_balance"/>
+		 </td>
+               <td class="list-item" align="right" nowrap tal:content="info/next_opening"
+                   tal:define="global next_opening python:info['next_opening'] + next_opening"/>
+           </tr>
+           <tr><td colspan="10" tal:attributes="colspan python: real and 11 or 10"><hr/></td></tr>
+           <tr>
+               <td colspan="4" class="list-item">
+                  <input type="checkbox" name="force:boolean" value="1"/>Force
+                  <input type="submit" name="manage_updateReportingBalances:method" value=" Save "/>
+               </td>
+               <td class="list-item"  align="right" nowrap>
+                   <span style="" tal:attributes="style python: gl and opening != 0 and 'color:red' or ''"
+                                  tal:content="opening"/>
+               </td>
+               <td class="list-item"  align="right" nowrap>
+                   <span style="" tal:attributes="style python: gl and total != 0 and 'color:red' or ''"
+                                  tal:content="total"/>
+               </td>
+               <td class="list-item"  align="right" nowrap>
+                   <span style="" tal:attributes="style python: gl and change != 0 and 'color:red' or ''"
+                                  tal:content="change"/>
+               </td>
+               <td class="list-item"  align="right" nowrap>
+                   <span style="" tal:attributes="style python: gl and balance != 0 and 'color:red' or ''"
+                                  tal:content="balance"/>
+               </td>
+               <td class="list-item" align="right" nowrap>
+                   <span style="" tal:attributes="style python: gl and reported != 0 and 'color:red' or ''"
+                                  tal:content="reported"/>
+               </td>
+               <td class="list-item" align="right" nowrap tal:condition="real">
+                   <span style="" tal:attributes="style python: gl and real_balance != 0 and 'color:red' or ''"
+                                  tal:content="real_balance"/>
+               </td>
+               <td class="list-item" align="right" nowrap>
+                   <span style="" tal:attributes="style python: gl and next_opening != 0 and 'color:red' or ''"
+                                  tal:content="next_opening"/>
+               </td>
+           </tr>
+       </table>
+   </form>
+
+   <table>
+      <tr>
+        <td class="list-item">
+           <form name="update-form" action="" method="post" tal:attributes="action request/URL1">
+              <input type="submit" name="manage_updateChart:method" value=" Update Chart "/>
+           </form>
+        </td>
+        <td class="list-item">
+           <form name="update-form" action="" method="post" tal:attributes="action request/URL1">
+              <input type="hidden" name="all" value="1"/>
+              <input type="submit" name="manage_updateChart:method" value=" Recalculate "/>
+           </form>
+        </td>
+        <td class="list-item">
+          <form name="show-form" action="" method="post" tal:attributes="action request/URL1">
+	      <input type="hidden" name="real" value="1" />
+              <input type="submit" name="manage_main:method" value=" Show Actual Balances "/>
+           </form>
+        </td>
+      </tr>
+   </table>
+
+<html tal:replace="structure context/manage_page_footer"/>
+
+
+
+

@@ -1,0 +1,31 @@
+##parameters=account=None,args=[],kw={}
+#
+# This script should return a list (possibly empty) of BLEntry objects
+#
+from Products.BastionBanking.ZCurrency import ZCurrency
+from Products.BastionLedger.BLEntry import BLEntry
+from Products.BastionLedger.BLSubsidiaryEntry import BLSubsidiaryEntry
+
+order = args[0]
+
+sign = context.aq_parent.isReceivable() and -1 or 1
+
+freight = order.blorder_freight() * sign
+
+if freight != 0:
+    freight_accounts = context.Ledger.accountValues(tags='freight')
+    if freight_accounts:
+	account_id = freight_accounts[0].getId()
+        if account:
+            description = account.prettyTitle()
+        else:
+            description = script.getId()
+
+        return [ BLEntry(account_id,
+                         description,
+                         'Ledger/%s' % account_id,
+                         freight,
+                         script.getId()) ]
+
+return []
+

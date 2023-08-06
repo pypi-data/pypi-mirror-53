@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: Products.BastionLedger
+Version: 5.0.3
+Summary: Zope/Plone Accountancy Suite.
+Home-page: http://www.last-bastion.net/forge/BastionLedger
+Author: Alan Milligan
+Author-email: alan.milligan@last-bastion.net
+License: GPL
+Keywords: BastionLedger
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Topic :: Office/Business :: Financial :: Accounting
+Requires-Dist: setuptools
+Requires-Dist: Products.BastionBanking
+Requires-Dist: Products.ZScheduler
+Requires-Dist: archetypes.referencebrowserwidget
+Requires-Dist: Products.AdvancedQuery
+Requires-Dist: Products.ManagableIndex
+Requires-Dist: collective.quickupload
+Requires-Dist: beautifulsoup4
+Requires-Dist: ftw.datepicker
+Provides-Extra: pdfkit
+Requires-Dist: pdfkit ; extra == 'pdfkit'
+Provides-Extra: xhtml2pdf
+Requires-Dist: xhtml2pdf ; extra == 'xhtml2pdf'
+
+General Ledger, Order Management, Debtor and Creditor Management,Shareholder Management, Asset Register, Forecasting, ...
+
+

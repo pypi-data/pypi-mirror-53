@@ -1,0 +1,19 @@
+##parameters=account=None,args=[],kw={}
+#
+# This script should return a list (possibly empty) of BLEntry objects
+#
+from Products.BastionLedger.BLSubsidiaryEntry import BLSubsidiaryEntry
+
+order = args[0]
+
+account = account or order.blAccount()
+sign = account.isReceivable() and 1 or -1
+
+return (BLSubsidiaryEntry(account.getId(),
+                          kw.get('title', script.getId()),	
+                          account.getId(),
+                          (order.getGross() - order.getDiscount() + order.getTax()) * sign,
+                          order.getId()),)
+
+
+

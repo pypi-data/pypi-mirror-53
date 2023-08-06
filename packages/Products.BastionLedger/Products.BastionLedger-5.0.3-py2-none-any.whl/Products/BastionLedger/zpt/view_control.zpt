@@ -1,0 +1,95 @@
+<html tal:replace="structure context/manage_page_header"/>
+
+  <body tal:define="ceiling_date python: modules['Products.BastionLedger.utils'].ceiling_date;
+                    url context/absolute_url;
+                    underlying context/controlInfo;
+                    historicals python:context.periods.periodsForLedger(context.getId())">
+
+    <span tal:replace="structure context/manage_tabs"/>
+
+    <br/>
+
+    <table border="0" cellpadding="2" cellspacing="0">
+       <tr>
+         <td class="list-item" tal:repeat="control context/controlEntries">
+            <img src="misc_/BastionLedger/blaccount"/>
+            <a href="" 
+               tal:attributes="href string:${control/aq_parent/absolute_url}/manage_main" 
+               tal:content="control/prettyTitle"/>&nbsp;&nbsp;
+            <i tal:content="python: control.lastTransactionDate().strftime('%Y/%m/%d')"/>&nbsp;&nbsp;
+            <b tal:content="control/amount"/>
+         </td> 
+       </tr>
+    </table>
+
+    <form action="" method="post" tal:attributes="action url">
+        <table border="0" cellpadding="2" cellspacing="0">
+           <tr class="list-header">
+               <td class="list-item">&nbsp;</td>
+               <td class="list-item">&nbsp;</td>
+               <td class="list-item">Effective</td>
+               <td class="list-item" align="right">No. Txns</td>
+               <td class="list-item" align="right">Amount</td>
+               <td class="list-item" align="right">Balance</td>
+           </tr>
+           <tr tal:repeat="info underlying"
+               tal:attributes="class python: repeat['info'].index % 2 and 'row-hilite' or 'row-normal'">
+              <td class="list-item">
+                 <input type="checkbox" name="effective:list" value="" tal:attributes="value info/effective"/>
+              </td>
+              <td class="list-item">
+                 <img src="misc_/BastionLedger/bltransaction"/>
+              </td>
+              <td class="list-item">
+                 <a href="" 
+                    tal:define="dt info/effective"
+                    tal:attributes="href string:${url}/manage_transactions?effective:date:list=${dt}&effective:date:list=${dt}"
+                    tal:content="dt"/>
+              </td>
+              <td class="list-item" align="right" tal:content="info/count"/>
+              <td class="list-item" align="right" tal:content="info/amount"/>
+              <td class="list-item" align="right" tal:content="info/balance"/>
+           </tr>
+           <tr>
+              <td class="list-item" colspan="4">
+                 <input type="submit" value=" Set Control " tal:condition="underlying"/>
+              </td>
+           </tr>
+        </table>
+    </form>
+
+    <p class="form-help" tal:condition="not: historicals">There are no historical period-ends for this ledger.</p>
+
+    <table border="0" cellpadding="2" cellspacing="0" width="100%" tal:condition="historicals">
+           <tr class="list-header">
+               <td class="list-item">&nbsp;</td>
+               <td class="list-item">Year Ended</td>
+               <td class="list-item" align="right">Total</td>
+               <td class="list-item" align="right">Computed</td>
+               <td class="list-item" align="right">Opening</td>
+           </tr>
+           <tr tal:repeat="info historicals"
+               tal:attributes="class python: repeat['info'].index % 2 and 'row-hilite' or 'row-normal'">
+              <td class="list-item">
+                 <img src="misc_/BastionLedger/period"/>
+              </td>
+              <td class="list-item">
+                  <a href="" 
+                     tal:define="endedstr python: ended.strftime('%Y/%m/%d')"
+                     tal:attributes="href string:${url}/manage_main?date:date=${endedstr}" 
+                     tal:content="endstr"/>
+              </td>
+              <td class="list-item" align="right" 
+                  tal:content="info/total"/>
+              <td class="list-item" align="right" 
+                  tal:content="info/computed_total"/>
+              <td class="list-item" align="right" 
+                  tal:content="python: context.openingBalance(effective=ended)"/>
+           </tr>
+     </table>
+  </body>
+
+<html tal:replace="structure context/manage_page_footer"/>
+
+
+
