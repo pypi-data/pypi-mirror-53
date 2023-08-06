@@ -1,0 +1,297 @@
+Metadata-Version: 2.1
+Name: cdp-validator-for-aws
+Version: 0.0.2
+Summary: Validation of aws resources used to create Cloudera Data Platform environments
+Home-page: UNKNOWN
+License: UNKNOWN
+Description: # cdp_validator_for_aws
+        This tool validates that AWS resources have been setup correctly for
+        use by Cloudera Data Platform (cdp), so that cdp can use those
+        resources to create an environment.
+        
+        This tool uses a `json` file (we call it `cdp_json`, but its name
+        doesn't matter) to feed in the information about the resources.
+        
+        The format of this file is shown below (there could be extra
+        elements - the once we're displaying are the critical ones):
+        ```json
+        {
+          "aws": {
+            "s3guard": {
+              "dynamoDbTableName": "dynamo"
+            }
+          },
+          "idBrokerInstanceProfileArn": "arn:aws:iam::007856030109:instance-profile/idbroker_instance_profile_workable-bird",
+          "idBrokerMappings": {
+            "baselineRole": "arn:aws:iam::007856030109:role/datalake_admin_role_workable-bird",
+            "dataAccessRole": "arn:aws:iam::007856030109:role/ranger_audit_role_workable-bird",
+          },
+          "location": {
+            "name": "us-east-1"
+          },
+          "network": {
+            "aws": {
+              "vpcId": "vpc-0bd760316679db5cb"
+            },
+            "subnetIds": [
+              "subnet-0aaea807fb0bd7324",
+              "subnet-0cf3890ddf5418adb",
+              "subnet-019052b500b0ec751"
+            ]
+          },
+          "securityAccess": {
+            "defaultSecurityGroupId": "sg-0614ae4bc34aab00a",
+            "securityGroupIdForKnox": "sg-0881e000a25678273"
+          },
+          "storageLocationBase": "s3a://terraform-20191004154753079000000001/base",
+          "telemetry": {
+            "logging": {
+              "s3": {
+                "instanceProfile": "arn:aws:iam::007856030109:instance-profile/logger_instance_profile_workable-bird"
+              },
+              "storageLocation": "s3a://terraform-20191004154753079700000002/logs"
+            }
+          }
+        }
+        ```
+        The meanings of these fields is given below using `jsonpath` to denote
+        the fields:
+        
+        * `aws.s3guard.dynamoDbTableName`: The name of the dynamo db table to
+           be created
+        * `idBrokerInstanceProfileArn`: The arn of the idbroker *instance
+          profile* used to run the idbroker ec2 instance
+        * `idBrokerMappings.baselineRole`: The arn of the adminstrator role that is used to
+          manage data in the CDP datalake
+        * `idBrokerMappings.dataAccessRole`: the arn of the ranger audit role
+        * `location.name`: The AWS region for these resources
+        * `network.aws.vpcId`: The VPC id
+        * `network.subnetIds`: An array of subnet ids that will be used by the
+          CDP
+        * `securityAccess.defaultSecurityGroupId`: Id of the default security
+          group
+        * `securityAccess.securityGroupIdForKnox`: Id of the security group
+          for Knox
+        * `storageLocationBase`: The `s3a://` url to the bucket and path where
+          data will be stored in the data lake
+        * `telementery.logging.s3.instanceProfile`: The arn of the instance
+          profile that will be running the logging system
+        * `telemetry.logging.storageLocation`: The `s3a://` url where logs
+          will be placed.
+        
+        An example of running it is here (note the use of the `--profile`
+        argument, allowing the use of an AWS assumed role, described below):
+        
+        ```
+        python -m cdp_validator_for_aws -c my_cdp_file.json --profile validator
+        ```
+        
+        # AWS Setup
+        AWS needs to be properly setup for this tool to work.
+        ## CLI
+        We assume you have installed and configured the AWS CLI as per
+        https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
+        
+        
+        ## Permissions
+        The minimum permissions needed to run `cdp_validator_for_aws` are:
+        
+        ```
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:DescribeRouteTables",
+                        "ec2:DescribeSecurityGroups",
+                        "ec2:DescribeSubnets",
+                        "ec2:DescribeVpcs",
+                        "ec2:DescribeVpcAttribute",
+                        "eks:ListClusters",
+                        "iam:GetContextKeysForPrincipalPolicy",
+                        "iam:GetInstanceProfile",
+                        "iam:GetRole",
+                        "iam:SimulatePrincipalPolicy",
+                        "s3:GetBucketLocation",
+                        "s3:HeadBucket"
+                    ],
+                    "Resource": "*"
+                }
+            ]
+        }
+        ```
+        The permissions that have the deepest security impact are those
+        required to simulate the various roles
+        (`iam:GetContextKeysForPrincipalPolicy` &
+        `iam:SimulatePrincipalPolicy`), as
+        [documented](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html#policies-simulator-using-api)
+        by AWS. `cdp_validator_for_aws` will do what it can with whatever permissions you
+        can give it.
+        
+        `cdp_validator_for_aws` takes a `--profile profile_name` argument, as per the usual
+        AWS CLI, and all calls are handed off to `boto3` to do the actual work.
+        
+        ### Setting up the permissions structure
+        Lets assume you've setup to execute AWS CLI commands with the
+        `default` profile with whatever permissions you normally get.
+        
+        1. Create a role (lets call it `cdp_validation`) that:
+           a. Trusts your `default` role
+           b. Has the above permissions (or most of them)
+           
+        1. In `${HOME}/.aws/credentials` put the following:
+        
+        ```
+        [validator]
+        role_arn = arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/cdp_validation
+        source_profile = default
+        ```
+        
+        Now you can run the validator thus:
+        ```
+        python -m cdp_validator_for_aws -c my_cdp_file.json --profile validator
+        ```
+        
+        # Configuration
+        No configuration is needed. The below information is simply for full
+        documentation purposes.
+        ## Policy Management
+        Cloudera's documentation *LINK NEEDED* shows the various policy files
+        that are combined to give each of the four roles their necessary
+        permissions for various resources.
+        
+        These files are in the `policies` directory of the package and are named according to
+        Cloudera's naming conventions. They dictate the actions and resources
+        that are simulated for each role. If the actions change in the future
+        then these files can be simply updated. If the variables in the
+        resources change then I'm afraid you'll have to change the code
+        (look in the `policy_manager.py` to start)
+        
+        # Development
+        ## Testing
+        We drive our testing through make. There's a makefile in the top level
+        directory. 
+        
+        *YOU MUST PREPARE FOR THE USE OF TERRAFORM* Look at the README in the
+        `aws_resource_builder` directory for details
+        
+        Interesting targets are:
+        
+        - `acceptance_tests`: This will run all the acceptance tests, 
+        
+        - `good`, `bad_1`, `bad_2`, `bad_3` - this will make the acceptance tests
+          (which builds infrastructure in AWS) for each of the four different
+          test cases, derive a cdp json file from it, and then run the
+          validator against that file
+        
+        - `unittest` - this will run the python unittests
+        
+        ## Acceptance tests
+        Overall the acceptance tests go end to end - they use real live AWS
+        resources and run against those resources.
+        
+        The acceptance tests are divided into equivalence classes, so that,
+        amongs the three sets of tests, every path, good and bad, is
+        executed. (An equivalence class treats classes of errors as the same -
+        we don't need to repeat a test if its already covered by another
+        test.)
+        
+        When you run an acceptance test you need the following minimum
+        permissions:
+        
+        ```
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": [
+                        "dynamodb:CreateTable",
+                        "dynamodb:DeleteTable",
+                        "dynamodb:DescribeContinuousBackups",
+                        "dynamodb:DescribeTable",
+                        "dynamodb:DescribeTimeToLive",
+                        "dynamodb:ListTagsOfResource",
+                        "dynamodb:TagResource",
+                        "ec2:AttachInternetGateway",
+                        "ec2:AuthorizeSecurityGroupEgress",
+                        "ec2:AuthorizeSecurityGroupIngress",
+                        "ec2:CreateInternetGateway",
+                        "ec2:CreateRoute",
+                        "ec2:CreateSecurityGroup",
+                        "ec2:CreateSubnet",
+                        "ec2:CreateVpc",
+                        "ec2:DeleteInternetGateway",
+                        "ec2:DeleteRoute",
+                        "ec2:DeleteSecurityGroup",
+                        "ec2:DeleteSubnet",
+                        "ec2:DeleteVpc",
+                        "ec2:DescribeAccountAttributes",
+                        "ec2:DescribeInternetGateways",
+                        "ec2:DescribeNetworkAcls",
+                        "ec2:DescribeNetworkInterfaces",
+                        "ec2:DescribeRouteTables",
+                        "ec2:DescribeSecurityGroups",
+                        "ec2:DescribeSubnets",
+                        "ec2:DescribeVpcAttribute",
+                        "ec2:DescribeVpcClassicLink",
+                        "ec2:DescribeVpcClassicLinkDnsSupport",
+                        "ec2:DescribeVpcDetails",
+                        "ec2:DescribeVpcs",
+                        "ec2:DetachInternetGateway",
+                        "ec2:ModifySubnetAttribute",
+                        "ec2:ModifyVpcAttribute",
+                        "ec2:RevokeSecurityGroupEgress",
+                        "ec2:RevokeSecurityGroupIngress",
+                        "iam:AddRoleToInstanceProfile",
+                        "iam:AttachRolePolicy",
+                        "iam:CreateInstanceProfile",
+                        "iam:CreatePolicy",
+                        "iam:CreateRole",
+                        "iam:DeleteInstanceProfile",
+                        "iam:DeletePolicy",
+                        "iam:DeleteRole",
+                        "iam:DetachRolePolicy",
+                        "iam:GetInstanceProfile",
+                        "iam:GetPolicy",
+                        "iam:GetPolicy",
+                        "iam:GetPolicyVersion",
+                        "iam:GetPolicyVersion",
+                        "iam:GetRole",
+                        "iam:ListAttachedRolePolicies",
+                        "iam:ListInstanceProfilesForRole",
+                        "iam:ListPolicyVersions",
+                        "iam:PassRole",
+                        "iam:RemoveRoleFromInstanceProfile",
+                        "iam:UpdateAssumeRolePolicy",
+                        "s3:CreateBucket",
+                        "s3:DeleteBucket",
+                        "s3:GetAccelerateConfiguration",
+                        "s3:GetBucketCORS",
+                        "s3:GetBucketLocation",
+                        "s3:GetBucketLogging",
+                        "s3:GetBucketObjectLockConfiguration",
+                        "s3:GetBucketRequestPayment",
+                        "s3:GetBucketTagging",
+                        "s3:GetBucketVersioning",
+                        "s3:GetBucketWebsite",
+                        "s3:GetEncryptionConfiguration",
+                        "s3:GetLifecycleConfiguration",
+                        "s3:GetReplicationConfiguration",
+                        "s3:ListBucket"
+                    ],
+                    "Resource": "*"
+                }
+            ]
+        }
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
