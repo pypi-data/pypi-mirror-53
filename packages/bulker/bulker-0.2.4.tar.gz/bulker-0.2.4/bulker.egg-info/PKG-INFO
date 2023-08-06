@@ -1,0 +1,56 @@
+Metadata-Version: 1.1
+Name: bulker
+Version: 0.2.4
+Summary: A manager for containerized executables
+Home-page: https://bulker.databio.org
+Author: Nathan Sheffield
+Author-email: nathan@code.databio.org
+License: BSD2
+Description: Bulker
+        ======
+        
+        |PEP compatible| |Build Status|
+        
+        Bulker manages collections of containerized executables. It builds
+        drop-in replacements to command line-tools that act just like native
+        tools, but are run in a container. Think of bulker as a lightweight
+        wrapper on top of docker/singularity to simplify sharing and using
+        compute environments that run containers.
+        
+        For details, see the `bulker
+        documentation <https://bulker.databio.org>`__.
+        
+        Example
+        -------
+        
+        ::
+        
+           pip install --user bulker
+           bulker load demo
+           bulker activate demo
+           cowsay Hello World!
+        
+        ::
+        
+            ____________
+           < Hello World! >
+            --------------
+                   \   ^__^
+                    \  (oo)\_______
+                       (__)\       )\/\
+                           ||----w |
+                           ||     ||
+        
+        .. |PEP compatible| image:: https://pepkit.github.io/img/PEP-compatible-green.svg
+           :target: http://pepkit.github.io
+        .. |Build Status| image:: https://travis-ci.org/databio/bulker.svg?branch=master
+           :target: https://travis-ci.org/databio/bulker
+        
+Keywords: docker,containers,reproducibility,bioinformatics,workflow
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: System :: Distributed Computing
