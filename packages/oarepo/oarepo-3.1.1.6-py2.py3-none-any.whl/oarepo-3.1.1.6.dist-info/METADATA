@@ -1,0 +1,61 @@
+Metadata-Version: 2.1
+Name: oarepo
+Version: 3.1.1.6
+Summary: Invenio Digital Library Framework.
+Home-page: https://github.com/oarepo/oarepo
+Author: UCT Prague, CESNET z.s.p.o., NTK
+Author-email: miroslav.simek@vscht.cz
+License: MIT
+Keywords: oarepo invenio
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Development Status :: 3 - Alpha
+Provides-Extra: acls
+Requires-Dist: invenio-explicit-acls (>=4.4.0) ; extra == 'acls'
+Provides-Extra: deploy
+Requires-Dist: invenio[auth,base,elasticsearch6,metadata,postgresql] (~=3.1.1) ; extra == 'deploy'
+Requires-Dist: invenio-oarepo (<1.1.0,>=1.0.7) ; extra == 'deploy'
+Requires-Dist: invenio-oarepo-ui (>=1.0.0) ; extra == 'deploy'
+Provides-Extra: deploy-es7
+Requires-Dist: invenio[auth,base,elasticsearch7,metadata,postgresql] (~=3.1.1) ; extra == 'deploy-es7'
+Requires-Dist: invenio-oarepo (<1.1.0,>=1.0.7) ; extra == 'deploy-es7'
+Requires-Dist: invenio-oarepo-ui (>=1.0.0) ; extra == 'deploy-es7'
+Provides-Extra: draft
+Requires-Dist: oarepo-invenio-records-draft (<2.0.0,>=1.2.0) ; extra == 'draft'
+Provides-Extra: files
+Requires-Dist: invenio-files-rest (<1.1.0,>=1.0.0) ; extra == 'files'
+Requires-Dist: invenio-records-files (<1.2.0,>=1.1.0) ; extra == 'files'
+Provides-Extra: iiif
+Requires-Dist: invenio-iiif (<1.1.0,>=1.0.0) ; extra == 'iiif'
+Provides-Extra: includes
+Requires-Dist: invenio-oarepo-mapping-includes (>=1.1.0) ; extra == 'includes'
+Provides-Extra: links
+Requires-Dist: invenio-records-links (>=1.0.0) ; extra == 'links'
+Provides-Extra: models
+Requires-Dist: invenio-oarepo-dc (>=1.1.0) ; extra == 'models'
+Requires-Dist: invenio-oarepo-invenio-model (>=1.1.0) ; extra == 'models'
+Requires-Dist: invenio-oarepo-multilingual (>=1.0.0) ; extra == 'models'
+Provides-Extra: multisum
+Requires-Dist: invenio-files-multisum-storage (<1.1.0,>=1.0.0) ; extra == 'multisum'
+Requires-Dist: invenio-oarepo-files-rest (>=1.0.0) ; extra == 'multisum'
+Provides-Extra: openid
+Requires-Dist: invenio-openid-connect (<1.1.0,>=1.0.0) ; extra == 'openid'
+Provides-Extra: taxonomies
+Requires-Dist: flask-taxonomies (>=6.2.1) ; extra == 'taxonomies'
+Provides-Extra: tests
+Requires-Dist: invenio[tests] (~=3.1.1) ; extra == 'tests'
+
+CESNET, UCT Prague and NTK wrapper around invenio v3
+
+
