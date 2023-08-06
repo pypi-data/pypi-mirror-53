@@ -1,0 +1,182 @@
+Metadata-Version: 2.1
+Name: iterfilesystem
+Version: 1.0.0
+Summary: Threaded directory iteration via os.scandir() with progress indicator and resume function.
+Home-page: https://github.com/jedie/iterfilesystem
+Author: Jens Diemer
+Author-email: python@jensdiemer.de
+License: GNU General Public License v3
+Keywords: iterfilesystem
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+
+--------------
+IterFilesystem
+--------------
+
+Multiprocess directory iteration via ``os.scandir()``:
+
+* "stats" processes:
+
+    * only counts up all directories and files.
+
+    * accumulates the sizes of all files.
+
+* "worker" process:
+
+    * Filesystem walk and process the real action with dir/files
+
+among other things these packages are used:
+
+* progress bar `tqdm <https://pypi.org/project/tqdm/>`_
+
+Requirement:
+
+* Python 3.6 or newer.
+
+* `Pipenv <https://pipenv.readthedocs.io/en/latest/install/#installing-pipenv>`_. Packages and virtual environment manager.
+
+Please: try, fork and contribute! ;)
+
++--------------------------------------+----------------------------------------------------------+
+| |Build Status on travis-ci.org|      | `travis-ci.org/jedie/IterFilesystem`_                    |
++--------------------------------------+----------------------------------------------------------+
+| |Build Status on appveyor.com|       | `ci.appveyor.com/project/jedie/IterFilesystem`_          |
++--------------------------------------+----------------------------------------------------------+
+| |Coverage Status on codecov.io|      | `codecov.io/gh/jedie/IterFilesystem`_                    |
++--------------------------------------+----------------------------------------------------------+
+| |Coverage Status on coveralls.io|    | `coveralls.io/r/jedie/IterFilesystem`_                   |
++--------------------------------------+----------------------------------------------------------+
+| |Requirements Status on requires.io| | `requires.io/github/jedie/IterFilesystem/requirements/`_ |
++--------------------------------------+----------------------------------------------------------+
+
+.. |Build Status on travis-ci.org| image:: https://travis-ci.org/jedie/IterFilesystem.svg
+.. _travis-ci.org/jedie/IterFilesystem: https://travis-ci.org/jedie/IterFilesystem/
+.. |Build Status on appveyor.com| image:: https://ci.appveyor.com/api/projects/status/py5sl38ql3xciafc?svg=true
+.. _ci.appveyor.com/project/jedie/IterFilesystem: https://ci.appveyor.com/project/jedie/IterFilesystem/history
+.. |Coverage Status on codecov.io| image:: https://codecov.io/gh/jedie/IterFilesystem/branch/master/graph/badge.svg
+.. _codecov.io/gh/jedie/IterFilesystem: https://codecov.io/gh/jedie/IterFilesystem
+.. |Coverage Status on coveralls.io| image:: https://coveralls.io/repos/jedie/IterFilesystem/badge.svg
+.. _coveralls.io/r/jedie/IterFilesystem: https://coveralls.io/r/jedie/IterFilesystem
+.. |Requirements Status on requires.io| image:: https://requires.io/github/jedie/IterFilesystem/requirements.svg?branch=master
+.. _requires.io/github/jedie/IterFilesystem/requirements/: https://requires.io/github/jedie/IterFilesystem/requirements/
+
+-------
+Example
+-------
+
+Use example CLI, e.g.:
+
+::
+
+    ~$ git clone https://github.com/jedie/IterFilesystem.git
+    ~$ cd IterFilesystem
+    ~/IterFilesystem$ pipenv install
+    ~/IterFilesystem$ pipenv shell
+    (IterFilesystem) ~/IterFilesystem$ print_fs_stats --help
+    (IterFilesystem) ~/IterFilesystem$ pip install -e .
+    ...
+    Successfully installed iterfilesystem
+
+    (IterFilesystem) ~/IterFilesystem$ $ print_fs_stats --help
+    usage: print_fs_stats.py [-h] [-v] [--path PATH]
+                             [--skip_dirs [SKIP_DIRS [SKIP_DIRS ...]]]
+                             [--skip_filenames [SKIP_FILENAMES [SKIP_FILENAMES ...]]]
+
+    Scan filesystem and print some information
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --version         show program's version number and exit
+      --path PATH           The file path that should be scanned e.g.: "~/foobar/"
+                            default is "~"
+      --skip_dirs [SKIP_DIRS [SKIP_DIRS ...]]
+                            Directory names to exclude from scan.
+      --skip_filenames [SKIP_FILENAMES [SKIP_FILENAMES ...]]
+                            File names to ignore.
+
+example output looks like this:
+
+::
+
+    (IterFilesystem) ~/IterFilesystem$ $ print_fs_stats --path ~/IterFilesystem --skip_dirs .tox .pytest_cache
+    $ print_fs_stats --path ~/repos/IterFilesystem --skip_dirs .tox .pytest_cache
+    Read/process: '~/repos/IterFilesystem'...
+    Skip directories:
+    	* .tox
+    	* .pytest_cache
+
+    No files will be skipped.
+
+    ...
+
+    Filesystem items..: 100%|██████████████████████████████████████████|633/633 13185.18entries/s [00:00<00:00, 13185.18entries/s]
+    File sizes........: 100%|█████████████████████████████████████████████████████████████|2.22M/2.22M [00:00<00:00, 48.6MBytes/s]
+    Average progress..: 100%|████████████████████████████████████████████████████████████████████████████████████████|00:00<00:00
+    Current File......:, ~/repos/IterFilesystem/Pipfile
+
+    Processed 633 filesystem items in 0.06 sec
+    SHA515 hash calculated over all file content: 79f2b0587e147b1c7d8581ea3597039a9e6d0c79ff10ea3bfd499cc60bc48892507437dd00da3c311280b4305c75459dbb122ebbec6b3b0445ce595b47c9f4a8
+    File count: 428
+    Total file size: 2.2 MB
+
+-------
+History
+-------
+
+* **dev** - `compare v1.0.0...master <https://github.com/jedie/IterFilesystem/compare/v1.0.0...master>`_ 
+
+    * TBC
+
+* 12.10.2019 - `compare v0.2.0...v1.0.0 <https://github.com/jedie/IterFilesystem/compare/v0.2.0...v1.0.0>`_ 
+
+    * refactoring:
+
+        * don't use ``persist-queue``
+
+        * switch from threading to multiprocessing
+
+        * enhance progress display with multiple ``tqdm`` process bars
+
+* 15.09.2019 - `compare v0.1.0...v0.2.0 <https://github.com/jedie/IterFilesystem/compare/v0.1.0...v0.2.0>`_ 
+
+    * store persist queue in temp directory
+
+    * Don't catch ``process_path_item`` errors, this should be made in child class
+
+* 15.09.2019 - `compare v0.0.1...v0.1.0 <https://github.com/jedie/IterFilesystem/compare/v0.0.1...v0.1.0>`_ 
+
+    * add some project meta files and tests
+
+    * setup CI
+
+    * fix tests
+
+* 15.09.2019 - v0.0.1
+
+    * first Release on PyPi
+
+-----
+Links
+-----
+
+* `https://pypi.python.org/pypi/IterFilesystem/ <https://pypi.python.org/pypi/IterFilesystem/>`_
+
+* `https://github.com/jedie/IterFilesystem/ <https://github.com/jedie/IterFilesystem/>`_
+
+--------
+Donating
+--------
+
+* `paypal.me/JensDiemer <https://www.paypal.me/JensDiemer>`_
+
+* `Flattr This! <https://flattr.com/submit/auto?uid=jedie&url=https%3A%2F%2Fgithub.com%2Fjedie%2FIterFilesystem%2F>`_
+
+* Send `Bitcoins <http://www.bitcoin.org/>`_ to `1823RZ5Md1Q2X5aSXRC5LRPcYdveCiVX6F <https://blockexplorer.com/address/1823RZ5Md1Q2X5aSXRC5LRPcYdveCiVX6F>`_
+
