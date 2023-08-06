@@ -1,0 +1,9 @@
+include README
+include *.py
+include */*.py
+recursive-include cubicweb_company *.py
+recursive-include cubicweb_company/i18n *.po
+recursive-include test/data bootstrap_cubes *.py
+include *.ini
+recursive-include debian changelog compat control copyright rules
+
