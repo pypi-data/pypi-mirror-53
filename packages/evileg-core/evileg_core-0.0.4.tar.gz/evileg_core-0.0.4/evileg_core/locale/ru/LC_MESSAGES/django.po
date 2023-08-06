@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ESNF-C\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-11 16:18+0200\n"
+"PO-Revision-Date: 2019-08-06 23:00+0200\n"
+"Last-Translator: Evgenii Legotckoi <evileg@evileg.com>\n"
+"Language-Team: EVILEG Team <info@evileg.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: evileg_core/evileg_core/admin.py:41 evileg_core/evileg_core/models.py:107
+msgid "SPAM"
+msgstr "СПАМ"
+
+#: evileg_core/evileg_core/admin.py:44
+msgid "Set marked as SPAM"
+msgstr "Пометить как СПАМ"
+
+#: evileg_core/evileg_core/admin.py:56
+msgid "NOT MODERATED"
+msgstr "Не модерировано"
+
+#: evileg_core/evileg_core/admin.py:59
+msgid "Set marked as NOT MODERATED"
+msgstr "Пометить как не модерированный контент"
+
+#: evileg_core/evileg_core/admin.py:71
+msgid "POST MODERATED"
+msgstr "Пост модерация"
+
+#: evileg_core/evileg_core/admin.py:74
+msgid "Set marked as POST MODERATED"
+msgstr "Пометить как пост модерируемый контент"
+
+#: evileg_core/evileg_core/admin.py:86
+msgid "MODERATED"
+msgstr "Модерировано"
+
+#: evileg_core/evileg_core/admin.py:89
+msgid "Set marked as MODERATED"
+msgstr "Пометить как модерированный контент"
+
+#: evileg_core/evileg_core/apps.py:9
+msgid "EVILEG Core"
+msgstr "Ядро EVILEG"
+
+#: evileg_core/evileg_core/decorators.py:35
+msgid "Invalid reCAPTCHA. Please try again."
+msgstr "Невалидная reCAPTCHA. Попробуйте ещё раз."
+
+#: evileg_core/evileg_core/filters.py:66 evileg_core/evileg_core/filters.py:93
+msgid "Filter title not set"
+msgstr "Заголовок фильтра не установлен"
+
+#: evileg_core/evileg_core/filters.py:71 evileg_core/evileg_core/filters.py:98
+msgid "Not empty only"
+msgstr "Только не пустой"
+
+#: evileg_core/evileg_core/filters.py:72 evileg_core/evileg_core/filters.py:99
+msgid "Empty only"
+msgstr "Только пустой"
+
+#: evileg_core/evileg_core/forms.py:32
+msgid "From date"
+msgstr "С даты"
+
+#: evileg_core/evileg_core/forms.py:39
+msgid "To date"
+msgstr "До даты"
+
+#: evileg_core/evileg_core/models.py:38
+msgid "Author"
+msgstr "Автор"
+
+#: evileg_core/evileg_core/models.py:39
+msgid "Content - HTML"
+msgstr "Содержание - HTML"
+
+#: evileg_core/evileg_core/models.py:40
+msgid "Content - Markdown"
+msgstr "Содержание Markdown"
+
+#: evileg_core/evileg_core/models.py:41
+msgid "Publication date"
+msgstr "Дата публикации"
+
+#: evileg_core/evileg_core/models.py:42
+msgid "Last modification date"
+msgstr "Дата последнего изменения"
+
+#: evileg_core/evileg_core/models.py:108
+msgid "Not Moderated"
+msgstr "Не модерировано"
+
+#: evileg_core/evileg_core/models.py:109
+msgid "Post Moderated"
+msgstr "Пост модерируемый контент"
+
+#: evileg_core/evileg_core/models.py:110
+msgid "Moderated"
+msgstr "Модерировано"
+
+#: evileg_core/evileg_core/models.py:114
+msgid "Moderation"
+msgstr "Модерация"
+
+#: evileg_core/evileg_core/models.py:166
+msgid "Title"
+msgstr "Заголовок"
+
+#: evileg_core/evileg_core/models.py:167
+msgid "Views"
+msgstr "Просмотры"
+
+#: evileg_core/evileg_core/models.py:168
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:18
+msgid "URL"
+msgstr "URL"
+
+#: evileg_core/evileg_core/models.py:255
+msgid "User"
+msgstr "Пользователь"
+
+#: evileg_core/evileg_core/templates/evileg_core/date_range_filter.html:2
+#, python-format
+msgid " By %(filter_title)s "
+msgstr "%(filter_title)s"
+
+#: evileg_core/evileg_core/templates/evileg_core/date_range_filter.html:30
+msgid "Search"
+msgstr "Найти"
+
+#: evileg_core/evileg_core/templates/evileg_core/date_range_filter.html:31
+msgid "Clear"
+msgstr "Очистить"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:9
+msgid "Add Link"
+msgstr "Добавить ссылку"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:14
+msgid "Text"
+msgstr "Текст"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:23
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:80
+msgid "Close"
+msgstr "Закрыть"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:24
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:81
+msgid "Insert"
+msgstr "Вставить"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:34
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:103
+msgid "Insert code"
+msgstr "Вставить код"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:39
+msgid "Select language"
+msgstr "Выбрать язык"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:42
+msgid "Other language"
+msgstr "Другой язык"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:69
+msgid "Insert your code"
+msgstr "Вставьте ваш код"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:92
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:96
+msgid "Content separator"
+msgstr "Разделитель контента"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:98
+msgid "Upload File"
+msgstr "Загрузить файл"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:101
+msgid "Upload Image"
+msgstr "Загрузить изображение"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:104
+msgid "Add link"
+msgstr "Добавить ссылку"
+
+#: evileg_core/evileg_core/templates/evileg_core/markdown_widget.html:107
+msgid "Markdown syntax"
+msgstr "Синтаксис Markdown"
+
+#: evileg_core/evileg_core/templates/evileg_core/partials/object_list_preview.html:7
+msgid "Nothing found"
+msgstr "Ничего не найдено"
+
+#: evileg_core/evileg_core/templatetags/evileg_core.py:17
+msgid "Classic"
+msgstr "Классическая"
+
+#: evileg_core/evileg_core/templatetags/evileg_core.py:18
+msgid "Darcula"
+msgstr "Darcula"
