@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: DateFormatExtractor-AVT-DEV
+Version: 0.0.1
+Summary: This package can extract a specific date format from an iterable object (list, pandas column, etc)
+Home-page: https://github.com/VenturaDev/DateExtractorRepo
+Author: Albert Ventura-Traveset
+Author-email: albertoventuratraveset@hotmail.com
+License: UNKNOWN
+Description: This library offers an easy implementation for extracting the date format from an iterator (serie, pandas column, array, list, etc).
+        
+        The method "extract_format" needs only the iterator as parameter.
+        It uses a list of known date formats that you can overwrite passing the optional argument list_date_formats.
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
