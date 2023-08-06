@@ -1,0 +1,40 @@
+{
+    "cpu": 20,
+    "templates": {
+        "example.fa": {
+            "description": "Example Database",
+            "group": "example",
+            "junction": false,
+            "isoform": false,
+            "IDs": "seq1; seq2"
+        },
+        "example2.fa": {
+            "IDs": "seq1, seq2",
+            "description": "Example Database 2",
+            "group": "example",
+            "junction": false,
+            "isoform": false
+        },
+        "hg38.fa": {
+            "description": "Human genome, hg38",
+            "group": "animal",
+            "IDs": "chr1; chr2; chr3",
+            "junction": false,
+            "isoform": false
+        },
+        "rice.fa": {
+            "description": "Rice genome",
+            "group": "plant",
+            "IDs": "1; 3; 2",
+            "junction": false,
+            "isoform": false
+        },
+        "human.RNA": {
+            "description": "Human Refseq RNA",
+            "group": "animal",
+            "junction": true,
+            "isoform": true,
+            "IDs": "NM_001267550; NM_001256850; NM_133378"
+        }
+    }
+}
