@@ -1,0 +1,8 @@
+include pyjamas/pyjamas.tif
+include *.py
+include LICENSE
+include README.md
+prune dev
+prune dist
+prune build
+prune pyjamas.egg-info
