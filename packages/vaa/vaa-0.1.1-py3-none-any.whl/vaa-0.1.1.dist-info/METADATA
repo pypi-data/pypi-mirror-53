@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: vaa
+Version: 0.1.1
+Summary: Validators Adapter. The common interface for all validators.
+Home-Page: https://github.com/life4/vaa
+Author: Gram Orsinium
+Author-email: master_fess@mail.ru
+Requires-Dist: cerberus; extra == "tests"
+Requires-Dist: django; extra == "tests"
+Requires-Dist: djangorestframework; extra == "tests"
+Requires-Dist: marshmallow; extra == "tests"
+Requires-Dist: pyschemes; extra == "tests"
+Requires-Dist: pytest; extra == "tests"
+Requires-Dist: wtforms; extra == "tests"
+Provides-Extra: tests
