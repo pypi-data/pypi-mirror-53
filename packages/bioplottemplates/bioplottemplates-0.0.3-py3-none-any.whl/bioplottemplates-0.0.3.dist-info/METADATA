@@ -1,0 +1,83 @@
+Metadata-Version: 2.1
+Name: bioplottemplates
+Version: 0.0.3
+Summary: Plotting templates common in biological sciences.
+Home-page: https://github.com/joaomcteixeira/python-bioplottemplates
+Author: Joao MC Teixeira
+Author-email: joaomcteixeira@gmail.com
+License: MIT
+Project-URL: Documentation, https://python-bioplottemplates.readthedocs.io/
+Project-URL: Changelog, https://python-bioplottemplates.readthedocs.io/en/latest/changelog.html
+Project-URL: Issue Tracker, https://github.com/joaomcteixeira/python-bioplottemplates/issues
+Keywords: plotting,biology,structural-biology
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Unix
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
+Requires-Dist: matplotlib (==3)
+
+========
+Overview
+========
+
+
+
+Plotting templates common in biological sciences.
+
+Installation
+============
+
+::
+
+    pip install bioplottemplates
+
+You can also install the in-development version with::
+
+    pip install https://github.com/joaomcteixeira/python-bioplottemplates/archive/master.zip
+
+
+Documentation
+=============
+
+
+https://python-bioplottemplates.readthedocs.io/
+
+
+Development
+===========
+
+To run the all tests run::
+
+    tox
+
+
+
+Changelog
+=========
+
+0.0.3 (2019-10-14)
+------------------
+
+* Supports just Python >= 3.6
+* Coverage details reported just from Travis-CI
+* Added new stats badges
+* Removed CI for OSX.
+
+
+0.0.0 (2019-10-10)
+------------------
+
+* First release on PyPI.
+
+
