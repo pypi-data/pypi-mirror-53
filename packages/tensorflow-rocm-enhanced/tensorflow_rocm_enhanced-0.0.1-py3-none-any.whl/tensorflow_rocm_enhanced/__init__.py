@@ -1,0 +1,2 @@
+name = "tensorflow-rocm-enhanced"
+
