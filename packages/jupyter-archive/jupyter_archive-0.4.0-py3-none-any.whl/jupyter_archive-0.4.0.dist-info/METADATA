@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: jupyter-archive
+Version: 0.4.0
+Summary: Make, download and extract archive files.
+Home-page: https://github.com/hadim/jupyter-archive/
+Author: Hadrien Mary
+Author-email: hadrien.mary@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Description-Content-Type: text/markdown
+Requires-Dist: notebook
+Provides-Extra: test
+Requires-Dist: jupyterlab ; extra == 'test'
+Requires-Dist: pytest ; extra == 'test'
+
+UNKNOWN
+
+
