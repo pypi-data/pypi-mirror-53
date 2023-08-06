@@ -1,0 +1,44 @@
+#!/bin/sh
+
+arg="${1}"
+
+if [ "${arg}" = "--help" ] || [ "${arg}" = "-h" ]; then
+    cat <<EOF
+usage: mousikofidi [-h] [-d] [any uWSGI options]
+
+Run MousikóFídi via Flask or uWSGI.
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+Options:
+  -d, --dev             Run MousikóFídi via the Flask dev server.  Not
+                        recommended for production.
+
+For uWSGI, a file at '~/.config/fidi/uwsgi.ini' is automatically used
+if it exists.
+
+Any command line arguments given to this are passed to uWSGI.
+EOF
+    exit
+fi
+
+if [ "${arg}" = "--dev" ] || [ "${arg}" = "-d" ]; then
+    if [ -f $(which uwsgi >/dev/null 2>/dev/null) ]; then
+        FLASK_APP=mousikofidi FLASK_ENV=development flask run
+    else
+        echo "ERROR: The `flask` executable could not be found!  Exiting..."
+        exit 1
+    fi
+fi
+
+if ! [ -f $(which uwsgi >/dev/null 2>/dev/null) ]; then
+    echo "ERROR: The `uwsgi` executable could not be found!  Exiting..."
+    exit 1
+fi
+
+if [ -f ~/.config/fidi/uwsgi.ini ]; then
+    uwsgi --ini ~/.config/fidi/uwsgi.ini "${@}"
+else
+    uwsgi "${@}"
+fi

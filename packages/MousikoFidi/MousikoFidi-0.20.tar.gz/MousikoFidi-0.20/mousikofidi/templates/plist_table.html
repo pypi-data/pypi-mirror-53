@@ -1,0 +1,29 @@
+{% if plists %}
+
+  <table style="margin: 0 auto;">
+    <thead>
+      <tr>
+        <th>Playlist Name</th>
+        <th>Track Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in plists %}
+        <tr>
+          <td>
+            <a class="bold mobile-big" href="{{ url_for('.playlist_detail', name=p.name) }}">
+              {% if icons %}<i class="fas fa-list"></i> {% endif %}{{ p.name }}
+            </a>
+          </td>
+          <td>
+            {{ p.count }}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% elif not "Welcome" in page_name %}
+  <p class="bold center mobile-big">
+    Nothing here!
+  </p>
+{% endif %}

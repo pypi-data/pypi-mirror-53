@@ -1,0 +1,68 @@
+<div class="center" id="player">
+  <p id="now-playing" title="The status of the current track.  Click the track title to jump to it in the playlist.">Paused: <span class="bold" id="playing-title" title="The title of the current track."></span></p>
+  <div data-nowplaying-num="0" id="now-playing-num"></div>
+  <div data-randorder="none" id="randorder"></div>
+  <div data-playback-ended="false" id="audio-playback-ended"></div>
+  <audio{% if autoplay %} autoplay{% endif %}{% if preload_audio %} preload="auto"{% endif %} id="audio" controls>
+    Your browser does not support the <code>audio</code> element.
+  </audio>
+  <div class="mobile-hide">
+    <input type="checkbox" id="follow-track" name="follow-track" checked>
+    <label id="follow" for="follow-track">Follow</label>
+    {% if icons %}
+      <button data-cmd="prev" id="prev" title="Click to skip to the previous track in the list.">
+        <i class="fas fa-step-backward"></i> Previous
+      </button>
+      <button class="with-icons" data-stat="off" id="repeat" title="Click to toggle between no repeat, repeat one track, and repeat all tracks.">
+        No Repeat<span class="fa-stack"><i class="fas fa-redo fa-stack-1x"></i><i class="fas fa-slash fa-stack-1x"></i></span>
+      </button>
+      <button class="with-icons" data-stat="off" id="shuffle" title="Click to toggle between a shuffled track order on and off.">
+        Shuffle Off<span class="fa-stack"><i class="fas fa-random fa-stack-1x"></i><i class="fas fa-slash fa-stack-1x"></i></span>
+      </button>
+      <button data-cmd="fwd" id="next" title="Click to skip to the next track in the list.">
+        Next <i class="fas fa-step-forward"></i>
+      </button>
+
+    {% else %}
+      <button data-cmd="prev" id="prev" title="Click to skip to the previous track in the list.">Previous</button>
+      <button data-stat="off" id="repeat" title="Click to toggle between no repeat, repeat one track, and repeat all tracks.">No Repeat</button>
+      <button data-stat="off" id="shuffle" title="Click to toggle between a shuffled track order on and off.">Shuffle Off</button>
+      <button data-cmd="fwd" id="next" title="Click to skip to the next track in the list.">Next</button>
+    {% endif %}
+
+  </div>
+  <div class="mobile-show">
+    <div>
+      <button data-cmd="prev" id="mobile-prev" title="Click to skip to the previous track in the list.">{% if icons %}<i class="fas fa-step-backward"></i> {% endif %}Previous</button>
+      <button data-cmd="fwd" id="mobile-next" title="Click to skip to the next track in the list.">Next{% if icons %} <i class="fas fa-step-forward"></i>{% endif %}</button>
+    </div>
+    <div id="mobile-controls">
+      {% if icons %}
+        <button class="with-icons" data-stat="off" id="mobile-repeat" title="Click to toggle between no repeat, repeat one track, and repeat all tracks.">
+          No Repeat<span class="fa-stack"><i class="fas fa-redo fa-stack-1x"></i><i class="fas fa-slash fa-stack-1x"></i></span>
+        </button>
+        <button class="with-icons" data-stat="off" id="mobile-shuffle" title="Click to toggle between a shuffled track order on and off.">
+          Shuffle Off<span class="fa-stack"><i class="fas fa-random fa-stack-1x"></i><i class="fas fa-slash fa-stack-1x"></i></span>
+        </button>
+
+      {% else %}
+        <button data-stat="off" id="mobile-repeat" title="Click to toggle between no repeat, repeat one track, and repeat all tracks.">
+          No Repeat
+        </button>
+        <button data-stat="off" id="mobile-shuffle" title="Click to toggle between a shuffled track order on and off.">
+          Shuffle Off
+        </button>
+      {% endif %}
+    </div>
+    <input type="checkbox" id="mobile-follow-track" name="mobile-follow-track" checked>
+    <label id="mobile-follow" for="mobile-follow-track">Follow</label>
+  </div>
+</div>
+
+{% if link_button %}
+  <div id="audio-time-link" class="center">
+    <button id="audio-time-link" title="Click this button to have a link to this track at the current time put into your clipboard.">
+      {% if icons %}<i class="fas fa-link"></i> {% endif %}Current Time Link
+    </button>
+  </div>
+{% endif %}

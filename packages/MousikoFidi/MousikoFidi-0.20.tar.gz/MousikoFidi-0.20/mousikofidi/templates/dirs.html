@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <table style="margin: 0 auto;">
+    <thead>
+      <tr>
+        <th>{# BLANK #}</th>
+        <th class="center">Your Media Dirs</th>
+        <th>{# BLANK #}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dir in dir_list %}
+        <tr>
+          <td></td>
+          <td>
+            <a class="bold mobile-big" href="/browse/{{ dir.encoded }}">
+              {% if icons %}<i class="fas fa-folder"></i> {% endif %}{{ dir.raw }}
+            </a>
+          </td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if plists %}
+    <h3 class="center">Playlists:</h3>
+    {% include 'plist_table.html' with context %}
+  {% endif %}
+
+{% endblock %}

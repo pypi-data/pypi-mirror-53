@@ -1,0 +1,118 @@
+#!/bin/bash
+
+Help() {
+    cat << EOF
+usage: mousikofidi-client [-h] [-u URL] [-n] [optional browser flag]
+
+Run a web browser in incognito or private mode pointed at the
+MousikóFídi instance of your choosing.
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+Options:
+  --chrome              Open a MousikóFídi with Chrome.
+
+  --chromium            Open a MousikóFídi with Chromium.
+                        This is the default.
+
+  --firefox             Open a MousikóFídi with Firefox.
+
+  --icecat              Open a MousikóFídi with IceCat.
+
+  -o BROWSER            Name of a web browser executable to use.
+  --other BROWSER
+
+  -u URL,               The address of the MousikóFídi instance to be opened.
+  --instance-url URL    Default: mousikofidi.info
+
+  -n, --no-private      Don't use an incognito or private browser session.
+EOF
+}
+
+export browser=chromium
+export instanceURL=${FIDI_URL:-mousikofidi.info}
+export other=false
+export private=true
+
+opts=$(getopt -l "help,chrome,chromium,firefox,icecat,instance-url:,no-private,other:" -o "no:u:" -a -- "$@")
+
+eval set -- "$opts"
+
+while true
+do
+    case $1 in
+        -h|--help)
+            Help
+            exit 0
+            ;;
+        --chrome)
+            export browser=chrome
+            ;;
+        --chromium)
+            export browser=chromium
+            ;;
+        --firefox)
+            export browser=firefox
+            ;;
+        --icecat)
+            export browser=icecat
+            ;;
+        --other)
+            shift
+            export browser=$1
+            export other=true
+            ;;
+        -u|--instance-url)
+            shift
+            export instanceURL=$1
+            ;;
+        -n|--no-private)
+            export private=false
+            ;;
+        --)
+            shift
+            break;;
+    esac
+    shift
+done
+
+if [ "${browser}" = "chrome" ]; then
+    if [ "${private}" = "true" ]; then
+        chrome --incognito "${instanceURL}" 2>/dev/null >/dev/null
+    else
+        chrome "${instanceURL}" 2>/dev/null >/dev/null
+    fi
+
+elif [ "${browser}" = "chromium" ]; then
+    if [ "${private}" = "true" ]; then
+        chromium --incognito "${instanceURL}" 2>/dev/null >/dev/null
+    else
+        chromium "${instanceURL}" 2>/dev/null >/dev/null
+    fi
+
+elif [ "${browser}" = "firefox" ]; then
+    if [ "${private}" = "true" ]; then
+        firefox --private-window "${instanceURL}" 2>/dev/null >/dev/null
+    else
+        firefox "${instanceURL}" 2>/dev/null >/dev/null
+    fi
+
+elif [ "${browser}" = "icecat" ]; then
+    if [ "${private}" = "true" ]; then
+        icecat --private-window "${instanceURL}" 2>/dev/null >/dev/null
+    else
+        icecat "${instanceURL}" 2>/dev/null >/dev/null
+    fi
+
+elif [ "${other}" = "true" ]; then
+    eval "${browser}" "${instanceURL}" 2>/dev/null >/dev/null || echo [ERROR]: The given browser \""${browser}"\" failed!
+
+else
+    if [ "${private}" = "true" ]; then
+        chromium --incognito "${instanceURL}" 2>/dev/null >/dev/null
+    else
+        chromium "${instanceURL}" 2>/dev/null >/dev/null
+    fi
+
+fi
