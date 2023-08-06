@@ -1,0 +1,21 @@
+#!/bin/bash
+#Build a virtualenv 
+
+output=$1
+python=python$2
+
+# create virtualenv if it does not exist yet
+if test -f $output/bin/activate; then
+  echo "Found existing virtualenv at $output ..."
+else
+  echo "Creating virtualenv using $python ..."
+
+  # use existing directory
+  if test -f $output; then
+    echo "Using existing directory at $output ..."
+  else
+    mkdir -p $output
+  fi
+
+  $python -m virtualenv $output
+fi

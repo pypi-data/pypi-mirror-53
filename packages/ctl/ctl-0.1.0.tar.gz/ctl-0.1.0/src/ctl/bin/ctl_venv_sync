@@ -1,0 +1,32 @@
+#!/bin/bash
+#Build a virtualenv 
+
+venv=$1
+pipfile=$2
+
+
+# make sure Pipfile location exists
+if test -f $pipfile; then
+  export PIPENV_PIPFILE=$pipfile
+else
+  echo "Could not locate pipfile $pipfile"
+  exit 1
+fi
+
+# make sure virtualenv location exists and is a virtualenv
+if test -f $venv/bin/activate; then
+  echo "Found existing virtualenv at $venv ..."
+else
+  echo "Virtualenv does not exist, please run ctl_venv_build.sh first"
+  exit 1
+fi
+
+# activate virtualenv
+. $venv/bin/activate
+
+echo "installing pipenv ..."
+pip install pipenv
+
+echo "syncing via pipenv from $pipfile ..."
+pipenv lock
+pipenv sync
