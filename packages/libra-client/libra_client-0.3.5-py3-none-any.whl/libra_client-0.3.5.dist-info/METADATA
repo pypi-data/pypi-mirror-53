@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: libra-client
+Version: 0.3.5
+Summary: A CLI inteface Libra client and Python API for Libra blockchain.
+Home-page: https://github.com/yuan-xy/libra-client.git
+Author: yuan xinyu
+Author-email: yuanxinyu.hangzhou@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: canoser (>=0.3.6)
+Requires-Dist: protobuf
+Requires-Dist: grpcio
+Requires-Dist: PyNaCl
+Requires-Dist: requests
+Requires-Dist: toml
+Requires-Dist: mnemonic
+
+LibraClient is an unofficial client for [Libra blockchain](http://libra.org) written in python language. The Client allows you interact whith Libra Network easily. For Python programmers, you can also call the client side api to interact with Libra Network.
+
+
