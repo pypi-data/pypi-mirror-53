@@ -1,0 +1,116 @@
+#!python
+
+import sys,getopt
+import os
+import json
+import shlex, subprocess
+from pprint import pprint
+def main():
+
+    if not config_file_exit():
+        create_config_file()
+
+    refresh_credentials()
+
+    try:
+        opts,args = getopt.getopt(sys.argv[1:],"hiut",["help","train", "upload","infer=","setup="])
+    except:
+        print(err)
+        usage()
+        sys.exit(2)
+
+    for option, arg in opts:
+        
+        if option in ["--setup"]:
+            base_url = arg
+            write_base_url_to_config(url=base_url)
+            pprint("Url to your lambada has been set")
+
+        elif option in ["--train"]:
+            base_url = get_base_url()
+            cmd = create_train_cmd(base_url)
+            response = exec_cmd(cmd=cmd)
+            pprint(response)
+        
+        elif option in ["--upload"]:
+            base_url = get_base_url()
+            upload_cmd = '''curl -X POST '''+ base_url +'''/dev/upload'''
+            response = exec_cmd(cmd=upload_cmd)
+            timestamp = json.loads(response).get('epoch')       
+
+            config_file = open(".config","a")
+            config_file.write(timestamp)
+            config_file.close()
+            pprint("Timestamp of your checkpoint is {0}".format(timestamp))
+
+        elif option in ["--infer"]:
+            base_url = get_base_url()
+            cmd = create_infer_cmd(base_url=base_url, arg=arg)
+            response = exec_cmd(cmd=cmd)
+            print("\n")
+            pprint("RESPONSE = {0}".format(response))
+            
+        elif option in ["--help"]:
+            usage()
+            sys.exit()
+        else:
+            sys.exit()
+
+def exec_cmd(cmd):
+    params = shlex.split(cmd)
+    process = subprocess.Popen(params, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    response, stderr = process.communicate()
+    return response
+
+def create_train_cmd(base_url):
+    timestamp = get_timestamp()
+    train_cmd = """curl -X POST """ + base_url +"""/dev/train -d""" + """ '{"epoch":\"""" + timestamp + """"}' """
+    return train_cmd
+
+def create_infer_cmd(base_url, arg):
+    timestamp = get_timestamp()
+    infer_cmd = ''' 
+    curl -X POST ''' + base_url +'''/dev/infer -d '{"epoch":"''' + timestamp + '''", "input": {"age": ["34"], "workclass": ["Private"], "fnlwgt": ["357145"], "education": ["Bachelors"], "education_num": ["13"], "marital_status": ["Married-civ-spouse"], "occupation": ["Prof-specialty"], "relationship": ["Wife"], "race": ["White"], "gender": ["Female"], "capital_gain": ["0"], "capital_loss": ["0"], "hours_per_week": ["50"], "native_country": ["United-States"], "income_bracket": [">50K"]}}'
+    '''
+    return infer_cmd
+
+def refresh_credentials():
+    refresh_cred_cmd = "aws-okta write-to-credentials geekon/dev /Users/" + os.getenv('USER') + "/.aws/credentials"
+    process = subprocess.Popen(refresh_cred_cmd.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+
+def config_file_exit():
+    return os.path.exists(".config")
+
+def create_config_file():
+    f = open(".config","w+")
+    f.close()
+
+def get_timestamp():
+    f = open(".config","r")
+    timestamp = f.read().split('\n')[1]
+    return timestamp
+
+def usage():
+    print(''' This script is a utility tool for geekon project which employs AWS lambdas for computation purposes.
+    In order to use this tool you have to specify path to your lambda with --setup parameter. Url should look like https://<id>.execute-api.us-east-1.amazonaws.com.
+    If you want to go through full process firstly you should upload data into S3 using -u option, nextly train it with -t and lastly
+    receive results with -i option. 
+    ''')
+
+def write_base_url_to_config(url):
+    f = open(".config", "w+")
+    f.write(url)
+    f.write("\n")
+    f.close()
+
+def get_base_url():
+    f = open(".config", "r")
+    url = f.read().split('\n')[0]
+    if url is None or url == '':
+        print("Use geekon --setup to specify url address to your endpoint. Url should look like https://<id>.execute-api.us-east-1.amazonaws.com")
+        sys.exit()
+    return url
+
+if __name__ == "__main__":
+    main()
