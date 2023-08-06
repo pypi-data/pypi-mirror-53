@@ -1,0 +1,70 @@
+
+NAME
+    deduce.ingest - an interface to Deduce Ingestion
+
+SYNOPSIS
+      import deduce.ingest
+
+      d = deduce.Ingest( 'my site id', 'my secret api key' )
+
+      # output html widget
+      print d.html()
+
+      # send en event
+      d.event( 'email@domain', '192.0.2.3', 'eventname', { ... } )
+
+INTERFACE
+  new( site, apikey )
+    Create a new object. You need to pass in the site id and api key that
+    were assigned to you by Deduce.
+
+  html( email )
+    Generate HTML to place on your web page.
+
+    "email"
+        The user's email address. It will be processed and hashed, not used
+        directly.
+
+  event(email, client_ip, eventtype, additional)
+    When something interesting happens on your site, tell Deduce.
+
+    email
+        The user's email address. It will be processed and hashed, not used
+        directly.
+
+    "client_ip"
+        the user's IP address in dotted quad format (IPv4), or coloned
+        octopus (IPv6). can often be found in $ENV{REMOTE_ADDR}.
+
+    "eventtype"
+        the event type. Consult with Deduce support to determine the event
+        types.
+
+    "additional"
+        a dict of event data to send. Consult with Deduce support to
+        determine data to send.
+
+        if you pass in 'email_prev' or 'cc' fields, they will be
+        automatically processed and hashed, not send directly.
+
+  events(evts)
+    You can send several related events, by sending an array of event data.
+
+    evts
+        an array of event data (dicts).
+
+        the events must contain valid email, ip, and event fields.
+
+        any email, email_prev, and cc fields will automatically be processed
+        and hashed.
+
+BUGS
+    There are no known bugs in the module.
+
+SEE ALSO
+        http://www.deduce.com/
+
+LICENSE
+    This software may be copied and distributed under the terms found in the
+    MIT License
+
