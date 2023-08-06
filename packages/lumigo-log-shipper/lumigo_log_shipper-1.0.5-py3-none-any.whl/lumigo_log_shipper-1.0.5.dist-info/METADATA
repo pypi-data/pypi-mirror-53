@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: lumigo-log-shipper
+Version: 1.0.5
+Summary: Ship logs to lumigo platform
+Home-page: https://github.com/lumigo-io/lumigo-python-log-shipper.git
+Author: Lumigo LTD (https://lumigo.io)
+Author-email: support@lumigo.io
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: boto3
+Requires-Dist: attr
+
+![CircleCI](https://circleci.com/gh/lumigo-io/lumigo-python-log-shipper/tree/master.svg?style=svg&circle-token=82bcda94717aed3dc5068e1643922ffc0ad039c6)
+![Version](https://badge.fury.io/py/lumigo-log-shipper.svg)
+# lumigo-python-log-shipper
+
+[`lumigo-log-shipper`](https://pypi.org/project/lumigo-log-shipper/) is Lumigo's log shipper for Python
+
+## Usage 
+
+Install `lumigo-log-shipper`:
+
+npm: 
+~~~bash
+$ pip3 install lumigo-log-shipper
+~~~
+
+In your lambda's code: 
+~~~python
+from lumigo_log_shipper import lumigo_shipper
+
+def handler(event, context):
+    lumigo_shipper.ship_logs(event)
+~~~
+
+With programtic error:
+~~~python
+from lumigo_log_shipper import lumigo_shipper
+
+def handler(event, context):
+    lumigo_shipper.ship_logs(event, ["WARNING-EXAMPLE"])
+~~~
+Add to your lambda's `serverless.yml`
+```bash
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "firehose:PutRecordBatch"
+      Resource:
+        - "arn:aws:firehose:[YOUR-REGION]:114300393969:deliverystream/prod_logs-edge-stfl_customer-logs-firehose"
+    - Effect: Allow
+      Action:
+        - "sts:AssumeRole"
+      Resource:
+        - "arn:aws:iam::114300393969:role/CustomerLogsWriteRole"
+```
+
