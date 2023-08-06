@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "contestfs"
+version = "0.0.5"
+description = "continuously test file system changes, and run a command."
+license = "MIT"
+authors = ["Jeong-Min Lee"]
+packages = [
+    { include = "contestfs.py"}
+]
+readme = "README.md"
+
+[tool.poetry.scripts]
+contestfs = "contestfs:main"
+
+[tool.poetry.dependencies]
+python = "~2.7 || ^3.4"
+watchdog = "^0.9.0"
+colorama = "^0.4.1"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.7"
+flake8-import-order = "^0.18.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
