@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: toai
+Version: 0.1.15
+Summary: To AI helper library
+Home-page: https://github.com/mokahaiku/toai
+Author: Dovydas Ceilutka
+Author-email: dovydas.ceilutka@gmail.com
+License: MIT
+Download-URL: https://github.com/mokahaiku/toai
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: attrs
+Requires-Dist: fastparquet
+Requires-Dist: fastprogress
+Requires-Dist: funcy
+Requires-Dist: imagehash
+Requires-Dist: joblib
+Requires-Dist: kaggle
+Requires-Dist: lightgbm
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: Pillow
+Requires-Dist: pyarrow
+Requires-Dist: scikit-image
+Requires-Dist: scikit-learn
+Requires-Dist: scikit-optimize
+Requires-Dist: seaborn
+Provides-Extra: tests
+Requires-Dist: pytest ; extra == 'tests'
+Requires-Dist: pytest-pep8 ; extra == 'tests'
+Requires-Dist: pytest-xdist ; extra == 'tests'
+Requires-Dist: pytest-cov ; extra == 'tests'
+Requires-Dist: pytest-timeout ; extra == 'tests'
+
+# To AI
+
+To AI provides convenient classes and functions for working with Jupyter notebooks, scikit-learn and Tensorflow models.
+
+## Install
+
+```
+pip install toai
+```
+
