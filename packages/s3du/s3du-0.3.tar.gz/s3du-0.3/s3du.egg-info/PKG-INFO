@@ -1,0 +1,21 @@
+Metadata-Version: 1.1
+Name: s3du
+Version: 0.3
+Summary: Inspect Amazon S3 buckets interactively with ncdu
+Home-page: http://github.com/umonkey/s3du
+Author: Justin Forest
+Author-email: hex@umonkey.net
+License: GNU GPL
+Description: Reads the list of files from Amazon S3 and sends it to the ncdu
+        utility for interactive browsing.  Makes it easy to quickly find out what takes
+        most storage.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Utilities
