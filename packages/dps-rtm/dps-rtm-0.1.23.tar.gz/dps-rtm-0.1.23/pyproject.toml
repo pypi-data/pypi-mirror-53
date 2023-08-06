@@ -1,0 +1,23 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "rtm"  # source code directory
+    # The __init__.py must contain:
+    #   - description. Must take the form of docstring at top of file.
+    #       Only the first line will be publish to PyPI. The other lines are there for developers' benefit.
+    #   - version. example:  __verion__ = "0.1.0"
+dist-name = "dps-rtm"  # Module name as shown on PyPI
+author = "Jonathan Chukinas"  # Visible on PyPI
+author-email = "chukinas@gmail.com"  # Visible on PyPI
+home-page = "https://github.com/jonathanchukinas/fdr"
+classifiers = ["License :: OSI Approved :: MIT License"]
+description-file = "README.rst"
+requires-python = ">=3.6"
+requires = ["click", "openpyxl", "colorama", "pypi-get", "mentormatch"]
+
+[tool.flit.scripts]
+rtm = "rtm.main.cli:main"
+    # The name left of the assignment operator is the shell command that will run the application.
+    # Similar to setuptools 'entry points'
