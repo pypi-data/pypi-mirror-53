@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "django-leaflet-gpx"
+version = "0.1.2"
+description = "Simple Django application to include LeafletJS map and display GPX file"
+authors = ["Aloha68 <dev@aloha.im>"]
+license = "ISC"
+readme = "README.md"
+homepage = "https://gitlab.com/aloha68/django-leaflet-gpx"
+repository = "https://gitlab.com/aloha68/django-leaflet-gpx"
+
+[tool.poetry.dependencies]
+python = "^3.5"
+django = "^2.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

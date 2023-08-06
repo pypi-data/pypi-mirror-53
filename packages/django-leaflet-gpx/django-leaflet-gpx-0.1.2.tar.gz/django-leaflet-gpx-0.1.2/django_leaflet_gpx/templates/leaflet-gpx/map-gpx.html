@@ -1,0 +1,41 @@
+<section id="{{ map_id }}-container" class="map-container" data-gpx-source="{{ gpx_url }}">
+
+    <header>
+        <h3 class="title">Chargement de la carte...</h3>
+        <span class="start"></span>
+    </header>
+
+    <article>
+        <div id="{{ map_id }}" class="map gpx-map"></div>
+    </article>
+
+    <footer>
+        <ul class="info">
+            <li>Distance&nbsp;:&nbsp;<span class="distance"></span>&nbsp;km</li>
+            &mdash;
+            <li>Durée&nbsp;:&nbsp;<span class="duration"></span></li>
+            &mdash;
+            <li>Arrêt&nbsp;:&nbsp;<span class="stop-duration"></span></li>
+            &mdash;
+            <li>Vitesse moyenne&nbsp;:&nbsp;<span class="average-speed"></span>&nbsp;km/h</li>
+            &mdash;
+            <li>
+                Dénivellé&nbsp;:&nbsp;+<span class="elevation-gain"></span>&nbsp;m,&nbsp;-<span class="elevation-loss"></span>&nbsp;m&nbsp;(net&nbsp;:&nbsp;<span class="elevation-net"></span>&nbsp;m)
+            </li>
+        </ul>
+    </footer>
+
+</section>
+
+<script type="text/javascript">
+    let map = new LeaftletGpxMap('{{ map_id }}', {{ map_options|safe }});
+    window.addEventListener('load', () => {
+        map.load_gpx();
+        {% if map_markers %}
+        let markers = {{ map_markers|safe }};
+        for (let marker of markers) {
+            map.add_marker(marker.lat, marker.lng, marker.options);
+        }
+        {% endif %}
+    });
+</script>
