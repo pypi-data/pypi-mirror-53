@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: persession
+Version: 0.1.4
+Summary: A wrapper on requests session with persistence and login functionalities
+Home-page: https://github.com/rishabhsingh971/persession
+Author: Rishabh Singh
+Author-email: rishabhsingh971@gmail.com
+License: MIT
+Project-URL: Documentation, https://github.com/rishabhsingh971/persession/README.md
+Project-URL: Source, https://github.com/rishabhsingh971/persession/
+Project-URL: Tracker, https://github.com/rishabhsingh971/persession/issues
+Description: # PERSESSION (PERsistent SESSION)
+        A wrapper on [requests.Session](https://2.python-requests.org/en/master/api/#requests.Session) with following additional functionalities:
+        - Persistence: session can be cached in a file for persistence between script runs.
+        - Login functionalities: login and is_logged_in functions are available to help logging into sites
+        
+        
+        ### Usage
+        ```python
+        from persession import Session, LoginStatus
+        
+        base_url = 'https://e.com'
+        cache_file_path = 'cache.dat'
+        session = Session(cache_file_path)
+        
+        is_logged_in = session.is_logged_in()
+        if not is_logged_in:
+            login_url = base_url + '/login'
+            data = {'user': 'user', 'password': 'pass'}
+            res = session.login(login_url, data)
+            if res.login_status != LoginStatus.FAILURE:
+                is_logged_in = True
+                print('Login success')
+            else:
+                print('login failed')
+        if is_logged_in:
+            data_url = base_url + '/data'
+            res = session.get(data_url)
+        ```
+        You can also check out [example.py](./example.py) for a detailed example.
+        
+Keywords: requests session persistent login utility development
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3
+Description-Content-Type: text/markdown
