@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: entry-logger-sanic
+Version: 0.1.5
+Summary: NDJSON formatted logger integration with Sanic
+Home-page: https://github.com/EntryDSM/entry-logger-sanic
+Author: NovemberOscar
+Author-email: kim@seonghyeon.dev
+License: MIT
+Description: # entry-logger-sanic
+        ![PyPI](https://img.shields.io/pypi/v/entry-logger-sanic.svg)
+        ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/entry-logger-sanic.svg)
+        
+        A logger for Sanic based EntryDSM service
+        
+        ## Install
+        ```bash
+        pip install entry-logger-sanic
+        ```
+        
+        ## Feature
+        - Request logging
+        - System logging
+        - File saving in NDJSON format
+        
+        ## Usage
+        ```python
+        import os
+        from sanic import Sanic
+        from entry_logger_sanic import set_logger
+        
+        log_path = os.path.dirname(__file__).replace("/service", "").replace("/currentdir", "")  # example
+        
+        app = Sanic("SERVICE NAME")  # please specify service name!
+        set_logger(app, log_path)
+        
+        ...
+        ```
+        
+        The log file will be saved under `{designated path}/log` as `{given service name}.log`
+        
+        ## Versioning
+        ```
+        {Major}.{Minor}.{Patch}
+        ```
+        ex: 0.2.3
+        
+        - Major: without subcompatibility
+        - Minor: with partial subcompatibility
+        - Patch: with full subcompatibility
+        
+        ## Maintainer
+        
+        - Seonghyeon Kim - [NovemberOscar](https://github.com/NovemberOscar)
+Keywords: sanic,log,logger
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/markdown
