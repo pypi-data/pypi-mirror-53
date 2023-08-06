@@ -1,0 +1,20 @@
+syntax: glob
+.idea
+*.orig
+*.rej
+*~
+*.bak
+*.marks
+*.o
+*.pyc
+*.swp
+*.egg-info
+.eggs
+.tox
+build
+temp
+dist
+.coverage
+
+syntax: regexp
+.*\#.*\#$
