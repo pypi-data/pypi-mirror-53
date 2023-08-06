@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: oweatherm
+Version: 0.5.2
+Summary: Weather from OpenWeatherMap
+Home-page: UNKNOWN
+Author: nedogimov
+Author-email: mrfoxit01@gmail.com
+License: Apache License, Version 2.0
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+
+oweatherm [![PyPI](https://img.shields.io/pypi/v/oweatherm.svg)](https://pypi.org/project/oweatherm/) ![Python 3.4, 3.5, 3.6, 3.7](https://img.shields.io/pypi/pyversions/oweatherm.svg)
+=================================================================================================================================================================================
+**oweatherm** – Weather from OpenWeatherMap
+
+```python
+from weather import Weather
+
+a = Weather.find("city")
+print(a)
+```
+
+Installation
+------------
+    $ pip install oweatherm
+
+Upgrade
+------------
+    $ pip install --upgrade oweatherm
+
