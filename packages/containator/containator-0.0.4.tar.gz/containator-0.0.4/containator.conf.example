@@ -1,0 +1,52 @@
+# Containator example config file
+#
+# Uses INI-file syntax with some extra features. More details:
+# https://docs.python.org/3/library/configparser.html
+#
+[DEFAULT]
+# defaults for all sections can be defined here
+
+# individual container sections follows
+[tor]
+
+image = beli/tor
+
+# make the container unique
+named = yes
+
+# container name, defaults to section name
+# requires "named" to be set
+#name = tor
+
+# attach a PTY
+#attach = yes
+
+# stream output from container
+logs = yes
+
+# wait for container to finish
+wait = yes
+
+# remove container upon finish, implies wait
+remove = yes
+
+# Note: first of attach, logs and wait takes precedence, in that order
+
+# extra parameters for the create_container API function
+# https://docker-py.readthedocs.io/en/stable/api.html#docker.api.container.ContainerApiMixin.create_container
+extra_params = {"hostname": "tor"}
+
+[firefox]
+image = beli/firefox
+
+# bind a volume from the host, format same as for '-v' of 'docker run',
+# separate multiple, possibly double-quoted, volumes by whitespace
+volumes = ~/cont_ff_profile:/profile:rw
+
+remove = yes
+
+# run a command after starting the container, further action, like attaching,
+# streaming logs or removing the container happens only after the command
+# finishes
+cmd_after = sleep 3 ; xpra attach tcp:{NetworkSettings[IPAddress]}:10000
+
