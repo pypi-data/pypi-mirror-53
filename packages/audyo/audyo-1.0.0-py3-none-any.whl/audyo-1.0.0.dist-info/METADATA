@@ -1,0 +1,51 @@
+Metadata-Version: 2.0
+Name: audyo
+Version: 1.0.0
+Summary: Python audio manager
+Home-page: https://github.com/pypa/audyo
+Author: Marco Di Gioia
+Author-email: marco.digioia.dev@gmail.com
+License: UNKNOWN
+Project-URL: Source, https://github.com/MarcoDiGioia/audyo
+Keywords: simple audio recorder speaker
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.0.*, <4
+Description-Content-Type: text/markdown
+Provides-Extra: test
+Provides-Extra: dev
+Requires-Dist: pyaudio
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage; extra == 'test'
+
+=====
+audyo
+=====
+
+Python audio manager
+
+Description
+===========
+
+Simple i/o package for "audio things". You can easily record a phrase or play audio files.
+
+
+Note
+====
+
+Microphone object can record until silence is detected.
+This package provide two terminal commands:
+
+- audyo-rec: This command will record until silence to default "audyo.wav" file. (output parameter will be released soon)
+- audyo-play: This command will play audio file passed by parameter (will be released soon)
+
+
