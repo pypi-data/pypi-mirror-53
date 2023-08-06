@@ -1,0 +1,133 @@
+#!/bin/bash
+#
+# Additional functions that would mostly just pertain to a Ubuntu + Qemu setup
+#
+
+function build_vm() {
+    exclaim "Actually building the image, this can take up to 15 minutes"
+    rm -rf ~/.cache/image-create
+
+    local datastore_type=$1
+    local guest_os=$2
+    local guest_release=$3
+    local dev_mode=$4
+    local guest_username=$5
+    local image_output=$6
+
+    local elementes="base vm"
+    local trove_elements_path=${PATH_TROVE}/integration/scripts/files/elements
+    local GUEST_IMAGETYPE=${GUEST_IMAGETYPE:-"qcow2"}
+    local GUEST_IMAGESIZE=${GUEST_IMAGESIZE:-4}
+    local GUEST_CACHEDIR=${GUEST_CACHEDIR:-"$HOME/.cache/image-create"}
+    local working_dir=$(dirname ${image_output})
+
+    export GUEST_USERNAME=${guest_username}
+
+    # In dev mode, the trove guest agent needs to download trove code from
+    # trove-taskmanager host during service initialization.
+    if [[ "${dev_mode}" == "true" ]]; then
+        host_ip=$(ip route get 8.8.8.8 | head -1 | awk '{print $7}')
+        export CONTROLLER_IP=${CONTROLLER_IP:-${host_ip}}
+        export PATH_TROVE=${PATH_TROVE}
+        export ESCAPED_PATH_TROVE=$(echo ${PATH_TROVE} | sed 's/\//\\\//g')
+        export GUEST_LOGDIR=${GUEST_LOGDIR:-"/var/log/trove/"}
+        export ESCAPED_GUEST_LOGDIR=$(echo ${GUEST_LOGDIR} | sed 's/\//\\\//g')
+        export TROVESTACK_SCRIPTS=${TROVESTACK_SCRIPTS}
+        export HOST_SCP_USERNAME=${HOST_SCP_USERNAME:-$(whoami)}
+        export HOST_USERNAME=${HOST_SCP_USERNAME}
+        export SSH_DIR=${SSH_DIR:-"$HOME/.ssh"}
+        manage_ssh_keys
+    fi
+
+    # For system-wide installs, DIB will automatically find the elements, so we only check local path
+    if [ "${DIB_LOCAL_ELEMENTS_PATH}" ]; then
+        export ELEMENTS_PATH=${trove_elements_path}:${DIB_LOCAL_ELEMENTS_PATH}
+    else
+        export ELEMENTS_PATH=${trove_elements_path}
+    fi
+
+    export DIB_RELEASE=${guest_release}
+    export DIB_CLOUD_INIT_DATASOURCES="ConfigDrive"
+
+    # https://cloud-images.ubuntu.com/releases is more stable than the daily
+    # builds(https://cloud-images.ubuntu.com/xenial/current/),
+    # e.g. sometimes SHA256SUMS file is missing in the daily builds
+    declare -A releasemapping=( ["xenial"]="16.04" ["bionic"]="18.04")
+    export DIB_CLOUD_IMAGES="https://cloud-images.ubuntu.com/releases/${DIB_RELEASE}/release/"
+    export BASE_IMAGE_FILE="ubuntu-${releasemapping[${DIB_RELEASE}]}-server-cloudimg-amd64-root.tar.gz"
+
+    TEMP=$(mktemp -d ${working_dir}/diskimage-create.XXXXXXX)
+    pushd $TEMP > /dev/null
+
+    elementes="$elementes ${guest_os}"
+
+    if [[ "${dev_mode}" == "false" ]]; then
+        elementes="$elementes pip-and-virtualenv"
+        elementes="$elementes pip-cache"
+        elementes="$elementes guest-agent"
+    else
+        elementes="$elementes ${guest_os}-guest"
+        elementes="$elementes ${guest_os}-${guest_release}-guest"
+    fi
+
+    elementes="$elementes ${guest_os}-${datastore_type}"
+    elementes="$elementes ${guest_os}-${guest_release}-${datastore_type}"
+
+    # Build the image
+    disk-image-create -x \
+      -a amd64 \
+      -o ${image_output} \
+      -t ${GUEST_IMAGETYPE} \
+      --image-size ${GUEST_IMAGESIZE} \
+      --image-cache ${GUEST_CACHEDIR} \
+      $elementes
+
+    # out of $TEMP
+    popd > /dev/null
+    sudo rm -rf $TEMP
+
+    exclaim "Image ${image_output}.${GUEST_IMAGETYPE} was built successfully."
+}
+
+function build_guest_image() {
+    exclaim "Params for build_guest_image function: $@"
+
+    local datastore_type=${1:-"mysql"}
+    local guest_os=${2:-"ubuntu"}
+    local guest_release=${3:-"xenial"}
+    local dev_mode=${4:-"true"}
+    local guest_username=${5:-"ubuntu"}
+    local output=$6
+
+    VALID_SERVICES='mysql percona mariadb redis cassandra couchbase mongodb postgresql couchdb vertica db2 pxc'
+    if ! [[ " $VALID_SERVICES " =~ " $datastore_type " ]]; then
+        exclaim "You did not pass in a valid datastore type. Valid types are:" $VALID_SERVICES
+        exit 1
+    fi
+
+    build_vm ${datastore_type} ${guest_os} ${guest_release} ${dev_mode} ${guest_username} ${output}
+}
+
+function clean_instances() {
+    LIST=`virsh -q list|awk '{print $1}'`
+    for i in $LIST; do sudo virsh destroy $i; done
+}
+
+# In dev mode, guest agent needs to ssh into the controller to download code.
+function manage_ssh_keys() {
+    if [ -d ${SSH_DIR} ]; then
+        echo "${SSH_DIR} already exists"
+    else
+        echo "Creating ${SSH_DIR} for ${HOST_SCP_USERNAME}"
+        sudo -Hiu ${HOST_SCP_USERNAME} mkdir -m go-w -p ${SSH_DIR}
+    fi
+
+    if [ ! -f ${SSH_DIR}/id_rsa.pub ]; then
+         /usr/bin/ssh-keygen -f ${SSH_DIR}/id_rsa -q -N ""
+    fi
+
+    cat ${SSH_DIR}/id_rsa.pub >> ${SSH_DIR}/authorized_keys
+    sort ${SSH_DIR}/authorized_keys | uniq > ${SSH_DIR}/authorized_keys.uniq
+    mv ${SSH_DIR}/authorized_keys.uniq ${SSH_DIR}/authorized_keys
+    chmod 600 ${SSH_DIR}/authorized_keys
+}
