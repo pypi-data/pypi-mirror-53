@@ -1,0 +1,72 @@
+Metadata-Version: 1.1
+Name: carson-logging
+Version: 0.1.0
+Summary: easier to use original python provides a module of logging
+Home-page: https://github.com/CarsonSlovoka/carson-logging
+Author: Carson
+Author-email: jackparadise520a@gmail.com
+License: Apache-2.0
+Download-URL: https://github.com/CarsonSlovoka/carson-logging/tarball/v0.1.0
+Description: ===================
+        CLogging
+        ===================
+        
+        .. sectnum::
+        
+        
+        
+        Install
+        ===============
+        
+            * ``pip install carson-logging``
+        
+        import packages
+        ===============
+        
+        .. code-block:: python
+        
+            from Carson.Class.Logging import CLogging
+        
+        USAGE
+        ===============
+        
+        Basic
+        -----------
+        
+        .. code-block:: python
+        
+            log = CLogging("log_name", "temp_dir/xxx.log")
+            log.info('info msg')
+            log.debug('info msg')
+            log.warning('info msg')
+            log.error('info msg')
+            log.critical('info msg')
+        	
+        Advanced
+        ----------
+        
+        .. code-block:: python
+        
+            my_define_format = logging.Formatter(u'%(asctime)s|%(levelname)s|%(name)s|%(message)s')
+            log = CLogging("log_name", "C:dir/xxx.log", logging.INFO, 'w', my_define_format, stream_handler_on=True, stream_level=logging.ERROR)
+        
+        Issues
+        ===============
+        
+        * `Issues <https://github.com/CarsonSlovoka/carson-logging/issues>`_
+Keywords: logging,log
+Platform: UNKNOWN
+Classifier: Topic :: System :: Logging
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Natural Language :: Chinese (Traditional)
+Classifier: Natural Language :: English
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Unix
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
