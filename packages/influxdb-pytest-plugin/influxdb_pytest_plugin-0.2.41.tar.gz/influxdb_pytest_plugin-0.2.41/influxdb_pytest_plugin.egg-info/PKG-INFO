@@ -1,0 +1,118 @@
+Metadata-Version: 1.1
+Name: influxdb-pytest-plugin
+Version: 0.2.41
+Summary: Plugin for influxdb and pytest integration.
+Home-page: https://gitlab.workfront.tech/globalqa/influxdb-grafana-reporting/influxdb-pytest
+Author: Strike Team
+Author-email: elenaramyan@workfront.com
+License: UNKNOWN
+Description: Influxdb Pytest Plugin
+        ======================
+        
+        Pytest plugin designed for reporting test results to the 'InfluxDB'.
+        
+        Table of Contents
+        =================
+        - About this documentation
+        - Usage
+        - Examples
+        - Send attachment
+        
+        About this documentation
+        ========================
+        Welcome to the Influxdb Pytest Plugin documentation!
+        
+        This style guide provides set of editorial guidelines for anyone using Influxdb Pytest Plugin.
+        
+        Usage
+        =====
+        
+        **Installation**
+        
+            pip install influxdb-pytest-plugin
+        
+        **Launching**
+        
+        To run a test with influxdb-pytest-plugin, the '--influxdb-pytest' flag should be provided.
+        
+            pytest -sv --influxdb-pytest
+        
+        Prepare the config file :code:`pytest.ini` in root directory of tests and/or call next to the run command the mandatory config variables which are mentioned below:
+        
+        
+        The next mandatory fields should be mentioned in :code:`pytest.ini` or run through command line without '--' prefix:
+        
+        - :code:`--db_host` - host of the influxdb
+        - :code:`--db_name` - name of influxdb table
+        
+        And here are the optional fields:
+        
+        - :code:`--db_port` - port of the influxdb
+        - :code:`--db_user` - username of influxdb user
+        - :code:`--db_password` - password of influxdb user
+        - :code:`--project` - project name
+        - :code:`--version` - custom version of project
+        - :code:`--run_id` - run id (Can be passed as CI variable)
+        
+        Example of :code:`pytest.ini`:
+        
+        .. code-block:: text
+        
+            [pytest]
+            db_host = <DB_HOST>
+            db_port = <DB_PORT>
+            db_name = <DB_NAME>
+            db_user = <DB_USER>
+            db_password = <DB_PASSWORD>
+            project = <PROJECT_NAME>
+            version = <PROJECT_NAME>
+            run_id = <RUN_ID>
+        
+        Add custom fields as an additional data
+        =======================================
+        **Add custom fields for test result**
+        For adding custom fields as an additional data for test result the code like below should be added in conftest.py.
+        
+        .. code-block:: python
+        
+            @pytest.fixture(scope='function', autouse=True)
+            def test_suite(request):
+                from influxdb_pytest_plugin import TestResultDTO
+                test_result_dto = TestResultDTO()
+                test_name = request.node.nodeid
+                TestResultDTO.set_tag_values(test_result_dto, test_name, {'tag1': 'tag_value1', 'tag2': 'tag_value2'})
+                TestResultDTO.set_field_values(test_result_dto, test_name, {'field1': 'field_value1', 'field2': 'field_value2'})
+        
+        **Add custom fields for suite result**
+        For adding custom fields as an additional data for suite result the :code:`pytest_terminal_summary` pytest plugin like below in conftest.py.
+        
+        .. code-block:: python
+        
+            @pytest.hookimpl(hookwrapper=True)
+            def pytest_terminal_summary(config, terminalreporter):
+                from influxdb_pytest_plugin import SuiteResultDTO
+                suite_result_dto = SuiteResultDTO()
+                SuiteResultDTO.set_tag_values(suite_result_dto, {'tag1': 'tag_value1'})
+                SuiteResultDTO.set_field_values(suite_result_dto, {'field1': 'field_value1'})
+                yield
+        
+        
+        Send screenshot as attachment
+        =============================
+        For sending the screenshot to the influxdb, the :code:`screenshot_url` fixture should be used in function scope like below:
+        
+        .. code-block:: python
+        
+            @pytest.fixture(scope="function")
+            def chrome_driver_init(request, screenshot_url, pytestconfig):
+            chrome_driver = webdriver.Chrome()
+            request.cls.driver = chrome_driver
+            yield
+            if request.node.rep_call.failed and pytestconfig.getoption('--influxdb-pytest'):
+                screenshot_link = 'URL_EXAMPLE'
+                chrome_driver.save_screenshot(screenshot_link)
+                screenshot_url(screenshot_link)
+            chrome_driver.close()
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
