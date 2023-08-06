@@ -1,0 +1,34 @@
+
+pipelines:
+  branches:
+    master:
+      - step:
+          image: python:3.6.8
+          name: Master siempre funciona
+          script:
+            - pip install -r requirements.txt
+            - python -m unittest discover tests/
+          artifacts:
+            - dist/**
+      - step:
+          name: Publicación de versión en PyPI
+          trigger: manual
+          script:
+            - pipe: atlassian/pypi-publish:0.2.7
+              variables:
+                PYPI_USERNAME: $PYPI_USERNAME
+                PYPI_PASSWORD: $PYPI_PASSWORD
+                REPOSITORY: $PYPI_REPO_URL
+
+  pull-requests:
+    '**':
+      - step:
+          image: python:3.6.8
+          caches:
+            - pip
+          name: PR funciona
+          script:
+            - pip install -r requirements.txt
+            - python -m unittest discover tests/
+          artifacts:
+            - dist/**
