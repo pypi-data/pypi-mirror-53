@@ -1,0 +1,121 @@
+Metadata-Version: 2.1
+Name: azure-mgmt-frontdoor
+Version: 0.3.0
+Summary: Microsoft Azure Front Door Service Client Library for Python
+Home-page: https://github.com/Azure/azure-sdk-for-python
+Author: Microsoft Corporation
+Author-email: azpysdkhelp@microsoft.com
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/x-rst
+Requires-Dist: msrest (>=0.5.0)
+Requires-Dist: msrestazure (<2.0.0,>=0.4.32)
+Requires-Dist: azure-common (~=1.1)
+Requires-Dist: azure-mgmt-nspkg ; python_version<'3.0'
+
+Microsoft Azure SDK for Python
+==============================
+
+This is the Microsoft Azure Front Door Service Client Library.
+
+Azure Resource Manager (ARM) is the next generation of management APIs that
+replace the old Azure Service Management (ASM).
+
+This package has been tested with Python 2.7, 3.5, 3.6 and 3.7.
+
+For the older Azure Service Management (ASM) libraries, see
+`azure-servicemanagement-legacy <https://pypi.python.org/pypi/azure-servicemanagement-legacy>`__ library.
+
+For a more complete set of Azure libraries, see the `azure <https://pypi.python.org/pypi/azure>`__ bundle package.
+
+
+Usage
+=====
+
+For code examples, see `Front Door Service
+<https://docs.microsoft.com/python/api/overview/azure/>`__
+on docs.microsoft.com.
+
+
+Provide Feedback
+================
+
+If you encounter any bugs or have suggestions, please file an issue in the
+`Issues <https://github.com/Azure/azure-sdk-for-python/issues>`__
+section of the project.
+
+
+.. image::  https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-python%2Fazure-mgmt-frontdoor%2FREADME.png
+
+
+.. :changelog:
+
+Release History
+===============
+
+0.3.0 (2019-10-11)
+++++++++++++++++++
+
+- Fixed new network experiment SDK structure
+
+0.2.0 (2019-10-09)
+++++++++++++++++++
+
+**Features**
+
+- Model RoutingRule has a new parameter route_configuration
+- Model PolicySettings has a new parameter redirect_url
+- Model PolicySettings has a new parameter custom_block_response_body
+- Model PolicySettings has a new parameter custom_block_response_status_code
+- Model HealthProbeSettingsModel has a new parameter enabled_state
+- Model HealthProbeSettingsModel has a new parameter health_probe_method
+- Model HealthProbeSettingsUpdateParameters has a new parameter enabled_state
+- Model HealthProbeSettingsUpdateParameters has a new parameter health_probe_method
+- Model FrontDoorUpdateParameters has a new parameter backend_pools_settings
+- Model CustomRule has a new parameter enabled_state
+- Model FrontDoor has a new parameter backend_pools_settings
+- Model RoutingRuleUpdateParameters has a new parameter route_configuration
+- Added operation group ProfilesOperations
+- Added operation group ExperimentsOperations
+- Added operation group PreconfiguredEndpointsOperations
+- Added operation group ManagedRuleSetsOperations
+- Added operation group FrontDoorManagementClientOperationsMixin
+
+**Breaking changes**
+
+- Parameter certificate_source of model CustomHttpsConfiguration is now required
+- Parameter protocol_type of model CustomHttpsConfiguration is now required
+- Model RoutingRule no longer has parameter custom_forwarding_path
+- Model RoutingRule no longer has parameter forwarding_protocol
+- Model RoutingRule no longer has parameter cache_configuration
+- Model RoutingRule no longer has parameter backend_pool
+- Model CustomRule no longer has parameter etag
+- Model CustomRule no longer has parameter transforms
+- Model CustomHttpsConfiguration has a new required parameter minimum_tls_version
+- Model RoutingRuleUpdateParameters no longer has parameter custom_forwarding_path
+- Model RoutingRuleUpdateParameters no longer has parameter forwarding_protocol
+- Model RoutingRuleUpdateParameters no longer has parameter cache_configuration
+- Model RoutingRuleUpdateParameters no longer has parameter backend_pool
+- Removed operation FrontendEndpointsOperations.delete
+- Removed operation FrontendEndpointsOperations.create_or_update
+- Model ManagedRuleSet has a new signature
+- Removed operation group LoadBalancingSettingsOperations
+- Removed operation group RoutingRulesOperations
+- Removed operation group HealthProbeSettingsOperations
+- Removed operation group BackendPoolsOperations
+
+0.1.0 (2019-03-11)
+++++++++++++++++++
+
+* Initial Release
+
+
