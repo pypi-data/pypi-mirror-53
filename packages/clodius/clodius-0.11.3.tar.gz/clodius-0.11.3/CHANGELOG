@@ -1,0 +1,116 @@
+v0.11.3
+
+- Maintenance: Switched from nose to pytest and added coverage reporting.
+- Use columnar format for BAM reads return values
+
+v0.11.2
+
+- Added `max_tile_width` parameter to ct.bam.tiles() so that users can set a
+  limit on how large of a region data is returned for
+
+v0.11.0
+
+- Added bamfile support
+
+v0.10.12
+
+- Simplified density tiles generator.
+- Fix error with `npvector` tileset_info.
+- Add `__version__`.
+
+v0.10.11
+
+- Calculate np.nan on the fly if not available for npvector tracks
+
+v0.10.10
+
+- Fix error in bedfile_to_multivec conversion when encountering value-less files
+- Update the bedpe aggregator to fix the error in using a chromsizes file
+- Make tsv_to_mrmatrix more flexible and add it to the exported scripts.
+- Display more meaningful error messages when encountering unknown chromosomes or assemblies
+- Removed redundant multivec function
+- Removed obsolete bigwig function
+- Make tsv_to_mrmatrix more flexible and add it to the exported
+- Detect non-symmetric square coolers using the storage-mode metadata. Support for the symmetric property is retained for the legacy mcool format.
+
+v0.10.7
+
+- Changed bins_per_dimension in npvector.tileset_info to match the value in
+in npvector.tiles (1024)
+
+v0.10.5
+
+- Removed slugid decode
+
+v0.10.2 (2019-02-06)
+
+- new option to import a "states" file format, a bed file with categorical data, e.g. from chromHMM to multivec format.
+- while converting a bed file to multivec, each segment can now be a multiple of base_resolution,
+rather than exactly match the base_resolution
+
+v0.10.1 (2019-01-22)
+
+- Removed a buggy print statement from the conversion script
+
+v0.9.5 (2018-11-11)
+
+- If the start position is greater than the end position, switch them around
+
+v0.9.0 (2018-05-07)
+
+- Removed clodius aggregate bigwig
+
+v0.8.0 (2018-05-06)
+
+- Bug fixes
+- GeoJSON aggregation
+- Multivec tiles
+
+v0.7.4 (2018-02-14)
+
+- Greatly sped up bedfile aggregation and fixed the maximum per tile limiting
+
+v0.7.3 (2018-01-31)
+
+- Use random importance by default
+
+v0.7.2 (2017-12-04)
+
+- Populate the xEnd field
+
+v0.7.1 (2017-12-04)
+
+- Added the 'header' field to beddb tiles
+
+v0.7.0 (2017-10-04)
+
+- Replaced get_2d_tile with get_2d_tiles
+- Replaced get_tile with get_tiles
+
+v0.6.5 (2017-07-14)
+
+- Added a delimiter option to bedfiles
+- Fixed beddb uid decoding
+- Adding decoding to slugid.nice() methods
+
+v0.6.0-0.6.4 (2017-07-13)
+
+- python3 support
+
+v0.5.0
+
+- Added clodius aggregate bedpe
+- More extensive unit tests
+
+v0.4.7
+
+- Renamed tsv to bedlike
+
+v0.4.6
+
+- Bug fixes in tile-text-file (tsv tiling)
+
+v0.4.3
+
+- When extracting a certain chromosome, place features at the position of the
+chromosome
