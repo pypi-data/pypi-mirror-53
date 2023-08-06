@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: sensplit
+Version: 0.0.5
+Summary: Splits a dataset (in Pandas dataframe format) to train/test sets.
+Home-page: https://github.com/pypa/sensplit
+Author: Mohammad Malekzadeh
+Author-email: moh.malekzadeh@gmail.com
+License: UNKNOWN
+Description: # SenSplit
+        This python package helps to splits a sensor dataset (in Pandas DataFrame format) into train and test sets.
+        
+        -----------------------------------------
+        ## Homepage:
+        https://github.com/mmalekzadeh/sensplit
+        
+        -----------------------------------------
+        ## Installation 
+        Install SenSplit from PyPI (recommended):
+        ```sh
+        pip install sensplit
+        ```
+        - **Alternatively: install SenSplit from the GitHub source:**
+        
+        First, clone SenSplit using `git`:
+        
+        ```sh
+        git clone https://github.com/mmalekzadeh/sensplit
+        ```
+        
+         Then, `cd` to the SenSplit folder and run the install command:
+        ```sh
+        cd sensplit
+        python setup.py install
+        ```
+        -----------------------------------------
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
