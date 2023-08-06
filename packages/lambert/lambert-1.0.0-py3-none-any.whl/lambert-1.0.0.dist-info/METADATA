@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: lambert
+Version: 1.0.0
+Summary: Convert location units from WS84 to Lambert (I,II,III) and reverse
+Home-page: https://github.com/willena/lambert-python
+Author: Willena
+Author-email: contact@guillaumevillena.fr
+License: MIT
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+
+# Lambert-python
+
+A pure python module to convert from Lambert to WGS84 positioning system
+Highly inspired by https://github.com/yageek/lambert-java
+Thank you Yannick Heinrich !
+
+## Install 
+
+To install this module just type
+```
+pip install lambert
+```
+
+## Example
+
+```python
+
+from lambert import Lambert93, convertToWGS84Deg
+
+print(str(Lambert93.n()))
+pt = convertToWGS84Deg(780886, 6980743, Lambert93)
+print("Point latitude:" + str(pt.getY()) + " longitude:" + str(pt.getX()))
+```
+
+
+
+
