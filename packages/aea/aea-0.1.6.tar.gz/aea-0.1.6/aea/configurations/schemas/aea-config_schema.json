@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for the agent configuration file.",
+    "additionalProperties": false,
+    "type": "object",
+    "required": ["aea_version", "agent_name", "authors", "version", "license", "url", "private_key_pem_path", "connections", "default_connection", "protocols", "skills"],
+    "properties": {
+        "aea_version": {"type": "string"},
+        "agent_name": {"type": "string"},
+        "authors": {"type": "string"},
+        "version": {"type": "string"},
+        "license": {"type": "string"},
+        "url": {"type": "string"},
+        "registry_path": {"type": "string"},
+        "private_key_pem_path": {"type": "string"},
+        "connections": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string"}
+        },
+        "default_connection": {"type": "string"},
+        "protocols": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string"}
+        },
+        "skills": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string"}
+        }
+    }
+}
