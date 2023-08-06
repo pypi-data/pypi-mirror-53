@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reference-tab>
+    <group value="redacteurchef">
+        <key value="invite">rédacteur invité</key>
+        <key value="">rédacteur en chef</key>
+        <key value="regulier">rédacteur en chef</key>
+    </group>
+    <group value="lists">
+        <key value="listeord">order</key>
+        <key value="listenonord">simple</key>
+    </group>
+    <group value="article-type">
+        <key value="article">research-article</key>
+        <key value="autre">other</key>
+        <key value="compterendu">book-review</key>
+        <key value="note">other</key><!-- must be fixed: "note" is not available in JATS -->
+    </group>
+    <group value="publication-format">
+        <key value="publication">epub</key>
+        <key value="pubpapier">ppub</key>
+        <key value="pubnum">epub</key>
+    </group>
+    <group value="ref-type">
+        <key value="note">fn</key>
+    </group>
+    <group value="image-type">
+        <key value="figure">figure</key>
+        <key value="tableau">table</key>
+        <key value="forme">figure</key>
+        <key value="equation">equation</key>
+        <key value="example">example</key>
+        <key value="encadre">figure</key>
+        <key value="glossaire">glossary</key>
+        <key value="poeme">figure</key>
+        <key value="programme">program</key>
+    </group>
+    <group value="image-position">
+        <key value="ligne">anchor</key>
+        <key value="bloc">float</key>
+    </group>
+    <group value="table-cel-halign">
+        <key value="droite">right</key>
+        <key value="gauche">left</key>
+        <key value="centre">center</key>
+        <key value="justifie">justify</key>
+        <key value="carac">char</key>
+    </group>
+    <group value="table-cel-valign">
+        <key value="haute">top</key>
+        <key value="centre">middle</key>
+        <key value="bas">bottom</key>
+        <key value="lignebase">baseline</key>
+    </group>
+</reference-tab>

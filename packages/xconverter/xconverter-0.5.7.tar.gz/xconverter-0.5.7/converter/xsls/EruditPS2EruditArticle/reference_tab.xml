@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reference-tab>
+    <group value="role">
+        <key value="rédacteur invité">invite</key>
+        <key value="rédacteur en chef">regulier</key>
+    </group>
+    <group value="pub-id-type">
+        <key value="doi">doi</key>
+    </group>
+    <group value="contrib-type">
+        <key value="manager">directeur</key>
+        <key value="editor">redacteurchef</key>
+        <key value="author">auteur</key>
+    </group>
+    <group value="lists">
+        <key value="order">listeord</key>
+        <key value="simple">listenonord</key>
+    </group>
+    <group value="article-type">
+        <key value="research-article">article</key>
+        <key value="other">outre</key>
+        <key value="book-review">compterendu</key>
+        <key value="note">note</key>
+    </group>
+    <group value="publication-format">
+        <key value="epub">publication</key>
+        <key value="ppub">pubpapier</key>
+        <key value="epub">pubnum</key>
+    </group>
+    <group value="ref-type">
+        <key value="fn">note</key>
+    </group>
+    <group value="image-type">
+        <key value="figure">figure</key>
+        <key value="table">tableau</key>
+        <key value="figure">forme</key>
+        <key value="equation">equation</key>
+        <key value="example">example</key>
+        <key value="encadre">encadre</key> <!-- find relation in JATS -->
+        <key value="glossary">glossaire</key>
+        <key value="figure">poeme</key> <!-- find relation in JATS -->
+        <key value="program">programme</key>
+    </group>
+    <group value="image-position">
+        <key value="anchor">ligne</key>
+        <key value="float">bloc</key>
+    </group>
+    <group value="table-cel-halign">
+        <key value="right">droite</key>
+        <key value="left">gauche</key>
+        <key value="center">centre</key>
+        <key value="justify">justifie</key>
+        <key value="char">carac</key>
+    </group>
+    <group value="table-cel-valign">
+        <key value="top">haute</key>
+        <key value="middle">centre</key>
+        <key value="bottom">bas</key>
+        <key value="baseline">lignebase</key>
+    </group>
+</reference-tab>
