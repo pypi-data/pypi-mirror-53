@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+
+from subprocess import run, PIPE
+from ipaddress import ip_address
+import socket
+import sys
+
+
+BLUE, RED, WHITE, YELLOW, MAGENTA, GREEN, END = '\33[94m', '\033[91m', '\33[97m', '\33[93m', '\033[1;35m', '\033[1;32m', '\033[0m'
+
+def quit(message, exit_code):
+    if exit_code == 0:
+        print(message)
+    else:
+        print(f"{RED}{message}{END}")
+    sys.exit(exit_code)
+
+
+def get_devices():
+    output = run("adb devices", shell=True, stdout=PIPE).stdout.decode("utf-8")
+    # str().splitlines
+    devices = [" - ".join(device.split("\t")) for device in output.splitlines()[1:] if device != ""]
+
+    return devices
+
+
+def get_packages(device_id=None):
+    if device_id:
+        result = run(f"adb -s {device_id} shell pm list packages", shell=True, stdout=PIPE)
+    else:
+        result = run("adb shell pm list packages", shell=True, stdout=PIPE)
+
+    packages = result.stdout.decode("utf-8").splitlines();
+
+    # Strip "package:" prefix
+    packages = [package.split(":")[1] for package in packages]
+
+    return packages
+
+
+def add_spacing(number):
+    number = str(number)
+    if len(number) == 1:
+        return f"  {number}"
+    elif len(number) == 2:
+        return f" {number}"
+    else:
+        return number
+
+
+def list_devices(devices):
+    for index, device in enumerate(devices):
+        print(f"  [{index + 1}] {device}")
+
+
+def list_packages(packages):
+    for index, package in enumerate(packages):
+        print(f"{add_spacing(index + 1)}) {package}")
+
+
+def remove_package(package):
+    result = run(f"adb shell pm uninstall -k --user 0 {package}", shell=True, stdout=PIPE)
+    print(f"\n{GREEN}{result.stdout.decode('utf-8')}{END}")
+
+
+def remove_packages(indexes, packages):
+    try:
+        for package_index in indexes:
+            remove_package(packages[int(package_index) - 1])
+    except IndexError:
+        print(f"\n{RED}ERROR: {package_index} is invalid index!{END}")
+
+
+def connect_with_usb():
+    devices = get_devices()
+
+    if len(devices) == 0:
+        quit("\nERROR: You don't have any devices connected to the computer.\nAlso make sure that you have USB debugging enabled", 1)
+
+    print("Please select a device from the list:\n")
+    list_devices(devices)
+
+    try:
+        device_num = int(input(f"\n{BLUE}removio{END}> "))
+        selected_device = devices[device_num - 1]
+
+        device_id = selected_device.split(" ")[0]
+
+        return device_id
+    except ValueError:
+        quit("ERROR: Please specify a valid device!", 1)
+    except IndexError:
+        quit("ERROR: Invalid device", 1)
+
+
+def connect_with_tcpip():
+    ip_address = input("IP address of your device:\n")
+    validate_ip(ip_address)
+
+    port = input("\nPort for connecting:\n")
+    validate_port(port)
+
+    # If ADB server is not running, it will start automatically
+    connnection = run(f"adb connect {ip_address}:{port}", shell=True, stderr=PIPE, stdout=PIPE)
+
+    message = connnection.stdout.decode("utf-8")
+
+    if message.startswith("connected to"):
+        print(f"{GREEN}\n{message}{END}")
+    else:
+        quit("ERROR: ADB failed to connect to your device.", 1)
+
+
+def validate_ip(ip_addr):
+    try:
+        ip_address(ip_addr)
+    except ValueError:
+        quit("ERROR: Invalid IP address!", 1)
+
+
+def validate_port(port):
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            return s.bind(('localhost', int(port)))
+    except TypeError:
+        quit(f"ERROR: {port} is not valid port!", 1)
+    except PermissionError:
+        quit(f"ERROR: Port {port} is already in use!", 1)
+
+
+def check_for_adb():
+    adb_path = run("which adb", shell=True, stdout=PIPE).stdout.decode("utf-8")
+
+    if adb_path == "":
+        quit("ERROR: You don't have ADB installed on your machine!", 1)
+
+
+def main():
+    check_for_adb()
+
+    choice = input(f"Connect to the device with: \n\n{WHITE}  [1] TCP/IP \n  [2] USB\n\n  [E] Exit Removio{END}\n\n{BLUE}removio{END}> ").strip()
+
+    if choice == "1":
+        connect_with_tcpip()
+        packages  = get_packages()
+    elif choice == "2":
+        device_id = connect_with_usb()
+        packages = get_packages(device_id)
+    elif choice == "E":
+        quit("\nbye :)", 0)
+    else:
+        quit("\nERROR: Please select a valid option!", 1)
+
+    list_packages(packages)
+    print("\nNOTE: Type E to exit")
+
+    while True:
+        output = input(f"\n{BLUE}removio{END}> ")
+
+        if output.strip() == "E":
+            quit("\nbye :)", 0)
+
+        indexes = output.split()
+        remove_packages(indexes, packages)
+
+
+if __name__ == "__main__":
+    main()
