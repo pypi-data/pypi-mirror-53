@@ -1,0 +1,364 @@
+@media screen {
+/*Prayers*/
+    #prayers {
+    $green: #4C833B;
+    $vermillion: #F67400;
+    $red: #EE3400;
+
+    $dgreen: #1e530b;
+    $dark: #201f1e;
+
+    /*$bg: #1e530b;*/
+    $bg: #164007;
+    $behind-bg: #000f29;
+    $sleeve: #fff;
+    $box: wheat;
+    $textc: #201f1e;
+    $outt: #eee;
+    $accent: #EE3400;
+    /* Default (small) screens */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: $bg;
+            color: $outt;
+            text-align: center;
+            font-size: 1.5em;
+            font-family: serif;
+            margin: 0em;
+        }
+
+        main {
+            color: $textc;
+            a:link {
+                color: #0032A3;
+                text-decoration: underline
+            }
+
+            a:visited {
+                color: #640FB9;
+            }
+
+            a:hover, a:focus, a:active {
+                color: #940000;
+            }
+        }
+
+        main, figure {
+            margin-left: 0em;
+            padding-left: 0em;
+        }
+
+        main > div, main > section, figure#comic, , .cominavbox, main > .tagslist {
+            background: $sleeve;
+            border: double thick $accent;
+        }
+
+        main > div, main > section, main > .tagslist {
+            background-color: $sleeve;
+        }
+
+        h1 {
+            margin: 0em;
+            font-size: 1.2em;
+        }
+
+        h2 {
+            font-size: 1em;
+            padding-bottom: 0.5em;
+            border-bottom: medium dashed $accent;
+        }
+        figure {
+            padding: 0.3em;
+            text-align: center;
+            margin-right: 0;
+        }
+
+        .cominavbox {
+            max-width: 100%;
+            display: inline-block;
+            padding: 0em;
+        }
+        .cominavbox li {
+            display: inline-block;
+            padding: 0em;
+            margin: 0em 1em;
+        }
+
+        .cominavbox li a {
+            &:active, &:focus {
+                background: $sleeve;
+                outline: dashed medium $accent;
+            }
+        }
+
+        * + * {
+            margin-top: 0.5em
+        }
+
+        header {
+            margin-top: 0;
+        }
+
+        /*TODO: Fix the skip link hiding method*/
+        #skippy {
+            text-align: left;
+            margin-bottom: 0em;
+            display: inline;
+        }
+        #skippy a, #skippy a:hover, #skippy a:visited {
+        position:absolute;
+        left:-10000px;
+        top:auto;
+        width:1px;
+        height:1px;
+        overflow:hidden;
+        }
+
+        #skippy a:active, #skippy a:focus {
+          position: static;
+          height: auto;
+          width: auto;
+          font-size: 1em;
+          margin-top: 0em;
+          color: #00f;
+        }
+
+        nav li {
+            display: inline-block;
+            padding: 1em;
+            background: $box;
+            border: solid medium $dark;
+            color: $textc;
+            a:link {
+                color: #0300AD
+            }
+            a:visited {
+                color: #5B008A;
+            }
+            a:hover, a:active, a:focus {
+                color: #8A0000
+            }
+        }
+
+        #commentary, #transcript {
+            text-align: left;
+        }
+
+        a:link {
+            color: #99D1FF;
+            text-decoration: underline
+        }
+
+        a:visited {
+            color: #EBBDFF;
+        }
+
+        a:hover, a:focus, a:active {
+            color: #FFADB7;
+        }
+
+        .statline {
+            font-weight: bold;
+        }
+
+        footer p {
+            margin-left: 0em;
+            text-align: left;
+        }
+
+        main > div, main > section, main > .tagslist {
+            padding: .5em 1.4em 0em 1.2em;
+            text-align: left;
+        }
+
+        img, embed, object, video {
+            max-width: 100%;
+        }
+
+        .archive li {
+            margin-top: 1em;
+        }
+
+        .charname {
+            font-weight: bold;
+        }
+
+        .action {
+            font-weight: bold;
+        }
+
+        .char {
+            text-align: left;
+            .chartraits {
+                overflow-wrap: break-word;
+            }
+            dt {
+                font-weight: bold;
+                &:after {
+                    content: ":"
+                };
+            };
+            dd:after {
+                content: "\A";
+                white-space: pre;
+            };
+            dd {
+                margin-left: 0em;
+            };
+            dt, dd {
+                display: inline;
+                white-space: pre-wrap;
+            };
+        }
+
+        .intro {
+            border: none;
+            background: none;
+            margin: 0em;
+            padding: 0em;
+        }
+        
+        .tagslist, .chapterarch {
+            list-style-type: none;
+            padding-left: 0em
+        }
+
+    /*Medium screens*/
+
+        @media screen and (min-width: 1024px) {
+
+            * + * {
+                margin-top: 1em
+            }
+            body {
+                margin-left: 1em;
+                background: url("torii.png") 99% 99% no-repeat fixed, url("trees.png") repeat-y -200px 0%, $behind-bg url("trees.png") repeat-y 101% 0%;
+            }
+
+            figure#comic {
+                margin: 1em 1em 0em 1em;
+                padding: 1em 1em 0em 1em;
+                img {
+                    max-width: 100%;
+                    border: solid thin $sleeve
+                }
+                figcaption {
+                    margin-bottom: 1em;
+                }
+            }
+
+            .cominavbox {
+                margin: 0em 1em;
+                li {
+                    margin: 0.5em;
+                    padding: 0.5em;
+                }
+            }
+
+            figure + .cominavbox {
+                margin-top: 1em;
+            }
+
+            header {
+                background: url("shimenawa.png") 98% 0% no-repeat, url("shimenawa.png") 2% 0% no-repeat;
+            }
+
+            h1 {
+                font-size: 1.4em;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 1.2em;
+                margin-bottom: 0.5em;
+                margin-top: 0.5em;
+            }
+
+            h3 {
+                font-size: 1em;
+            }
+
+            nav {
+                max-width: 75%;
+                margin-left: 10%;
+                margin-bottom: 1em;
+                padding-bottom: 0.1em;
+            }
+
+            nav li {
+                padding: 1em;
+                margin: 0em;
+            }
+
+            main {
+                line-height: 1.2em;
+                & > div, & > section, & > .tagslist {
+                    max-width: 65%;
+                    text-align: left;
+                    padding: 1em;
+                }
+            }
+
+            .statline {
+                font-size: 0.8em;
+            }
+
+            footer p {
+                font-size: 0.7em;
+            }
+
+            .action {
+                text-indent: 1em;
+            }
+
+            main > section {
+                & + section {
+                    margin-top: 0em;
+                };
+                .status {
+                    margin-top: 0em;
+                }
+            }
+            
+            #extras {
+                padding-top: 0em;
+            }
+
+            .intro {
+                h2 {
+                    margin-bottom: 0.5em;
+                };
+                img {
+                    display: inline;
+                };
+                .author {
+                    font-size: 0.8em;
+                    font-weight: bold;
+                };
+                .desc {
+                    font-weight: bold;
+                }
+            }
+
+            .char {
+                padding: 1em;
+                img {
+                    margin: 0em 1em 1em 0em
+                }
+                // .chartext {
+                //     border: none;
+                //     margin: 0em;
+                //     text-align: left
+                // }
+                // .chartext, img {
+                //     display: inline-block;
+                //     vertical-align: top;
+                //     max-width: 50%;
+                // }
+            }
+
+        }
+    }
+}

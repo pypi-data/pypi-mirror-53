@@ -1,0 +1,264 @@
+@media screen {
+  /*Steam*/
+  #steam {
+    /* Default (small) screens */
+    /*TODO: Fix the skip link hiding method*/
+    /*Medium screens*/ }
+    #steam * {
+      box-sizing: border-box; }
+    #steam body {
+      background-color: #190D00;
+      background-image: url("gears.png");
+      color: #ffd;
+      text-align: center;
+      font-size: 1.5em;
+      font-family: serif;
+      margin: 0; }
+    #steam main, #steam figure {
+      margin-left: 0em;
+      padding-left: 0em; }
+    #steam figure#comic, #steam main > div, #steam main > section, #steam main > .tagslist {
+      background-color: #f5deb3;
+      color: #111;
+      border-top: double thick #8C643F;
+      border-bottom: double thick #8C643F; }
+    #steam h1 {
+      margin: 1em 0em 0em 0em; }
+    #steam figure {
+      text-align: center;
+      margin: 0em; }
+    #steam figure#comic {
+      padding: 1em 0em 0em 0em;
+      background: #f5deb3 url("frame.gif") no-repeat 100% 0%; }
+      #steam figure#comic img {
+        margin: 0em; }
+    #steam figcaption {
+      text-align: center;
+      padding: 0.5em; }
+    #steam .cominavbox {
+      background: #190D00;
+      border: double medium #8C643F;
+      border-bottom: none;
+      padding: 0.5em;
+      margin: 0em; }
+    #steam figure + .cominavbox {
+      border: double thick #8C643F;
+      border-top: none; }
+    #steam .cominavbox, #steam .cominavbox li {
+      display: inline-block; }
+    #steam p + p, #steam li + li {
+      margin-top: 0.5em; }
+    #steam #skippy {
+      text-align: left;
+      margin: 0em; }
+    #steam #skippy a, #steam #skippy a:hover, #steam #skippy a:visited {
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden; }
+    #steam #skippy a:active, #steam #skippy a:focus {
+      position: static;
+      height: auto;
+      width: auto;
+      font-size: 1em;
+      margin-top: 0em;
+      color: #bbf;
+      margin: 1em;
+      outline: dotted medium #bbf; }
+    #steam nav {
+      margin-bottom: 0em;
+      background: #f5deb3;
+      background-image: -moz-linear-gradient(center top, #53452B 0%, #987F46 25%, #B99C56 37%, #FDF0E8 50%, #B99C56 62%, #987F46 75%, #53452B 100%);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #53452B), color-stop(0.25, #987F46), color-stop(0.375, #B99C56), color-stop(0.5, #FDF0E8), color-stop(0.625, #B99C56), color-stop(0.75, #987F46), color-stop(1, #53452B));
+      background-image: linear-gradient(top, #53452B 0%, #987F46 25%, #B99C56 37%, #FDF0E8 50%, #B99C56 62%, #987F46 75%, #53452B 100%); }
+      #steam nav ul {
+        margin: 0em;
+        padding-left: 0em; }
+      #steam nav li {
+        display: inline-block;
+        padding: 0.5em;
+        background: #190D00;
+        color: #ffd;
+        border: double medium #8C643F; }
+      #steam nav li + li {
+        margin-left: 1em; }
+      #steam nav a:link {
+        text-decoration: none;
+        color: #7c7cff; }
+      #steam nav a:visited {
+        color: #b97cff; }
+      #steam nav a:hover {
+        text-decoration: underline; }
+    #steam header {
+      margin-top: 0em;
+      padding-top: 0em; }
+      #steam header img {
+        margin-top: 0em;
+        padding-top: 0em;
+        display: inline; }
+    #steam main > div, #steam main > section, #steam main > .tagslist {
+      text-align: left;
+      padding: 0.5em 0em 0.5em 0.2em; }
+    #steam main > div + div, #steam main > section + section {
+      margin-top: 1em; }
+    #steam .statline {
+      font-weight: bold; }
+    #steam a:link {
+      color: #0000c1;
+      text-decoration: underline; }
+    #steam a:visited {
+      color: #46284c; }
+    #steam a:hover, #steam a:focus, #steam a:active {
+      color: #700404; }
+    #steam footer, #steam .cominavbox {
+      color: #ffd; }
+      #steam footer a:link, #steam .cominavbox a:link {
+        color: #bbf;
+        text-decoration: underline; }
+      #steam footer a:visited, #steam .cominavbox a:visited {
+        color: #daf; }
+      #steam footer a:hover, #steam footer a:focus, #steam footer a:active, #steam .cominavbox a:hover, #steam .cominavbox a:focus, #steam .cominavbox a:active {
+        color: #ffaaaa; }
+      #steam footer p, #steam .cominavbox p {
+        margin-left: 0em;
+        text-align: left; }
+    #steam main > section {
+      vertical-align: top;
+      text-align: left;
+      background-color: #f5deb3;
+      color: #111; }
+      #steam main > section h2 {
+        border: none;
+        margin-top: 0.5em; }
+      #steam main > section ol {
+        margin-top: 0em; }
+    #steam img, #steam embed, #steam object, #steam video {
+      max-width: 100%; }
+    #steam .action {
+      font-weight: bold; }
+    #steam .char {
+      text-align: left; }
+      #steam .char .chartraits {
+        overflow-wrap: break-word;
+        padding: 0em 1em; }
+      #steam .char dt {
+        font-weight: bold;
+        font-style: italic; }
+      #steam .char .chartext {
+        background: none; }
+      #steam .char + .char {
+        margin-top: 1em; }
+    #steam .status {
+      font-weight: bold; }
+    #steam .tagslist, #steam .chapterarch {
+      list-style-type: none;
+      margin-top: 1em; }
+    #steam .archives .status {
+      margin: 0em; } }
+  @media screen and (min-width: 1024px) {
+    #steam figure {
+      margin: 0em; }
+    #steam figure#comic {
+      padding: 1em 1em 0em 1em;
+      margin: 0em 1em;
+      border: double thick #8C643F;
+      vertical-align: middle; }
+      #steam figure#comic + .cominavbox {
+        margin-top: 0em; }
+    #steam main > div, #steam main > section, #steam main > .tagslist {
+      padding: 0em 0em 0.5em 0em;
+      margin: 1em 0em 1em 10%;
+      max-width: 70%;
+      border: double thick #8C643F; }
+      #steam main > div p, #steam main > section p, #steam main > .tagslist p {
+        margin-left: 1em; }
+      #steam main > div h2, #steam main > section h2, #steam main > .tagslist h2 {
+        margin-top: 0em; }
+    #steam div + div, #steam section + section {
+      margin-bottom: 0em;
+      margin-top: 0em; }
+    #steam .cominavbox, #steam .cominavbox li {
+      margin: 0.5em 1em 0em 1em; }
+    #steam h1 {
+      font-size: 1.5em;
+      border-bottom: none;
+      border-top: none;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em; }
+    #steam h2 {
+      font-size: 1.2em;
+      margin: 0em;
+      padding: 0.5em 0em 0.5em 0.5em;
+      border-left: none;
+      border-right: none; }
+    #steam h3 {
+      font-size: 1em;
+      margin-left: 0.5em; }
+    #steam nav {
+      text-align: center;
+      background: none; }
+    #steam nav li {
+      padding: 1em 1em 0.8em 1em;
+      margin: 0em;
+      border: none; }
+      #steam nav li + li {
+        margin-left: 0em;
+        border: none; }
+      #steam nav li a:link {
+        color: #0000c1;
+        text-decoration: underline; }
+      #steam nav li a:visited {
+        color: #46284c; }
+      #steam nav li a:hover, #steam nav li a:focus, #steam nav li a:active {
+        color: #700404; }
+    #steam h2, #steam nav li, #steam .archives .status {
+      background: #A88D4D;
+      background: linear-gradient(to bottom, #53452b 0%, #987f46 10%, #b99c56 25%, #fdf0e8 50%, #b99c56 75%, #987f46 90%, #53452b 100%);
+      color: #111;
+      /*                text-shadow: 0.15em 0.15em 0.1em $out-text;*/
+      text-shadow: 0.1em 0.1em 0.1em #fdf0e8, -0.1em -0.1em 0.1em #fdf0e8, 0.1em -0.1em 0.1em #fdf0e8, -0.1em 0.1em 0.1em #fdf0e8;
+      box-shadow: 0em 0.1em 0.1em 0em #111;
+      font-weight: normal; }
+    #steam .archives .status {
+      padding: 1em; }
+    #steam .statline {
+      font-size: 0.8em;
+      text-align: right;
+      margin-right: 1em; }
+    #steam footer p {
+      font-size: 0.7em;
+      margin-left: 1em; }
+    #steam main > .tagslist {
+      padding: 1em; }
+    #steam .action {
+      text-indent: 1em; }
+    #steam .intro {
+      padding: 0em;
+      margin: 0em; }
+      #steam .intro p {
+        padding: 0em 0.5em 1em 1em; }
+      #steam .intro img {
+        padding-top: 1em; }
+      #steam .intro .author {
+        font-weight: bold; }
+      #steam .intro .desc {
+        font-weight: bold; }
+    #steam .char {
+      padding: 0em;
+      margin: 1em; }
+      #steam .char img {
+        margin: 1em;
+        border: double medium #8C643F; }
+      #steam .char .chartraits {
+        font-size: 0.9em;
+        margin: 0em;
+        text-align: left; }
+      #steam .char .chartext {
+        margin-top: 0.5em;
+        padding: 0em 0.5em 0.5em 0.5em;
+        border-top: double medium #8C643F;
+        text-indent: 1em; } }
+
+/*# sourceMappingURL=style.css.map */
