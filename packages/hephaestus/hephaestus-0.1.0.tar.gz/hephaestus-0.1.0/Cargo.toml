@@ -1,0 +1,25 @@
+[package]
+name = "hephaestus"
+version = "0.1.0"
+authors = ["Daniele Esposti"]
+edition = "2018"
+
+[build-dependencies]
+lalrpop = "0.17.1"
+
+[dependencies]
+lalrpop-util = "0.17.1"
+regex = "0.2.1"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+
+[dependencies.dict_derive]
+path = "./dict_derive"
+[lib]
+name = "hephaestus"
+crate-type = ["cdylib"]
+
+[dependencies.pyo3]
+version = "0.8.0"
+features = ["extension-module"]
