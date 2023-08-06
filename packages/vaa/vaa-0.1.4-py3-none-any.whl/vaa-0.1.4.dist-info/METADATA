@@ -1,0 +1,153 @@
+Metadata-Version: 2.1
+Name: vaa
+Version: 0.1.4
+Summary: Validators Adapter. The common interface for all validators.
+Home-Page: https://github.com/life4/vaa
+Author: Gram Orsinium
+Author-email: master_fess@mail.ru
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: cerberus; extra == "validators"
+Requires-Dist: django; extra == "validators"
+Requires-Dist: djangorestframework; extra == "validators"
+Requires-Dist: marshmallow>=3.0.1; extra == "validators"
+Requires-Dist: pyschemes; extra == "validators"
+Requires-Dist: pytest; extra == "tests"
+Requires-Dist: wtforms; extra == "validators"
+Provides-Extra: tests
+Provides-Extra: validators
+
+
+VAA
+===
+
+VAlidators Adapter makes validation by any existing validator with the same interface.
+
+Supported validators:
+
+.. list-table::
+   :header-rows: 1
+
+   * - validator
+     - adapter
+   * - `Cerberus <http://docs.python-cerberus.org/en/stable/>`_
+     - ``va.cerberus``
+   * - `Django Forms <https://docs.djangoproject.com/en/2.2/topics/forms/>`_
+     - ``va.django``
+   * - `Marshmallow <https://marshmallow.readthedocs.io/en/stable/>`_
+     - ``va.marshmallow``
+   * - `PySchemes <https://github.com/spy16/pyschemes>`_
+     - ``va.pyschemes``
+   * - `Django REST Framework <https://www.django-rest-framework.org/>`_
+     - ``va.restframework``
+   * - `WTForms <https://wtforms.readthedocs.io/en/stable/>`_
+     - ``va.wtforms``
+
+
+.. code-block:: bash
+
+   python3 -m pip install --user vaa
+
+Example
+-------
+
+.. code-block:: python
+
+   import marshmallow
+   import vaa
+
+
+   @vaa.marshmallow
+   class Scheme(marshmallow.Schema):
+     id = marshmallow.fields.Int(required=True)
+     name = marshmallow.fields.Str(required=True)
+
+Validating data
+---------------
+
+All schemes adopted by va has the same interface:
+
+.. code-block:: python
+
+   validator = Scheme({'id': '1', 'name': 'Oleg'})
+   validator.is_valid()  # True
+   validator.cleaned_data
+   # {'name': 'Oleg', 'id': 1}
+
+   validator = Scheme({'id': 'no', 'name': 'Oleg'})
+   validator.is_valid()  # False
+   validator.errors
+   # {'id': ['Not a valid integer.']}
+
+If error isn't for specific field, iw will be in ``__all__`` key.
+
+Simple scheme
+-------------
+
+If you want to do validation with simple function, you can use ``va.simple`` adapter. For example, you want to check that in dict ``{'a': ..., 'b': ...}`` both values are positive. There are many ways to do so.
+
+It can return ``bool``\ :
+
+.. code-block:: python
+
+   @vaa.simple
+   def validate(a, b) -> bool:
+     return a > 0 and b > 0
+
+Or return message for error:
+
+.. code-block:: python
+
+   @vaa.simple
+   def validate(a, b) -> bool:
+     if a > 0 and b > 0:
+       return True
+     return 'should be positive'
+
+Or return errors dict:
+
+.. code-block:: python
+
+   @vaa.simple
+   def validate(a, b) -> bool:
+     if a <= 0:
+       return {'a': 'should be positive'}
+     if b <= 0:
+       return {'b': 'should be positive'}
+     return True
+
+Or raise ``va.ValidationError`` with error message or dict:
+
+.. code-block:: python
+
+   @vaa.simple
+   def validate(a, b) -> bool:
+     if a > 0 and b > 0:
+         return True
+     raise vaa.ValidationError('should be positive')
+
+Also, if you want to get the original dict without unpacking it into keyword arguments, do a function that accepts only one ``_`` argument:
+
+.. code-block:: python
+
+   @vaa.simple
+   def validate(_):
+     return _['a'] > 0 and _['b'] > 0
+
+In that dict keys can be accessed as attributes:
+
+.. code-block:: python
+
+   @vaa.simple
+   def validate(_):
+     return _.a > 0 and _.b > 0
+
+Choose the best way and follow it. Avoid mixing them in one project.
