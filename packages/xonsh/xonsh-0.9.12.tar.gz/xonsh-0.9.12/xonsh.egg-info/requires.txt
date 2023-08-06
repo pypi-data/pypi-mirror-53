@@ -1,0 +1,23 @@
+
+[linux]
+distro
+
+[mac]
+gnureadline
+
+[proctitle]
+setproctitle
+
+[ptk]
+prompt-toolkit
+
+[pygments]
+pygments>=2.2
+
+[win]
+win_unicode_console
+
+[zipapp]
+
+[zipapp:python_version < "3.7"]
+importlib_resources
