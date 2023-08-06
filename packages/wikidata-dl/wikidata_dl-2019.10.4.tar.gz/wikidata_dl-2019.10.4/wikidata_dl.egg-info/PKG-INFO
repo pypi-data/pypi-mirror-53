@@ -1,0 +1,38 @@
+Metadata-Version: 1.2
+Name: wikidata-dl
+Version: 2019.10.4
+Summary: Download data from Wikidata based on input SPARQL query.
+Home-page: https://github.com/yaph/wikidata-dl
+Author: Ramiro Gómez
+Author-email: code@ramiro.org
+License: MIT license
+Description: # wikidata-dl
+        
+        ## Description
+        
+        **wikidata-dl** is a command line programm for downloading data from [Wikidata](https://www.wikidata.org/) based on [SPARQL](https://en.wikipedia.org/wiki/SPARQL) queries passed to the program.
+        
+        ## Installation
+        
+            pip install wikidata_dl
+        
+        ## Usage
+        
+            wikidata-dl /path/to/my-query.sparql
+        
+        ## Conventions
+        
+        * The SPARQL query you pass to the program must return Wikidata entity IDs.
+        * The query variable where the entity ID is stored must be called ``item``.
+Keywords: wikidata,download,dl,command line,cli,sparql
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.5
