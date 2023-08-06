@@ -1,0 +1,72 @@
+{% extends "sphinx_rtd_theme/layout.html" %}
+
+<link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/ydq4pad.css">
+<link rel='stylesheet' id='font-awesome-original-css' href='https://techblog.aimms.com/wp-content/plugins/dpArticleShare/css/font-awesome.css?ver=1.3.4' type='text/css' media='all' /> 
+
+{% block extrahead %}{% if pagename == master_doc %} <meta name="description" content="{{ theme_home_page_description }}"> {% endif %} {% endblock %} 
+
+{% block sidebartitle %} {% if pagename == master_doc %}
+
+<style>
+    .localtoc {
+        display: none;
+    }
+<!--     .wy-nav-content {
+        max-width: none !important;
+    }
+</style>
+{% else %}
+<style>
+    .wy-nav-content {
+        max-width: 1200px !important;
+    }-->
+</style> 
+{% endif %}
+
+{% include "searchbox.html" %} {% endblock %} 
+
+{% block body %} {% if pagename == master_doc %}
+
+<style>
+    .wy-nav-content {
+        max-width: none !important;
+    }
+</style>
+{% else %}
+<style>
+    .wy-nav-content {
+        max-width: 1200px !important;
+    }
+</style>
+{% endif %} {% endblock %} 
+{% block htmltitle %} {% if pagename == master_doc %}
+
+<title>{{ _('AIMMS How-To &mdash; Help &amp; Support') }}</title>
+
+{% else %}
+
+<title>{{ title|striptags|e }} &mdash; AIMMS How-To &mdash; Help &amp; Support</title>
+
+{% endif %} {% endblock %} 
+
+{% block document %} {{ super() }} 
+
+<a href="https://community.aimms.com/search?q={{ title|striptags|e }}" target="_blank">Give feedback on the AIMMS Community</a> {% endblock %} 
+
+{% block footer %} {{ super() }}
+
+{% if Display_3rd_Party_Extensions %}
+
+<!-- Insided embeddable -->
+<script>
+    (function(w, d, s) {
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s);
+        j.async = true;
+        j.src = '//embeddable-widgets-euw1.insided.com/aimms-en.insided-conversational.js';
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script');
+</script>
+
+{% endif %} {% endblock %}
