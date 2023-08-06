@@ -1,0 +1,54 @@
+CHANGES
+=======
+
+1.0.0
+-----
+
+* Recover iso-image-create script
+* Use pip install-option to specify ipa install location
+* Correct usage of BUILD\_AND\_INSTALL\_TINYIPA
+* Add irrelevant-files to the image check jobs
+* Update the constraints url
+* CI: do not create UPLOAD\_\* directories when uploading images
+* DIB: do not use /tmp for a virtualenv in the source build
+* DIB: rename files and paths to match the element name
+* DIB: remove deprecated extension and output image size for convenience
+* Add documentation on building images
+* Correct variables in the POST job image\_name -> image\_type
+* CI: run a DIB job and make the inspector job non-voting
+* Correct a typo in zuul.yaml
+* Remove dib/build.sh
+* Build pdf doc
+* Add file to tinybuild's IPA image
+* Import ansible version of the image building job
+* Correct the relative path calculation
+* DIB: add missing ironic-python-agent-create-rescue-user.sh
+* Fix a typo that prevents AUTHORIZE\_SSH from working
+* Accounts for Ubuntu paths on pip installation
+* DIB: create the directory for rescue password
+* Update tinycore from 8.x to 9.x
+* tinyipa: update qemu and tgt dependencies
+* Run a standalone job in the gate
+* Add a full set of IPA jobs to the CI
+* Revert "tinyipa: update qemu and tgt dependencies"
+* tinyipa: update qemu and tgt dependencies
+* Updates build.sh file in DIB element
+* Add missing packages to setup.cfg
+* Make ironic-python-agent-builder packaging-friendly
+* Updates the build file in DIB
+* Copies the "ironic-agent" element from DIB
+* Add ipv6 module modprobe to tinycore
+* Adding two tinyipa CI jobs in ironic-python-agent-builder
+* Sync package requirements from IPA repo
+* Moving tinyipa to IPA-B from IPA Task: 30071 Story: 2005114
+* Update sphinx requirements
+* Replace git.openstack.org URLs with opendev.org URLs
+* OpenDev Migration Patch
+* Update home-page
+* Change openstack-dev to openstack-discuss
+* fix tox python3 overrides
+* switch documentation job to new PTI
+* import zuul job settings from project-config
+* Change bug links to storyboard
+* Initial structure
+* Added .gitreview

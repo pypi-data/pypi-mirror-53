@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [ "${DIB_DEBUG_TRACE:-0}" -gt 0 ]; then
+    set -x
+fi
+set -eu
+set -o pipefail
+
+SCRIPTDIR=$(dirname $0)
+IPADIR=/tmp/ironic-python-agent
+VENVDIR=/opt/ironic-python-agent
+
+# Generate upper-constraints
+$IPADIR/imagebuild/common/generate_upper_constraints.sh $IPADIR/upper-constraints.txt
+
+# create the virtual environment
+virtualenv $VENVDIR
+
+# pip might be an older version which does not support the -c option, therefore upgrade first
+$VENVDIR/bin/pip install pip --upgrade
+
+# install IPA inside the virtual environment
+$VENVDIR/bin/pip install -c $IPADIR/upper-constraints.txt $IPADIR --install-option="--install-scripts=/usr/local/bin/"
+
+case "$DIB_INIT_SYSTEM" in
+    upstart)
+        install -D -g root -o root -m 0755 ${SCRIPTDIR}/ironic-python-agent.conf /etc/init/ironic-python-agent.conf
+        ;;
+    systemd)
+        install -D -g root -o root -m 0644 ${SCRIPTDIR}/ironic-python-agent.service /usr/lib/systemd/system/ironic-python-agent.service
+        ;;
+    sysv)
+        install -D -g root -o root -m 0755 ${SCRIPTDIR}/ironic-python-agent.init /etc/init.d/ironic-python-agent.init
+        update-rc.d ironic-python-agent.init defaults
+        ;;
+    *)
+        echo "Unsupported init system"
+        exit 1
+        ;;
+esac
+
+# Copying the self signed certificate for request library
+if [ -f /tmp/in_target.d/ipa-trusted-cert.pem ]; then
+    cat /tmp/in_target.d/ipa-trusted-cert.pem >> $($VENVDIR/bin/python -c "import requests; print requests.certs.where()")
+fi
