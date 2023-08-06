@@ -1,0 +1,9 @@
+#!/usr/bin/python
+
+import sys
+from upython import UPython
+
+command, *args = sys.argv[1:]
+
+u = UPython()
+getattr(u, command)(*args)
