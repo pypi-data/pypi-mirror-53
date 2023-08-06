@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: mkdocs-versioning
+Version: 0.1.0
+Summary: A tool that allows for versioning sites built with mkdocs
+Home-page: https://github.com/zayd62/mkdocs-versioning
+Author: Zayd Patel
+Author-email: zayd62@gmail.com
+License: UNKNOWN
+Project-URL: Documentation, https://zayd62.github.io/mkdocs-versioning/
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Documentation
+Classifier: Topic :: Text Processing
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=2.7.9,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*
+Description-Content-Type: text/markdown
+Requires-Dist: PyYAML (>=5.1.2)
+Requires-Dist: mkdocs (>=1.0.4)
+
+# mkdocs-versioning
+
+mkdocs-versioning is a plugin for [mkdocs](https://www.mkdocs.org/), a
+tool designed to create static websites usually for generating project
+documentation. mkdocs-versioning extends mkdocs by differentiating
+between different versions of documentation you may build. For example,
+a newer versions of some software may work differently from an older
+version and it is important that users of an older version of the
+software reads the appropriate version of the documentation in order to
+ensure that the user has the correct information and uses the software
+appropriately.
+
+Please note that mkdocs-versioning is currently in **Alpha** and there may
+be missing feature/documentation so if you could help out by either:
+
+1. finding and reporting bugs
+2. contributing by checking out the [issues](https://github.com/zayd62/mkdocs-versioning/issues)
+
