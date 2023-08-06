@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: swashbookler
+Version: 1.0.2
+Summary: Allows downloading books from Google Books and converting them to PDFs.
+Home-page: https://gitlab.com/cvpines/swashbookler
+License: MIT
+Author: Coriander Pines
+Author-email: incoming+cvpines-swashbookler-5856924-issue-@incoming.gitlab.com
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: PyYAML (>=5.1,<6.0)
+Requires-Dist: beautifulsoup4 (>=4.8.0,<5.0.0)
+Requires-Dist: click (>=7.0,<8.0)
+Requires-Dist: img2pdf (>=0.3.3,<0.4.0)
+Requires-Dist: pillow (>=6.1,<7.0)
+Requires-Dist: requests (>=2.22,<3.0)
+Project-URL: Repository, https://gitlab.com/cvpines/swashbookler
+Description-Content-Type: text/markdown
+
+# Google Book Downloader
+
+## Downloads books from Google Books!
+
+Only works for books that provide a full preview.
+
+## Usage
+
+This project uses [pipenv](https://github.com/pypa/pipenv) for package management.
+Once pipenv is installed, simply run the downloader using ```pipenv run python main.py [options] ID```.
+Options are visible using ```pipenv run python main.py -h```.
+The book ID to download can be found in the URL of the Google Books page.
+
