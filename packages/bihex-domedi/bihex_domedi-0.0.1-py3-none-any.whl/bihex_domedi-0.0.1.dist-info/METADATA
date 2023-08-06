@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: bihex-domedi
+Version: 0.0.1
+Summary: Convert to and from multiple bases
+Home-page: https://github.com/EduardAlex/BiHex
+Author: David Eduard
+Author-email: edyalex.david@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# BiHex
+Simple binary to hexadecimal and backwards
+# How to use
+
+`from BiHex import *`
+
+To create an instance, use:
+
+`foo = Bihex("b10110100")`, where the letter behind the number is the base (2 = b, 8 = o, 10 = d, 16 = x)
+
+To display the number in:
+- decimal: `foo.returnnum("d")`, gives `"180"`
+- binary: `foo.returnnum("b")`, gives  `"0b10110100"`
+- hexadecimal: `foo.returnnum("x")`, gives `"0xB4"`
+- octal: `foo.returnnum("o")`. gives `"0o264"`
+
+
