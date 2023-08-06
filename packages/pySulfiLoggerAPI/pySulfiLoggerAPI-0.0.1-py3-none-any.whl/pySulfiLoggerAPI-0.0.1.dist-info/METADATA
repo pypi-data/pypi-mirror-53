@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: pySulfiLoggerAPI
+Version: 0.0.1
+Summary: Driver module for the SulfiLogger sensor
+Home-page: https://sulfilogger.com
+Author: Unisense
+Author-email: sulfilogger@unisense.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Description-Content-Type: text/markdown
+Requires-Dist: pyserial
+
+# SulfiLogger sensor
+Module for reading data from the SulfiLogger sensor
+
+## python requirements
+* Python 3.7 or newer
+
+## python code example
+```python
+import os
+from pySulfiLoggerAPI import sensor
+
+# locate sensor
+comport = sensor.findCom(   debug = False,
+                            useAnyDriver = False,
+                            driver = ['FTDI','Moxa Inc.'])
+if(comport == None):
+    print('info','no sensor found.')
+    os._exit(1)
+
+# data acquisition
+sample = sensor.getData(comport)
+print(['signal', 'unit', 'temperature', 'unit'])
+print(sample)
+```
+
+## more examples
+A python script for continuously logging and plotting via the bokeh module is available upon request.
+
+
