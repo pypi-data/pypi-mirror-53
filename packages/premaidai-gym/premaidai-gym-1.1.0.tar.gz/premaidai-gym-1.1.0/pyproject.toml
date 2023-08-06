@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "premaidai-gym"
+version = "1.1.0"
+description = "Roboshcool env for Premaid AI"
+authors = ["Shundo Kishi <syundo0730@gmail.com>"]
+readme = "README.rst"
+repository = "https://github.com/syundo0730/premaidai-gym"
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+roboschool = "^1.0"
+numpy = "^1.17"
+gym = "^0.10.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

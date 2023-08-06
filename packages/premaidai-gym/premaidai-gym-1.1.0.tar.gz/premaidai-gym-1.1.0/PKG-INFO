@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: premaidai-gym
+Version: 1.1.0
+Summary: Roboshcool env for Premaid AI
+Home-page: https://github.com/syundo0730/premaidai-gym
+License: MIT
+Author: Shundo Kishi
+Author-email: syundo0730@gmail.com
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: gym (>=0.10.5,<0.11.0)
+Requires-Dist: numpy (>=1.17,<2.0)
+Requires-Dist: roboschool (>=1.0,<2.0)
+Project-URL: Repository, https://github.com/syundo0730/premaidai-gym
+Description-Content-Type: text/x-rst
+
+premaidai-gym: プリメイドAIのRoboschool gym env
+
+---------------
+インストール
+---------------
+
+code-block:: bash
+
+    $ pip install premaidai_gym
+
+---------------
+使い方
+---------------
+
+code-block:: python
+
+    import gym
+    import premaidai_gym
+
+    env = gym.make('RoboschoolPremaidAIWalker-v0')
+
