@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<form col="2">
+    <group id="grpemplo" col="4" colspan="2">
+        <label name="employee"/>
+        <field name="employee"/>
+        <label name="company"/>
+        <field name="company"/>
+    </group>
+    <group id="grpstate" col="4" string="Current State">
+        <label name="currstate"/>
+        <field name="currstate"/>
+        <label name="currtype"/>
+        <field name="currtype"/>
+        <label name="currstart"/>
+        <field name="currstart"/>
+        <label name="currperiod"/>
+        <field name="currperiod"/>
+    </group>
+
+    <group id="grphelp" string="Information" col="1" yfill="1">
+        <label id="labh1" xalign="0.0" string="You can always start or finish a working time or site work."/>
+        <label id="labh2" xalign="0.0" string="At the beginning of a new time entry, a possibly still open time entry will be closed."/>
+        <label id="labh3" xalign="0.0" string="You can also enter an close entry without first entering a start entry."/>
+    </group>
+
+    <group name="presence" col="2">
+        <label name="presence"/>
+        <field name="presence" widget="selection" />
+        <label id="labpres1" colspan="2" xalign="0.0"
+            string="Select the presence type you want to start or end."/>
+    </group>
+    <newline/>
+    
+    <group name="breakstate" col="4">
+        <label name="breakstate"/>
+        <field name="breakstate" colspan="3"/>
+        <label name="breakstart"/>
+        <field name="breakstart"/>
+        <label name="breakperiod"/>
+        <field name="breakperiod"/>
+    </group>
+
+    <field name="presences"/>
+</form>

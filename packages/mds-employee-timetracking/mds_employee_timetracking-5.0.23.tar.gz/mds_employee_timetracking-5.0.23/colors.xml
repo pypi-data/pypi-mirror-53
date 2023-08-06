@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!-- forms -->
+        <record model="ir.ui.view" id="colors_view_form">
+            <field name="model">employee_timetracking.colors</field>
+            <field name="type">form</field>
+            <field name="name">colors_form</field>
+        </record>
+        <record model="ir.ui.view" id="colors_view_tree">
+            <field name="model">employee_timetracking.colors</field>
+            <field name="type">tree</field>
+            <field name="name">colors_tree</field>
+        </record>
+
+        <!-- action view -->
+        <record model="ir.action.act_window" id="act_colors_form">
+            <field name="name">Colors</field>
+            <field name="res_model">employee_timetracking.colors</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_colors_form1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="colors_view_tree"/>
+            <field name="act_window" ref="act_colors_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_colors_form2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="colors_view_form"/>
+            <field name="act_window" ref="act_colors_form"/>
+        </record>
+
+        <!-- menu item -->
+        <menuitem  action="act_colors_form" parent="menu_cfg_timetracking"
+                id="menu_config_colors" icon="mds-colors" sequence="80"/>
+
+        <!-- read access to anonymous -->
+        <record model="ir.model.access" id="access_colors_anon">
+            <field name="model" search="[('model', '=', 'employee_timetracking.colors')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+
+    </data>
+</tryton>

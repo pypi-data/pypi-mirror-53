@@ -1,0 +1,43 @@
+Working time model
+- indicates how many working hours a member has per week
+- this can be a simple rule
+   like 8-16, Mon - Fri - result: 40 h
+- or several rules:
+   1. Mon - Thu, 8 am - 4 pm
+   2. Fri, 8 am - 14 pm
+   Result: 38 h
+
+Time Account
+- Working hours are posted to this account
+- At least one time account is required
+- For multiple time accounts, one must be considered primary
+- all other time accounts with content appear on the evaluation as a surcharge
+
+Tariff model
+- determines according to which rules the registered working hours are booked
+- Only entries on the primary time account are used for the evaluation
+- all other time accounts are shown as surcharges
+- Time account rule
+   + a rule to book a registered working time on an account
+   + Rules can be active at: 
+      only certain times of the day or 
+      on certain days or
+      24h / 7days
+   + Several rules can be active at the same time, for example a late shift
+     to book as normal work as well as late shift supplement
+     (in this case, several times account entries are created per work time entry)
+
+Holidays
+- The holiday is entered in the holiday calendar by the employee
+- The holiday calendar is the calendar set on the employee
+- The cron job periodically updates the vacations in the current evaluation
+- a day of vacation is counted if there is a working time on this day and:
+ + it is a 'full day' and there is no presence on that day
+   (planned working time = actual working time is calculated)
+ + it is half a day, working hours are allowed on this day
+   (half planned working time + registered working hours are calculated)
+- at a half holiday the registered working time can be reduced by the break time regulation
+- Number of vacation days in evaluation: the actually counted vacation days are spent (whole / half)
+- Remaining days are: the current value for the number of Holidays + special leave of the employee
+  from the beginning of the year or the beginning of the work and up to the current evaluation
+  Holiday days are calculated
