@@ -1,0 +1,20 @@
+# Library Dependencies
+matplotlib>=2.0.2,!=3.0.0,!=3.1.1
+scipy>=1.0.0
+scikit-learn>=0.20
+numpy>=1.13.0
+cycler>=0.10.0
+
+# Testing Requirements
+pytest>=4.2.0, !=4.6.0
+pytest-cov>=2.6.1
+pytest-flakes>=4.0.0
+#pytest-spec>=1.1.0
+coverage>=4.5.2
+
+# Optional Testing Dependencies
+nltk>=3.2
+# spacy>=2.0.18
+pandas>=0.20
+umap-learn==0.3
+numba==0.42
