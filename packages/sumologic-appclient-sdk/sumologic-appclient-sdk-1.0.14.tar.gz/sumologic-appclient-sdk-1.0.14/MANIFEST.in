@@ -1,0 +1,9 @@
+include requirements.txt
+include LICENSE
+include VERSION
+include README
+exclude sumoappclient/metadata.yaml
+recursive-include sumoappclient/pkggenerator/resources *
+recursive-exclude sumoappclient/pkggenerator/resources/azure *
+recursive-exclude sumoappclient/pkggenerator/resources/gcp *
+recursive-exclude tests *
