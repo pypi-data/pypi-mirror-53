@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ ${DIB_DEBUG_TRACE:-0} -gt 0 ]; then
+    set -x
+fi
+set -eu
+set -o pipefail
+
+if [[ ${DISTRO_NAME} =~ (centos|rhel) && ${DIB_RELEASE} == 8 ]]; then
+    # RHEL8 has a system python, separate from the user python.  What
+    # a good idea, abstracting the python binary for system scripts!
+    # :)  Use it for dib-python.
+    python_path=/usr/libexec/platform-python
+else
+    python_path=$(command -v python${DIB_PYTHON_VERSION})
+fi
+
+if [ -z "$python_path" ]; then
+    echo "Could not find python${DIB_PYTHON_VERSION} executable."
+    exit 1
+fi
+
+ln -sf $python_path /usr/local/bin/dib-python
