@@ -1,0 +1,14 @@
+archive
+requests
+z3c.recipe.usercrontab
+zc.buildout
+zc.lockfile
+zope.password
+
+[:python_version < "3"]
+configparser
+pathlib2
+
+[test]
+mock
+requests-file
