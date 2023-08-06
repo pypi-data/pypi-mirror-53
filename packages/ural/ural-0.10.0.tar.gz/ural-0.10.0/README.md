@@ -1,0 +1,342 @@
+[![Build Status](https://travis-ci.org/medialab/ural.svg)](https://travis-ci.org/medialab/ural)
+
+# Ural
+
+A helper library full of URL-related heuristics.
+
+## Installation
+
+You can install `ural` with pip with the following command:
+
+```
+pip install ural
+```
+
+## Usage
+
+### Functions
+
+*Generic functions*
+
+* [ensure_protocol](#ensure_protocol)
+* [get_domain_name](#get_domain_name)
+* [force_protocol](#force_protocol)
+* [is_url](#is_url)
+* [lru_from_url](#lru_from_url)
+* [normalize_url](#normalize_url)
+* [normalized_lru_from_url](#normalized_lru_from_url)
+* [strip_protocol](#strip_protocol)
+* [urls_from_html](#urls_from_html)
+* [urls_from_text](#urls_from_text)
+
+*Platform-specific functions*
+
+* [facebook](#facebook)
+  * [convert_facebook_url_to_mobile](#convert_facebook_url_to_mobile)
+  * [extract_user_from_url](#extract_user_from_url)
+
+### Classes
+
+* [LRUTrie](#LRUTrie)
+  * [set](#set)
+  * [match](#match)
+  * [values](#values)
+
+---
+
+### Functions
+
+#### ensure_protocol
+
+Function checking if the url has a protocol, and adding the given one if there is none.
+
+```python
+from ural import ensure_protocol
+
+ensure_protocol('www2.lemonde.fr', protocol='https')
+>>> 'https://www2.lemonde.fr'
+```
+
+*Arguments*
+
+* **url** *string*: URL to format.
+* **protocol** *string*: protocol to use if there is none in **url**. Is 'http' by default.
+
+---
+
+#### get_domain_name
+
+Function returning an url's domain name. This function is of course tld-aware and will return `None` if no valid domain name can be found.
+
+```python
+from ural import get_domain_name
+
+get_domain_name('https://facebook.com/path')
+>>> 'facebook.com'
+```
+
+*Arguments*
+
+* **url** *string*: Target url.
+
+---
+
+#### force_protocol
+
+Function force-replacing the protocol of the given url.
+
+```python
+from ural import force_protocol
+
+force_protocol('https://www2.lemonde.fr', protocol='ftp')
+>>> 'ftp://www2.lemonde.fr'
+```
+
+*Arguments*
+
+* **url** *string*: URL to format.
+* **protocol** *string*: protocol wanted in the output url. Is `'http'` by default.
+
+---
+
+#### is_url
+
+Function returning True if its argument is a url.
+
+```python
+from ural import is_url
+
+is_url('https://www2.lemonde.fr')
+>>> True
+
+is_url('lemonde.fr/economie/article.php', require_protocol=False)
+>>> True
+
+is_url('lemonde.falsetld/whatever.html', tld_aware=True)
+>>> False
+```
+
+*Arguments*
+
+* **string** *string*: string to test.
+* **require_protocol** *boolean* [`True`]: whether the argument has to have a protocol to be considered a url.
+* **tld_aware** *boolean* [`False`]: whether to check if the url's tld actually exists or not.
+
+---
+
+#### lru_from_url
+
+Function returning url parts in hierarchical order.
+
+```python
+from ural import lru_from_url
+
+lru_from_url('http://www.lemonde.fr:8000/article/1234/index.html?field=value#2')
+>>> ['s:http', 't:8000', 'h:fr', 'h:lemonde', 'h:www', 'p:article', 'p:1234', 'p:index.html', 'q:field=value', 'f:2']
+```
+
+*Arguments*
+
+* **url** *string*: URL to parse.
+
+---
+
+#### normalize_url
+
+Function normalizing the given url by stripping it of usually non-discriminant parts such as irrelevant query items or sub-domains etc.
+
+This is a very useful utility when attempting to match similar urls written slightly differently when shared on social media etc.
+
+```python
+from ural import normalize_url
+
+normalize_url('https://www2.lemonde.fr/index.php?utm_source=google')
+>>> 'lemonde.fr'
+```
+
+*Arguments*
+
+* **url** *string*: URL to normalize.
+* **sort_query** *boolean* [`True`]: whether to sort query items.
+* **strip_authentication** *boolean* [`True`]: whether to strip authentication.
+* **strip_fragment** *boolean|str* [`'except-routing'`]: whether to strip the url's fragment. If set to `except-routing`, will only strip the fragment if the fragment is not deemed to be js routing (i.e. if it contains a `/`).
+* **strip_index** *boolean* [`True`]: whether to strip trailing index.
+* **strip_lang_subdomains** *boolean* [`False`]: whether to strip language subdomains (ex: 'fr-FR.lemonde.fr' to only 'lemonde.fr' because 'fr-FR' isn't a relevant subdomain, it indicates the language and the country).
+* **strip_trailing_slash** *boolean* [`False`]: whether to strip trailing slash.
+
+---
+
+#### normalized_lru_from_url
+
+Function normalizing url and returning its parts in hierarchical order.
+
+```python
+from ural import normalized_lru_from_url
+
+normalized_lru_from_url('http://www.lemonde.fr:8000/article/1234/index.html?field=value#2')
+>>> ['t:8000', 'h:fr', 'h:lemonde', 'h:www', 'p:article', 'p:1234', 'q:field=value']
+```
+
+*Arguments*
+
+This function accepts the same arguments as [normalize_url](#normalize_url).
+
+---
+
+#### strip_protocol
+
+Function removing the protocol from the url.
+
+```python
+from ural import strip_protocol
+
+strip_protocol('https://www2.lemonde.fr/index.php')
+>>> 'www2.lemonde.fr/index.php'
+```
+
+*Arguments*
+
+* **url** *string*: URL to format.
+
+---
+
+#### urls_from_html
+
+Function returning an iterator over the urls present in the links of given HTML text.
+
+```python
+from ural import urls_from_html
+
+html = """<p>Hey! Check this site: <a href="https://medialab.sciencespo.fr/">médialab</a></p>"""
+
+for url in urls_from_html(html):
+    print(url)
+>>> 'https://medialab.sciencespo.fr/'
+```
+
+*Arguments*
+
+* **string** *string*: html string.
+
+---
+
+#### urls_from_text
+
+Function returning an iterator over the urls present in the string argument. Extracts only the urls with a protocol.
+
+```python
+from ural import urls_from_text
+
+text = "Hey! Check this site: https://medialab.sciencespo.fr/, it looks really cool. They're developing many tools on https://github.com/"
+
+for url in urls_from_text(text):
+    print(url)
+>>> 'https://medialab.sciencespo.fr/'
+>>> 'https://github.com/'
+```
+
+*Arguments*
+
+* **string** *string*: source string.
+
+---
+
+### Facebook
+
+#### convert_facebook_url_to_mobile
+
+Function returning the mobile version of the given Facebook url. Will raise an exception if a non-Facebook url is given.
+
+```python
+from ural.facebook import convert_facebook_url_to_mobile
+
+convert_facebook_url_to_mobile('http://www.facebook.com/post/974583586343')
+>>> 'http://m.facebook.com/post/974583586343'
+```
+
+---
+
+#### extract_user_from_url
+
+Function extracting user information from a facebook user url.
+
+```python
+from ural.facebook import extract_user_from_url
+
+extract_user_from_url('https://www.facebook.com/people/Sophia-Aman/102016783928989')
+>>> FacebookUser(id='102016783928989', handle=None, url='https://www.facebook.com/profile.php?id=102016783928989)
+
+extract_user_from_url('/annelaure.rivolu?rc=p&__tn__=R')
+>>> FacebookUser(id=None, handle='annelaure.rivolu', url='https://www.facebook.com/annelaure.rivolu)
+```
+
+---
+
+### Classes
+
+#### LRUTrie
+
+Class implementing a prefix tree (Trie) storing LRUs and their metadata, allowing to find the longest common prefix between two urls.
+
+##### set
+
+A function storing an url in a LRUTrie along with its metadata.
+
+```python
+from ural import LRUTrie
+
+trie = LRUTrie()
+trie.set('http://www.lemonde.fr', {'type': 'general press'})
+
+trie.match('http://www.lemonde.fr')
+>>> {'type': 'general press'}
+```
+
+*Arguments*
+
+* **url** *string*: url to store in the LRUTrie.
+* **metadata** *dict*: metadata of the url.
+
+---
+
+##### match
+
+Method returning the metadata of the given url as it is stored in the LRUTrie.
+If the exact given url doesn't exist in the LRUTrie, it returns the metadata of the longest common prefix, or `None` if there is no common prefix.
+
+```python
+from ural import LRUTrie
+
+trie = LRUTrie()
+trie.set('http://www.lemonde.fr', {'media': 'lemonde'})
+
+trie.match('http://www.lemonde.fr')
+>>> {'media': 'lemonde'}
+trie.match('http://www.lemonde.fr/politique')
+>>> {'media': 'lemonde'}
+```
+
+*Arguments*
+
+* **url** *string*: url to match in the LRUTrie.
+
+---
+
+##### values
+
+Method yielding the metadata of each url stored in the LRUTrie.
+
+```python
+from ural import LRUTrie
+
+trie = LRUTrie()
+trie.set('http://www.lemonde.fr', {'media' : 'lemonde'})
+trie.set('http://www.lefigaro.fr', {'media' : 'lefigaro'})
+trie.set('https://www.liberation.fr', {'media' : 'liberation'})
+
+for value in trie.values():
+  print(value)
+>>> {'media': 'lemonde'}
+>>> {'media': 'liberation'}
+>>> {'media': 'lefigaro'}
+```
