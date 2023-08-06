@@ -1,0 +1,13 @@
+settings:
+  all_files: &all_files !settings
+    included:
+      - "*"
+    excluded: []
+    allow_ignore: yes
+
+default_settings: *all_files
+
+rules:
+  MissingPytestMarkAsyncio:
+    description: "Missing decorator @pytest.mark.asyncio in asynchronous test"
+    expr: //AsyncFunctionDef[starts-with(@name, 'test_')]/decorator_list[not(Attribute[@attr = 'asyncio']/value/Attribute[@attr = 'mark']/value/Name[@id = 'pytest'])]
