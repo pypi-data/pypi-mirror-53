@@ -1,0 +1,7 @@
+include setup.cfg
+include setup.py
+include matialvarezs_charge_controller/*.py
+recursive-include matialvarezs_charge_controller/management *
+recursive-include matialvarezs_charge_controller/migrations *
+recursive-include matialvarezs_charge_controller/api *
+recursive-include matialvarezs_charge_controller/github *
