@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "mercurial-litf"
+version = "0.2.0"
+description = "A litf plugin for the Mercurial test runner"
+authors = ["Boris Feld <lothiraldan@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://bitbucket.org/lothiraldan/mercurial_litf"
+repository = "https://bitbucket.org/lothiraldan/mercurial_litf"
+
+[tool.poetry.dependencies]
+python = "^2.7 || ^3.6 || ^3.7"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+mercurial-litf = "mercurial_litf.cli:main"
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
