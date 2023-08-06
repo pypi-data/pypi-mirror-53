@@ -1,0 +1,143 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-03 21:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:16
+msgid "Report Type"
+msgstr ""
+
+#: forms.py:17
+msgid "Only the offer and order reports use the selected date range"
+msgstr ""
+
+#: forms.py:20
+msgid "Date from"
+msgstr ""
+
+#: forms.py:25
+msgid "Date to"
+msgstr ""
+
+#: forms.py:26
+msgid "The report is inclusive of this date"
+msgstr ""
+
+#: forms.py:34
+msgid "Your start date must be before your end date"
+msgstr ""
+
+#: models.py:31
+msgid "Created"
+msgstr ""
+
+#: models.py:32
+msgid "Queued"
+msgstr ""
+
+#: models.py:33
+msgid "In-Progress"
+msgstr ""
+
+#: models.py:34
+msgid "Completed"
+msgstr ""
+
+#: models.py:38
+msgid "UUID"
+msgstr ""
+
+#: models.py:44
+msgid "Content Type"
+msgstr ""
+
+#: models.py:52 tables.py:15
+msgid "Owner"
+msgstr ""
+
+#: models.py:56
+msgid "Type Code"
+msgstr ""
+
+#: models.py:57
+msgid "Description"
+msgstr ""
+
+#: models.py:58 tables.py:12
+msgid "Date Range"
+msgstr ""
+
+#: models.py:61
+msgid "Background Task ID"
+msgstr ""
+
+#: models.py:64
+msgid "Created On"
+msgstr ""
+
+#: models.py:65
+msgid "Queued On"
+msgstr ""
+
+#: models.py:66
+msgid "Started On"
+msgstr ""
+
+#: models.py:67
+msgid "Completed On"
+msgstr ""
+
+#: models.py:70
+msgid "MIME Type"
+msgstr ""
+
+#: models.py:71
+msgid "Report File"
+msgstr ""
+
+#: tables.py:16
+msgid "Status"
+msgstr ""
+
+#: templates/oscar/dashboard/reports/index.html:9
+msgid "Reporting dashboard"
+msgstr ""
+
+#: templates/oscar/dashboard/reports/index.html:16
+msgid "Generating..."
+msgstr ""
+
+#: templates/oscar/dashboard/reports/index.html:17
+msgid "Generate report"
+msgstr ""
+
+#: templates/oscar/dashboard/reports/index.html:29
+msgid "No reports found."
+msgstr ""
+
+#: templates/oscar/dashboard/reports/report_row_actions.html:6
+msgid "Download"
+msgstr ""
+
+#: views.py:48
+msgid "Successfully queued report for generation"
+msgstr ""
+
+#: views.py:55
+msgid "Reports"
+msgstr ""
