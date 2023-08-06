@@ -1,0 +1,68 @@
+[tool.poetry]
+name = "yapo"
+version = "0.2.5"
+description = "Flexible and easy-to-use Python library for analysis & manipulation with financial & economic data"
+authors = [
+    "Alexander Myltsev",
+    "Sergey Kikevich",
+]
+licence = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/okama-io/yapo"
+repository = "https://github.com/okama-io/yapo"
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: IPython",
+    "Framework :: Jupyter",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+
+keywords = [
+    "Modern portfolio theory",
+    "Financial library",
+    "Asset allocation",
+    "Portfolio investments",
+    "Financial operations",
+    "Financial analysys",
+    "Quantitative finance",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+numpy = "^1.16"
+PyContracts = "^1.8"
+pandas = "^0.24"
+pinject = "^0.14.1"
+typing_extensions = "^3.7"
+
+[tool.poetry.dev-dependencies]
+freezegun = "^0.3.11"
+pytest = "^4.5"
+PyHamcrest = "^1.9"
+flake8 = "^3.7"
+codecov = "^2.0"
+pytest-cov = "^2.7"
+jupyterlab = "^0.35.6"
+nbval = "^0.9.1"
+mypy = "^0.701.0"
+pytype = "^2019.5"
+
+[build-system]
+requires = ["poetry >= 0.12, <1"]
+python = ">=3.6, <4"
+build-backend = "poetry.masonry.api"
+
