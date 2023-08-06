@@ -1,0 +1,66 @@
+Metadata-Version: 2.1
+Name: funity
+Version: 0.0.1
+Summary: A Unity3d installation finder and a command line helper.
+Home-page: https://github.com/fopoon/funity
+Author: Elmer Nocon, fopoon
+Author-email: elmernocon@gmail.com
+License: MIT
+Download-URL: https://pypi.org/project/funity/
+Description: # funity
+        
+        A Unity3d installation finder and command line helper.
+        
+        ## Installation
+        
+        ```sh
+        pip install funity
+        ```
+        
+        ## Usage
+        
+        ### In Terminal
+        
+        ```sh
+        python -m funity
+        
+        # Outputs a JSON-formatted file containing all Unity3d editors found in the current working directory.
+        
+        # editor.cache
+        # [
+        #   "/Applications/Unity/Hub/Editor/2019.2.6f1"
+        # ]
+        ```
+        
+        ### In Python
+        
+        ```python
+        from funity import *
+        
+        
+        editors = UnityEditor.find_all()
+        
+        editor = editors[0]
+        
+        project = UnityProject('/Users/you/Projects/HelloWorld')
+        
+        return_code = editor.run(
+            '-projectPath', str(project),
+            '-buildTarget', 'Win64',
+            '-executeMethod', 'BuildPlayerCommand.Execute',
+            cli=True,  # Shorthand for '-batchmode', '-nographics', '-quit', '-silent-crashes'.
+            log_func=lambda l: print(l, end='')  # Prints all logs from Unity.
+        )
+        ```
+        
+        # Changelog
+Platform: Any
+Classifier: Development Status :: 1 - Planning
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Description-Content-Type: text/markdown
