@@ -1,0 +1,53 @@
+Metadata-Version: 2.1
+Name: brewblox-plaato
+Version: 0.1.1.dev9
+Summary: Integration with the Plaato airlock
+Home-page: https://github.com/BrewBlox/brewblox-plaato
+Author: BrewPi
+Author-email: Development@brewpi.com
+License: UNKNOWN
+Description: # Brewblox-Plaato
+        
+        BrewBlox integration for the [Plaato airlock](https://plaato.io).
+        
+        The service periodically fetches the Plaato measurements, and sends it to the history service, allowing it to be used in graphs.
+        
+        ## Installation
+        
+        For the service to access your Plaato data, you'll need an authentication token.
+        
+        See https://plaato.io/apps/help-center#!hc-auth-token on how to get one.
+        
+        When you have that, edit your services by running `brewblox-ctl editor`.
+        
+        Add the new service:
+        
+        ```yml
+          plaato:
+            # remove 'rpi-' if you're running on desktop
+            image: brewblox/brewblox-plaato:rpi-${BREWBLOX_RELEASE:-stable}
+            restart: unless-stopped
+            depends_on:
+              - eventbus
+            labels:
+              - "traefik.port=5000"
+              - "traefik.frontend.rule=PathPrefix: /plaato"
+            environment:
+              PLAATO_AUTH: "xyzabc1234" # Put your auth token here
+            command: >
+              --name=plaato
+        ```
+        
+        Start your services with `brewblox-ctl up`.
+        
+        After a few seconds, you should see the `plaato` measurement appear in the Graph widget metrics.
+        
+Keywords: brewing brewpi brewblox embedded plugin service
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Topic :: System :: Hardware
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
