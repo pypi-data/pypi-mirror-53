@@ -1,0 +1,125 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from SConsider import createTargets
+    from ThirdParty import getBinaryDistDir
+    buildSettings = {
+        packagename: {
+            'linkDependencies': [
+                packagename + '.lib_nnz',
+                packagename + '.lib_clntsh',
+            ],
+            'requires': [
+                packagename + '.lib_ociicus',
+            ],
+            'targetType': 'IncludeOnly',
+            'public': {
+                'includeSubdir': 'include',
+            },
+        },
+        'lib_occi': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('occi')],
+            'libVersion': '.11.1',
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_clntsh': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('clntsh')],
+            'libVersion': '.11.1',
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_nnz': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('nnz11')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_ociicus': {  # us language support library
+            'sourceFiles': [getBinaryDistDir(packagename).File('ociicus')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_ociei': {  # oci library supporting all character sets
+            'sourceFiles': [getBinaryDistDir(packagename).File('ociei')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_sqlplus': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sqlplus')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_sqlplusic': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sqlplusic')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'sqlplusbin': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sqlplus')],
+            'targetType': 'PrecompiledBinary',
+        },
+        'sqlplus': {
+            'targetType': 'ProgramApp',
+            'runConfig': {
+            },
+            'requires': [
+                packagename + '.' + packagename,
+                packagename + '.lib_sqlplus',
+                packagename + '.lib_sqlplusic',
+            ],
+            'usedTarget': packagename + '.sqlplusbin',
+        },
+        'script_sqlplus': {
+            'targetType': 'ProgramApp',
+            'runConfig': {
+            },
+            'requires': [
+                packagename + '.' + packagename,
+                packagename + '.lib_sqlplus',
+                packagename + '.lib_sqlplusic',
+            ],
+            'usedTarget': packagename + '.sqlplusbin',
+        },
+    }
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from TargetHelpers import createPackageProgramScripts, installPrecompiledBinaries, installPrecompiledLibraries, createPackageRunTarget
+
+    includeTarget = EnvBuilder(export=[EnvBuilder().include(Dir('include'))]).build().RegisterPackageTarget(
+        packagename=packagename, targetname='include')
+
+    libnames = [('occi', 'lib_occi'), ('clntsh', 'lib_clntsh'), ('nnz11', 'lib_nnz'),
+                ('ociicus', 'lib_ociicus'), ('ociei', 'lib_ociei'), ('sqlplus', 'lib_sqlplus'),
+                ('sqlplusic', 'lib_sqlplusic')]
+    libs_installed = installPrecompiledLibraries(packagename, libnames)
+    libs = EnvBuilder().depend(libs_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='libs')
+
+    binnames = [('sqlplus', 'bin_sqlplus', {
+        'require': [
+            'oracle.lib_sqlplus', 'oracle.lib_sqlplusic', 'oracle.lib_clntsh', 'oracle.lib_nnz',
+            'oracle.lib_ociicus'
+        ]
+    })]
+    bins_installed = installPrecompiledBinaries(packagename, binnames)
+    bins = EnvBuilder().depend(bins_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='bins')
+
+    scriptnames = [('bin_sqlplus', {}, {'runParams': '-- -h'})]
+    scripts_installed = createPackageProgramScripts(packagename, bins_installed, scriptnames,
+                                                    createPackageRunTarget)
+    scripts = EnvBuilder().depend(scripts_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                                   targetname='scripts')
+
+    EnvBuilder().depend(includeTarget, libs, bins,
+                        scripts).build().RegisterPackageTarget(packagename=packagename,
+                                                               targetname=packagename)

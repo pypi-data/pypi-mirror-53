@@ -1,0 +1,147 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+import os
+from SomeUtils import listFiles
+from stat import *
+
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from SConsider import createTargets
+    from SConsider.PackageRegistry import PackageRegistry
+    from ThirdParty import getBinaryDistDir
+    buildSettings = {
+        packagename: {
+            'linkDependencies': [
+                packagename + '.sybunic',
+                packagename + '.sybcs',
+                packagename + '.sybct',
+                packagename + '.sybintl',
+                packagename + '.sybtcl',
+                packagename + '.sybcomn',
+            ],
+            'requires': [packagename + '.config'],
+            'targetType': 'IncludeOnly',
+            'public': {
+                'includeSubdir': 'include',
+            },
+        },
+        'config': {
+            'targetType': 'CopyFiles',
+            'copyFiles': [
+                (listFiles(['config/*', 'charsets/*', 'locales/*'],
+                           recursive=True), S_IRUSR | S_IRGRP | S_IROTH),
+            ],
+            'appendUnique': {
+                'RELTARGETDIR': os.path.join('globals', packagename)
+            },
+            'public': {
+                'execEnv': {
+                    'SYBASE': lambda env: env.getTargetBaseInstallDir().abspath,
+                    'LANG': 'C',
+                },
+            },
+        },
+        'sybunic': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sybunic')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'sybcs': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sybcs')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'sybct': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sybct')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'sybintl': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sybintl')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'sybtcl': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sybtcl')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'sybcomn': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('sybcomn')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'isql': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('isql')],
+            'requires': [
+                PackageRegistry.createFulltargetname(packagename, 'config'),
+            ],
+            'targetType': 'PrecompiledBinary',
+        },
+        'script_isql': {
+            'targetType': 'ProgramApp',
+            'runConfig': {},
+            'usedTarget': packagename + '.isql',
+        },
+    }
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    import os
+    from TargetMaker import EnvBuilder
+    from TargetHelpers import createPackageProgramScripts, installPrecompiledBinaries, installPrecompiledLibraries, createPackageRunTarget, createCopyFilesTarget
+
+    includeTarget = EnvBuilder(export=[EnvBuilder().include(Dir('include'))]).build().RegisterPackageTarget(
+        packagename=packagename, targetname='include')
+
+    libnames = [('sybunic', 'lib_sybunic'), ('sybcs', 'lib_sybcs'), ('sybct', 'lib_sybct'),
+                ('sybintl', 'lib_sybintl'), ('sybtcl', 'lib_sybtcl'), ('sybcomn', 'lib_sybcomn')]
+    libs_installed = installPrecompiledLibraries(packagename, libnames)
+    libs = EnvBuilder().depend(libs_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='libs')
+
+    reltargetdir = os.path.join('globals', packagename)
+
+    def setRelTargetDir(env):
+        env.setRelativeTargetDirectory(reltargetdir)
+
+    binnames = [('isql', 'bin_isql', {})]
+    bins_installed = installPrecompiledBinaries(packagename, binnames)
+    bins = EnvBuilder().depend(bins_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='bins')
+
+    copyFiles = [
+        (listFiles(['config/*', 'charsets/*', 'locales/*'], recursive=True), S_IRUSR | S_IRGRP | S_IROTH),
+    ]
+    copyTarget = createCopyFilesTarget(packagename,
+                                       'config',
+                                       lambda env: env.getTargetBaseInstallDir(),
+                                       copyFiles,
+                                       pkg_local=[setRelTargetDir])
+
+    def addGenerateScriptVars(env):
+        env.AppendENVPath('SYBASE', os.path.join(env.getBaseOutDir().get_abspath(), reltargetdir))
+        env.AppendENVPath('LANG', 'C')
+        env.Append(GENERATESCRIPTVARS=[('SYBASE', '${SYBASE:-' +
+                                        os.path.join(env.getBaseOutDir().get_abspath(), reltargetdir) +
+                                        '}'), ('LANG', 'C')])
+
+    generateScriptEnv = EnvBuilder().export(addGenerateScriptVars).build()
+    generateScriptTarget = generateScriptEnv.RegisterPackageTarget(packagename, 'generatescriptvars')
+
+    scriptnames = [('bin_isql', {'depend': [generateScriptTarget, copyTarget]}, {'runParams': '-- --help'})]
+    scripts_installed = createPackageProgramScripts(packagename, bins_installed, scriptnames,
+                                                    createPackageRunTarget)
+    scripts = EnvBuilder().depend(scripts_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                                   targetname='scripts')
+
+    EnvBuilder().depend(includeTarget, libs, bins,
+                        scripts).build().RegisterPackageTarget(packagename=packagename,
+                                                               targetname=packagename)

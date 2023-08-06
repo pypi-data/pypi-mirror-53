@@ -1,0 +1,98 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from SConsider import createTargets
+    from ThirdParty import getBinaryDistDir
+    buildSettings = {
+        packagename: {
+            'linkDependencies': [
+                packagename + '.gxi',
+                packagename + '.gxibasicmatch',
+                packagename + '.gxical',
+                packagename + '.gxiosa',
+                packagename + '.gxiplugin',
+                packagename + '.gxiwmqmsg',
+                packagename + '.gxiwmqprot',
+                packagename + '.gxixil',
+                packagename + '.icudata',
+                packagename + '.icuuc',
+            ],
+            'targetType': 'IncludeOnly',
+            'public': {
+                'includeSubdir': 'inc',
+            }
+        },
+        'gxi': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxi')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxibasicmatch': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxibasicmatch')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxical': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxical')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxiosa': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxiosa')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxiplugin': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxiplugin')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxiwmqprot': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxiwmqprot')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxiwmqmsg': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxiwmqmsg')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'gxixil': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('gxixil')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'icudata': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('icudata')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'icuuc': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('icuuc')],
+            'targetType': 'PrecompiledLibrary',
+        },
+    }
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from TargetHelpers import installPrecompiledLibraries
+
+    includeTarget = EnvBuilder(export=[EnvBuilder().include(Dir('inc'))]).build().RegisterPackageTarget(
+        packagename=packagename, targetname='include')
+
+    libnames = [('gxi', 'lib_gxi'), ('gxibasicmatch', 'lib_gxibasicmatch'), ('gxical', 'lib_gxical'),
+                ('gxiosa', 'lib_gxiosa'), ('gxiplugin', 'lib_gxiplugin'), ('gxiwmqprot', 'lib_gxiwmqprot'),
+                ('gxiwmqmsg', 'lib_gxiwmqmsg'), ('gxixil', 'lib_gxixil'), ('icudata', 'lib_icudata'),
+                ('icuuc', 'lib_icuuc')]
+    libs_installed = installPrecompiledLibraries(packagename, libnames)
+    libs = EnvBuilder().depend(libs_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='libs')
+
+    EnvBuilder().depend(includeTarget, libs).build().RegisterPackageTarget(packagename=packagename,
+                                                                           targetname=packagename)
