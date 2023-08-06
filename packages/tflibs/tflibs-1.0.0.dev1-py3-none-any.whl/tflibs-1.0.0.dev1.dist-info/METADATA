@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: tflibs
+Version: 1.0.0.dev1
+Summary: Libraries for easy bootstrapping TensorFlow project
+Home-page: https://github.com/shygiants/tflibs
+Author: Sanghoon Yoon
+Author-email: shygiants@gmail.com
+License: UNKNOWN
+Keywords: tensorflow,libraries
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.5
+Requires-Dist: wheel
+Requires-Dist: tqdm
+Requires-Dist: opencv-python
+Requires-Dist: requests
+Requires-Dist: pandas
+Requires-Dist: pyyaml
+Provides-Extra: dev
+Requires-Dist: tensorflow (==2.0.0) ; extra == 'dev'
+
+UNKNOWN
+
+
