@@ -1,0 +1,3 @@
+add_executable(unit_test unit_test.cpp solution_fits_instance_test.cpp intersections_test.cpp face_checker_test.cpp)
+set_visibility(unit_test)
+target_link_libraries(unit_test cgshop2020_verifier)
