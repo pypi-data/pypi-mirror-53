@@ -1,0 +1,67 @@
+Metadata-Version: 1.1
+Name: ignot
+Version: 0.1.0
+Summary: Simple CLI for MC versions management
+Home-page: https://git.mc4ep.org/mc4ep/ignot
+Author: Andriy Kushnir (Orhideous)
+Author-email: me@orhideous.name
+License: MIT license
+Description: ignot
+        =====
+        
+        *Утилита для управления версиями MC*
+        
+        .. image:: https://img.shields.io/pypi/pyversions/ignot.svg
+            :target: https://pypi.python.org/pypi/ignot
+        .. image:: https://img.shields.io/pypi/v/ignot.svg
+            :target: https://pypi.python.org/pypi/ignot
+        
+        
+        Установка
+        ---------
+        
+        ``pip3 install ignot``
+        
+        Использование
+        -------------
+        
+        .. code:: bash
+        
+            ignite \
+            --name 1.12.2-2844 \
+            --forge-version 14.23.5.2844 \
+            --with-liteloader \
+            --auth-type mc4ep
+        
+        Системные требования
+        --------------------
+        
+        -  POSIX-совместимая ОС
+        -  Python 3.6.4 и выше
+        
+        
+        Credits
+        -------
+        
+        This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+        
+        
+        =======
+        History
+        =======
+        
+        0.1.0 (2019-10-13)
+        ------------------
+        
+        * First release on PyPI.
+        
+Keywords: Minecraft,modpack,skcraft
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
