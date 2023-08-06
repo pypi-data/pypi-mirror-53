@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!-- group: for employee -->
+        <record model="res.group" id="group_timetracking_employee_editeval">
+            <field name="name">Timetracking - Employee can edit its evaluation</field>
+        </record>
+
+        <!-- write to evaluation of employee -->
+        <record model="ir.model.access" id="access_evaluation_employee_edeval">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <!-- access rule group -->
+        <record model="ir.rule.group" id="rule_group_evaluation_employee_edeval">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+            <field name="global_p" eval="False"/>
+            <field name="default_p" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_evaluation_employee_edeval_line1">
+            <field name="domain" pyson="1" 
+                eval="[('employee', '=', Eval('user', {}).get('employee', None))]" />
+            <field name="rule_group" ref="rule_group_evaluation_employee_edeval"/>
+        </record>
+        <record model="ir.rule.group-res.group" 
+                id="rule_group_evaluation_employee_edeval-group_timetracking_employee_editeval">
+            <field name="rule_group" ref="rule_group_evaluation_employee_edeval"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+        </record>
+        <!-- wizard recalc -->
+        <record model="ir.action-res.group" 
+                id="wizard_recalc_evaluation-group_timetracking_employee_editeval">
+            <field name="action" ref="wizard_recalc_evaluation"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+        </record>
+        <!-- field access - evaluation-->
+        <record model="ir.model.field.access" id="access_field-evaluation-evalitem-editeval">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluation'), ('name', '=', 'evalitem')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+        <record model="ir.model.field.access" id="access_field-evaluation-needs_recalc-editeval">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluation'), ('name', '=', 'needs_recalc')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+
+
+        <!-- evaluation item -->
+        <!-- readonly to employee -->
+        <record model="ir.model.access" id="access_evalitem_employee_edeval">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluationitem')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <!-- access rule group -->
+        <record model="ir.rule.group" id="rule_group_evalitem_employee_edeval">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluationitem')]"/>
+            <field name="global_p" eval="False"/>
+            <field name="default_p" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_evalitem_employee_edeval_line1">
+            <field name="domain" pyson="1" 
+                eval="[('evaluation.employee', '=', Eval('user', {}).get('employee', None))]" />
+            <field name="rule_group" ref="rule_group_evalitem_employee_edeval"/>
+        </record>
+        <record model="ir.rule.group-res.group" 
+                id="rule_group_evalitem_employee_edeval-group_timetracking_employee_editeval">
+            <field name="rule_group" ref="rule_group_evalitem_employee_edeval"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+        </record>
+        <!-- field permission -->
+        <record model="ir.model.field.access" id="access_field-evaluationitem-evaluation-editeval">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluationitem'), ('name', '=', 'evaluation')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+        <record model="ir.model.field.access" id="access_field-evaluationitem-balancestart-editeval">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluationitem'), ('name', '=', 'balancestart')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+        <record model="ir.model.field.access" id="access_field-evaluationitem-balstartmanu-editeval">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluationitem'), ('name', '=', 'balstartmanu')]"/>
+            <field name="group" ref="group_timetracking_employee_editeval"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+
+    </data>
+</tryton>

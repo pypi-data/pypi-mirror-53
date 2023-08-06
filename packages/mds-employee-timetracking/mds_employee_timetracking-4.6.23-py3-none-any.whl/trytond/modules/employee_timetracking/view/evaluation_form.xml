@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<form col="2">
+    <group id="grpdat" col="6" string="Evaluation">
+        <label name="employee"/>
+        <field name="employee" colspan="3"/>
+        <label name="evaldate"/>
+        <field name="evaldate"/>
+        
+        <label name="worktime_target_str"/>
+        <field name="worktime_target_str"/>
+        <label name="bal_prev_month_str"/>
+        <field name="bal_prev_month_str"/>
+        <label name="vacationdays_taken"/>
+        <field name="vacationdays_taken"/>
+
+        <label name="worktime_wobreaks_str"/>
+        <field name="worktime_wobreaks_str"/>
+        <label name="bal_current_month"/>
+        <field name="bal_current_month"/>
+        <label name="vacationdays_remain"/>
+        <field name="vacationdays_remain"/>
+
+        <label name="worktime_diff_str"/>
+        <field name="worktime_diff_str"/>
+        <label id="lab2" colspan="2" string=""/>
+        <label name="numsickdays"/>
+        <field name="numsickdays"/>
+
+        <label name="payed_out"/>
+        <field name="payed_out"/>
+        <label name="holidays"/>
+        <field name="holidays"/>
+    </group>
+    <group id="grpstate" col="2" string="State" yfill="1">
+        <label name="state"/>
+        <field name="state"/>
+        <group id="grpbtn" col="3" colspan="2">
+            <button name="wfcreate" string="Create" icon="tryton-go-next"/>
+            <button name="wfactivate" string="Activate" icon="tryton-go-next"/>
+            <button name="wflock" string="Lock" icon="tryton-go-next"/>
+        </group>
+
+        <label name="needs_recalc"/>
+        <field name="needs_recalc"/>
+        <field name="recalc_at" colspan="2"/>
+    </group>
+    
+    <notebook>
+        <page id="pg1" string="Time accounts" col="1">
+            <field name="evalitem"/>
+        </page>
+        <page id="pg2" string="Daily view" col="1">
+            <label id="lab1" xalign="0.0" string="The day view shows the entries on the primary time account."/>
+            <field name="days" view_ids="employee_timetracking.eval_dayofyear_view_tree"/>
+        </page>
+        <page name="vacationdays" col="1">
+            <field name="vacationdays" view_ids="employee_timetracking.eval_holiday_view_tree"/>
+        </page>
+        <page name="sickdays" col="1">
+            <field name="sickdays" view_ids="employee_timetracking.eval_sickday_view_tree"/>
+        </page>
+    </notebook>
+</form>

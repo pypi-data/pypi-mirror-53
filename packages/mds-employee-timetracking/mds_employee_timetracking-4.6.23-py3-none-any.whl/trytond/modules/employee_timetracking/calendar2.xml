@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!-- forms -->
+        <record model="ir.ui.view" id="calendar_view_form">
+            <field name="model">pim_calendar.calendar</field>
+            <field name="inherit" ref="pim_calendar.calendar_view_form"/>
+            <field name="name">calendar_form</field>
+        </record>
+        <record model="ir.ui.view" id="calendar_view_tree">
+            <field name="model">pim_calendar.calendar</field>
+            <field name="inherit" ref="pim_calendar.calendar_view_tree"/>
+            <field name="name">calendar_tree</field>
+        </record>
+
+    </data>
+</tryton>
