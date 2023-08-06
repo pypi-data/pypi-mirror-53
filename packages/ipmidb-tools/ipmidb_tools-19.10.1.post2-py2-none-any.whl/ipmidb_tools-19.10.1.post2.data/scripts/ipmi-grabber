@@ -1,0 +1,25 @@
+#!python
+"""Execute IPMIDB sanitization."""
+
+from argparse import ArgumentParser
+
+from pyipmidb.sanitizer import IPMIDBSanitizer
+
+def main():
+    """Execute IPMIDB sanitization."""
+
+    arguments_parser = ArgumentParser(
+        description='Updates IPMIDB credentials from Ironic and Openstack.')
+    arguments_parser.add_argument('-a', '--armed', action='store_true',
+                                  help='Use production IPMIDB endpoint')
+    arguments = arguments_parser.parse_args()
+
+    endpoint = 'ipmidb-dev.cern.ch'
+    if arguments.armed:
+        endpoint = 'ipmidb.cern.ch'
+
+    sanitizer = IPMIDBSanitizer(endpoint=endpoint, debug=True)
+    sanitizer.run()
+
+if __name__ == '__main__':
+    main()
