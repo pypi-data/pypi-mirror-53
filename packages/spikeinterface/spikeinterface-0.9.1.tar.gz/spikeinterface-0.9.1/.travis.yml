@@ -1,0 +1,22 @@
+language: python
+cache: pip
+os:
+- linux
+python:
+- '3.6'
+install:
+- pip install -r requirements.txt
+- pip install -r requirements_rtd.txt
+- pip install sphinx sphinx-gallery
+- pip install .
+script:
+- python -m pytest --ignore=doc/
+- cd doc
+- make html
+deploy:
+  provider: pypi
+  user: alejoe91
+  on:
+    tags: true
+  password:
+    secure: kMLey7aksRbho8zpaSMhUT4p/fLAipYrDmCvcqcHtAqdOYv17lU0YGY99NjAU5LIYidttcLW+jGQr35tgCzYTY4NbqwQ19CHLrMZgUWVyw+bnjftmLnyr/9+tPG0cJnAF+QnWemStz9XVhyHSlLpAl/mIAHSd60EJWlO/zgFmtvRqKz0tX//3EN84AdYxBlZxDebdYZUG8+cIsQ3OcY8x7oAhaNoJxRmwKIgmvoNpwSlOPamqXxpURCM+EzWnCM1hu2j29CyT/gUxlHVdmdVTu0OsfY7YMbjMQQJPC2D0QBPODLAZ1rH5OT84PJg1j4IkldfKSdPa5C2s+IEp5dreuv7/K6oUWy08LlDoSPFwm0NIC2y5/OqtWmDBYp7s06nqIr+KtWBTJRiDQGHm5qDEcIEKIMlYX7YJAy7JGuOlHrXe5u99NIiZPInPe6yB5x5pZ0VyjPDNGBzfqXWbNovDpKFQa6NaHAlTL7USUIbj+RNkb4nMSDFiwnGHhKYmPRuaOjGKNDWuVR99mSeds/d81BVYXql+c8DedwX2qk+XnHON5M/2h0tsWY0dUBbpB3EghMyjSLBIhnp+ifCQ3v1fW8LfSM04Zg8CJ33rqkJJUnWo5JB+4CPUsnp1k3MDy3Ifll5hlAh1WHo6UyzGthi4zb/FYEuHTTUYJqpk+CbumE=
