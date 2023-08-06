@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=ECCW
+GenericName=ECCW
+Comment=Exact Critical Coulomb Wedge : tools to compute and display the exact solution of any parameter of Critical Coulomb Wedge
+TryExec=eccw
+Exec=bash -c 'export PATH="$PATH:~/.local/bin"; eccw'
+Categories=Geology;Science;Qt;
+Terminal=false
+StartupNotify=true
+MimeType=text/eccw
+Icon=icon_eccw
