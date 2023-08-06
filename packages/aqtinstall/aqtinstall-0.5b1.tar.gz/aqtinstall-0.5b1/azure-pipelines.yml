@@ -1,0 +1,72 @@
+jobs:
+- job: MatricesGenerator
+  displayName: Matrices Generator
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.7'
+        addToPath: true
+    - bash: python ci/generate_azure_pipelines_matrices.py
+      name: mtrx
+      displayName: Generate test matrices and set variables in Azure Pipelines
+
+- job: Mac
+  dependsOn: MatricesGenerator
+  pool:
+    vmImage: 'macOS-10.14'
+  strategy:
+    matrix: $[ dependencies.MatricesGenerator.outputs['mtrx.mac'] ]
+  steps:
+    - script: brew install p7zip
+      displayName: Install 7zip
+    - template: ci/steps.yml
+
+- job: Windows
+  dependsOn: MatricesGenerator
+  pool:
+    vmImage: 'vs2017-win2016'
+  strategy:
+    matrix: $[ dependencies.MatricesGenerator.outputs['mtrx.windows'] ]
+  steps:
+    - template: ci/steps.yml
+
+- job: Linux
+  dependsOn: MatricesGenerator
+  pool:
+    vmImage: 'ubuntu-16.04'
+  strategy:
+    matrix: $[ dependencies.MatricesGenerator.outputs['mtrx.linux'] ]
+  steps:
+    - template: ci/steps.yml
+
+- job: LinuxSpecificMirror
+  displayName: Linux (Specific Mirror)
+  variables:
+    PYTHON_VERSION: '3.7'
+    QT_VERSION: 5.13.1
+    HOST: linux
+    TARGET: android
+    ARCH: android_armv7
+    ARCHDIR: android_armv7
+    QT_BASE_MIRROR: http://mirrors.ocf.berkeley.edu/qt/
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+    - template: ci/steps.yml
+
+- job: LinuxToolsOpenSSL
+  displayName: Tools(OpenSSL, Linux)
+  variables:
+    PYTHON_VERSION: '3.7'
+    HOST: linux
+    TOOL_NAME: tools_openssl_x64
+    TOOL_VERSION: 1.1.1-0
+    ARCH: qt.tools.openssl.gcc_64
+    TEST_EXECUTABLE: OpenSSL/binary/bin/openssl
+    TEST_COMMAND: version
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+    - template: ci/steps.yml
