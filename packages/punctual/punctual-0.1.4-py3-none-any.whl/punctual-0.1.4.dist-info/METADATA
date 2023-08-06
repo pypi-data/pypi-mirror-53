@@ -1,0 +1,61 @@
+Metadata-Version: 2.1
+Name: punctual
+Version: 0.1.4
+Summary: Clean and simple docfile management with a lot of flexibility
+Author: Mark Rawls
+Author-email: markrawls96@gmail.com
+Requires-Python: >=3.7,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: click (>=7.0,<8.0)
+Requires-Dist: colorama (>=0.4.1,<0.5.0)
+Description-Content-Type: text/x-rst
+
+punctual
+========
+
+``punctual`` is an uncomplicated dotfile manager that works on common Linux fundamentals and simplistic JSON configuration files.
+
+
+Installation
+------------
+
+
+With pip::
+
+  pip install punctual
+
+With this you will have an executable named `pcl`.
+
+
+Usage
+-----
+
+Main::
+
+  $ pcl --help
+  Usage: pcl [OPTIONS] COMMAND [ARGS]...
+
+  Options:
+    --help  Show this message and exit.
+
+  Commands:
+    delete
+    install
+    list
+
+Install::
+
+  $ pcl install --help
+  Usage: pcl install [OPTIONS] PACKAGE_NAME
+
+  Options:
+    --force  Remove any existing files
+    --help   Show this message and exit.
+
+
+Documentation
+-------------
+
+`Available on ReadTheDocs! <https://punctual.readthedocs.io/>`_
+
