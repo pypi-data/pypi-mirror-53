@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: contentmatcher
+Version: 0.0.1
+Summary: A pattern-based content matcher for Python
+Home-page: https://github.com/brandonmpace/contentmatcher
+Author: Brandon M. Pace
+Author-email: brandonmpace@gmail.com
+License: GNU Lesser General Public License v3 or later
+Description: # contentmatcher  
+        A pattern-based content matcher for Python programs  
+          
+        ##### Current state: Under development (alpha)  
+          
+          
+        It provides:  
+          * Match ratios based on amount of pattern that was matched  
+          * Fast method for first-pass match
+            * Allows filtering out patterns that are unlikely to match  
+            * More thorough matching can be performed with patterns that are more likely to match, reducing time requirements  
+          
+        Original use case:  
+          * matching a list of function names from a backtrace to known patterns  
+          
+        Installation:  
+          * pip install contentmatcher  
+          
+        Tested for Python >=3.6.5 on Linux (Ubuntu) and Windows 7/10  
+        
+Keywords: content pattern matcher
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.6.5
+Description-Content-Type: text/markdown
