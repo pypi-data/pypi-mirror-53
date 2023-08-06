@@ -1,0 +1,9 @@
+[nanaimo]
+nanaimo_builtin_bar = nanaimo.builtin.nanaimo_bar
+nanaimo_builtin_gtest = nanaimo.builtin.gtest_over_jlink
+
+[pytest11]
+pytest_gtest_over_jlink = nanaimo.builtin.gtest_over_jlink
+pytest_nanaimo = nanaimo.pytest_plugin
+pytest_nanaimo_bar = nanaimo.builtin.nanaimo_bar
+
