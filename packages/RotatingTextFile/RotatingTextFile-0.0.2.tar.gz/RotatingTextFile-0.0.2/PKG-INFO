@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: RotatingTextFile
+Version: 0.0.2
+Summary: A ZERO dependency rotating file handler which rotates when YOU want it to, rather than based on bytes size.
+Home-page: https://github.com/Rahul-RB/RotatingTextFile
+Author: Rahul R Bharadwaj
+Author-email: rahulbharadwaj033@gmail.com
+License: UNKNOWN
+Description: # Rotating Text File
+        A rotating file handler which rotates when YOU want it to, rather than based on bytes size. 
+        
+        ### When to use this module?
+        - When you have that niche case of logs being written into some text file from several functions and you just want it to rotate without having to re-write all the write calls with some new package.
+        
+        ### Why not use RotatingFileHandler provided by Python's logging module?
+        - If you are thinking of logging, please use RotatingFileHandler. It provides doRollover method which does the same functionality but with all the logging APIs.
+        - This module aims to solve cases of code where outputs were just being dumped into some file and over time the code grew so big that rotating the text file was needed without distrubing/refactoring the entire codebase.
+        
+        ### Installation
+        `pip install RotatingTextFile`
+        
+        ### Usage:
+        - Any existing code with text file can be replaced with the RotateTextFile constructor and a checker function.
+        - Eg:
+        
+        If you have some code like:
+        ```
+        with open("path/to/text/file","w") as fp:
+          fp.write("some log")
+        ```
+        All you have to do is:
+        ```
+        def condition():
+          return some_variable==0
+        
+        with RotateTextFile("path/to/text/file",condition,10) as fp: #10 is backupCount as in RotatingFileHandler
+          fp.write("some log")
+        ``` 
+        
+        - `condition` is called on every write. You can think of it as an analogy to a sort function which takes your `checking` function as an input.
+        - `RotateTextFile` inherits `io.TextIOWrapper`, so to pass any arguments specific to `io.TextIOWrapper`'s constructor, just pass them as Keyword Arguments.
+        - Since a file is rotated only on write, `RotateTextFile` constructor opens the file in `ab+` mode. Other supported modes are :`wb`. `mode` can be passed as:
+        `RotateTextFile("path/to/text/file",condition,10,'wb'):`
+        - `backupCount` indicates how many backups a file can have before it is rotated.
+        - Like `RotatingFileHandler` provided by Python's logging module, `RotateTextFile` guarentees that the file being written to will ALWAYS be `filename.log`
+        
+Keywords: custom rotating file handler textfile logger
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.0
+Classifier: Programming Language :: Python :: 3.1
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Intended Audience :: Developers
+Description-Content-Type: text/markdown
