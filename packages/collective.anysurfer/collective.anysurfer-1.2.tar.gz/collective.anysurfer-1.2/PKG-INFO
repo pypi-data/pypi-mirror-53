@@ -1,0 +1,134 @@
+Metadata-Version: 2.1
+Name: collective.anysurfer
+Version: 1.2
+Summary: Anysurfer (Belgian accessibility standard) support for Plone
+Home-page: https://github.com/collective/collective.anysurfer/
+Author: 
+Author-email: 
+License: gpl
+Description: ====================
+        collective.anysurfer
+        ====================
+        
+        This package adds Anysurfer (https://anysurfer.be/fr) support to Plone.
+        Anysurfer is a Belgian accessibility standard equivalent to WCAG 2.0 A.
+        
+        This package is totally transparent for the user.
+        It fixes various accessibility issues in Plone, in standard features,
+        content types, body texts, ...
+        
+        
+        Features
+        --------
+        
+        1. Adds missing page titles for views / skins / 404 error page
+        2. Improves search results count (in H1 and page title)
+        3. Fixes News item image alt
+        4. Removes empty <ul> lists
+        5. Allows empty image alt
+        6. Fixes 'Required' labels html position
+        7. Replace Plone replacetag="h2" by real tag
+        
+        
+        Limitations
+        -----------
+        
+        This add-on has been developed on Plone 4.3.
+        It is not yet fully compatible with Plone 5.
+        
+        
+        Translations
+        ------------
+        
+        This product has been translated into
+        
+        - English
+        - French
+        - Dutch
+        
+        
+        Installation
+        ------------
+        
+        Install collective.anysurfer by adding it to your buildout::
+        
+            [buildout]
+        
+            ...
+        
+            eggs =
+                collective.anysurfer
+        
+        
+        and then running ``bin/buildout``
+        
+        
+        Contribute
+        ----------
+        
+        - Issue Tracker: https://github.com/collective/collective.anysurfer/issues
+        - Source Code: https://github.com/collective/collective.anysurfer
+        
+        
+        License
+        -------
+        
+        The project is licensed under the GPLv2.
+        
+        Contributors
+        ============
+        
+        - Godefroid Chapelle, Original Author [BubbleNet]
+        - Laurent Lasudry [Affinitic]
+        - Valentin Piret [Affinitic]
+        - Sébastien Sirtoli [Affinitic]
+        
+        Changelog
+        =========
+        
+        1.2 (2019-10-04)
+        ----------------
+        
+        - Add documentation, contributors, fix setup.py & use RST
+          [laulaz]
+        
+        - Handle more Anysurfer usecases : empty lists, bad alts, required labels, ...
+          [laulaz]
+        
+        - Move h1, add search results count in search page title & handle JS refresh
+          [laulaz]
+        
+        - Handle 404 page
+          [vpiret]
+        
+        - Migrate to plone 5
+          [oxydedefer]
+        
+        - Add missing translations for accessibility view title
+          [laulaz]
+        
+        - Add missing translations for contact-info view title
+          [laulaz]
+        
+        
+        1.1 (2012-11-12)
+        ----------------
+        
+        - Nothing changed yet.
+        
+        
+        1.0 (2012-11-09)
+        ----------------
+        
+        - Package created using zopeskel
+          []
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Plone
+Classifier: Framework :: Plone :: 4.3
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Provides-Extra: test
