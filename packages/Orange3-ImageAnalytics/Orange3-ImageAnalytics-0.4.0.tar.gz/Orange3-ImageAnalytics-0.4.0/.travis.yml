@@ -1,0 +1,50 @@
+language: python
+
+sudo: false   # use container-based infrastructure
+dist: xenial
+
+matrix:
+  include:
+
+    - python: '3.7'
+      env: ORANGE="3.21.0"
+
+    - python: '3.6'
+      env: ORANGE="release"
+
+    - python: '3.7'
+      env: ORANGE="release"
+
+    - python: '3.7'
+      env: ORANGE="master"
+
+
+cache:
+    apt: true
+    pip: true
+    ccache: true
+    directories:
+        - $TRAVIS_BUILD_DIR/pyqt
+
+before_install:
+    - pip install -U pip wheel setuptools
+    - pip install codecov
+
+install:
+    # todo: numpy limited to 1.16 since there is an issue with version 1.17.*
+    # and 1.15.* remove this limitation after while, also remove the limitation
+    # requirements
+    - pip install --only-binary numpy,scipy,scikit-learn numpy==1.16.* scipy scikit-learn
+    - pip install sip pyqt5==5.11.*
+    - source $TRAVIS_BUILD_DIR/.travis/install_orange.sh
+    - pip install -e .
+    # todo: orange cache dir doesn't get created at installation
+    - mkdir -p $(python -c 'from Orange.misc.environ import cache_dir; print(cache_dir())')
+
+script:
+    # Screen must be at least 24bpp (see https://github.com/pytest-dev/pytest-qt/issues/35)
+    - XVFBARGS="-screen 0 1280x1024x24"
+    - catchsegv xvfb-run -a -s "$XVFBARGS" coverage run -m unittest discover -v
+
+after_success:
+    - codecov
