@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: AeroEvap
+Version: 0.0.1
+Summary: Aerodynamic mass-transfer approach for open-water evaporation
+Home-page: https://github.com/WSWUP/AeroEvap
+Author: Chris Pearson and John Volk
+Author-email: john.volk@dri.edu
+License: BSD3
+Platform: Windows
+Platform: Linux
+Platform: Mac OS X
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Environment :: Console
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Scientific/Engineering
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.7
+Requires-Dist: numpy
+Requires-Dist: pandas
+
+AeroEvap
+========
+
+Python version of aerodynamic mass-transfer approach for open-water evaporation
+
+
+Installation
+------------
+
+Dependencies are only Python 3, NumPy, and pandas.
+
+You may install the dependencies using the provided conda virtual environment (recommended), the environment file can be downloaded `here <https://raw.githubusercontent.com/WSWUP/AeroEvap/master/environment.yml>`__ and installed and activated by
+
+.. code-block:: bash
+
+   conda env create -f environment.yml
+   conda activate aeroevap
+
+Once activated install with PIP:
+
+.. code-block:: bash
+
+   pip install aeroevap
+
+
