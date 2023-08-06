@@ -1,0 +1,96 @@
+Metadata-Version: 2.1
+Name: qsiprep
+Version: 0.6.0rc1
+Summary: qsiprep builds workflows for preprocessing and reconstructing q-space images
+Home-page: https://github.com/pennbbl/qsiprep
+Author: The PennBBL developers
+Author-email: Matthew.Cieslak@pennmedicine.upenn.edu
+Maintainer: Matt Cieslak
+Maintainer-email: Matthew.Cieslak@pennmedicine.upenn.edu
+License: 3-clause BSD
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.5
+Description-Content-Type: text/x-rst; charset=UTF-8
+Requires-Dist: nibabel (>=2.2.1)
+Requires-Dist: indexed-gzip (>=0.8.8)
+Requires-Dist: nilearn (!=0.5.0,!=0.5.1)
+Requires-Dist: nipype (<=1.1.9)
+Requires-Dist: psutil (>=5.4)
+Requires-Dist: pybids (~=0.9.3)
+Requires-Dist: matplotlib (<=2.2.3)
+Requires-Dist: svgutils
+Requires-Dist: numpy
+Requires-Dist: dipy (<=0.15.0)
+Requires-Dist: seaborn
+Requires-Dist: pandas
+Requires-Dist: pyyaml
+Requires-Dist: jinja2
+Requires-Dist: scikit-learn (>=0.20.2)
+Requires-Dist: scikit-image
+Requires-Dist: statsmodels
+Provides-Extra: all
+Requires-Dist: datalad ; extra == 'all'
+Requires-Dist: dipy ; extra == 'all'
+Requires-Dist: nbsphinx ; extra == 'all'
+Requires-Dist: packaging ; extra == 'all'
+Requires-Dist: pydot (>=1.2.3) ; extra == 'all'
+Requires-Dist: pydotplus ; extra == 'all'
+Requires-Dist: sphinx (>=1.5.3) ; extra == 'all'
+Requires-Dist: sphinx-argparse ; extra == 'all'
+Requires-Dist: sphinx-rtd-theme ; extra == 'all'
+Requires-Dist: duecredit ; extra == 'all'
+Requires-Dist: coverage ; extra == 'all'
+Requires-Dist: codecov ; extra == 'all'
+Requires-Dist: pytest ; extra == 'all'
+Provides-Extra: datalad
+Requires-Dist: datalad ; extra == 'datalad'
+Provides-Extra: doc
+Requires-Dist: dipy ; extra == 'doc'
+Requires-Dist: nbsphinx ; extra == 'doc'
+Requires-Dist: packaging ; extra == 'doc'
+Requires-Dist: pydot (>=1.2.3) ; extra == 'doc'
+Requires-Dist: pydotplus ; extra == 'doc'
+Requires-Dist: sphinx (>=1.5.3) ; extra == 'doc'
+Requires-Dist: sphinx-argparse ; extra == 'doc'
+Requires-Dist: sphinx-rtd-theme ; extra == 'doc'
+Provides-Extra: docs
+Requires-Dist: dipy ; extra == 'docs'
+Requires-Dist: nbsphinx ; extra == 'docs'
+Requires-Dist: packaging ; extra == 'docs'
+Requires-Dist: pydot (>=1.2.3) ; extra == 'docs'
+Requires-Dist: pydotplus ; extra == 'docs'
+Requires-Dist: sphinx (>=1.5.3) ; extra == 'docs'
+Requires-Dist: sphinx-argparse ; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme ; extra == 'docs'
+Provides-Extra: duecredit
+Requires-Dist: duecredit ; extra == 'duecredit'
+Provides-Extra: resmon
+Provides-Extra: tests
+Requires-Dist: coverage ; extra == 'tests'
+Requires-Dist: codecov ; extra == 'tests'
+Requires-Dist: pytest ; extra == 'tests'
+
+qsiprep borrows heavily from FMRIPREP to build workflows for preprocessing q-space images
+such as Diffusion Spectrum Images (DSI), multi-shell HARDI and compressed sensing DSI (CS-DSI).
+It utilizes Dipy and ANTs to implement a novel high-b-value head motion correction approach
+using q-space methods such as 3dSHORE to iteratively generate head motion target images for each
+gradient direction and strength.
+
+Since qsiprep uses the FMRIPREP workflow-building strategy, it can also generate methods
+boilerplate and quality-check figures.
+
+Users can also reconstruct orientation distribution functions (ODFs), fiber orientation
+distributions (FODs) and perform tractography, estimate anisotropy scalars and connectivity
+estimation using a combination of Dipy, MRTrix and DSI Studio using a JSON-based pipeline
+specification.
+
+[Documentation `qsiprep.org <https://qsiprep.readthedocs.io>`_]
+
+
