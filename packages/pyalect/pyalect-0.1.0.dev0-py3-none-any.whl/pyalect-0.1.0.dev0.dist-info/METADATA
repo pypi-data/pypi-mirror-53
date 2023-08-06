@@ -1,0 +1,78 @@
+Metadata-Version: 2.1
+Name: pyalect
+Version: 0.1.0.dev0
+Summary: UNKNOWN
+Home-page: https://github.com/rmorshea/pyalect
+Author: Ryan Morshead
+Author-email: ryan.morshead@gmail.com
+License: MIT
+Platform: Linux
+Platform: Mac OS X
+Platform: Windows
+Requires-Python: >=3.6,<4.0
+Description-Content-Type: text/markdown
+Requires-Dist: docopt (==0.6.2)
+Requires-Dist: typing-extensions (==3.7.4)
+
+# Pyalect
+
+Dynamically transpiling Python for Good
+
+
+# Console Usage
+
+```
+pyalect (activate | deactivate)
+pyalect register <transpiler> as <dialect> [--force]
+pyalect deregister (<dialect> | <transpiler> [as <dialect])
+pyalect config (show | path)
+```
+
+Examples:
+
+```bash
+pyalect register my_module:MyTranspiler as my_dialect
+pyalect activate
+pyalect config show
+```
+
+
+# Programatic Usage
+
+```python
+import ast
+import pyalect
+
+class MyTranspiler:
+
+    def transform_src(self, source: str) -> str:
+        # modify src ...
+        return new_src
+
+    def transform_ast(self, node: ast.AST) -> ast.AST:
+        # modify AST ...
+        return node
+
+# this will only be applied within the current interpreter
+pyalect.register("my_dialect", MyTranspiler)
+```
+
+
+# Indicating Dialects
+
+```python
+# dialect=my_dialect
+...
+```
+
+
+# IPython and Jupyter Support
+
+Dialects are supported in [IPython](http://ipython.org/) and [Jupyter](https://jupyter.org) via magics:
+
+```python
+%%dialect html
+...
+```
+
+
