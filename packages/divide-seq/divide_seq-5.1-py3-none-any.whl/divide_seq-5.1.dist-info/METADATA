@@ -1,0 +1,176 @@
+Metadata-Version: 2.1
+Name: divide-seq
+Version: 5.1
+Summary: Divide amplicon sequences
+Home-page: https://github.com/wpwupingwp/divide
+Author: Ping Wu
+Author-email: wpwupingwp@outlook.com
+License: GNU AGPL v3
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Description-Content-Type: text/markdown
+Requires-Dist: biopython (>=1.72)
+Requires-Dist: pip (>=18.0)
+Requires-Dist: regex (>=2019.08.19)
+Requires-Dist: wheel (>=0.32.3)
+
+# join_and_split.py
+
+Helper for join and split fastq files.
+
+Required python 3.6 or above.
+
+## Usage
+```
+# Linux
+## split
+python3 join_and_split.py split -m fastq_file
+## join
+python3 join_and_split.py join -f forward.fastq -r reverse.fastq
+# Windows
+## split
+python join_and_split.py split -m fastq_file
+## join
+python join_and_split.py join -f forward.fastq -r reverse.fastq
+```
+
+Use -t to set linker text, by default the program use "JOINTEXT".
+
+When split, "fastq_file" could be multiple files, use "\*.fastq" (include
+quotation mark) to represent all ".fastq" files in current folder.
+
+# divide.py
+
+Divide NGS data by barcode and primer.
+
+## Prerequisite
+
+* Python 3.5 or above
+* Biopython
+* regex
+* [vsearch](https://github.com/torognes/vsearch) (Optional)
+
+To install Biopython and regex, run as administrator:
+
+> pip install biopython regex
+
+## Changelog
+
+### v4.6
+Support ambiguous base.
+
+### v4.5
+Extend vsearch options.
+Improve output
+
+### v4.2
+Integrate vsearch.
+
+### v4.0
+Use regex instead of BLAST. Faster and easier.
+
+### v3.3
+Parallel version, use BLAST.
+
+### v2.1
+Single core version. Use BLAST.
+
+### v1.0
+Deprecated.
+
+## Sequence structure
+
+It can handle merged pair-end sequence like this:
+
+>barcode-adapter-primer-sequence-primer-adapter-barcode
+
+Or just handle one direction:
+
+>barcode-adapter-primer-sequence
+
+Sequences will be divided by barcode according to given barcode file.
+If barcode is wrong even only one base, it will be dropped.
+
+## adapter
+
+Some one adds sequence between barcode and primer, if you do not have it, just
+set adapter length to zero by "--adapter 0". The default value is 14.
+
+## Barcode mode
+
+Use "-m" to set barcode mode, like "8\*1", means barcode with length 5 repeats
+only 1 times. The default is "5\*2", i.e., 5-base barcode repeats twice.
+
+Note that the forward and reverse barcode may be different sequence, but they
+*SHOULD FOLLOW THE SAME MODE!*
+
+## Strict option
+
+Use "-s" or "--strict" to use strict version. If set, the program will check
+barcode in head and tail is equal or not and whether barcode in tail (3') is
+correct. If not, it will only check barcode in head (5') of sequence.
+
+## Barcode file
+
+Barcode file looks like this:
+
+>   sample,barcode-f,barcode-r
+
+>   S0001,ATACG,ATACG
+
+>   S0002,ATATA,TATAC
+
+>   S0003,ATACG
+
+>   ...
+
+The _barcode-f_ means barcode in 5' direction and _barcode-r_ means barcode in
+3' direction. All sequences should be *forward*.
+
+If forward and reverse barcode are same, you can omit the reverse barcode in
+the table.
+
+To avoid potential error, _please do not use space in sample info_.
+
+And notice that here it use **English comma** to seperate two  fields rather
+than **Chinese comma**.
+
+## Primer file
+Primer file looks like this:
+
+>    gene,forward,reverse
+
+>    rbcL,ATCGATCGATCGA,TACGTACGTACG
+
+>    matK,AAAATTTTCCCC,GGGGTTACCAAAA
+
+>    ...
+
+Or:
+
+>    gene,sequence
+
+>    rbcL-f,ATCGATCGATCGA
+
+>    rbcL-r,TACGTACGTACG
+
+
+You can use Microsoft Excel to prepare these two files and save as CSV format,
+or use any text editor you prefer.
+
+**Make sure you don't miss the first line.**
+
+# task.sh
+
+If you use PBS task submitting system, you can use this script to submit the
+task, and you can finish the work from combine two direction sequence by flash and join_fastq.py to divide them.
+
+
