@@ -1,0 +1,139 @@
+{% extends "queryset_reporter/base.html" %}
+
+{% load dict_utils %}
+{% load i18n %}
+
+{% block content %}
+
+{% if rendered_csv %}
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>{% trans "CSV gerado" %}</h4>
+  {% trans "Acesse-o através desta URL: " %}<a href="{{ rendered_csv }}">{{ rendered_csv }}</a>
+</div>
+{% endif %}
+
+{% if rendered_xlsx %}
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>{% trans "XLSX gerado" %}</h4>
+  {% trans "Acesse-o através desta URL: " %}<a href="{{ rendered_xlsx }}">{{ rendered_xlsx }}</a>
+</div>
+{% endif %}
+
+<form action="{% url 'queryset_reporter:qr_create' %}" method="GET" id="querysets-form">
+{% if reporter.queryset %}
+<input type="hidden" value="{{ reporter.queryset.id }}" name="queryset" /> 
+{% endif %}
+<div class="row-fluid">
+    {% if reporter.queryset %}    
+    <div class="span3">
+        <ul class="nav filter-nav">
+
+            <li class="nav-header">{% trans "Filtros" %}<li>
+            {% for filter in reporter.get_filters %}
+            {% include 'queryset_reporter/filter_fields.html' %}
+            {% endfor %}
+
+            <li class="nav-header">{% trans "Exclusões" %}<li>
+            {% for filter in reporter.get_excludes %}
+            {% include 'queryset_reporter/filter_fields.html' %}
+            {% endfor %}
+
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="span9">
+        <fieldset>
+            <legend>
+                {% if reporter.queryset %}
+                    {{ reporter.queryset }}
+                {% else %}
+                    {% trans "Criar Relatório" %}
+                {% endif %}
+            </legend>
+            {% if reporter.queryset%}
+            {% if reporter.queryset and reporter.queryset.automatic_generation and reporter.queryset.last_automatic_generation_at %}
+                <div class="alert alert-success">
+                  <h4>{% trans "Relatórios gerados automaticamente em: " %}{{ reporter.queryset.last_automatic_generation_at|date:"d/m/Y H:i:s" }}</h4>
+                  {% trans "XLSX: " %}<a href="{{ reporter.queryset.last_automatic_generation_xlsx }}">{{ reporter.queryset.last_automatic_generation_xlsx }}</a><br/>
+                </div>
+            {% endif %}
+            <div class="btn-toolbar">
+                <button class="btn btn-primary" type="submit">
+                    <i class="icon-refresh"></i>
+                    {% trans "Aplicar filtros" %}</button>
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">{% trans "Ação" %} <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'queryset_reporter:qr_create' %}?queryset={{ reporter.queryset.pk }}">{% trans "Zerar filtros" %}</a></li>
+                    <li><a href="{% url 'queryset_reporter:qr_create' %}">{% trans "Selecionar outro modelo" %}</a></li>
+                    </ul>
+                </div><!-- /btn-group -->
+                <div class="btn-group">
+                    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">{% trans "Gerar relatório" %}<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="?{{ request.META.QUERY_STRING }}&format=xlsx">XLSX</a></li>
+                    {% comment %}
+                    <li><a href="#">CSV</a></li>
+                    <li><a href="#">PDF</a></li>
+                    <li><a href="#">HTML</a></li>
+                    {% endcomment %}
+                    </ul>
+                </div><!-- /btn-group -->
+            </div><!-- /btn-toolbar -->
+            {% else %}
+            <select class="input-xxlarge" name="queryset">
+                <option value="">{% trans "Selecione o modelo" %}</option>
+                {% for qs in querysets %}
+                <option value="{{ qs.pk }}"
+                    {% if qs.pk == reporter.queryset.pk %} selected="selected"{% endif %}>
+                    {{ qs }}
+                </option>
+                {% endfor %}
+            </select>
+            {% endif %}
+        </fieldset>
+
+        {% if reporter %}
+        <dl>
+            <dt>{% trans "Total de resultados" %}</dt>
+            <dd>{{ reporter.count }}</dd>
+            <dt>{% trans "Pré-visualização" %}</dt>
+            <dd>{{ reporter.preview.count }}</dd>
+        </dl>
+        {% endif %}
+
+        {% with reporter.preview as preview %}
+        {% if preview %}
+        <table class="table table-striped table-condensed table-hover table-bordered">
+            <thead>
+                <tr>
+                {% for field in reporter.fields %}
+                    <th>{{ field.field_verbose|capfirst }}</th>
+                {% endfor%}
+                </tr>
+            </thead>
+            <tbody>
+            {% for line in preview %}
+            <tr>
+                {% for field in reporter.fields %}
+                <td>
+                    {% spaceless %} 
+                    {{ field.pre_concatenate|default_if_none:'' }}
+                    {{ line|get:field.get_field|default_if_none:'-' }}
+                    {{ field.pos_concatenate|default_if_none:'' }}
+                    {% endspaceless %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+</form>
+{% endblock %}
