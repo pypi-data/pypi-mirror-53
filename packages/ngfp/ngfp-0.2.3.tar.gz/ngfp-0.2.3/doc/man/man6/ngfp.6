@@ -1,0 +1,171 @@
+.\" ngfp.6 - New Gfingerpoken manual page.
+.\" adapted from gfpoken.6 - Gfingerpoken manual page.
+.\" Copyright 1999-2000 Martin Hock
+.\" Copyright 2005-2006 Bas Wijnen <wijnen@debian.org>
+.\" Copyright 2018-2019 ant <ant@anthive.com>
+.\"
+.\" This file is part of New Gfingerpoken.
+.\"
+.\" New Gfingerpoken is free software; you can redistribute it and/or modify
+.\" it under the terms of the The Unlicense and some artwork is covered by
+.\" the GNU General Public License as published by the Free Software 
+.\" Foundation; either version 3 of the License, or (at your option) any 
+.\" later version.
+.\"
+.\" New Gfingerpoken is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See The
+.\" Unlicense and the GNU General Public License for more details.
+
+.TH NGFP 6
+.\" NAME should be all caps, SECTION should be 1-8, maybe w/ subsection
+.\" other parms are allowed: see man(7), man(1)
+.SH NAME
+.PP
+ngfp \- Recreate a grid of mirrors from clues
+.SH SYNOPSIS
+.B ngfp
+
+.SH INTRODUCTION
+
+Suddenly, you attain consciousness.  You are faced by a grid of tiny
+squares, all alike, and a sign, which reads as follows:
+
+ACHTUNG!  ALLES LOOKENSPEEPERS!
+Das rollenballenmachine ist nicht fuer gefingerpoken und widgetmoven.
+Ist easy flippen der mirrorwerk, losenballen und shovenmirroren mit
+slippensliden.  Ist nicht fuer gewerken bei das dumpkopfen.  Das
+rubbernecken sichtseeren keepen das cotten-pickenen hans in das pockets
+muss; relaxen und watchen das rollenballen.
+
+Unable to decipher it, you begin rolling marbles at the grid, having nothing
+better to do. And thus begins your pathetic adventure deep into the bowels
+of Nihilism.
+
+.SH "DESCRIPTION"
+
+The idea for this game comes from a Windows game called "Marble," by
+Analogue Software.  GFingerPoken was basically Marble, rewritten
+from scratch in C for GTK and then New GFingerPoken is an adaptation
+of GFingerPoken rewritten in Python.
+
+The game starts with a default configuration, a grid and a random game 
+to play.  You can adjust these if desired by pressing the configure icon 
+(top symbol in the light green column).
+
+The game grid on the left side of the screen is where mirrors from the 
+right side are placed.  Any that have numbers below them other than 
+Zero (0) means that number of mirrors are still to be placed.  All 
+mirrors must be used to solve the puzzle.  To place a mirror click on 
+it once (you do not need to hold down the mouse button) and then click 
+on the grid to the left where you'd like to place it.  You can rotate 
+those mirrors that will rotate by pressing the right mouse button.  
+To move a mirror that has already been placed click on it once with 
+the left mouse button to pick it up and then left mouse click the new 
+desired location.
+
+You can also change your mind about what mirror to place by clicking
+on a different mirror.
+
+You can throw marbles into the grid by clicking around the edges of the grid.
+There are six different colored marbles.  When you click on an edge there
+will be an In Arrow of the marble color to start.  Then you'll see your 
+marble roll through the grid (possibly interacting with mirrors along the
+way and changing directions), then you'll see an Out Arrow (maybe, some
+mirrors absorb or can set up a loop which means no marble comes out).
+
+Your job is to place all of the mirrors from the right side on the left
+side of the grid and set up your grid to be the same as the output indicates, 
+i.e., so your colored marble always goes out where the same color arrow 
+says it should.  If a mirror has a some arrows in the center, it is
+flippable; right click on it, and it will change between its states.
+Furthermore, every time these mirrors are hit within the maze, either yours
+or the computer's, they will be flipped also.  So your grid must be
+synchronized with the invisible one.
+
+When you think that your grid perfectly matches the output, click the
+check icon and see if you were right.
+
+In the configuration dialog you can set the relative abundance of the 
+different mirror types, the size of the grid, the amount of mirrors in 
+it, and how much the mirror density should vary.  You can also load and
+save the configuration information or reset the values to default values.
+
+In the light green column there are load and save icons to load and save 
+existing games.
+
+There are two indicator buttons at the bottom corners of the grid which
+tell you if you are in the Guess grid (Green on the right) or looking 
+at the puzzle that you are trying to solve (Pink on the left).
+
+For quick help press the light green ? icon.  For more lengthy help
+press F1, H or ?.
+
+
+.SH MIRROR TYPES
+.TP
+.B Simple mirrors
+The marble rolls toward it.  The marble hits it.  The marble
+rolls in a different direction.  Very simple.  They are shaped / and \ .
+
+.TP
+.B Flipping mirrors
+The marble hits it and rolls in a different direction, but
+then the mirror changes shape according to its little indicator.
+There are two cycle mirrors which go between / and \ shapes, and four
+cycle mirrors which cycle this way: / o \ o .  (The little "o"
+representing a box, coming up next.)
+
+This is where the game begins to get devious.  Your setup must match the
+functionality of the invisible one exactly.  Meaning you have to get the
+alignment of these precisely perfect.  To change the alignment of one,
+right click on it.
+
+.TP
+.BR Box " and " sink
+Basically they are opposites.  A box will repel the marble in
+the opposite direction that it came from, and a sink will "eat" the marble,
+resulting in NO output arrow.
+
+.TP
+.B Axial mirrors
+They will let the marble come through on one
+axis (i.e. vertically or horizontally) but bounce it back on the other.
+There are both simple and flipping axial mirrors for your amusement.
+
+.TP
+.B Rotators
+These are quite similar to normal mirrors, only they redirect
+the marble in a different sort of way.  There are clockwise and
+counterclockwise varieties as well as a flipper.
+
+.TP
+.B One Way Mirrors
+Only one order away from pure evil, one way mirrors will
+boggle the mind for centuries if used liberally.  They are just like
+normal static mirrors, except they only let the marble travel right through it
+in two (perpendicular) directions and bounce it off in the other two.
+These can cause an infinite loop if used wrecklessly, which the random
+computer is fairly likely to do.  In that case, there is no output arrow, just
+like when the marble falls into a sink.
+
+.TP
+.B PURE EVIL
+There are two varieties:
+fllipping one way mirrors, and moving mirrors.  Flipping one way mirrors
+can flip in either a clockwise or counterclockwise direction.  Moving
+mirrors, when hit, will travel one square in the direction they were hit,
+after being hit, so your marble will travel as if a simple mirror had been
+where the mirror was just sitting.
+
+Finally, the colored marbles and arrows that appear next to the board are
+your history.  The whole reason for the 6 different marble colors
+is to differentiate your last 6 moves in the history.  Sometimes it is
+possible for one to to be overwritten by another move.
+
+.SH SEE ALSO
+"blinkenlights" in the Jargon File.
+
+.SH AUTHOR
+This manual page was written by Bas Wijnen <wijnen@debian.org>, based on
+documentation by Martin Hock and then altered again by ant <ant@anthive.com>
