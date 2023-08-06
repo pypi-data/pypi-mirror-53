@@ -1,0 +1,59 @@
+[tool.black]
+line_length = 79
+
+[tool.poetry]
+name = "rororo"
+version = "2.0.0a2"
+description = "OpenAPI 3 schema support for aiohttp.web applications."
+authors = ["Igor Davydenko <iam@igordavydenko.com>"]
+license = "BSD-3-Clause"
+readme = "README.rst"
+homepage = "https://igordavydenko.com/projects.html#rororo"
+repository = "https://github.com/playpauseandstop/rororo"
+documentation = "https://rororo.readthedocs.io/"
+keywords = ["aiohttp", "aiohttp.web", "oas", "openapi", "openapi3", "helpers", "utilities"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Operating System :: OS Independent",
+    "Topic :: Utilities",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Internet :: WWW/HTTP :: WSGI",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application"
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+aiohttp = "^3.5"
+jsonschema = "^3.0"
+openapi-core = "^0.12.0"
+PyYAML = "^5.1"
+
+[tool.poetry.dev-dependencies]
+aiohttp-middlewares = "^0.2.0"
+coveralls = "^1.7"
+pytest = "^5.0"
+pytest-aiohttp = "^0.3.0"
+pytest-cov = "^2.7"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py36,py37
+skipsdist = True
+
+[testenv]
+passenv =
+    PYTHONPATH
+    PYTEST_ADDOPTS
+setenv =
+    PYTHONPATH=.
+    USER=playpauseandstop
+skip_install = True
+whitelist_externals = poetry
+commands_pre =
+    poetry install
+commands =
+    poetry run python -m pytest examples/petstore/tests.py --cov=rororo --cov-branch --no-cov --no-cov-on-fail
+    poetry run python -m pytest tests/ --cov=rororo --cov-append --cov-branch --cov-fail-under=90 --cov-report=term-missing:skip-covered --no-cov-on-fail
+"""
