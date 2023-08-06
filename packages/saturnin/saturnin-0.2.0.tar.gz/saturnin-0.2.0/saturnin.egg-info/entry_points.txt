@@ -1,0 +1,8 @@
+[console_scripts]
+nodeconsole = saturnin.service.node.console:main
+saturnin-node = saturnin.service.node.runner:main
+
+[saturnin.service]
+firebird-log = saturnin.micro.fblog.api:SERVICE_DESCRIPTION
+saturnin-node = saturnin.service.node.api:SERVICE_DESCRIPTION
+
