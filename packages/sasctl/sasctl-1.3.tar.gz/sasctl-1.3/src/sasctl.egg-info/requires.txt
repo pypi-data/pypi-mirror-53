@@ -1,0 +1,22 @@
+requests
+six>=1.11
+
+[all]
+swat
+
+[all:platform_system != "Windows"]
+kerberos
+
+[all:platform_system == "Windows"]
+winkerberos
+
+[kerberos]
+
+[kerberos:platform_system != "Windows"]
+kerberos
+
+[kerberos:platform_system == "Windows"]
+winkerberos
+
+[swat]
+swat
