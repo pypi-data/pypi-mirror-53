@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: smm-utils
+Version: 0.0.3
+Summary: Utilities for smm guru project
+Home-page: https://gitlab.com/smm-guru/smm-utils
+Author: Evgeny Basmov
+Author-email: coykto@gmail.com
+License: MIT
+Platform: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.9
+Classifier: Environment :: Web Environment
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+
+========================
+Utils for url shortener
+========================
+
+Included is:
+
+* ``URLParser``
+
+Installation
+============
+
+::
+
+    pip install smm_utils
+
+=============
+Usage
+=============
+
+::
+
+    from us_utils import URLParser
+
+    parser = URLParser(url)
+
+    print(parser.scheme)
+    print(parser.username)
+    print(parser.password)
+    print(parser.subdomain)
+    print(parser.path)
+    print(parser.uri)
+    print(parser.uri_dict)
+
+
+
