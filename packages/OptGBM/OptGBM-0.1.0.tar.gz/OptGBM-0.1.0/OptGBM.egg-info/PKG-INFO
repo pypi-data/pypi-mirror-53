@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: OptGBM
+Version: 0.1.0
+Summary: Optuna + LightGBM \= OptGBM
+Home-page: UNKNOWN
+Author: Kon
+License: MIT License
+Description: # OptGBM
+        
+        [![CircleCI](https://circleci.com/gh/Y-oHr-N/OptGBM.svg?style=svg)](https://circleci.com/gh/Y-oHr-N/OptGBM)
+        
+        Optuna + LightGBM = OptGBM
+        
+        ## Examples
+        
+        ```python
+        from optgbm import OGBMClassifier
+        from sklearn.datasets import load_iris
+        
+        clf = OGBMClassifier(random_state=0)
+        X, y = load_iris(return_X_y=True)
+        
+        clf.fit(X, y)
+        ```
+        
+        ## Installation
+        
+        ```
+        pip install optgbm
+        ```
+        
+        ## Testing
+        
+        ```
+        python setup.py test
+        ```
+        
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
