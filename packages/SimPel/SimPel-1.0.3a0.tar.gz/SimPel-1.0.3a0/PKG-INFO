@@ -1,0 +1,79 @@
+Metadata-Version: 2.1
+Name: SimPel
+Version: 1.0.3a0
+Summary: Simulation of PELDOR time traces
+Home-page: https://www.radicals.uni-freiburg.de/de/software/simpel
+Author: Stephan Rein
+Author-email: stephan.rein@physchem.uni-freiburg.de
+License: GPLv3
+Description: SimPel
+        ======
+        
+        SimPel is a Python3-based simulation program for high-performance simulations of PELDOR/DEER traces. SimPel provides a user-friendly GUI based on the PyQt5 GUI framework.
+        
+        SimPel has been developed in the group of Prof. Dr. Stefan Weber at the University of Freiburg, Freiburg im Breisgau, Germany, during the last couple of years in course of developing GloPel, a software for advanced global analysis of PELDOR/DEER spectra.
+        SimPel is developed by Stephan Rein.
+        
+        
+        Find the full documentation at the link below:
+        https://www.radicals.uni-freiburg.de/de/software
+        
+        
+        
+        Installation
+        ------------
+        
+        Install SimPel via pip:
+        
+        pip install simpel
+        
+        
+        
+        Run SimPel
+        ----------
+        
+        Run SimPel on the console via:
+        
+        simpel
+        
+        
+        
+        
+        Properties
+        ----------
+        
+        SimPel provides:
+        
+        - PELDOR/DEER data simulation
+        - Up to 5 individual Gaussians
+        - Background modeling
+        - Comparison with experimental data
+        - High quality figure export
+        - Figure layout configuration
+        
+        
+        Feedback
+        --------
+        
+        We are eager to hear about your experiences with SimPel. You can
+        email me at stephan.rein@physchem.uni-freiburg.de.
+        
+        
+        Acknowledgement
+        ---------------
+        
+        A number of people have helped shaping GloPel and the ideas behind. First and foremost, Prof. Dr. Stefan Weber and Dr. Sylwia Kacprzak (now Bruker Biospin). Dr. Till Biskup (now Saarland University) contributed ideas for programming and details of the implementation that make all the difference between a program useful for a larger audience and a simple in-house solution.
+        
+        
+Keywords: EPR simulations,DEER,PELDOR,Dipolar spectroscopy
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Python: >=3.5
+Description-Content-Type: text/x-rst
