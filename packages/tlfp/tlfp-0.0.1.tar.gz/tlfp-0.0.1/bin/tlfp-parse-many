@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+import os
+import sys
+import glob
+
+from tlfp.tools.common import open_json
+from tlfp import parse_one
+
+
+args = [arg for arg in sys.argv[1:] if '--' not in arg]
+API_DIRECTORY = args[0] if len(args) > 0 else 'data'
+
+verbose = "--quiet" not in sys.argv
+include_motions = '--include-motions' in sys.argv
+include_resolutions = '--include-resolutions' in sys.argv
+
+
+def is_already_done(url):
+    for jsondos in glob.glob(os.path.join(API_DIRECTORY, '*/viz/procedure.json')):
+        dos = open_json(jsondos)
+        if dos.get('url_jo') and dos.get('url_dossier_senat') == url:
+            return True
+
+
+for url in sys.stdin:
+    url = url.strip()
+    if (("dossier-legislatif/ppr" in url and not include_resolutions) or
+        ("dossier-legislatif/motionpjl" in url and not include_motions)):
+        continue
+    if is_already_done(url):
+        if verbose:
+            print()
+            print('======')
+            print(url)
+            print('  + passed, already done:', url)
+        continue
+    dos = None
+    try:
+        dos = parse_one.process(API_DIRECTORY, url)
+        if dos:
+            print('SUCCESS:', url)
+            print("       > https://www.lafabriquedelaloi.fr/articles.html?loi=%s" % dos.get('id'))
+    except KeyboardInterrupt:
+        break
+    except parse_one.ParsingFailedException as e:
+        print('FAILED:', url)
+        print('     > ', e.root_exception)
+        print('     > ', "https://www.lafabriquedelaloi.fr/api/%s" % e.logfile)
