@@ -1,0 +1,6 @@
+[console_scripts]
+
+
+[jupyterhub.authenticators]
+btrdb = btrdb_admin.jupyter:BTrDBAuthenticator
+
