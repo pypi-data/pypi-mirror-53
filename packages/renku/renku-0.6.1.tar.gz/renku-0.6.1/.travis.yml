@@ -1,0 +1,216 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright 2017-2019 - Swiss Data Science Center (SDSC)
+# A partnership between École Polytechnique Fédérale de Lausanne (EPFL) and
+# Eidgenössische Technische Hochschule Zürich (ETHZ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+notifications:
+  email: false
+
+git:
+  depth: false
+
+language: python
+
+matrix:
+  fast_finish: true
+
+cache:
+  - pip
+
+env:
+  - REQUIREMENTS=lowest
+  - REQUIREMENTS=release
+
+dist: xenial
+
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+
+stages:
+  - name: docs
+  - name: test
+  - name: integration
+    if: branch = master AND (type != pull_request)
+  - name: test OSX
+    if: branch = master AND (type != pull_request)
+  - name: publish 🐍
+    if: type = push AND (branch = master OR tag IS present)
+  - name: brew 🍺
+    if: type = push AND tag IS present AND tag =~ /^v\d\.\d\.\d$/
+
+before_install:
+  - git fetch --tags
+  - git config --global --add user.name "Renku @ SDSC"
+  - git config --global --add user.email "renku@datascience.ch"
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
+        sudo apt-get update;
+        sudo apt-get -y install shellcheck;
+        travis_retry python -m pip install --upgrade pip setuptools py;
+        travis_retry python -m pip install twine wheel coveralls requirements-builder;
+        requirements-builder -e all --level=min setup.py > .travis-lowest-requirements.txt;
+        requirements-builder -e all --level=pypi setup.py > .travis-release-requirements.txt;
+        requirements-builder -e all --level=dev --req requirements-devel.txt setup.py > .travis-devel-requirements.txt;
+        requirements-builder -e nodocs --level=min setup.py > .travis-lowest-requirements-nodocs.txt;
+        requirements-builder -e nodocs --level=pypi setup.py > .travis-release-requirements-nodocs.txt;
+        requirements-builder -e nodocs --level=dev --req requirements-devel.txt setup.py > .travis-devel-requirements-nodocs.txt;
+    elif [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+        brew update;
+        brew upgrade python;
+        brew unlink python;
+        brew link python;
+        brew install git-lfs jq node pipenv shellcheck;
+        brew upgrade node;
+    fi
+
+install:
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
+        travis_retry python -m pip install -r .travis-${REQUIREMENTS}-requirements-nodocs.txt;
+        travis_retry python -m pip install -e .[nodocs];
+    elif [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+        travis_retry pipenv install --deploy;
+        source "$(pipenv --venv)/bin/activate";
+        travis_retry pip install -e .[nodocs];
+    fi
+
+script:
+  - "./run-tests.sh -t -s"
+
+after_success:
+  - coveralls
+
+jobs:
+  include:
+    - stage: docs
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=lowest
+        - REQUIREMENTS=release
+      install:
+        - travis_retry python -m pip install -r .travis-${REQUIREMENTS}-requirements-all.txt;
+          travis_retry python -m pip install -e .[all];
+      script: ./run-tests.sh -d
+    - stage: integration
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=release
+      script: pytest -m integration -v
+    - stage: integration
+      python: "3.6"
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=release
+      script: pytest -m integration -v
+    - stage: integration
+      python: "3.7"
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=release
+      script: pytest -m integration -v
+    - stage: integration
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=lowest
+      script: pytest -m integration -v
+    - stage: integration
+      python: "3.6"
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=lowest
+      script: pytest -m integration -v
+    - stage: integration
+      python: "3.7"
+      os: linux
+      dist: xenial
+      language: python
+      env:
+        - REQUIREMENTS=lowest
+      script: pytest -m integration -v
+    - stage: test OSX
+      if: branch = master
+      language: generic
+      sudo: true
+      os: osx
+      osx_image: xcode10.1
+    - language: generic
+      sudo: true
+      os: osx
+      osx_image: xcode9.2
+
+    - stage: publish 🐍
+      python: 3.6
+      script: echo "Publishing on PyPI.io ..."
+      before_deploy:
+        if [[ -z $TRAVIS_TAG ]]; then
+          export TRAVIS_TAG=$(renku --version) &&
+          git tag $TRAVIS_TAG;
+        fi
+      deploy:
+        - provider: pypi
+          user:
+            secure: "RPxGYNL+N6LQy1/TbXCFy9IDgZ05u/Qj6my/p1hSoBWG304se28njZ0zpTv5AGZF8G3dBeVjYbf4s+ytwUPoxK+1fBWlnnSuw4QUXWf339rzcMU4dDO2QX8/SvMDZFbJdE/1/6arlbXa8dTZobm1V0Q3AUTkl2AwXIg9jCaRcYb6n9lASRIiR1M2BK/+FTJG2qywB9kSyQ3giuobwwhQa4CAwDg5MoqL5KLFm2CxejvS0vpleaWqA/LJxeHTQqqd0CIk6V2NBETZ6V78MqdISai88nRafijT0iQ5LSWsy7R6CCpK7OFjHnvA7hGSYzs/BRpdABAk5a2yFbKKZErXoLvatjflMlj2OhHy/0Hlv6xEt1db1pwnjQQIiS62R/Gpx4DZAO8hGp6pT9g9xiifzlj4km9iOD4GY1g+A5A+ssEneBTvExJja4yAqJzAVu+XVDVqxVj+MOmpIcQkzT983+cVceoeczJ61sDuftQaAgcVqQACRE02fLszEtSJVFaq3vKu8dX2eMdiCk7GLdqNF9kfygagNC8eja6Yvr+Ft8kTwrjTBMC/D3xC584I8OTzmpNE/tfZHppfhiKXoU+FySdIGCPcSTGKUgljiz3sFk1JjjEBkGqBLAMaD8l5FsgQqR4zO/2IiwSst1Wx8owF+tiLlerDAC9b/ZFcqDpUab4="
+          password:
+            secure: "f8f2175dg1FUt4mZCQ87tgwwUrFoxQ5CTcZkRnlCXJqagSMk9VmjR8/XXDE5cW48JPG0qdKQdvBtC81NCq+4MqC20HI9VtOdZWeT6Jej90XOZ742osC3pdIGMF4wrsd7+fs1AZkbzzjgB7FsJ42qW6rMa3vP4mXB4GJEel453Fs3Fw8tnR4PZ2ikOJ9fcmtMensjxh9oNMyAIMkYVGim5bWtpkpI1cddeThDBEKurj1IWEMonQw4lR2yLwZTEP6F/b43Cy4aNy+YkdJzJbM0KMJASLeeu8SxNTE7JCqrYc4irU3AzHzzy/FNVGdiw0F10kbK+yI7cPUqWfeoVjwqBJe8Hr0CXNNCsEYkjXkY9PE2m2x10z2UrTy+O1dNo/8sDoKvZBChuAPPtxp2I7/KujECWjzFvMunHEk3K940ZeSMo90xHKQllmA7umquNcPTXiM2l4nNHtolh5W2HdanvsEFhkY2Y2o9sRIytOa5bM+iS9RCL5GsZwLgGKdjfuqk0GF6KK4AIgi7WKtVM73vM7HQaAVRpyUWZ/h8Vu5IRdkORC20WwHZ/Jg6pUy3pkN1VlcKE5uanaPik/npq/uCGe9YC2bh5IoclmqdJUHrkzFPb+f8wRBvbof0zU1B6UMSdiug5oDk3a0Q8kk2AppfjTs7x8NHi3KYXdUphi9HrWQ="
+          distributions: "sdist bdist_wheel"
+          on:
+            all_branches: true
+        # push the dev tag to github
+        - provider: releases
+          api_key: ${GITHUB_TOKEN}
+          on:
+            all_branches: true
+            tags: false
+
+    - stage: brew 🍺
+      language: generic
+      sudo: true
+      os: osx
+      osx_image: xcode10.2
+      before_install: brew install jq
+      install: python -m pip install requests
+      script:
+        - echo PY_BREW_VERSION=$(python setup.py --version)
+        - make -e PY_BREW_VERSION=$(python setup.py --version) brew-commit-formula brew-build-bottle brew-commit-bottle
+      deploy:
+        - provider: releases
+          api_key: ${GITHUB_TOKEN}
+          file_glob: true
+          file: "*.bottle.*"
+          skip_cleanup: true
+          on:
+            all_branches: true
+        - provider: pages
+          skip-cleanup: true
+          github-token: ${GITHUB_TOKEN}
+          repo: swissdatasciencecenter/homebrew-renku
+          target-branch: master
+          keep-history: true
+          local-dir: /usr/local/Homebrew/Library/Taps/swissdatasciencecenter/homebrew-renku/
+          on:
+            all_branches: true
