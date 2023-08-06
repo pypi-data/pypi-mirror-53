@@ -1,0 +1,28 @@
+Metadata-Version: 1.2
+Name: nfc-module
+Version: 1
+Summary: NFC读写操作
+Home-page: https://www.github.com/cpak00/nfc_module
+Author: cpak00
+Author-email: cymcpak00@gmail.com
+Maintainer: cpak00
+Maintainer-email: cymcpak00@gmail.com
+License: MIT License
+Description: 为NFC读卡器设备制作的便于操作的软件，样例：
+        start()
+        wakeUp()
+        uid = getUid()
+        checkKey(uid, [])
+        writeBar(5, [1, 9, 9, 8, 1, 1, 2, 3])
+        print('5s: ' + str(readBar(5)))
+Platform: all
+Classifier: Development Status :: 4 - Beta
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Libraries
