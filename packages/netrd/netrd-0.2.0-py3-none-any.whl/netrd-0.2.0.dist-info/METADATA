@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: netrd
+Version: 0.2.0
+Summary: netrd: A library for network {reconstruction, distances, dynamics}
+Home-page: https://github.com/netsiphd/netrd
+Author: NetSI 2019 Collabathon Team
+Author-email: stefanmccabe@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: networkx (>=2.2.0)
+Requires-Dist: numpy (>=1.16.0)
+Requires-Dist: scipy (>=1.0.0)
+Requires-Dist: scikit-learn (>=0.18.2)
+Requires-Dist: Cython (>=0.29.2)
+Requires-Dist: numpydoc (>=0.9)
+Requires-Dist: sphinx-rtd-theme (>=0.4)
+Requires-Dist: Sphinx (==2.0.1)
+Provides-Extra: doc
+Requires-Dist: POT (>=0.5.1) ; extra == 'doc'
+
+This library provides a consistent, NetworkX-based interface to various
+utilities for graph distances, graph reconstruction from time series data, and
+simulated dynamics on networks. 
+
+Some resources that maybe of interest:
+
+* An interactive demonstration: [netrd
+  explorer](https://netrdexplorer.herokuapp.com)
+* A [tutorial](https://netrd.readthedocs.io/en/latest/tutorial.html) on how to use the library
+* The API [reference](https://netrd.readthedocs.io/en/latest/) 
+* A [notebook](https://nbviewer.jupyter.org/github/netsiphd/netrd/blob/master/notebooks/00%20-%20netrd_introduction.ipynb) showing advanced usage
+
