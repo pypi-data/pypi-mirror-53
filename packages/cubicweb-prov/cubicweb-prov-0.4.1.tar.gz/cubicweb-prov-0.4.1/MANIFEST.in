@@ -1,0 +1,10 @@
+recursive-include cubicweb_prov *.py
+recursive-include cubicweb_prov/data *.gif *.png *.ico *.css *.js
+recursive-include cubicweb_prov/i18n *.po
+recursive-include test *.py
+include test/data/bootstrap_cubes
+include tox.ini
+
+prune __pkginfo__.py
+prune cubicweb-prov.spec
+prune debian
