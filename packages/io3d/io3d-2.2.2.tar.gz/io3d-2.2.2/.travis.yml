@@ -1,0 +1,88 @@
+# if no languge, the ruby is used
+#language: ruby
+#language: bash
+language: python
+python: 2.7
+#language: minimal
+#virtualenv:
+#    system_site_packages: false
+
+os:
+    - linux
+#    - osx
+#    - windows # on bash there does not work linux X server
+services:
+  - xvfb
+env:
+#    - CONDA_PYTHON_VERSION=2.7
+    - CONDA_PYTHON_VERSION=3.6
+    - CONDA_PYTHON_VERSION=3.7
+
+matrix:
+  include:
+    - os: osx
+      language: minimal
+      name: osx python36
+      env:
+        - CONDA_PYTHON_VERSION=3.6
+    - os: osx
+      language: minimal
+      name: osx python37
+      env:
+        - CONDA_PYTHON_VERSION=3.7
+  allow_failures:
+    - env: CONDA_PYTHON_VERSION=2.7
+    - env: CONDA_PYTHON_VERSION=3.7
+    - name: "osx python37"
+  fast_finish: true
+before_install:
+    # We do this conditionally because it saves us some downloading if the
+    # version is the same.
+#    - wget http://home.zcu.cz/~mjirik/lisa/install/install_conda.sh && source install_conda.sh
+    - wget https://raw.githubusercontent.com/mjirik/discon/master/tools/install_conda.sh && source install_conda.sh
+    - hash -r
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update -q conda
+    # Useful for debugging any issues with conda
+    - conda info -a
+
+install:
+    - conda config --add channels conda-forge
+    - conda config --add channels SimpleITK
+    - conda config --add channels mjirik
+#    - sudo apt-get install -qq $(< apt_requirements.txt)
+# download training data
+#    - mkdir -p ~/data/medical/orig
+#    - wget http://home.zcu.cz/~mjirik/lisa/sample-data/io3d_sample_data.zip
+#    - unzip -d ~/data/medical/orig/ io3d_sample_data.zip
+# command to install dependencies
+    - conda create --yes -n travis pip pytest coveralls pytest-cov python=$CONDA_PYTHON_VERSION
+    - source activate travis
+#    - Install dependencies
+#    - pip install python-coveralls
+    - conda install --yes --file requirements_conda.txt python=$CONDA_PYTHON_VERSION
+#    - pip install checksumdir
+#    - pip install pathlib # install pathlib for python 2.7, useless on python 3.*
+    - conda list
+
+    - python -m io3d.datasets -l 3Dircadb1.1 jatra_5mm exp_small sliver_training_001 io3d_sample_data head volumetrie
+
+#    - pip install -r requirements.txt
+#    -
+# command to run tests
+before_script:
+    # GUI
+    - "export DISPLAY=:99.0"
+#    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+#        export DISPLAY=:99.0;
+#        sh -e /etc/init.d/xvfb start ;
+#        sleep 3 ;
+#      fi
+#    # give xvfb sume time to start
+#    - if [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+
+#script: nosetests -v --with-coverage --cover-package=io3d
+script:
+  - python -m pytest --cov=io3d/
+after_success:
+    - coveralls
