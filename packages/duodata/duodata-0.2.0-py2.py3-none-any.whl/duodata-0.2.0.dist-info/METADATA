@@ -1,0 +1,78 @@
+Metadata-Version: 2.1
+Name: duodata
+Version: 0.2.0
+Summary: A package that extracts data from Dienst Uitvoering Onderwijs (DUO).
+Home-page: https://github.com/enningb/python-duo
+Author: Bram Enning
+Author-email: bramenning@gmail.com
+License: MIT license
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Unix
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python
+Classifier: Topic :: Utilities
+Requires-Dist: pandas
+Requires-Dist: numpy
+
+========
+Overview
+========
+
+
+
+A package that extracts data from Dienst Uitvoering Onderwijs.
+
+* Free software: MIT license
+
+Installation
+============
+
+::
+
+    pip install duodata
+
+Documentation
+=============
+
+
+https://python-duodata.readthedocs.io/
+
+
+Development
+===========
+
+To run the all tests run::
+
+    tox
+
+Note, to combine the coverage data from all the tox environments run:
+
+.. list-table::
+    :widths: 10 90
+    :stub-columns: 1
+
+    - - Windows
+      - ::
+
+            set PYTEST_ADDOPTS=--cov-append
+            tox
+
+    - - Other
+      - ::
+
+            PYTEST_ADDOPTS=--cov-append tox
+
+
+Changelog
+=========
+
+0.1.0 (2018-12-29)
+------------------
+
+* First release on PyPI.
+
+
