@@ -1,0 +1,15 @@
+#!python
+
+import sys
+import pyhuff.core as hf
+
+if len(sys.argv) == 2:
+    hf.compress(sys.argv[1])
+
+elif len(sys.argv) == 4:
+    hf.decode(sys.argv[1], sys.argv[2], sys.argv[3])
+
+else:
+    print('Error: This operation is not supported.')
+    print('`pyhuff <filename>` to encode')
+    print('`pyhuff <filename> <huffman_tree_file> <output_filename>` to decode')
