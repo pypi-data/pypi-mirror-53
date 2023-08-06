@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API &mdash; GDAPS  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://gdaps.readthedocs.io/APIs.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="Contributing.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> GDAPS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interfaces-imeplementations">Interfaces/Imeplementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gdaps.pluginmanager">PluginManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plugin-configuration-and-metadata">Plugin configuration and metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GDAPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/APIs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="Contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="interfaces-imeplementations">
+<h2>Interfaces/Imeplementations<a class="headerlink" href="#interfaces-imeplementations" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-gdaps"></span><dl class="function">
+<dt id="gdaps.Interface">
+<code class="sig-prename descclassname">gdaps.</code><code class="sig-name descname">Interface</code><span class="sig-paren">(</span><em class="sig-param">cls</em><span class="sig-paren">)</span><a class="headerlink" href="#gdaps.Interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for classes that are interfaces.</p>
+<p>Declare an interface using the <code class="docutils literal notranslate"><span class="pre">&#64;interface</span></code> decorator, optionally add add attributes/methods to that class:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@interface</span>
+<span class="k">class</span> <span class="nc">IFooInterface</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>You can choose whatever name you want for your interfaces, but we recommend you start the name with a capital “I”.
+Read more about interfaces in the <a class="reference internal" href="usage.html#interfaces"><span class="std std-ref">Interfaces</span></a> section.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="gdaps.require_app">
+<code class="sig-prename descclassname">gdaps.</code><code class="sig-name descname">require_app</code><span class="sig-paren">(</span><em class="sig-param">appconfig: django.apps.AppConfig</em>, <em class="sig-param">required_app_name: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#gdaps.require_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for AppConfig.ready - checks if an app is loaded.</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">ImproperlyConfigured</span></code> Exception is raised if the required app is not present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>appconfig</strong> – the AppConfig which requires another app. usually use <code class="docutils literal notranslate"><span class="pre">self</span></code> here.</p></li>
+<li><p><strong>required_app_name</strong> – the required app name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">gdaps.</code><code class="sig-name descname">Interface</code></dt>
+<dd><p>Decorator for classes that are interfaces.</p>
+<p>Declare an interface using the <code class="docutils literal notranslate"><span class="pre">&#64;interface</span></code> decorator, optionally add add attributes/methods to that class:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@interface</span>
+<span class="k">class</span> <span class="nc">IFooInterface</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>You can choose whatever name you want for your interfaces, but we recommend you start the name with a capital “I”.
+Read more about interfaces in the <a class="reference internal" href="usage.html#interfaces"><span class="std std-ref">Interfaces</span></a> section.</p>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gdaps.pluginmanager">
+<span id="pluginmanager"></span><h2>PluginManager<a class="headerlink" href="#module-gdaps.pluginmanager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gdaps.pluginmanager.PluginManager">
+<em class="property">class </em><code class="sig-prename descclassname">gdaps.pluginmanager.</code><code class="sig-name descname">PluginManager</code><a class="headerlink" href="#gdaps.pluginmanager.PluginManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Generic Django Plugin Manager that finds Django app plugins in a
+plugins folder or setuptools entry points and loads them dynamically.</p>
+<p>It provides a couple of methods to interaft with plugins, load submodules of all available plugins
+dynamically, or get a list of enabled plugins.
+Don’t instantiate a <code class="docutils literal notranslate"><span class="pre">PluginManager</span></code> directly, just use its static and class methods directly.</p>
+<dl class="method">
+<dt id="gdaps.pluginmanager.PluginManager.find_plugins">
+<em class="property">classmethod </em><code class="sig-name descname">find_plugins</code><span class="sig-paren">(</span><em class="sig-param">group: str</em><span class="sig-paren">)</span> &#x2192; List[str]<a class="headerlink" href="#gdaps.pluginmanager.PluginManager.find_plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds plugins from setuptools entry points.</p>
+<p>This function is supposed to be called in settings.py after the
+INSTALLED_APPS variable. Therefore it can not use global variables from
+settings, to prevent circle imports.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>group</strong> – a dotted path where to find plugin apps. This is used as
+‘group’ for setuptools’ entry points.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of dotted app_names, which can be appended to
+INSTALLED_APPS.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gdaps.pluginmanager.PluginManager.load_plugin_submodule">
+<em class="property">classmethod </em><code class="sig-name descname">load_plugin_submodule</code><span class="sig-paren">(</span><em class="sig-param">submodule: str</em>, <em class="sig-param">mandatory=False</em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#gdaps.pluginmanager.PluginManager.load_plugin_submodule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search plugin apps for specific submodules and load them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>submodule</strong> – the dotted name of the Django app’s submodule to
+import. This package must be a submodule of the
+plugin’s namespace, e.g. “schema” - then
+[“&lt;main&gt;.core.schema”, “&lt;main&gt;.laboratory.schema”] etc. will be
+found and imported.</p></li>
+<li><p><strong>mandatory</strong> – If set to True, each found plugin _must_ contain the given
+submodule. If any installed plugin doesn’t have it, a PluginError is raised.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of module objects that have been successfully imported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gdaps.pluginmanager.PluginManager.orphaned_plugins">
+<em class="property">static </em><code class="sig-name descname">orphaned_plugins</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; django.db.models.QuerySet<a class="headerlink" href="#gdaps.pluginmanager.PluginManager.orphaned_plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of GdapsPlugin models that have no disk representance any more.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method needs Django’s ORM to be running.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="gdaps.pluginmanager.PluginManager.plugin_path">
+<em class="property">classmethod </em><code class="sig-name descname">plugin_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gdaps.pluginmanager.PluginManager.plugin_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute path where application plugins live.</p>
+<p>This is basically the Django root + the dotted entry point.
+CAVE: this is not callable from within the settings.py file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gdaps.pluginmanager.PluginManager.plugins">
+<em class="property">static </em><code class="sig-name descname">plugins</code><span class="sig-paren">(</span><em class="sig-param">skip_disabled: bool = False</em><span class="sig-paren">)</span> &#x2192; List[gdaps.api.PluginConfig]<a class="headerlink" href="#gdaps.pluginmanager.PluginManager.plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of AppConfig classes that are GDAPS plugins.</p>
+<p>This method basically checks for the presence of a <code class="docutils literal notranslate"><span class="pre">PluginMeta</span></code> attribute
+within the AppConfig of all apps and returns a list of apps containing it.
+:param skip_disabled: If True, skips disabled plugins and only returns enabled ones. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gdaps.pluginmanager.PluginManager.urlpatterns">
+<em class="property">static </em><code class="sig-name descname">urlpatterns</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#gdaps.pluginmanager.PluginManager.urlpatterns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all plugins’ urls.py and collects their urlpatterns.</p>
+<p>This is maybe not the best approach, but it allows plugins to
+have “global” URLs, and not only namespaced, and it is flexible</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of urlpatterns that can be merged with the global
+urls.urlpattern.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="plugin-configuration-and-metadata">
+<h2>Plugin configuration and metadata<a class="headerlink" href="#plugin-configuration-and-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Plugins need to have a special AppConfig class. GDAPS provides a convenience <code class="docutils literal notranslate"><span class="pre">PluginConfig</span></code> class to inherit from:</p>
+<dl class="class">
+<dt id="gdaps.apps.PluginConfig">
+<em class="property">class </em><code class="sig-prename descclassname">gdaps.apps.</code><code class="sig-name descname">PluginConfig</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#gdaps.apps.PluginConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base config class for GDAPS plugins.</p>
+<p>All GDAPS plugin apps files need to have an AppConfig class which inherits from <code class="docutils literal notranslate"><span class="pre">PluginConfig</span></code>.
+It is a convenience class that checks for the existence of the PluginMeta inner class, and provides
+some basic methods that are needed when interacting with a plugin during its life cycle.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">gdaps.apps</span> <span class="kn">import</span> <span class="n">PluginConfig</span>
+
+<span class="k">class</span> <span class="nc">FooPluginConfig</span><span class="p">(</span><span class="n">PluginConfig</span><span class="p">):</span>
+
+    <span class="k">class</span> <span class="nc">PluginMeta</span><span class="p">:</span>
+        <span class="c1"># the plugin machine &quot;name&quot; is taken from the Appconfig, so no name here</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Foo Plugin&#39;</span><span class="p">)</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;Me Personally&#39;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;A foo plugin&#39;</span><span class="p">)</span>
+        <span class="n">visible</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;1.0.0&#39;</span>
+        <span class="n">compatibility</span> <span class="o">=</span> <span class="s2">&quot;myproject.core&gt;=2.3.0&quot;</span>
+</pre></div>
+</div>
+<p>If you are using signals in your plugin, we recommend to put them into a <code class="docutils literal notranslate"><span class="pre">signals</span></code> submodule.
+Import them from the <code class="docutils literal notranslate"><span class="pre">AppConfig.ready()</span></code> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Import signals if necessary:</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">signals</span>  <span class="c1"># NOQA</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Don’t overuse the <code class="docutils literal notranslate"><span class="pre">ready</span></code> method. Have a look at the <a class="reference external" href="https://docs.djangoproject.com/en/2.2/ref/applications/#django.apps.AppConfig.ready">Django documentation of ready()</a>.</p>
+</div>
+<p>If your plugin needs to install some data into the database at the first run, you can provide a <code class="docutils literal notranslate"><span class="pre">initialize</span></code>
+method, which will be called using the <code class="docutils literal notranslate"><span class="pre">initializeplugins</span></code> management command:</p>
+<p>Do all necessary things there that need to be done when the plugin is available the first time, e.g. after
+installing a plugin using pip/pipenv.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># install some fixtures, etc.</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Christian González
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

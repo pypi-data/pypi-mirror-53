@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; GDAPS  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://gdaps.readthedocs.io/Installation.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Introduction" href="Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> GDAPS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#frontend-support">Frontend support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="APIs.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GDAPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Install GDAPS in your Python virtual environment (pipenv is preferred):</p>
+<p>Create a Django application as usual: <code class="docutils literal notranslate"><span class="pre">manage.py</span> <span class="pre">startproject</span> <span class="pre">myproject</span></code>.</p>
+<p>Now add “gdaps” to the <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> section, and add a special line below it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gdaps.pluginmanager</span> <span class="kn">import</span> <span class="n">PluginManager</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ... standard Django apps and GDAPS</span>
+    <span class="c1"># if you also want frontend support, add:</span>
+    <span class="s2">&quot;gdaps&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1"># The following line is important: It loads all plugins from setuptools</span>
+<span class="c1"># entry points and from the directory named &#39;myproject.plugins&#39;:</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="n">find_plugins</span><span class="p">(</span><span class="s2">&quot;myproject.plugins&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can use whatever you want for your plugin path, but we recommend that you use “<strong>&lt;myproject&gt;.plugins</strong>” here to make things easier. See <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a>.</p>
+<p>For further frontend specific instructions, see <a class="reference internal" href="usage.html#frontend-support"><span class="std std-ref">Frontend support</span></a>.</p>
+<p>Basically, this is all you really need so far, for a minimal working
+GDAPS-enabled Django application.</p>
+<div class="section" id="frontend-support">
+<h2>Frontend support<a class="headerlink" href="#frontend-support" title="Permalink to this headline">¶</a></h2>
+<p>If you want to add frontend support too your project, you need to do as follows:</p>
+<p>First, add <em>gdaps</em>, <em>gdaps.frontend</em>, and <em>webpack_loader</em> to Django.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gdaps.pluginmanager</span> <span class="kn">import</span> <span class="n">PluginManager</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ... standard Django apps and GDAPS</span>
+    <span class="s2">&quot;gdaps.frontend&quot;</span>
+    <span class="s2">&quot;gdaps&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;webpack_loader&quot;</span><span class="p">,</span>  <span class="c1"># you&#39;ll need that too</span>
+<span class="p">]</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="n">PluginManager</span><span class="o">.</span><span class="n">find_plugins</span><span class="p">(</span><span class="s2">&quot;myproject.plugins&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, to satisfy webpack-loader, add a section to settings.py:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">WEBPACK_LOADER</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>You can leave that empty by now, it’s just that it has to exist. Another section is needed for GDAPS:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">GDAPS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;FRONTEND_ENGINE&quot;</span><span class="p">:</span> <span class="s2">&quot;vue&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are some keys here to configure:</p>
+<dl class="simple">
+<dt>FRONTEND_DIR</dt><dd><p>This is the directory for the frontend, relative to DJANGO_ROOT.
+Default is “frontend”.</p>
+</dd>
+<dt>FRONTEND_ENGINE</dt><dd><p>The engine which is used for setting up a frontend. ATM it can only be “vue”. In future, maybe other engines are supported (Angular, React, etc.). PRs welcome.</p>
+</dd>
+<dt>FRONTEND_PKG_MANAGER</dt><dd><p>This is the package manager used to init/install packages. ATM you can use “yarn” or “npm”. Default is <em>npm</em>.</p>
+</dd>
+</dl>
+<p>Now you can initialize the frontend with</p>
+<p>This creates a basic boilerplate (previously created with ‘vue create’ and calls <em>yarn install</em> to
+install the needed javascript packages.
+.. _Usage: usage</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Christian González
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
