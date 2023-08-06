@@ -1,0 +1,79 @@
+
+{
+    "staging_area"         : "staging_area",
+    "staging_schema"       : "staging",
+    "max_io_loglength"     : 1024,
+    "bulk_collection_size" :  1024,
+    "bulk_collection_time" : 1.0,
+    "db_poll_sleeptime"    : 1.0,
+    "target"               : "local",
+    "mode"                 : "shared",
+
+
+    "components" : {
+        "UpdateWorker"                : {"count" : 1},
+        "AgentSchedulingComponent"    : {"count" : 1}
+    },
+
+    "agents"   : {
+        "agent_1" : {
+            "target"     : "node",
+            "components" : {
+                "AgentStagingInputComponent"  : {"count" : 2},
+                "AgentExecutingComponent"     : {"count" : 4},
+                "AgentStagingOutputComponent" : {"count" : 2}
+            }
+        }
+    },
+
+
+    "bridges" : {
+        "agent_staging_input_queue" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "agent_scheduling_queue" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "agent_executing_queue" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "agent_staging_output_queue" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+
+        "agent_unschedule_pubsub" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "agent_schedule_pubsub" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "log_pubsub" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "state_pubsub" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        },
+        "control_pubsub" : {
+            "log_level" : "error",
+            "stall_hwm" : 1,
+            "bulk_size" : 0
+        }
+    }
+}
+
