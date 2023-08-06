@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: aws-credentials
+Version: 0.1.0
+Summary: AWS credential manager
+Home-page: https://gitlab.com/perobertson/aws-credentials
+License: MIT
+Keywords: aws,credentials,access keys
+Author: Paul Robertson
+Author-email: t.paulrobertson@gmail.com
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: boto3 (>=1.9,<2.0)
+Requires-Dist: click (>=7.0,<8.0)
+Project-URL: Repository, https://gitlab.com/perobertson/aws-credentials
+Description-Content-Type: text/markdown
+
+# AWS Credentials
+
+This tool lets you easily manage AWS IAM Credentials for a user.
+
