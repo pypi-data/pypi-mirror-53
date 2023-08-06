@@ -1,0 +1,59 @@
+Metadata-Version: 2.1
+Name: ya_ma
+Version: 0.3.8
+Summary: YANDEX transport API client library
+Home-page: https://github.com/rishatik92/ya_ma
+Author: Askarov Rishat Ramilovich
+Author-email: rishatik92@gmail.com
+License: MIT
+Project-URL: Source Code, https://github.com/rishatik92/ya_ma
+Project-URL: Bug Tracker, https://github.com/rishatik92/ya_ma/issues
+Project-URL: Say Thanks!, https://saythanks.io/to/rishatik92
+Description: ``ya_ma`` is unofficial client library for the YANDEX MAPS API
+        This client can request data for bus stops and present it on python dictionary
+        
+        
+        Installation
+        ============
+        Just use `pip <https://pip.pypa.io>`_ (You have pip, right?) to install
+        ``ya_ma`` and its dependencies::
+        
+            pip install ya_ma
+        
+        
+        Example
+        =======
+        
+        ::
+        
+            >>> from ya_ma import YandexMapsRequester
+                >>> client = YandexMapsRequester()
+                >>> print(client.get_stop_info(9639579))
+            >>> client = YandexMapsRequester()
+            >>> print(client.get_stop_info(9639579))
+        
+        Or you can use it in your shell:
+        ::
+        
+            python -m ya_ma -s 9966346
+        
+        
+Keywords: pypi,yandex transport,packages,pip
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Software Distribution
+Classifier: Topic :: Text Processing :: Markup :: HTML
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4
+Description-Content-Type: text/x-rst
