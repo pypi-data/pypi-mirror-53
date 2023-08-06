@@ -1,0 +1,36 @@
+{% extends "frame.html" %}
+{% block content %}
+    <div class="block">
+        <i style="float: right">API version {{version}}</i>
+        <p>
+            The API works over HTTP. All requests return a response with a code <i>200</i>.
+            API responses are divided into 2 types: <a href="/{{docs_path}}/errors">errors</a> и <code>response</code>.
+        </p>
+        <p>
+            Authorization and API access is performed via OAuth 2.0 <a href="/{{docs_path}}/auth">auth</a>.
+        </p>
+    </div>
+
+    <div class="block">
+        <em>Success response [200 OK]</em>
+        <pre class="code">
+{
+  "response": {
+    "success": true
+  }
+}</pre>
+    </div>
+
+    <div class="block">
+        <em>Response with errors [200 OK]</em>
+        <pre class="code">
+{
+    "error": {
+        "code": "RequestErrors.BadRequest",
+        "msg": "Bad request. Required parameter `id` missing.",
+        "params": {}
+    }
+}</pre>
+    </div>
+
+{% endblock content %}
