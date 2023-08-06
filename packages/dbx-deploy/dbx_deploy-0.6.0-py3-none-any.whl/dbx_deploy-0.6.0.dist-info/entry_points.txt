@@ -1,0 +1,6 @@
+[console_scripts]
+dbx-delete-all-jobs = DbxDeploy.JobsDeleterCommand:JobsDeleterCommand.run
+dbx-deploy = DbxDeploy.DeployerCommand:DeployerCommand.run
+dbx-deploy-submit-job = DbxDeploy.DeployerJobSubmitterCommand:DeployerJobSubmitterCommand.run
+dbx-deploy-with-cleanup = DbxDeploy.DeployWithCleanupCommand:DeployWithCleanupCommand.run
+

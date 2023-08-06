@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: dbx-deploy
+Version: 0.6.0
+Summary: Databrics Deployment Tool
+Home-page: https://github.com/DataSentics/dbx-deploy
+Author: Jiri Koutny
+Author-email: jiri.koutny@datasentics.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: injecta (>=0.4.2)
+Requires-Dist: nbconvert
+Requires-Dist: dbx-notebook-exporter (>=0.2.2)
+Requires-Dist: python-box
+Requires-Dist: databricks-api
+Requires-Dist: requirements-parser
+Requires-Dist: pygit2
+Requires-Dist: colorlog (>=4.0.2)
+
+Databricks project deployment package
+
+
