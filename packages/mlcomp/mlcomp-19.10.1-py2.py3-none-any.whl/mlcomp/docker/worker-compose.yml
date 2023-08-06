@@ -1,0 +1,13 @@
+services:
+  mlcomp-worker:
+    container_name: mlcomp-worker
+    restart: always
+    build:
+      context: ../
+      dockerfile: docker/worker
+    env_file: .env
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    volumes: ["/opt/mlcomp:/opt/mlcomp"]
+version: '2.3'
