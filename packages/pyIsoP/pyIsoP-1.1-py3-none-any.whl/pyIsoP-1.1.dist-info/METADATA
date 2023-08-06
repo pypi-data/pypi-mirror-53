@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: pyIsoP
+Version: 1.1
+Summary: UNKNOWN
+Home-page: https://github.com/arung-northwestern/pyIsoP
+Author: Arun Gopalan
+Author-email: arungopalan2020@u.northwestern.edu
+License: BSD-3-Clause
+Platform: Linux
+Platform: Unix
+Platform: Windows
+Requires-Python: >=3.6
+Requires-Dist: numpy (>=1.13.3)
+Requires-Dist: ase (==3.16)
+Requires-Dist: tqdm (>=4.15)
+Requires-Dist: pyevtk (==1.1.1)
+Requires-Dist: pandas (>=0.20.3)
+Requires-Dist: numba (>=0.35)
+Requires-Dist: scikit-learn (>=0.19.1)
+Requires-Dist: scipy (>=1.1.0)
+Requires-Dist: pytest (>=5.0.1)
+Requires-Dist: dask (>=2.2.0)
+Requires-Dist: dask-jobqueue (>=0.6.2)
+
+A fast and accurate semi-analytic method for predicting small molecule adsorption in nanoporous
+materials, ideal for high-throughput screening applications. Developed by Arun Gopalan at
+R. Q. Snurr Research Group, Northwestern University.
+
+
