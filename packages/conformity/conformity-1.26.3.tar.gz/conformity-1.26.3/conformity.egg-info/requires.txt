@@ -1,0 +1,38 @@
+attrs<20,>=17.4
+six
+
+[:python_version < "3.5"]
+typing~=3.7.4
+
+[country]
+pycountry
+
+[currency]
+currint
+
+[docs]
+pycountry
+currint
+
+[docs:python_version >= "3.6"]
+sphinx~=2.2
+
+[sphinx]
+
+[sphinx:python_version >= "3.6"]
+sphinx~=2.2
+
+[testing]
+freezegun
+pytest
+pytest-cov
+pytest-runner
+pytz
+currint
+pycountry
+
+[testing:python_version > "3.4"]
+mypy~=0.730
+
+[testing:python_version >= "3.6"]
+sphinx~=2.2
