@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: castor-orsay
+Version: 2019.10.8
+Summary: Codes pour l’ASTronomie à ORsay
+Home-page: https://github.com/coupole-orsay/castor
+Author: Gabriel Pelouze
+Author-email: gabriel.pelouze@ias.u-psud.fr
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: python-dateutil (>=2.7)
+Requires-Dist: numpy (>=1.15)
+Requires-Dist: matplotlib (>=2.0)
+Requires-Dist: astropy (>=3.0)
+Requires-Dist: tqdm (>=4.20.0)
+Requires-Dist: astroalign (>=1.0.3)
+Requires-Dist: sep (>=1.0.3)
+Requires-Dist: PyYAML (>=3.13)
+Requires-Dist: opencv-python (>=3.4.0.12)
+Requires-Dist: scikit-image (>=0.13.0)
+
+# CASTOR: Codes pour l’ASTronomie à ORsay
+
+Outils pour l’analyse des données de la coupole d’Orsay.
+
+## Installation
+
+Cloner (ou télécharger les sources) de ce dépôt, et l’installer avec pip :
+
+~~~
+git clone https://github.com/coupole-orsay/castor
+cd castor
+pip3 install . --user
+~~~
+
+## Licence
+
+Ces outils sont mis à disposition sous licence MIT. Voir `LICENSE.txt`
+
+
