@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: insteon
+Version: 0.0.2
+Summary: A utility for interacting with insteon modems and hubs
+Home-page: https://github.com/pfrommerd/python-insteon
+Author: Daniel Pfrommer
+License: UNKNOWN
+Project-URL: Source, https://github.com/pfrommerd/python-insteon/
+Keywords: insteon
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: aioserial
+Requires-Dist: logbook
+Requires-Dist: setuptools
+Provides-Extra: dev
+Provides-Extra: test
+
+A set of utilities for interacting with insteon modems and hubs
+
+Used as a backend for the Insteon Terminal and several insteon plugins
+
+
