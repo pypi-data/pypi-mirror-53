@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: etna-link
+Version: 0.0.4
+Summary: Python wrapper to inspect the C AST produced by clang
+Home-page: https://github.com/etna-alternance/link
+Author: Clément Doumergue
+Author-email: clement.doumergue@etna.io
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: clang
+
+# link
+Python wrapper to inspect the C AST produced by clang
+
+## Installation
+
+Link can be installed using Python's package manager `pip`:
+```
+pip3 install etna-link
+```
+
+However, its also requires the installation of the `libclang` library in order to work properly.
+On Debian, this can be achieved with the following command:
+```
+sudo apt install libclang-6.0-dev
+```
+
+
