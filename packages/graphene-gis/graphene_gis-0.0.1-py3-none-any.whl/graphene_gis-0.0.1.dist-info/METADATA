@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: graphene-gis
+Version: 0.0.1
+Summary: GIS support for graphene-django
+Home-page: UNKNOWN
+Author: Rishabh Mehta
+Author-email: eternal.blizzard23@gmail.com
+License: UNKNOWN
+Keywords: api graphql graphene geos gis
+Platform: any
+Requires-Dist: graphene (==2.1.8)
+Requires-Dist: graphene-django (==2.5.0)
+Requires-Dist: graphql-core (==2.2.1)
+Provides-Extra: dev
+Requires-Dist: black (==19.3b0) ; extra == 'dev'
+Requires-Dist: flake8 (==3.7.8) ; extra == 'dev'
+Requires-Dist: pytest (>=5.1.2) ; extra == 'dev'
+Requires-Dist: pytest-cov (==2.7.1) ; extra == 'dev'
+Requires-Dist: pytest-django (>=3.5.1) ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest (>=5.1.2) ; extra == 'test'
+Requires-Dist: pytest-cov (==2.7.1) ; extra == 'test'
+Requires-Dist: pytest-django (>=3.5.1) ; extra == 'test'
+
+UNKNOWN
+
+
