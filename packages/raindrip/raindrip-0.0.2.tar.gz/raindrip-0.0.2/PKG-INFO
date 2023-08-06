@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: raindrip
+Version: 0.0.2
+Summary: Collect various operating system metrics and stream it
+License: MIT
+Author: Keshab Paudel
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: kafka-python (>=1.4,<2.0)
+Requires-Dist: psutil (>=5.6,<6.0)
+Requires-Dist: psycopg2 (>=2.8,<3.0)
