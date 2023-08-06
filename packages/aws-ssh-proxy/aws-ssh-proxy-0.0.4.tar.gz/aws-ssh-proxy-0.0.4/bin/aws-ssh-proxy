@@ -1,0 +1,214 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import boto3
+import argparse
+import os
+import sys
+import re
+
+if sys.version_info.major == 2:
+    from urlparse import urlparse
+else:
+    from urllib.parse import urlparse
+
+def main():
+    args = parse_args()
+
+    # Get all running instances from EC2
+    ec2 = boto3.client(
+        'ec2',
+        aws_access_key_id=args.aws_access_key_id,
+        aws_secret_access_key=args.aws_secret_access_key,
+        aws_session_token=args.aws_session_token,
+    )
+    results = ec2.describe_instances(
+        Filters=[
+            {
+                'Name': 'instance-state-name',
+                'Values': [ 'running' ],
+            },
+        ]
+    )
+
+    if args.hostname is None:
+        list_ec2_names(results)
+        return
+
+    original_hostname = args.hostname.lower()
+    hostname = original_hostname
+
+    if not(args.suffix is None) and hostname.endswith(args.suffix.lower()):
+        hostname = hostname[:-len(args.suffix)]
+
+    if not(args.prefix is None) and hostname.startswith(args.prefix.lower()):
+        hostname = hostname[len(args.prefix):]
+
+    if args.verbose:
+        print("Searching for", hostname)
+
+    # Find the instance that matches the hostname
+    dns_name = find_dns_name(results, hostname)
+    if args.verbose:
+        if dns_name is None:
+            print("dns name not found, defaulting to", original_hostname)
+        else:
+            print("dns name:", dns_name)
+
+    # Ensure we always have a hostname to use
+    if dns_name is None:
+        dns_name = original_hostname
+
+    # Execute the proxy command that will connect us to the host
+    command = args.command.format(host=dns_name, port=args.port)
+
+    if args.auto_proxy or args.proxy_url:
+        proxy = None
+        if args.proxy_url:
+            proxy_url = args.proxy_url
+        else:
+            for var in ['https_proxy', 'HTTPS_PROXY', 'http_proxy', 'HTTP_PROXY']:
+                if os.environ.get(var):
+                    proxy_url = os.environ.get(var)
+                    break
+
+        if proxy_url is None:
+            print("Couldn't find a proxy in the environment variables")
+            sys.exit(1)
+
+        if re.search("^(?P<host>[^:/]+):(?P<port>[0-9]+)$", proxy_url):
+            proxy = proxy_url
+        else:
+            proxy = urlparse(proxy_url).netloc
+        exec_command = [ 'nc', '-X', 'connect', '-x', proxy, dns_name, str(args.port) ]
+    else:
+        exec_command = [ 'bash', '-c', command ]
+
+    os.execvp(exec_command[0], exec_command)
+
+
+def list_ec2_names(results):
+    if not results.get('Reservations'):
+        return
+
+    tags = []
+    for reservation in results['Reservations']:
+        for instances in reservation['Instances']:
+            # Search for the Tags for: { Key: 'Name', Value: $name }
+            for tag in instances.get('Tags', {}):
+                if tag['Key'] == 'Name':
+                    aws_name = tag['Value']
+                    aws_name = str(aws_name).lower()
+                    tags.append(aws_name)
+    tags.sort()
+    print("\n".join(tags))
+
+
+def find_dns_name(results, name):
+    if not results.get('Reservations'):
+        return
+
+    for reservation in results['Reservations']:
+        for instances in reservation['Instances']:
+
+            # Search for the Tags for: { Key: 'Name', Value: $name }
+            for tag in instances.get('Tags', {}):
+                if tag['Key'] == 'Name':
+                    aws_name = tag['Value']
+                    if aws_name is not None and str(aws_name).lower() == name:
+                        return instances['PublicDnsName']
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description='%(prog)s [options] [hostname [port]]',
+    )
+
+    parser.add_argument(
+        'hostname',
+        help="the hostame",
+        nargs='?',
+        default=None,
+    )
+
+    parser.add_argument(
+        'port',
+        type=int,
+        help="the port",
+        nargs='?',
+        default=22,
+    )
+
+    parser.add_argument(
+        '--suffix', '-s',
+        action="store",
+        dest="suffix",
+        help="suffix added to the hostame",
+    )
+
+    parser.add_argument(
+        '--prefix', '-p',
+        action="store",
+        dest="prefix",
+        help="prefix added to the hostame",
+    )
+
+    parser.add_argument(
+        '--proxy-command', '-c',
+        action="store",
+        dest="command",
+        help="comand to execute",
+        default='nc {host} {port}',
+    )
+
+    parser.add_argument(
+        '--proxy-url', '-u',
+        action="store",
+        dest="proxy_url",
+        help="proxy url to use for nc",
+    )
+
+    parser.add_argument(
+        '--auto-proxy', '-P',
+        action="store_true",
+        dest="auto_proxy",
+        help="use an http(s) proxy for the connection",
+    )
+
+    parser.add_argument(
+        '--verbose', '-v',
+        action="store_true",
+        dest="verbose",
+        help="enable verbose mode",
+    )
+
+    parser.add_argument(
+        '--aws-access-key-id', '-A',
+        action="store",
+        dest="aws_access_key_id",
+        help="AWS access key id",
+        default=os.environ.get('AWS_ACCESS_KEY_ID'),
+    )
+
+    parser.add_argument(
+        '--aws-secret-access-key', '-S',
+        action="store",
+        dest="aws_secret_access_key",
+        help="AWS secret access key",
+        default=os.environ.get('AWS_SECRET_ACCESS_KEY'),
+    )
+
+    parser.add_argument(
+        '--aws-session-token', '-T',
+        action="store",
+        dest="aws_session_token",
+        help="AWS session token",
+        default=os.environ.get('AWS_SESSION_TOKEN'),
+    )
+
+    return parser.parse_args()
+
+
+if __name__ == '__main__':
+    main()
