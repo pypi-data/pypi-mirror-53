@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: fml
+Version: 1.0.1
+Summary: A small CLI app to see a joke on your terminal when you are down.
+Home-page: https://github.com/slash-arun/fml/
+Author: Arun
+Author-email: slash-arun@outlook.com
+License: MIT
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: cowsay
+
+
+# fml
+A command line app that tells a joke with an option to edit the name of the character
+
+Usage:
+
+- Whenever you are tried and want to see a joke type `fml` in your terminal to get a joke.
+
+- There is an option to set a custom name instead of the default name Chuck Norris
+
+```
+fml --name <first-name> <last-name>
+```
+Example:
+```
+fml --name Jhon Doe
+```
+
+- For help, use
+```
+fml --help
+```
+
+
