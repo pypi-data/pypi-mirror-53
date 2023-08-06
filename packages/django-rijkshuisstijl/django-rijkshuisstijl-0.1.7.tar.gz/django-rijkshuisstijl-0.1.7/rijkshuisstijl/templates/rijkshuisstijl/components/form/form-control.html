@@ -1,0 +1,77 @@
+{% spaceless %}{% load i18n rijkshuisstijl_filters sniplates %}
+    <div class="form-control{% if class %} {{ class }}{% endif %}">
+
+        {% if label %}
+            <header class="form-control__header">
+                {% if label and required %}
+                    {% include 'rijkshuisstijl/components/form/label.html' with label=label|add:'&nbsp;*'|safe for=id %}{% endif %}
+                {% if label and not required %}
+                    {% include 'rijkshuisstijl/components/form/label.html' with label=label for=id %}{% endif %}
+            </header>
+        {% endif %}
+
+
+        {% if label %}
+            <div class="form-control__body">
+        {% endif %}
+
+
+        {% if type == 'checkbox' %}
+            {% if choices %}
+                {% for val, display in choices %}
+                    {% include 'rijkshuisstijl/components/form/checkbox.html' with type='checkbox' name=name val=val value=value checked=checked id=html_id label=display errors=errors widget_attrs=widget.attrs|flatattrs select_all=select_all widget_attrs=widget.attrs only %}
+                {% endfor %}
+            {% else %}
+                {% include 'rijkshuisstijl/components/form/checkbox.html' with type='checkbox' name=name val=form_field.value value=value checked=checked id=html_id label=label errors=errors widget_attrs=widget.attrs|flatattrs select_all=select_all widget_attrs=widget.attrs only %}
+            {% endif %}
+
+        {% elif type == 'radio' %}
+            <div class="form-control__choices">
+                {% for val, display in choices %}
+                    {% include 'rijkshuisstijl/components/form/checkbox.html' with type='radio' name=name val=val value=value checked=checked id=html_id label=display errors=errors widget_attrs=widget.attrs|flatattrs only %}
+                {% endfor %}
+            </div>
+
+        {% elif type == 'datetime' %}
+        {% with date_name=name|add:'_0' time_name=name|add:'_1' %}
+        {% with date_value=raw_value|input_date_format time_value=raw_value|input_time_format %}
+            {% include 'rijkshuisstijl/components/form/input.html' with type='date' name=date_name value=date_value id=id errors=errors widget_attrs=widget.attrs|flatattrs only %}
+            {% include 'rijkshuisstijl/components/form/input.html' with type='time' name=time_name value=time_value id=id errors=errors widget_attrs=widget.attrs|flatattrs only %}
+        {% endwith %}
+        {% endwith %}
+
+        {% elif type == 'file' %}
+            {% include 'rijkshuisstijl/components/form/input.html' with type=type name=name value=value raw_value=raw_value checked=checked placeholder=placeholder id=id errors=errors widget_attrs=widget.attrs|flatattrs only %}
+
+            {% if raw_value %}
+                <div class="help-text">
+                    <div class="help-text__body">
+                        {{ _('Huidige') }}: <a class="form-control__link" href="{{ url }}">{{ url }}</a>
+                        {% include 'rijkshuisstijl/components/form/checkbox.html' with type='checkbox' name=html_name|add:'-clear' id=html_name|add:'-clear_id' label='wissen' %}
+                    </div>
+                </div>
+            {% endif %}
+
+        {% elif type == 'select' %}
+            {% include 'rijkshuisstijl/components/form/select.html' with name=name value=value raw_value=raw_value id=id errors=errors %}
+        {% elif type == 'textarea' %}
+            {% include 'rijkshuisstijl/components/form/textarea.html' with name=name value=value placeholder=placeholder id=id errors=errors widget_attrs=widget.attrs only %}
+        {% else %}
+            {% include 'rijkshuisstijl/components/form/input.html' with type=type name=name value=value checked=checked placeholder=placeholder id=id errors=errors widget_attrs=widget.attrs only %}
+        {% endif %}
+
+
+        {% if errors %}
+            {% include 'rijkshuisstijl/components/form/errors.html' with errors=errors for=id %}
+        {% endif %}
+        {% if help_text %}
+            {% include 'rijkshuisstijl/components/form/help-text.html' with help_text=help_text for=id %}
+        {% endif %}
+
+
+        {% if label %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endspaceless %}

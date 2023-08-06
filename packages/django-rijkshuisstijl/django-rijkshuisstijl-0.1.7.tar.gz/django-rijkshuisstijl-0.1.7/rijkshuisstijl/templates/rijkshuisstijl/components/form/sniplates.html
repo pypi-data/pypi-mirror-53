@@ -1,0 +1,178 @@
+{% extends 'sniplates/django.html' %}{% spaceless %}{% load sniplates rijkshuisstijl_filters %}
+    {#  Form control wrapper. #}
+    {% block _formControl %}
+        {% include 'rijkshuisstijl/components/form/form-control.html' with class=widget.attrs.class value=value %}
+    {% endblock %}
+    {#  End form control wrapper. #}
+
+
+    {#  Buit in fields. #}
+    {# TODO: BooleanField #}
+
+    {% block CharField %}
+        {% reuse '_formControl' type='textarea' %}
+    {% endblock %}
+
+    {# TODO: ChoiceField #}
+
+    {# TODO: ComboField #}
+
+    {% block DateField %}
+        {% reuse '_formControl' type='date' value=value|input_date_format %}
+    {% endblock %}
+
+    {% block DateTimeField %}
+        {% reuse '_formControl' type='datetime' %}
+    {% endblock %}
+
+    {# TODO: DecimalField #}
+
+    {% block EmailField %}
+        {% reuse '_formControl' type='email' placeholder='naam@domein.nl' %}
+    {% endblock %}
+
+    {# TODO: FileField #}
+
+    {# TODO: FilePathField #}
+
+    {# TODO: FloatField #}
+
+    {# TODO: GenericIPAddressField #}
+
+    {# TODO: ImageField #}
+
+    {# TODO: IPAddressField #}
+
+    {% block IntegerField %}
+        {% reuse '_formControl' type='number' %}
+    {% endblock %}
+
+    {% block MultipleChoiceField %}
+        {% reuse '_formControl' type='select' multiple=True %}
+    {% endblock %}
+
+    {# TODO: MultiValueField #}
+
+    {# TODO: NullBooleanField #}
+
+    {# TODO: REGEXFIELD #}
+
+    {# TODO: SlugField #}
+
+    {% block SplitDateTimeField %}
+        {% reuse '_formControl' type='datetime' %}
+    {% endblock %}
+
+    {% block TimeField %}
+        {% reuse '_formControl' type="time" value=value|input_time_format %}
+    {% endblock %}
+
+    {# TODO: TypedChoiceField #}
+
+    {# TODO: TypedMultipleChoiceField #}
+
+    {% block URLField %}
+        {% reuse '_formControl' type='url' placeholder='http://' %}
+    {% endblock %}
+    {# End buit in fields. #}
+
+
+    {# Built in widgets. #}
+    {% block CheckboxInput %}
+        {% reuse '_formControl' type='checkbox' checked=form_field.value %}
+    {% endblock %}
+
+    {% block CheckboxSelectMultiple %}
+        {% reuse '_formControl' type='checkbox' %}
+    {% endblock %}
+
+    {% block ClearableFileInput %}
+        {% reuse '_formControl' type='file' raw_value=raw_value %}
+    {% endblock %}
+
+    {% block DateInput %}
+        {% reuse '_formControl' type='date' value=value|input_date_format %}
+    {% endblock %}
+
+    {% block DateTimeInput %}
+        {% reuse 'TextInput' %}
+    {% endblock %}
+
+    {% block EmailInput %}
+        {% reuse '_formControl' type='email' placeholder='naam@domein.nl' %}
+    {% endblock %}
+
+    {# TODO FileInput #}
+
+    {# TODO HiddenInput #}
+
+    {# TODO MultipleHiddenInput #}
+
+    {# TODO NullBooleanSelect #}
+
+    {% block NumberInput %}
+        {% reuse '_formControl' type='number' %}
+    {% endblock %}
+
+    {% block PasswordInput %}
+        {% reuse '_formControl' type='password' %}
+    {% endblock %}
+
+    {% block RadioSelect %}
+        {% reuse '_formControl' type='radio' %}
+    {% endblock %}
+
+    {% block Select %}
+        {% reuse '_formControl' type='select' %}
+    {% endblock %}
+
+    {% block SelectMultiple %}
+        {% reuse '_formControl' type='select' multiple=True %}
+    {% endblock %}
+
+    {% block SplitDateTimeWidget %}
+        {% reuse '_formControl' type='datetime' %}
+    {% endblock %}
+
+    {# TODO SplitHiddenDateTimeWidget #}
+
+    {% block Textarea %}
+        {% reuse '_formControl' type='textarea' %}
+    {% endblock %}
+
+    {% block TextInput %}
+        {% reuse '_formControl' %}
+    {% endblock %}
+
+    {% block TimeInput %}
+        {% reuse '_formControl' type="time" value=value|input_time_format %}
+    {% endblock %}
+
+    {% block URLInput %}
+        {% reuse '_formControl' type='url' placeholder='http://' %}
+    {% endblock %}
+    {# End built in widgets. #}
+
+
+    {# Extra.  #}
+    {% block AdminTextInputWidget %}
+        {% reuse '_formControl' %}
+    {% endblock %}
+
+    {% block ModelChoiceField %}
+        {% reuse '_formControl' type='select' %}
+    {% endblock %}
+
+    {% block ModelMultipleChoiceField %}
+        {% reuse '_formControl' type='select' multiple=True %}
+    {% endblock %}
+
+    {% block ReadOnlyPasswordHashField %}
+        {% reuse '_formControl' %}
+    {% endblock %}
+
+    {% block UUIDField %}
+        {% reuse '_formControl' %}
+    {% endblock %}
+    {# End extra. #}
+{% endspaceless %}

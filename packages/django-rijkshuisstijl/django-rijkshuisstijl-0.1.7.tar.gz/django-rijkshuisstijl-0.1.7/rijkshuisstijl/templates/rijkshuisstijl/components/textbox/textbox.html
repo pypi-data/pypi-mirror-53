@@ -1,0 +1,7 @@
+{% spaceless %}{% load rijkshuisstijl %}
+<div class="textbox{% if class %} {{ class }}{% endif %}{% if status %} textbox--{{ status }}{% endif %}{% if class %} {{ class }}{% endif %}">
+    {% if title %}<h4 class="textbox__title">{{ title }}</h4>{% endif %}
+    {% if text %}<p class="textbox__text">{% if urlize %}{{ text|urlize }}{% else %}{{ text }}{% endif %}</p>{% endif %}
+    {% if wysiwyg %}<div class="wysiwyg">{{ wysiwyg }}</div>{% endif %}
+</div>
+{% endspaceless %}
