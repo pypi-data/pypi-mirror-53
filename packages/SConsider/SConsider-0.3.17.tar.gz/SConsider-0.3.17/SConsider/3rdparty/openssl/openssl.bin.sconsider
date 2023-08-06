@@ -1,0 +1,89 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from SConsider import createTargets
+    from ThirdParty import getBinaryDistDir
+    buildSettings = {
+        packagename: {
+            'linkDependencies': [
+                packagename + '.lib_ssl',
+                packagename + '.lib_crypto',
+            ],
+            'targetType': 'IncludeOnly',
+            'public': {
+                'includeSubdir': 'include',
+            },
+        },
+        'lib_ssl': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('ssl')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'lib_crypto': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('crypto')],
+            'targetType': 'PrecompiledLibrary',
+        },
+        'opensslbin': {
+            'sourceFiles': [getBinaryDistDir(packagename).File('openssl')],
+            'targetType': 'PrecompiledBinary',
+        },
+        'openSSL': {
+            'targetType': 'ProgramApp',
+            'runConfig': {},
+            'requires': [
+                packagename + '.lib_ssl',
+                packagename + '.lib_crypto',
+            ],
+            'usedTarget': packagename + '.opensslbin',
+        },
+        'script_openssl': {
+            'targetType': 'ProgramApp',
+            'runConfig': {},
+            'requires': [
+                packagename + '.lib_ssl',
+                packagename + '.lib_crypto',
+            ],
+            'usedTarget': packagename + '.opensslbin',
+        },
+    }
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from TargetHelpers import createPackageRunTarget, createPackageProgramScripts, installPrecompiledBinaries, installPrecompiledLibraries
+
+    includeTarget = EnvBuilder(export=[EnvBuilder().include(Dir('include'))]).build().RegisterPackageTarget(
+        packagename=packagename, targetname='include')
+
+    libnames = [('ssl', 'lib_ssl'), ('crypto', 'lib_crypto')]
+    libs_installed = installPrecompiledLibraries(packagename, libnames)
+    libs = EnvBuilder().depend(libs_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='libs')
+
+    binnames = [('openssl', 'bin_openssl', {'require': libs_installed})]
+    bins_installed = installPrecompiledBinaries(packagename, binnames)
+    bins = EnvBuilder().depend(bins_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                             targetname='bins')
+
+    scriptnames = [('bin_openssl', {}, {'runParams': '-- help'})]
+    scripts_installed = createPackageProgramScripts(packagename, bins_installed, scriptnames,
+                                                    createPackageRunTarget)
+    scripts = EnvBuilder().depend(scripts_installed).build().RegisterPackageTarget(packagename=packagename,
+                                                                                   targetname='scripts')
+
+    EnvBuilder().depend(includeTarget, libs, bins,
+                        scripts).build().RegisterPackageTarget(packagename=packagename,
+                                                               targetname=packagename)

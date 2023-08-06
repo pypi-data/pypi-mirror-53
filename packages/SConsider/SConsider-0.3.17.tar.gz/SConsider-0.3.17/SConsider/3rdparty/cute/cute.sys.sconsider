@@ -1,0 +1,38 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from ConfigureHelper import Configure
+    from SConsider import createTargets, cloneBaseEnv
+    env = cloneBaseEnv()
+    conf = Configure(env)
+    if conf.CheckCHeader('cute.h'):
+        conf.env.Append(CPPDEFINES='HAS_CUTE')
+    env = conf.Finish()
+
+    buildSettings = {}
+    if 'HAS_CUTE' in env['CPPDEFINES']:
+        buildSettings['include'] = {}
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from ThirdParty import add_3rdparty_system_header_target
+    includeTarget = add_3rdparty_system_header_target(
+        EnvBuilder().build(), packagename, lambda conf: conf.CheckCXXHeader('cute_lib/cute_version.h'))
+
+    EnvBuilder().depend(includeTarget).build().RegisterPackageTarget(packagename=packagename,
+                                                                     targetname=packagename)

@@ -1,0 +1,92 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from ConfigureHelper import Configure
+    from SConsider import createTargets, cloneBaseEnv
+    env = cloneBaseEnv()
+    conf = Configure(env)
+    if conf.CheckLibWithHeader('mysqlclient', 'mysql/mysql.h', 'C'):
+        conf.env.Append(CPPDEFINES='HAS_MYSQL')
+    mysqlbin = conf.CheckExecutable('mysql')
+    env = conf.Finish()
+
+    buildSettings = {}
+    if 'HAS_MYSQL' in env['CPPDEFINES']:
+        buildSettings[packagename] = {
+            'linkDependencies': [
+                packagename + '.mysqlclient',
+            ],
+        }
+        buildSettings['mysqlclient'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['mysqlclient'],
+                },
+            },
+        }
+        if mysqlbin:
+            buildSettings['mysqlbin'] = {
+                'sourceFiles': [mysqlbin],
+                'targetType': 'InstallBinary',
+            }
+            buildSettings['script_mysql'] = {
+                'targetType': 'ProgramApp',
+                'runConfig': {},
+                'requires': [
+                    packagename + '.mysqlclient',
+                ],
+                'usedTarget': packagename + '.mysqlbin',
+            },
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from ThirdParty import add_3rdparty_system_lib_target, add_3rdparty_system_header_target, add_3rdparty_system_binary_target
+    from TargetHelpers import createPackageProgramScript, createPackageRunTarget
+    includeTarget = add_3rdparty_system_header_target(EnvBuilder().build(), packagename,
+                                                      lambda conf: conf.CheckCHeader('mysql/mysql.h'))
+
+    libnames = [('mysqlclient', 'lib_mysql')]
+    libs = add_3rdparty_system_lib_target(EnvBuilder().depend(includeTarget).build(), packagename,
+                                          lambda conf: conf.CheckMultipleLibs([lib for lib, _ in libnames]),
+                                          libnames)
+
+    libs = EnvBuilder().depend(libs).build().RegisterPackageTarget(packagename=packagename, targetname='libs')
+
+    bin_env = EnvBuilder().depend(libs).build()
+    #import os
+    #reltargetdir = os.path.join('globals', packagename)
+    # bin_env.setRelativeTargetDirectory(reltargetdir)
+    bin_name = 'mysql'
+    bin_target = add_3rdparty_system_binary_target(bin_env, packagename,
+                                                   lambda conf: conf.CheckExecutable(bin_name), bin_name,
+                                                   'bin_' + bin_name)
+    bins = EnvBuilder().depend(bin_target).build().RegisterPackageTarget(packagename=packagename,
+                                                                         targetname='bins')
+
+    scriptTarget = createPackageProgramScript(packagename, bin_name, bin_target)
+    scripts = EnvBuilder().depend(scriptTarget).build().RegisterPackageTarget(packagename=packagename,
+                                                                              targetname='scripts')
+
+    runTarget = createPackageRunTarget(packagename,
+                                       bin_name,
+                                       scriptTarget,
+                                       settings={'runParams': '-- --help'})
+
+    EnvBuilder().depend(includeTarget, libs, bins,
+                        scripts).build().RegisterPackageTarget(packagename=packagename,
+                                                               targetname=packagename)

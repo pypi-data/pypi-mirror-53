@@ -1,0 +1,142 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2011, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from ConfigureHelper import Configure
+    from SConsider import createTargets, cloneBaseEnv
+    env = cloneBaseEnv()
+    conf = Configure(env)
+    if conf.CheckCHeader('oci.h') and conf.CheckMultipleLibs(
+        ['occi', 'clntsh', 'nnz11', 'ociicus', 'ociei', 'sqlplus', 'sqlplusic']):
+        conf.env.Append(CPPDEFINES='HAS_ORACLE')
+    sqlplusbin = conf.CheckExecutable('sqlplus')
+    env = conf.Finish()
+
+    buildSettings = {}
+    if 'HAS_ORACLE' in env['CPPDEFINES']:
+        buildSettings[packagename] = {
+            'linkDependencies': [
+                packagename + '.lib_nnz',
+                packagename + '.lib_clntsh',
+            ],
+            'requires': [
+                packagename + '.lib_ociicus',
+            ],
+        }
+        buildSettings['lib_occi'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['occi'],
+                },
+            },
+        }
+        buildSettings['lib_clntsh'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['clntsh'],
+                },
+            },
+        }
+        buildSettings['lib_nnz'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['nnz11'],
+                },
+            },
+        }
+        buildSettings['lib_ociicus'] = {  # us language support library
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['ociicus'],
+                },
+            },
+        }
+        buildSettings[
+            'lib_ociei'] = {  # oci library supporting all character sets
+                'public': {
+                    'appendUnique': {
+                        'LIBS': ['ociei'],
+                    },
+                },
+            }
+        buildSettings['lib_sqlplus'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['sqlplus'],
+                },
+            },
+        }
+        buildSettings['lib_sqlplusic'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['sqlplusic'],
+                },
+            },
+        }
+        if sqlplusbin:
+            buildSettings['sqlplusbin'] = {
+                'sourceFiles': [sqlplusbin],
+                'targetType': 'InstallBinary',
+            }
+            buildSettings['sqlplus'] = {
+                'targetType': 'ProgramApp',
+                'runConfig': {},
+                'requires': [
+                    packagename + '.' + packagename,
+                    packagename + '.lib_sqlplus',
+                    packagename + '.lib_sqlplusic',
+                ],
+                'usedTarget': packagename + '.sqlplusbin',
+            }
+            buildSettings['script_sqlplus'] = buildSettings['sqlplus']
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from ThirdParty import add_3rdparty_system_lib_target, add_3rdparty_system_header_target, add_3rdparty_system_binary_target
+    from TargetHelpers import createPackageProgramScript, createPackageRunTarget
+    includeTarget = add_3rdparty_system_header_target(EnvBuilder().build(), packagename,
+                                                      lambda conf: conf.CheckCHeader('oci.h'))
+
+    libnames = [('occi', 'lib_occi'), ('clntsh', 'lib_clntsh'), ('nnz11', 'lib_nnz'),
+                ('ociicus', 'lib_ociicus'), ('ociei', 'lib_ociei'), ('sqlplus', 'lib_sqlplus'),
+                ('sqlplusic', 'lib_sqlplusic')]
+    libs = add_3rdparty_system_lib_target(EnvBuilder().depend(includeTarget).build(), packagename,
+                                          lambda conf: conf.CheckMultipleLibs([lib for lib, _ in libnames]),
+                                          libnames)
+
+    libs = EnvBuilder().depend(libs).build().RegisterPackageTarget(packagename=packagename, targetname='libs')
+
+    bin_env = EnvBuilder().depend(libs).build()
+    import os
+    reltargetdir = os.path.join('globals', packagename)
+    bin_env.setRelativeTargetDirectory(reltargetdir)
+    bin_name = 'sqlplus'
+    bin_target = add_3rdparty_system_binary_target(bin_env, packagename,
+                                                   lambda conf: conf.CheckExecutable(bin_name), bin_name,
+                                                   'bin_' + bin_name)
+    bins = EnvBuilder().depend(bin_target).build().RegisterPackageTarget(packagename=packagename,
+                                                                         targetname='bins')
+
+    scriptTarget = createPackageProgramScript(packagename, bin_name, bin_target)
+    scripts = EnvBuilder().depend(scriptTarget).build().RegisterPackageTarget(packagename=packagename,
+                                                                              targetname='scripts')
+
+    runTarget = createPackageRunTarget(packagename, bin_name, scriptTarget, settings={'runParams': '-- help'})
+
+    EnvBuilder().depend(includeTarget, libs, bins,
+                        scripts).build().RegisterPackageTarget(packagename=packagename,
+                                                               targetname=packagename)

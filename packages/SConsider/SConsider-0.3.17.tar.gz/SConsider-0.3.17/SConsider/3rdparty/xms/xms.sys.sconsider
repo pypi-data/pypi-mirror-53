@@ -1,0 +1,135 @@
+# vim: set et ai ts=4 sw=4:
+# -------------------------------------------------------------------------
+# Copyright (c) 2012, Peter Sommerlad and IFS Institute for Software
+# at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or
+# modify it under the terms of the license that is included with this
+# library/application in the file license.txt.
+# -------------------------------------------------------------------------
+
+import pkg_resources
+pkg_resources.require(["SConsider"])
+Import('*')
+
+_sconsider_dist = pkg_resources.get_distribution("SConsider").parsed_version
+if _sconsider_dist < pkg_resources.parse_version("0.5"):
+    from ConfigureHelper import Configure
+    from SConsider import createTargets, cloneBaseEnv
+    env = cloneBaseEnv()
+    conf = Configure(env)
+    if conf.CheckCHeader('xms.h') and conf.CheckMultipleLibs([
+            'gxi', 'gxibasicmatch', 'gxical', 'gxiosa', 'gxiplugin', 'gxiwmqprot', 'gxiwmqmsg', 'gxixil',
+            'icudata', 'icuuc'
+    ]):
+        conf.env.Append(CPPDEFINES='HAS_XMS')
+    env = conf.Finish()
+
+    buildSettings = {}
+    if 'HAS_XMS' in env['CPPDEFINES']:
+        buildSettings[packagename] = {
+            'linkDependencies': [
+                packagename + '.gxi',
+                packagename + '.gxibasicmatch',
+                packagename + '.gxical',
+                packagename + '.gxiosa',
+                packagename + '.gxiplugin',
+                packagename + '.gxiwmqmsg',
+                packagename + '.gxiwmqprot',
+                packagename + '.gxixil',
+                packagename + '.icudata',
+                packagename + '.icuuc',
+            ],
+            'targetType': 'IncludeOnly',
+        }
+        buildSettings['gxi'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxi'],
+                },
+            },
+        }
+        buildSettings['gxibasicmatch'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxibasicmatch'],
+                },
+            },
+        }
+        buildSettings['gxical'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxical'],
+                },
+            },
+        }
+        buildSettings['gxiosa'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxiosa'],
+                },
+            },
+        }
+        buildSettings['gxiplugin'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxiplugin'],
+                },
+            },
+        }
+        buildSettings['gxiwmqprot'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxiwmqprot'],
+                },
+            },
+        }
+        buildSettings['gxiwmqmsg'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxiwmqmsg'],
+                },
+            },
+        }
+        buildSettings['gxixil'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['gxixil'],
+                },
+            },
+        }
+        buildSettings['icudata'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['icudata'],
+                },
+            },
+        }
+        buildSettings['icuuc'] = {
+            'public': {
+                'appendUnique': {
+                    'LIBS': ['icuuc'],
+                },
+            },
+        }
+
+    createTargets(packagename, buildSettings)
+elif _sconsider_dist >= pkg_resources.parse_version("0.5"):
+    from TargetMaker import EnvBuilder
+    from ThirdParty import add_3rdparty_system_lib_target, add_3rdparty_system_header_target
+    includeTarget = add_3rdparty_system_header_target(EnvBuilder().build(), packagename,
+                                                      lambda conf: conf.CheckCHeader('xms.h'))
+
+    libnames = [('gxi', 'lib_gxi'), ('gxibasicmatch', 'lib_gxibasicmatch'), ('gxical', 'lib_gxical'),
+                ('gxiosa', 'lib_gxiosa'), ('gxiplugin', 'lib_gxiplugin'), ('gxiwmqprot', 'lib_gxiwmqprot'),
+                ('gxiwmqmsg', 'lib_gxiwmqmsg'), ('gxixil', 'lib_gxixil'), ('icudata', 'lib_icudata'),
+                ('icuuc', 'lib_icuuc')]
+    libs = add_3rdparty_system_lib_target(EnvBuilder().depend(includeTarget).build(), packagename,
+                                          lambda conf: conf.CheckMultipleLibs([lib for lib, _ in libnames]),
+                                          libnames)
+
+    libs = EnvBuilder().depend(libs).build().RegisterPackageTarget(packagename=packagename, targetname='libs')
+
+    EnvBuilder().depend(includeTarget, libs).build().RegisterPackageTarget(packagename=packagename,
+                                                                           targetname=packagename)
