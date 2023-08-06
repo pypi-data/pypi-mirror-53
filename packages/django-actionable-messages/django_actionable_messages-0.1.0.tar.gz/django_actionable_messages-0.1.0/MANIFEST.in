@@ -1,0 +1,9 @@
+include *.py
+include *.txt
+include *.html
+include LICENSE
+include README.md
+recursive-include django_actionable_messages/templates *
+global-exclude *.py[cod] *.so __pycache__
+prune examples
+prune tests
