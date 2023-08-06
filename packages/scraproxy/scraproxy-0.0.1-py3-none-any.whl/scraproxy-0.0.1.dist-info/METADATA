@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: scraproxy
+Version: 0.0.1
+Summary: A simple proxy list fetcher
+Home-page: https://github.com/andersonqueiroz/scraproxy
+Author: Anderson Queiroz
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# Scraproxy
+
+Proxy listing library useful for using with python [requests](https://requests.readthedocs.io/pt_BR/latest/user/quickstart.html).
+
+## Usage
+
+    >>> import requests
+    >>> from scraproxy import Scraproxy
+
+    >>> sp = Scraproxy()
+    >>> sp.fetch_proxies(only_https=True, allow_transparent=False, country='US')
+
+    >>> len(sp.proxies)    
+    >>> requests.get('https://httpbin.org/anything', proxies=sp.random_proxy())
+
