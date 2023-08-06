@@ -1,0 +1,71 @@
+#!python
+import argparse, os, sys
+
+directory = os.path.dirname(os.path.realpath(__file__))
+
+arg_parser = argparse.ArgumentParser(
+    description="BitBot CLI control utility")
+
+arg_parser.add_argument("--database", "-d",
+    help="Location of the sqlite3 database file",
+    default=os.path.join(directory, "databases", "bot.db"))
+
+arg_parser.add_argument("command")
+
+args, unknown = arg_parser.parse_known_args()
+
+def _die(s):
+    sys.stderr.write("%s\n" % s)
+    sys.exit(1)
+
+if args.command == "log":
+    arg_parser.add_argument("--level", "-l", help="Log level",
+        default="INFO")
+elif args.command in ["rehash", "reload"]:
+    pass
+else:
+    _die("Unknown command '%s'" % args.command)
+
+args = arg_parser.parse_args()
+
+sock_location = "%s.sock" % args.database
+if not os.path.exists(sock_location):
+    _die("Failed to connect to BitBot instance")
+
+import json, socket, signal
+
+def _sigint(_1, _2):
+    print("")
+    sys.exit(0)
+signal.signal(signal.SIGINT, _sigint)
+
+
+sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+sock.connect("%s.sock" % args.database)
+
+def _send(s):
+    sock.send(("%s\n" % s).encode("utf8"))
+
+_send("0 version 0")
+
+if args.command == "log":
+    _send("1 log %s" % args.level)
+elif args.command == "rehash":
+    _send("1 rehash")
+elif args.command == "reload":
+    _send("1 reload")
+
+read_buffer = b""
+
+while True:
+    data = sock.recv(1024)
+    if not data:
+        break
+
+    data = read_buffer+data
+    lines = [line.strip(b"\r") for line in data.split(b"\n")]
+    read_buffer = lines.pop(-1)
+    for line in lines:
+        line = json.loads(line)
+        if line["action"] == "log":
+            print(line["data"])
