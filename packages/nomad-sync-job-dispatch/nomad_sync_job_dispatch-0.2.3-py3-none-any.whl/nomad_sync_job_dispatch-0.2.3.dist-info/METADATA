@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: nomad-sync-job-dispatch
+Version: 0.2.3
+Summary: UNKNOWN
+Home-page: https://github.com/kshpytsya/nomad-sync-job-dispatch
+Author: Kyrylo Shpytsya
+Author-email: kshpitsa@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: System :: Systems Administration
+Requires-Python: >=3.7, <3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Requires-Dist: click (<8,>=7.0)
+Requires-Dist: click-log (<1,>=0.3.2)
+Requires-Dist: python-nomad (<2,>=1.1.0)
+
+# nomad-sync-job-dispatch
+
+[![Build Status](https://travis-ci.org/kshpytsya/nomad-sync-job-dispatch.svg?branch=master)](https://travis-ci.org/kshpytsya/nomad-sync-job-dispatch)
+
+A tool to create an instance of a parameterized nomad job and wait for its
+completion outputting job's stdout and stderr.
+
+Install with pip:
+
+```
+pip install nomad-sync-job-dispatch
+```
+
+or better yet, with [pipx](https://pipxproject.github.io/pipx/):
+
+```
+pipx install nomad-sync-job-dispatch
+```
+
+
