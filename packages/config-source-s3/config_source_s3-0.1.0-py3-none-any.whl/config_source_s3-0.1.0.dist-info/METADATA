@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: config-source-s3
+Version: 0.1.0
+Summary: S3 configuration source for the config-source library.
+Home-page: UNKNOWN
+Author: Sergey Kozlov
+Author-email: dev@ludditelabs.io
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Dist: config-source (>=0.0.4)
+Requires-Dist: boto3
+
+config-source-s3
+================
+
+.. image:: https://travis-ci.org/LudditeLabs/config-source-s3.svg?branch=master
+   :target: https://travis-ci.org/LudditeLabs/config-source-s3
+
+S3 configuration source for the
+`config-source <https://github.com/LudditeLabs/config-source>`_ library.
+
+
