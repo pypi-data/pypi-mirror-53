@@ -1,0 +1,58 @@
+Metadata-Version: 2.1
+Name: datanator-query-python
+Version: 0.2.7
+Summary: A package to query and format the data in the integrated Datanator database
+Home-page: https://github.com/KarrLab/datanator_query_python
+Author: Karr Lab
+Author-email: info@karrlab.org
+License: MIT
+Download-URL: https://github.com/KarrLab/datanator_query_python
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Requires-Dist: Jinja2
+Requires-Dist: MarkupSafe
+Requires-Dist: aniso8601
+Requires-Dist: attrs
+Requires-Dist: cement
+Requires-Dist: click
+Requires-Dist: configparser
+Requires-Dist: genson
+Requires-Dist: glob2
+Requires-Dist: itsdangerous
+Requires-Dist: karr-lab-aws-manager (>=0.0.4)
+Requires-Dist: numpy
+Requires-Dist: pkg-utils
+Requires-Dist: pymongo
+Requires-Dist: pyrsistent
+Requires-Dist: python-dotenv
+Requires-Dist: pytz (==2019.1)
+Requires-Dist: requirements-parser
+Provides-Extra: all
+Requires-Dist: capturer ; extra == 'all'
+Requires-Dist: mock ; extra == 'all'
+Requires-Dist: sphinx (>=1.8) ; extra == 'all'
+Requires-Dist: sphinx-fontawesome ; extra == 'all'
+Requires-Dist: sphinx-rtd-theme (>=0.4.2) ; extra == 'all'
+Requires-Dist: sphinxcontrib-addmetahtml (>=0.1.1) ; extra == 'all'
+Requires-Dist: sphinxcontrib-bibtex ; extra == 'all'
+Requires-Dist: sphinxcontrib-googleanalytics (>=0.1.1) ; extra == 'all'
+Requires-Dist: sphinxcontrib-spelling ; extra == 'all'
+Requires-Dist: sphinxprettysearchresults ; extra == 'all'
+Provides-Extra: docs
+Requires-Dist: sphinx (>=1.8) ; extra == 'docs'
+Requires-Dist: sphinx-fontawesome ; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme (>=0.4.2) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-addmetahtml (>=0.1.1) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-bibtex ; extra == 'docs'
+Requires-Dist: sphinxcontrib-googleanalytics (>=0.1.1) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-spelling ; extra == 'docs'
+Requires-Dist: sphinxprettysearchresults ; extra == 'docs'
+Provides-Extra: tests
+Requires-Dist: capturer ; extra == 'tests'
+Requires-Dist: mock ; extra == 'tests'
+
+UNKNOWN
+
+
