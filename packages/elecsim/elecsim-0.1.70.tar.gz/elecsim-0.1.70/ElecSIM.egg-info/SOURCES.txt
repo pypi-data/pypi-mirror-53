@@ -1,0 +1,1805 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+ElecSIM.egg-info/PKG-INFO
+ElecSIM.egg-info/SOURCES.txt
+ElecSIM.egg-info/dependency_links.txt
+ElecSIM.egg-info/requires.txt
+ElecSIM.egg-info/top_level.txt
+ElecSim.egg-info/PKG-INFO
+ElecSim.egg-info/SOURCES.txt
+ElecSim.egg-info/dependency_links.txt
+ElecSim.egg-info/requires.txt
+ElecSim.egg-info/top_level.txt
+elecsim/__init__.py
+elecsim/constants.py
+elecsim.egg-info/PKG-INFO
+elecsim.egg-info/SOURCES.txt
+elecsim.egg-info/dependency_links.txt
+elecsim.egg-info/requires.txt
+elecsim.egg-info/top_level.txt
+elecsim/../elecsim/data/processed/__init__.py
+elecsim/../elecsim/data/processed/availability_factor/.DS_Store
+elecsim/../elecsim/data/processed/availability_factor/__init__.py
+elecsim/../elecsim/data/processed/availability_factor/historical_availability_factor.csv
+elecsim/../elecsim/data/processed/capacity_factor/__init__.py
+elecsim/../elecsim/data/processed/capacity_factor/Solar/__init__.py
+elecsim/../elecsim/data/processed/capacity_factor/Solar/ninja_pv_country_GB_merra-2_corrected.csv
+elecsim/../elecsim/data/processed/capacity_factor/Wind/.DS_Store
+elecsim/../elecsim/data/processed/capacity_factor/Wind/__init__.py
+elecsim/../elecsim/data/processed/capacity_factor/Wind/ninja_wind_country_GB_current-merra-2_corrected.csv
+elecsim/../elecsim/data/processed/carbon_price/__init__.py
+elecsim/../elecsim/data/processed/carbon_price/uk_carbon_tax_historical.csv
+elecsim/../elecsim/data/processed/companies/__init__.py
+elecsim/../elecsim/data/processed/companies/company_financials.csv
+elecsim/../elecsim/data/processed/electricity_demand/__init__.py
+elecsim/../elecsim/data/processed/electricity_demand/uk_all_year_demand.csv
+elecsim/../elecsim/data/processed/fuel/__init__.py
+elecsim/../elecsim/data/processed/fuel/fuel_costs/__init__.py
+elecsim/../elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/__init__.py
+elecsim/../elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/fuel_costs_per_mwh.csv
+elecsim/../elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/historical_fuel_costs_converted.csv
+elecsim/../elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/historical_fuel_costs_converted_long.csv
+elecsim/../elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/total_fuel_price.csv
+elecsim/../elecsim/data/processed/load_duration_curve/__init__.py
+elecsim/../elecsim/data/processed/load_duration_curve/load_duration_curve.csv
+elecsim/../elecsim/data/processed/load_duration_curve/load_duration_curve_difference.csv
+elecsim/../elecsim/data/processed/power_plants/__init__.py
+elecsim/../elecsim/data/processed/power_plants/carbon_price/__init__.py
+elecsim/../elecsim/data/processed/power_plants/carbon_price/uk_carbon_tax_historical.csv
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/__init__.py
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/__init__.py
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/historical_power_plant_costs_long.csv
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/efficiency/__init__.py
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/efficiency/historical_fuel_plant_efficiency.csv
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/modern_power_plant_costs/__init__.py
+elecsim/../elecsim/data/processed/power_plants/power_plant_costs/modern_power_plant_costs/power_plant_costs_with_simplified_type.csv
+elecsim/../elecsim/data/processed/power_plants/uk_power_plants/__init__.py
+elecsim/../elecsim/data/processed/power_plants/uk_power_plants/uk_power_plants.csv
+elecsim/agents/__init__.py
+elecsim/agents/demand/__init__.py
+elecsim/agents/demand/demand.py
+elecsim/agents/demand/multi_day_demand.py
+elecsim/agents/generation_company/__init__.py
+elecsim/agents/generation_company/gen_co.py
+elecsim/agents/generation_company/invest/__init__.py
+elecsim/agents/generation_company/invest/investment.py
+elecsim/data/__init__.py
+elecsim/data/processed/.DS_Store
+elecsim/data/processed/__init__.py
+elecsim/data/processed/availability_factor/.DS_Store
+elecsim/data/processed/availability_factor/__init__.py
+elecsim/data/processed/availability_factor/historical_availability_factor.csv
+elecsim/data/processed/capacity_factor/__init__.py
+elecsim/data/processed/capacity_factor/Solar/__init__.py
+elecsim/data/processed/capacity_factor/Solar/ninja_pv_country_GB_merra-2_corrected.csv
+elecsim/data/processed/capacity_factor/Wind/.DS_Store
+elecsim/data/processed/capacity_factor/Wind/__init__.py
+elecsim/data/processed/capacity_factor/Wind/ninja_wind_country_GB_current-merra-2_corrected.csv
+elecsim/data/processed/carbon_price/__init__.py
+elecsim/data/processed/carbon_price/uk_carbon_tax_historical.csv
+elecsim/data/processed/companies/__init__.py
+elecsim/data/processed/companies/company_financials.csv
+elecsim/data/processed/companies/company_financials_2013.csv
+elecsim/data/processed/companies/company_financials_2013_revised.csv
+elecsim/data/processed/electricity_demand/__init__.py
+elecsim/data/processed/electricity_demand/uk_all_year_demand.csv
+elecsim/data/processed/electricity_mix/energy_mix_historical.csv
+elecsim/data/processed/fuel/__init__.py
+elecsim/data/processed/fuel/fuel_costs/__init__.py
+elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/__init__.py
+elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/fuel_costs_per_mwh.csv
+elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/historical_fuel_costs_converted.csv
+elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/historical_fuel_costs_converted_long.csv
+elecsim/data/processed/fuel/fuel_costs/historical_fuel_costs/total_fuel_price.csv
+elecsim/data/processed/load_duration_curve/__init__.py
+elecsim/data/processed/load_duration_curve/load_duration_curve.csv
+elecsim/data/processed/load_duration_curve/load_duration_curve_difference.csv
+elecsim/data/processed/multi_day_data/4_medoids.csv
+elecsim/data/processed/multi_day_data/4_medoids_scaled.csv
+elecsim/data/processed/multi_day_data/8_medoids.csv
+elecsim/data/processed/multi_day_data/8_medoids_scaled.csv
+elecsim/data/processed/pickled_data/.DS_Store
+elecsim/data/processed/pickled_data/power_plants/ Whitchurch -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/.DS_Store
+elecsim/data/processed/pickled_data/power_plants/30 Acres-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/A'Chruach-2016-24.pickle
+elecsim/data/processed/pickled_data/power_plants/AOE-2014-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Abbots Ripton-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Aberdare District Energy-2002-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Abergelli-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Aberthaw B-1971-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Aberthaw B-1971-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Aberthaw GT-1971-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Aberthaw GT-1971-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Achanalt-1956-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Achanalt-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Achany Windfarm-2010-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Achany-2010-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Acrefair-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Aigas-1962-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Aigas-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Ainderby-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Airfield Poddington-2017-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Airies-2017-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Airies-2017-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Aller Court Solar Park-2017-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Allt na Lairige-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Allt-na-Lairige-1956-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Alltwalis Wind Farm-2009-51.pickle
+elecsim/data/processed/pickled_data/power_plants/Alltwalis-2009-65.pickle
+elecsim/data/processed/pickled_data/power_plants/Altahullion Extension Wind Farm (NI)-2007-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Altahullion Wind Farm (NI)-2003-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Altahullion-2003-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Altahullion2-2007-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Altaveedan-2017-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Alveston-2017-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Alveston-2017-8.pickle
+elecsim/data/processed/pickled_data/power_plants/An Suidhe-2005-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Andershaw Wind Farm-2016-51.pickle
+elecsim/data/processed/pickled_data/power_plants/Anglesey-2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Apse-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Ardley EfW-2014-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Ardrossan Extension-2008-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Ardrossan-2004-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Ardrossan-2004-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Ardrossan-2004-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Arecleoch-2010-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Arecleoch-2010-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Arnish Moor-2006-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Arnish-2001-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Arnish-2001-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Artfield Fell Windfarm - A,C-2005-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Artfield Fell-2005-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Ash Row-2015-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Ash Row-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Ashby-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ashton-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Askam-1999-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Askern-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Assel Valley-2016-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Astley-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Auchrobert-2017-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Auchtertyre-2000-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Avenue Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Averill Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Awe Barrage-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Baglan Bay CCGT-2002-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Baglan Bay OCGT-2002-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Baglan Bay-2002-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Bagmoor -2009-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Bagmoor-2009-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Bagmoor-2009-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Baillie Wind Farm-2013-51.pickle
+elecsim/data/processed/pickled_data/power_plants/Baillie-2013-65.pickle
+elecsim/data/processed/pickled_data/power_plants/Bake Farm Solar Park (England)-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Balcombe-2016-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Balcombe-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballylumford B OCGT-1968-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballylumford B OCGT-1968-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballylumford B-1968-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballylumford B-1968-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballylumford C-2003-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballylumford C-2003-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Ballymena-2013-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Balmurrie Fell-2012-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Bambers-2004-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Bann Road-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Barkantine Heat & Power Company *-2000-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Barkantine Heat & Power Company -2000-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Barking-1994-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Barkip AD-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Barlborough-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Barlockhart Moor Wind Energy Ltd-2013-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Barmoor-2014-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Barn Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Barr Farm Limited-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Barra-1990-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Barra-1990-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Barrow (11)-2006-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Barrow-2006-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Barry (10)-1998-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Barry-1998-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Barton Close Solar Park (England)-2015-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Barton-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Batsworthy Cross-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Beannachran Dam-2005-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Bears Down-2001-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Bears down reservoir -2001-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Beatrice (3)-2007-67.pickle
+elecsim/data/processed/pickled_data/power_plants/Beckburn-2017-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Beckton-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Bedborough-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Beeches-2016-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Beeches-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Bein Ghlas-1999-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn Tharsuinn-2006-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn Tharsuinn-2007-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn an Tuirc I-2001-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn an Tuirc I-2001-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn an Tuirc II-2002-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn an Tuirc II-2012-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn ghlas windfarm-1999-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinn ghlas windfarm-1999-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Beinneun Wind Farm-2017-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Belvedere-2012-47.pickle
+elecsim/data/processed/pickled_data/power_plants/Ben Aketil-2007-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Ben Aketil-2007-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Benbole-2011-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Benbole-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Bentley Estate 2-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Bentley Estate-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Berry Burn Wind farm-2014-51.pickle
+elecsim/data/processed/pickled_data/power_plants/Berry Court-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Berthllwyd-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bessy Bell 1-1995-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Bessy Bell 2-2008-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Bessy Bell Windfarm (NI) Limited-2008-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Bessy Bell Windfarm-1995-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Betty Hill-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Bhlaraidh Wind Farm-2017-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Bicker Fen-2008-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Bicker Fen-2008-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Bilbster-2007-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Bilsborrow-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bilsborrow-2017-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Bilsthorpe -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Bin Mountain (20)-2007-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Bin Mountain Wind Farm -2007-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bin Mountain Wind Farm -2007-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Binsted-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Birch Estate-2015-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Birch Estate-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Bishops Sutton-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Bishopthorpe-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Hill Wind Farm (GB)-2006-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Hill-2006-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Law II-2017-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Law II-2017-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Law-2005-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Law-2005-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Rock-2012-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Black Rock-2012-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Blackburn meadows *-2015-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Blackburn-2011-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Blackdown -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Blackstone Edge-2013-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Blackstone Edge-2013-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Blackwell-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Blantyre Muir Wind Energy Ltd-2013-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Blantyre-1995-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Blantyre-1995-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Blatchworthy-2013-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Blatchworthy-2013-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Blenches Mill Solar Park-2014-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Blue House-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Blyth T1-2001-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Blyth T2-2001-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Blyth-2000-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Blyth-2017-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Blyth-2017-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Bodmin-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Bodwen-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bogenlea-2014-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bolsovermoor Quarry -2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Bolton EfW-1971-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Bonnington-1927-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Bonnington-1927-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Boundary Lane-2013-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Boundary Lane-2013-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Bourne Park -2012-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Bourne Park 2 -2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Bowbeat (Emly Bank)-2002-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Bowbeat (Roughside)-2002-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Bowbeat-2002-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bowden Lane Solar Park-2017-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Bowmore-1946-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Bowmore-1946-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Boyndie-2006-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Boyndie-2006-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Brackagh Quarry-2017-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Bradenstoke Solar Park-2015-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Bradford-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Bradwell-2013-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Braes of Doune Wind Farm-2006-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Braes of Doune-2007-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Braevallich-2005-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Brafield on the Green Solar Park-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Braich Ddu-2007-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Bratton-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Brickkiln Lane-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Bridgewater District Energy-2000-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Bristol Port-2007-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Bristol Port-2007-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Bristol Water-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Broadgate-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Brockloch Rig -2017-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Brook Farm-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Brook hall -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Brookbarn-2015-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Brookbarn-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Brookside -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Broomhill-2008-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Broomhill-2009-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Broomhill-2009-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Broxted Solar Park (England)-2014-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Bryn Bachau-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bryn Titli-1994-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Bryn Yr Odyn-2015-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Bryn Yr Odyn-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Bryn titli wind farm-1994-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Brynteg-2014-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Brynteg-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Bu-2002-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Bulls Head North-2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Bumpers Farm-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Burbo Bank-2009-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Burbo Extension Offshore Windfarm-2017-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Burbo Offshore Windfarm-2007-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Burbo Offshore Windfarm-2007-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Burcroft Solar Parks-2014-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Burgar Hill-2006-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Burghfield-1998-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Burghfield-1998-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Burn of Whilk-2015-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Burn of Whilk-2015-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnfoot Hill-2010-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnfoot-2010-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnfoot-2010-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnhead Moss-2015-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnthouse Farm-2013-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnthouse-2015-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Burnthouse-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Burntstalks-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Burthy-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Burton Pedwardine Solar Farm Phase 2-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Burton Pedwardine-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Bury Lane-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Butleigh Solar Park-2011-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Butterwick Moor Circuit 1-2011-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Butterwick Moor Circuit 1-2011-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Butterwick Moor Circuit 2-2011-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Butterwick Moor Circuit 2-2011-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Butterwick Moor-2011-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Bystock Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Cadland 2 -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Cairnborrow Wind Energy Ltd-2017-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Callagheen-2006-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Callagheen-2006-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Cambrian-2016-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Cambrian-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Camster-2012-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Camster-2013-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Camster-2013-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Capel Grange Solar Energy Ltd-2016-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Carcant (20)-2010-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Carcant Wind Farm-2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Cardiff EfW-2014-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Cardiff-2013-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Carland Cross RP-2013-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Carland Cross RP-2013-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Carlisle Estate-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Carnemough-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Carno-1996-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Carno-1997-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Carnoch-2009-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Carnoch-2009-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Carrington-2016-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Carrowdore-2017-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Carrowdore-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Carsfad-1936-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Carsfad-1936-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Carsfad-1936-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Carsington Wind Energy Ltd-2014-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Cashlie-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Cashlie-1959-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Cassley-1959-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Cassley-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Cassley-1959-62.pickle
+elecsim/data/processed/pickled_data/power_plants/Castle Combe-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Castleford-2002-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Castleford-2002-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Castleford-2002-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Cathkin Braes Wind Farm-2013-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Causeymire wind farm-2004-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Causeymire-2004-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Causilgey-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Ceannacroc-1956-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Ceannacroc-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Cefn Croes-2006-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Cemmaes-2002-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Cemmaes-2002-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Chalcroft-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Chalgrove - Langlay Hall - Solar Farm-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Charity Farm - CfD-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Chatteris-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Chawton-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Chediston-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Chickerell-1998-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Chickerell-1998-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Chilton Cantelo Solar Park-2013-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Chippenham-2002-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Chippenham-2002-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Chisbon-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Chittering-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Chliostair-1960-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Chliostair-1960-64.pickle
+elecsim/data/processed/pickled_data/power_plants/Church Farm - Slapton-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Cia Aig -2016-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Clachan Flats-2009-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Clachan Flats-2009-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Clachan Flats-2009-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Clachan-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clachan-1955-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Cladach Dam-1949-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clann Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Clashindarroch-2015-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Clawdd Ddu -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Cleave Farm-2013-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Cloford Common-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Cluanie Dam-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clunie Dam-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clunie-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clunie-1950-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Clyde Central-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Clyde North-2012-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Clyde South-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Clyde Windfarm (Central)-2011-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clyde Windfarm (North)-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Clyde Windfarm (South)-2011-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Coal Clough RP-1992-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Coal Clough RP-1992-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Coal Clough-1992-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Cold Harbour-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Cold Northcott-1993-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Cold Northcott-1993-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Coldham-2005-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Coldham-2006-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Coltishall 1-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Coltishall 2.1-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Coltishall 2.2-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Coltishall 2.3-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Coltishall 2.4-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Common Farm-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Connahs Quay-1996-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Connahs Quay-1996-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Coolkeeragh OCGT-2005-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Coolkeeragh OCGT-2005-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Coolkeeragh-2005-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Coolkeeragh-2005-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Copley Wood Solar Park-2016-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Corby-1993-16.pickle
+elecsim/data/processed/pickled_data/power_plants/Corby-1993-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Corkey-1994-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Corkey-1994-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Corriegarth-2016-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Corriemoillie-2017-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Coryton -2001-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Coryton-2001-26.pickle
+elecsim/data/processed/pickled_data/power_plants/Cotgrave-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Coton Park Solar Farm-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Cottam Development Centre-1999-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Cottam Development Centre-1999-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Cottam-1969-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Cottam-1969-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Cotton Farm-2013-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Cour Wind Farm-2016-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Cowes -1982-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Cowes-1982-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Cranham-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Crapnell (Dinder)-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Craymarsh-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Crimp Wind Power Ltd-2011-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Croesor-1999-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Crookedstone-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Crossness-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Crossways Solar Park-2014-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Cruach Mhor-2004-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Cruach Mhor-2004-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Cruachan-1966-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Cruachan-1966-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Crucis Farm-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Crundale-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Crystal Rig II-2003-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Crystal Rig II-2010-31.pickle
+elecsim/data/processed/pickled_data/power_plants/Crystal Rig III-2016-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Crystal Rig Windfarm-2003-31.pickle
+elecsim/data/processed/pickled_data/power_plants/Crystal Rig-2003-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Cuaich-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Cuaich-1959-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Cuileg-2002-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Cuileg-2002-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Cuileig-2002-64.pickle
+elecsim/data/processed/pickled_data/power_plants/Culligran Compensation  Set-1962-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Culligran Compensation Set-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Culligran-1962-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Culligran-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Culworth -2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Cwm Dyli-2002-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Cwrt Henllys-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Dagenham-2004-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Dagenham-2004-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Daintree-2016-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Dairy House-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Dalby-2016-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Dalchonzie-1958-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Dalchonzie-1958-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Dalchonzie-1958-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Dalswinton-2007-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Dalswinton-2008-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Damhead Creek-2000-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Damhead Creek-2000-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Deanie-1963-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Deanie-1963-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Decoy-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Deeping-2006-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Deeping-2006-29.pickle
+elecsim/data/processed/pickled_data/power_plants/Deeside -1994-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Deeside-1994-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Deeside-1994-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Den Brook Wind Farm (GB)-2016-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Denzell Downs Windfarm-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Derriton (Tamar Heights)-2014-16.pickle
+elecsim/data/processed/pickled_data/power_plants/Derriton (Tamar Heights)-2014-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Dersalloch-2016-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Deucheran Hill (RO)-2001-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Deucheran Hill-2001-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Dewlay (Garstang)-2010-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Dewley Cheese-2010-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Didcot B-1998-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Didcot B-1998-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Didcot GT-1972-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Didcot GT-1972-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Dinorwig-1983-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Dinorwig-1983-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Dolgarrog High Head-2002-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Douglas Water-2008-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Drapers Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Drax - biomass units-1974-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Drax - coal units-1974-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Drax GT-1971-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Drax GT-1971-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Drax-1974-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Drone Hill-2012-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Drumderg Windfarm-2008-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Drumderg-2008-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Drumjohn-1985-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Drumjohn-1985-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Duchally-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Dudgeon BMU 1-2017-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Dudgeon BMU 1-2017-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Dudgeon BMU 2-2017-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Dudgeon BMU 3-2017-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Dudgeon BMU 4-2017-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Dulyn-1998-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Dun Law I-2000-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Dun Law I-2000-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Dun Law II-2009-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Dun Law II-2009-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Dundee-2006-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Dundreggan Dam A-1957-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Dungavel-2015-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Dungeness B-1983-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Dungeness B-1983-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Dunmaglass Wind Farm-2016-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Dunsfold-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Dyffryn Brodyn Wind Farm (GB)-1994-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Dyffryn Brodyn-1994-54.pickle
+elecsim/data/processed/pickled_data/power_plants/EPR Ely Ltd-2001-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Eakring-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Earls Hall Farm-2013-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Earlsburn-2006-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Earlsburn-2007-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Earlseat Wind Farm (GB)-2014-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Earlstoun-1936-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Earlstoun-1936-46.pickle
+elecsim/data/processed/pickled_data/power_plants/East Appleton-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/East Fairlee -2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/East Farm -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/East Kilbride-2016-15.pickle
+elecsim/data/processed/pickled_data/power_plants/East Youlstone-2014-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Eastacombe-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Ebnal Lodge-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Eckland Lodge-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Ecotech-1999-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Ecotech-1999-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Edinbane-2010-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Edinbane-2010-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Edinburgh College-2013-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Edmonton-1970-29.pickle
+elecsim/data/processed/pickled_data/power_plants/Edmonton-2011-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Eggborough-1967-16.pickle
+elecsim/data/processed/pickled_data/power_plants/Eggborough-1967-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Eggborough-1967-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Elean-2001-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Ellicombe-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Elliot's Hill-1995-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Elliots Hill-1995-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Ellough Solar Farm-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Enfield-1999-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Enfield-1999-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Epwell-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Ermine-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Errochty-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Errochty-1955-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Eveley-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Eveley-2016-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Evesham -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Ewe Hill I-2016-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Ewe Hill II-2017-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Exeter EfW-2014-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Exeter EfW-2014-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Exning-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Eye Suffolk-1992-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Eye-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/FMC (2)-2011-68.pickle
+elecsim/data/processed/pickled_data/power_plants/FMC Dunfermline-2010-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Fairburn Windfarm-2010-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Fairburn-2009-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Fairfield-2011-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Fairfield-2011-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Fairwinds-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Fallago Rig-2013-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Fallago-2013-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Fanny House-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Fareham-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Farr wind farm ltd-2005-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Farr-2006-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Fasnakyle Compensation Set-2006-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Fasnakyle Compensation Set-2006-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Fasnakyle-1951-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Fasnakyle-1951-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Fawley (Langley)-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Fawley GT-1969-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Fell View -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Fellside CHP *-1995-48.pickle
+elecsim/data/processed/pickled_data/power_plants/Fellside CHP-1995-53.pickle
+elecsim/data/processed/pickled_data/power_plants/Fen Farm Solar-2011-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Fen Farm-2007-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Fen Road Solar Farm-2011-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Ferry Farm-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ferrybridge C-1966-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Ferrybridge GT-1966-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Ferrybridge Multi-fuel-2015-32.pickle
+elecsim/data/processed/pickled_data/power_plants/Ffestiniog-1961-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Ffestiniog-1961-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Ffos Las-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Ffynnon Oer-2006-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Fiddler’s Ferry GT-1969-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Fiddler’s Ferry GT-1969-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Fiddler’s Ferry-1971-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Fiddler’s Ferry-1971-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Fields Farm (Agden) -2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Finlarig-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Finlarig-1955-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Fiskerton Solar Farm-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Five Oaks-2011-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Flimby Wind Energy Ltd-2013-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Forss Extension Wind Farm (GB)-2007-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Forss Wind Farm (GB)-2003-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Forss-2003-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Forss2-2007-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Four Burrows Solar (Kenwyn)-2015-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Four Burrows Wind Farm (GB)-1995-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Four Burrows-1995-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Foyers Falls-1968-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Foyers Falls-1968-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Foyers-1974-30.pickle
+elecsim/data/processed/pickled_data/power_plants/Foyers-1974-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Francis Court-2017-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Francis Court-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Freasdail (GB)-2017-38.pickle
+elecsim/data/processed/pickled_data/power_plants/French Farm-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Frodsham Wind Farm Ltd-2016-35.pickle
+elecsim/data/processed/pickled_data/power_plants/Fynnon Oer-2006-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Galawhistle-2016-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Galloper Wind Farm-2017-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Galloper-2013-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Galsworthy-2014-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Garlenick-2015-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Garnedd-1990-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Garreg Llwyd (GB)-2017-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Garrogie-2005-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Garrogie-2005-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Garry Gualach-2002-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Gaur-1953-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Gaur-1953-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Gedling-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Gelli Gron-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Gisla-1960-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Glanford Brigg (10)-1993-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Glanford Brigg-1993-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Glanford-1993-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Glanford-1993-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Glass Moor II-2013-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Glass Moor II-2013-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Glass Moor-2006-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Glass Moor-2006-29.pickle
+elecsim/data/processed/pickled_data/power_plants/Glen Tarbert-2000-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenapp-2016-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenchamber Wind Farm (GB)-2016-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Glendoe-2008-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Glendoe-2008-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenkerie-2012-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenkerie-2012-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenkerie-2012-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenlee-1935-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenlee-1935-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenmoriston-1957-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Glenmoriston-1957-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Glens of Foudland-2005-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Glens of Foudland-2005-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Goole Fields 2-2016-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Goole Fields 2-2016-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Goonhilly Downs Wind Farm-1993-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Goonhilly Solar-2014-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Gordonbush Wind Farm-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Gordonbush-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Gordonstown-2013-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Gordonstown-2013-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Grain CHP *-2010-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Grain CHP *-2010-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Grain GT-1978-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Grain GT-1978-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Grain-2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Grange Farm -2013-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Grange Farm -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Grange Wind Farm (GB)-2013-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Grange Wind Farm-2016-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Grange-2013-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Grantham Solar Park (England)-2016-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Grantham Solar Park (England)-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Eppleton (ex NFFO)-1997-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Eppleton -2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Eppleton RO-2010-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Eppleton RO-2010-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Knowles-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Orton-1999-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Orton-1999-35.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Yarmouth-2001-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Great Yarmouth-2001-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Greater Gabbard (21)-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Greater Gabbard-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Green Knowes-2008-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Green Lane-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Green Rigg -2012-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Green Rigg-2012-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Green Rigg-2012-7.pickle
+elecsim/data/processed/pickled_data/power_plants/GreenPark-2005-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Greendykeside-2007-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Greendykeside-2007-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Greenknowes-2008-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Griffin Wind Farm-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Griffin-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Grimsargh -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Grudie -2017-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Grudie Bridge-1950-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Grudie Bridge-1950-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Grudie Bridge-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Gruig Wind Farm Limited-2009-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Gruig-2009-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Guisborough-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Gunfleet Sands 1 & 2 Ltd.-2010-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Gunfleet Sands 1-2010-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Gunfleet Sands 2-2010-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Gunfleet Sands 3-2013-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Gwynt-y-Mor-2013-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Hadley Farm-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hadlow Solar Park (England)-2015-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Hadyard Hill Windfarm - A,C-2006-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Hadyard Hill-2005-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Hagshaw Hill I-1995-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Hagshaw Hill I-1995-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Hagshaw Hill II-1995-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Hagshaw Hill II-2009-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Hale Farm Solar-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Hale Manor Farm -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hale-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hameldon Hill Extension-2013-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Hameldon Hill-2006-25.pickle
+elecsim/data/processed/pickled_data/power_plants/HandH-2016-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill (scotland)-2004-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill II-2016-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill II-2016-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill RO-2004-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill RO-2004-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill-2000-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare Hill-2004-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Hare hill-2000-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Harestanes-2013-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Hartlepool-1984-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Hartlepool-1984-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Hartlepool-1984-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Haswell Moor Circuit 1-2010-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Haswell Moor Circuit 2-2010-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Haswell Moor-2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Hatchlands-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Haverigg III-2005-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Haverigg III-2005-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Hawton-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hazard-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Hellrigg-2012-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Henbury Quarry-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hermitage -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hewas-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Heysham 1-1984-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Heysham 2-1988-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Heysham 2-1988-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Heysham1-1984-9.pickle
+elecsim/data/processed/pickled_data/power_plants/High Down-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/High Haswell Wind Farm-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/High Hedley 1-2001-37.pickle
+elecsim/data/processed/pickled_data/power_plants/High Hedley 2-2008-37.pickle
+elecsim/data/processed/pickled_data/power_plants/High Hedley I-2001-11.pickle
+elecsim/data/processed/pickled_data/power_plants/High Hedley II-2008-11.pickle
+elecsim/data/processed/pickled_data/power_plants/High Pow-2007-36.pickle
+elecsim/data/processed/pickled_data/power_plants/High Sharpley-2006-36.pickle
+elecsim/data/processed/pickled_data/power_plants/High Volts RO-2004-9.pickle
+elecsim/data/processed/pickled_data/power_plants/High Volts-2004-22.pickle
+elecsim/data/processed/pickled_data/power_plants/High Volts-2004-9.pickle
+elecsim/data/processed/pickled_data/power_plants/High point-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Higher Bye-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Higher Hill Solar Park-2011-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Higher Knapp-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Higher Pirzwell-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Higher Trenhayle-2013-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Higher Trenhayle-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill Farm-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill Hall Farm-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill House Farm-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill of Auquhirie-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill of Fiddes-2010-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill of Fiddes-2010-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill of Towie Wind Farm (GB)-2012-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Hill of Towie-2012-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Hinkley Point B-1976-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Hinkley Point B-1976-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Hollamoor-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Hollies-2008-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Hollies-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Holmside RO-2004-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Holmside-2004-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Holmside-2004-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Holtwood-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Home Farm-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Homestead-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hook Valley Solar Park-2014-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Horam-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Hornacott-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Howbery-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Howton-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Huddlesford House Farm-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Hullavington-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Humber Gateway-2015-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Hunger Hill-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Hungerford -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hunterston B-1976-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Hunterston B-1976-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Huntingdon -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hyde Farm-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Hywind BMU 1-2017-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Immingham CHP-2004-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Indian Queens-1996-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Indian Queens-1996-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Indian Queens-1996-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Inner Dowsing -2009-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Inner Dowsing-2009-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Inverawe-1963-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Inverawe-1963-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Inverbain-2006-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Invergarry Dam-1956-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Invergarry Dam-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Invergarry-1956-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Invergarry-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Inverlael-2009-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Ironbridge-1970-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Jacks Lane (GB)-2015-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Keadby GT-1994-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Keadby GT-1994-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Keadby Wind Farm-2013-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Keadby-1994-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Keadby-1994-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Kelburn -2011-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Kelburn Wind Farm (GB)-2012-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Kendoon-1936-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Kendoon-1936-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Kenninghall Solar Farm-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Kentish Flats Extension-2015-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Kentish-2005-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Kerry Falls-1951-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Kerry Falls-1951-64.pickle
+elecsim/data/processed/pickled_data/power_plants/Ketton Solar Farm-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Ketton Solar Phase 2-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Kia Ora-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Kielder-2006-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilbraur-2008-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilbraur-2008-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilbraur-2008-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Kildrummy-2013-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilgallioch -2017-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Killingholme-1993-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Killingholme-1994-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Killingholme-1994-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilmelfort-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilmelfort-1956-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilmorack-1962-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilmorack-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Kiln Pit Hill-2011-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilroot OCGT-1981-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilroot OCGT-1981-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilroot-1981-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Kilroot-1981-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Kinblethmont Solar Park (Scotland)-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Kingairloch-2005-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Kingairloch-2005-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Kingsburn-2016-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Kirkby Moor-1993-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Kirkby moor wind farm-1993-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Kirkheaton-2000-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Kirkheaton-2000-43.pickle
+elecsim/data/processed/pickled_data/power_plants/Kirkwall-1953-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Kirkwall-1953-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Knabs Ridge-2007-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Knabs Ridge-2007-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Knapton-1994-53.pickle
+elecsim/data/processed/pickled_data/power_plants/Knapton-1994-55.pickle
+elecsim/data/processed/pickled_data/power_plants/Knockworthy Farm Solar Park-2013-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Knockworthy Farm Solar Park-2013-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Knowlton-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Lagness-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Lairg-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lairg-1959-62.pickle
+elecsim/data/processed/pickled_data/power_plants/Lairg-2012-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Lakeside EfW-2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Lakeside EfW-2010-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Lambirgg-2000-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Lambrigg-2000-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Langage-2010-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Langage-2010-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Langford Solar Farm-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Langhope Rig-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Langley Park-2008-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Langley Priory Solar Farm-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Langley-2008-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Langley-2008-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Langton (FIT)-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Langunnett-2013-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Lawn Lane-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Lawrence End Park-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Lednock-1961-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lednock-1961-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Lee Moor-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Lendrum's Bridge-2000-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Lendrums Bridge Extension Wind Farm (NI)-1999-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Lendrums Bridge Wind Farm (NI)-2000-16.pickle
+elecsim/data/processed/pickled_data/power_plants/Lendrums Bridge Wind Farm (NI)-2000-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Lenham-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Lerwick-1953-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lerwick-1953-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Lexham-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Limberlost -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Limes Farm Wickham Solar-2013-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Lincs (11)-2012-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Lincs-2013-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Lindhurst-2010-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Lindhurst-2010-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Lisburn-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Lissett-2007-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Lissett-2007-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Barford GT-2006-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Barford GT-2006-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Barford-1995-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Barford-1995-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Cheyne Court-2008-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Irchester -2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Morton Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Little Neath-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Little T-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Littlebrook GT-1982-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Littleton-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Livishie-1962-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Livishie-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Llangwyryfon-1993-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Llangwyryfon-1993-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Llangwyryfon-2003-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Llyn Alaw-1997-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Llyn Alaw-1997-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Carnan, South Uist-1971-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Carnan, South Uist-1971-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Dubh-1954-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Ericht-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Ericht-1962-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Gair-1961-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Loch Gair-1961-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochay Compensation Set-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochay Compensation Set-1959-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochay-1958-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochay-1958-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochelbank-2010-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochhead-2009-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochhead-2009-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Lochluichart-2014-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Lodge Farm - Orston-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Lodge Farm-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Lodge Farm1-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/London Array-2012-46.pickle
+elecsim/data/processed/pickled_data/power_plants/London Array-2013-9.pickle
+elecsim/data/processed/pickled_data/power_plants/London Heat & Power Company *-2000-10.pickle
+elecsim/data/processed/pickled_data/power_plants/London Heat & Power Company -2000-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Long Ash Lane Solar Park-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Long Ash Lane Solar Park-2016-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Longannet-1970-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Longpark-2009-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Longpark-2009-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Longpark-2009-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Loscar-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Lough Hill Wind Farm (NI)-2007-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Lough Hill-2007-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Lough Road PV-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Lovedean-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Low Burntoft -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Low Spinney-2011-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Low Spinney-2011-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Lowca-2000-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Lower House-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Loyne-1959-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Loyne-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lubreoch-1958-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lubreoch-1958-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Lucern-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Luichart Dam-1954-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Luichart-1954-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Luichart-1954-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Luson-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Lussa-1952-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Lussa-1952-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Lynch Knoll-1996-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Lynemouth-1972-48.pickle
+elecsim/data/processed/pickled_data/power_plants/Lynemouth-2012-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Lynemouth-2012-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Lynn -2009-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Lynn-2009-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Mablethorpe-2002-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Maentwrog-1928-30.pickle
+elecsim/data/processed/pickled_data/power_plants/Maentwrog-1928-49.pickle
+elecsim/data/processed/pickled_data/power_plants/Maerdy-2012-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Maes Bach-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Maldie-2013-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Manor Farm Dorset-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Manor Farm Eggington-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Manor Farm-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Manor Farm-2016-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Manston-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/March -2014-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Marchwood-2009-31.pickle
+elecsim/data/processed/pickled_data/power_plants/Marchwood-2009-50.pickle
+elecsim/data/processed/pickled_data/power_plants/Margate-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Mark Hill-2011-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Mark Hill-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Markinch CHP *-2014-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Marley Thatch-2013-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Marley Thatch-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Marston-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Marvel (Stone Farm)-2011-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Meadow Farm (Thorpe Lanton) -2014-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Meadow Farm (Thorpe Lanton) -2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Medway-1995-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Medway-1995-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Medway-1995-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Medway-1995-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Meig Dam-1954-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Meikle Carewe Wind Farm (GB)-2013-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Meikle Carewe-2013-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Melborn Black Peak-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Melborn Muncey-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Mendennick Solar-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Mendip -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Merston-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Mid Hill-2013-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Middle Balbeggie-2016-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Middlemoor-2013-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Middlemoor-2013-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Middleton-2013-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Middleton-2013-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Middlewick-2014-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Middlewick-2014-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Mill Farm-2016-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Mill Farm-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Mill Hill-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Millar Farm-2017-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Millar Farm-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Millennium-2007-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Millennium-2008-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Mingay Farm (Wilburton 2)-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Minnygap (GB)-2017-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Minsca-2007-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Minsca-2008-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Misgeach Power Station-1963-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Molland-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Monty's farm-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Moor House-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Moor Solar 1-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Moor Solar 2-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Mopley-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Morar Power Station-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Morfa-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Moss Thorn-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Mossford-1957-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Mossford-1957-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Mossmorran-2015-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Mount Mill-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Moy-2016-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Moy-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Mucomir-1962-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Mucomir-1962-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Mucomir-1962-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Mullardoch Tunnel-1955-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Mullardoch Tunnel-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd Brombil-2017-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd Brombil-2017-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd Clogau-2004-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd Clogau-2005-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd Gorddu-1996-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd Portref-2012-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Mynydd gorddu -1998-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Nant-1963-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Nant-1963-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Nant-1963-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Nanthenfoel-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Natewood-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/National Offshore Wind Turbine Test Facility (NOWTTF)-2014-18.pickle
+elecsim/data/processed/pickled_data/power_plants/National Offshore Wind Turbine Test Facility (NOWTTF)-2014-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Nefyn (Tyddyn Cae)-2015-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Nefyn (Tyddyn Cae)-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Neilston (GB)-2013-38.pickle
+elecsim/data/processed/pickled_data/power_plants/New Kaine-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/New Mains of Guynd (Scotland)-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/New Row Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Newlands Farm Solar Park (England)-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Newlands-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Newnton Dairy -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Newton Ferrers -2016-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Newton Ferrers -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Newton of Fortrie-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Newton-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Ninnis-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Nixey Farm - Chalgrove - Solar Farm-2015-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Norrington-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/North Hoyle-2003-25.pickle
+elecsim/data/processed/pickled_data/power_plants/North Hoyle-2003-6.pickle
+elecsim/data/processed/pickled_data/power_plants/North Perrott Fruit Farm-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/North Rhins-2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/North Steads-2016-24.pickle
+elecsim/data/processed/pickled_data/power_plants/North Tenement-2017-13.pickle
+elecsim/data/processed/pickled_data/power_plants/North Tenement-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/North Wayton-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Northmoor-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Nostie Bridge-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Nostie Bridge-1950-64.pickle
+elecsim/data/processed/pickled_data/power_plants/Novar-1997-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Novar-1997-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Novar-1997-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Novar2-2012-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Nutberry-2011-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Oak Cottage-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Oakdale-2013-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Oakdale-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Oakham-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Oaklands-2016-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Oldside-1996-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ollerton-2017-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Ollerton-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Orchard End Windfarm-2013-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Ormonde-2012-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Orrin Dam-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Orrin-1959-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Orrin-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Otherton-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Out Newton (RO)-2002-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Out Newton-2002-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Outwood-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Ovenden Moor-1993-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Overton Solar Park (England)-2015-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Overton Solar Park (England)-2015-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Overton Solar Park (England)-2015-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Owl's Hatch Solar Park (England)-2015-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Owls Lodge -2013-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Owls Lodge -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Oxcroft-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/P&L-1993-46.pickle
+elecsim/data/processed/pickled_data/power_plants/PV@Pendine-2016-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Palfreys Barton-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Palmersford-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Parc Cynog-2001-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Parciau-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Park Farm West -2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Park Lane-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Park Spring-2015-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Park Wall-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Parkhouse-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Parley-2014-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Parsonage (Hazel)-2013-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Parsonage -2013-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Parsonage -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Paul's Hill-2005-31.pickle
+elecsim/data/processed/pickled_data/power_plants/Pauls Hill-2005-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Pearie Law-2016-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Pearie Law-2016-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Pearie Law-2016-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Pembroke-2012-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Pembroke-2012-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Pen Rhiw -2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Pen y Cymoedd-2016-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Pen-Y-Cae-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Penare-2014-16.pickle
+elecsim/data/processed/pickled_data/power_plants/Penare-2014-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Pencoose -2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Pendine-2009-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Penhale-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Penmanshiel (GB)-2016-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Penryddian & Llidiartywaun-1992-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Pentland Road-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Penycae Solar Farm-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Peter Hill-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Peterborough (10)-1993-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Peterborough EfW-2016-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Peterborough-1993-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Peterborough-1993-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Peterhead (22)-1980-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Peterhead-1980-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Pierces Farm-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Pilkington - Greengate *-1998-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Pilkington - Greengate-1998-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Pitchford-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Pitlochry Dam-1950-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Pitlochry Dam-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Pitlochry-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Pitlochry-1950-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Pitts Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Playters-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Pollington Airfield-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Pond Farm Solar Farm-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Pont Andrew-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Port of Liverpool-2008-52.pickle
+elecsim/data/processed/pickled_data/power_plants/Port of Liverpool-2008-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Port of Sheerness Wind Farm Ltd-2016-35.pickle
+elecsim/data/processed/pickled_data/power_plants/Port of Tilbury Wind Farm -2013-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Portworthy-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Potato Pot-2016-23.pickle
+elecsim/data/processed/pickled_data/power_plants/Potato Pot-2016-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Prestop Park-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Primrose Hill-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Promens-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Puriton-2011-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Pyde Drove-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/QE2 Reservoir-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/QEH-2016-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Quoich Dam-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Quoich-1955-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Quoich-1955-42.pickle
+elecsim/data/processed/pickled_data/power_plants/RSPB-2016-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Race Bank-2018-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Radcliffe-2015-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Radcliffe-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Raglington Farm Solar Park-2013-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Rainbow -2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Rampion-2018-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Rampion-2018-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Rampisham Estate Solar Park-2017-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Rampisham Estate Solar Park-2017-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Ramsey 2 Wind Farm-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Ramsey Airfields-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ramsey Heights-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ramsey-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Rannoch-1930-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Rannoch-1930-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe GT-1966-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe GT-1966-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe GT-1966-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe House Farm-2015-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe House Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe-1968-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ratcliffe-1968-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Ray-2017-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Reaches-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Red House-2006-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Red House-2006-29.pickle
+elecsim/data/processed/pickled_data/power_plants/Red Tile-2006-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Red Tile-2007-29.pickle
+elecsim/data/processed/pickled_data/power_plants/RedHill Farm -2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Redbridge-2013-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Rew Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Rheidol-1961-51.pickle
+elecsim/data/processed/pickled_data/power_plants/Rheidol-1961-65.pickle
+elecsim/data/processed/pickled_data/power_plants/Rheidol-1997-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Rheidol-1997-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Rhodders -2016-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Rhyd y Groes-1992-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Rhyd y Groes-1992-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Rhyd-y-Groes-1992-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Rhyl Flats-2009-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Rhyl Flats-2009-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Rigged Hill-1994-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Rigged Hill-1994-59.pickle
+elecsim/data/processed/pickled_data/power_plants/River E-2008-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Riverside - Energy from Waste-2011-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Roade-2014-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Roade-2014-5.pickle
+elecsim/data/processed/pickled_data/power_plants/Robin Rigg -2010-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Robin Rigg East-2010-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Robin Rigg West-2010-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Robin Rigg West-2010-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Rocksavage-1998-26.pickle
+elecsim/data/processed/pickled_data/power_plants/Rocksavage-1998-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Rodbaston-2017-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Rolls Royce-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Roos -2012-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Roos Wind Farm (GB)-2013-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Rosehall-2012-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Rosehall-2013-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Roskrow Barton-2007-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Rothes II-2013-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Rothes II-2013-31.pickle
+elecsim/data/processed/pickled_data/power_plants/Rothes-2004-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Rothes-2004-31.pickle
+elecsim/data/processed/pickled_data/power_plants/Royd Moor-1993-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Rudge Hill Farm-2013-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Rudge Manor-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Rugeley -1972-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Rugeley GT-1972-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Runcorn EfW-2014-57.pickle
+elecsim/data/processed/pickled_data/power_plants/Rusholme-2010-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Rusholme-2010-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Rydon Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Rye House-1993-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Rye House-1993-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Ryston Estate Solar Plant-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/SELCHP ERF *-1994-50.pickle
+elecsim/data/processed/pickled_data/power_plants/SELCHP ERF-1994-13.pickle
+elecsim/data/processed/pickled_data/power_plants/SPD 2 Hall Farm-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/SPD 3 Grange Farm-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/SPD 4 Gelliwern-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/SSE Arena Belfast-2017-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Safeguard Bradwall-2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Salcey Farm -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Saltend *-2000-43.pickle
+elecsim/data/processed/pickled_data/power_plants/Saltend -2000-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Sancton Hill Wind Farm-2012-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Sandbach-1999-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Sandbach-1999-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Sandhill-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Sandhutton-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Sandys Moor -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Saron-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Says Court-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/School Aycliffe-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Scira (Sheringham Shoal)-2012-65.pickle
+elecsim/data/processed/pickled_data/power_plants/Scotia wind (Craigengelt) Ltd-2010-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Scotia-2010-32.pickle
+elecsim/data/processed/pickled_data/power_plants/Scout Moor (3)-2009-51.pickle
+elecsim/data/processed/pickled_data/power_plants/Scout Moor-2008-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Screggagh-2011-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Scroby Sands-2004-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Scroby Sands-2004-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Seabank 1-1998-60.pickle
+elecsim/data/processed/pickled_data/power_plants/Seabank 2-2000-60.pickle
+elecsim/data/processed/pickled_data/power_plants/Seabank-1998-47.pickle
+elecsim/data/processed/pickled_data/power_plants/Seaforth Wind Farm Ltd-1999-35.pickle
+elecsim/data/processed/pickled_data/power_plants/Seaforth-1999-52.pickle
+elecsim/data/processed/pickled_data/power_plants/Seamer-2012-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Seamer-2012-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Sellindge-2016-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Selset-2010-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Selset-2010-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Severn Power-2010-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Severn-2010-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Sevington District Energy-2000-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Shaftesbury-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Shalfleet-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Sharland Farm -2017-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Sheep Shed -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Shelswell -2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Sheriffhales CIC-2015-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Sheriffhales CIC-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Sheriffhales-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Sheringham Shoal BMU 1-2012-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Sheringham Shoal BMU 2-2017-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Shin Diversion Dam-1958-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Shin-1958-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Shin-1958-62.pickle
+elecsim/data/processed/pickled_data/power_plants/Shipton Bellinger-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Shooters-2008-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Shoreham-2000-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Shoreham-2000-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Shotwick Solar Park-2016-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Shuttleworth-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Siddick-1996-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Singrug-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Sisters-2016-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Six Hills-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Sixpenny Wood-2013-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Sizewell B-1995-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Sizewell B-1995-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Skegness -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Skylark-2013-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Slaughtergate-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Slepe Farm -2011-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Slieve Divena 2-2017-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Slieve Divena-2009-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Slieve Divena-2009-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Slieve Kirk Windfarm-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Slieve Kirk-2011-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Slough *-1918-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Slough-1918-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Sloy-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Sloy-1950-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Sober Hill Wind Farm Ltd-2013-45.pickle
+elecsim/data/processed/pickled_data/power_plants/Solutia (Newport)-2010-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Solutia District Energy-2000-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Solutia-2009-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Somerton Door-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Somerton-2000-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Somerton-2000-6.pickle
+elecsim/data/processed/pickled_data/power_plants/South Creake-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/South Humber Bank -1996-11.pickle
+elecsim/data/processed/pickled_data/power_plants/South Humber Bank-1996-13.pickle
+elecsim/data/processed/pickled_data/power_plants/South Sharpley Wind Farm-2013-15.pickle
+elecsim/data/processed/pickled_data/power_plants/South Sharpley Wind Farm-2013-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Southcombe Farm-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Southfield Solar Park (England)-2016-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Spalding-2004-26.pickle
+elecsim/data/processed/pickled_data/power_plants/Spalding-2004-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Spaldington-2016-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Spittleborough Farm-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Spring Lane-2017-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Spring Lane-2017-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Spurness Extension (19)-2012-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Spurness Wind Farm II-2012-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Spurness Wind Farm II-2012-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Sron Mor-1957-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Sron Mor-1957-63.pickle
+elecsim/data/processed/pickled_data/power_plants/St Breock-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/St Francis-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/St. Fillans-1957-42.pickle
+elecsim/data/processed/pickled_data/power_plants/St. Fillans-1957-8.pickle
+elecsim/data/processed/pickled_data/power_plants/Stables (Lightsource)-2012-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Stables (Lightsource)-2012-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Stables-2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Stags Holt -2007-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Stags Holt-2007-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Staining Wood-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Stalbridge Solar Park-2017-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Standford Hill-2013-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Stanley Mill-2003-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Staythorpe C-2010-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Staythorpe C-2010-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Steven's Croft *-2007-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Steven's Croft-2007-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Steventon -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Stonebarrow-2014-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Stonebyres-1927-44.pickle
+elecsim/data/processed/pickled_data/power_plants/Stonebyres-1927-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Stornoway-1950-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Stornoway-1950-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Storr Lochs-1952-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Storr Lochs-1952-64.pickle
+elecsim/data/processed/pickled_data/power_plants/Stragglethorpe-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Strath of Brydock-2009-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Strathy North-2015-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Stratton Hall-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Strete-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Stripe-2016-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Stripe-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Striven-1951-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Striven-1951-63.pickle
+elecsim/data/processed/pickled_data/power_plants/Stronuich Power Station-1957-19.pickle
+elecsim/data/processed/pickled_data/power_plants/Stronuich Power Station-1957-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Stroupster-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Stud Farm -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Summerlands-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Sundorne-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Sutton Bridge-1999-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Sutton Bridge-1999-66.pickle
+elecsim/data/processed/pickled_data/power_plants/Sutton Mawr-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Swaffham II-2003-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Swindon Solar Farm-2016-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Swindon Solar Farm-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Swinford-2012-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Sycamore-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Sywell-2017-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Taff Ely  -1993-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Taff Ely-1993-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Tallentire Wind Farm (GB)-2013-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Tallentire-2013-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Tangy Wind Farm - A-2002-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Tangy-2002-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Tappaghan (20)-2005-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Tappaghan Wind Farm-2004-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Tavells-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Taylor's Lane GT-1979-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Taylor's Lane GT-1979-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Tedder Hill-2013-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Teesside (13)-1992-32.pickle
+elecsim/data/processed/pickled_data/power_plants/Teesside (offshore)-2013-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Temple Normanton-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Thames Valley Power-1995-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Thanet-2010-56.pickle
+elecsim/data/processed/pickled_data/power_plants/The Breck-2016-13.pickle
+elecsim/data/processed/pickled_data/power_plants/The Breck-2016-33.pickle
+elecsim/data/processed/pickled_data/power_plants/The Hydes-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/The Leys-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/The Oaks-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/The Rushes -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Thetford-1998-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Thetford-1998-26.pickle
+elecsim/data/processed/pickled_data/power_plants/Thoresby-2015-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Thoresby-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Thornborough Grounds-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Thornhill-1998-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Thornhill-1998-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Tievenameenta Wind Farm-2017-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Tilbury B -1968-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Tilbury GT-1968-56.pickle
+elecsim/data/processed/pickled_data/power_plants/Till House-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Tir Mostyn & Foel Goch-2005-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Tiree-1945-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Tiree-1945-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Tobermory Power Station-1954-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Toddleburn Windfarm-2010-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Toddleburn-2010-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Todmorden Moor Wind Farm Limited-2014-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Tongland-1935-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Tongland-1935-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Tooleys Solar Farm-2015-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Tooleys Solar Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Tope Farm-2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Torness-1988-10.pickle
+elecsim/data/processed/pickled_data/power_plants/Torness-1988-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Torr Achilty-1954-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Torr Achilty-1954-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Tow Law-2001-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Tow law wind farm-2001-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Tralaig Power Station-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Tredown Farm-2013-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Tredown Farm-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Trefinnick-2013-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Trefinnick-2013-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Tregassow-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Treguff-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Trench Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Trequite -2014-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Trequite -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Trevemper-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Trewidland -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Trickey Warren-2015-0.pickle
+elecsim/data/processed/pickled_data/power_plants/Trickey Warren-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Trimdon Grange-2008-37.pickle
+elecsim/data/processed/pickled_data/power_plants/Trimdon-2008-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Trinafour Power Station-1959-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Trowle-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Trysglwyn-1996-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Trysglwyn-1996-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Tullo-2010-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Tummel-1933-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Tummel-1933-69.pickle
+elecsim/data/processed/pickled_data/power_plants/Turncole Wind Farm (GB)-2016-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Turves-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Tween Bridge-2012-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Tween Bridge-2012-9.pickle
+elecsim/data/processed/pickled_data/power_plants/Twinshiels-2015-17.pickle
+elecsim/data/processed/pickled_data/power_plants/Tyr Mostyn & Foel Goch-2005-36.pickle
+elecsim/data/processed/pickled_data/power_plants/UK Solar (Hartwell) LLP-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/UK Solar (Lower Newton) LLP-2015-15.pickle
+elecsim/data/processed/pickled_data/power_plants/UK Solar (Lower Newton) LLP-2015-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Upper Clayhill-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Upper Farringdon-2015-14.pickle
+elecsim/data/processed/pickled_data/power_plants/Upper Farringdon-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Upper wick-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Uskmouth power-1966-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Uskmouth power-1966-41.pickle
+elecsim/data/processed/pickled_data/power_plants/Uskmouth-2000-59.pickle
+elecsim/data/processed/pickled_data/power_plants/VPI Immingham *-2004-55.pickle
+elecsim/data/processed/pickled_data/power_plants/Vaich Power Station-1956-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Wadlow Farm (GB)-2012-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Wadlow-2012-54.pickle
+elecsim/data/processed/pickled_data/power_plants/Walkway-2008-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Walkway-2008-21.pickle
+elecsim/data/processed/pickled_data/power_plants/Walland Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Walney 1 & 2-2012-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Walney 1 (3)-2011-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Walney 2 (3)-2011-18.pickle
+elecsim/data/processed/pickled_data/power_plants/Walney 3-2017-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Walton-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Warren -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Waterloo -2015-13.pickle
+elecsim/data/processed/pickled_data/power_plants/Waterloo -2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Wedgehill-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Week Farm 2 (Week Farm Solar Park)-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Welbeck -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Wellingborough Solar Farm-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/West Bradley-2012-28.pickle
+elecsim/data/processed/pickled_data/power_plants/West Browncastle-2014-19.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton CCGT-2012-10.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton CCGT-2012-20.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton GT-1967-10.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton GT-1967-20.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton-1967-10.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton-1967-20.pickle
+elecsim/data/processed/pickled_data/power_plants/West Burton-1967-4.pickle
+elecsim/data/processed/pickled_data/power_plants/West Farm-2013-12.pickle
+elecsim/data/processed/pickled_data/power_plants/West Farm-2013-28.pickle
+elecsim/data/processed/pickled_data/power_plants/West Hall-2014-33.pickle
+elecsim/data/processed/pickled_data/power_plants/West of Duddon Sands-2014-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Westerfield-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Westermost Rough-2014-34.pickle
+elecsim/data/processed/pickled_data/power_plants/Westfield-2000-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Westfield-2000-25.pickle
+elecsim/data/processed/pickled_data/power_plants/Westfield-2013-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Westfield-2013-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Westover-2014-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Westwood Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Westwood-2014-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Wether Hill-2007-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Wether Hill-2007-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Wheal Jane-2011-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Wheal Jane-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Whiddon Farm-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Whitelee II-2012-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Whitelee II-2013-20.pickle
+elecsim/data/processed/pickled_data/power_plants/Whitelee II-2013-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Whitelee-2007-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Whitelee-2007-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Whitley (Ashcott Farm) Solar Park-2014-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Whittlesey-2016-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Wick Red Farm-2016-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Widehurst-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Wiggin Hill-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilbees-2016-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilburton-2011-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Willersey -2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/William's Farm-2016-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Willsland-2013-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilton 10 *-2007-49.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilton 10-2007-61.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilton 11 EfW-2016-52.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilton GT *-1952-49.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilton GT2-2005-61.pickle
+elecsim/data/processed/pickled_data/power_plants/Wilton-2015-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Windy Standard-1996-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Windy Standard-1996-6.pickle
+elecsim/data/processed/pickled_data/power_plants/Wingates-2013-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Wingates-2013-24.pickle
+elecsim/data/processed/pickled_data/power_plants/Wingates-2013-39.pickle
+elecsim/data/processed/pickled_data/power_plants/Winscales 1-1999-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Winscales 2-2005-42.pickle
+elecsim/data/processed/pickled_data/power_plants/Winscales I-1999-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Winscales II-2005-11.pickle
+elecsim/data/processed/pickled_data/power_plants/Winscales II-2005-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Wisbech Solar Park (England)-2015-7.pickle
+elecsim/data/processed/pickled_data/power_plants/Wix Lodge (Stour Fields)-2014-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Woden Park -2014-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Wolf Bog-2007-46.pickle
+elecsim/data/processed/pickled_data/power_plants/Wolf Bog-2008-59.pickle
+elecsim/data/processed/pickled_data/power_plants/Woodhouse-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Woodlands Farm-2015-33.pickle
+elecsim/data/processed/pickled_data/power_plants/Woodtown-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Woolley Hill (GB)-2015-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Workington (Eastman)-2005-36.pickle
+elecsim/data/processed/pickled_data/power_plants/Workington (Voridian)-2006-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Worksopp-2016-15.pickle
+elecsim/data/processed/pickled_data/power_plants/Worksopp-2016-4.pickle
+elecsim/data/processed/pickled_data/power_plants/Wrangle Farm-2014-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Wraysbury-2017-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Wrea Green-2017-40.pickle
+elecsim/data/processed/pickled_data/power_plants/Wrockwardine-2015-12.pickle
+elecsim/data/processed/pickled_data/power_plants/Wrockwardine-2015-28.pickle
+elecsim/data/processed/pickled_data/power_plants/Wroxton Solar Farm-2014-27.pickle
+elecsim/data/processed/pickled_data/power_plants/Wryde Croft Wind Farm (GB)-2016-38.pickle
+elecsim/data/processed/pickled_data/power_plants/Wychwood -2012-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Wyld Meadow Farm Solar Park-2012-2.pickle
+elecsim/data/processed/pickled_data/power_plants/Wyld Meadow Farm Solar Park-2012-3.pickle
+elecsim/data/processed/pickled_data/power_plants/Wylfa-1971-49.pickle
+elecsim/data/processed/pickled_data/power_plants/Wymeswold - Wide Lane-2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Wymeswold -2016-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Wythegill-2015-58.pickle
+elecsim/data/processed/pickled_data/power_plants/Yarburgh-2015-1.pickle
+elecsim/data/processed/pickled_data/power_plants/Yelvertoft-2013-22.pickle
+elecsim/data/processed/pickled_data/power_plants/Ysgellog-2013-58.pickle
+elecsim/data/processed/power_plants/__init__.py
+elecsim/data/processed/power_plants/carbon_price/__init__.py
+elecsim/data/processed/power_plants/carbon_price/uk_carbon_tax_historical.csv
+elecsim/data/processed/power_plants/power_plant_costs/.DS_Store
+elecsim/data/processed/power_plants/power_plant_costs/__init__.py
+elecsim/data/processed/power_plants/power_plant_costs/2013_predicted_plant_costs/power_plant_costs_with_simplified_type.csv
+elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/__init__.py
+elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/historical_power_plant_costs_long.csv
+elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/efficiency/__init__.py
+elecsim/data/processed/power_plants/power_plant_costs/historical_power_plant_costs/efficiency/historical_fuel_plant_efficiency.csv
+elecsim/data/processed/power_plants/power_plant_costs/modern_power_plant_costs/__init__.py
+elecsim/data/processed/power_plants/power_plant_costs/modern_power_plant_costs/power_plant_costs_with_simplified_type copy.csv
+elecsim/data/processed/power_plants/power_plant_costs/modern_power_plant_costs/power_plant_costs_with_simplified_type.csv
+elecsim/data/processed/power_plants/uk_power_plants/.DS_Store
+elecsim/data/processed/power_plants/uk_power_plants/__init__.py
+elecsim/data/processed/power_plants/uk_power_plants/uk_power_plants.csv
+elecsim/data/processed/power_plants/uk_power_plants/plants_2013/uk_plants_2013.csv
+elecsim/data/processed/power_plants/uk_power_plants/plants_2013/uk_plants_2013_revised.csv
+elecsim/data/processed/price_duration_curve/self_priceduration.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_0.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_1.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_2.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_3.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_4.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_5.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_6.csv
+elecsim/data/processed/price_duration_curve/self_priceduration_7.csv
+elecsim/data_manipulation/__init__.py
+elecsim/data_manipulation/import_power_plant_dat.py
+elecsim/data_manipulation/uk_plant_db_manipulation.py
+elecsim/data_manipulation/data_modifications/__init__.py
+elecsim/data_manipulation/data_modifications/extrapolation_interpolate.py
+elecsim/data_manipulation/data_modifications/inverse_transform_sampling.py
+elecsim/data_manipulation/data_modifications/linear_regression.py
+elecsim/data_manipulation/data_modifications/renewable_learning_rate.py
+elecsim/data_manipulation/data_modifications/scenario_modifier.py
+elecsim/data_manipulation/data_modifications/value_estimations.py
+elecsim/market/__init__.py
+elecsim/market/electricity/__init__.py
+elecsim/market/electricity/bid.py
+elecsim/market/electricity/market/__init__.py
+elecsim/market/electricity/market/power_exchange.py
+elecsim/market/electricity/market/power_exchange.py.py
+elecsim/mesa_addons/__init__.py
+elecsim/mesa_addons/scheduler_addon.py
+elecsim/model/__init__.py
+elecsim/model/world.py
+elecsim/plants/__init__.py
+elecsim/plants/plant_registry.py
+elecsim/plants/availability_factors/__init__.py
+elecsim/plants/availability_factors/availability_factor_calculations.py
+elecsim/plants/fuel/__init__.py
+elecsim/plants/fuel/fuel.py
+elecsim/plants/fuel/capacity_factor/__init__.py
+elecsim/plants/fuel/capacity_factor/capacity_factor_calculations.py
+elecsim/plants/fuel/fuel_registry/__init__.py
+elecsim/plants/fuel/fuel_registry/fuel_registry.py
+elecsim/plants/plant_costs/__init__.py
+elecsim/plants/plant_costs/estimate_costs/__init__.py
+elecsim/plants/plant_costs/estimate_costs/estimate_costs.py
+elecsim/plants/plant_costs/estimate_costs/estimate_modern_power_plant_costs/__init__.py
+elecsim/plants/plant_costs/estimate_costs/estimate_modern_power_plant_costs/predict_modern_plant_costs.py
+elecsim/plants/plant_costs/estimate_costs/estimate_old_plant_cost_params/__init__.py
+elecsim/plants/plant_costs/estimate_costs/estimate_old_plant_cost_params/old_plant_param_calc.py
+elecsim/plants/plant_costs/estimate_costs/estimate_old_plant_cost_params/fuel_plant_calculations/__init__.py
+elecsim/plants/plant_costs/estimate_costs/estimate_old_plant_cost_params/fuel_plant_calculations/fuel_plants_old_params.py
+elecsim/plants/plant_costs/estimate_costs/estimate_old_plant_cost_params/non_fuel_plant_calculations/__init__.py
+elecsim/plants/plant_costs/estimate_costs/estimate_old_plant_cost_params/non_fuel_plant_calculations/non_fuel_plants_old_params.py
+elecsim/plants/plant_type/__init__.py
+elecsim/plants/plant_type/fuel_plant.py
+elecsim/plants/plant_type/non_fuel_plant.py
+elecsim/plants/plant_type/power_plant.py
+elecsim/reinforcement_learning/__init__.py
+elecsim/reinforcement_learning/world_environment.py
+elecsim/reinforcement_learning/gym_elecsim/__init__.py
+elecsim/reinforcement_learning/gym_elecsim/setup.py
+elecsim/reinforcement_learning/gym_elecsim/gym_elecsim/__init__.py
+elecsim/reinforcement_learning/gym_elecsim/gym_elecsim/envs/__init__.py
+elecsim/reinforcement_learning/gym_elecsim/gym_elecsim/envs/world_environment.py
+elecsim/role/__init__.py
+elecsim/role/investment/__init__.py
+elecsim/role/investment/calculate_npv.py
+elecsim/role/investment/calculate_npv.py.py
+elecsim/role/investment/curve_fitting_functions.py
+elecsim/role/investment/predict_load_duration_prices.py
+elecsim/role/investment/predict_load_duration_prices.py.py
+elecsim/role/market/__init__.py
+elecsim/role/market/latest_market_data.py
+elecsim/role/market/world_plant_capacity.py
+elecsim/role/plants/__init__.py
+elecsim/role/plants/costs/__init__.py
+elecsim/role/plants/costs/fuel_plant_cost_calculations.py
+elecsim/role/plants/costs/non_fuel_cost_calculations.py
+elecsim/role/plants/costs/plant_cost_calculation.py
+elecsim/scenario/__init__.py
+elecsim/scenario/scenario_data.py
+elecsim/scenario/scenario_data.py.py
