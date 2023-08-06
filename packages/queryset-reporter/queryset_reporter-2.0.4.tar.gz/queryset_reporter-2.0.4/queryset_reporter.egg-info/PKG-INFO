@@ -1,0 +1,86 @@
+Metadata-Version: 2.1
+Name: queryset-reporter
+Version: 2.0.4
+Summary: App that creates models of Queryset and generate reports
+Home-page: http://github.com/ricardodani/django-queryset-reporter
+Author: Ricardo Dani
+Author-email: ricardodani@gmail.com
+License: MIT
+Description: Django Queryset Reporter
+        =================
+        
+        Description
+        -----------
+        
+        A django pluggable admin-site app for create persisted queryset's and make reports based on them, in various forms of data like cvs's, xlsx's.
+        
+        Project URL: https://github.com/ricardodani/django-queryset-reporter/
+        
+        Install
+        -------
+        
+        Type:
+        
+        ```bash
+        pip install queryset_reporter
+        ```
+        
+        In your **settings** add:
+        
+        ```python
+        INSTALLED_APPS = [
+            # ...
+            'queryset_reporter',
+        ]
+        ```
+        
+        Migrate `queryset_reporter`` models:
+        
+        ```bash
+        ./manage.py migrate
+        ```
+        
+        
+        Add url's definitions to your **project.urls** module:
+        
+        ```python
+        path('path-of-choice/', include('queryset_reporter.urls')),
+        ```
+        
+        Tested on
+        ---------
+        
+        - django == 2.2.x
+        - python == 3.7.x
+        
+        About
+        -----
+        
+        - Author: Ricardo Dani
+        - E-mail: ricardodani@gmail.com
+        - Github: github.com/ricardodani
+        
+        License
+        -------
+        
+        MIT
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.0
+Classifier: Framework :: Django :: 2.1
+Classifier: Framework :: Django :: 2.2
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Internet :: WWW/HTTP
+Requires-Python: >3.5
+Description-Content-Type: text/markdown
