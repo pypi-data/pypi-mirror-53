@@ -1,0 +1,35 @@
+{% extends "bee_django_course/user_base.html" %}
+{% load bee_django_course_filter %}
+{% block content %}
+    <h4>录制视频详情</h4>
+    <div class="video">
+        {% if user_live.provider_name == 'cc' %}
+            <iframe src="{{ user_live.record_video_id | get_video_src }}" frameborder="0" width="100%"
+                    height="100%"></iframe>
+        {% elif user_live.provider_name == 'tencent' %}
+            <div align="center" class="embed-responsive embed-responsive-16by9">
+                <video width='320' height='240' controls class="embed-responsive-item">
+                    <source src="{{ user_live.replay_url }}" type="video/mp4">
+                    你的浏览器不支持video标签.
+                </video>
+            </div>
+        {% elif user_live.provider_name == 'gensee' %}
+            <gs:video-vod id="videoComponent" site="zenweiqi.gensee.com" ctx="webcast"
+                              ownerid="{{ user_live.live_id }}" uname="{{ request.user.first_name }}"
+                              authcode="111111"/>
+        {% else %}
+            未配置录播供应商
+        {% endif %}
+    </div>
+
+    {% include 'bee_django_course/_user_live_comments.html' with comment_form=comment_form comments=comments %}
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        function get_custom_id() {
+            // 用户获取待设置的自定义参数的逻辑 var custom_id="aaaaaaaaa";
+            return '{{ request.user.id }}';
+        }
+    </script>
+{% endblock %}
