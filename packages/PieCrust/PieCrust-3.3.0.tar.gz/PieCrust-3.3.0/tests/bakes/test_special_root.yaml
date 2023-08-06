@@ -1,0 +1,24 @@
+---
+config:
+    site:
+        root: /~john/public/
+in:
+    pages/about.html: 'URL: {{page.url}}, LINK: {{pcurl("missing")}}'
+    pages/_index.html: 'URL: {{page.url}}'
+outfiles:
+    "{py>=3.7}about.html": 'URL: /~john/public/about.html, LINK: /~john/public/missing.html'
+    "{py>=3.7}index.html": 'URL: /~john/public/'
+    "{py<3.7}about.html": 'URL: /%7Ejohn/public/about.html, LINK: /%7Ejohn/public/missing.html'
+    "{py<3.7}index.html": 'URL: /%7Ejohn/public/'
+---
+config:
+    site:
+        pretty_urls: true
+in:
+    pages/users/~john.html: 'URL: {{page.url}}'
+    pages/users/~john/bio.html: 'URL: {{page.url}}'
+outfiles:
+    "{py>=3.7}users/~john/index.html": 'URL: /users/~john'
+    "{py>=3.7}users/~john/bio/index.html": 'URL: /users/~john/bio'
+    "{py<3.7}users/~john/index.html": 'URL: /users/%7Ejohn'
+    "{py<3.7}users/~john/bio/index.html": 'URL: /users/%7Ejohn/bio'
