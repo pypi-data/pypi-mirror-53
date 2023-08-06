@@ -1,0 +1,27 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        python-version: [pypy2, pypy3, 3.7]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+    - name: Install tox
+      run: |
+        python -m pip install --upgrade pip
+        pip install tox
+    - name: Run tox
+      run: |
+        tox --skip-missing-interpreters
