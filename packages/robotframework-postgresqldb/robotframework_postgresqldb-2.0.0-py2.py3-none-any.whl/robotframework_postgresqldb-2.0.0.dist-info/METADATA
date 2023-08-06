@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: robotframework-postgresqldb
+Version: 2.0.0
+Summary: Robot Framework Library For Working With PostgreSQL Database.
+Home-page: https://github.com/peterservice-rnd/robotframework-postgresqldb
+Author: Nexign
+Author-email: mf_aist_all@nexign-systems.com
+License: Apache License 2.0
+Keywords: testing testautomation robotframework autotest psycopg2 postgresql database
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Testing
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Framework :: Robot Framework :: Library
+Requires-Dist: robotframework
+Requires-Dist: psycopg2
+Requires-Dist: future (>=0.16.0) ; python_version<="2.7"
+
+RobotFramework PostgreSQL Library
+=================================
+
+|Build Status|
+
+Short Description
+-----------------
+
+`Robot Framework`_ library for working with PostgreSQL database, using `psycopg2`_.
+
+Installation
+------------
+
+::
+
+    pip install robotframework-postgresqldb
+
+Documentation
+-------------
+
+See keyword documentation for robotframework-postgresqldb library in
+folder ``docs``.
+
+Example
+-------
++-----------+------------------+
+| Settings  |      Value       |
++===========+==================+
+|  Library  | PostgreSQLDB     |
++-----------+------------------+
+
++---------------+-----------------------------------------------+--------------------+---------------------+----------+
+|  Test cases   |                     Action                    |      Argument      |       Argument      | Argument |
++===============+===============================================+====================+=====================+==========+
+|  Simple Test  | PostgreSQLDB.Connect To Postgresql            | postgres           | postgres            | password |
++---------------+-----------------------------------------------+--------------------+---------------------+----------+
+|               | @{query}=                                     | Execute Sql String | SELECT CURRENT_DATE |          |
++---------------+-----------------------------------------------+--------------------+---------------------+----------+
+|               | PostgreSQLDB.Close All Postgresql Connections |                    |                     |          |
++---------------+-----------------------------------------------+--------------------+---------------------+----------+
+
+License
+-------
+
+Apache License 2.0
+
+.. _Robot Framework: http://www.robotframework.org
+.. _psycopg2: http://initd.org/psycopg/
+
+.. |Build Status| image:: https://travis-ci.org/peterservice-rnd/robotframework-postgresqldb.svg?branch=master
+   :target: https://travis-ci.org/peterservice-rnd/robotframework-postgresqldb
+
