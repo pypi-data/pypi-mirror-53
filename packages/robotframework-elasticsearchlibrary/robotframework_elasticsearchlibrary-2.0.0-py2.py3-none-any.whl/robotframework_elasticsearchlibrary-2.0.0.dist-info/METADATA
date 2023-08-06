@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: robotframework-elasticsearchlibrary
+Version: 2.0.0
+Summary: Robot Framework Elasticsearch Library.
+Home-page: https://github.com/peterservice-rnd/robotframework-elasticsearchlibrary
+Author: JSC PETER-SERVICE
+Author-email: mf_aist_all@billing.ru
+License: Apache License 2.0
+Keywords: testing testautomation robotframework autotest elasticsearch
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Testing
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Framework :: Robot Framework :: Library
+Requires-Dist: elasticsearch (==2.4.0)
+Requires-Dist: robotframework (==3.0.3)
+
+RobotFramework Elasticsearch Library
+========================================
+
+|Build Status|
+
+Short Description
+-----------------
+
+`Robot Framework`_ library for working with Elasticsearch using `Elasticsearch`_ python library.
+
+Installation
+------------
+
+::
+
+    pip install robotframework-elasticsearchlibrary
+
+Documentation
+-------------
+
+See keyword documentation for ElasticsearchLibrary in folder ``docs``.
+
+Example
+-------
++-----------+----------------------+
+| Settings  |         Value        |
++===========+======================+
+|  Library  | ElasticsearchLibrary |
++-----------+----------------------+
+
++---------------+-------------------------------------+-----------------+---------------+----------------+
+|  Test cases   |               Action                |     Argument    |    Argument   |    Argument    |
++===============+=====================================+=================+===============+================+
+|  Simple Test  | Connect To Elasticsearch            | 192.168.1.108   | 9200          | alias=cluster1 |
++---------------+-------------------------------------+-----------------+---------------+----------------+
+|               | Es Save Data                        | some_string1    |               |                |
++---------------+-------------------------------------+-----------------+---------------+----------------+
+|               | ${search_result}=                   | Es Search       | some_string2  |                |
++---------------+-------------------------------------+-----------------+---------------+----------------+
+|               | Close All Elasticsearch Connections |                 |               |                |
++---------------+-------------------------------------+-----------------+---------------+----------------+
+
+License
+-------
+
+Apache License 2.0
+
+.. _Robot Framework: http://www.robotframework.org
+.. _Elasticsearch: https://pypi.org/project/elasticsearch/
+
+.. |Build Status| image:: https://travis-ci.org/peterservice-rnd/robotframework-elasticsearchlibrary.svg?branch=master
+   :target: https://travis-ci.org/peterservice-rnd/robotframework-elasticsearchlibrary
+
