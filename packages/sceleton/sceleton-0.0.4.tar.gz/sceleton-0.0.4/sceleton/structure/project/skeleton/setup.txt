@@ -1,0 +1,38 @@
+from setuptools import setup
+import os
+import sys
+
+
+current_path = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(current_path, 'README.rst'), encoding='utf-8') as file:
+      long_description = file.read()
+
+sep = '\\' if sys.platform == 'win32' else '/'
+
+subpackages = []
+parent = [projectname]
+subpackages_path = os.path.join(current_path, [projectname])
+for subdir, _, _ in os.walk(subpackages_path):
+      subdirs = subdir.split(sep)
+      parent_index = subdirs.index(parent) + 1
+      subpackages.append('.'.join(subdirs[parent_index:]))
+
+setup(name=[projectname],
+      version=[version],
+      description=[description],
+      long_description=long_description,
+      url=[url],
+      author=[author_name],
+      author_email=[author_email],
+      license=[license],
+      keywords=[keywords],
+      packages=[*subpackages],
+      package_data={},
+      py_modules=[[projectname]],
+      install_requires = [[packages]],
+      entry_points = {
+        'console_scripts': [],
+      },
+      classifiers=[
+[classifiers]      ],
+      zip_safe=True)
