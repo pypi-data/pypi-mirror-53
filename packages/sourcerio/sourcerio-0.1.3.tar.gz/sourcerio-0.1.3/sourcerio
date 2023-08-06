@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+import argparse
+import datetime
+import time
+
+from lib.logging import info, error
+from lib.sourcerio import Sourcerio
+
+from sys import argv
+
+def cli_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--bitbucket-user', dest='user', help='Bitbucket user')
+    parser.add_argument('--bitbucket-password', dest='password', help='Bitbucket password')
+    parser.add_argument('-d', dest='directory', help='Backup directory', required=True)
+    parser.add_argument('--github-api-token', dest='api_key', help='Github API key')
+    parser.add_argument('-o', dest='organization', help='Bitbucket/Github organization', required=True)
+    parser.add_argument('-t', dest='type', help='bitbucket/github', required=True, choices=['bitbucket', 'github'])
+    parser.add_argument( '-v', dest='verbose', help='verbose output', default=False, action='store_true')
+
+    return parser.parse_args()
+
+if __name__ == '__main__':
+    try:
+        begin_time = int(time.time())
+
+        sourcerio = Sourcerio(cli_arguments())
+        sourcerio.run()
+
+        if sourcerio.errors:
+            error('The following projects failed to backup properly:')
+            error(sourcerio.errors)
+            exit(1)
+    
+    except KeyboardInterrupt:
+        info('Ctrl-C was pressed, aborting.')
+        exit(0)
+
+    finally:
+        end_time = int(time.time())
+        execution_time = end_time - begin_time
+        execution_time = str(datetime.timedelta(seconds=execution_time))
+        info('execution time: %s' % execution_time)
