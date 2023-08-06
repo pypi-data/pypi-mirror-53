@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: syllogio-identifyPropositions
+Version: 0.0.0
+Summary: Identify natural language propositions in a written argument.
+Home-page: https://github.com/syllogio/syllogio-identifyPropositions
+Author: Peter Sieg
+Author-email: chasingmaxwell@gmail.com
+License: MIT
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+
+# Syllogio Identify Propositions
+
+Identify natural language propositions in a written argument.
+
+# Installation
+
+`pip install syllogio-identifyPropositions`
+
+# Usage
+
+Command line
+
+```
+> idpr "All men are mortal. Socrates is a man. Therefore, Socrates is mortal."
+[
+  "All men are mortal",
+  "Socrates is a man",
+  "Therefore, Socrates is mortal"
+]
+```
+
+Programmatic
+
+```python
+from identifyPropositions import identify
+
+propositions = identify("All men are mortal. Socrates is a man. Therefore, Socrates is mortal.")
+
+# propositions will be:
+# [
+#   "All men are mortal",
+#   "Socrates is a man",
+#   "Therefore, Socrates is mortal"
+# ]
+```
+
+
