@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: ehelply-bootstrapper
+Version: 0.6.2
+Summary: eHelply Bootstrapper
+Home-page: https://github.com/ehelply/Bootstrapper
+Author: Shawn Clake
+Author-email: shawn.clake@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi (==0.33.*)
+Requires-Dist: pymongo (==3.8.*)
+Requires-Dist: redis (==3.2.*)
+Requires-Dist: python-socketio (==4.2.*)
+Requires-Dist: sentry-asgi (==0.2.*)
+Requires-Dist: boto3 (==1.9.*)
+Requires-Dist: pymysql
+Requires-Dist: SQLAlchemy
+Requires-Dist: alembic
+Requires-Dist: wheel
+Requires-Dist: uvicorn (==0.8.*)
+Requires-Dist: pprint (==0.1)
+Requires-Dist: pyjwt (==1.7.*)
+Requires-Dist: passlib[bcrypt] (==1.7.*)
+Requires-Dist: python-multipart (==0.0.*)
+Requires-Dist: email-validator (==1.0.*)
+Requires-Dist: requests (==2.22.*)
+Requires-Dist: python-dateutil (==2.6.0)
+Requires-Dist: six (==1.12.*)
+Requires-Dist: pydantic (==0.30.*)
+Requires-Dist: pymlconf (==1.2.*)
+Requires-Dist: pytest (==5.0.*)
+Requires-Dist: ehelply-logger (>=0.0.7)
+Requires-Dist: ehelply-batcher (>=1.0.9)
+Requires-Dist: ehelply-cacher (==0.1.*)
+
+# Bootstrapper
+Microservice bootstrapper
+
+
