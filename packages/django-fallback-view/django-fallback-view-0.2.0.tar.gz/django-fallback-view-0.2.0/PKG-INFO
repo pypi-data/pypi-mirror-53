@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: django-fallback-view
+Version: 0.2.0
+Summary: Middleware that returns a fallback view when the URL matches anything that isnt specified>
+Home-page: https://github.com/alexseitsinger/django-fallback-view
+Author: Alex Seitsinger
+Author-email: contact@alexseitsinger.com
+License: BSD 2-Clause License
+Description: # Django Fallback View
+        
+        ## Description
+        
+        Middleware that returns a fallback view when the URL matches anything that isnt specified>
+        
+        ## Installation
+        
+        ```
+        pip install django-fallback-view
+        ```
+        
+        ## Usage
+        
+        ```python
+        # settings.py
+        
+        FALLBACK_VIEW = "path.to.view.class.ViewClass"
+        
+        MIDDLEWARE = [
+            ...
+            "fallback_view.middleware.FallbackViewMiddleware",
+        ]
+        ```
+        
+        
+        
+Keywords: django,view,middleware
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Description-Content-Type: text/markdown
