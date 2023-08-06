@@ -1,0 +1,351 @@
+{% extends '_layout.html' %}
+
+{% block title %}List of servers{% endblock %}
+
+{% block content -%}
+    <h1>{{ self.title() }}</h1>
+
+    <p class="lead">Number of active instances: {{ active_instances }}/{{ server_list | length }}</p>
+
+    <div class="server-list-actions btn-group">
+        {% if server_list %}
+            <button id="crawl-all" type="button" class="btn btn-secondary">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Crawl all
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                    Show
+                </button>
+                <div class="dropdown-menu">
+                    <label class="dropdown-item checkbox">
+                            <input id="show-enabled" type="checkbox">
+                            Enabled instances
+                    </label>
+                    <label class="dropdown-item checkbox">
+                            <input id="show-disabled" type="checkbox">
+                            Disabled instances
+                    </label>
+                </div>
+            </div>
+            {% if extra_fields %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                        Additional data
+                    </button>
+                    <div id="additional-data-dropdown" class="dropdown-menu"
+                         role="menu">
+                        {% for field in extra_fields %}
+                            <label class="dropdown-item checkbox">
+                                <input id="{{ field }}"  type="checkbox">
+                                {{ field | pretty_name }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <table id="server-table" class="table">
+        <thead>
+            <tr>
+                <th>Organization name</th>
+                <th>URL</th>
+                <th>Last crawled</th>
+                {% for field in extra_fields %}
+                    <th class="field-{{ field }}">
+                        {{ field | pretty_name }}
+                    </th>
+                {% endfor %}
+                <th class="no-sort"></th>
+            </tr>
+        </thead>
+        <tbody id="server-list">
+            {% if server_list %}
+                {% for server in server_list %}
+                    <tr class="server-row{{ ' danger' if not server.enabled }}">
+                        <td>
+                            <i class="fa fa-chevron-right toggle-expand"></i>
+                            {{ server.organization }}
+                        </td>
+                        <td><a href="{{ server.url }}">{{ server.url }}</a></td>
+                        <td>
+                            {% if not server.crawl_date %}
+                                Never
+                            {% else %}
+                                {{ server.crawl_date | datetimeformat('medium') }} ({{ config.BABEL_DEFAULT_TIMEZONE }})
+                            {% endif %}
+                        </td>
+                        {% for field in extra_fields %}
+                            {% set aggregation_func = config.CRAWLED_FIELDS_SETTINGS.get(field, {}).get('aggregation', None) %}
+                            <td class="field-{{ field }}">
+                                {% if not server.crawled_data or field not in server.crawled_data %}
+                                    -
+                                {% else %}
+                                    {% set aggregated_value = (server.crawled_data[field] | aggregate(aggregation_func)) %}
+                                    {% if aggregated_value is string or aggregated_value is number %}
+                                        {{ aggregated_value }}
+                                    {% else %}
+                                        [Data not displayable]
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                        <td>
+                            <div class="btn-group btn-group-xs server-actions">
+                                <button type="button" class="btn btn-secondary manage-server" data-url="{{ url_for('.get_server', id=server.id) }}" title="Server details">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary crawl-now"{{ ' disabled' if not server.enabled }} data-url="{{ url_for('.update_server', id=server.id) }}" title="Crawl now">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger js-server-delete" data-url="{{ url_for('.remove_server', id=server.id) }}" title="Delete server">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="active server-info-row hidden">
+                        <td colspan="{{ extra_fields|length + 4 }}">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <strong>Contact:</strong>
+                                        <span>{{ server.contact }}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <strong>Email:</strong>
+                                        <a href="mailto:{{ server.email }}">{{ server.email }}</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <strong>UUID:</strong>
+                                        <span>{{ server.uuid }}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        {% if server.enabled %}
+                                            <strong class="text-success">Enabled</strong>
+                                        {% else %}
+                                            <strong class="text-danger">Disabled</strong>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {% if server.crawled_data%}
+                                        {% for field in extra_fields %}
+                                            {% if server.crawled_data[field]%}
+                                                {% set aggregation_func = config.CRAWLED_FIELDS_SETTINGS.get(field, {}).get('aggregation', None) %}
+                                                <div class="col-md-3">
+                                                    <strong>
+                                                        {{ field | pretty_name }}:
+                                                    </strong>
+                                                    <span>
+                                                        {% set aggregated_value = (server.crawled_data[field] | aggregate(aggregation_func)) %}
+                                                        {% if aggregated_value is string or aggregated_value is number %}
+                                                            {{ aggregated_value }}
+                                                        {% else %}
+                                                            [Data not displayable]
+                                                        {% endif %}
+                                                    </span>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">No server available in the database at the moment.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{%- endblock %}
+
+{% block body_end %}
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+
+    <script>
+
+        addAjaxDeleter($('#server-list'), '.js-server-delete');
+
+        var additionalData = localStorage.getItem('additionalData');
+        if (!additionalData) {
+            localStorage.setItem("additionalData", JSON.stringify([]));
+        } else {
+            JSON.parse(additionalData).forEach(function(field) {
+                $('.field-' + field).css('display', 'table-cell');
+                $('#' + field).prop('checked', true);
+            });
+        }
+
+        $('#additional-data-dropdown input').on('change', function(){
+            var additionalData = JSON.parse(localStorage.getItem('additionalData'));
+            var idx = additionalData.indexOf(this.id);
+            if (this.checked) {
+                $('.field-'+this.id).css('display', 'table-cell');
+                // Save checked option in localStorage if doesn't exist
+                if (idx === -1) {
+                    additionalData.push(this.id);
+                }
+            } else {
+                $('.field-'+this.id).css('display', 'none');
+                // Remove unchecked option form localStorage if exists
+                if (idx > -1) {
+                    additionalData.splice(idx, 1);
+                }
+            }
+            localStorage.setItem("additionalData", JSON.stringify(additionalData));
+        }).trigger('change');
+
+        $('.toggle-expand').on('click', function(){
+            var $line = $(this).parent().parent();
+            if($line.data('cached-row')) {
+                $line.data('cached-row').toggle().insertAfter($line);
+            }
+            $(this).toggleClass('fa-chevron-down').toggleClass('fa-chevron-right');
+        });
+
+        $('.crawl-now').on('click', function(){
+            $.ajax({
+                type: 'POST',
+                url: $(this).data('url'),
+                data: {
+                    crawl: true
+                },
+                success: function() {
+                    location.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('AJAX request failed: ' + errorThrown);
+                    location.reload();
+                }
+            });
+        });
+
+        $('.manage-server').on('click', function(){
+            location.href = $(this).data('url');
+        });
+
+        $('.server-list-actions .dropdown-menu').on('click', function(e) {
+            if($(this).hasClass('dropdown-menu-form')) {
+                e.stopPropagation();
+            }
+        });
+
+        $('#crawl-all').on('click', function(){
+            if (!confirm('Do you really want to crawl all the servers now?')) {
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: {{ url_for('.crawl_all') | tojson }},
+                success: function() {
+                    location.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('AJAX request failed: ' + errorThrown);
+                    location.reload();
+                }
+            });
+        });
+
+        $('#show-enabled').on('change', function(){
+            var noMatch = $('#no-matching-instances');
+            var toggled = this.checked;
+            var allHidden = true;
+            $('.server-row').each(function(){
+                var $this = $(this);
+                if (!$this.hasClass('danger')) {
+                    $this.toggle(toggled);
+                }
+                if ($this.css('display') != 'none') {
+                    allHidden = false;
+                }
+            });
+            if (allHidden) {
+                noMatch.show();
+            } else {
+                noMatch.hide();
+            }
+        }).prop('checked', true);
+
+        $('#show-disabled').on('change', function(){
+            var noMatch = $('#no-matching-instances');
+            var toggled = this.checked;
+            var allHidden = true;
+            $('.server-row').each(function(){
+                var $this = $(this);
+                if ($this.hasClass('danger')) {
+                    if (toggled) {
+                        $this.show();
+                    } else {
+                        $this.hide();
+                    }
+                }
+                if ($this.is(':visible')) {
+                    allHidden = false;
+                }
+            });
+            if (allHidden) {
+                noMatch.show();
+            } else {
+                noMatch.hide();
+            }
+        }).prop('checked', false);
+
+        $('.server-row').each(function(){
+            var $row = $(this);
+            var $rowmore = $row.next('.server-info-row');
+
+            if($rowmore.length > 0){
+                $row.data('cached-row', $rowmore);
+            }
+            $rowmore.detach();
+            $rowmore.removeClass('hidden');
+        });
+
+        var aoColumns = [];
+        $('#server-table thead th').each(function(){
+            if ($(this).hasClass('no-sort')) {
+                aoColumns.push({ "bSortable": false });
+            } else {
+                aoColumns.push(null);
+            }
+        });
+
+        if ($('.server-row').length > 0) {
+            $('#server-table').DataTable({
+                'columns': aoColumns,
+                'order': [[0, 'asc']],
+                'paging': false,
+                'bInfo': false
+            });
+        }
+        {% if server_list %}
+            var tr = $('<tr>', {id: "no-matching-instances"});
+            $('<td>', {colspan: "{{ extra_fields|length + 4 }}", text: 'No instance matches the criteria selected.'}).appendTo(tr);
+            tr.appendTo($('#server-table tbody'));
+        {% endif %}
+
+        $('th:not(.no-sort)').on('click', function(){
+            $('.toggle-expand').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        });
+
+        $('#show-enabled').trigger('change');
+        $('#show-disabled').trigger('change');
+
+        // Prevents 'Additional data' dropdown from closing when clicking the label
+        $('label.dropdown-item').on('click', function() {
+            $(this).closest('.btn-group').addClass('show');
+        });
+
+    </script>
+
+{%- endblock %}

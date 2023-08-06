@@ -1,0 +1,133 @@
+/* Palette */
+
+$pastel-red: #e67878;
+
+/* Global */
+
+body {
+    height: 100%;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1.5em;
+}
+
+.footer-logo {
+     height: 60px;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    margin-bottom: 1em;
+}
+
+.flashed-message {
+    color: $pastel-red;
+    font-size: 0.9rem;
+}
+
+/* Server list page */
+
+#server-list {
+    .server-row {
+        td {
+            vertical-align: middle;
+        }
+
+        .toggle-expand {
+            cursor: pointer;
+        }
+    }
+
+    .server-info-row {
+        .row > * {
+            padding: 0;
+        }
+    }
+}
+
+
+/* Statistics page */
+
+.statistics-grid {
+    margin-bottom: 60px;
+
+    .row {
+        min-width: 1020px;
+    }
+
+    .world-map {
+        width: 600px;
+        height: 400px;
+    }
+
+    .country-piechart-container {
+        margin-top: 50px;
+        width: 400px;
+    }
+
+    .statistics-item {
+        margin-top: 40px;
+    }
+
+    .jqplot-table-legend-swatch-outline, .jqplot-table-legend {
+        border: none;
+    }
+}
+
+
+/* Server management page */
+
+.server-management-body {
+
+    .server-main-information {
+        .card-footer {
+            display: none;
+
+            &.active {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        .card-header .fa, .card-footer .fa {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+    }
+
+    .server-main-information, .server-crawled-information {
+        margin-top: 60px;
+
+        .card-block {
+            .text-success, .text-muted {
+                font-weight: bold;
+            }
+        }
+
+        .card-footer {
+            .btn {
+                margin-left: 10px;
+            }
+        }
+
+        .card-block, .card-footer {
+            font-size: 0.9rem;
+        }
+    }
+
+    .server-geolocation {
+        .map-canvas {
+            height: 400px;
+            margin-bottom: 40px;
+        }
+    }
+}
