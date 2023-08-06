@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: bluestoned
+Version: 0.1.1
+Summary: find bluescreen chroma keys or other color rangers in video files and images using OpenCV
+License: MIT
+Author: Nik Cubrilovic
+Author-email: git@nikcub.me
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: numpy (>=1.17,<2.0)
+Requires-Dist: opencv-python (>=4.1,<5.0)
+Requires-Dist: tqdm (>=4.36,<5.0)
+Requires-Dist: verboselogs (>=1.7,<2.0)
