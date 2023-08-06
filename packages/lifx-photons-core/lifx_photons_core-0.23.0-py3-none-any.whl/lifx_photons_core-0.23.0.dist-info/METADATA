@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: lifx-photons-core
+Version: 0.23.0
+Summary: The core modules of the photons framework
+Home-page: http://github.com/delfick/photons-core
+Author: Stephen Moore
+Author-email: delfick755@gmail.com
+License: MIT
+Keywords: lifx photons
+Platform: UNKNOWN
+Requires-Dist: delfick-project (==0.5.1)
+Requires-Dist: ruamel.yaml (==0.15.87)
+Requires-Dist: rainbow-logging-handler (==2.2.2)
+Requires-Dist: lru-dict (==1.1.6)
+Requires-Dist: bitarray (==1.0.1)
+Provides-Extra: tests
+Requires-Dist: noseOfYeti (==1.9.1) ; extra == 'tests'
+Requires-Dist: asynctest (==0.12.2) ; extra == 'tests'
+Requires-Dist: nose ; extra == 'tests'
+
+Photons
+=======
+
+Photons is Python3.6+ framework for interacting with LIFX products.
+
+See full documentation at https://delfick.github.io/photons-core
+
+Example scripts can be found in the ``examples`` and ``scripts`` folders of
+this repository.
+
+
