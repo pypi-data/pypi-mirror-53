@@ -1,0 +1,169 @@
+Metadata-Version: 2.1
+Name: RelStorage
+Version: 3.0a12
+Summary: A backend for ZODB that stores pickles in a relational database.
+Home-page: http://relstorage.readthedocs.io/
+Author: Zope Foundation and Contributors
+Author-email: shane@willowrise.com
+Maintainer: Shane Hathaway
+Maintainer-email: shane@willowrise.com
+License: ZPL 2.1
+Project-URL: Bug Tracker, https://github.com/zodb/relstorage/issues
+Project-URL: Documentation, http://relstorage.readthedocs.io
+Project-URL: Source Code, https://github.com/zodb/relstorage/
+Keywords: ZODB SQL RDBMS MySQL PostgreSQL Oracle
+Platform: any
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Zope Public License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Development Status :: 3 - Alpha
+Provides-Extra: test
+Provides-Extra: mysql
+Provides-Extra: all_tested_drivers
+Provides-Extra: docs
+Provides-Extra: oracle
+Provides-Extra: postgresql
+Provides-Extra: memcache
+Requires-Dist: cffi
+Requires-Dist: perfmetrics (>=3.0.0)
+Requires-Dist: zope.interface
+Requires-Dist: zope.dottedname
+Requires-Dist: zc.lockfile
+Requires-Dist: ZODB (>=5.5)
+Requires-Dist: transaction (>=2.4.0)
+Provides-Extra: all_tested_drivers
+Provides-Extra: all_tested_drivers
+Requires-Dist: psycopg2 (>=2.6.1); (platform_python_implementation == "CPython") and extra == 'all_tested_drivers'
+Provides-Extra: all_tested_drivers
+Requires-Dist: mysqlclient (>=1.4); (platform_python_implementation == "CPython" and sys_platform != "win32") and extra == 'all_tested_drivers'
+Provides-Extra: all_tested_drivers
+Requires-Dist: pg8000 (>=1.11.0); (python_version == "2.7" or platform_python_implementation == "PyPy") and extra == 'all_tested_drivers'
+Provides-Extra: all_tested_drivers
+Requires-Dist: psycopg2cffi (>=2.7.4); (python_version == "3.5" or platform_python_implementation == "PyPy") and extra == 'all_tested_drivers'
+Provides-Extra: all_tested_drivers
+Requires-Dist: PyMySQL (>=0.6.6); (python_version == "3.6" or platform_python_implementation == "PyPy" or sys_platform == "win32") and extra == 'all_tested_drivers'
+Provides-Extra: all_tested_drivers
+Requires-Dist: mysql-connector-python (>=8.0.16); (python_version == "3.7" or platform_python_implementation == "PyPy") and extra == 'all_tested_drivers'
+Provides-Extra: docs
+Requires-Dist: sphinxcontrib-programoutput; extra == 'docs'
+Requires-Dist: repoze.sphinx.autointerface; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme; extra == 'docs'
+Provides-Extra: memcache
+Provides-Extra: memcache
+Requires-Dist: pylibmc; (platform_python_implementation == "CPython" and sys_platform != "win32") and extra == 'memcache'
+Provides-Extra: memcache
+Requires-Dist: python-memcached; (platform_python_implementation == "PyPy" or sys_platform == "win32") and extra == 'memcache'
+Provides-Extra: mysql
+Requires-Dist: mysqlclient (>=1.4); (platform_python_implementation=="CPython" and (sys_platform != "win32")) and extra == 'mysql'
+Provides-Extra: mysql
+Requires-Dist: PyMySQL (>=0.6.6); (platform_python_implementation=="PyPy" or (sys_platform == "win32")) and extra == 'mysql'
+Provides-Extra: oracle
+Requires-Dist: cx-Oracle (>=5.0.0); extra == 'oracle'
+Provides-Extra: postgresql
+Requires-Dist: psycopg2 (>=2.8.3); ( platform_python_implementation == "CPython") and extra == 'postgresql'
+Provides-Extra: postgresql
+Requires-Dist: psycopg2cffi (>=2.8.1); ( platform_python_implementation == "PyPy") and extra == 'postgresql'
+Provides-Extra: test
+Requires-Dist: random2; extra == 'test'
+Requires-Dist: zope.testing; extra == 'test'
+Requires-Dist: ZODB[test]; extra == 'test'
+Requires-Dist: zc.zlibstorage; extra == 'test'
+Requires-Dist: zope.testrunner; extra == 'test'
+Requires-Dist: nti.testing; extra == 'test'
+Requires-Dist: pyperf; extra == 'test'
+Requires-Dist: psutil; extra == 'test'
+Provides-Extra: test
+Requires-Dist: pylibmc; (platform_python_implementation == "CPython" and sys_platform != "win32") and extra == 'test'
+Provides-Extra: test
+Requires-Dist: python-memcached; (platform_python_implementation == "PyPy" or sys_platform == "win32") and extra == 'test'
+Provides-Extra: test
+Requires-Dist: mock; (python_version == "2.7") and extra == 'test'
+Provides-Extra: test
+Requires-Dist: ZEO (>=5.2); (python_version > "2.7") and extra == 'test'
+Provides-Extra: test
+Requires-Dist: gevent (>=1.5a1); (sys_platform != "win32") and extra == 'test'
+
+RelStorage is a storage implementation for ZODB that stores pickles in
+a relational database. PostgreSQL 9.6 and above (but not 12), MySQL 5.7.19 / 8.0, and
+Oracle 10g and 11g are currently supported. RelStorage replaced the
+PGStorage project.
+
+
+==========
+ Features
+==========
+
+* It is a drop-in replacement for FileStorage and ZEO.
+* There is a simple way to convert FileStorage to RelStorage and back again.
+  You can also convert a RelStorage instance to a different relational database.
+* Designed for high volume sites: multiple ZODB instances can share the same
+  database. This is similar to ZEO, but RelStorage does not require ZEO.
+* According to some tests, RelStorage handles high concurrency better than
+  the standard combination of ZEO and FileStorage.
+* Whereas FileStorage takes longer to start as the database grows due to an
+  in-memory index of all objects, RelStorage starts quickly regardless of
+  database size.
+* Supports undo, packing, and filesystem-based ZODB blobs.
+* Both history-preserving and history-free storage are available.
+* Capable of failover to replicated SQL databases.
+* ``zodbconvert`` utility to copy databases.
+* Free, open source (ZPL 2.1)
+
+
+===============
+ Documentation
+===============
+
+Documentation including `installation instructions`_ is hosted on `readthedocs`_.
+
+The complete `changelog`_ is also there.
+
+.. image:: https://readthedocs.org/projects/relstorage/badge/?version=latest
+     :target: http://relstorage.readthedocs.io/en/latest/?badge=latest
+
+
+.. _`installation instructions`: http://relstorage.readthedocs.io/en/latest/install.html
+.. _`readthedocs`: http://relstorage.readthedocs.io/en/latest/
+.. _`changelog`: http://relstorage.readthedocs.io/en/latest/changelog.html
+
+
+=============
+ Development
+=============
+
+RelStorage is hosted at GitHub:
+
+    https://github.com/zodb/relstorage
+
+Continuous integration
+----------------------
+
+A test suite is run for every push and pull request submitted. Travis
+CI is used to test on Linux, and AppVeyor runs the builds on
+Windows.
+
+.. image:: https://travis-ci.org/zodb/relstorage.svg?branch=master
+    :target: https://travis-ci.org/zodb/relstorage
+
+.. image:: https://ci.appveyor.com/api/projects/status/pccddlgujdoqvl83?svg=true
+   :target: https://ci.appveyor.com/project/jamadden/relstorage/branch/master
+
+Builds on Travis CI automatically submit updates to `coveralls.io`_ to
+monitor test coverage.
+
+.. image:: https://coveralls.io/repos/zodb/relstorage/badge.svg?branch=master&service=github
+   :target: https://coveralls.io/github/zodb/relstorage?branch=master
+
+.. _coveralls.io: https://coveralls.io/github/zodb/relstorage
+
+
