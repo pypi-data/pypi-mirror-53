@@ -1,0 +1,48 @@
+@media print {
+
+    @page {
+        margin-left: 1cm;
+        margin-right: 1cm;
+
+        @top-left {
+            font-size: 10px;
+            content: string(journal-title);
+        }
+        @top-center {
+        }
+        @top-right {
+            content: string(issue-label);
+            font-size: 10px;
+        } 
+        @bottom-left {
+        }
+        @bottom-center {
+            content: string(license);
+            font-size: 10px;
+            text-align: center;
+        }
+        @bottom-right {
+            content: counter(page);
+            font-size: 12px;
+        }
+    }
+
+    head, head > meta {
+        display:inline;
+        color: red;
+    }
+
+    meta[name="journal-title"] {
+        string-set: journal-title attr(content);
+    }
+
+    meta[name="issue-label"] {
+        string-set: issue-label attr(content);
+    }
+
+    meta[name="license"] {
+        string-set: license attr(content);
+    }
+
+}
+
