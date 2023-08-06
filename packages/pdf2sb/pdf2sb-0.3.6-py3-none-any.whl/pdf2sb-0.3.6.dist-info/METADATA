@@ -1,0 +1,62 @@
+Metadata-Version: 2.1
+Name: pdf2sb
+Version: 0.3.6
+Summary: Upload PDF file to Gyazo as images then convert Scrapbox format
+Home-page: https://github.com/reiyw/pdf2sb
+License: MIT
+Author: reiyw
+Author-email: reiyw.setuve@gmail.com
+Requires-Python: >=3.6,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: click (>=7.0,<8.0)
+Requires-Dist: pdf2image (>=1.4,<2.0)
+Requires-Dist: pillow (>=5.4,<6.0)
+Requires-Dist: pypdf2 (>=1.26,<2.0)
+Requires-Dist: python-gyazo (>=1.1,<2.0)
+Project-URL: Repository, https://github.com/reiyw/pdf2sb
+Description-Content-Type: text/markdown
+
+# pdf2sb
+
+![PyPI](https://img.shields.io/pypi/v/pdf2sb.svg) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pdf2sb.svg) ![PyPI - License](https://img.shields.io/pypi/l/pdf2sb.svg)
+
+Upload PDF file to Gyazo as images then convert Scrapbox format.
+
+## Usage
+
+Download slides (e.g. https://speakerdeck.com/reiyw/effective-modern-python-2018).
+Run:
+
+```sh
+pdf2sb ~/Downloads/presentation.pdf | pbcopy
+```
+
+Paste copied text to a Scrapbox page:
+
+[![Image from Gyazo](https://i.gyazo.com/0417c51246c401de8725393d7c78f715.png)](https://gyazo.com/0417c51246c401de8725393d7c78f715)
+
+## Installation
+
+- [poppler](https://poppler.freedesktop.org/) is required to generate images from a PDF file. Install poppler via Homebrew:
+
+```sh
+brew install poppler
+```
+
+- Install pdf2sb:
+
+```sh
+pip install pdf2sb
+```
+
+- Get Gyazo access token from [here](https://gyazo.com/oauth/applications).
+    - Follow the instructions in [this article (in Japanese)](https://blog.naichilab.com/entry/gyazo-access-token) if you don't understand.
+- Set `$GYAZO_ACCESS_TOKEN`:
+
+```sh
+export GYAZO_ACCESS_TOKEN=<access token>
+```
+
