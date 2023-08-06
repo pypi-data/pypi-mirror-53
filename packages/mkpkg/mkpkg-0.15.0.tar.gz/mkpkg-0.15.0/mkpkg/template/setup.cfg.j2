@@ -1,0 +1,62 @@
+[metadata]
+name = {{ package_name }}
+url = https://github.com/Julian/{{ name }}
+project_urls =
+    Docs = https://{{ name }}.readthedocs.io/en/latest/
+description =
+long_description = file: README.rst
+author = {{ author }}
+author_email = {{ author_email }}
+classifiers =
+    {{ status_classifier }}
+    Operating System :: OS Independent
+    Programming Language :: Python
+    {% if not closed -%}
+    License :: OSI Approved :: MIT License
+    {% else -%}
+    Private :: Do Not Upload
+    {% endif -%}
+    {% for each in version_classifiers | sort -%}
+        {{ each }}
+    {% endfor -%}
+    {% if py2 -%}
+    Programming Language :: Python :: 2
+    {% endif -%}
+    {% if py3 -%}
+    Programming Language :: Python :: 3
+    {% endif -%}
+    {% if cpython -%}
+    Programming Language :: Python :: Implementation :: CPython
+    {% endif -%}
+    {% if pypy -%}
+    Programming Language :: Python :: Implementation :: PyPy
+    {% endif -%}
+    {% if jython -%}
+    Programming Language :: Python :: Implementation :: Jython
+    {% endif %}
+[options]
+{% if single_module -%}
+py_modules = {{ name }}
+{% else -%}
+packages = find:
+{% endif -%}
+setup_requires = setuptools_scm
+install_requires =
+    importlib_metadata
+{%- if console_scripts %}
+    click
+
+[options.entry_points]
+console_scripts =
+  {%- for each in console_scripts %}
+    {{ each }}
+  {%- endfor %}
+{%- endif %}
+{%- if not single_module %}
+
+[flake8]
+exclude = {{ package_name }}/__init__.py
+{%- endif %}
+
+[bdist_wheel]
+universal = 1
