@@ -1,0 +1,35 @@
+global-include *.py *.js *.rst *.html *.css *.lyx *.pdf *.png *.gif *.jpg *.txt *.bat *.html *tpl *
+recursive-include oms_cms/*
+global-exclude *.pyc .gitignore
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude local_settings
+global-exclude prod_settings
+global-exclude manage.py
+global-exclude oms_cms/templates/base.html
+global-exclude oms_cms/templates/super-base.html
+
+prune oms_cms/static/admin
+prune oms_cms/static/css
+prune oms_cms/static/js
+prune oms_cms/static/vendor
+prune oms_cms/static/img
+prune oms_cms/static/rest_framework
+prune oms_cms/static/range_filter
+prune oms_cms/static/drf-yasg
+prune oms_cms/static/debug_toolbar
+prune oms_cms/static/ckeditor
+prune oms_cms/static/mptt
+
+prune oms_cms/templates/admin
+prune oms_cms/templates/include
+prune oms_cms/templates/news
+prune oms_cms/templates/pages
+prune oms_cms/templates/search
+
+prune .git
+prune __target__
+prune dist
+prune venv
+prune .idea
+prune oms_cms.egg-info
