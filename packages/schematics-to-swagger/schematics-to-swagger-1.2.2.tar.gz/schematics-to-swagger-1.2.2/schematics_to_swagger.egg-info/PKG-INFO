@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: schematics-to-swagger
+Version: 1.2.2
+Summary: Helper library to build Swagger Schema objects from Schematics models
+Home-page: https://github.com/Alexei-Kornienko/schematics_to_swagger
+Author: Alexei Kornienko
+Author-email: alexei.kornienko@gmail.com
+License: MIT
+Description: [![Build Status](https://travis-ci.com/Alexei-Kornienko/schematics_to_swagger.svg?branch=master)](https://travis-ci.com/Alexei-Kornienko/schematics_to_swagger)
+        
+        # Usecase
+        
+        * I have a REST API built using aiohttp and schematics.
+        * I want to provide Swagger spec for it and I use aiohttp-swagger.
+        * I'm too lazy to describe models for swagger docs so I want to build this information automatically
+        
+        ## Usage
+        
+        ```
+        import schematics_to_swagger
+        
+        from your_package import models
+        
+        definitions = schematics_to_swagger.read_models_from_module(models)
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
