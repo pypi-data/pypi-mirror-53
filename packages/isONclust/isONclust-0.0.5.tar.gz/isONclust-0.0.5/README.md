@@ -1,0 +1,170 @@
+isONclust
+===========
+
+isONclust is a tool for clustering either PacBio Iso-Seq reads, or Oxford Nanopore reads into clusters, where each cluster represents all reads that came from a gene. Output is a tsv file with each read assigned to a cluster-ID. Detailed information is available in [preprint](https://www.biorxiv.org/content/early/2018/11/06/463463).  
+
+
+isONclust is distributed as a python package supported on Linux / OSX with python v>=3.4 as of version 0.0.2 and above (due to updates in python's multiprocessing library). [![Build Status](https://travis-ci.org/ksahlin/isONclust.svg?branch=master)](https://travis-ci.org/ksahlin/isONclust).
+
+Table of Contents
+=================
+
+  * [INSTALLATION](#INSTALLATION)
+    * [Using conda](#Using-conda)
+    * [Using pip](#Using-pip)
+    * [Downloading source from GitHub](#Downloading-source-from-github)
+    * [Dependencies](#Dependencies)
+    * [Testing installation](#testing-installation)
+  * [USAGE](#USAGE)
+    * [Iso-Seq](#Iso-Seq)
+    * [Oxford Nanopore](#Oxford-Nanopore)
+    * [Output](#Output)
+    * [Parameters](#Parameters)
+  * [CREDITS](#CREDITS)
+  * [LICENCE](#LICENCE)
+
+
+
+INSTALLATION
+----------------
+
+### Using conda
+Conda is the preferred way to install isONclust.
+
+1. Create and activate a new environment called isonclust
+
+```
+conda create -n isonclust python=3 pip 
+source activate isonclust
+```
+
+2. Install isONclust 
+
+```
+pip install isONclust
+```
+3. You should now have 'isONclust' installed; try it:
+```
+isONclust --help
+```
+
+Upon start/login to your server/computer you need to activate the conda environment "isonclust" to run isONclust as:
+```
+source activate isonclust
+```
+
+### Using pip 
+
+To install isONclust, run:
+```
+pip install  isONclust
+```
+`pip` will install the dependencies automatically for you. `pip` is pythons official package installer and is included in most python versions. If you do not have `pip`, it can be easily installed [from here](https://pip.pypa.io/en/stable/installing/) and upgraded with `pip install --upgrade pip`. 
+
+
+### Downloading source from GitHub
+
+#### Dependencies
+
+Make sure the below listed dependencies are installed (installation links below). Versions in parenthesis are suggested as isONclust has not been tested with earlier versions of these libraries. However, isONclust may also work with earliear versions of these libaries.
+* [parasail](https://github.com/jeffdaily/parasail-python)
+* [pysam](http://pysam.readthedocs.io/en/latest/installation.html) (>= v0.11)
+
+
+With these dependencies installed. Run
+
+```sh
+git clone https://github.com/ksahlin/isONclust.git
+cd isONclust
+./isONclust
+```
+
+### Testing installation
+
+You can verify successul installation by running isONclust on this [small dataset](https://github.com/ksahlin/isONclust/tree/master/test/sample_alz_2k.fastq). Simply download the test dataset and run:
+
+```
+isONclust --fastq [test/sample_alz_2k.fastq] --outfolder [output path]
+```
+
+
+USAGE
+-------
+
+IsONclust can be used with either Iso-Seq or ONT reads. It takes either a fastq file or ccs.bam file. 
+ 
+
+
+### Iso-Seq
+
+IsONclust works with full-lengh non-chimeric (_flnc_) reads that has quality values assigned to bases. The flnc reads with quality values can be generated as follows:
+
+1. Make sure quality values is output when running the circular consensus calling step (CCS), by running `ccs` with the parameter `--polish`.
+2. Run PacBio's Iso-Seq pipeline step 2 and 3 (primer removal and extraction of flnc reads) [isoseq3](https://github.com/PacificBiosciences/IsoSeq3/blob/master/README_v3.1.md).  
+
+Flnc reads can be submitted as either a fastq file or bam file. A fastq file is created from a BAM by running _e.g_ `bamtools convert -format fastq -in flnc.bam -out flnc.fastq`. isONclust is called as follows
+
+```
+isONclust pipeline --isoseq --fastq <reads.fastq> --outfolder </path/to/output> 
+```
+
+isONclust also supports older versions of the isoseq3 pipeline by taking the `ccs.bam` file together with the `flnc.bam`. In this case, isONclust can be run as follows. 
+
+<!--- If not, flnc reads can be generated as follows. Raw pacbio subreads needs to be proccesed with `ccs` with the command `--polish` (to get quality values), followed by `lima`, and `isoseq3 cluster` to get the flnc reads. The flnc file is generated at the very beginning of the `isoseq3 cluster` algorithm and it can be used once its created (no need to wait for isoseq3 to finish). See full documentation on generating flnc reads at [isoseq3](https://github.com/PacificBiosciences/IsoSeq3). After these three comands are run isONclust can be run as follows -->
+```
+isONclust --isoseq --ccs <ccs.bam> --flnc <flnc.bam> --outfolder </path/to/output> 
+```
+Where `<ccs.bam>` is the file generated from `ccs` and `<flnc.bam>` is the file generated from `isoseq3 cluster`. The argument `--isoseq` simply means `--k 15 --w 50`. These arguments can be set manually without the `--isoseq` flag. Specify number of cores with `--t`. 
+
+
+### Oxford Nanopore
+isONclust needs a fastq file generated by an Oxford Nanopore basecaller.
+
+```
+isONclust pipeline --ont --fastq <reads.fastq> --outfolder </path/to/output> 
+```
+The argument `--ont` simply means `--k 13 --w 20`. These arguments can be set manually without the `--ont` flag. Specify number of cores with `--t`. 
+
+#### Output
+
+The output consists of a tsv file `final_clusters.tsv` present in the specified output folder. In this file, the first column is the cluster ID and the second column is the read accession. For example:
+```
+0 read_X_acc
+0 read_Y_acc
+...
+n read_Z_acc
+```
+if there are n reads there will be n rows. Some reads might be singletons. The rows are ordered with respect to the size of the cluster (largest first).
+
+
+
+
+CREDITS
+----------------
+
+Please cite [1] when using isONclust.
+
+1. Kristoffer Sahlin, Paul Medvedev (2019) "De Novo Clustering of Long-Read Transcriptome Data Using a Greedy, Quality-Value Based Algorithm", RECOMB 2019 [Link](https://link.springer.com/chapter/10.1007/978-3-030-17083-7_14).
+
+Bib record: 
+
+@InProceedings{10.1007/978-3-030-17083-7_14,
+author="Sahlin, Kristoffer
+and Medvedev, Paul",
+editor="Cowen, Lenore J.",
+title="De Novo Clustering of Long-Read Transcriptome Data Using a Greedy, Quality-Value Based Algorithm",
+booktitle="Research in Computational Molecular Biology",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="227--242",
+abstract="Long-read sequencing of transcripts with PacBio Iso-Seq and Oxford Nanopore Technologies has proven to be central to the study of complex isoform landscapes in many organisms. However, current de novo transcript reconstruction algorithms from long-read data are limited, leaving the potential of these technologies unfulfilled. A common bottleneck is the dearth of scalable and accurate algorithms for clustering long reads according to their gene family of origin. To address this challenge, we develop isONclust, a clustering algorithm that is greedy (in order to scale) and makes use of quality values (in order to handle variable error rates). We test isONclust on three simulated and five biological datasets, across a breadth of organisms, technologies, and read depths. Our results demonstrate that isONclust is a substantial improvement over previous approaches, both in terms of overall accuracy and/or scalability to large datasets. Our tool is available at https://github.com/ksahlin/isONclust.",
+isbn="978-3-030-17083-7"
+}
+
+LICENCE
+----------------
+
+GPL v3.0, see [LICENSE.txt](https://github.com/ksahlin/isONclust/blob/master/LICENCE.txt).
+
+
