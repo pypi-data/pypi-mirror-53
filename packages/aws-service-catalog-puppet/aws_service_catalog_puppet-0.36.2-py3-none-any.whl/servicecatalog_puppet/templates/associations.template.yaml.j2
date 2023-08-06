@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Associations for {{portfolio.DisplayName}}
+Resources:
+{% for association in portfolio.Associations %}
+  Association{{ loop.index }}:
+    Type: AWS::ServiceCatalog::PortfolioPrincipalAssociation
+    Properties:
+      PrincipalARN: !Sub "{{ association }}"
+      PortfolioId: {{ portfolio_id }}
+      PrincipalType: IAM{% endfor %}
+
+
+
+eamonnf+puppet-issues-97-org-spoke-1
+
+941935392890
