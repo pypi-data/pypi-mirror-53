@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_groups_form" model="ir.ui.view">
+            <field name="name">res.groups.mindev.form</field>
+            <field name="model">res.groups</field>
+            <field name="inherit_id" ref="base.view_groups_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="XML" groups="mindev.group_mindev">
+                        <group>
+                            <field name="xml_id" readonly="1"/>
+                            <field name="xml_module" readonly="1"/>
+                            <field name="xml_name" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

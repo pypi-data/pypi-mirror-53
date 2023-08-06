@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mindev_download_translation_form" model="ir.ui.view">
+            <field name="name">mindev.download.translation.form</field>
+            <field name="model">mindev.download.translation</field>
+            <field name="arch" type="xml">
+                <form string="Download Translation">
+                    <group>
+                        <group>
+                            <field name="languages" widget="many2many_tags" readonly="1"/>
+                            <field name="module"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                            <field name="i18n_path" invisible="1"/>
+                            <field name="has_git" invisible="1"/>
+                            <field name="git_repo" invisible="1"/>
+                            <field name="state" invisible="1"/>
+                            <field name="do_commit"
+                                   attrs="{'invisible': [('has_git', '=', False)]}"/>
+                            <field name="do_fields"/>
+                        </group>
+                    </group>
+                    <group string="Result" states="end">
+                        <field name="html_res" nolabel="1" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="do_download" type="object" string="Get Translations"
+                                class="oe_highlight" states="start"/>
+                        <button special="cancel" states="start" string="Cancel"/>
+                        <button special="cancel" states="end" string="OK"
+                                class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="mindev_download_translation_action" model="ir.actions.act_window">
+            <field name="name">Download Translation</field>
+            <!--
+            <field name="type">ir.actions.act_window</field>
+            -->
+            <field name="res_model">mindev.download.translation</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="mindev_download_translation_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="mindev_download_translation" name="Download Translation"
+                  parent="mindev.menu_min_dev"
+                  action="mindev_download_translation_action" sequence="20"/>
+    </data>
+</odoo>
