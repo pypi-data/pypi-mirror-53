@@ -1,0 +1,62 @@
+Metadata-Version: 2.1
+Name: roadmap-py
+Version: 1.0.2
+Summary: Python bindings for the Roadmap API
+Home-page: https://github.com/roadmap-space/roadmap-python
+Author: Roadmap
+Author-email: support@roadmap.space
+License: MIT
+Project-URL: Bug Tracker, https://github.com/roadmap-space/roadmap-python/issues
+Project-URL: Documentation, https://api.roadmap.space/?python
+Project-URL: Source Code, https://github.com/roadmap-space/roadmap-python
+Description: # Roadmap for Python
+        
+        Version: v1.0.2
+        
+        ## Summary
+        
+        Official Python API client library for [Roadmap](https://roadmap.space)'s API.
+        
+        ## Installation
+        
+        ```shell
+        pip install roadmap-py
+        ```
+        
+        ## Documentation
+        
+        For a comprehensive list of examples, check out the [API documentation](http://api.roadmap.space).
+        
+        Here are some examples:
+        
+        ### Get the roadmap
+        
+        ```python
+        from roadmap-py import roadmap
+        
+        roadmap.init("email", "token")
+        
+        roadmap.roadmaps.get_roadmap(
+          "[roadmap id here]",
+          lambda err, result: print(err, result)
+        )
+        ```
+        
+Keywords: roadmap api product
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
+Description-Content-Type: text/markdown
