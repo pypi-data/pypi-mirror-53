@@ -1,0 +1,34 @@
+language: python
+
+dist: xenial
+
+env:
+    global:
+        - PYTHONPATH=$PYTHONPATH:/home/travis/build/fmv1992/data_utilities/data_utilities/
+        - DISPLAY=:0.0
+    matrix:
+        - EXTRAS_REQUIRE=''
+        - EXTRAS_REQUIRE='[all]'
+
+branches:
+  only:
+    - dev
+    - master
+    - evolutionary_cv
+
+python:
+    - "3.4"  # oldest python version supported by numpy
+    - "3.5"
+    - "3.6"
+
+before_install:
+    - sudo apt-get update
+    - sudo python3 -m pip install --upgrade numpy matplotlib seaborn pandas scikit-learn
+    - sudo apt-get install libgomp1
+    - sudo python3 -m pip || wget -qO- https://bootstrap.pypa.io/get-pip.py | python3
+
+install:
+    - python3 -m pip install -e ".$EXTRAS_REQUIRE"
+
+script:
+    - python3 -c "import matplotlib;matplotlib.use('Agg');import data_utilities as du; du.test(label='full', verbose=10)"

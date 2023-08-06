@@ -1,0 +1,45 @@
+# vim: set fileformat=unix filetype=sh wrap :
+
+# Project specific.
+*personal*
+.stfolder
+.stignore
+__not_for_packaging
+data/
+output/
+processed_data/
+__*/
+
+# Extensions.
+*.*.un
+*.*~
+*.orig
+*.so
+*.vim
+*~
+*~$*
+*.stackdump
+
+# Data folders and 'big data'.
+*.hdf
+
+# Windows patterns.
+Thumbs.db
+thumbs.db
+
+# Python patterns.
+*.pyc
+*.pyo
+*egg-info*
+.cache/
+.eggs/
+.tox
+MANIFEST
+__pycache__
+build/
+dist/
+docs/_build/
+.ropeproject/
+
+# Auxiliar code files.
+.pylintrc
