@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: wmonitor
+Version: 0.0.2
+Summary: send http request to wmonitor
+Home-page: UNKNOWN
+Author: chunyu.piao
+Author-email: chunyu.piao@bianlifeng.com
+License: UNKNOWN
+Description: # wmonitor #
+        ## wmonitor ##
+        + wmonitor会从环境变量中获取"BUILD_TYPE"与"CONFIG_DIR"
+        
+        demo.py
+        ```python
+        from metric import Metric
+        
+        Metric.counter("demo_counter").send()
+        Metric.counter("demo_counter").tags("business=123").send()
+        Metric.counter("demo_counter", 2).send()
+        Metric.gauge("demo_gauge").send()
+        Metric.state("demo_state").send()
+        
+        ```
+        ## config ##
+        | BUILD_TYPE | 文件名称 |
+        | :----:| :----:|
+        | BETA | wmonitor_beta.cfg|
+        | DEV| wmonitor_dev.cfg|
+        | PROD| wmonitor_prod.cfg|
+        | DEFAULT or '' | wmonitor.cfg|
+        
+        wmonitor.cfg
+        ```text
+        [web]
+        domain = http://b1.wmonitor-adaptor.beta.wormpex.com
+        [app]
+        app_code = ai_vision_vision_dynamic_cabinet_service
+        ```
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
