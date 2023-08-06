@@ -1,0 +1,24 @@
+#!python
+
+import requests
+import json
+import click
+ 
+@click.command()
+@click.option('--count', default=1, help='Number of jokes.')
+def main(count):
+  for x in range(count):
+    joke = __get_joke()
+    if count == 1:
+      click.echo('%s' % joke)
+    else:
+      click.echo('%d - %s' % (x, joke))
+
+def __get_joke():
+  headers = {'accept': 'application/json'}
+  response = requests.get("https://icanhazdadjoke.com/", headers=headers)
+  data = json.loads(response.content)
+  return data['joke']
+
+if __name__ == '__main__':
+    main()
