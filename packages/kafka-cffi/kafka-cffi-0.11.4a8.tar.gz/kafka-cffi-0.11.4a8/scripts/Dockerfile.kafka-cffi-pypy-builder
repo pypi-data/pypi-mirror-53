@@ -1,0 +1,7 @@
+FROM quay.io/wenxiang/pypy-wheel-builder
+
+COPY scripts/install-libs.sh /tmp
+RUN /tmp/install-libs.sh
+
+WORKDIR /app
+
