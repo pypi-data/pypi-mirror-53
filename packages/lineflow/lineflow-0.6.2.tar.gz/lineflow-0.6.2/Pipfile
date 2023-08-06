@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pytest = "*"
+flake8 = "*"
+ipython = "*"
+autopep8 = "*"
+pytest-cov = "*"
+pytest-xdist = "*"
+
+[packages]
+easyfile = "*"
+gdown = "*"
