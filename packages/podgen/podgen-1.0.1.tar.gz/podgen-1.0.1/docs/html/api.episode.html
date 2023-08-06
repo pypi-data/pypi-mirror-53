@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>podgen.Episode &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="podgen.Person" href="api.person.html" />
+    <link rel="prev" title="podgen.Podcast" href="api.podcast.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="api.podcast.html" title="Previous document">podgen.Podcast</a>
+        </li>
+        <li>
+          <a href="api.person.html" title="Next document">podgen.Person</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="podgen-episode">
+<h1>podgen.Episode<a class="headerlink" href="#podgen-episode" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="podgen.Episode">
+<em class="property">class </em><code class="sig-prename descclassname">podgen.</code><code class="sig-name descname">Episode</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/podgen/episode.html#Episode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#podgen.Episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing an episode in a podcast. Corresponds to an RSS Item.</p>
+<p>When creating a new Episode, you can populate any attribute
+using keyword arguments. Use the attribute’s name on the left side of
+the equals sign and its value on the right side. Here’s an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span> <span class="o">=</span> <span class="n">Episode</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Exploring the RTS genre&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="s2">&quot;Tory and I talk about a genre of games we&#39;ve &quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>             <span class="s2">&quot;never dared try out before now...&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># ...is equal to this:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span> <span class="o">=</span> <span class="n">Episode</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Exploring the RTS genre&quot;</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Tory and I talk about a genre of games we&#39;ve &quot;</span>
+<span class="gp">... </span>           <span class="s2">&quot;never dared try out before now...&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>TypeError if you try to set an attribute which doesn’t exist,
+ValueError if you set an attribute to an invalid value.</p>
+</dd>
+</dl>
+<p>You must have filled in either <a class="reference internal" href="#podgen.Episode.title" title="podgen.Episode.title"><code class="xref py py-attr docutils literal notranslate"><span class="pre">title</span></code></a> or <a class="reference internal" href="#podgen.Episode.summary" title="podgen.Episode.summary"><code class="xref py py-attr docutils literal notranslate"><span class="pre">summary</span></code></a> before
+the RSS can be generated.</p>
+<p>To add an episode to a podcast:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">podgen</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">podgen</span><span class="o">.</span><span class="n">Podcast</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">episode</span> <span class="o">=</span> <span class="n">podgen</span><span class="o">.</span><span class="n">Episode</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">episodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">episode</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You may also replace the last two lines with a shortcut:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">episode</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">add_episode</span><span class="p">(</span><span class="n">podgen</span><span class="o">.</span><span class="n">Episode</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="usage_guide/episodes.html"><span class="doc">Episodes</span></a></dt><dd><p>A friendlier introduction to episodes.</p>
+</dd>
+</dl>
+</div>
+<dl class="method">
+<dt id="podgen.Episode.authors">
+<em class="property">property </em><code class="sig-name descname">authors</code><a class="headerlink" href="#podgen.Episode.authors" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of <a class="reference internal" href="api.person.html#podgen.Person" title="podgen.Person"><code class="xref py py-class docutils literal notranslate"><span class="pre">Person</span></code></a> that contributed to this
+episode.</p>
+<p>The authors don’t need to have both name and email set. They’re usually
+not displayed anywhere.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You do not need to provide any authors for an episode if
+they’re identical to the podcast’s authors.</p>
+</div>
+<p>Any value you assign to authors will be automatically converted to a
+list, but only if it’s iterable (like tuple, set and so on). It is an
+error to assign a single <a class="reference internal" href="api.person.html#podgen.Person" title="podgen.Person"><code class="xref py py-class docutils literal notranslate"><span class="pre">Person</span></code></a> object to this
+attribute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This results in an error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">authors</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;johndoe@example.org&quot;</span><span class="p">)</span>
+<span class="go">TypeError: Only iterable types can be assigned to authors, ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># This is the correct way:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="n">Person</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;johndoe@example.org&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The initial value is an empty list, so you can use the list methods
+right away.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This attribute is just a list - you can for example append:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">authors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;johndoe@example.org&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Or assign a new list (discarding earlier authors)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="n">Person</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;johndoe@example.org&quot;</span><span class="p">),</span>
+<span class="gp">... </span>              <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;Mary Sue&quot;</span><span class="p">,</span> <span class="s2">&quot;marysue@example.org&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference internal" href="api.person.html#podgen.Person" title="podgen.Person"><code class="xref py py-class docutils literal notranslate"><span class="pre">podgen.Person</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>author or dc:creator, and itunes:author</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.explicit">
+<em class="property">property </em><code class="sig-name descname">explicit</code><a class="headerlink" href="#podgen.Episode.explicit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether this podcast episode contains material which may be
+inappropriate for children.</p>
+<p>The value of the podcast’s explicit attribute is used by default, if
+this is kept as <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>If you set this to <code class="docutils literal notranslate"><span class="pre">True</span></code>, an “explicit” parental advisory
+graphic will appear in the Name column in iTunes. If the value is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, the parental advisory type is considered Clean, meaning that
+no explicit language or adult content is included anywhere in this
+episode, and a “clean” graphic will appear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:explicit</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.id">
+<code class="sig-name descname">id</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>This episode’s globally unique identifier.</p>
+<p>If not present, the URL of the enclosed media is used. This is usually
+the best way to go, <strong>as long as the media URL doesn’t change</strong>.</p>
+<p>Set the id to boolean <code class="docutils literal notranslate"><span class="pre">False</span></code> if you don’t want to associate any id to
+this episode.</p>
+<p>It is important that an episode keeps the same ID until the end of time,
+since the ID is used by clients to identify which episodes have been
+listened to, which episodes are new, and so on. Changing the ID causes
+the same consequences as deleting the existing episode and adding a
+new, identical episode.</p>
+<p>Note that this is a GLOBALLY unique identifier. Thus, not only must it
+be unique in this podcast, it must not be the same ID as any other
+episode for any podcast out there. To ensure this, you should use a
+domain which you own (for example, use something like
+<a class="reference external" href="http://example.org/podcast/episode1">http://example.org/podcast/episode1</a> if you own example.org).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> to use default or <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a> to leave
+out.</p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>guid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.image">
+<em class="property">property </em><code class="sig-name descname">image</code><a class="headerlink" href="#podgen.Episode.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The podcast episode’s image, overriding the podcast’s
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">image</span></code>.</p>
+<p>This attribute specifies the absolute URL to the artwork for your
+podcast. iTunes prefers square images that are at least <code class="docutils literal notranslate"><span class="pre">1400x1400</span></code>
+pixels.</p>
+<p>iTunes supports images in JPEG and PNG formats with an RGB color space
+(CMYK is not supported). The URL must end in “.jpg” or “.png”; a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">NotSupportedByItunesWarning</span></code> will be issued if it doesn’t.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:image</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you change an episode’s image, you should also change the file’s
+name; iTunes doesn’t check the actual file to see if it’s changed.</p>
+<p>Additionally, the server hosting your cover art image must allow HTTP
+HEAD requests.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Almost no podcatchers support this. iTunes supports it only if you
+embed the cover in the media file (the same way you would embed
+an album cover), and recommends that you use Garageband’s Enhanced
+Podcast feature.</p>
+<p>The podcast’s image is used if this isn’t supported.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.is_closed_captioned">
+<code class="sig-name descname">is_closed_captioned</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.is_closed_captioned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether this podcast includes a video episode with embedded <a class="reference external" href="https://en.wikipedia.org/wiki/Closed_captioning">closed
+captioning</a> support. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:isClosedCaptioned</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.link">
+<code class="sig-name descname">link</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.link" title="Permalink to this definition">¶</a></dt>
+<dd><p>The link to the full version of this episode’s <a class="reference internal" href="#podgen.Episode.summary" title="podgen.Episode.summary"><code class="xref py py-attr docutils literal notranslate"><span class="pre">summary</span></code></a>.
+Remember to start the link with the scheme, e.g. <a class="reference external" href="https://">https://</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>link</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.long_summary">
+<code class="sig-name descname">long_summary</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.long_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>A long (read: full) summary, which supplements the shorter
+<a class="reference internal" href="#podgen.Episode.summary" title="podgen.Episode.summary"><code class="xref py py-attr docutils literal notranslate"><span class="pre">summary</span></code></a>. Like summary, this must be compatible
+with XHTML parsers; use <code class="xref py py-func docutils literal notranslate"><span class="pre">podgen.htmlencode()</span></code> if this isn’t HTML.</p>
+<p>This attribute should be seen as a full, longer variation of
+summary if summary exists. Even then, the long_summary should be
+independent from summary, in that you only need to read one of them.
+This means you may have to repeat the first sentences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> which can be parsed as XHTML.</p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>content:encoded or description</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#podgen.Episode.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the <a class="reference internal" href="api.media.html#podgen.Media" title="podgen.Media"><code class="xref py py-class docutils literal notranslate"><span class="pre">Media</span></code></a> object that is attached
+to this episode.</p>
+<p>Note that if <a class="reference internal" href="#podgen.Episode.id" title="podgen.Episode.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">id</span></code></a> is not set, the media’s URL is used as
+the id. If you rely on this, you should make sure the URL never changes,
+since changing the id messes up with clients (they will think this
+episode is new again, even if the user has listened to it already).
+Therefore, you should only rely on this behaviour if you own the domain
+which the episodes reside on. If you don’t, then you must set
+<a class="reference internal" href="#podgen.Episode.id" title="podgen.Episode.id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">id</span></code></a> to an appropriate value manually.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="api.media.html#podgen.Media" title="podgen.Media"><code class="xref py py-class docutils literal notranslate"><span class="pre">podgen.Media</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>enclosure and itunes:duration</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.position">
+<em class="property">property </em><code class="sig-name descname">position</code><a class="headerlink" href="#podgen.Episode.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>A custom position for this episode on the iTunes store page.</p>
+<p>If you would like this episode to appear first, set it to <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+If you want it second, set it to <code class="docutils literal notranslate"><span class="pre">2</span></code>, and so on. If multiple episodes
+share the same position, they will be sorted by their
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">publication</span> <span class="pre">date</span></code>.</p>
+<p>To remove the order from the episode, set the position back to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:order</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.publication_date">
+<em class="property">property </em><code class="sig-name descname">publication_date</code><a class="headerlink" href="#podgen.Episode.publication_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>The time and date this episode was first published.</p>
+<p>The value can be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, which will be parsed and
+made into a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> object when assigned. You may
+also assign a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> object directly. In both cases,
+you must ensure that the value includes timezone information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> (will be converted to and stored as
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>) or <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>.</p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>pubDate</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Don’t use the media file’s modification date as the publication
+date, unless they’re the same. It looks very odd when an episode
+suddenly pops up in the feed, but it claims to be several hours old!</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.rss_entry">
+<code class="sig-name descname">rss_entry</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/podgen/episode.html#Episode.rss_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#podgen.Episode.rss_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an RSS item using lxml’s etree and return it.</p>
+<p>This is primarily used by <a class="reference internal" href="api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">podgen.Podcast</span></code></a> when generating the
+podcast’s RSS feed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>etree.Element(‘item’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.subtitle">
+<code class="sig-name descname">subtitle</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.subtitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>A short subtitle.</p>
+<p>This is shown in the Description column in iTunes.
+The subtitle displays best if it is only a few words long.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:subtitle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.summary">
+<code class="sig-name descname">summary</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>The summary of this episode, in a format that can be parsed by
+XHTML parsers.</p>
+<p>If your summary isn’t fit to be parsed as XHTML, you can use
+<code class="xref py py-func docutils literal notranslate"><span class="pre">podgen.htmlencode()</span></code> to fix the text, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">podgen</span><span class="o">.</span><span class="n">htmlencode</span><span class="p">(</span><span class="s2">&quot;We spread lots of love &lt;3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">summary</span>
+<span class="go">We spread lots of love &amp;lt;3</span>
+</pre></div>
+</div>
+<p>In iTunes, the summary is shown in a separate window that appears when
+the “circled i” in the Description column is clicked. This field can be
+up to 4000 characters in length.</p>
+<p>See also <a class="reference internal" href="#podgen.Episode.subtitle" title="podgen.Episode.subtitle"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Episode.subtitle</span></code></a> and
+<a class="reference internal" href="#podgen.Episode.long_summary" title="podgen.Episode.long_summary"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Episode.long_summary</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a> which can be parsed as XHTML.</p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>description</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="podgen.Episode.title">
+<code class="sig-name descname">title</code><em class="property"> = None</em><a class="headerlink" href="#podgen.Episode.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>This episode’s human-readable title.
+Title is mandatory and should not be blank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>title</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="podgen.Episode.withhold_from_itunes">
+<em class="property">property </em><code class="sig-name descname">withhold_from_itunes</code><a class="headerlink" href="#podgen.Episode.withhold_from_itunes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prevent this episode from appearing in the iTunes podcast directory.
+Note that the episode can still be found by inspecting the XML, so it is
+still public.</p>
+<p>One use case would be if you knew that this episode would get you kicked
+out from iTunes, should it make it there. In such cases, you can set
+withhold_from_itunes to <code class="docutils literal notranslate"><span class="pre">True</span></code> so this episode isn’t published on
+iTunes, allowing you to publish it to everyone else while keeping your
+podcast on iTunes.</p>
+<p>This attribute defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>, of course.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:block</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="api.podcast.html" title="Previous document">podgen.Podcast</a>
+        </li>
+        <li>
+          <a href="api.person.html" title="Next document">podgen.Person</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_guide/index.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api.podcast.html">podgen.Podcast</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">podgen.Episode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.person.html">podgen.Person</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.media.html">podgen.Media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.category.html">podgen.Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.util.html">podgen.util</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.episode.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Full example &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Advanced Topics" href="../advanced/index.html" />
+    <link rel="prev" title="RSS" href="rss.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="rss.html" title="Previous document">RSS</a>
+        </li>
+        <li>
+          <a href="../advanced/index.html" title="Next document">Advanced Topics</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="full-example">
+<h1>Full example<a class="headerlink" href="#full-example" title="Permalink to this headline">¶</a></h1>
+<p>This example is located at <code class="docutils literal notranslate"><span class="pre">podgen/__main__.py</span></code> in the package, and is run
+as part of the <a class="reference internal" href="../contributing.html"><span class="doc">testing routines</span></a>.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Create an example podcast and print it or save it to a file.&quot;&quot;&quot;</span>
+    <span class="c1"># There must be exactly one argument, and it is must end with rss</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">)):</span>
+        <span class="c1"># Invalid usage, print help message</span>
+        <span class="c1"># print_enc is just a custom function which functions like print,</span>
+        <span class="c1"># except it deals with byte arrays properly.</span>
+        <span class="n">print_enc</span> <span class="p">(</span><span class="s1">&#39;Usage: </span><span class="si">%s</span><span class="s1"> ( &lt;file&gt;.rss | rss )&#39;</span> <span class="o">%</span> \
+                <span class="s1">&#39;python -m podgen&#39;</span><span class="p">)</span>
+        <span class="n">print_enc</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">print_enc</span> <span class="p">(</span><span class="s1">&#39;  rss              -- Generate RSS test output and print it to stdout.&#39;</span><span class="p">)</span>
+        <span class="n">print_enc</span> <span class="p">(</span><span class="s1">&#39;  &lt;file&gt;.rss       -- Generate RSS test teed and write it to file.rss.&#39;</span><span class="p">)</span>
+        <span class="n">print_enc</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># Remember what type of feed the user wants</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="kn">from</span> <span class="nn">podgen</span> <span class="k">import</span> <span class="n">Podcast</span><span class="p">,</span> <span class="n">Person</span><span class="p">,</span> <span class="n">Media</span><span class="p">,</span> <span class="n">Category</span><span class="p">,</span> <span class="n">htmlencode</span>
+    <span class="c1"># Initialize the feed</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Podcast</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Testfeed&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">authors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Person</span><span class="p">(</span><span class="s2">&quot;Lars Kiesow&quot;</span><span class="p">,</span> <span class="s2">&quot;lkiesow@uos.de&quot;</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="s1">&#39;http://example.com&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">copyright</span> <span class="o">=</span> <span class="s1">&#39;cc-by&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;This is a cool feed!&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;de&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">feed_url</span> <span class="o">=</span> <span class="s1">&#39;http://example.com/feeds/myfeed.rss&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="p">(</span><span class="s1">&#39;Technology&#39;</span><span class="p">,</span> <span class="s1">&#39;Podcasting&#39;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">explicit</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">complete</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">new_feed_url</span> <span class="o">=</span> <span class="s1">&#39;http://example.com/new-feed.rss&#39;</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;john@example.com&#39;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">xslt</span> <span class="o">=</span> <span class="s2">&quot;http://example.com/stylesheet.xsl&quot;</span>
+
+    <span class="n">e1</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">add_episode</span><span class="p">()</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;http://lernfunk.de/_MEDIAID_123#1&#39;</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;First Element&#39;</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">htmlencode</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tamen</span>
+<span class="s1">            aberramus a proposito, et, ne longius, prorsus, inquam, Piso, si ista</span>
+<span class="s1">            mala sunt, placet. Aut etiam, ut vestitum, sic sententiam habeas aliam</span>
+<span class="s1">            domesticam, aliam forensem, ut in fronte ostentatio sit, intus veritas</span>
+<span class="s1">            occultetur? Cum id fugiunt, re eadem defendunt, quae Peripatetici,</span>
+<span class="s1">            verba &lt;3.&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">link</span> <span class="o">=</span> <span class="s1">&#39;http://example.com&#39;</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="n">Person</span><span class="p">(</span><span class="s1">&#39;Lars Kiesow&#39;</span><span class="p">,</span> <span class="s1">&#39;lkiesow@uos.de&#39;</span><span class="p">)]</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">publication_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+    <span class="n">e1</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">Media</span><span class="p">(</span><span class="s2">&quot;http://example.com/episodes/loremipsum.mp3&quot;</span><span class="p">,</span> <span class="mi">454599964</span><span class="p">,</span>
+                     <span class="n">duration</span><span class="o">=</span>
+                     <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">19</span><span class="p">))</span>
+
+    <span class="c1"># Should we just print out, or write to file?</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;rss&#39;</span><span class="p">:</span>
+        <span class="c1"># Print</span>
+        <span class="n">print_enc</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">rss_str</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">arg</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">):</span>
+        <span class="c1"># Write to file</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">rss_file</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">minimize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="rss.html" title="Previous document">RSS</a>
+        </li>
+        <li>
+          <a href="../advanced/index.html" title="Next document">Advanced Topics</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background/index.html">Background</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Usage Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="podcasts.html">Podcasts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="episodes.html">Episodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Full example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/usage_guide/example.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

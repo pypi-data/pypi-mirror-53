@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>podgen.media &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for podgen.media</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    podgen.media</span>
+<span class="sd">    ~~~~~~~~~~~~</span>
+
+<span class="sd">    This file contains the Media class, which represents a pointer to a media</span>
+<span class="sd">    file.</span>
+
+<span class="sd">    :copyright: 2016, Thorben Dahl &lt;thorben@sjostrom.no&gt;</span>
+<span class="sd">    :license: FreeBSD and LGPL, see license.* for more details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Support for Python 2.7</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">future.moves.urllib.parse</span> <span class="k">import</span> <span class="n">urlparse</span>
+<span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">raise_from</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">from</span> <span class="nn">tinytag</span> <span class="k">import</span> <span class="n">TinyTag</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">podgen.not_supported_by_itunes_warning</span> <span class="k">import</span> <span class="n">NotSupportedByItunesWarning</span>
+<span class="kn">from</span> <span class="nn">podgen</span> <span class="k">import</span> <span class="n">version</span>
+
+
+<span class="k">def</span> <span class="nf">_get_new_requests_session</span><span class="p">():</span>
+    <span class="c1"># TODO: Change into condition about requests&#39; version once bug is fixed</span>
+    <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">requests_session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="n">requests_session</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> v</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> \
+                                                 <span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">.</span><span class="n">version_full_str</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Currently work-around for bug in requests</span>
+        <span class="c1"># See #3421 (https://github.com/kennethreitz/requests/issues/3421)</span>
+        <span class="n">requests_session</span> <span class="o">=</span> <span class="n">requests</span>
+    <span class="k">return</span> <span class="n">requests_session</span>
+
+
+<div class="viewcode-block" id="Media"><a class="viewcode-back" href="../../api.media.html#podgen.Media">[docs]</a><span class="k">class</span> <span class="nc">Media</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Data-oriented class representing a pointer to a media file.</span>
+
+<span class="sd">    A media file can be a sound file (most typical), video file or a document.</span>
+
+<span class="sd">    You should provide the absolute URL at which this media can be found, and</span>
+<span class="sd">    the media&#39;s file size in bytes.</span>
+
+<span class="sd">    Optionally, you can provide the type of media (expressed using MIME types).</span>
+<span class="sd">    When not given in the constructor, it will be found automatically by looking</span>
+<span class="sd">    at the url&#39;s file extension. If the url&#39;s file extension isn&#39;t supported by</span>
+<span class="sd">    iTunes, you will get an error if you don&#39;t supply the type.</span>
+
+<span class="sd">    You are also highly encouraged to provide the duration of the media.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        iTunes is lazy and will just look at the URL to figure out if</span>
+<span class="sd">        a file is of a supported file type. You must therefore ensure your URL</span>
+<span class="sd">        ends with a supported file extension.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        A warning called :class:`~podgen.NotSupportedByItunesWarning`</span>
+<span class="sd">        will be issued if your URL or type isn&#39;t compatible with iTunes. See</span>
+<span class="sd">        the Python documentation for more details on :mod:`warnings`.</span>
+
+<span class="sd">    Media types supported by iTunes:</span>
+
+<span class="sd">    * Audio</span>
+<span class="sd">      * M4A</span>
+<span class="sd">      * MP3</span>
+<span class="sd">    * Video</span>
+<span class="sd">      * MOV</span>
+<span class="sd">      * MP4</span>
+<span class="sd">      * M4V</span>
+<span class="sd">    * Document</span>
+<span class="sd">      * PDF</span>
+<span class="sd">      * EPUB</span>
+
+<span class="sd">    All attributes will always have a value, except size which can be 0 if the</span>
+<span class="sd">    size cannot be determined by any means (eg. if it&#39;s a stream) and duration</span>
+<span class="sd">    which is optional (but recommended).</span>
+
+<span class="sd">    .. seealso::</span>
+<span class="sd">       :ref:`podgen.Media-guide`</span>
+<span class="sd">          for a more gentle introduction.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_types</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;m4a&#39;</span><span class="p">:</span> <span class="s1">&#39;audio/x-m4a&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mp3&#39;</span><span class="p">:</span> <span class="s1">&#39;audio/mpeg&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mov&#39;</span><span class="p">:</span> <span class="s1">&#39;video/quicktime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mp4&#39;</span><span class="p">:</span> <span class="s1">&#39;video/mp4&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;m4v&#39;</span><span class="p">:</span> <span class="s1">&#39;video/x-m4v&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pdf&#39;</span><span class="p">:</span> <span class="s1">&#39;application/pdf&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;epub&#39;</span><span class="p">:</span> <span class="s1">&#39;document/x-epub&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">requests_session</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requests_session</span> <span class="o">=</span> <span class="n">requests_session</span> <span class="ow">or</span> <span class="n">_get_new_requests_session</span><span class="p">()</span>
+        <span class="sd">&quot;&quot;&quot;The requests.Session object which shall be used. Defaults to a new</span>
+<span class="sd">        session with PodGen as User-Agent.</span>
+
+<span class="sd">        This is used by the instance methods :meth:`~.Media.download` and</span>
+<span class="sd">        :meth:`~.Media.fetch_duration`.</span>
+<span class="sd">        :meth:`~.Media.create_from_server_response`, however, creates its own</span>
+<span class="sd">        requests Session if not given as a parameter (since it is a static</span>
+<span class="sd">        method).</span>
+
+<span class="sd">        You can set this attribute manually to set your own User-Agent and</span>
+<span class="sd">        benefit from Keep-Alive across different instances of Media.</span>
+
+<span class="sd">        :type: :class:`requests.Session`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The URL at which this media is publicly accessible.</span>
+
+<span class="sd">        Only absolute URLs are allowed, so make sure it starts with http:// or</span>
+<span class="sd">        https://. The server should support HEAD-requests and byte-range</span>
+<span class="sd">        requests.</span>
+
+<span class="sd">        Ensure you quote parts of the URL that are not supposed to carry any</span>
+<span class="sd">        special meaning to the browser, typically the name of your file.</span>
+<span class="sd">        Common offenders include the slash character when not used to separate</span>
+<span class="sd">        folders, the hash mark (#) and the question mark (?). Use</span>
+<span class="sd">        :func:`urllib.parse.quote` in Python3 and :func:`urllib.quote` in</span>
+<span class="sd">        Python2.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span>
+
+    <span class="nd">@url</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;url cannot be empty or None&quot;</span><span class="p">)</span>
+        <span class="n">parsed_url</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">file_extension</span> <span class="o">=</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">file_extension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_types</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;File extension </span><span class="si">%s</span><span class="s2"> is not supported by iTunes.&quot;</span>
+                          <span class="o">%</span> <span class="n">file_extension</span><span class="p">,</span> <span class="n">NotSupportedByItunesWarning</span><span class="p">,</span>
+                          <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">scheme</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="s2">&quot;https&quot;</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;URL scheme </span><span class="si">%s</span><span class="s2"> is not supported by iTunes. Make sure &quot;</span>
+                          <span class="s2">&quot;you use absolute URLs and HTTP or HTTPS.&quot;</span>
+                          <span class="o">%</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="n">NotSupportedByItunesWarning</span><span class="p">,</span>
+                          <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">=</span> <span class="n">url</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">file_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The file extension of :attr:`~.Media.url`. Read-only.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">urlparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The media&#39;s file size in bytes.</span>
+
+<span class="sd">        You can either provide the number of bytes as an :obj:`int`, or you can</span>
+<span class="sd">        provide a human-readable :obj:`str` with a unit, like MB or GiB.</span>
+
+<span class="sd">        An unknown size is represented as 0. This should ONLY be used in</span>
+<span class="sd">        exceptional cases, where it is theoretically impossible to determine</span>
+<span class="sd">        the file size (for example if it&#39;s a stream). Setting the size to 0</span>
+<span class="sd">        will issue a UserWarning.</span>
+
+<span class="sd">        :type: :obj:`str` (which will be converted to and stored as :obj:`int`)</span>
+<span class="sd">            or :obj:`int`</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            If you provide a string, it will be translated to int when the</span>
+<span class="sd">            assignment happens. Thus, on subsequent accesses, you will get the</span>
+<span class="sd">            resulting int, not the string you put in.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The units are case-insensitive. This means that the ``B`` is</span>
+<span class="sd">            always assumed to mean &quot;bytes&quot;, even if it is lowercase (``b``).</span>
+<span class="sd">            Likewise, ``m`` is taken to mean mega, not milli.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span>
+
+    <span class="nd">@size</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;File size must be 0 if unknown, or a positive&quot;</span>
+                                 <span class="s2">&quot; integer.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="n">size</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Size is set to 0. This should ONLY be done when &quot;</span>
+                              <span class="s2">&quot;there is no possible way to determine the &quot;</span>
+                              <span class="s2">&quot;media&#39;s size, like if the media is a stream.&quot;</span><span class="p">,</span>
+                              <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_str_to_bytes</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_str_to_bytes</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse ``size`` and return the number of bytes it names.</span>
+<span class="sd">        See :attr:`.Media.size` for more information on this conversion.&quot;&quot;&quot;</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;kb&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+            <span class="s2">&quot;kib&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+            <span class="s2">&quot;mb&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;mib&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;gb&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;gib&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;tb&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;tib&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">4</span>
+        <span class="p">}</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;bkimgt&quot;</span><span class="p">))</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;0123456789.&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">number</span> <span class="o">*</span> <span class="n">units</span><span class="p">[</span><span class="n">unit</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The unit </span><span class="si">%s</span><span class="s2"> was not recognized.&quot;</span> <span class="o">%</span> <span class="n">unit</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The MIME type of this media.</span>
+
+<span class="sd">        See https://en.wikipedia.org/wiki/Media_type for an introduction.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            If you leave out type when creating a new Media object, the</span>
+<span class="sd">            type will be auto-detected from the :attr:`~podgen.Media.url`</span>
+<span class="sd">            attribute. However, this won&#39;t happen automatically other than</span>
+<span class="sd">            during initialization. If you want to autodetect type when</span>
+<span class="sd">            assigning a new value to url, you should use</span>
+<span class="sd">            :meth:`~podgen.Media.get_type`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
+
+    <span class="nd">@type</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Type cannot be empty or None&quot;</span><span class="p">)</span>
+
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_types</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Media type </span><span class="si">%s</span><span class="s2"> is not supported by iTunes.&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">,</span>
+                          <span class="n">NotSupportedByItunesWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="nb">type</span>
+
+<div class="viewcode-block" id="Media.get_type"><a class="viewcode-back" href="../../api.media.html#podgen.Media.get_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Guess the MIME type from the URL.</span>
+
+<span class="sd">        This is used to fill in :attr:`~.Media.type` when it is not given (and</span>
+<span class="sd">        thus called implicitly by the constructor), but you can call it</span>
+<span class="sd">        yourself.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            &gt;&gt;&gt; from podgen import Media</span>
+<span class="sd">            &gt;&gt;&gt; m = Media(&quot;http://example.org/1.mp3&quot;, 136532744)</span>
+<span class="sd">            &gt;&gt;&gt; # The type was detected from the url:</span>
+<span class="sd">            &gt;&gt;&gt; m.type</span>
+<span class="sd">            audio/mpeg</span>
+<span class="sd">            &gt;&gt;&gt; # Ops, I changed my mind...</span>
+<span class="sd">            &gt;&gt;&gt; m.url = &quot;https://example.org/1.m4a&quot;</span>
+<span class="sd">            &gt;&gt;&gt; # As you can see, the type didn&#39;t change:</span>
+<span class="sd">            &gt;&gt;&gt; m.type</span>
+<span class="sd">            audio/mpeg</span>
+<span class="sd">            &gt;&gt;&gt; # So update type yourself</span>
+<span class="sd">            &gt;&gt;&gt; m.type = m.get_type(m.url)</span>
+<span class="sd">            &gt;&gt;&gt; m.type</span>
+<span class="sd">            audio/x-m4a</span>
+
+<span class="sd">        :param url: The URL which should be used to guess the MIME type.</span>
+<span class="sd">        :type url: str</span>
+<span class="sd">        :returns: The guessed MIME type.</span>
+<span class="sd">        :raises: ValueError if the MIME type couldn&#39;t be guessed from the URL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_extension</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_types</span><span class="p">[</span><span class="n">file_extension</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">raise_from</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The file extension </span><span class="si">%s</span><span class="s2"> was not recognized, which means it&#39;s &quot;</span>
+                <span class="s2">&quot;not supported by iTunes. If this is intended, please provide &quot;</span>
+                <span class="s2">&quot;the type yourself so clients can see what type of file it is.&quot;</span>
+                <span class="o">%</span> <span class="n">file_extension</span><span class="p">),</span> <span class="n">e</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The duration of the media file.</span>
+
+<span class="sd">        :type: :class:`datetime.timedelta`</span>
+<span class="sd">        :raises: :obj:`TypeError` if you try to assign anything other than</span>
+<span class="sd">            :class:`datetime.timedelta` or :obj:`None` to this attribute. Raises</span>
+<span class="sd">            :obj:`ValueError` if a negative timedelta value is given.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span>
+
+    <span class="nd">@duration</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration must be a datetime.timedelta instance!&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">duration</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected a positive timedelta, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">duration</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="n">duration</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">duration_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;:attr:`.duration`, formatted as a string according to iTunes&#39; specs.</span>
+<span class="sd">        That is, HH:MM:SS if it lasts more than an hour, or MM:SS if it lasts</span>
+<span class="sd">        less than an hour.</span>
+
+<span class="sd">        This is just an alternate, read-only view of :attr:`.duration`.</span>
+
+<span class="sd">        If :attr:`.duration` is :obj:`None`, then this will be :obj:`None` as</span>
+<span class="sd">        well.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hours</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">days</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">seconds</span> <span class="o">//</span> <span class="mi">3600</span>
+            <span class="n">minutes</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">seconds</span> <span class="o">//</span> <span class="mi">60</span><span class="p">)</span> <span class="o">%</span> <span class="mi">60</span>
+            <span class="n">seconds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">seconds</span> <span class="o">%</span> <span class="mi">60</span>
+
+            <span class="k">if</span> <span class="n">hours</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%02d</span><span class="s2">:</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Media.create_from_server_response"><a class="viewcode-back" href="../../api.media.html#podgen.Media.create_from_server_response">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create_from_server_response</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                    <span class="n">duration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">requests_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new Media object, with size and/or type fetched from the</span>
+<span class="sd">        server when not given.</span>
+
+<span class="sd">        See :meth:`.Media.fetch_duration` for a (slow!) way to fill in the</span>
+<span class="sd">        duration as well.</span>
+
+<span class="sd">        Example (assuming the server responds with Content-Length: 252345991 and</span>
+<span class="sd">        Content-Type: audio/mpeg)::</span>
+
+<span class="sd">            &gt;&gt;&gt; from podgen import Media</span>
+<span class="sd">            &gt;&gt;&gt; # Assume an episode is hosted at example.com</span>
+<span class="sd">            &gt;&gt;&gt; m = Media.create_from_server_response(</span>
+<span class="sd">            ...     &quot;http://example.com/episodes/ep1.mp3&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; m</span>
+<span class="sd">            Media(url=http://example.com/episodes/ep1.mp3, size=252345991,</span>
+<span class="sd">                type=audio/mpeg, duration=None)</span>
+
+
+<span class="sd">        :param url: The URL at which the media can be accessed right now.</span>
+<span class="sd">        :type url: str</span>
+<span class="sd">        :param size: Size of the file. Will be fetched from server if not given.</span>
+<span class="sd">        :type size: int or None</span>
+<span class="sd">        :param type: The media type of the file. Will be fetched from server if</span>
+<span class="sd">            not given.</span>
+<span class="sd">        :type type: str or None</span>
+<span class="sd">        :param duration: The media&#39;s duration.</span>
+<span class="sd">        :type duration: :class:`datetime.timedelta` or :obj:`None`</span>
+<span class="sd">        :param requests_: Either the</span>
+<span class="sd">            `requests &lt;http://docs.python-requests.org/en/master/&gt;`_ module</span>
+<span class="sd">            itself, or a :class:`requests.Session` object. Defaults to a new</span>
+<span class="sd">            :class:`~requests.Session`.</span>
+<span class="sd">        :type requests_: :mod:`requests` or :class:`requests.Session`</span>
+<span class="sd">        :returns: New instance of Media with url, size and type filled in.</span>
+<span class="sd">        :raises: The appropriate requests exceptions are thrown when networking</span>
+<span class="sd">            errors occur. RuntimeError is thrown if some information isn&#39;t</span>
+<span class="sd">            given and isn&#39;t found in the server&#39;s response.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">size</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="n">requests_</span> <span class="o">=</span> <span class="n">requests_</span> <span class="ow">or</span> <span class="n">_get_new_requests_session</span><span class="p">()</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">requests_</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">size</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Content-Length not returned by server &quot;</span>
+                                       <span class="s2">&quot;when sending HEAD request to </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="nb">type</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Content-Type header not returned by &quot;</span>
+                                       <span class="s2">&quot;server when sending HEAD request to </span><span class="si">%s</span><span class="s2">&quot;</span>
+                                       <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Media</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Media(url=</span><span class="si">%s</span><span class="s2">, size=</span><span class="si">%s</span><span class="s2">, type=</span><span class="si">%s</span><span class="s2">, duration=</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> \
+               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;requests_session&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requests_session</span> <span class="o">=</span> <span class="n">_get_new_requests_session</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Media.download"><a class="viewcode-back" href="../../api.media.html#podgen.Media.download">[docs]</a>    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Download the media file.</span>
+
+<span class="sd">        This method will block until the file is downloaded in its entirety.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The destination will not be populated atomically; if you need this,</span>
+<span class="sd">            you must give provide a temporary file as destination and rename the</span>
+<span class="sd">            file yourself.</span>
+
+<span class="sd">        :param destination: Where to save the media file. Either a filename,</span>
+<span class="sd">            or a file-like object. The file-like object will *not* be closed by</span>
+<span class="sd">            PodGen.</span>
+<span class="sd">        :type destination: :obj:`fd` or :obj:`str`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">requests_session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">destination_is_fd</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">destination_is_fd</span><span class="p">:</span>
+                <span class="n">fd</span> <span class="o">=</span> <span class="n">destination</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">chunk</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">InterruptedError</span><span class="p">):</span>
+            <span class="c1"># Don&#39;t leave half-finished files laying around.</span>
+            <span class="k">if</span> <span class="n">fd</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">destination_is_fd</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fd</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">destination_is_fd</span><span class="p">:</span>
+                <span class="c1"># Close the file we&#39;ve opened (doesn&#39;t hurt to close twice)</span>
+                <span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Media.populate_duration_from"><a class="viewcode-back" href="../../api.media.html#podgen.Media.populate_duration_from">[docs]</a>    <span class="k">def</span> <span class="nf">populate_duration_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Populate :attr:`.Media.duration` by analyzing the given file.</span>
+
+<span class="sd">        Use this method when you have the media file on the local file system.</span>
+<span class="sd">        Use :meth:`.Media.fetch_duration` if you need to download the file from</span>
+<span class="sd">        the server.</span>
+
+<span class="sd">        :param filename: Path to the media file which shall be used to determine</span>
+<span class="sd">            this media&#39;s duration. The file extension must match its file type,</span>
+<span class="sd">            since it is used to determine what type of media file it is. For</span>
+<span class="sd">            a list of supported formats, see</span>
+<span class="sd">            https://pypi.python.org/pypi/tinytag/</span>
+<span class="sd">        :type filename: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_duration_of</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_duration_of</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the duration of the media file located at ``filename``.</span>
+
+<span class="sd">        Use :meth:`.Media.populate_duration_from` if you want to populate the</span>
+<span class="sd">        duration property of a Media instance using a local file.</span>
+
+<span class="sd">        :param filename: Path to the media file which shall be used to determine</span>
+<span class="sd">            this media&#39;s duration. The file extension must match its file type,</span>
+<span class="sd">            since it is used to determine what type of media file it is. For</span>
+<span class="sd">            a list of supported formats, see</span>
+<span class="sd">            https://pypi.python.org/pypi/tinytag/</span>
+<span class="sd">        :type filename: str</span>
+<span class="sd">        :returns: datetime.timedelta</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">TinyTag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Media.fetch_duration"><a class="viewcode-back" href="../../api.media.html#podgen.Media.fetch_duration">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Download :attr:`.Media.url` locally and use it to populate</span>
+<span class="sd">        :attr:`.Media.duration`.</span>
+
+<span class="sd">        Use this method when you don&#39;t have the media file on the local file</span>
+<span class="sd">        system. Use :meth:`~.Media.populate_duration_from` otherwise.</span>
+
+<span class="sd">        This method will take quite some time, since the media file must be</span>
+<span class="sd">        downloaded before it can be analyzed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span>
+                    <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_extension</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">name</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">populate_duration_from</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage_guide/index.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Adding new tags &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../contributing.html" />
+    <link rel="prev" title="Using PubSubHubbub" href="pubsubhubbub.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="pubsubhubbub.html" title="Previous document">Using PubSubHubbub</a>
+        </li>
+        <li>
+          <a href="../contributing.html" title="Next document">Contributing</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="adding-new-tags">
+<h1>Adding new tags<a class="headerlink" href="#adding-new-tags" title="Permalink to this headline">¶</a></h1>
+<p>Are there XML elements you want to use that aren’t supported by PodGen? If so,
+you should be able to add them in using inheritance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There hasn’t been a focus on making it easy to extend PodGen.
+Future versions may provide better support for this.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Feel free to add a feature request to <a class="reference external" href="https://github.com/tobinus/python-podgen/issues">GitHub Issues</a> if you think PodGen
+should support a certain element out of the box.</p>
+</div>
+<div class="section" id="quick-how-to">
+<h2>Quick How-to<a class="headerlink" href="#quick-how-to" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Create new class that extends <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a>.</p></li>
+<li><p>Add the new attribute.</p></li>
+<li><p>Override <code class="xref py py-meth docutils literal notranslate"><span class="pre">_create_rss()</span></code>, call <code class="docutils literal notranslate"><span class="pre">super()._create_rss()</span></code>,
+add the new element to its result and return the new tree.</p></li>
+</ol>
+<p>You can do the same with <a class="reference internal" href="../api.episode.html#podgen.Episode" title="podgen.Episode"><code class="xref py py-class docutils literal notranslate"><span class="pre">Episode</span></code></a>, if you replace
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">_create_rss()</span></code> with <code class="xref py py-meth docutils literal notranslate"><span class="pre">rss_entry()</span></code> above.</p>
+<p>There are plenty of small quirks you have to keep in mind. You are strongly
+encouraged to read the example below.</p>
+<div class="section" id="using-namespaces">
+<h3>Using namespaces<a class="headerlink" href="#using-namespaces" title="Permalink to this headline">¶</a></h3>
+<p>If you’ll use RSS elements from another namespace, you must make sure you
+update the <code class="xref py py-attr docutils literal notranslate"><span class="pre">_nsmap</span></code> attribute of <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a>
+(you cannot define new namespaces from an episode!). It is a dictionary with the
+prefix as key and the URI for that namespace as value. To use a namespace, you
+must put the URI inside curly braces, with the tag name following right after
+(outside the braces). For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;{</span><span class="si">%s</span><span class="s2">}link&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span><span class="p">[</span><span class="s1">&#39;atom&#39;</span><span class="p">]</span>  <span class="c1"># This will render as atom:link</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="http://lxml.de/api/index.html">lxml API documentation</a> is a pain to read, so just look at the <a class="reference external" href="https://github.com/tobinus/python-podgen/blob/master/podgen/podcast.py">source code
+for PodGen</a> and the example below.</p>
+</div>
+</div>
+<div class="section" id="example-adding-a-ttl-element">
+<h2>Example: Adding a ttl element<a class="headerlink" href="#example-adding-a-ttl-element" title="Permalink to this headline">¶</a></h2>
+<p>The examples here assume version 3 of Python is used.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ttl</span></code> is an RSS element and stands for “time to live”, and can only be an
+integer which indicates how many minutes the podcatcher can rely on its copy of
+the feed before refreshing (or something like that). There is confusion as to
+what it is supposed to mean (max refresh frequency? min refresh frequency?),
+which is why it is not included in PodGen. If you use it, you should treat it as
+the <strong>recommended</strong> update period (source: <a class="reference external" href="http://www.rssboard.org/rss-profile#element-channel-ttl">RSS Best Practices</a>).</p>
+<div class="section" id="using-traditional-inheritance">
+<h3>Using traditional inheritance<a class="headerlink" href="#using-traditional-inheritance" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The module used to create the XML tree and generate the XML</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="k">import</span> <span class="n">etree</span>
+
+<span class="c1"># The class we will extend</span>
+<span class="kn">from</span> <span class="nn">podgen</span> <span class="k">import</span> <span class="n">Podcast</span>
+
+
+<span class="k">class</span> <span class="nc">PodcastWithTtl</span><span class="p">(</span><span class="n">Podcast</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is an extension of Podcast, which supports ttl.</span>
+
+<span class="sd">    You gain access to ttl by creating a new instance of this class instead</span>
+<span class="sd">    of Podcast.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Initialize the ttl value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ttl</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Call Podcast&#39;s constructor (this will set ttl using setattr if</span>
+        <span class="c1"># given as argument to the constructor, hence why self.__ttl is</span>
+        <span class="c1"># defined before we do this)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># If we were to use another namespace, we would add this here:</span>
+        <span class="c1"># self._nsmap[&#39;prefix&#39;] = &quot;URI&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ttl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Your suggestion for how many minutes podcatchers should wait</span>
+<span class="sd">        before refreshing the feed.</span>
+
+<span class="sd">        ttl stands for &quot;time to live&quot;.</span>
+
+<span class="sd">        :type: :obj:`int`</span>
+<span class="sd">        :RSS: ttl</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># By using @property and @ttl.setter, we encapsulate the ttl field</span>
+        <span class="c1"># so that we can check the value that is assigned to it.</span>
+        <span class="c1"># If you don&#39;t need this, you could just rename self.__ttl to</span>
+        <span class="c1"># self.ttl and remove those two methods.</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ttl</span>
+
+    <span class="nd">@ttl</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ttl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl</span><span class="p">):</span>
+        <span class="c1"># Try to convert to int</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ttl_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;ttl expects an integer, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ttl</span><span class="p">)</span>
+        <span class="c1"># Is this negative?</span>
+        <span class="k">if</span> <span class="n">ttl_int</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Negative ttl values aren&#39;t accepted, got </span><span class="si">%s</span><span class="s2">&quot;</span>
+                             <span class="o">%</span> <span class="n">ttl_int</span><span class="p">)</span>
+        <span class="c1"># All checks passed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ttl</span> <span class="o">=</span> <span class="n">ttl_int</span>
+
+    <span class="k">def</span> <span class="nf">_create_rss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Let Podcast generate the lxml etree (adding the standard elements)</span>
+        <span class="n">rss</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_create_rss</span><span class="p">()</span>
+        <span class="c1"># We must get the channel element, since we want to add subelements</span>
+        <span class="c1"># to it.</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">rss</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;channel&quot;</span><span class="p">)</span>
+        <span class="c1"># Only add the ttl element if it has been populated.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ttl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># First create our new subelement of channel.</span>
+            <span class="n">ttl</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;ttl&#39;</span><span class="p">)</span>
+            <span class="c1"># If we were to use another namespace, we would instead do this:</span>
+            <span class="c1"># ttl = etree.SubElement(channel,</span>
+            <span class="c1">#                        &#39;{%s}ttl&#39; % self._nsmap[&#39;prefix&#39;])</span>
+
+            <span class="c1"># Then, fill it with the ttl value</span>
+            <span class="n">ttl</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ttl</span><span class="p">)</span>
+
+        <span class="c1"># Return the new etree, now with ttl</span>
+        <span class="k">return</span> <span class="n">rss</span>
+
+<span class="c1"># How to use the new class (normally, you would put this somewhere else)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">myPodcast</span> <span class="o">=</span> <span class="n">PodcastWithTtl</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="n">website</span><span class="o">=</span><span class="s2">&quot;http://example.org&quot;</span><span class="p">,</span>
+                               <span class="n">explicit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Testing ttl&quot;</span><span class="p">)</span>
+    <span class="n">myPodcast</span><span class="o">.</span><span class="n">ttl</span> <span class="o">=</span> <span class="mi">90</span>  <span class="c1"># or set ttl=90 in the constructor</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">myPodcast</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-mixins">
+<h3>Using mixins<a class="headerlink" href="#using-mixins" title="Permalink to this headline">¶</a></h3>
+<p>To use mixins, you cannot make the class with the <code class="docutils literal notranslate"><span class="pre">ttl</span></code> functionality inherit
+<a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a>. Instead, it must inherit nothing. Other than that, the code
+will be the same, so it doesn’t make sense to repeat it here.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TtlMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+
+<span class="c1"># How to use the new mixin</span>
+<span class="k">class</span> <span class="nc">PodcastWithTtl</span><span class="p">(</span><span class="n">TtlMixin</span><span class="p">,</span> <span class="n">Podcast</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="n">myPodcast</span> <span class="o">=</span> <span class="n">PodcastWithTtl</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="n">website</span><span class="o">=</span><span class="s2">&quot;http://example.org&quot;</span><span class="p">,</span>
+                           <span class="n">explicit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Testing ttl&quot;</span><span class="p">)</span>
+<span class="n">myPodcast</span><span class="o">.</span><span class="n">ttl</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">myPodcast</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note the order of the mixins in the class declaration. You should read it as
+the path Python takes when looking for a method. First Python checks
+<code class="docutils literal notranslate"><span class="pre">PodcastWithTtl</span></code>, then <code class="docutils literal notranslate"><span class="pre">TtlMixin</span></code> and finally <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a>. This is
+also the order the methods are called when chained together using <a class="reference external" href="https://docs.python.org/3/library/functions.html#super" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a>.
+If you had Podcast first, <code class="xref py py-meth docutils literal notranslate"><span class="pre">Podcast._create_rss()</span></code> method would be run
+first, and since it never calls <code class="docutils literal notranslate"><span class="pre">super()._create_rss()</span></code>, the <code class="docutils literal notranslate"><span class="pre">TtlMixin</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">_create_rss</span></code> would never be run. Therefore, you should always have
+<a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a> last in that list.</p>
+</div>
+<div class="section" id="which-approach-is-best">
+<h3>Which approach is best?<a class="headerlink" href="#which-approach-is-best" title="Permalink to this headline">¶</a></h3>
+<p>The advantage of mixins isn’t really displayed here, but it will become
+apparent as you add more and more extensions. Say you define 5 different mixins,
+which all add exactly one more element to <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a>. If you used traditional
+inheritance, you would have to make sure each of those 5 subclasses made up a
+tree. That is, class 1 would inherit <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a>. Class 2 would have to inherit
+class 1, class 3 would have to inherit class 2 and so on. If two of the classes
+had the same superclass, you could get screwed.</p>
+<p>By using mixins, you can put them together however you want. Perhaps for one
+podcast you only need <code class="docutils literal notranslate"><span class="pre">ttl</span></code>, while for another podcast you want to use the
+<code class="docutils literal notranslate"><span class="pre">textInput</span></code> element in addition to <code class="docutils literal notranslate"><span class="pre">ttl</span></code>, and another podcast requires the
+<code class="docutils literal notranslate"><span class="pre">textInput</span></code> element together with the <code class="docutils literal notranslate"><span class="pre">comments</span></code> element. Using traditional
+inheritance, you would have to duplicate code for <code class="docutils literal notranslate"><span class="pre">textInput</span></code> in two classes. Not
+so with mixins:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PodcastWithTtl</span><span class="p">(</span><span class="n">TtlMixin</span><span class="p">,</span> <span class="n">Podcast</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">PodcastWithTtlAndTextInput</span><span class="p">(</span><span class="n">TtlMixin</span><span class="p">,</span> <span class="n">TextInputMixin</span><span class="p">,</span> <span class="n">Podcast</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">PodcastWithTextInputAndComments</span><span class="p">(</span><span class="n">TextInputMixin</span><span class="p">,</span> <span class="n">CommentsMixin</span><span class="p">,</span>
+                                      <span class="n">Podcast</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the list of elements you want to use varies between different podcasts,
+mixins are the way to go. On the other hand, mixins are overkill if you are okay
+with one giant class with all the elements you need.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="pubsubhubbub.html" title="Previous document">Using PubSubHubbub</a>
+        </li>
+        <li>
+          <a href="../contributing.html" title="Next document">Contributing</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage_guide/index.html">Usage Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Advanced Topics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pubsubhubbub.html">Using PubSubHubbub</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Adding new tags</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quick-how-to">Quick How-to</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-adding-a-ttl-element">Example: Adding a ttl element</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/advanced/extending.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>podgen.category &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for podgen.category</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    podgen.category</span>
+<span class="sd">    ~~~~~~~~~~~~~~~</span>
+
+<span class="sd">    This module contains Category, which represents a single iTunes category.</span>
+
+<span class="sd">    :copyright: 2016, Thorben Dahl &lt;thorben@sjostrom.no&gt;</span>
+<span class="sd">    :license: FreeBSD and LGPL, see license.* for more details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Support for Python 2.7</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="Category"><a class="viewcode-back" href="../../api.category.html#podgen.Category">[docs]</a><span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Immutable class representing an iTunes category.</span>
+
+<span class="sd">    See https://help.apple.com/itc/podcasts_connect/#/itc9267a2f12 for an</span>
+<span class="sd">    overview of the available categories and their subcategories.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The categories are case-insensitive, and you may escape ampersands.</span>
+<span class="sd">        The category and subcategory will end up properly capitalized and</span>
+<span class="sd">        with unescaped ampersands.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; from podgen import Category</span>
+<span class="sd">        &gt;&gt;&gt; c = Category(&quot;Music&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; c.category</span>
+<span class="sd">        Music</span>
+<span class="sd">        &gt;&gt;&gt; c.subcategory</span>
+<span class="sd">        None</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; d = Category(&quot;games &amp;amp; hobbies&quot;, &quot;Video games&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; d.category</span>
+<span class="sd">        Games &amp; Hobbies</span>
+<span class="sd">        &gt;&gt;&gt; d.subcategory</span>
+<span class="sd">        Video Games</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_categories</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Arts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Design&#39;</span><span class="p">,</span> <span class="s1">&#39;Fashion &amp; Beauty&#39;</span><span class="p">,</span> <span class="s1">&#39;Food&#39;</span><span class="p">,</span> <span class="s1">&#39;Literature&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Performing Arts&#39;</span><span class="p">,</span> <span class="s1">&#39;Visual Arts&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Business&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Business News&#39;</span><span class="p">,</span> <span class="s1">&#39;Careers&#39;</span><span class="p">,</span> <span class="s1">&#39;Investing&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;Management &amp; Marketing&#39;</span><span class="p">,</span> <span class="s1">&#39;Shopping&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Comedy&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;Education&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="s1">&#39;Education Technology&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;Higher Education&#39;</span><span class="p">,</span> <span class="s1">&#39;K-12&#39;</span><span class="p">,</span> <span class="s1">&#39;Language Courses&#39;</span><span class="p">,</span> <span class="s1">&#39;Training&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Games &amp; Hobbies&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Automotive&#39;</span><span class="p">,</span> <span class="s1">&#39;Aviation&#39;</span><span class="p">,</span> <span class="s1">&#39;Hobbies&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;Other Games&#39;</span><span class="p">,</span> <span class="s1">&#39;Video Games&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Government &amp; Organizations&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Local&#39;</span><span class="p">,</span> <span class="s1">&#39;National&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Profit&#39;</span><span class="p">,</span>
+                                       <span class="s1">&#39;Regional&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Health&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alternative Health&#39;</span><span class="p">,</span> <span class="s1">&#39;Fitness &amp; Nutrition&#39;</span><span class="p">,</span> <span class="s1">&#39;Self-Help&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;Sexuality&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Kids &amp; Family&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;Music&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;News &amp; Politics&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;Religion &amp; Spirituality&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Buddhism&#39;</span><span class="p">,</span> <span class="s1">&#39;Christianity&#39;</span><span class="p">,</span> <span class="s1">&#39;Hinduism&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Islam&#39;</span><span class="p">,</span> <span class="s1">&#39;Judaism&#39;</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">,</span> <span class="s1">&#39;Spirituality&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Science &amp; Medicine&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Medicine&#39;</span><span class="p">,</span> <span class="s1">&#39;Natural Sciences&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;Social Sciences&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Society &amp; Culture&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;History&#39;</span><span class="p">,</span> <span class="s1">&#39;Personal Journals&#39;</span><span class="p">,</span> <span class="s1">&#39;Philosophy&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;Places &amp; Travel&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Sports &amp; Recreation&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Amateur&#39;</span><span class="p">,</span> <span class="s1">&#39;College &amp; High School&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;Outdoor&#39;</span><span class="p">,</span> <span class="s1">&#39;Professional&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;Technology&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Gadgets&#39;</span><span class="p">,</span> <span class="s1">&#39;Tech News&#39;</span><span class="p">,</span> <span class="s1">&#39;Podcasting&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;Software How-To&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;TV &amp; Film&#39;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">subcategory</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new Category object. See the class description of</span>
+<span class="sd">        :class:´~podgen.category.Category`.</span>
+
+<span class="sd">        :param category: Category of the podcast.</span>
+<span class="sd">        :type category: str</span>
+<span class="sd">        :param subcategory: (Optional) Subcategory of the podcast.</span>
+<span class="sd">        :type subcategory: str or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">category</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;category must be provided, was </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">category</span><span class="p">)</span>
+        <span class="c1"># Do a case-insensitive search for the category</span>
+        <span class="n">search_category</span> <span class="o">=</span> <span class="n">category</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">actual_category</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_categories</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">actual_category</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">search_category</span><span class="p">:</span>
+                <span class="c1"># We found it</span>
+                <span class="n">canonical_category</span> <span class="o">=</span> <span class="n">actual_category</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># no break</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid category &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">category</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__category</span> <span class="o">=</span> <span class="n">canonical_category</span>
+
+        <span class="c1"># Do a case-insensitive search for the subcategory, if provided</span>
+        <span class="n">canonical_subcategory</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">subcategory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">search_subcategory</span> <span class="o">=</span> <span class="n">subcategory</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">actual_subcategory</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_categories</span><span class="p">[</span><span class="n">canonical_category</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">actual_subcategory</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">search_subcategory</span><span class="p">:</span>
+                    <span class="n">canonical_subcategory</span> <span class="o">=</span> <span class="n">actual_subcategory</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># no break</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid subcategory &quot;</span><span class="si">%s</span><span class="s1">&quot; under category &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span>
+                                 <span class="o">%</span> <span class="p">(</span><span class="n">subcategory</span><span class="p">,</span> <span class="n">canonical_category</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__subcategory</span> <span class="o">=</span> <span class="n">canonical_subcategory</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The category represented by this object. Read-only.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__category</span>
+        <span class="c1"># Make this attribute read-only by not implementing setter</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">subcategory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The subcategory this object represents. Read-only.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__subcategory</span>
+        <span class="c1"># Make this attribute read-only by not implementing setter</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Category(category=</span><span class="si">%s</span><span class="s1">, subcategory=</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> \
+               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage_guide/index.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

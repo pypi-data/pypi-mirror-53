@@ -1,0 +1,1295 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>podgen.podcast &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for podgen.podcast</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    podgen.feed</span>
+<span class="sd">    ~~~~~~~~~~~~</span>
+
+<span class="sd">    :copyright: 2013, Lars Kiesow &lt;lkiesow@uos.de&gt; and 2016, Thorben Dahl</span>
+<span class="sd">        &lt;thorben@sjostrom.no&gt;</span>
+
+<span class="sd">    :license: FreeBSD and LGPL, see license.* for more details.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Support for Python 2.7</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">iteritems</span>
+
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="k">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">dateutil.parser</span>
+<span class="kn">import</span> <span class="nn">dateutil.tz</span>
+<span class="kn">from</span> <span class="nn">podgen.episode</span> <span class="k">import</span> <span class="n">Episode</span>
+<span class="kn">from</span> <span class="nn">podgen.not_supported_by_itunes_warning</span> <span class="k">import</span> <span class="n">NotSupportedByItunesWarning</span>
+<span class="kn">from</span> <span class="nn">podgen.util</span> <span class="k">import</span> <span class="n">ensure_format</span><span class="p">,</span> <span class="n">formatRFC2822</span><span class="p">,</span> <span class="n">listToHumanreadableStr</span><span class="p">,</span> \
+    <span class="n">htmlencode</span>
+<span class="kn">from</span> <span class="nn">podgen.person</span> <span class="k">import</span> <span class="n">Person</span>
+<span class="kn">import</span> <span class="nn">podgen.version</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">podgen.compat</span> <span class="k">import</span> <span class="n">string_types</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<span class="n">_feedgen_version</span> <span class="o">=</span> <span class="n">podgen</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">version_str</span>
+
+
+<div class="viewcode-block" id="Podcast"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast">[docs]</a><span class="k">class</span> <span class="nc">Podcast</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class representing one podcast feed.</span>
+
+<span class="sd">    The following attributes are mandatory:</span>
+
+<span class="sd">    * :attr:`~podgen.Podcast.name`</span>
+<span class="sd">    * :attr:`~podgen.Podcast.website`</span>
+<span class="sd">    * :attr:`~podgen.Podcast.description`</span>
+<span class="sd">    * :attr:`~podgen.Podcast.explicit`</span>
+
+<span class="sd">    All attributes can be assigned :obj:`None` in addition to the types</span>
+<span class="sd">    specified below. Types etc. are checked during assignment, to help you</span>
+<span class="sd">    discover errors earlier. Duck typing is employed wherever a class in podgen</span>
+<span class="sd">    is expected.</span>
+
+<span class="sd">    There is a **shortcut** you can use when creating new Podcast objects, that</span>
+<span class="sd">    lets you populate the attributes using the constructor. Use keyword</span>
+<span class="sd">    arguments with the **attribute name as keyword** and the desired value as</span>
+<span class="sd">    value. As an example::</span>
+
+<span class="sd">        &gt;&gt;&gt; import podgen</span>
+<span class="sd">        &gt;&gt;&gt; # The following...</span>
+<span class="sd">        &gt;&gt;&gt; p = Podcast()</span>
+<span class="sd">        &gt;&gt;&gt; p.name = &quot;The Test Podcast&quot;</span>
+<span class="sd">        &gt;&gt;&gt; p.website = &quot;http://example.com&quot;</span>
+<span class="sd">        &gt;&gt;&gt; # ...is the same as this:</span>
+<span class="sd">        &gt;&gt;&gt; p = Podcast(</span>
+<span class="sd">        ...     name=&quot;The Test Podcast&quot;,</span>
+<span class="sd">        ...     website=&quot;http://example.com&quot;,</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">    Of course, you can do this for as many (or few) attributes as you like, and</span>
+<span class="sd">    you can still set the attributes afterwards, like always.</span>
+
+<span class="sd">    :raises: TypeError if you use a keyword which isn&#39;t recognized as an</span>
+<span class="sd">        attribute. ValueError if you use a value which isn&#39;t compatible with</span>
+<span class="sd">        the attribute (just like when you assign it manually).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__episodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="sd">&quot;&quot;&quot;The list used by self.episodes.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__episode_class</span> <span class="o">=</span> <span class="n">Episode</span>
+        <span class="sd">&quot;&quot;&quot;The internal value used by self.Episode.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;atom&#39;</span><span class="p">:</span>  <span class="s1">&#39;http://www.w3.org/2005/Atom&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;http://purl.org/rss/1.0/modules/content/&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;itunes&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.itunes.com/dtds/podcast-1.0.dtd&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dc&#39;</span><span class="p">:</span> <span class="s1">&#39;http://purl.org/dc/elements/1.1/&#39;</span>
+        <span class="p">}</span>
+        <span class="sd">&quot;&quot;&quot;A dictionary which maps namespace prefixes to their namespace URI.</span>
+<span class="sd">        Add a new entry here if you want to use that namespace.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1">## RSS</span>
+        <span class="c1"># http://www.rssboard.org/rss-specification</span>
+        <span class="c1"># Mandatory:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The name of the podcast as a :obj:`str`. It should be a human</span>
+<span class="sd">        readable title. Often the same as the title of the associated website.</span>
+<span class="sd">        This is mandatory and must not be blank.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: title</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The absolute URL of this podcast&#39;s website.</span>
+
+<span class="sd">        This is one of the mandatory attributes.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: link</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The description of the podcast, which is a phrase or sentence</span>
+<span class="sd">        describing it to potential new subscribers. It is mandatory for RSS</span>
+<span class="sd">        feeds, and is shown under the podcast&#39;s name on the iTunes store page.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">explicit</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;Whether this podcast may be inappropriate for children or not.</span>
+
+<span class="sd">        This is one of the mandatory attributes, and can seen as the</span>
+<span class="sd">        default for episodes. Individual episodes can be marked as explicit</span>
+<span class="sd">        or clean independently from the podcast.</span>
+
+<span class="sd">        If you set this to ``True``, an &quot;explicit&quot; parental advisory</span>
+<span class="sd">        graphic will appear next to your podcast artwork on the iTunes Store and</span>
+<span class="sd">        in the Name column in iTunes. If it is set to ``False``,</span>
+<span class="sd">        the parental advisory type is considered Clean, meaning that no explicit</span>
+<span class="sd">        language or adult content is included anywhere in the episodes, and a</span>
+<span class="sd">        &quot;clean&quot; graphic will appear.</span>
+
+<span class="sd">        :type: :obj:`bool`</span>
+<span class="sd">        :RSS: itunes:explicit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Optional:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">copyright</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The copyright notice for content in this podcast.</span>
+
+<span class="sd">        This should be human-readable. For example, &quot;Copyright 2016 Example</span>
+<span class="sd">        Radio&quot;.</span>
+
+<span class="sd">        Note that even if you leave out the copyright notice, your content is</span>
+<span class="sd">        still protected by copyright (unless anything else is indicated), since</span>
+<span class="sd">        you do not need a copyright statement for something to be protected by</span>
+<span class="sd">        copyright. If you intend to put the podcast in public domain or license</span>
+<span class="sd">        it under a Creative Commons license, you should say so in the copyright</span>
+<span class="sd">        notice.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: copyright&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__docs</span> <span class="o">=</span> <span class="s1">&#39;http://www.rssboard.org/rss-specification&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_feedgen_generator_str</span>
+        <span class="sd">&quot;&quot;&quot;A string identifying the software that generated this RSS feed.</span>
+<span class="sd">        Defaults to a string identifying PodGen.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: generator</span>
+
+<span class="sd">        .. seealso::</span>
+
+<span class="sd">           The :py:meth:`.set_generator` method</span>
+<span class="sd">              A convenient way to set the generator value and include version</span>
+<span class="sd">              and url.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The language of the podcast.</span>
+
+<span class="sd">        This allows aggregators to group all Italian</span>
+<span class="sd">        language podcasts, for example, on a single page.</span>
+
+<span class="sd">        It must be a two-letter code, as found in ISO639-1, with the</span>
+<span class="sd">        possibility of specifying subcodes (eg. en-US for American English).</span>
+<span class="sd">        See http://www.rssboard.org/rss-language-codes and</span>
+<span class="sd">        http://www.loc.gov/standards/iso639-2/php/code_list.php</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: language</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__last_updated</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__authors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__publication_date</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__skip_hours</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__skip_days</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__web_master</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__feed_url</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1">## ITunes tags</span>
+        <span class="c1"># http://www.apple.com/itunes/podcasts/specs.html#rss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">withhold_from_itunes</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="sd">&quot;&quot;&quot;Prevent the entire podcast from appearing in the iTunes podcast</span>
+<span class="sd">        directory.</span>
+
+<span class="sd">        Note that this will affect more than iTunes, since most podcatchers use</span>
+<span class="sd">        the iTunes catalogue to implement the search feature. Listeners will</span>
+<span class="sd">        still be able to subscribe by adding the feed&#39;s address manually.</span>
+
+<span class="sd">        If you don&#39;t intend to submit this podcast to iTunes, you can set</span>
+<span class="sd">        this to ``True`` as a way of giving iTunes the middle finger, and</span>
+<span class="sd">        perhaps more importantly, preventing others from submitting it as well.</span>
+
+<span class="sd">        Set it to ``True`` to withhold the entire podcast from iTunes. It is set</span>
+<span class="sd">        to ``False`` by default, of course.</span>
+
+<span class="sd">        :type: :obj:`bool`</span>
+<span class="sd">        :RSS: itunes:block</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__category</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__image</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__complete</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_feed_url</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;When set, tell iTunes that your feed has moved to this URL.</span>
+
+<span class="sd">        After adding this attribute, you should maintain the old feed</span>
+<span class="sd">        for 48 hours before retiring it. At that point, iTunes will have updated</span>
+<span class="sd">        the directory with the new feed URL.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: itunes:new-feed-url</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">            iTunes supports this mechanic of changing your feed&#39;s location.</span>
+<span class="sd">            However, you cannot assume the same of everyone else who has</span>
+<span class="sd">            subscribed to this podcast. Therefore, you should NEVER stop</span>
+<span class="sd">            supporting an old location for your podcast. Instead, you should</span>
+<span class="sd">            create HTTP redirects so those with the old address are redirected</span>
+<span class="sd">            to your new address, and keep those redirects up for all eternity.</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">            Make sure the new URL you set is correct, or else you&#39;re making</span>
+<span class="sd">            people switch to a URL that doesn&#39;t work!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__owner</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">subtitle</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The subtitle for your podcast, shown mainly as a very short</span>
+<span class="sd">        description on iTunes. The subtitle displays best if it is only a few</span>
+<span class="sd">        words long, like a short slogan.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: itunes:subtitle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pubsubhubbub</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;The URL at which the PubSubHubbub_ hub can be found.</span>
+
+<span class="sd">        Podcatchers can tell the hub that they want to be notified when a new</span>
+<span class="sd">        episode is released. This way, they don&#39;t need to check for new episodes</span>
+<span class="sd">        every few hours; instead, the episodes arrive at their doorstep as soon</span>
+<span class="sd">        as they&#39;re published, through a notification sent by the hub.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: atom:link with ``rel=&quot;hub&quot;``</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">           Do NOT set this attribute if you haven&#39;t set up mechanics for</span>
+<span class="sd">           notifying the hub of new episodes. Doing so could make it appear to</span>
+<span class="sd">           your listeners like there is no new content for this feed. See the</span>
+<span class="sd">           guide.</span>
+
+<span class="sd">        .. seealso::</span>
+<span class="sd">           The :doc:`guide on how to use PubSubHubbub &lt;/advanced/pubsubhubbub&gt;`</span>
+<span class="sd">              A step-for-step guide with examples.</span>
+
+<span class="sd">        .. _PubSubHubbub: https://en.wikipedia.org/wiki/PubSubHubbub</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">xslt</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Absolute URL to the XSLT file which web browsers should use with this</span>
+<span class="sd">        feed.</span>
+
+<span class="sd">        `XSLT`_ stands for Extensible Stylesheet Language Transformations and</span>
+<span class="sd">        can be regarded as a template language made for transforming XML into</span>
+<span class="sd">        XHTML (among other things). You can use it to avoid giving users an</span>
+<span class="sd">        ugly XML listing when trying to subscribe to your podcast; this</span>
+<span class="sd">        technique is in fact employed by most podcast publishers today.</span>
+<span class="sd">        In a web browser, it looks like a web page, and to the</span>
+<span class="sd">        podcatchers, it looks like a normal podcast feed. To put it another</span>
+<span class="sd">        way, the very same URL can be used as an information web page about the</span>
+<span class="sd">        podcast as well as the URL you subscribe to in podcatchers.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: Processor instruction right after the xml declaration called</span>
+<span class="sd">            ``xml-stylesheet``, with type set to ``text/xsl`` and href set to</span>
+<span class="sd">            this attribute.</span>
+
+<span class="sd">        .. _XSLT: https://en.wikipedia.org/wiki/XSLT</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Populate the podcast with the keyword arguments</span>
+        <span class="k">for</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Keyword argument </span><span class="si">%s</span><span class="s2"> (with value </span><span class="si">%s</span><span class="s2">) doesn&#39;t &quot;</span>
+                                <span class="s2">&quot;match any attribute in Podcast.&quot;</span> <span class="o">%</span>
+                                <span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">episodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List of :class:`.Episode` objects that are part of this podcast.</span>
+
+<span class="sd">        See :py:meth:`.add_episode` for an easy way to create new episodes and</span>
+<span class="sd">        assign them to this podcast in one call.</span>
+
+<span class="sd">        :type: :obj:`list` of :class:`podgen.Episode`</span>
+<span class="sd">        :RSS: item elements</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__episodes</span>
+
+    <span class="nd">@episodes</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">episodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episodes</span><span class="p">):</span>
+        <span class="c1"># Ensure it is a list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__episodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">episodes</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">episodes</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> \
+            <span class="k">else</span> <span class="n">episodes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">episode_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Class used to represent episodes.</span>
+
+<span class="sd">        This is used by :py:meth:`.add_episode` when creating new episode</span>
+<span class="sd">        objects, and you, too, may use it when creating episodes.</span>
+
+<span class="sd">        By default, this property points to :py:class:`.Episode`.</span>
+
+<span class="sd">        When assigning a new class to ``episode_class``, you must make sure that</span>
+<span class="sd">        the new value (1) is a class and not an instance, and (2) that it is a</span>
+<span class="sd">        subclass of Episode (or is Episode itself).</span>
+
+<span class="sd">        Example of use::</span>
+
+<span class="sd">            &gt;&gt;&gt; # Create new podcast</span>
+<span class="sd">            &gt;&gt;&gt; from podgen import Podcast, Episode</span>
+<span class="sd">            &gt;&gt;&gt; p = Podcast()</span>
+
+<span class="sd">            &gt;&gt;&gt; # Normal way of creating new episodes</span>
+<span class="sd">            &gt;&gt;&gt; episode1 = Episode()</span>
+<span class="sd">            &gt;&gt;&gt; p.episodes.append(episode1)</span>
+
+<span class="sd">            &gt;&gt;&gt; # Or use add_episode (and thus episode_class indirectly)</span>
+<span class="sd">            &gt;&gt;&gt; episode2 = p.add_episode()</span>
+
+<span class="sd">            &gt;&gt;&gt; # Or use episode_class directly</span>
+<span class="sd">            &gt;&gt;&gt; episode3 = p.episode_class()</span>
+<span class="sd">            &gt;&gt;&gt; p.episodes.append(episode3)</span>
+
+<span class="sd">            &gt;&gt;&gt; # Say you want to use AlternateEpisode class instead of Episode</span>
+<span class="sd">            &gt;&gt;&gt; from mymodule import AlternateEpisode</span>
+<span class="sd">            &gt;&gt;&gt; p.episode_class = AlternateEpisode</span>
+
+<span class="sd">            &gt;&gt;&gt; episode4 = p.add_episode()</span>
+<span class="sd">            &gt;&gt;&gt; episode4.title(&quot;This is an instance of AlternateEpisode!&quot;)</span>
+
+<span class="sd">        :type: :obj:`class` which extends :class:`podgen.Episode`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__episode_class</span>
+
+    <span class="nd">@episode_class</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">episode_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;New episode_class must NOT be an _instance_ of &quot;</span>
+                             <span class="s2">&quot;the desired class, but rather the class itself. &quot;</span>
+                             <span class="s2">&quot;You can generally achieve this by removing the &quot;</span>
+                             <span class="s2">&quot;parenthesis from the constructor call. For &quot;</span>
+                             <span class="s2">&quot;example, use Episode, not Episode().&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Episode</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__episode_class</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;New episode_class must be Episode or a descendant&quot;</span>
+                             <span class="s2">&quot; of it (so the API still works).&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Podcast.add_episode"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast.add_episode">[docs]</a>    <span class="k">def</span> <span class="nf">add_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_episode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shorthand method which adds a new episode to the feed, creating an</span>
+<span class="sd">        object if it&#39;s not provided, and returns it. This</span>
+<span class="sd">        is the easiest way to add episodes to a podcast.</span>
+
+<span class="sd">        :param new_episode: :class:`.Episode` object to add. A new instance of</span>
+<span class="sd">            :attr:`.episode_class` is used if ``new_episode`` is omitted.</span>
+<span class="sd">        :returns: Episode object created or passed to this function.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            &gt;&gt;&gt; episode1 = p.add_episode()</span>
+<span class="sd">            &gt;&gt;&gt; episode1.title = &#39;First episode&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # You may also provide an episode object yourself:</span>
+<span class="sd">            &gt;&gt;&gt; another_episode = p.add_episode(podgen.Episode())</span>
+<span class="sd">            &gt;&gt;&gt; another_episode.title = &#39;My second episode&#39;</span>
+
+<span class="sd">        Internally, this method creates a new instance of</span>
+<span class="sd">        :attr:`~podgen.Episode.episode_class`, which means you can change what</span>
+<span class="sd">        type of objects are created by changing</span>
+<span class="sd">        :attr:`~podgen.Episode.episode_class`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">new_episode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_episode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_class</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">episodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_episode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_episode</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_rss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create an RSS feed XML structure containing all previously set fields.</span>
+
+<span class="sd">        :returns: The root element (ie. the rss element) of the feed.</span>
+<span class="sd">        :rtype: lxml.etree.Element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ITUNES_NS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span><span class="p">[</span><span class="s1">&#39;itunes&#39;</span><span class="p">]</span>
+
+        <span class="n">feed</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;2.0&#39;</span><span class="p">,</span> <span class="n">nsmap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span><span class="p">)</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">website</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">explicit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">missing</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(([]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span> <span class="o">+</span>
+                                <span class="p">([]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">website</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;website&#39;</span><span class="p">])</span> <span class="o">+</span>
+                                <span class="p">([]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">])</span> <span class="o">+</span>
+                                <span class="p">([]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">explicit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;explicit&#39;</span><span class="p">]))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Required fields not set (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">missing</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span>
+        <span class="n">title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;link&#39;</span><span class="p">)</span>
+        <span class="n">link</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">website</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">)</span>
+        <span class="n">desc</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
+        <span class="n">explicit</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}explicit&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+        <span class="n">explicit</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">explicit</span> <span class="k">else</span> <span class="s2">&quot;no&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="p">:</span>
+            <span class="n">cloud</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;cloud&#39;</span><span class="p">)</span>
+            <span class="n">cloud</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;domain&#39;</span><span class="p">)</span>
+            <span class="n">cloud</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">))</span>
+            <span class="n">cloud</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+            <span class="n">cloud</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;registerProcedure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="s1">&#39;registerProcedure&#39;</span><span class="p">)</span>
+            <span class="n">cloud</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;protocol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;protocol&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">copyright</span><span class="p">:</span>
+            <span class="n">copyright</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;copyright&#39;</span><span class="p">)</span>
+            <span class="n">copyright</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copyright</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__docs</span><span class="p">:</span>
+            <span class="n">docs</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;docs&#39;</span><span class="p">)</span>
+            <span class="n">docs</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__docs</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="p">:</span>
+            <span class="n">generator</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;generator&#39;</span><span class="p">)</span>
+            <span class="n">generator</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">:</span>
+            <span class="n">language</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;language&#39;</span><span class="p">)</span>
+            <span class="n">language</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">language</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_updated</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lastBuildDateDate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">dateutil</span><span class="o">.</span><span class="n">tz</span><span class="o">.</span><span class="n">tzutc</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lastBuildDateDate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_updated</span>
+        <span class="k">if</span> <span class="n">lastBuildDateDate</span><span class="p">:</span>
+            <span class="n">lastBuildDate</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;lastBuildDate&#39;</span><span class="p">)</span>
+            <span class="n">lastBuildDate</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">formatRFC2822</span><span class="p">(</span><span class="n">lastBuildDateDate</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">authors</span><span class="p">:</span>
+            <span class="n">authors_with_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">authors</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">authors_with_name</span><span class="p">:</span>
+                <span class="c1"># We have something to display as itunes:author, combine all</span>
+                <span class="c1"># names</span>
+                <span class="n">itunes_author</span> <span class="o">=</span> \
+                    <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}author&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+                <span class="n">itunes_author</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">listToHumanreadableStr</span><span class="p">(</span><span class="n">authors_with_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">authors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
+                <span class="c1"># Use dc:creator, since it supports multiple authors (and</span>
+                <span class="c1"># author without email)</span>
+                <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">authors</span> <span class="ow">or</span> <span class="p">[]:</span>
+                    <span class="n">author</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span>
+                                              <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}creator&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span><span class="p">[</span><span class="s1">&#39;dc&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
+                        <span class="n">author</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                        <span class="n">author</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">author</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">email</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Only one author and with email, so use rss managingEditor</span>
+                <span class="n">author</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;managingEditor&#39;</span><span class="p">)</span>
+                <span class="n">author</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">publication_date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">episode_dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">publication_date</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">episodes</span>
+                             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">publication_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">episode_dates</span><span class="p">:</span>
+                <span class="n">actual_pubDate</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">episode_dates</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">actual_pubDate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actual_pubDate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">publication_date</span>
+        <span class="k">if</span> <span class="n">actual_pubDate</span><span class="p">:</span>
+            <span class="n">pubDate</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;pubDate&#39;</span><span class="p">)</span>
+            <span class="n">pubDate</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">formatRFC2822</span><span class="p">(</span><span class="n">actual_pubDate</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_hours</span><span class="p">:</span>
+            <span class="c1"># Ensure any modifications to the set are accounted for</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_hours</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_hours</span>
+            <span class="n">skipHours</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;skipHours&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_hours</span><span class="p">:</span>
+                <span class="n">hour</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">skipHours</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">)</span>
+                <span class="n">hour</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_days</span><span class="p">:</span>
+            <span class="c1"># Ensure any modifications to the set are accounted for</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_days</span>
+            <span class="n">skipDays</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;skipDays&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_days</span><span class="p">:</span>
+                <span class="n">day</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">skipDays</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">)</span>
+                <span class="n">day</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">web_master</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">web_master</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;webMaster must have an email. Did you &quot;</span>
+                                   <span class="s2">&quot;set email to None after assigning that &quot;</span>
+                                   <span class="s2">&quot;Person to webMaster?&quot;</span><span class="p">)</span>
+            <span class="n">webMaster</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;webMaster&#39;</span><span class="p">)</span>
+            <span class="n">webMaster</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">web_master</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">withhold_from_itunes</span><span class="p">:</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}block&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">block</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Yes&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">:</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}category&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">category</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">category</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">subcategory</span><span class="p">:</span>
+                <span class="n">subcategory</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}category&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+                <span class="n">subcategory</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">subcategory</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}image&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">image</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
+            <span class="n">complete</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}complete&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">complete</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_feed_url</span><span class="p">:</span>
+            <span class="n">new_feed_url</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}new-feed-url&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">new_feed_url</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_feed_url</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="p">:</span>
+            <span class="n">owner</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}owner&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">owner_name</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}name&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">owner_name</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">owner_email</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}email&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">owner_email</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">email</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtitle</span><span class="p">:</span>
+            <span class="n">subtitle</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}subtitle&#39;</span> <span class="o">%</span> <span class="n">ITUNES_NS</span><span class="p">)</span>
+            <span class="n">subtitle</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subtitle</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feed_url</span><span class="p">:</span>
+            <span class="n">link_to_self</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}link&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span><span class="p">[</span><span class="s1">&#39;atom&#39;</span><span class="p">])</span>
+            <span class="n">link_to_self</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feed_url</span>
+            <span class="n">link_to_self</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;rel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;self&#39;</span>
+            <span class="n">link_to_self</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/rss+xml&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pubsubhubbub</span><span class="p">:</span>
+            <span class="n">link_to_hub</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;{</span><span class="si">%s</span><span class="s1">}link&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nsmap</span><span class="p">[</span><span class="s1">&#39;atom&#39;</span><span class="p">])</span>
+            <span class="n">link_to_hub</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pubsubhubbub</span>
+            <span class="n">link_to_hub</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;rel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hub&#39;</span>
+
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">episodes</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">rss_entry</span><span class="p">()</span>
+            <span class="n">channel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">feed</span>
+
+    <span class="k">def</span> <span class="nf">_add_xslt_pi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rss</span><span class="p">,</span> <span class="n">xml_declaration</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add an XSLT processor instruction to the RSS string provided.&quot;&quot;&quot;</span>
+        <span class="c1"># This is a hackish way of getting a processor instruction between</span>
+        <span class="c1"># the XML declaration and the RSS element; simply because lxml doesn&#39;t</span>
+        <span class="c1"># support processor instructions outside the root element. So we do</span>
+        <span class="c1"># a str.replace to replace the first newline with the processor</span>
+        <span class="c1"># instruction, since the XML declaration is followed by a newline.</span>
+
+        <span class="c1"># Get the processor instruction as a string</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_xslt_pi</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">xml_declaration</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rss</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+             <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+             <span class="s1">&#39;</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pi</span><span class="p">,</span>
+             <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># No declaration, so just put it at the beginning (assuming the</span>
+            <span class="c1"># caller wants it there, why else would you set self.xslt?)</span>
+            <span class="k">return</span> <span class="n">pi</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">rss</span>
+
+    <span class="k">def</span> <span class="nf">_get_xslt_pi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">htmlescaped_url</span> <span class="o">=</span> <span class="n">htmlencode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xslt</span><span class="p">)</span>
+        <span class="n">quote_sanitized</span> <span class="o">=</span> <span class="n">htmlescaped_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">ProcessingInstruction</span><span class="p">(</span>
+            <span class="s2">&quot;xml-stylesheet&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;type=&quot;text/xsl&quot; href=&quot;&#39;</span> <span class="o">+</span> <span class="n">quote_sanitized</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span>
+        <span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Print the podcast in RSS format, using the default options.</span>
+
+<span class="sd">        This method just calls :py:meth:`.rss_str` without arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rss_str</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Podcast.rss_str"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast.rss_str">[docs]</a>    <span class="k">def</span> <span class="nf">rss_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span>
+                <span class="n">xml_declaration</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate an RSS feed and return the feed XML as string.</span>
+
+<span class="sd">        :param minimize: Set to True to disable splitting the feed into multiple</span>
+<span class="sd">            lines and adding properly indentation, saving bytes at the cost of</span>
+<span class="sd">            readability (default: False).</span>
+<span class="sd">        :type minimize: bool</span>
+<span class="sd">        :param encoding: Encoding used in the XML declaration (default: UTF-8).</span>
+<span class="sd">        :type encoding: str</span>
+<span class="sd">        :param xml_declaration: Whether an XML declaration should be added to</span>
+<span class="sd">            the output (default: True).</span>
+<span class="sd">        :type xml_declaration: bool</span>
+<span class="sd">        :returns: The generated RSS feed as a :obj:`str` (unicode in 2.7)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">feed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_rss</span><span class="p">()</span>
+        <span class="n">rss</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">feed</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="ow">not</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+                              <span class="n">xml_declaration</span><span class="o">=</span><span class="n">xml_declaration</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xslt</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_xslt_pi</span><span class="p">(</span><span class="n">rss</span><span class="p">,</span> <span class="n">xml_declaration</span><span class="o">=</span><span class="n">xml_declaration</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rss</span></div>
+
+<div class="viewcode-block" id="Podcast.rss_file"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast.rss_file">[docs]</a>    <span class="k">def</span> <span class="nf">rss_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">minimize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="n">xml_declaration</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate an RSS feed and write the resulting XML to a file.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           If atomicity is needed, then you are expected to provide that</span>
+<span class="sd">           yourself. That means that you should write the feed to a temporary</span>
+<span class="sd">           file which you rename to the final name afterwards; renaming is an</span>
+<span class="sd">           atomic operation on Unix(like) systems.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           File-like objects given to this method will not be closed.</span>
+
+<span class="sd">        :param filename: Name of file to write, or a file-like object (accepting</span>
+<span class="sd">            string/unicode, not bytes).</span>
+<span class="sd">        :type filename: str or fd</span>
+<span class="sd">        :param minimize: Set to True to disable splitting the feed into multiple</span>
+<span class="sd">            lines and adding properly indentation, saving bytes at the cost of</span>
+<span class="sd">            readability (default: False).</span>
+<span class="sd">        :type minimize: bool</span>
+<span class="sd">        :param encoding: Encoding used in the XML file (default: UTF-8).</span>
+<span class="sd">        :type encoding: str</span>
+<span class="sd">        :param xml_declaration: Whether an XML declaration should be added to</span>
+<span class="sd">            the output (default: True).</span>
+<span class="sd">        :type xml_declaration: bool</span>
+<span class="sd">        :returns: Nothing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rss_str</span><span class="p">(</span><span class="n">minimize</span><span class="o">=</span><span class="n">minimize</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+                           <span class="n">xml_declaration</span><span class="o">=</span><span class="n">xml_declaration</span><span class="p">)</span>
+        <span class="c1"># Have we got a filename, or a file-like object?</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+            <span class="c1"># It is a string, assume it is filename</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+                <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rss</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">):</span>
+            <span class="c1"># It is file-like enough to fool us</span>
+            <span class="n">filename</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rss</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;filename must either be a filename (str/unicode) &quot;</span>
+                            <span class="s2">&quot;or a file-like object (with write method); &quot;</span>
+                            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> satisfies none of those conditions.&quot;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Podcast.apply_episode_order"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast.apply_episode_order">[docs]</a>    <span class="k">def</span> <span class="nf">apply_episode_order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make sure that the episodes appear on iTunes in the exact order</span>
+<span class="sd">        they have in :attr:`~.Podcast.episodes`.</span>
+
+<span class="sd">        This will set each :attr:`.Episode.position` so it matches the episode&#39;s</span>
+<span class="sd">        position in :attr:`.Podcast.episodes`.</span>
+
+<span class="sd">        If you&#39;re using some :class:`.Episode` objects in multiple podcast</span>
+<span class="sd">        feeds and you don&#39;t use this method with every feed, you might want to</span>
+<span class="sd">        call :meth:`.Podcast.clear_episode_order` after generating this feed&#39;s</span>
+<span class="sd">        RSS so an episode&#39;s position in this feed won&#39;t affect its position in</span>
+<span class="sd">        the other feeds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">episode</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">episodes</span><span class="p">):</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">episode</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span></div>
+
+<div class="viewcode-block" id="Podcast.clear_episode_order"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast.clear_episode_order">[docs]</a>    <span class="k">def</span> <span class="nf">clear_episode_order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset :attr:`.Episode.position` for every single episode.</span>
+
+<span class="sd">        Use this if you want to reuse an :class:`.Episode` object in another</span>
+<span class="sd">        feed, and don&#39;t want its position in this feed to affect where it</span>
+<span class="sd">        appears in the other feed. This is not needed if you&#39;ll call</span>
+<span class="sd">        :meth:`.Podcast.apply_episode_order` on the other feed, though.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">episodes</span><span class="p">:</span>
+            <span class="n">episode</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">last_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The last time the feed was generated. It defaults to the time and</span>
+<span class="sd">        date at which the RSS is generated, if set to :obj:`None`. The default</span>
+<span class="sd">        should be sufficient for most, if not all, use cases.</span>
+
+<span class="sd">        The value can either be a string, which will automatically be parsed</span>
+<span class="sd">        into a :class:`datetime.datetime` object when assigned, or a</span>
+<span class="sd">        :class:`datetime.datetime` object. In any case, the time and date must</span>
+<span class="sd">        be timezone aware.</span>
+
+<span class="sd">        Set this to ``False`` to leave out this element instead of using the</span>
+<span class="sd">        default.</span>
+
+<span class="sd">        :type: :class:`datetime.datetime`, :obj:`str` (will be converted to</span>
+<span class="sd">           and stored as :class:`datetime.datetime`), :obj:`None` for default or</span>
+<span class="sd">           :obj:`False` to leave out.</span>
+<span class="sd">        :RSS: lastBuildDate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__last_updated</span>
+
+    <span class="nd">@last_updated</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">last_updated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">last_updated</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">last_updated</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">last_updated</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__last_updated</span> <span class="o">=</span> <span class="n">last_updated</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">last_updated</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+                <span class="n">last_updated</span> <span class="o">=</span> <span class="n">dateutil</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">last_updated</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">last_updated</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid datetime format&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">last_updated</span><span class="o">.</span><span class="n">tzinfo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Datetime object has no timezone info&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__last_updated</span> <span class="o">=</span> <span class="n">last_updated</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cloud</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The cloud data of the feed, as a 5-tuple. It specifies a web service</span>
+<span class="sd">        that supports the (somewhat dated) rssCloud interface, which can be</span>
+<span class="sd">        implemented in HTTP-POST, XML-RPC or SOAP 1.1.</span>
+
+<span class="sd">        The tuple should look like this: ``(domain, port, path,</span>
+<span class="sd">        registerProcedure, protocol)``.</span>
+
+<span class="sd">        :domain: The domain where the webservice can be found.</span>
+<span class="sd">        :port: The port the webservice listens to.</span>
+<span class="sd">        :path: The path of the webservice.</span>
+<span class="sd">        :registerProcedure: The procedure to call.</span>
+<span class="sd">        :protocol: Can be either &quot;HTTP-POST&quot;, &quot;xml-rpc&quot; or &quot;soap&quot;.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            p.cloud = (&quot;podcast.example.org&quot;, 80, &quot;/rpc&quot;, &quot;cloud.notify&quot;,</span>
+<span class="sd">                       &quot;xml-rpc&quot;)</span>
+
+<span class="sd">        :type: :obj:`tuple` with (:obj:`str`, :obj:`int`, :obj:`str`,</span>
+<span class="sd">           :obj:`str`, :obj:`str`)</span>
+<span class="sd">        :RSS: cloud</span>
+
+<span class="sd">        .. tip::</span>
+
+<span class="sd">            PubSubHubbub is a competitor to rssCloud, and is the preferred</span>
+<span class="sd">            choice if you&#39;re looking to set up a new service of this kind.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tuple_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;registerProcedure&#39;</span><span class="p">,</span> <span class="s1">&#39;protocol&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">tuple_keys</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span> \
+            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span>
+
+    <span class="nd">@cloud</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cloud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cloud</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cloud</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">domain</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">registerProcedure</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">=</span> <span class="n">cloud</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Value of cloud must either be None or a &quot;</span>
+                                <span class="s2">&quot;5-tuple.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">domain</span> <span class="ow">and</span> <span class="p">(</span><span class="n">port</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="n">path</span> <span class="ow">and</span> <span class="n">registerProcedure</span>
+                    <span class="ow">and</span> <span class="n">protocol</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All parameters of cloud must be present and&quot;</span>
+                                 <span class="s2">&quot; not empty.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;domain&#39;</span><span class="p">:</span><span class="n">domain</span><span class="p">,</span> <span class="s1">&#39;port&#39;</span><span class="p">:</span><span class="n">port</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span><span class="n">path</span><span class="p">,</span>
+                    <span class="s1">&#39;registerProcedure&#39;</span><span class="p">:</span><span class="n">registerProcedure</span><span class="p">,</span> <span class="s1">&#39;protocol&#39;</span><span class="p">:</span><span class="n">protocol</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cloud</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Podcast.set_generator"><a class="viewcode-back" href="../../api.podcast.html#podgen.Podcast.set_generator">[docs]</a>    <span class="k">def</span> <span class="nf">set_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">exclude_podgen</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the generator of the feed, formatted nicely, which identifies the</span>
+<span class="sd">        software used to generate the feed.</span>
+
+<span class="sd">        :param generator: Software used to create the feed.</span>
+<span class="sd">        :type generator: str</span>
+<span class="sd">        :param version: (Optional) Version of the software, as a tuple.</span>
+<span class="sd">        :type version: :obj:`tuple` of :obj:`int`</span>
+<span class="sd">        :param uri: (Optional) The software&#39;s website.</span>
+<span class="sd">        :type uri: str</span>
+<span class="sd">        :param exclude_podgen: (Optional) Set to True if you don&#39;t want</span>
+<span class="sd">            PodGen to be mentioned (e.g., &quot;My Program (using PodGen 1.0.0)&quot;)</span>
+<span class="sd">        :type exclude_podgen: bool</span>
+
+<span class="sd">        .. seealso::</span>
+
+<span class="sd">           The attribute :py:attr:`.generator`</span>
+<span class="sd">              Lets you access and set the generator string yourself, without</span>
+<span class="sd">              any formatting help.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_program_name_to_str</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">uri</span><span class="p">)</span> <span class="o">+</span> \
+                         <span class="p">(</span><span class="s2">&quot; (using </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_feedgen_generator_str</span>
+                                <span class="k">if</span> <span class="ow">not</span> <span class="n">exclude_podgen</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_program_name_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">generator</span> <span class="o">+</span> \
+                <span class="p">((</span><span class="s2">&quot; v&quot;</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">version</span><span class="p">]))</span> <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> \
+                <span class="p">((</span><span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">uri</span><span class="p">)</span> <span class="k">if</span> <span class="n">uri</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_feedgen_generator_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_program_name_to_str</span><span class="p">(</span>
+                                       <span class="n">podgen</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                       <span class="n">podgen</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">version_full</span><span class="p">,</span>
+                                       <span class="n">podgen</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">website</span>
+                                   <span class="p">)</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">authors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List of :class:`~podgen.Person` that are responsible for this</span>
+<span class="sd">        podcast&#39;s editorial content.</span>
+
+<span class="sd">        Any value you assign to authors will be automatically converted to a</span>
+<span class="sd">        list, but only if it&#39;s iterable (like tuple, set and so on). It is an</span>
+<span class="sd">        error to assign a single :class:`~podgen.person.Person` object to this</span>
+<span class="sd">        attribute::</span>
+
+<span class="sd">            &gt;&gt;&gt; # This results in an error</span>
+<span class="sd">            &gt;&gt;&gt; p.authors = Person(&quot;John Doe&quot;, &quot;johndoe@example.org&quot;)</span>
+<span class="sd">            TypeError: Only iterable types can be assigned to authors, ...</span>
+<span class="sd">            &gt;&gt;&gt; # This is the correct way:</span>
+<span class="sd">            &gt;&gt;&gt; p.authors = [Person(&quot;John Doe&quot;, &quot;johndoe@example.org&quot;)]</span>
+
+<span class="sd">        The authors don&#39;t need to have both name and email set. The names are</span>
+<span class="sd">        shown under the podcast&#39;s title on iTunes.</span>
+
+<span class="sd">        The initial value is an empty list, so you can use the list methods</span>
+<span class="sd">        right away.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            &gt;&gt;&gt; # This attribute is just a list - you can for example append:</span>
+<span class="sd">            &gt;&gt;&gt; p.authors.append(Person(&quot;John Doe&quot;, &quot;johndoe@example.org&quot;))</span>
+<span class="sd">            &gt;&gt;&gt; # Or they can be given as new list (overriding earlier authors)</span>
+<span class="sd">            &gt;&gt;&gt; p.authors = [Person(&quot;John Doe&quot;, &quot;johndoe@example.org&quot;),</span>
+<span class="sd">            ...               Person(&quot;Mary Sue&quot;, &quot;marysue@example.org&quot;)]</span>
+
+<span class="sd">        :type: :obj:`list` of :class:`podgen.Person`</span>
+<span class="sd">        :RSS: managingEditor or dc:creator, and itunes:author</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authors</span>
+
+    <span class="nd">@authors</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">authors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">authors</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__authors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Only iterable types can be assigned to authors, &quot;</span>
+                            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> given. You must put your object in a list, &quot;</span>
+                            <span class="s2">&quot;even if there&#39;s only one author.&quot;</span> <span class="o">%</span> <span class="n">authors</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">publication_date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The publication date for the content in this podcast. You</span>
+<span class="sd">        probably want to use the default value.</span>
+
+<span class="sd">        :Default value: If this is :obj:`None` when the feed is generated, the</span>
+<span class="sd">           publication date of the episode with the latest publication date</span>
+<span class="sd">           (which may be in the future) is used. If there are no episodes, the</span>
+<span class="sd">           publication date is omitted from the feed.</span>
+
+<span class="sd">        If you set this to a :obj:`str`, it will be parsed and made into a</span>
+<span class="sd">        :class:`datetime.datetime` object when assigned. You may also set it to</span>
+<span class="sd">        a :class:`datetime.datetime` object directly. In any case, the time and</span>
+<span class="sd">        date must be timezone aware.</span>
+
+<span class="sd">        If you want to forcefully omit the publication date from the feed, set</span>
+<span class="sd">        this to ``False``.</span>
+
+<span class="sd">        :type: :class:`datetime.datetime`, :obj:`str` (will be converted to</span>
+<span class="sd">           and stored as :class:`datetime.datetime`), :obj:`None` for default or</span>
+<span class="sd">           :obj:`False` to leave out.</span>
+<span class="sd">        :RSS: pubDate</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__publication_date</span>
+
+    <span class="nd">@publication_date</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">publication_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">publication_date</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">publication_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">publication_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">publication_date</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+                <span class="n">publication_date</span> <span class="o">=</span> <span class="n">dateutil</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">publication_date</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">publication_date</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid datetime format&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">publication_date</span><span class="o">.</span><span class="n">tzinfo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Datetime object has no timezone info&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__publication_date</span> <span class="o">=</span> <span class="n">publication_date</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">skip_hours</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set of hours of the day in which podcatchers don&#39;t need to refresh</span>
+<span class="sd">        this feed.</span>
+
+<span class="sd">        This isn&#39;t widely supported by podcatchers.</span>
+
+<span class="sd">        The hours are represented as integer values from 0 to 23.</span>
+<span class="sd">        Note that while the content of the set is checked when it is first</span>
+<span class="sd">        assigned to ``skip_hours``, further changes to the set &quot;in place&quot; will</span>
+<span class="sd">        not be checked before you generate the RSS.</span>
+
+<span class="sd">        For example, to stop refreshing the feed between 18 and 7::</span>
+
+<span class="sd">            &gt;&gt;&gt; from podgen import Podcast</span>
+<span class="sd">            &gt;&gt;&gt; p = Podcast()</span>
+<span class="sd">            &gt;&gt;&gt; p.skip_hours = set(range(18, 24))</span>
+<span class="sd">            &gt;&gt;&gt; p.skip_hours</span>
+<span class="sd">            {18, 19, 20, 21, 22, 23}</span>
+<span class="sd">            &gt;&gt;&gt; p.skip_hours |= set(range(8))</span>
+<span class="sd">            &gt;&gt;&gt; p.skip_hours</span>
+<span class="sd">            {0, 1, 2, 3, 4, 5, 6, 7, 18, 19, 20, 21, 22, 23}</span>
+
+<span class="sd">        :type: :obj:`set` of :obj:`int`</span>
+<span class="sd">        :RSS: skipHours</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__skip_hours</span>
+
+    <span class="nd">@skip_hours</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">skip_hours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">hours</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="nb">set</span><span class="p">)):</span>
+                <span class="n">hours</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">hours</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hours</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">h</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid hour </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">h</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__skip_hours</span> <span class="o">=</span> <span class="n">hours</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">skip_days</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set of days in which podcatchers don&#39;t need to refresh this feed.</span>
+
+<span class="sd">        This isn&#39;t widely supported by podcatchers.</span>
+
+<span class="sd">        The days are represented using strings of their English names, like</span>
+<span class="sd">        &quot;Monday&quot; or &quot;wednesday&quot;. The day names are automatically capitalized</span>
+<span class="sd">        when the set is assigned to ``skip_days``, but subsequent changes to the</span>
+<span class="sd">        set &quot;in place&quot; are only checked and capitalized when the RSS feed is</span>
+<span class="sd">        generated.</span>
+
+<span class="sd">        For example, to stop refreshing the feed in the weekend::</span>
+
+<span class="sd">            &gt;&gt;&gt; from podgen import Podcast</span>
+<span class="sd">            &gt;&gt;&gt; p = Podcast()</span>
+<span class="sd">            &gt;&gt;&gt; p.skip_days = {&quot;Friday&quot;, &quot;Saturday&quot;, &quot;sUnDaY&quot;}</span>
+<span class="sd">            &gt;&gt;&gt; p.skip_days</span>
+<span class="sd">            {&quot;Saturday&quot;, &quot;Friday&quot;, &quot;Sunday&quot;}</span>
+
+<span class="sd">        :type: :obj:`set` of :obj:`str`</span>
+<span class="sd">        :RSS: skipDays</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__skip_days</span>
+
+    <span class="nd">@skip_days</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">skip_days</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">days</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">days</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
+                <span class="n">days</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">days</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">d</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;monday&#39;</span><span class="p">,</span> <span class="s1">&#39;tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;wednesday&#39;</span><span class="p">,</span> <span class="s1">&#39;thursday&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;friday&#39;</span><span class="p">,</span> <span class="s1">&#39;saturday&#39;</span><span class="p">,</span> <span class="s1">&#39;sunday&#39;</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid day </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">d</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__skip_days</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">day</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__skip_days</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">web_master</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The :class:`~podgen.Person` responsible for</span>
+<span class="sd">        technical issues relating to the feed.</span>
+
+<span class="sd">        :type: :class:`podgen.Person`</span>
+<span class="sd">        :RSS: webMaster</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__web_master</span>
+
+    <span class="nd">@web_master</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">web_master</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">web_master</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">web_master</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">web_master</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">web_master</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The webmaster must have an email attribute &quot;</span>
+                                 <span class="s2">&quot;and it must be set and not empty.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__web_master</span> <span class="o">=</span> <span class="n">web_master</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The iTunes category, which appears in the category column</span>
+<span class="sd">        and in iTunes Store listings.</span>
+
+<span class="sd">        :type: :class:`podgen.Category`</span>
+<span class="sd">        :RSS: itunes:category</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__category</span>
+
+    <span class="nd">@category</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">category</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Check that the category quacks like a duck</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="nb">hasattr</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="s2">&quot;subcategory&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__category</span> <span class="o">=</span> <span class="n">category</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;A Category(-like) object must be used, got &quot;</span>
+                                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">category</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__category</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The URL of the artwork for this podcast. iTunes</span>
+<span class="sd">        prefers square images that are at least ``1400x1400`` pixels.</span>
+<span class="sd">        Podcasts with an image smaller than this are *not* eligible to be</span>
+<span class="sd">        featured on the iTunes Store.</span>
+
+<span class="sd">        iTunes supports images in JPEG and PNG formats with an RGB color space</span>
+<span class="sd">        (CMYK is not supported). The URL must end in &quot;.jpg&quot; or &quot;.png&quot;; if they</span>
+<span class="sd">        don&#39;t, a :class:`.NotSupportedByItunesWarning` will be issued.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: itunes:image</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           If you change your podcast’s image, you must also change the file’s</span>
+<span class="sd">           name; iTunes doesn&#39;t check the image to see if it has changed.</span>
+
+<span class="sd">           Additionally, the server hosting your cover art image must allow HTTP</span>
+<span class="sd">           HEAD requests (most servers support this).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__image</span>
+
+    <span class="nd">@image</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lowercase_itunes_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">lowercase_itunes_image</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">))):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span>\
+                  <span class="p">(</span>
+                    <span class="s1">&#39;Image URL must end with png or jpg, not &#39;</span>
+                    <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">NotSupportedByItunesWarning</span><span class="p">,</span>
+                    <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
+                  <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__image</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__image</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Whether this podcast is completed or not.</span>
+
+<span class="sd">        If you set this to ``True``, you are indicating that no more</span>
+<span class="sd">        episodes will be added to the podcast. If you let this be ``None`` or</span>
+<span class="sd">        ``False``, you are indicating that new episodes may be posted.</span>
+
+<span class="sd">        :type: :obj:`bool`</span>
+<span class="sd">        :RSS: itunes:complete</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">            Setting this to ``True`` is the same as promising you&#39;ll never ever</span>
+<span class="sd">            release a new episode. Do NOT set this to ``True`` as long as</span>
+<span class="sd">            there&#39;s any chance AT ALL that a new episode will be released</span>
+<span class="sd">            someday.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__complete</span>
+
+    <span class="nd">@complete</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">complete</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__complete</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">complete</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__complete</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">owner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The :class:`~podgen.Person` who owns this podcast. iTunes</span>
+<span class="sd">        will use this person&#39;s name and email address for all correspondence</span>
+<span class="sd">        related to this podcast. It will not be publicly displayed, but it&#39;s</span>
+<span class="sd">        still publicly available in the RSS source.</span>
+
+<span class="sd">        Both the name and email are required.</span>
+
+<span class="sd">        :type: :class:`podgen.Person`</span>
+<span class="sd">        :RSS: itunes:owner</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__owner</span>
+
+    <span class="nd">@owner</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">owner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">owner</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">owner</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">owner</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__owner</span> <span class="o">=</span> <span class="n">owner</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Both name and email must be set.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__owner</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">feed_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The URL which this feed is available at.</span>
+
+<span class="sd">        Identifying a feed&#39;s URL within the feed makes it more portable,</span>
+<span class="sd">        self-contained, and easier to cache. You should therefore set this</span>
+<span class="sd">        attribute if you&#39;re able to.</span>
+
+<span class="sd">        :type: :obj:`str`</span>
+<span class="sd">        :RSS: atom:link with ``rel=&quot;self&quot;``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__feed_url</span>
+
+    <span class="nd">@feed_url</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">feed_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed_url</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">feed_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">feed_url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">feed_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span>
+                    <span class="s1">&#39;http://&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;https://&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;ftp://&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;news://&#39;</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The feed url must be a valid URL, but it &quot;</span>
+                                 <span class="s2">&quot;doesn&#39;t have a valid URL scheme &quot;</span>
+                                 <span class="s2">&quot;(like for example http:// or https://)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__feed_url</span> <span class="o">=</span> <span class="n">feed_url</span></div>
+
+</pre></div>
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage_guide/index.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

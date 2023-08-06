@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Podcasts &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Episodes" href="episodes.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="installation.html" title="Previous document">Installation</a>
+        </li>
+        <li>
+          <a href="episodes.html" title="Next document">Episodes</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="podcasts">
+<h1>Podcasts<a class="headerlink" href="#podcasts" title="Permalink to this headline">¶</a></h1>
+<p>In PodGen, the term <em>podcast</em> refers to the show which listeners can subscribe to,
+which consists of individual <em>episodes</em>. Therefore, the Podcast class will be the
+first thing you start with.</p>
+<div class="section" id="creating-a-new-instance">
+<h2>Creating a new instance<a class="headerlink" href="#creating-a-new-instance" title="Permalink to this headline">¶</a></h2>
+<p>You can start with a blank podcast by invoking the Podcast constructor with no
+arguments, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">podgen</span> <span class="k">import</span> <span class="n">Podcast</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Podcast</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mandatory-attributes">
+<h2>Mandatory attributes<a class="headerlink" href="#mandatory-attributes" title="Permalink to this headline">¶</a></h2>
+<p>There are four attributes which must be set before you can generate your podcast.
+They are mandatory because Apple’s podcast directory will not accept podcasts without
+this information. If you try to generate the podcast without setting all of the
+mandatory attributes, you will get an error.</p>
+<p>The mandatory attributes are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;My Example Podcast&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="s2">&quot;https://example.org&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">explicit</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>They’re mostly self explanatory, but you can read more about them if you’d like:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.name" title="podgen.Podcast.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.description" title="podgen.Podcast.description"><code class="xref py py-attr docutils literal notranslate"><span class="pre">description</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.website" title="podgen.Podcast.website"><code class="xref py py-attr docutils literal notranslate"><span class="pre">website</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.explicit" title="podgen.Podcast.explicit"><code class="xref py py-attr docutils literal notranslate"><span class="pre">explicit</span></code></a></p></li>
+</ul>
+</div>
+<div class="section" id="image">
+<h2>Image<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
+<p>A podcast’s image is worth special attention:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;https://example.com/static/example_podcast.png&quot;</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt>
+<code class="sig-prename descclassname">Podcast.</code><code class="sig-name descname">image</code></dt>
+<dd><p>The URL of the artwork for this podcast. iTunes
+prefers square images that are at least <code class="docutils literal notranslate"><span class="pre">1400x1400</span></code> pixels.
+Podcasts with an image smaller than this are <em>not</em> eligible to be
+featured on the iTunes Store.</p>
+<p>iTunes supports images in JPEG and PNG formats with an RGB color space
+(CMYK is not supported). The URL must end in “.jpg” or “.png”; if they
+don’t, a <code class="xref py py-class docutils literal notranslate"><span class="pre">NotSupportedByItunesWarning</span></code> will be issued.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">RSS</dt>
+<dd class="field-even"><p>itunes:image</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you change your podcast’s image, you must also change the file’s
+name; iTunes doesn’t check the image to see if it has changed.</p>
+<p>Additionally, the server hosting your cover art image must allow HTTP
+HEAD requests (most servers support this).</p>
+</div>
+</dd></dl>
+
+<p>Even though the image <em>technically</em> is optional, you won’t reach people without it.</p>
+</div>
+<div class="section" id="optional-attributes">
+<h2>Optional attributes<a class="headerlink" href="#optional-attributes" title="Permalink to this headline">¶</a></h2>
+<p>There are plenty of other attributes that can be used with
+<a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">podgen.Podcast</span></code></a>:</p>
+<div class="section" id="commonly-used">
+<h3>Commonly used<a class="headerlink" href="#commonly-used" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">copyright</span> <span class="o">=</span> <span class="s2">&quot;2016 Example Radio&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="s2">&quot;en-US&quot;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="n">Person</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;editor@example.org&quot;</span><span class="p">)]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">feed_url</span> <span class="o">=</span> <span class="s2">&quot;https://example.com/feeds/podcast.rss&quot;</span>  <span class="c1"># URL of this feed</span>
+<span class="n">p</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="p">(</span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span> <span class="s2">&quot;Podcasting&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">xslt</span> <span class="o">=</span> <span class="s2">&quot;https://example.com/feed/stylesheet.xsl&quot;</span>  <span class="c1"># URL of XSLT stylesheet</span>
+</pre></div>
+</div>
+<p>Read more:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.copyright" title="podgen.Podcast.copyright"><code class="xref py py-attr docutils literal notranslate"><span class="pre">copyright</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.language" title="podgen.Podcast.language"><code class="xref py py-attr docutils literal notranslate"><span class="pre">language</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.authors" title="podgen.Podcast.authors"><code class="xref py py-attr docutils literal notranslate"><span class="pre">authors</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.feed_url" title="podgen.Podcast.feed_url"><code class="xref py py-attr docutils literal notranslate"><span class="pre">feed_url</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.category" title="podgen.Podcast.category"><code class="xref py py-attr docutils literal notranslate"><span class="pre">category</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.owner" title="podgen.Podcast.owner"><code class="xref py py-attr docutils literal notranslate"><span class="pre">owner</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.xslt" title="podgen.Podcast.xslt"><code class="xref py py-attr docutils literal notranslate"><span class="pre">xslt</span></code></a></p></li>
+</ul>
+</div>
+<div class="section" id="less-commonly-used">
+<h3>Less commonly used<a class="headerlink" href="#less-commonly-used" title="Permalink to this headline">¶</a></h3>
+<p>Some of those are obscure while some of them are often times not needed. Others
+again have very reasonable defaults.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># RSS Cloud enables podcatchers to subscribe to notifications when there&#39;s</span>
+<span class="c1"># a new episode ready, however it&#39;s not used much.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">cloud</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;server.example.com&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="s2">&quot;/rpc&quot;</span><span class="p">,</span> <span class="s2">&quot;cloud.notify&quot;</span><span class="p">,</span> <span class="s2">&quot;xml-rpc&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="c1"># pytz is a dependency of this library, and makes it easy to deal with</span>
+<span class="c1"># timezones. Generally, all dates must be timezone aware.</span>
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="c1"># last_updated is datetime when the feed was last refreshed. If you don&#39;t</span>
+<span class="c1"># set it, the current date and time will be used instead when the feed is</span>
+<span class="c1"># generated, which is generally what you want. Nevertheless, you can</span>
+<span class="c1"># set your own date:</span>
+<span class="n">p</span><span class="o">.</span><span class="n">last_updated</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">))</span>
+
+<span class="c1"># publication_date is when the contents of this feed last were published.</span>
+<span class="c1"># If you don&#39;t set it, the date of the most recent Episode is used. Again,</span>
+<span class="c1"># this is generally what you want, but you can override it:</span>
+<span class="n">p</span><span class="o">.</span><span class="n">publication_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">utc</span><span class="p">))</span>
+
+<span class="c1"># Set of days on which podcatchers won&#39;t need to refresh the feed.</span>
+<span class="c1"># Not implemented widely.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">skip_days</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Friday&quot;</span><span class="p">,</span> <span class="s2">&quot;Saturday&quot;</span><span class="p">,</span> <span class="s2">&quot;Sunday&quot;</span><span class="p">}</span>
+
+<span class="c1"># Set of hours on which podcatchers won&#39;t need to refresh the feed.</span>
+<span class="c1"># Not implemented widely.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">skip_hours</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">skip_hours</span> <span class="o">|=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+
+<span class="c1"># Person to contact regarding technical aspects of the feed.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">web_master</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;helpdesk@dallas.example.com&quot;</span><span class="p">)</span>
+
+<span class="c1"># Identify the software which generates the feed (defaults to python-podgen)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">set_generator</span><span class="p">(</span><span class="s2">&quot;ExamplePodcastProgram&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="c1"># (you can also set the generator string directly)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">generator</span> <span class="o">=</span> <span class="s2">&quot;ExamplePodcastProgram v1.0.0 (with help from python-feedgen)&quot;</span>
+
+<span class="c1"># !!! Be very careful about using the following attributes !!!</span>
+
+<span class="c1"># Tell iTunes that this feed has moved somewhere else.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">new_feed_url</span> <span class="o">=</span> <span class="s2">&quot;https://podcast.example.com/example&quot;</span>
+
+<span class="c1"># Tell iTunes that this feed will never be updated again.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">complete</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Tell iTunes that you&#39;d rather not have this feed appear on iTunes.</span>
+<span class="n">p</span><span class="o">.</span><span class="n">withhold_from_itunes</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Read more:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.cloud" title="podgen.Podcast.cloud"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cloud</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.last_updated" title="podgen.Podcast.last_updated"><code class="xref py py-attr docutils literal notranslate"><span class="pre">last_updated</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.publication_date" title="podgen.Podcast.publication_date"><code class="xref py py-attr docutils literal notranslate"><span class="pre">publication_date</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.skip_days" title="podgen.Podcast.skip_days"><code class="xref py py-attr docutils literal notranslate"><span class="pre">skip_days</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.skip_hours" title="podgen.Podcast.skip_hours"><code class="xref py py-attr docutils literal notranslate"><span class="pre">skip_hours</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.web_master" title="podgen.Podcast.web_master"><code class="xref py py-attr docutils literal notranslate"><span class="pre">web_master</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.set_generator" title="podgen.Podcast.set_generator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_generator()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.new_feed_url" title="podgen.Podcast.new_feed_url"><code class="xref py py-attr docutils literal notranslate"><span class="pre">new_feed_url</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.complete" title="podgen.Podcast.complete"><code class="xref py py-attr docutils literal notranslate"><span class="pre">complete</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.withhold_from_itunes" title="podgen.Podcast.withhold_from_itunes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">withhold_from_itunes</span></code></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="shortcut-for-filling-in-data">
+<h2>Shortcut for filling in data<a class="headerlink" href="#shortcut-for-filling-in-data" title="Permalink to this headline">¶</a></h2>
+<p>Instead of creating a new <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a> object in one statement, and
+populating it with data one statement at a time afterwards, you can create a
+new <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a> object and fill it with data in one statement. Simply
+use the attribute name as keyword arguments to the constructor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">podgen</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">podgen</span><span class="o">.</span><span class="n">Podcast</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;=&lt;</span><span class="n">attribute</span> <span class="n">value</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;=&lt;</span><span class="n">attribute</span> <span class="n">value</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Using this technique, you can define the Podcast as part of a list
+comprehension, dictionaries and so on.
+Take a look at the <a class="reference internal" href="../api.podcast.html"><span class="doc">API Documentation for Podcast</span></a> for a
+practical example.</p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="installation.html" title="Previous document">Installation</a>
+        </li>
+        <li>
+          <a href="episodes.html" title="Next document">Episodes</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background/index.html">Background</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Usage Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Podcasts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-instance">Creating a new instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mandatory-attributes">Mandatory attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#image">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-attributes">Optional attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shortcut-for-filling-in-data">Shortcut for filling in data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="episodes.html">Episodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html">Full example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/usage_guide/podcasts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
