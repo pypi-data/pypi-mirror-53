@@ -1,0 +1,62 @@
+Metadata-Version: 2.1
+Name: pysphero
+Version: 0.0.5
+Summary: Unofficial library for sphero v2.
+Home-page: https://github.com/EnotYoyo/pysphero
+Author: Andrey Lemets
+Author-email: a.a.lemets@gmail.com
+License: MIT License
+Description: # PySphero
+        [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pysphero.svg)](https://pypi.org/project/pysphero/)
+        [![Build Status](https://travis-ci.org/EnotYoyo/pysphero.svg?branch=master)](https://travis-ci.org/EnotYoyo/pysphero)
+        
+        This is an unofficial Sphero library for BLE toys.   
+        The Sphero protocol is reverse-engineered using the official Sphero Edu application for Android and [this](https://github.com/igbopie/spherov2.js) library. 
+        
+        > This code is tested only on Sphero Bolt. Probably it will work on the other BLE toys too.
+        
+        ### Install the dependencies
+        For using this library need bluepy and libgtk2.0-dev.
+        ```bash
+        # apt-get install libgtk2.0-dev
+        # pip install bluepy
+        ```
+        
+        # Install
+        To install `pysphero` use `pip`:
+        ```bash
+        # pip install pysphero
+        ```
+        
+        # Example
+        ```python
+        from time import sleep
+        
+        from pysphero.core import Sphero
+        
+        
+        def main():
+            with Sphero(mac_address='aa:bb:cc:dd:ee:ff') as sphero:
+                sphero.power.wake()
+                sleep(2)
+                sphero.power.enter_soft_sleep()
+        
+        
+        if __name__ == '__main__':
+            main()
+        
+        ```
+        
+        # Unknown
+        Packet contains sourceID and targetID. Their meaning is unknown.
+        
+Keywords: sphero,sphero-ble,bolt
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Software Development :: Libraries
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Provides-Extra: tests
