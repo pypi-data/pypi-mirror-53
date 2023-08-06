@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: sqlite-rx
+Version: 0.9.8
+Summary: Python SQLite Client and Server
+Home-page: https://github.com/aosingh/sqlite_rx
+Author: Abhishek Singh
+Author-email: aosingh@asu.edu
+Maintainer: Abhishek Singh
+Maintainer-email: aosingh@asu.edu
+License: GNU GPLv3
+Keywords: sqlite client server
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: MacOS
+Requires-Dist: colorlog
+Requires-Dist: msgpack-python
+Requires-Dist: pyzmq
+Requires-Dist: tornado
+
+sqlite_rx implements a simple, fast, reliable and secure client/server interfaces for SQLite.
+
+
