@@ -1,0 +1,58 @@
+Metadata-Version: 2.1
+Name: netmagus
+Version: 0.7.8
+Summary: Python module for JSON data exchange via files or RPC with the Intelligent Visibility NetMagus system.
+Home-page: https://www.intelligentvisibility.com/netmagus/
+License: LGPL-3.0
+Keywords: netmagus,network,automation,netops
+Author: Richard Collins
+Author-email: richardc@intelligentvisibility.com
+Requires-Python: >=3.5,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: System :: Networking
+Classifier: or later (LGPLv3+)
+Requires-Dist: autobahn (>=19.10.1,<20.0.0)
+Requires-Dist: autobahn-sync (>=0.3.2,<0.4.0)
+Requires-Dist: future (>=0.16.0,<0.17.0)
+Project-URL: Repository, https://github.com/sdispater/pendulum
+Description-Content-Type: text/x-rst
+
+NetMāgus Python Package
+=======================
+
+| |Updates| |Python3| |BuildStatus|
+
+
+This Python package is to be used with the `NetMāgus <http://www.intelligentvisibility.com/netmagus>`_ product from `Intelligent Visbility, Inc <http://www.intelligentvisibility.com>`_.
+
+It is used to create and exchange UI forms and Formula steps with the NetMāgus application.
+
+The code has been tested and should work for both Python 2.7 and 3.5+.
+
+To install, simply use ``pip install netmagus``
+
+Refer to the `NetMāgus <http://www.intelligentvisibility.com/netmagus>`_ documentation for usage details.
+
+.. |Updates| image:: https://pyup.io/repos/github/rbcollins123/netmagus_python/shield.svg?token=fffb8c76-e275-451f-8ce0-1ec463f6d650
+    :target: https://pyup.io/repos/github/rbcollins123/netmagus_python/
+     :alt: Updates
+
+.. |Python3| image:: https://pyup.io/repos/github/rbcollins123/netmagus_python/python-3-shield.svg?token=fffb8c76-e275-451f-8ce0-1ec463f6d650
+    :target: https://pyup.io/repos/github/rbcollins123/netmagus_python/
+     :alt: Python3
+
+.. |BuildStatus| image:: https://travis-ci.com/rbcollins123/netmagus_python.svg?token=dqosS7xWadx9zSztAYMC&branch=master
+    :target: https://travis-ci.com/rbcollins123/netmagus_python/
+     :alt: Build Status
