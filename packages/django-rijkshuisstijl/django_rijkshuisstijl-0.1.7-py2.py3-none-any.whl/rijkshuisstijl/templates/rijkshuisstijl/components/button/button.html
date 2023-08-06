@@ -1,0 +1,10 @@
+{% spaceless %}{% load rijkshuisstijl_utils %}
+{% capture as tags %}{% if id %} id="{{ id }}"{% endif %}{% if type %} type="{{ type }}"{% endif %}{% if title %} title="{{ title }}"{% endif %}{% endcapture %}
+{% capture as form %}{% if name %} name="{{ name }}"{% endif %}{% if value %} value="{{ value }}"{% endif %}{% endcapture %}
+{% capture as data %}{% if toggle_target %} data-toggle-target="{{ toggle_target }}" data-toggle-modifier="{{ toggle_modifier }}"{% endif %}{% if toggle_mobile_state %}data-toggle-mobile-state="{{ toggle_mobile_state }}"{% endif %}{% if focus_target %} data-focus-target="{{ focus_target }}"{% endif %}{% endcapture %}
+
+<button class="button{% if class %} {{ class }}{% endif %}{% if toggle_target %} toggle{% endif %}" {{ tags }}{{ form }}{{ data }}>
+    {% include 'rijkshuisstijl/components/button/label.html' with class=class label=label icon=icon only %}
+</button>
+{% endspaceless %}
+

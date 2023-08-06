@@ -1,0 +1,14 @@
+{% spaceless %}{% load rijkshuisstijl rijkshuisstijl_utils %}
+    {% capture as base_attrs %} {% if name %} name="{{ name }}"{% endif %}{% if val %} value="{{ val }}"{% endif %}{% endcapture %}
+    {% capture as optional_attrs %}{% if val or val == False or checked %}{% if val == value|default:"" or val in value or checked %} checked{% endif %}{% endif %}{% endcapture %}
+    {% capture as valdation_attrs %}{% if disabled %} disabled{% endif %}{% if readonly %} readonly{% endif %}{% if required %} required{% endif %}{% endcapture %}
+    {% capture as meta_attrs %}{% if id %} id="{{ id }}"{% endif %}{% endcapture %}
+    {% capture as data_attrs %}{% if select_all %} data-select-all="{{ select_all }}"{% endif %}{% endcapture %}
+    {% capture as additional_attrs %}{% for attr, value in widget_attrs.items %} {{ attr }}="{{ value }}"{% endfor %}{% endcapture %}
+    {% capture as widget_attrs %}{% if widget_attrs %} {{ widget_attrs }}{% endif %}{% endcapture %}
+    <div class="{{ type|default:'checkbox' }}">
+        <input class="input{% if errors %} input--error{% endif %}{% if readonly %} input--readonly{% endif %}{% if select_all %} select-all{% endif %}{% if class %} {{ class }}{% endif %}" type="{{ type|default:'checkbox' }}"{{ base_attrs }}{{ optional_attrs }}{{ valdation_attrs }}{{ meta_attrs }}{{ data_attrs }}{{ additional_attrs }}{{ widget_attrs }}>
+        <div class="{{ type|default:'checkbox' }}__checkmark"></div>
+        {% if label %}{% include 'rijkshuisstijl/components/form/label.html' with for=id label=label %}{% endif %}
+    </div>
+{% endspaceless %}

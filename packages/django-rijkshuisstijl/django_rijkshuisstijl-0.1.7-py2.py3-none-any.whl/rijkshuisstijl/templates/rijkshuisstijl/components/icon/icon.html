@@ -1,0 +1,5 @@
+{% spaceless %}
+{% if href %}<a class="image-link" href="{{ href }}">{% endif %}
+<span class="icon icon--{{ icon }}{% if class %} {{ class }}{% endif %}" {% if label %}title="{{ label }}"{% endif %}>{% firstof label icon %}</span>
+{% if href %}</a>{% endif %}
+{% endspaceless %}

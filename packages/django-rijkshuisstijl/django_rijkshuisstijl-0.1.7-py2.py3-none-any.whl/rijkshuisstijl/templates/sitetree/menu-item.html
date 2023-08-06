@@ -1,0 +1,10 @@
+{% spaceless %}{% load sitetree utils %}
+<li class="menu__list-item{% if item.is_current or item.in_current_branch %} menu__list-item--active{% endif %}">
+    <a class="menu__link" href="{% sitetree_url for item %}"{% if item.hint %} title="{{ item.hint }}"{% endif %}>
+        {{ item.title_resolved }}
+    </a>
+    {% if item.has_children %}
+        {% sitetree_children of item for menu template "sitetree/menu.html" %}
+    {% endif %}
+</li>
+{% endspaceless %}

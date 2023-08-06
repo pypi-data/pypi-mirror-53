@@ -1,0 +1,87 @@
+{% spaceless %}{% load i18n sniplates rijkshuisstijl rijkshuisstijl_form rijkshuisstijl_filters rijkshuisstijl_utils %}
+    {% load_widgets form=sniplates|default:'rijkshuisstijl/components/form/sniplates.html' %}
+    <{{ tag }} class="form{% if class %} {{ class }}{% endif %}"{% if id %} id="{{ id }}"{% endif %}{% if tag == 'form' %} method="{{ method|default:'post' }}" enctype="{{ enctype|default:'multipart/form-data' }}"{% endif %}>
+        <header class="form__header">
+            {% if title %}<h1 class="form__title">{{ title }}</h1>{% endif %}
+            {% if form.fieldsets %}<p class="form__text">* {{ _('verplichte velden') }}</p>{% endif %}
+            {% if text or wysiwyg %}{% textbox text=text wysiwyg=wysiwyg status=status %}{% endif %}
+        </header>
+
+        <div class="form__body">
+            {% csrf_token %}
+
+            {% for error in form.non_field_errors %}
+                {% include 'rijkshuisstijl/components/form/errors.html' with class='errors--non-field' errors=error only %}
+            {% endfor %}
+
+            {# Allow admin like fieldsets to be defined on regular forms. #}
+            {% if form.fieldsets %}
+                {% for fieldset in form.fieldsets %}
+                    {% if fieldset.0 %}<h2 class="form__subtitle" aria-hidden="true">{{ fieldset.0 }}</h2>{% endif %}
+                    <fieldset class="form__fieldset{% if fieldset.1.classes %} {{ fieldset.1.classes|join:' ' }}{% endif %}">
+                        {% if fieldset.0 %}<legend class="form__legend">{{ fieldset.0 }}</legend>{% endif %}
+
+                         {# TODO: Possible candidate for optimisation. #}
+                        {% for field in form %}
+                            {% if  field.name in fieldset.1.fields %}
+                                {% form_field field %}
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {# Support AdminForm  #}
+                        {% for field in form.form %}
+                            {% if  field.name in fieldset.1.fields %}
+                                {% try %}
+                                    {% form_field field %}
+                                {% except %}
+                                    <div class="form-control">
+                                        <header class="form-control__header">
+                                            {% label label=field.label %}
+                                        </header>
+                                        <div class="form-control__body">
+                                            {{ field }}
+                                        </div>
+                                    </div>
+                                {% endtry %}
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {# Support read only fields in AdminForm. #}
+                        {% capture as key_value_fields %}{% spaceless %}
+                        {% for readonly_field in form.readonly_fields %}
+                            {% if readonly_field in fieldset.1.fields %}
+                                {{ readonly_field }},
+                            {% endif %}
+                        {% endfor %}
+                        {% endspaceless %}{% endcapture %}
+
+                        {% if key_value_fields %}
+                            {% key_value_table object=form.form.instance fields=key_value_fields %}
+                        {% endif %}
+
+
+                        {# Last fieldset gets actions appended to it.  #}
+                        {% if forloop.last %}
+                            <div class="form__actions">
+                                <button class="button {{ button_class|default:'button--primary' }}" type="submit">{{ label|default:_('Verzenden') }}</button>
+                            </div>
+                        {% endif %}
+                    </fieldset>
+                {% endfor %}
+
+            {% else %}
+                <fieldset class="form__fieldset">
+                    {% for field in form %}
+                        {% form_field field %}
+                    {% endfor %}
+
+                    <div class="form__actions">
+                        <button class="button {{ button_class|default:'button--primary' }}" type="submit">{{ label|default:_('Verzenden') }}</button>
+                    </div>
+                </fieldset>
+            {% endif %}
+        </div>
+    </{{ tag }}>
+{% endspaceless %}
