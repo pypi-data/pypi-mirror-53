@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: ngs-test-utils
+Version: 0.0.1
+Summary: Utilities for generation of synthetic NGS files
+Home-page: https://github.com/genialis/ngs-test-utils
+Author: Genialis, Inc.
+Author-email: dev-team@genialis.com
+License: Apache License (2.0)
+Keywords: ngs test bioinformatics
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6, <3.8
+Description-Content-Type: text/x-rst
+Requires-Dist: numpy
+Requires-Dist: pybedtools
+Requires-Dist: pysam
+Provides-Extra: docs
+Requires-Dist: sphinx-rtd-theme ; extra == 'docs'
+Provides-Extra: package
+Requires-Dist: twine ; extra == 'package'
+Requires-Dist: wheel ; extra == 'package'
+Provides-Extra: test
+Requires-Dist: black ; extra == 'test'
+Requires-Dist: check-manifest ; extra == 'test'
+Requires-Dist: docutils ; extra == 'test'
+Requires-Dist: flake8 ; extra == 'test'
+Requires-Dist: isort ; extra == 'test'
+Requires-Dist: pydocstyle ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: setuptools-scm ; extra == 'test'
+
+==============
+NGS test utils
+==============
+
+Utilities for generation of synthetic NGS files.
+
+
