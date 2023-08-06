@@ -1,0 +1,324 @@
+Changes in Version 0.2.1 (2019-10-02)
+=====================================
+datamodel
+ - Allow access to attributes via "meta" property
+irbempy
+ - Fix compilation issues on certain systems
+poppy
+ - Fix bootstrapping when aggregating function has multiple outputs
+pycdf
+ - Allow access to attributes via "meta" property
+ - Single element references now return Python types not numpy scalars
+ - Fix type-guessing on numpy object arrays with no values
+ - New "istp" module supporting CDFs with ISTP-compliant metadata
+
+Changes in Version 0.2.0 (2019-06-22)
+=====================================
+- Many installer updates, including binary wheels for Windows
+- Fix writing of configuration file on Windows
+ae9ap9
+ - Fix handling of gzipped files under Windows/Python2
+datamodel
+ - Datatypes are now explicitly preserved by function "toRecArray"
+irbempy
+ - Update IRBEMlib to rev616
+ - Update build for compatibility with numpy>=1.16 and GCC 8
+ - Update retrieval of TS07 dynamic coefficient files
+pybats
+ - Many small changes and bugfixes (thanks John Haiducek)
+ - Fix handling of gzipped files under Windows/Python2
+pycdf
+ - Proper handling of type guessing for negative integers, numpy scalars, and
+   object arrays.
+ - Allow ... to get all gEntries
+ - Allow insert, append on gAttrs
+ - Properly handle reading from empty variables
+ - Fix some type-guessing ordering in Python 3.6
+ - Reading empty NRV variables will now return empty array (not padding)
+ - Fix more cases of BAD_ENTRY_NUM when reading attribute entries
+ - Fix UTC-to-TT2000 conversions on ARM (thanks Rodrigue Piberne for the bug)
+ - Speed up many operations by cacheing variable numbers. This is the biggest
+   change to pycdf internals in several years; please report any bugs.
+ - Fix TT2000-to-EPOCH16 conversions crashing in very rare cases.
+ - Minimize setting/unsetting readonly mode, as this can be very slow.
+ - Update for API changes in CDF library 3.7.1 (compatibility maintained
+   with earlier versions)
+
+Changes in Version 0.1.6 (2016-09-08)
+=====================================
+- Improvements to test suite (coverage and design)
+coordinates
+ - Bugfix to allow correct slicing behavior when Coords class has attached ticks
+datamanager
+ - New module to help in finding, slicing, and manipulating data
+ - Function "apply_index": help sort one multi-dimensional data set by another
+ - Function "array_interleave": combine data from two arrays to make a new
+ - Function "axis_index": prepare indices along the axis of an array
+ - Function "flatten_idx": convert an index to an index into flattened array
+ - Function "insert_fill" to make explicit gaps in irregular data
+ - Function "rev_index": convert an index into its complement
+ - Function "values_to_steps": convert values to index of unique, sorted values
+datamodel
+ - Fix reading JSON-headed ASCII in numpy 1.4, 1.5
+ - New function resample to change the time cadence of a SpaceData with
+   windowMean
+ - SpaceData gained methods for toCDF, toHDF, and toJSONheadedASCII
+ - SpaceData keys can be multiple called, see __getitem__
+ - New function toRecArray to create numpy record arrays from SpaceData objects
+ - New function fromRecArray to create SpaceData objects from numpy record
+   arrays
+empiricals
+ - Fix normalization of Vampola pitch angle model
+ - New function omniFromDirectionalFlux, calculates omnidirection flux from
+   directional fluxes
+ - New function getSolarRotation, returns Carrington or Bartels number
+ - New model in getPlasmaPause,  RT1970 -- Rycroft et al 1970
+ - New function getSolarProtonSpectra, returns a fluence spectra for SEP events
+irbempy
+ - updated to latest revision of IRBEM library (rev541)
+ - updated AlphaOfK to use vector inputs
+ - minor bugfixes and speedups
+plot
+ - Packages in plot are imported on import of plot module
+ - Addition of dual_half_circle() to overlay a light/dark "Earth"
+ - Addition of simpleSpectrogram() in spacepy.plot.spectrogram
+ - Addition of Carrington/Bartel plotting for 1D series
+   (in spacepy.plot.carrington)
+ - Updated smartTimeTicks, applySmartTimeTicks and added set_target
+   (from PyBATS)
+ - SpacePy style sheets added. Autoimported with plot, but with functionality
+   to change style
+ - Fix utils.collapse_vertical when called with sequences other than lists
+ - Update to utils.timestamp adding more customization
+pybats
+ - Updated docstrings across all modules.
+ - rim.py updated to be consistent with other pybats modules.
+ - many bugfixes
+ - Unified BATS-R-US calculation of number density and composition.
+ - New class for magnetometer grid files: MagGridFile
+ - New function for automatic latex label creation.
+ - Updated Mag and MagFile objects for forward/backward compatibility.
+ - IdlBin class renamed IdlFile; can read binary or ascii SWMF-IDL files.
+ - Moved core plotting routines (set_target, smart_timeticks,
+   apply_smart_timeticks) to plot.utils
+pycdf
+ - On OSX, search more paths for the CDF library
+ - CDF.clone() now returns the new variable
+ - Fix re-import after failure to find the CDF library, can now try the import
+   again without restarting the Python interpreter
+ - Fix some comparisons that might cause problems with future versions of numpy
+ - Log the path to the CDF library for debugging purposes
+ - Library.epoch_to_num: convert epoch to matplotlib date number (like date2num)
+ - Improve handling of CDF_CHAR element count on py3k
+ - Change tests to work with padding/stripping of CDF library 3.6.2 and later
+	- It's not clear where the CDF library is stripping and/or padding
+	  and pycdf has limited ability to work around this.
+ - Improve type-guessing of attribute entries, particularly for zAttrs
+ - Fix BAD_ENTRY_NUM when looking up zEntry type (or assigning to zEntry)
+time
+ - Speed improvement update to TickTock.getleapsecond
+ - Overall speed improvements with for loop removal
+ - ISO improvements via special cases for string input
+ - Added classmethod today()
+toolbox
+ - Added function unique_columns
+ - Added windowMean keyword op to allow arbitrary operations
+ - Bugfixes in windowmean
+        - double counting of points on window boundaries
+        - one window's width of data could dropped from output series
+python3 support
+ -updates for python3 support, seems to be complete
+AE9AP9
+ - added ae9ap9 module to parse and work with output files from the
+   AE9/AP9/SPM models (beta)
+
+Changes in Version 0.1.5 (2014-12-23)
+=====================================
+- Python 3 support
+- documentation updates across many packages
+- installer should work better w/pip
+- minor bugfixes throughout
+datamodel
+ - fromHDF5 now reads most netCDF4 and MatLab (v7.3+; r2011b onward) save files
+ - add function dmfilled: create a filled dmarray with any given fill value
+ - updates to toCDF to allow/use NRV variables
+irbempy
+ - add function find_footpoint: traces field line from given location to
+   specified altitude
+ - add functions find_LCDS and find_LCDS_K to find the last closed drift shell
+   at given pitch angle or given second invariant K
+ - add function AlphaOfK to find the equatorial pitch angle for a specified
+   second invariant K
+omni
+ - get_omni updated to also read from daily JSON-headed ASCII files in
+   custom databases
+plot
+ - new functions in utils:
+   - add_logo: put an image in one corner of a figure
+   - annotate_xaxis: add text in line with x tickmarks
+   - collapse_vertical: remove space between two subplots
+   - shared_ylabel: span a y-axis label across subplots
+   - show_used: draw boxes to show the space taken by each plot element
+pycdf
+ - fix bug with interpreting indexes with ellipses (var[..., 0] gave the
+   wrong result).
+ - epoch16_to_epoch: round sub-milliseconds rather than truncate.
+ - sped up indexing in variable copies
+ - improved handling of numpy fancy indexing in variable copies
+   (fancy indexing is still not supported for variables themselves.)
+ - make assignment to attrs work
+ - deprecate from_dict method of attribute lists; it is redundant with clone.
+ - fix BAD_DATA_TYPE bug with datetime attributes in backward-compatible CDF
+ - fix bug with finding CDF types for negative floats
+ - fix matching attribute to variable type when assigning attributes to dict
+ - fix handling of existence checks for variables with single quote in name
+time
+ - dtype in Ticktock can now be a callable (allowing custom time parsing)
+toolbox
+ - add function timeout_check_call to run another program with a timeout
+
+Changes in Version 0.1.4
+========================
+- Removed deprecated functions/classes
+  - time
+    - Tickdelta class (use datetime.timedelta)
+    - num2date, date2num functions (use matplotlib.dates)
+  - toolbox
+    - printfig, smartTimeTicks, applySmartTimeTicks, timestamp functions
+      (moved to plot.utils)
+    - leapyear, randomDate functions (moved to time)
+- Minor bugfixes and speed-ups across package
+- Expanded unit-testing
+- Changed download prompt on install to information only
+datamodel
+ - output from datamodel to JSON-headed ASCII added
+ - output from datamodel to NASA CDF added
+ - new methods on dmarrays (append, concatenate, h/v/dstack)
+empiricals
+ - fixed bug in getPlasmaPause implementation of Moldwin et al., 2002 model
+ - getPlasmaPause accepts optional dict-like of inputs instead of calling omni module
+irbempy
+ - updated to latest revision of IRBEM library (rev425)
+ - consistent with IRBEMlib release version 4.4.0
+ - add support for building with Intel Fortran compiler
+LANL*
+ - added new neural network trained on RAM-SCB model (valid inside 6.6Re)
+pybats
+ - Nearly all classes inherit from PbData, which is a subclass of SpaceData.
+ - All add_* plotting methods have unified "target" and "loc" kwargs for selecting where to place plots.
+ - New submodule: dgcpm, for handling the DGCPM model input/output.
+ - New class: NgdcIndex, for handling NGDC input data for SWMF runs.
+ - Bats2d class: stream tracing navigates native quadtree.
+ - Bats2d class: arbitrary interpolation of data to any X,Y point(s).
+ - Bats2d class: new variable calculations, including gradients.
+ - Bats2d class: better handling of multi-species/fluid variables.
+ - Bats2d class: unification of add_pcolor and add_contour syntax.
+ - New class: ram.BoundaryGroup for handling groups of boundary files.
+ - Expanded documentation for classes and methods.
+pycdf
+ - fixed bug in time types with pre-3.4.1 CDF library
+ - provide new CDF.raw_var method to give access to variables without
+   any translation.
+ - added functions to translate between EPOCH, EPOCH16, TT2000 without going
+   through datetime.
+ - add options to CDF.new to allow specification of variable compression
+   at creation time.
+ - sort lists of variables, attributes by name instead of number.
+time
+ - fixed bug in addition/subtraction of Ticktocks
+
+Changes in Version 0.1.3
+========================
+- Substantial updates to documentation
+  - including publication list, case studies
+- Minor bugfixes throughout
+- Expanded unit testing
+- Several functions deprecated:
+  - toolbox.leap_year (use time.leapyear)
+- Several previously deprecated functions removed:
+  - toolbox.makePoly (use matplotlib.pyplot.fill_between)
+- Several functions moved:
+  - leapyear: from toolbox to time
+  - randomDate: from toolbox to time
+  - applySmartTimeTicks, smartTimeTicks, printfig, timestamp:
+    from toolbox to plot.utils
+- Number of base level imports limited
+- MAJOR BUG in IRBEM library (T01S and TS04 models) fixed.
+datamodel
+ - new count method on dmarray
+ - HDF5 output now supports many more types
+ - output from datamodel to HTML table added
+irbempy
+ - Updated IRBEM library (including major bugfix to T01S and TS04)
+ - 'custom' internal B-field model set to Dungey model (dipole + uniform)
+ - revised multiprocessing of get_Lstar to use standard library
+ - new get_Lm function
+LANLstar
+ - LANLstar v3 (with improved UI) now packaged with SpacePy
+ - Fortran backend replaced (now requires ffnet Python package)
+omni
+ - additional OMNI parameters added to hourly database
+pycdf
+ - Convert to numpy-based backend, substantially faster/more flexible
+ - Speed up extending variables with additional data (roughly 4x as fast)
+ - Better integration with datamodel
+ - Deletion bug still present in CDF 3.4; extend workaround to later version
+ - Support for new CDF_TIME_TT2000 variable type
+time
+ - Ticktock is now iterable and adds/subtracts datetime.timedeltas
+ - Ticktock time storage is array-based and now has insert and remove methods
+ - Timedelta has been deprecated (use datetime.timedelta)
+toolbox
+ - hypot function speed-up
+ - update function:can specify HTTP User Agent in config file
+
+Changes in Version 0.1.2
+========================
+- Overhaul of all documentation for better organization and clarify
+- New C backends speed up several functions in toolbox and time
+- Minor bugfixes throughout
+- Support for newer compilers on Windows
+- Include Fortran runtime with Windows binary installers
+Datamodel
+ - Support for JSON-headed ASCII data read/write
+Empiricals
+ - New pitch angle model
+pybats
+ - PWOM added
+plot
+ - New EventClicker to manually identify event times on a plot
+
+Changes in Version 0.1.1
+========================
+- new config file structure
+- overhaul of source distribution build
+- __contact__ attribute added to each SpacePy module (FR: 3424949)
+Datamodel
+ - HDF5 file object closure on dump to HDF5
+ - file overwriting is now possible in toHDF using overwrite keyword
+ - warnings added for incompatible data types on dump to HDF5
+Toolbox
+ - reformatted example in dist_to_list
+ - hypot now takes multiple args or an iterable
+ - pmm now handles NaN
+ - tOverlap/tOverlapHalf now return iterators for presorted input
+ - forcedate keyword added to linspace
+ - EventTimer added
+ - bin_edges_to_center added to perform inverse of extant bin_center_to_edges
+ - listUniq deprecated in favor of numpy.unique
+ - feq deprecated in favor of numpy.allclose
+SeaPy
+ - fixed Sea2d failure caused by incomplete migration to base class for all Sea types
+Plot
+ - New subpackage plot added to SpacePy (still in heavy development)
+ - spectrogram function added
+PyBATS
+ - pybats is now an extension module
+ - major upgrades to internals (qdtree implementation, use of datamodel)
+ - new Kyoto index handler
+
+Additional typo fixes in documentation, Py3k compatibility updates and unit test updates
+
+Version 0.1
+===========
+Original release of SpacePy
