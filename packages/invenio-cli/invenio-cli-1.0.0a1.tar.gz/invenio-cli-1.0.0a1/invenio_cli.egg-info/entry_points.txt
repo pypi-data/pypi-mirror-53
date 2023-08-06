@@ -1,0 +1,12 @@
+[console_scripts]
+invenio-cli = invenio_cli.cli:cli
+
+[invenio_base.apps]
+invenio_cli = invenio_cli:InvenioCli
+
+[invenio_base.blueprints]
+invenio_cli = invenio_cli.views:blueprint
+
+[invenio_i18n.translations]
+messages = invenio_cli
+

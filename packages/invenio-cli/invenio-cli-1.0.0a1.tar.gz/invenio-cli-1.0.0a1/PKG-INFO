@@ -1,0 +1,95 @@
+Metadata-Version: 2.1
+Name: invenio-cli
+Version: 1.0.0a1
+Summary: Invenio module to ease the creation and management of applications.
+Home-page: https://github.com/inveniosoftware/invenio-cli
+Author: CERN
+Author-email: info@inveniosoftware.org
+License: MIT
+Description: ..
+            Copyright (C) 2019 CERN.
+            Copyright (C) 2019 Northwestern University, Galter Health Sciences Library & Learning Center.
+        
+            Invenio-Cli is free software; you can redistribute it and/or modify
+            it under the terms of the MIT License; see LICENSE file for more details.
+        
+        =================
+         Invenio-Cli
+        =================
+        
+        .. image:: https://img.shields.io/travis/inveniosoftware/invenio-cli.svg
+                :target: https://travis-ci.org/inveniosoftware/invenio-cli
+        
+        .. image:: https://img.shields.io/coveralls/inveniosoftware/invenio-cli.svg
+                :target: https://coveralls.io/r/inveniosoftware/invenio-cli
+        
+        .. image:: https://img.shields.io/github/tag/inveniosoftware/invenio-cli.svg
+                :target: https://github.com/inveniosoftware/invenio-cli/releases
+        
+        .. image:: https://img.shields.io/pypi/dm/invenio-cli.svg
+                :target: https://pypi.python.org/pypi/invenio-cli
+        
+        .. image:: https://img.shields.io/github/license/inveniosoftware/invenio-cli.svg
+                :target: https://github.com/inveniosoftware/invenio-cli/blob/master/LICENSE
+        
+        Invenio module that allows the creation of applications building workflows
+        
+        Example execution
+        
+        .Development environment
+        
+        ```
+        $ inveniobuilder --flavor RDM --project-name my-site init
+        $ inveniobuilder --flavor RDM --project-name my-site build --base --app --dev
+        $ inveniobuilder --flavor RDM --project-name my-site server --dev --bg [--stop]
+        $ inveniobuilder --flavor RDM --project-name my-site setup --dev
+        $ # USE AWAY! :)
+        $ inveniobuilder --flavor RDM --project-name my-site destroy --dev
+        ```
+        
+        .Production environment
+        
+        ```
+        $ inveniobuilder --flavor RDM --project-name my-site init
+        $ inveniobuilder --flavor RDM --project-name my-site build --base --app
+        $ inveniobuilder --flavor RDM --project-name my-site server --bg [--stop]
+        $ inveniobuilder --flavor RDM --project-name my-site setup
+        $ # USE AWAY! :)
+        $ inveniobuilder --flavor RDM --project-name my-site destroy
+        ```
+        
+        Further documentation is available on
+        https://invenio-cli.readthedocs.io/
+        
+        
+        ..
+            Copyright (C) 2019 CERN.
+            Copyright (C) 2019 Northwestern University, Galter Health Sciences Library & Learning Center.
+        
+            Invenio-Cli is free software; you can redistribute it and/or modify
+            it under the terms of the MIT License; see LICENSE file for more details.
+        
+        Changes
+        =======
+        
+        Version 1.0.0 (released TBD)
+        
+        - Initial public release.
+        
+Keywords: invenio-cli
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Development Status :: 3 - Alpha
+Provides-Extra: tests
+Provides-Extra: all
+Provides-Extra: docs
