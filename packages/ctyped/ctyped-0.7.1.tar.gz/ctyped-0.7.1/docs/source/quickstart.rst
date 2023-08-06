@@ -1,0 +1,81 @@
+Quickstart
+==========
+
+
+.. code-block:: python
+
+    from typing import Callable
+    from ctyped.toolbox import Library
+    from ctyped.types import CInt
+
+    # Define a library.
+    lib = Library('mylib.so')
+
+    # Structures are defined with the help of `structure` decorator
+    @lib.structure
+    class Box:
+
+        one: int
+        two: str
+        innerbox: 'Box'  # That'll be a pointer.
+
+    # Type less with function names prefixes.
+    with lib.scope(prefix='mylib_'):
+
+        # Describe function available in the library.
+        @lib.function(name='otherfunc')
+        def some_func(title: str, year: int) -> str:
+            ...
+
+        @lib.f  # `f` is a shortcut for function.
+        def struct_func(src: Box) -> Box:
+            ...
+
+        with lib.s(prefix='mylib_grouped_', int_bits=64, int_sign=False):  # `s` is a shortcut for scope.
+
+            class Thing(CInt):
+
+                @lib.method(int_sign=True)  # Override `int_sign` from scope.
+                def one(self, some: int) -> int:
+                    # Implicitly pass Thing instance alongside
+                    # with explicitly passed `some` arg.
+                    ...
+
+                @lib.m  # `m` is a shortcut for method.
+                def two(self, some:int, cfunc: Callable) -> int:
+                    # `cfunc` is a wrapper, calling an actual ctypes function.
+                    result = cfunc()
+                    # If no arguments, the wrapper will try to detect them automatically.
+                    return result + 1
+
+        @lib.function
+        def get_thing() -> Thing:
+            ...
+
+    # Or you may use classes as namespaces.
+    @lib.cls(prefix='common_', str_type=CCharsW)
+    class Wide:
+
+        @staticmethod
+        @lib.function
+        def get_utf(some: str) -> str:
+            ...
+
+    # Bind ctype types to functions available in the library.
+    lib.bind_types()
+
+    # Call function from the library. Call ``mylib_otherfunc``
+    result_string = some_func('Hello!', 2019)
+    result_wide = Wide.get_utf('some')  # Call ``common_get_utf``
+
+    # Now to structures. Call ``mylib_struct_func``
+    mybox = struct_func(Box(one=35, two='dummy', innerbox=Box(one=100)))
+    # Let's pretend our function returns a box inside a box (similar to what's in the params).
+    mybox.one  # Access box field value.
+    mybox.innerbox.one  # Access values from nested objects.
+
+    thing = get_thing()
+
+    thing.one(12)  # Call ``mylib_mylib_grouped_one``.
+    thing.two(13)  # Call ``mylib_mylib_grouped_two``
+
