@@ -1,0 +1,95 @@
+[tool.poetry]
+
+name = "twerk"
+version = "0.0"
+description = "Make Twitter work for humans by blocking fake accounts."
+
+license = "MIT"
+
+authors = ["Jace Browning <jacebrowning@gmail.com>"]
+
+readme = "README.md"
+
+homepage = "https://pypi.org/project/twerk"
+documentation = "https://twerk.readthedocs.io"
+repository = "https://github.com/jacebrowning/twerk"
+
+keywords = [
+]
+classifiers = [
+    # TODO: update this list to match your application: https://pypi.org/pypi?%3Aaction=list_classifiers
+    "Development Status :: 1 - Planning",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+]
+
+[tool.poetry.dependencies]
+
+python = "^3.7"
+
+# User interface
+bullet = "^2.1.0"
+click = "^7.0"
+minilog = "^1.2.4"
+ipdb = "~0.12.2"  # export PYTHONBREAKPOINT=ipdb.set_trace
+
+# Browser automation
+splinter = "^0.11.0"
+webdriver_manager = "^1.8.2"
+
+# Data persistence
+datafiles = "^0.5"
+
+[tool.poetry.dev-dependencies]
+
+# Formatters
+black = "=19.3b0"
+isort = "=4.3.4"
+
+# Linters
+mypy = "*"
+pydocstyle = "*"
+pylint = "^2.0"
+
+# Testing
+pytest = "^5.0"
+pytest-cov = "*"
+pytest-describe = "*"
+pytest-expecter = "*"
+pytest-random = "*"
+freezegun = "*"
+
+# Reports
+coveragespace = "*"
+
+# Documentation
+mkdocs = "^1.0"
+pygments = "*"
+
+# Tooling
+pyinstaller = "*"
+sniffer = "*"
+MacFSEvents = { version = "*", platform = "darwin" }
+pync = { version = "*", platform = "darwin" }
+
+# Notebooks
+ipython = "^7.8.0"
+jupyter = "^1.0.0"
+nbstripout = "^0.3.6"
+
+[tool.poetry.scripts]
+
+twerk = "twerk.cli:main"
+twerk-gui = "twerk.gui:main"
+
+[tool.black]
+
+target-version = ["py36", "py37"]
+
+[build-system]
+
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
