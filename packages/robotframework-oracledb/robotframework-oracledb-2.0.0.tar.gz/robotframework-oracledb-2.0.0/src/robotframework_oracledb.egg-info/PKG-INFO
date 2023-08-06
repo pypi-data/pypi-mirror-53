@@ -1,0 +1,68 @@
+Metadata-Version: 1.1
+Name: robotframework-oracledb
+Version: 2.0.0
+Summary: Robot Framework library for working with Oracle Database.
+Home-page: https://github.com/peterservice-rnd/robotframework-oracledb
+Author: Nexign
+Author-email: MF_AIST_all@nexign-systems.com
+License: Apache License 2.0
+Description: RobotFramework Oracle Library
+        =================================
+        
+        |Build Status|
+        
+        Short Description
+        -----------------
+        
+        `Robot Framework`_ library for working with Oracle database, using `cx_Oracle`_.
+        
+        Installation
+        ------------
+        
+        ::
+        
+            pip install robotframework-oracledb
+        
+        Documentation
+        -------------
+        
+        See keyword documentation for robotframework-oracledb library in
+        folder ``docs``.
+        
+        Example
+        -------
+        +-----------+------------------+
+        | Settings  |      Value       |
+        +===========+==================+
+        |  Library  |     OracleDB     |
+        +-----------+------------------+
+        
+        +---------------+---------------------------------------+--------------------+--------------------------+----------+
+        |  Test cases   |                  Action               |      Argument      |         Argument         | Argument |
+        +===============+=======================================+====================+==========================+==========+
+        |  Simple Test  | OracleDB.Connect To Oracle            | rb60db             | username                 | password |
+        +---------------+---------------------------------------+--------------------+--------------------------+----------+
+        |               | @{query}=                             | Execute Sql String | select sysdate from dual |          |
+        +---------------+---------------------------------------+--------------------+--------------------------+----------+
+        |               | OracleDB.Close All Oracle Connections |                    |                          |          |
+        +---------------+---------------------------------------+--------------------+--------------------------+----------+
+        
+        License
+        -------
+        
+        Apache License 2.0
+        
+        .. _Robot Framework: http://www.robotframework.org
+        .. _cx_Oracle: http://cx-oracle.readthedocs.io
+        
+        .. |Build Status| image:: https://travis-ci.org/peterservice-rnd/robotframework-oracledb.svg?branch=master
+           :target: https://travis-ci.org/peterservice-rnd/robotframework-oracledb
+Keywords: testing testautomation robotframework autotest oracle database
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Testing
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Framework :: Robot Framework :: Library
