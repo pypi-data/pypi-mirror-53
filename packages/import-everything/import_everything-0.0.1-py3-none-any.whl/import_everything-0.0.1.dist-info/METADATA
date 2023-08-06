@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: import-everything
+Version: 0.0.1
+Summary: A module containing everything
+Home-page: https://github.com/profMagija/everything
+Author: Nikola Bebić
+Author-email: nikola.bebic99@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# everything
+
+A module containing everything. For example:
+
+```py
+from everything import *
+
+print(sys.path) # sys is imported
+
+```
+
+Now you have imported every module on the system. Good luck.
+
+
+
