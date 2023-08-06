@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: comp-lead
+Version: 0.1.15
+Summary: Display a handful of tech leaders and companies
+Home-page: https://github.com/endormi/comp-lead
+Author: Endormi
+Author-email: contactendormi@gmail.com
+License: UNKNOWN
+Description: # Comp-Lead [![PyPI](https://img.shields.io/pypi/v/comp-lead?color=blue)](https://pypi.org/project/comp-lead/)
+        
+        This is my first PyPI package, so this is very simple. This package displays a handful of tech leaders and companies (five to be exact).
+        The reason why I decided to create this package was to just understand the way packages are built and how they are published.
+        
+        ### Usage:
+        
+        Installation:
+        
+        ```sh
+        pip install comp-lead
+        ```
+        
+        Import:
+        
+        ```python
+        from comp_lead import sample
+        ```
+        
+        Run: 
+        
+        ```python
+        sample.obj.displayLead()
+        
+        sample.com.displayComp()
+        ```
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3
+Description-Content-Type: text/markdown
