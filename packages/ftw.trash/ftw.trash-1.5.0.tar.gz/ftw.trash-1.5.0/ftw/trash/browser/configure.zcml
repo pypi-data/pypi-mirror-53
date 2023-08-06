@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ftw.trash">
+
+  <browser:page
+      name="trash"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".trash.TrashView"
+      permission="ftw.trash.RestoreTrashedContent"
+      allowed_attributes="restore
+                          delete_permanently
+                          confirm_clean_trash
+                          clean_trash"
+      />
+
+</configure>
