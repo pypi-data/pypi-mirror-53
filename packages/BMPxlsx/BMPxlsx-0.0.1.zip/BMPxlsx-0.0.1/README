@@ -1,0 +1,2 @@
+# BMPxlsx
+The library takes a dictionary of form {Sheet: {Cell: Value}} and updates the specified Excel file accordingly.
