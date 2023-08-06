@@ -1,0 +1,94 @@
+#########
+Changelog
+#########
+
+******
+v0.4.0
+******
+
+Breaking Changes
+================
+
+* :issue:`44`: Rename ``email-verification-request-create`` and
+  ``email-verification-create`` URLs to ``email-verification-request-list`` and
+  ``email-verification-list``, respectively.
+
+Features
+========
+
+* :issue:`32`: Link to frontend pages for resetting passwords and verifying
+  email addresses. These links are specified with the ``PASSWORD_RESET_URL`` and
+  ``EMAIL_VERIFICATION_URL`` settings, respectively.
+* :issue:`36`: Add endpoint to verify an email address to the provided REST
+  interface.
+* :issue:`38`: Add endpoint to resend a verification email to the provided REST
+  interface.
+* :issue:`39`: Add endpoints to request a password reset and reset a password.
+
+Documentation
+=============
+
+* :issue:`43`: Document usage of provided authentication backend.
+
+******
+v0.3.1
+******
+
+Bug Fixes
+=========
+
+* :issue:`30`: Fix error when attempting to authenticate an invalid
+  email/password combination.
+
+******
+v0.3.0
+******
+
+Breaking Changes
+================
+
+* :issue:`23`: The default ordering of `EmailVerification` instances has been switched
+  from ``email__normalized_address`` (doesn't exist) to ``time_created``.
+
+Features
+========
+
+* :issue:`6`: Add ``PasswordReset`` model to facilitate password resets using verified
+  email addresses.
+* :issue:`20`: Add ``EmailAddress.send_already_verified`` method to send a notification
+  to the user that their email address has already been verified.
+
+Bug Fixes
+=========
+
+* :issue:`22`: The ``time_sent`` field is now populated when calling
+  ``EmailVerification.send_email``.
+
+******
+v0.2.0
+******
+
+Breaking Changes
+================
+
+* :issue:`12`: Removed ``normalized_address`` field from ``EmailAddress`` model because
+  its behavior can easily be replicated by querying against ``address__iexact``.
+* :issue:`13`: Rename admin class ``EmailVerification`` to ``EmailVerificationAdmin``.
+
+Features
+========
+
+* :issue:`11`: Added utility method ``EmailAddress.send_verification_email`` to
+  encapsulate the process of creating an ``EmailVerification`` instance and
+  sending an email for it.
+* :issue:`14`: Added method to send a notification that an email address had another
+  registration attempt.
+
+******
+v0.1.0
+******
+
+Features
+========
+
+* Added models to track email addresses and verify them.
