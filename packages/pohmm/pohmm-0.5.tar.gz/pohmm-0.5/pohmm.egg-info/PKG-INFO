@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: pohmm
+Version: 0.5
+Summary: Partially observable hidden Markov model
+Home-page: https://github.com/vmonaco/pohmm
+Author: Vinnie Monaco
+Author-email: contact@vmonaco.com
+License: MIT
+Description: *pohmm* is an implementation of the partially observable hidden Markov model, a generalization of the hidden Markov model in which the underlying system state is partially observable through event metadata at each time step.
+        
+        An application that motivates usage of such a model is keystroke biometrics where the user can be in either a passive or active hidden state at each time step, and the time between key presses depends on the hidden state. In addition, the hidden state depends on the key that was pressed; thus the keys are observed symbols that partially reveal the hidden state of the user.
+        
+        For examples and documentation, see https://github.com/vmonaco/pohmm
+        
+Keywords: hidden Markov model data analysis
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Provides-Extra: testing
+Provides-Extra: docs
