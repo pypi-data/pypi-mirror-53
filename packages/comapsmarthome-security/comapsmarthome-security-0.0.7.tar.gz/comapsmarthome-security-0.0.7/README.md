@@ -1,0 +1,1 @@
+Provides security helpers  in the Comap Smart Home environment
