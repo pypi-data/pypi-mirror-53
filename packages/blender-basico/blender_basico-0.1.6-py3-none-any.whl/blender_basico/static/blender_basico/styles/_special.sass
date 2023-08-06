@@ -1,0 +1,80 @@
+/* Small button at the bottom of the page to hop to top */
+#hop
+	background: $color-background-light
+	border-radius: 50%
+	box-shadow: 0 0 15px rgba(black, .2)
+	bottom: 25px
+	cursor: pointer
+	height: 32px
+	opacity: 0
+	position: fixed
+	right: 25px
+	transform: scale(0.5)
+	transition: all 250ms ease-in-out
+	visibility: hidden
+	width: 32px
+	z-index: 999
+
+	&:hover
+		transform: scale(1.2)
+		background-color: $color-background-dark
+
+	svg
+		fill: $color-text-dark-hint
+		max-width: 12px
+		position: relative
+		top: 5px
+
+body
+	&.is-scrolled
+		#hop
+			visibility: visible
+			opacity: 1
+			transform: scale(1)
+
+
+/* ADMIN POWERS */
+.whoosh
+	@extend .align-items-center
+	@extend .d-flex
+	@extend .h5
+	@extend .justify-content-center
+	@extend .position-fixed
+	@extend .rounded-circle
+	@extend .text-muted
+	background-color: rgba($color-background-light, .8)
+	box-shadow: 0 0 15px rgba(black, .2)
+	width: 40px
+	height: 40px
+	right: 15px
+	text-shadow: none
+	transition: background-color 150ms ease-in-out, top 550ms ease-in-out
+	top: 60px
+	z-index: 99
+
+	&:hover
+		background-color: $color-background-light
+		opacity: 1
+		text-decoration: none
+
+	&:active
+		background-color: $color-primary
+		color: white !important
+
+	+media-xs
+		bottom: 10px
+		color: $color-text
+		right: 20px
+		top: unset
+
+	&.whoosh-page
+		right: 70px
+		transition: background-color 150ms ease-in-out, opacity 150ms ease-in-out, top 400ms ease-in-out
+
+		+media-xs
+			right: 80px
+
+body
+	&.is-navbar-hidden
+		.whoosh
+			top: 10px

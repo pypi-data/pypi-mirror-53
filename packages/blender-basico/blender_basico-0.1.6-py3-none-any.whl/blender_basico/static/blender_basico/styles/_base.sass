@@ -1,0 +1,94 @@
+html, body
+	-webkit-font-smoothing: antialiased
+	cursor: default
+	height: 100%
+	margin: 0
+	overflow-wrap: break-word
+	padding: 0
+	width: 100%
+
+body
+	background-color: $color-background-darker
+	padding-top: 49px // height of the header navigation
+
+	&.with-alert
+		.alert
+			span
+				@include make-container()
+				@include make-container-max-widths()
+			i
+				padding-right: 10px
+
+p a
+	text-decoration: underline
+
+.container
+	width: 100% // Full fluid, except for media-lg
+
+	+media-lg
+		max-width: $container-width
+
+
+// Main container (the whole page up to the footer)
+.container-main
+	background-color: rgba(white, .5)
+
+.flex
+	display: block
+
+	+media-sm
+		display: flex
+
+	> [class^="col-"]
+		display: block
+
+		+media-sm
+			display: flex
+
+		.box
+			width: 100%
+
+/* // LINKS */
+
+header
+	width: 100%
+	border-bottom: thin solid rgba($color-background, .3)
+	+media-xs
+		position: relative
+
+/* HEADINGS */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6
+	color: lighten($color-text-light, 10%)
+
+/* FORM FIELDS / INPUTS */
+input, button, select, textarea
+	font-family: $font-body !important
+	transition: background-color 0.1s ease-in
+
+textarea
+	resize: vertical
+	padding: 6px 6px 6px 10px !important
+	min-height: 180px
+
+blockquote
+	@extend .bg-light
+	@extend .p-3
+	@extend .rounded
+	border-left: 5px solid rgba($body-color, .1)
+
+fieldset
+	border: none
+	margin: 0
+	padding: 0
+
+.icon
+	max-width: 16px
+	position: relative
+	width: 16px
+
+	svg
+		fill: currentColor
+		max-height: 16px
+		max-width: 16px
+		stroke: currentColor
+		position: relative

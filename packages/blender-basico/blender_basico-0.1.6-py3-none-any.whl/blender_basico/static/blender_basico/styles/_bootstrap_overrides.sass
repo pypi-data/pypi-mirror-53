@@ -1,0 +1,335 @@
+/* Boostrap Panels Override */
+.panel
+	border-radius: 3px
+	box-shadow: 2px 2px 0 rgba(black, .1)
+
+.panel-default
+	border: none
+	& a:focus
+		text-decoration: none
+
+.panel-default > .panel-heading
+	color: $color-text
+	margin: 0
+	background-color: darken($color-background, 5%)
+	border: none
+	border-bottom: 2px solid lighten($color-text, 60%)
+
+.panel-title
+	font-size: 160%
+	text-shadow: 1px 1px 0 rgba(white, .5)
+
+a.list-group-item, .panel > .list-group .list-group-item
+	background-color: $color-background-light
+	color: $color-text
+	border: thin solid lighten($color-text, 65%)
+	border-left: 2px solid lighten($color-text, 65%)
+	padding: 5% 5% 5% 40px
+
+a.list-group-item:hover, a.list-group-item:focus
+	background-color: darken($color-background, 5%)
+	color: $color-primary !important
+	border: thin solid lighten($color-text, 60%)
+	border-left: 2px solid lighten($color-primary, 20%) !important
+
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus
+	background-color: transparent
+	color: $color-secondary !important
+	border: thin solid lighten($color-text, 60%)
+	border-left: 2px solid $color-secondary !important
+
+.list-group-with-icon a.list-group-item i, .panel > .list-group.list-group-with-icon .list-group-item i
+	padding: 3px 15px 5px
+	position: absolute
+	float: left
+	left: 0
+
+.accordion .panel-heading
+	border-bottom: thin solid darken($color-background, 10%)
+	transition: border-bottom 0.2s ease-out
+
+.accordion .collapsed .panel-heading
+	border-bottom: thin solid transparent
+
+.accordion a .panel-title
+	color: $color-primary
+	transition: color 0.1s ease-out
+
+.accordion a:hover .panel-title
+	color: $color-secondary !important
+
+.accordion a.collapsed .panel-title
+	color: lighten($color-text, 20%)
+
+.panel-collapse-widget
+	font-family: $font-body
+	color: lighten($color-text, 40%)
+	display: block
+	float: right
+	+rotate(45deg)
+	transition: all 0.25s ease-out
+
+.panel-collapse-widget:after
+	content: '+'
+
+.collapsed .panel-collapse-widget
+	+rotate(0deg)
+
+.accordion .panel-body
+	position: relative
+	transform: translateY(-2px)
+	opacity: 0
+	transition: opacity 0.2s ease-out
+	transition: transform 0.2s ease-out
+
+.accordion .collapse.in .panel-body
+	opacity: 1.0
+	transform: translateY(0)
+	transition: opacity 0.2s ease-out
+	transition: transform 0.2s ease-out
+
+.accordion .collapsed+.collapsing .panel-body
+	opacity: 0
+	transition: opacity 0.2s ease-out
+
+
+/* DROPDOWN TOGGLES */
+.btn-group.open .dropdown-toggle
+	box-shadow: none // Overrides ugly inset shadow from bootstrap
+
+
+// BOOTSTRAP SELECT
+.bootstrap-select
+	.btn
+		font-family: $font-body !important
+
+.bs-searchbox
+	display: inline-block
+	width: 100%
+
+	.form-control
+		margin: 0 auto
+		padding: 15px 10px
+		box-shadow: none
+		&:active, &:focus
+			box-shadow: none
+/* // DROPDOWN MENUS */
+
+
+/* Special Classes */
+.backicon
+	z-index: 0
+	position: absolute
+	font-size: 1400%
+	bottom: -50px
+	right: -35px
+	color: rgba($color-text, .08)
+	pointer-events: none
+	user-select: none
+
+.divider
+	margin: 20px auto
+	width: 100%
+	height: 2px
+	border-top: thin solid darken($color-background, 5%)
+
+
+i.title-icon
+	position: relative
+	float: right
+	margin: 0 3%
+	bottom: .1em
+	font-size: 116%
+	opacity: 0.2
+
+.info
+	color: $color-info !important
+	h1, h2, h3, h4, h5, h6
+		color: $color-info !important
+
+.warning
+	color: $color-warning !important
+	h1, h2, h3, h4, h5, h6
+		color: $color-warning !important
+
+.danger
+	color: $color-danger !important
+	h1, h2, h3, h4, h5, h6
+		color: $color-danger !important
+
+.success
+	color: darken($color-success, 10%) !important
+	h1, h2, h3, h4, h5, h6
+		color: $color-success !important
+
+.text-color-brand-main
+	color: $color-primary !important
+
+.text-color-brand-secondary
+	color: $color-secondary !important
+
+
+/* LISTS */
+ul, ol
+	padding-left: 20px
+/* // LISTS */
+
+/* LABELS */
+.label
+	padding: .2em .7em .3em
+	font-size: 90%
+	font-weight: normal
+	color: $color-text-light
+	text-shadow: 1px 1px 0 rgba(black, .2)
+	box-shadow: 1px 1px 0 rgba(black, .1)
+	border-radius: 3px
+
+.label.label-2x
+	font-size: 100%
+
+.label-info
+	background-color: $color-info
+	color: $color-text-light
+	font-weight: bold
+	text-shadow: 1px 1px 0 rgba(black, .2)
+	border: thin solid darken($color-info, 5%)
+
+.label-danger
+	background-color: $color-danger
+	color: $color-text-light
+	font-weight: bold
+	text-shadow: 1px 1px 0 rgba(black, .2)
+	border: thin solid darken($color-danger, 5%)
+
+.label-warning
+	background-color: $color-warning
+	color: darken($color-warning, 45%)
+	text-shadow: 1px 1px 0 rgba(white, .5)
+	border: thin solid darken($color-warning, 5%)
+
+.label-success
+	background-color: $color-success
+	color: darken($color-success, 40%)
+	text-shadow: 1px 1px 0 rgba(white, .5)
+	border: thin solid darken($color-success, 5%)
+
+.disabled label
+	color: lighten($color-text, 5%)
+/* // LABELS */
+
+
+/* THUMBNAILS */
+.thumbnail
+	padding: 4px
+	border: none
+	background-color: white
+	box-shadow: 1px 1px 0 rgba($color-text, .25)
+	transition: all 0.1s ease-out
+
+a img.thumbnail:hover
+	opacity: 0.9
+
+/* // THUMBNAILS */
+
+
+/* Bootstrap Overrides */
+
+/* Breadcrumb */
+.breadcrumb > li + li:before
+	content: '\f105'
+	font-family: "FontAwesome"
+
+.breadcrumb
+	& .active,
+	& .active a
+		color: lighten($color-text, 30%)
+
+	& .active a:hover
+		color: $color-secondary
+
+/* // Breadcrumb */
+
+.tooltip
+	font-size: $font-size
+	position: absolute
+
+.tooltip.in
+	opacity: 1.0
+
+.tooltip-inner
+	margin: 0 auto
+	background-color: $color-background
+	color: $color-text
+	border-radius: 3px
+	box-shadow: 2px 2px 0 rgba(darken($color-background, 60%), .2)
+
+.tooltip.bottom .tooltip-arrow
+	border-bottom-color: $color-background
+	border-radius: 6px
+
+.tooltip.top .tooltip-arrow
+	border-top-color: $color-background
+
+.tooltip.bottom .tooltip-arrow
+	border-bottom-color: $color-background
+
+.tooltip.left .tooltip-arrow
+	border-left-color: $color-background
+
+.tooltip.right .tooltip-arrow
+	border-left-color: $color-background
+
+.popover .arrow
+	display: none
+
+.popover
+	min-width: 250px
+	background-color: transparent
+	border: none
+	border-radius: 3px
+
+.popover-title
+	background-color: $color-background
+	font-size: 110%
+	border-radius: 0
+	display: none
+
+.popover-content
+	font-size: $font-size
+	border-radius: 3px
+	background-color: $color-background
+	box-shadow: 2px 2px 0 rgba(darken($color-background, 60%), .2)
+
+.blink
+	transition: all 2s ease-in-out
+	animation: blink 2s infinite ease-in-out
+	animation-name: blink
+	-moz-animation-name: blink
+	animation-direction: normal
+	animation-duration: 2s
+	animation-iteration-count: infinite
+	animation-timing-function: ease-in-out
+
+.blink.slowest
+	animation-duration: 12s
+
+.blink.slow
+	animation-duration: 6s
+
+.blink.fast
+	animation-duration: 1s
+
+.blink.fastest
+	animation-duration: .5s
+
+
+/* Tabs. */
+.nav-tabs
+	.nav-link
+		border: none
+		border-bottom: $nav-tabs-border-width solid rgba($body-color, .2)
+		color: $secondary
+
+		&:hover
+			color: $primary
+			border-bottom-color: rgba($body-color, .2)

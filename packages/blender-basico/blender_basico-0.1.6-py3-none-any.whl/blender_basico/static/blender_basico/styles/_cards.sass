@@ -1,0 +1,237 @@
+.cards
+	&-list // .cards-list
+		display: flex
+		flex-wrap: wrap
+		padding: 0
+
+		+media-xs
+			flex-direction: column
+
+		&.size-half
+			.cards-list-item-outer
+				width: 50%
+
+				+media-xs
+					width: 100%
+
+		&.compact
+			.cards-list-item-outer
+				+media-sm
+					width: 50%
+				+media-xs
+					width: 100%
+
+				width: 33.3333%
+
+			.cards-list-item-inner
+				flex-direction: row
+
+			$cards-list-item-thumbnail-size: 128px
+			.cards-list-item-thumbnail
+				+media-md
+					width: $cards-list-item-thumbnail-size
+				border: none
+				border-top-left-radius: $border-radius-lg
+				border-bottom-left-radius: $border-radius-lg
+				min-height: $cards-list-item-thumbnail-size
+				min-width: $cards-list-item-thumbnail-size
+				position: relative
+				width: $cards-list-item-thumbnail-size
+
+				img
+					border-radius: 0
+					height: 100%
+					object-fit: cover
+
+			.cards-list-item-title
+				font-size: 1.2em
+				padding-bottom: 0
+
+		&-item // .cards-list-item
+			a.cards-list-item-title:hover
+				color: $color-primary
+
+			// The card itself.
+			&-inner // .cards-list-item-inner
+				+box-card
+				display: flex
+				flex-direction: column
+				height: 100%
+				width: 100%
+
+			// The invisible container of the card.
+			&-outer // .cards-list-item-outer
+				padding: 10px 0
+				width: 100%
+
+				+media-sm
+					+make_cards_nth_child(2)
+					width: 50%
+
+				+media-md
+					+make_cards_nth_child(3)
+					width: 33.3333%
+
+				+media-lg
+					+make_cards_nth_child(3)
+					width: 33.3333%
+
+				&.is-image-only
+					.cards-list-item-thumbnail
+						border-radius: $border-radius-lg
+
+			&-title // .cards-list-item-title
+				color: $color-text
+				display: block
+				font:
+					size: 20px
+					weight: 600
+				line-height: 1.2em
+				padding: 15px 20px 10px
+
+				a, &:visited, &:hover
+					color: $color-text
+					text-decoration: none
+
+				+media-xs
+					font-size: $font-size * 1.3
+
+			&-excerpt // .cards-list-item-excerpt
+				color: $color-text
+				display: block
+				flex: 1
+				font-size: $font-size / 1.1
+				padding: 5px 20px 5px
+
+				&:visited, &:hover
+					color: $color-text
+					text-decoration: none
+
+			&-more // .cards-list-item-more
+				@extend .align-items-center
+				@extend .d-flex
+				@extend .font-weight-bold
+				@extend .p-4
+				@extend .mt-auto
+				justify-content: space-between
+				color: $color-primary
+				font-size: $font-size-small
+
+				> .more-item
+					display: block
+					transition: color 150ms ease-in-out
+
+					&:hover
+						color: lighten($color-primary, 10%)
+
+					&.video
+						i
+							padding-right: 5px
+							color: red
+
+					&.url
+						&:hover i
+							transform: translateX(5px)
+
+						i
+							font-size: .8em
+							left: 5px
+							position: relative
+							top: -1px
+							transition: transform 250ms ease-in-out
+
+			&-description
+				display: block
+				padding: 10px 20px 20px
+				font-size: $font-size
+				color: $color-text
+
+				&:visited, &:hover
+					color: $color-text
+
+			&-thumbnail
+				border-top-left-radius: $border-radius-lg
+				border-top-right-radius: $border-radius-lg
+				display: block
+				overflow: hidden
+				position: relative
+
+				img
+					border-radius: 0
+					display: block
+					margin: 0 auto
+					max-height: 100%
+					max-width: 100%
+					object-fit: cover
+
+			&-extra
+				padding: 5px 20px 15px
+				font-size: $font-size-small / 1.1
+				text-transform: uppercase
+				margin-top: auto
+
+				+media-xs
+					font-size: $font-size-small / 1.2
+
+				a
+					color: $color-text-dark-secondary
+					&:hover
+						color: $color-primary
+
+				ul
+					display: flex
+					align-items: center
+					margin: 0
+					padding: 0
+					li
+						display: inline-block
+						margin-right: 10px
+						+text-overflow-ellipsis
+
+						&.right
+							margin-left: auto
+							margin-right: 0
+							white-space: nowrap
+
+	/* Adjust padding and width every nth number of cards. */
+	&-1 // .cards-1
+		.cards-list-item-outer
+			+media-sm
+				+make_cards_nth_child(1)
+				width: 100%
+
+			+media-md
+				+make_cards_nth_child(1)
+				width: 100%
+
+			+media-lg
+				+make_cards_nth_child(1)
+				width: 100%
+
+	&-2 // .cards-2
+		.cards-list-item-outer
+			+media-sm
+				+make_cards_nth_child(2)
+				width: 50%
+
+			+media-md
+				+make_cards_nth_child(2)
+				width: 50%
+
+			+media-lg
+				+make_cards_nth_child(2)
+				width: 50%
+
+	&-4 // .cards-4
+		.cards-list-item-outer
+			+media-sm
+				+make_cards_nth_child(2)
+				width: 50%
+
+			+media-md
+				+make_cards_nth_child(3)
+				width: 33.3333%
+
+			+media-lg
+				+make_cards_nth_child(4)
+				width: 25%

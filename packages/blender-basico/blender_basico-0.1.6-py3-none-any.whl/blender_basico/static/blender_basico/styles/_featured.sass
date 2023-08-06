@@ -1,0 +1,123 @@
+/* Header of the page */
+.featured
+	align-items: flex-end
+	background:
+		color: $color-background
+		image: url(https://www.blender.org/wp-content/themes/bthree/assets/images/placeholder_background_small.jpg)
+		position: center top
+		size: cover
+	color: white
+	display: flex
+	min-height: 100px
+	position: relative
+	overflow: hidden
+	text-shadow: 1px 1px 3px rgba(black, .25)
+
+	&-background
+		background:
+			position: center top
+			size: cover
+		content: ""
+		filter: blur(20px)
+		left: 50%
+		height: 200%
+		position: absolute
+		transform: translate(-50%)
+		top: -35px
+		width: 150%
+
+	&+.container
+		margin-top: 15px
+
+	.container
+		display: flex
+		flex-direction: column
+		height: 100%
+		position: relative
+		z-index: 1
+
+	&-content // .featured-content
+		@extend .pb-3
+		z-index: 1
+
+		h1
+			margin-bottom: 10px
+			font-weight: 400
+
+	&-subtitle // .featured-subtitle
+		max-width: 800px
+
+	&-credits // .featured-credits
+		bottom: -20px
+		color: rgba($color-text, .4)
+		font-size: $font-size-small
+		position: absolute
+		right: 15px
+		text-shadow: none
+
+	.page-header-main-ctas
+		@extend .py-3
+
+		.page-header-main-cta
+			+media-xs
+				margin-bottom: 15px
+
+				a
+					display: block
+
+	&.large
+		background-position-y: top
+		height: $header-size-large
+
+		+media-xs
+			height: auto
+
+		.featured-content
+			@extend .pt-5
+			width: auto
+
+		.featured-subtitle
+			@extend .pt-2
+			font-size: 1.2em
+
+		.page-header-main-ctas
+			@extend .pt-4
+
+		.navbar-secondary
+			ul.nav
+				margin: auto
+
+	&-overlay // .featured-overlay
+		+position-absolute-zero
+		background-color: rgba(black, .33)
+
+	h1
+		@extend .mb-1
+		+media-xs
+			padding-bottom: 10px
+			margin: 40px 0 0 0
+		position: relative
+		z-index: 1
+
+	a
+		color: $white
+
+	&-overlay-video
+		+position-absolute-zero
+		background-color: black
+		background-position: center bottom
+		background-size: cover
+		height: 100%
+		overflow: hidden
+		width: 100%
+
+		iframe
+			+position-absolute-zero
+			height: 200vh
+			margin: auto -10vw
+			width: 120vw
+
+			+media-xs
+				height: 100vh
+				width: 200vw
+				left: -50vw

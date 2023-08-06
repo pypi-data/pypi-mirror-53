@@ -1,0 +1,20 @@
+/* BOX
+ **  Use it to put content inside a neat little box
+ */
+
+.box
+	+box-card
+	@extend .p-4
+	overflow: hidden
+	position: relative
+	word-break: break-word
+
+	p a,
+	ul a, ol a,
+	span a, strong a, em a,
+	blockquote a
+		text-decoration: underline
+
+	// When a box is immediately followed by another box.
+	&+.box
+		margin-top: 20px
