@@ -1,0 +1,7 @@
+include LICENSE
+include foxyproxy/*
+include *.sh
+include *.md
+include *.py
+recursive-exclude foxyproxy/upstream/ python_*
+exclude test/*
