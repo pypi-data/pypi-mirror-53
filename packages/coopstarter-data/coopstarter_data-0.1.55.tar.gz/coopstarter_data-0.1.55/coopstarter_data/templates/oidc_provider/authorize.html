@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p class="title_lead">
+    Request for Permission
+</p>
+
+<div>
+    <p class="flex">
+        The Knowledge Base Client <strong>{{ client.name }}</strong> would like to access your personal informations.
+    </p>
+    
+    <p class="flex">
+        This is a normal part of the login process to the knowledge base.
+    </p>
+    
+    <div class="flex">
+        <form method="post" class="block_log" action="{% url 'oidc_provider:authorize' %}">
+
+            {% csrf_token %}
+
+            {{ hidden_inputs }}
+
+            <ul>
+                {% for scope in scopes %}
+                <li><strong>{{ scope.name }}</strong> <br><i>{{ scope.description }}</i></li>
+                {% endfor %}
+            </ul>
+
+            <input class="button_base" type="submit" value="Decline" />
+            <input class="button_base" name="allow" type="submit" value="Authorize" />
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
