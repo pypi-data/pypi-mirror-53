@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: fakewindowsize
+Version: 0.1
+Summary: Python3 module to generate realistic browsers window size.
+Home-page: UNKNOWN
+Author: Carlos A. Planchón
+License: GPL3
+Description: # fakewindowsize
+        *Python3 module to generate realistic browsers window size.*
+        
+        ## Installation
+        ### Install with pip
+        ```
+        python setup.py install --user
+        ```
+        
+        ## Usage
+        ```
+        In [1]: import fakewindowsize
+        
+        In [2]: f = fakewindowsize.FakeWindowSize()
+        
+        In [3]: f.get_random_window_size()
+        Out[3]: (1366, 768)
+        ```
+        
+Keywords: fake,window,size
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
