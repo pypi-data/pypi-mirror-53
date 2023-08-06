@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: sphinx-matlabdoc-builder
+Version: 0.1.0
+Summary: A Sphinx extension for generating Matlab HTML docs.
+Home-page: https://github.com/ilent2/sphinx-matlabdoc-builder
+Author: Isaac Lenton
+Author-email: isaac@isuniversal.com
+Maintainer: Isaac Lenton
+Maintainer-email: isaac@isuniversal.com
+License: BSD
+Download-URL: https://pypi.org/project/sphinx-matlabdoc-builder
+Keywords: sphinx docs documentation matlab
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Documentation
+Classifier: Topic :: Utilities
+Classifier: Framework :: Sphinx :: Extension
+Requires-Dist: Sphinx (>=1.7.2)
+
+# sphinx-matlabdoc-builder
+
+[![Build Status](https://travis-ci.org/ilent2/sphinx-matlabdoc-builder.svg?branch=master)](https://travis-ci.org/ilent2/sphinx-matlabdoc-builder)
+
+A Sphinx extension for generating Matlab HTML docs.
+This extension builds the Sphinx project into a set of HTML
+documents and additionally generates the TOC `helptoc.xml` file
+required for the
+[Matlab toolbox documentation](https://au.mathworks.com/help/matlab/matlab_prog/display-custom-documentation.html)
+
+For generating documentation for Matlab code, check out the
+[matlabdomain](https://github.com/sphinx-contrib/matlabdomain) Sphinx extension.
+
+## Installation
+TODO
+
+## Requirements
+This package is an extension to Sphinx.
+
+## Usage
+TODO
+
+
