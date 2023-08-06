@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; Siren - Interactive Redescription Mining - User Guide</title>
+    
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+    <script type="text/javascript" src="doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="siren_icon.ico"/>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Siren - Interactive Redescription Mining - User Guide" href="index.html" />
+    <link rel="next" title="Interface" href="interface.html" />
+    <link rel="prev" title="In three steps" href="index.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+ 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="interface.html" title="Interface"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="In three steps"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Siren - Interactive Redescription Mining - User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#load-data">1. Load data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mine-redescriptions">2. Mine redescriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualize-and-edit-redescriptions">3. Visualize and edit redescriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iterate">Iterate…</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preferences.html">Parameters</a></li>
+</ul>
+
+
+
+<h4><a href="http://siren.gforge.inria.fr/">Main Siren webpage</a></h4>
+
+  <div class="logo">
+  <a href="index.html">
+      <img class="logo" src="siren_icon.png" alt="Logo"/>
+    </a>
+  </div>
+
+          <!-- -->
+          <!--   <p class="logo"><a href="index.html"> -->
+          <!--     <img class="logo" src="siren_icon.png" alt="Logo"/> -->
+          <!--   </a></p> -->
+          <!-- -->
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<span id="started"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><em>Siren</em> allows you to interactively mine and visualize redescriptions from your data.</p>
+<p class="last">We outline here some high-level interactions offered by <em>Siren</em>.</p>
+</div>
+<p>Because examples are worth many words, <a class="reference external" href="http://siren.gforge.inria.fr//data/toys/">here</a> are some datasets to try your hands on.</p>
+<div class="section" id="load-data">
+<span id="importing-data"></span><h2>1. Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h2>
+<p>After you get <em>Siren</em> installed and running, it will open the <a class="reference internal" href="interface.html#tools-window"><span class="std std-ref">tools window</span></a>, with tabs for variables and redescriptions, all of them empty. Hence, the first thing to do is to import data or open an existing siren package to start working.</p>
+<p>If you already have some siren package (i.e. with a <code class="docutils literal"><span class="pre">.siren</span></code> extension) you can open it via the interface menu <span class="menuselection">File ‣ Open</span>.</p>
+<p>Otherwise, or if you want to work on a new data set, you can <a class="reference internal" href="formats.html#data-formats"><span class="std std-ref">import data</span></a> to <em>Siren</em>, this will populate the <code class="docutils literal"><span class="pre">Entities</span></code> and <code class="docutils literal"><span class="pre">Variables</span></code> tabs.</p>
+</div>
+<div class="section" id="mine-redescriptions">
+<span id="mining-scratch"></span><h2>2. Mine redescriptions<a class="headerlink" href="#mine-redescriptions" title="Permalink to this headline">¶</a></h2>
+<p>Once the two sets of variables are loaded and can be seen in the tabs you may want to let the tool mine redescriptions in an fully automated way, using currently enabled variables. The menu entry <span class="menuselection">Process ‣ Mine</span> redescriptions let you do just that.</p>
+<p>Alternatively, if both queries in a visualization are empty <em>Siren</em> simply mines redescriptions on your data when clicking on the <code class="docutils literal"><span class="pre">Expand</span></code> button.</p>
+<p>Results of the mining process will appear in a new list in the <code class="docutils literal"><span class="pre">Redescriptions</span></code> tab.</p>
+<p>Before running a mining task make sure you have adjusted the main <a class="reference internal" href="preferences.html#mining-parameters"><span class="std std-ref">mining parameters</span></a>…</p>
+</div>
+<div class="section" id="visualize-and-edit-redescriptions">
+<span id="viz-edit-red"></span><h2>3. Visualize and edit redescriptions<a class="headerlink" href="#visualize-and-edit-redescriptions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="visualizing-a-redescription">
+<span id="visualizing-red"></span><h3>Visualizing a redescription<a class="headerlink" href="#visualizing-a-redescription" title="Permalink to this headline">¶</a></h3>
+<p>Individual redescriptions and lists can be plotted in different visualizations, depending on the type of your data and the redescriptions.</p>
+<p>Double-click on an item (variable, redescription, list) to open the default visualization for that item. The <span class="menuselection">View</span> entry in the main menu and under the contextual menu list available visualizations.</p>
+</div>
+<div class="section" id="expanding-a-redescription">
+<span id="expanding-red"></span><h3>Expanding a redescription<a class="headerlink" href="#expanding-a-redescription" title="Permalink to this headline">¶</a></h3>
+<p>You can also press the expansion button to automatically find expansions of any redescription your are currently visualizing and editing.
+<em>Siren</em> will try to append literals to the current redescription, using the enabled variables.</p>
+<p>Again, results will be appended to the redescriptions list in the <code class="docutils literal"><span class="pre">Expansions</span></code> tab.</p>
+<p>Before running an expansion task make sure you have adjusted the <a class="reference internal" href="preferences.html#mining-parameters"><span class="std std-ref">mining parameters</span></a>…</p>
+</div>
+<div class="section" id="filtering-redescriptions">
+<span id="filtering-red"></span><h3>Filtering redescriptions<a class="headerlink" href="#filtering-redescriptions" title="Permalink to this headline">¶</a></h3>
+<p>A list of redescription can be filtered automatically. That is, the algorithm will go through the redescriptions, from top to bottom in the current order, an check for each redescription, whether it is redundant given the previous ones. If a redescription is found redundant it will be disabled. This is done via the different filter entries in the <span class="menuselection">Edit</span> menu .</p>
+</div>
+<div class="section" id="exporting-redescriptions">
+<span id="exporting-reds"></span><h3>Exporting redescriptions<a class="headerlink" href="#exporting-redescriptions" title="Permalink to this headline">¶</a></h3>
+<p>The lists of redescriptions from the <em>Redescriptions</em> tab can be exported under <a class="reference internal" href="formats.html#export"><span class="std std-ref">different formats</span></a> from the contextual menu.</p>
+</div>
+<div class="section" id="saving-as-a-package">
+<span id="saving-package"></span><h3>Saving as a package<a class="headerlink" href="#saving-as-a-package" title="Permalink to this headline">¶</a></h3>
+<p>You can save your current project, i.e. the data, current redescription lists and parameter preferences as a siren package (i.e. with a <code class="docutils literal"><span class="pre">.siren</span></code> extension) via the interface menu <span class="menuselection">Edit ‣ Save as</span>…</p>
+<p>If you continue working on the current project you can save changes to the current siren package via the interface menu <span class="menuselection">Edit ‣ Save</span>.</p>
+<p>Existing siren packages can be opened via the interface menu <span class="menuselection">File ‣ Open</span>.</p>
+<p>Lists of redescriptions can be added and deleted from a package. A package needs to be first created before redescriptions lists can be added to it.</p>
+</div>
+</div>
+<div class="section" id="iterate">
+<span id="id1"></span><h2>Iterate…<a class="headerlink" href="#iterate" title="Permalink to this headline">¶</a></h2>
+<p>The data analysis process typically require a few iterations of mining, looking at the results, tuning the parameters, etc.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>  
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="interface.html" title="Interface"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="In three steps"
+             >previous</a> |</li>
+        <li><a href="index.html">Siren - Interactive Redescription Mining - User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Esther Galbrun and Pauli Miettinen.
+      Last updated on Oct 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.6.7.
+<br/>
+The source code hosted in a Git repository on <a href="https://gforge.inria.fr/projects/siren/">InriaForge</a>. You can <a href="https://gforge.inria.fr/scm/?group_id=8278">clone it.</a>
+<br/>
+    ::<a href="https://www.inria.fr/informations-pratiques/mentions-legales">Mentions légales</a>::
+</div>
+  </body>
+</html>
