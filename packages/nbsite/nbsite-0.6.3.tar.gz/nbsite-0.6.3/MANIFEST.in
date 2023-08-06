@@ -1,0 +1,7 @@
+include LICENSE.txt
+include README.md
+include nbsite/.version
+graft examples
+graft nbsite/examples
+graft nbsite/_shared_static
+graft nbsite/templates
