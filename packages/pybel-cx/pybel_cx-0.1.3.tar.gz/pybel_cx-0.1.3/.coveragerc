@@ -1,0 +1,19 @@
+[run]
+branch = True
+source = pybel_cx
+omit =
+    src/pybel_cx/__main__.py
+    src/pybel_cx/cli.py
+    tests/*
+    docs/*
+
+[paths]
+source =
+    src/pybel
+    .tox/*/lib/python*/site-packages/pybel-cx
+
+[report]
+show_missing = True
+exclude_lines =
+    def __str__
+    def __repr__
