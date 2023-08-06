@@ -1,0 +1,918 @@
+'\" t
+.\"     Title: twc
+.\"    Author: Michał Góral
+.\" Generator: Asciidoctor 1.5.8
+.\"      Date: 2019-10-12
+.\"    Manual: TWC Manual
+.\"    Source: TWC 0.7.0
+.\"  Language: English
+.\"
+.TH "TWC" "1" "2019-10-12" "TWC 0.7.0" "TWC Manual"
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.ss \n[.ss] 0
+.nh
+.ad l
+.de URL
+\fI\\$2\fP <\\$1>\\$3
+..
+.als MTO URL
+.if \n[.g] \{\
+.  mso www.tmac
+.  am URL
+.    ad l
+.  .
+.  am MTO
+.    ad l
+.  .
+.  LINKSTYLE blue R < >
+.\}
+.SH "NAME"
+TWC \- TaskWarrior Controller \- interactive command\-line task and todo manager.
+.SH "SYNOPSIS"
+.sp
+\fBtwc\fP [\fIOPTIONS\fP]
+.SH "DESCRIPTION"
+.sp
+TWC is an interactive command\-line task and todo manager which acts as a
+frontend for a popular program TaskWarrior. It eases and speeds up the burden
+of managing lists of tasks and offers many features which are expected from
+modern task and todo managers.
+.sp
+TWC can be invoked with additional arguments which modify its initial state and
+behavior. The following options are available:
+.sp
+\fB\-a, \-\-agenda\fP=\fIAGENDA\fP
+.RS 4
+Selects agenda which should be initially displayed when TWC starts. This option
+exects full agenda name and is case\-sensitive. If agenda\(cqs name contains spaces
+or other special characters, it can be e.g. enclosed in single or double quotes
+(see your shell manual for informations about escaping special characters:
+.sp
+.if n .RS 4
+.nf
+twc \-\-agenda="Next tasks"
+.fi
+.if n .RE
+.sp
+Setting this option overrides \fIagenda\fP setting from
+configuration file.
+.RE
+.sp
+\fB\-t, \-\-taskrc\fP=\fITASKRC\fP
+.RS 4
+Path to taskrc which should be the source of TaskWarrior configuration used by
+TWC. This file should contain for example configuration of taskd
+(synchronization server) or UDAs. By default \fI~/.taskrc\fP is used. See also
+\fBtaskrc(5)\fP.
+.sp
+Setting this option overrides \fItaskrc\fP setting from
+configuration file.
+.RE
+.sp
+\fB\-\-debug\fP
+.RS 4
+Enables additional features useful for debugging, like printing full tracebacks
+for exceptions.
+.RE
+.sp
+\fB\-\-version\fP
+.RS 4
+Shows TWC\(cqs version number and then exits.
+.RE
+.sp
+\fB\-h, \-\-help\fP
+.RS 4
+Displays a help message with short summary of available options and then exits.
+.RE
+.SH "CONFIGURATION"
+.sp
+During startup TWC reads a configuration file that commonly contains various
+settings: definitions of agendas, key bindings, program options etc. Typically
+it is kept in user\(cqs configuration directory: \fI~/.config/twc/config.py\fP, but
+TWC follows ther rules of \c
+.URL "https://specifications.freedesktop.org/basedir\-spec/basedir\-spec\-latest.html" "XDG Base Directory Specification" ":"
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.  sp -1
+.  IP " 1." 4.2
+.\}
+\fI$XDG_CONFIG_HOME/twc/config.py\fP is checked. If \f(CR$XDG_CONFIG_HOME\fP is not
+set, it defaults to \fI$HOME/.config\fP.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.  sp -1
+.  IP " 2." 4.2
+.\}
+any of \fI$XDG_DATA_DIRS/twc/config.py\fP is checked. \f(CR$XDG_DATA_DIRS\fP is a
+colon\-separated list of directories to check. If it is not set, it defaults
+to a single directory: /etc/xdg.
+.RE
+.sp
+Some options can be configured with specific program arguments. They are
+usually named the same as their config.py counterparts and they take precedence
+over settings from configuration file.
+.sp
+TWC\(cqs configuration file is ordinary Python file. It comes with exposed
+\fBvariable c\fP which should be used to configure all aspects of TWC and it
+contains all necessary methods to do so.
+.SS "Agendas"
+.sp
+Agendas are built from blocks. Each block specifies methods of retrieving tasks
+from TaskWarrior and presenting them in TWC. These include, but are not limited
+to filter used to retrieve tasks, tasks\(aq sorting method and tasks formatting.
+.sp
+Agendas are automatically created when blocks are defined. This is all done
+with \fBc.add_block()\fP function, which requires specifying parent agenda of block.
+.sp
+Apart from \fIagenda\fP, all parameters passed to \fBc.add_block()\fP must be named,
+i.e.  given in form of \fIname=value\fP, like: \fIsort=\(aqurgency\(aq\fP, \fIlimit=5\fP etc.
+.SS "Tasks Format"
+.sp
+Format of tasks displayed inside a block is a mix of \c
+.URL "https://docs.python.org/3/library/string.html#formatspec" "Python\(cqs
+string format"  and HTML\-like markup.
+.sp
+You can use any TaskWarrior\(cqs attribute name (includeing UDAs) as
+format\(cqs placeholder and it will be displayed if it is present in a particular
+task.
+.sp
+.if n .RS 4
+.nf
+{id} \-\- {description} \-\- {tags} {priority} {customuda}
+.fi
+.if n .RE
+.if n .sp
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+.B Note
+.ps -1
+.br
+.sp
+For some types TWC returns pre\-formatted strings. For example, all lists (like
+list of tags or annotations) will have their elements separated by a colon.
+.sp .5v
+.RE
+.sp
+Some additional markup can be added. The following tags are available:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\f(CR<sr left="[" right="]">text</sr>\fP \- surrounds text with \fIleft\fP and \fIright\fP;
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\f(CR<ind value="A">text</ind>\fP \- if there is any text inside a tag, it is
+replaced with \fIvalue\fP. It is particularily useful for indicating that some
+attribute is present without displaying it (like long list of annotations):
+\f(CR<ind value="A">{annotations}</ind>\fP;
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+any style name: \f(CR<somestyle>text</somestyle>\fP. See Styles section for
+additional informations.
+.RE
+.sp
+Markup elements (surrounding text, indicators) won\(cqt be added if there is no
+text inside the tags. For example, if task has no annotations, \f(CR<ind
+value="A">{annotations}</ind>\fP won\(cqt display "A" indicator.
+.if n .sp
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+.B Tip
+.ps -1
+.br
+.sp
+This can be used to conditionally insert separators (e.g. spaces) between task
+attributes. For example \f(CR<sr>\fP can be used to add a space only after a priority
+and nothing when task doesn\(cqt have a priority set:
+.sp
+.if n .RS 4
+.nf
+<sr right=" ">{priority}</sr>{description}
+.fi
+.if n .RE
+.sp .5v
+.RE
+.SS "Key Bindings"
+.sp
+You can modify any key binding available in TWC with two functions: \fBc.bind()\fP
+and \fBc.unbind()\fP. Unbinding is particularily useful if you want to disable a
+default key, because TWC will unbind automatically keys when re\-binding them to
+a different command.
+.sp
+TWC supports key sequences: executing commands by pressing some keys following
+the others (similar to e.g. Vim). For example, to jump to the first task in
+agenda you can double press "g". In configuration this should be set as \fIg g\fP
+(2 "g" letters separated by space).
+.sp
+Key prefixes are supported:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\fIc\-\fP for combinations with ctrl (e.g. \fIc\-f\fP, meaning Ctrl\0+\0f)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\fIa\-\fP for combinations with alt (e.g. \fIa\-space\fP, meaning Atl\0+\0Space)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+\fIs\-\fP for combinations with shift (e.g. \fIs\-tab\fP, meaning Shift\0+\0Tab)
+.RE
+.sp
+Due to how most terminals work, when you want to bind a command to
+"shift+letter", you\(cqll usually simply write upper\-case letter, like A
+instead of Shift\0+\0a.
+.sp
+There are 2 sets of default key bindings enabled: ordinary ones (arrows used
+for navigation, used shortcuts are common in most of popular applications like
+text editors) and Vim\-style (bindings familiar to Vim users).
+.SS "Global Commads"
+.sp
+\fBactivate\fP
+.RS 4
+Performs action on currently focused item:  opens task details, accepts typed
+command etc.
+.sp
+Default bindings: Enter.
+.RE
+.sp
+\fBcancel\fP
+.RS 4
+Cancels current action, e.g. cancels current command. On agenda view clears
+prompt and selections.
+.sp
+Default bindings: Esc.
+.RE
+.sp
+\fBquit\fP
+.RS 4
+Closes current screen (e.g. task details), eventually exitting TWC. This
+command is inactive when typing a command.
+.sp
+Default bindings: Q, q, Ctrl\0+\0c.
+.RE
+.sp
+\fBfollowurl\fP
+.RS 4
+Searches currently selected task (either in agenda or in detailed view) for URL
+patterns. If any URL is found, it will be opened in a browser configured in
+user\(cqs operating system. If more than one URLs are found, opens a new window
+which allows selecting which URLs should be opened.
+.sp
+Default bindings: f.
+.RE
+.SS "Navigation"
+.sp
+\fBscroll.down\fP
+.RS 4
+Scrolls down current view, e.g. by selecting next task on agenda view or
+scrolling a screen on task details view.
+.sp
+Default bindings: Down, j.
+.RE
+.sp
+\fBscroll.up\fP
+.RS 4
+Same as scroll.down, but backwards.
+.sp
+Default bindings: Up, k.
+.RE
+.sp
+\fBscroll.nextsection\fP
+.RS 4
+Jumps to the beginning of next visual section, e.g. next block in current
+agenda.
+.sp
+Default bindings: Page Down, ].
+.RE
+.sp
+\fBscroll.prevsection\fP
+.RS 4
+Jumps to the beginning of previous visual section, e.g. block in current agenda.
+.sp
+Default bindings: Page Up, [.
+.RE
+.sp
+\fBscroll.begin\fP
+.RS 4
+Jumps to the first task in current agenda.
+.sp
+Default bindings: Home, gg.
+.RE
+.sp
+\fBscroll.end\fP
+.RS 4
+Jumps to the last task in current agenda.
+.sp
+Default bindings: End, G.
+.RE
+.sp
+\fBtab.next\fP
+.RS 4
+Opens next agenda (the one to the right).
+.sp
+Default bindings: Tab.
+.RE
+.sp
+\fBtab.prev\fP
+.RS 4
+Opens previous agenda (the one to the left).
+.sp
+Default bindings: Shift\0+\0Tab.
+.RE
+.sp
+\fBsearch\fP
+.RS 4
+Starts new search of tasks in current agenda.
+.sp
+Default bindings: Ctrl\0+\0f, /.
+.RE
+.sp
+\fBsearch.forward\fP
+.RS 4
+Finds next occurence of currently searched term. Defa
+.sp
+ult bindings: n.
+.RE
+.sp
+\fBsearch.backward\fP
+.RS 4
+Finds previous occurence of currently searched term.
+.sp
+Default bindings: N.
+.RE
+.SS "Task Commands"
+.sp
+\fBtask.add\fP
+.RS 4
+Opens a command line which accepts a new task\(cqs description and parameters.
+They will be directly passed to TaskWarrior, so its syntax can be used, e.g.
+.sp
+.if n .RS 4
+.nf
+> Task description +tag due:someday
+.fi
+.if n .RE
+.sp
+You can use tab\- and auto\-completion. Press Tab to see a list of
+completions available.
+.sp
+Default bindings: a.
+.RE
+.sp
+\fBtask.add.subtask\fP
+.RS 4
+Adds a new task the same way as \fBtask.add\fP, but additionally sets a dependency
+to it in a currently highlighted task. Tasks added this way are considered
+sub\-tasks and task which depend on them are their parents.
+.sp
+Default bindings: t.
+.RE
+.sp
+\fBtask.modify\fP
+.RS 4
+Opens a command line which accepts a modification command:
+.sp
+.if n .RS 4
+.nf
+> \-tag1 \-tag2 due:
+.fi
+.if n .RE
+.sp
+Tab\- and auto\-completion are available.
+.sp
+Default bindings: m.
+.RE
+.sp
+\fBtask.edit\fP
+.RS 4
+Runs \fItask edit\fP which edits task in a text editor. This is not the recommended
+method of modifying tasks, but is provided for exceptional circumstances.
+.sp
+Default bindings: e.
+.RE
+.sp
+\fBtask.annotate\fP
+.RS 4
+Opens a command line which accepts a new annotation which will be added to
+currently focused task.
+.sp
+Default bindings: A.
+.RE
+.sp
+\fBtask.denotate\fP
+.RS 4
+Opens a command line which accepts any of existing annotations. Typed
+annotation will be removed. Annotation must be typed exactly the same as it\(cqs
+present inside task. Tab\- and auto completion are available: they will complete
+full annotations.
+.sp
+Default bindings: D.
+.RE
+.sp
+\fBtask.toggle\fP
+.RS 4
+Mark focused task\(cqs status as \fIdone\fP if it is currently pending. Otherwise mark
+it as \fIpending\fP.
+.sp
+Default bindings: Alt\-Space
+.RE
+.sp
+\fBtask.delete\fP
+.RS 4
+Delete focused task. Keep in mind that TaskWarrior doesn\(cqt really delete tasks,
+but merely marks them with \fIdeleted\fP status and removes them from most reports.
+You can still access them by their UUID.
+.sp
+Default bindings: Delete.
+.RE
+.sp
+\fBtask.undo\fP
+.RS 4
+Reverts the most recent action. This command uses \fItask undo\fP underneath.
+.sp
+Default bindings: u.
+.RE
+.sp
+\fBtask.synchornize\fP
+.RS 4
+Synchronizes tasks with a task server. Task server must be correctly configured
+in taskrc.
+.sp
+Default bindings: S.
+.RE
+.sp
+\fBtask.select\fP
+.RS 4
+Toggles selection for current task. You can bulk\-edit multiple selected tasks,
+for example by adding/removing tags for all of them.
+.sp
+Default bindings: Space.
+.RE
+.sp
+\fBrefresh\fP
+.RS 4
+Refreshes the view. Useful after some modifications which by design don\(cqt
+automatically refresh agenda (like sync).
+.sp
+Default bindings: R.
+.RE
+.SS "Settings"
+.sp
+Many different settings can be changed with \fBc.set()\fP function. Below is
+alphabetical list of all available TWC settings.
+.sp
+\fBagenda\fP
+.RS 4
+Agenda to start TWC with. If it\(cqs not set (default), first defined agenda
+will be used.
+.RE
+.sp
+\fBautocomplete\fP
+.RS 4
+Enable commands autocompletion instead of tab completion.
+.sp
+Default: \fIFalse\fP.
+.RE
+.sp
+\fBautohelp\fP
+.RS 4
+Shows various help texts, hints and tooltips. For example, command line will
+initially display additional visual feedback about current action.
+.sp
+Default: \fITrue\fP.
+.RE
+.sp
+\fBdeffilter\fP
+.RS 4
+Default filter used for all blocks. Useful when you don\(cqt want to repeat some
+.sp
+obvious filter over and over again. Default: \fI"\-DELETED \-PARENT"\fP
+.RE
+.sp
+\fBincsearch\fP
+.RS 4
+Enable incremental search (search\-when\-typing).
+.sp
+Default: \fITrue\fP
+.RE
+.sp
+\fBignorecase\fP
+.RS 4
+Disable case sensitive search.
+.sp
+Default: \fITrue\fP
+.RE
+.sp
+\fBsmartcase\fP
+.RS 4
+Override \(aqignorecase\(aq when search string contains upper case characters. Only
+used when \(aqignorecase\(aq is on (that\(cqs how it works in Vim). It results in
+case\-sensitive search when search string contains upper case characters and
+case\-insensitive when it contains only lower case characters.
+.sp
+Default: \fITrue\fP.
+.RE
+.sp
+\fBstatusleft\fP, \fBstatusright\fP
+.RS 4
+Formattings of status lines. \fBstatusleft\fP contains elements aligned to the left
+and \fBstatusright\fP \- to the right. Status line is disabled when both of these
+settings are disabled (set to empty strings).
+.sp
+Status line format is similar to Tasks Format. Main difference is
+that task attributes are referenced by \fI{task.<attribute>}\fP, e.g.
+"{task.description}". Additionally, there are more placeholders available:
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{taskrc} \- path of currently used taskrc
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{command} \- name of current command, when command line is active (e.g. add,
+modify, annotate,...)
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{COMMAND} \- same as before, but command is UPPER CASED
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{task.<attribute>} \- any attribute of currently highlighted task
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{agenda.pos} \- position of highlighted item
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{agenda.size} \- size of current agenda
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.  sp -1
+.  IP \(bu 2.3
+.\}
+{agenda.ppos} \- percentage position of highlighted item
+.RE
+.RE
+.sp
+\fBtaskrc\fP
+.RS 4
+Path to used taskrc file.
+.sp
+Default: \fI~/.taskrc\fP.
+.RE
+.sp
+\fBtimeoutlen\fP
+.RS 4
+Time in milliseconds that is waited for a mapped sequence to complete. For
+example, if "a b" sequence is mapped, TWC will wait for "b" after "a" was first
+pressed for number milliseconds equal to timeoutlen. If this time passes, it
+the whole key sequence is cancelled. This is similar to Vim setting with the
+same name.
+.sp
+Default: \fI1000\fP.
+.RE
+.sp
+\fBttimeoutlen\fP
+.RS 4
+Time in milliseconds that is waited for a key code sequence to complete.  It\(cqs
+important to distinguish escape key from other keys that start with escape
+sequence (x1B, e.g. \f(CRc\-[\fP). This s similar to Vim setting with the same name.
+.sp
+Default: \fI50\fP.
+.RE
+.SS "Styles"
+.sp
+With \fBc.set_style()\fP you can create new styles which can be used to change
+appearence of tasks and status line. Style is a mix of foregound and background
+colors as well as some flags describing text formatting (like bold, italics).
+.sp
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.B Table 1. Style examples
+.TS
+allbox tab(:);
+lt lt.
+T{
+.sp
+Style
+T}:T{
+.sp
+Description
+T}
+T{
+.sp
+\f(CRfg:white\fP
+T}:T{
+.sp
+white foreground, color is named
+T}
+T{
+.sp
+\f(CRbg:#000000\fP
+T}:T{
+.sp
+black background, hexadecimal notation
+T}
+T{
+.sp
+\f(CRbg:ansiblue\fP
+T}:T{
+.sp
+ANSI color palette
+T}
+T{
+.sp
+\f(CRbold italic underline blink reverse hidden\fP
+T}:T{
+.sp
+all supported style flags
+T}
+T{
+.sp
+\f(CRnobold noitalic nounderline noblink noreverse nohidden\fP
+T}:T{
+.sp
+reverse flags
+T}
+.TE
+.sp
+.if n .sp
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+.B Note
+.ps -1
+.br
+.sp
+Predefined styles are: \fIheading, text, comment, info, warning, error,
+highlight, mark, tabline, tabsel, tab, tooltip, statusline, status.1,
+status.2\fP. Some of them are used for styling specific elements of program
+interface.
+.sp .5v
+.RE
+.sp
+Such styles can be used e.g. to change appearence of tasks or status line.
+.sp
+.B Example style usage
+.br
+.sp
+.if n .RS 4
+.nf
+c.set_style(\(aqmystyle\(aq, \(aqfg:#EEEEEE bg:black bold\(aq)
+
+c.set(\(aqstatusright\(aq, \(aq<mystyle>{task.id}</mystyle>\(aq)
+c.add_block(...
+    format=\(aq<mystyle>{description}</mystyle>\(aq)
+.fi
+.if n .RE
+.sp
+To only change colors (but not other appearence options, like blinking or color
+reversing) you can also use drop\-in unnamed styles. To do that use any tag with
+\fIfg\fP, \fIcolor\fP or \fIbg\fP attributes.
+.sp
+.B Unnamed styles
+.br
+.sp
+.if n .RS 4
+.nf
+c.set_style(\(aqmystyle\(aq, \(aqfg:#EEEEEE bg:black bold\(aq)
+
+c.set(\(aqstatusright\(aq, \(aq<mystyle>{task.id}</mystyle>\(aq)
+c.add_block(...
+    format=\(aq<blah fg=blue bg="#999333">{description} </blah>\(aq)
+.fi
+.if n .RE
+.SS "Configuration Reference"
+.sp
+\fBc.add_block(agenda, *, title, format=\(aq{description}\(aq, filter=None, sort=None, limit=None)\fP
+.RS 4
+Adds a new block to a given \fIagenda\fP, which will be created if it doesn\(cqt exist.
+.sp
+Block contains a \fItitle\fP which is displayed above all of its tasks. Tasks
+formatting is described by \fIformat\fP string (see Tasks Format section
+for details).  By default only raw task description is displayed.
+.sp
+When given, \fIsort\fP parameter decides order of tasks inside block.  It is
+compatible with TaskWarrior\(cqs reports sorting. It iss defined by a
+comma\-separated list of task attributes. Each of attributes can be additionally
+post\-fixed by a "+" or "\-" sign for ascending and descending order. For
+example:
+.sp
+.if n .RS 4
+.nf
+sort=\(aqproject+,urgency\-,priority\(aq
+.fi
+.if n .RE
+.sp
+TaskWarrior\(cqs listing breaks (e.g. \f(CRproject+/,description+\fP) are not supported.
+.sp
+Maximum number of tasks displayed in block can be limited by a \fIlimit\fP. This
+is applied after sorting. By default number of tasks is not limited.
+.sp
+.B Example
+.br
+.sp
+.if n .RS 4
+.nf
+c.add_block(
+    agenda="My Agenda",
+    title="All tasks",
+    format=\(aq<sr right=" ">{id}</sr>{description}\(aq,
+    limit=20)
+.fi
+.if n .RE
+.RE
+.sp
+\fBc.bind(key, command)\fP, \fBc.unbind(key)\fP
+.RS 4
+These functions allow binding and unbinding keys in config.py. Keys are
+automatically re\-bound (unbound and bound) when \fBc.bind()\fP is called with a
+previously used \fIkey\fP and new \fIcommand\fP.
+.sp
+For a list and description of TWC commands see Key Bindings section.
+.sp
+.B Example
+.br
+.sp
+.if n .RS 4
+.nf
+# binds a key sequence
+c.bind(\(aqspace t a\(aq, \(aqadd\-task\(aq)
+
+# unbinds default undo
+c.unbind(\(aqu\(aq)
+.fi
+.if n .RE
+.RE
+.sp
+\fBc.set(setting, value)\fP
+.RS 4
+Changes a program option named \fIsetting\fP to the given \fIvalue\fP. See Settings
+section for a list and description of available settings.
+.sp
+.B Example
+.br
+.sp
+.if n .RS 4
+.nf
+c.set(\(aqstatusleft\(aq, \(aq{COMMAND} {task.id}\(aq)
+c.set(\(aqignorecase\(aq, False)
+.fi
+.if n .RE
+.RE
+.sp
+\fBc.set_style(name, style)\fP
+.RS 4
+Sets a new style or changes the existing one. Styles are used to change
+appearence of tasks, status line and certain interface elements.
+.sp
+Function accepts \fIname\fP of a stype and \fIstyle\fP definition. See Styles
+section for details.
+.sp
+.B Example
+.br
+.sp
+.if n .RS 4
+.nf
+c.set_style(\(aqheading\(aq, \(aqfg:#EEEEEE bg:black bold\(aq)
+.fi
+.if n .RE
+.RE
+.SH "SEE ALSO"
+.sp
+\fBtask\fP(1)
+.SH "COPYRIGHT"
+.sp
+Copyright \(co 2019 Michał Góral.
+.sp
+TWC is free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+.sp
+TWC is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+.sp
+You should have received a copy of the GNU General Public License along with
+TWC. If not, see \c
+.URL "http://www.gnu.org/licenses/" "" "."
+.SH "BUGS AND ISSUES"
+.sp
+Please report any bugs at \c
+.URL "https://gitlab.com/mgoral/twc/issues" "" "."
+.SH "AUTHOR"
+.sp
+Michał Góral
