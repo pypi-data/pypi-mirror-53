@@ -1,0 +1,13 @@
+catkin_pkg
+catkin_tools
+pygit2
+python-dateutil
+pyyaml
+requests
+rosdep
+
+[:python_version < "3"]
+futures
+
+[:python_version < "3.5"]
+scandir
