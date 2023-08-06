@@ -1,0 +1,46 @@
+{
+    "name": "{{ project_name }}_bundle",
+    "version": "{{ version }}",
+    "description": "{{ description }}",
+    "author": "{{ author }}",
+    "license": "{{ license }}",
+    "keywords": [
+        "{{ project_name }}"
+    ],
+    "scripts": {
+        "build": "webpack --mode production && mkdir -p ../{{ project_name }}/{{ project_name}}/dist && cp dist/bundle.js ../{{ project_name }}/{{ project_name }}/dist/bundle.js",
+        "build-dev": "webpack --mode development && mkdir -p ../{{ project_name }}/{{ project_name}}/dist && cp dist/bundle.js ../{{ project_name }}/{{ project_name }}/dist/bundle.js"
+    },
+    "dependencies": {
+        "json-stable-stringify": "^1.0.1",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6"
+    },
+    "dependencies_to_add": {
+        {% if package_json.dependencies is defined %}
+        {% for key, value in package_json.dependencies.items() -%}
+        "{{ key }}": "{{ value }}"{%- if not loop.last %},{% endif %}
+        {% endfor -%}
+        {% endif %}
+    },
+    "devDependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-class-properties": "^7.5.0",
+        "@babel/preset-env": "^7.4.5",
+        "@babel/preset-react": "^7.0.0",
+        "@tulipjs/eslint-config": "^1.1.1",
+        "babel-loader": "^8.0.6",
+        "css-loader": "^3.0.0",
+        "style-loader": "^0.23.1",
+        "url-loader": "^2.0.1",
+        "webpack": "^4.35.0",
+        "webpack-cli": "^3.3.6"
+    },
+    "dev_dependencies_to_add": {
+        {% if package_json.devDependencies is defined %}
+        {% for key, value in package_json.devDependencies.items() -%}
+        "{{ key }}": "{{ value }}"{%- if not loop.last %},{% endif %}
+        {% endfor -%}
+        {% endif -%}
+    }
+}
