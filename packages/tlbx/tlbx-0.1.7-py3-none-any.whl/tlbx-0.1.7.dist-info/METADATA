@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: tlbx
+Version: 0.1.7
+Summary: Just some common utilities.
+Home-page: https://github.com/totalhack/tlbx
+Author: totalhack
+Author-email: none@none.com
+Maintainer: totalhack
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: black
+Requires-Dist: climax
+Requires-Dist: imapclient
+Requires-Dist: orderedset
+Requires-Dist: pre-commit
+Requires-Dist: pytest
+Requires-Dist: pylint
+Requires-Dist: python-dateutil
+Requires-Dist: requests
+Requires-Dist: simplejson
+Requires-Dist: sqlparse
+Requires-Dist: twine
+Requires-Dist: wheel
+
+tlbx: just some common utilities
+================================
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+Installation
+------------
+
+```shell
+$ pip install tlbx
+```
+
+To install from source and setup development in your virtual environment:
+
+```shell
+$ git clone https://github.com/totalhack/tlbx.git
+$ cd tlbx
+$ pip install -e .
+$ pre-commit install
+```
+
+
