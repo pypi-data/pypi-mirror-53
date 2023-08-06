@@ -1,0 +1,232 @@
+CHANGES
+=======
+
+* Add unit test for unsupported archive type
+* Use Requests.Session in mbox files fixture
+* Add scope to mbox files fixture
+* pst / mbox file type detection
+* Adjust unit test assertion to code change
+* More edits for mbox support
+* Add mbox entity extraction test
+* Exclude abstract base class from coverage
+* Refactor entity extraction test code
+* Only catch ORM exceptions in session context manager
+* Fix formatting
+* Add basic mbox unit test
+* Use generic archive type
+* Formalize archive class interface
+* mbox support - WIP
+* mbox support - WIP
+
+0.1.2
+-----
+
+* Update README.md
+* Minor update to README.md
+* Update DB schema in README.md
+* Link ORM objects through relationships instead of foreign keys
+* Tweak commit strategy
+* Handle empty relationship in FileReport properties (#45)
+* Add version badge (#51)
+* Add unit test for database reports (#45)
+* Add FileReport model properties (#45)
+* Add timestamps to message reports (#45)
+* Add file checksum step to entity extraction code (#45)
+* filename -> filepath (#45)
+* Link messages to files (#45)
+* Add foreign key relationships between models (#45)
+* Add foreign key relationships in models (#45)
+* Refactoring (#45)
+* Processing reports WIP (#45)
+* Processing reports WIP (#45)
+* Processing reports WIP (#45)
+* Processing reports WIP (#45)
+* Add models for file processing report (#45)
+* Perform static analysis before test suite
+* Add missing type hint
+* Add PffArchive.get\_message\_by\_id() method
+* Add type hints to PffArchive's public methods
+* Updated copyright
+* Updated copyright
+
+0.1.1
+-----
+
+* Update requirements
+* Use pip3 in CI
+* Update README.md
+* Update setup.cfg
+* Fix travis configuration
+* Fix travis configuration \* No release stage in PRs \* Run script phase in release stage
+* Set up travis build stages
+* Remove dead code
+* Wrap pip-compile calls in utility script
+* Update libpff-python-ratom dependency version
+* Update libpff-python-ratom dependency version
+* Update requirements
+* flake8 fix
+* Add unit tests for message generator
+* Add unit tests for message generator
+* Test entities subcommand
+* Break entity extraction code into smaller pieces
+* Rename libratom.utils libratom.lib
+* Break entity extraction code into smaller pieces - WIP
+* Add mock context manager to consolidate code paths
+* Fix typo
+
+0.1.0
+-----
+
+* Update travis deploy configuration
+* Update codecov configuration
+* Updated README, entity extraction
+* Confirm entity counts in unit test (#24)
+* Fix unit test (#30)
+* Fix fixture (#30)
+* Unit test with large messages (#30)
+* Debug message tweak (#24)
+* Warning message tweak (#24)
+* More user friendly exception handling (#24)
+* Make error messages more user friendly (#24)
+* Update requirements-dev.txt
+* Use the same label for env var/setting (#30)
+* Update requirements (#24)
+* Remove redundant log message (#24)
+* Switch progress bar to enlighten (#24)
+* Add env var hook for spacy model max text length (#30)
+* Allow for passing progress\_callback=None in optional arguments (#24)
+* Pass progress update callback only instead of entire object (#24)
+* Add unit test (#29)
+* Add file and message info to spacy error message (#29)
+* Fix return value of entity extractor upon error (#29)
+* Handle bad files during the message count phase (#28)
+* Exit cleanly if spaCy cannot install a model (#24)
+* Exit cleanly if spaCy cannot install a model (#24)
+* Specify spaCy model as runtime option (#24)
+* Environment variable hooks for certain module constants (#24)
+* DRY (#24)
+* Add a unit test (#24)
+* Track progress on a per message basis (#24)
+* Don't download spacy model prior to running the test suite (#24)
+* Prevent spacy's CLI output from interfering with ours (#24)
+* Download spacy model if not found (#24)
+* Leave partial output file on disk after CTRL+C (#24)
+* Add codedov patch configuration
+* Remove incomplete DB file as part of CTRL+C handling (#24)
+* Add codecov configuration
+* CLI help message tweak (#24)
+* Pylint tweak (#24)
+* Check DB file after CLI test (#24)
+* Add test with file source (#24)
+* Remove unnecessary validator (#24)
+* Add actual entity extraction to unit tests (#24)
+* Minor test code refactor (#24)
+* Extend CLI unit tests (#24)
+* Extend CLI unit tests (#24)
+* CLI unit test stub (#24)
+* Update requirements-dev.txt
+* Add more type hints
+* Configure isort so that it doesn't conflict with black
+* Add optional progress bar to CLI (#24)
+* Handle CTRL+C cleanly (#24)
+* Move concurrency code into its own module (#24)
+* Minor edits
+* Entity extraction with multiprocessing.Pool
+* Move code around to accomodate multiprocessing.Pool
+* Entity extraction WIP
+* isort fix
+* Entity extraction WIP
+* Entity extraction WIP
+* Add sqlalchemy to the requirements
+* Move code out of libratom/utils
+* isort fix
+* Add docstrings
+* Update requirements-dev.txt
+* Update requirements.txt
+* Entities extraction WIP
+* black formatting
+* isort fix
+* Update requirements-dev.txt
+* Update requirements.txt
+* Finalize CLI
+* Small CLI tweaks
+* Small CLI tweaks
+* Add output path validation
+* Update requirements.txt
+* command line interface for ratom entities
+* command line interface stub
+* CLI WIP
+* Minor edit of README.md
+* Language fix
+* README updated with installation info and license
+* Update example/README.md
+* Update example/README.md
+* Remove sample notebooks and add mybinder link
+* Remove sample notebooks and add mybinder link
+* Make headers optional in PffArchive.format\_message()
+* gitignore ChangeLog and AUTHORS
+* gitignore Changelog and AUTHORS
+* Remove Changelog and AUTHORS from version control
+* Disable git --depth flag in travis config
+* Update .travis.yml and setup.cfg
+* Skip PyPI deployment on OSX
+* Add wheel distribution
+* Set up PyPI deployment from Travis
+* Update requirements
+* OSX Travis setup
+* Update Travis build matrix
+* Add requirements for sample notebooks
+* Remove notebook draft
+* Clean up entity extraction notebooks
+* Rename entity extraction notebooks
+* Finalize concurrency notebooks
+* concurrency WIP
+* concurrency WIP
+* concurrency WIP
+* Add widget box to show extracted entities (#11)
+* Add entity extraction notebook (#11)
+* Entities extraction WIP
+* Entities extraction WIP
+* Clear notebook outputs
+* Add notebook
+* Pylint tuning
+* Extend static analysis to test code
+* Remove assertion in load test
+* Remove assertion in load test
+* Tweak unit tests
+* Update dev requirements
+* Make pytest verbose in CI
+* Strip header string in PffArchive.format\_message
+* Pylint tuning
+* Add parameter-based load test
+* Improve load test
+* Formatting
+* Add logging to load test
+* First pass at load testing
+* load testing - WIP
+* Upgrade dependencies
+* Add dependency
+* Update pylint settings
+* Add attachment extraction test
+* Increase testing of PffArchive
+* Formatting
+* Update requirements
+* Add internal tree structure to PffArchive class
+* Try to get rich body if plain text is null/empty (#6)
+* Formatting (#6)
+* Add test fixture (#6)
+* First pass at message serializing (#6)
+* Address linter issues (#3)
+* DRY (#3)
+* DRY (#3)
+* Expand unit testing (#3)
+* Improve CI setup script (#3)
+* Add CI utility (#3)
+* Add PffArchive class (#3)
+* Add fixture to fetch PST test file (#3)
+* Update requirements (#3)
+* Add black and isort to static checks
+* Update requirements
+* Set up CI and packaging
+* Add Codacy badge
+* Initial commit
