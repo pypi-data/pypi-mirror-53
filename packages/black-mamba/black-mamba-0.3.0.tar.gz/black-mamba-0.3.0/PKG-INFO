@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: black-mamba
+Version: 0.3.0
+Summary: Development framework to write, test and deploy smart contracts written in Vyper. It has integrated web3.py support.
+Home-page: https://mamba.black
+License: LGPL-3.0
+Keywords: blockchain
+Author: Arjuna Sky Kok
+Author-email: arjuna@mamba.black
+Requires-Python: >=3.6,<4.0
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: eth-tester (==0.2.0b3)
+Requires-Dist: py-evm (==0.3.0a7)
+Requires-Dist: pytest (==5.2)
+Requires-Dist: vyper (==0.1.0b13)
+Requires-Dist: web3 (==5.2.0)
+Project-URL: Repository, https://github.com/arjunaskykok/mamba
+Description-Content-Type: text/markdown
+
+# mamba
+A framework for developing smart contracts in Vyper.
+
