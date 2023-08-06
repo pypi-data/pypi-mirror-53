@@ -1,0 +1,92 @@
+Metadata-Version: 2.1
+Name: swarm-lib
+Version: 0.0.2
+Summary: A Library for accessing the Swarm network written in Python
+Home-page: UNKNOWN
+Author: Geovane Fedrecheski
+License: UNKNOWN
+Description: # SwarmLib Repository
+        
+        Instructions for using swarm_lib.
+        
+        ## Dependencies
+        
+        ```
+        sudo apt install python3-pip python3-setuptools python3-dev
+        pip3 install -r requirements.txt
+        ```
+        
+        
+        ## Install
+        
+        Install with `pip3`: `pip3 install swarm_lib`
+        
+        Or, put this on your `requirements.txt`:
+        
+        ```
+        swarm_lib
+        ```
+        
+        ## Use
+        
+        The SwarmLib can be used to create Swarm Consumers and Providers.
+        
+        ### Consumer
+        A consumer is a client that only uses the Swarm resources. For example:
+        ```python
+        from swarm_lib import Consumer
+        consumer = Consumer(keys_file="keys.json")
+        query = {
+            "@type": "swarm:Camera",
+            "operation": {"@type": "ReadOperation"},
+            "usageDuration": 30
+        }
+        image_executor = consumer.get_executor(query)
+        if image_executor.contract_providers():
+            result = image_executor.smart_use()
+        ```
+        
+        ### Provider
+        A provider provides resources to the Swarm. For example:
+        
+        ```python
+        from flask import Flask, request, jsonify
+        from swarm_lib import Provider
+        from onboard_camera import read_frame
+        
+        app = Flask(__name__)
+        
+        provider = Provider(
+            description_file="./description.jsonld",
+            policies_file="./policies.json",
+            keys_file="./keys.json"
+        )
+        
+        @app.route("/camera-service/image", methods=['GET'])
+        @provider.enforce_authorization
+        def get_frame():
+            try:
+                return jsonify(read_frame())
+            except Exception as e:
+                print(e)
+                return(jsonify({"error": "could not get frame from onboard camera"}))
+        
+        if __name__ == "__main__":
+            if provider.join_swarm():
+                app.run(host="0.0.0.0", port=provider.get_port(), threaded=True, debug=True, use_reloader=True)
+            else:
+                print("Could not join the Swarm Network")
+        ```
+        
+        ## Publish a new version
+        
+        If you are *changing* the code of this library, and want to make a new release, follow these steps:
+        
+        1. Update the version in `setup.py`
+        2. Run `python3 setup.py sdist bdist_wheel` to create a distributable release
+        3. Run `python3 -m twine upload dist/*` to upload to pip
+        
+        If a password is asked and you don't know what to do, ask the maintainer (Geovane Fedrecheski).
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
