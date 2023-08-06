@@ -1,0 +1,17 @@
+# Feed2Mail
+
+Monitor a list of atom feeds and send an email digest with updates.
+
+## Installation
+`pip install feed2mail`
+
+## Config
+
+Store a JSON file containing a single object with keys of atom feed URLs and an empty value (or specify an ISO8601 timestamp to set the oldest time you care about). Specify it at runtime with `--config-path` (or `--config`). On a successful run, this file will be updated with new timestamps.
+```json
+{
+  "https://github.com/mattclement/feed2json/commits/master.atom": ""
+}
+```
+
+Mail is sent via SMTP with STARTTLS. Use the program arguments (`--mail-<user|password|host|to>`) or environment variables (`FEED_MAIL_<USER|PASS|HOST|TO>`).

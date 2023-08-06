@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "feed2mail"
+version = "0.1.0"
+description = "Monitor a list of atom feeds and send an email digest with updates"
+authors = ["Matt Clement <m@nullroute.host>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/mattclement/feed2mail"
+
+[tool.poetry.scripts]
+feed2mail = "feed2mail:main"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+aiohttp = "^3.6"
+atoma = "^0.0.17"
+Jinja2 = "^2.10"
+aiosmtplib = "^1.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

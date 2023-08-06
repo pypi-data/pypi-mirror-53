@@ -1,0 +1,10 @@
+{%- for title, items in feeds.items() -%}
+Feed: {{ title }}
+{% for item in items %}
+{{ item.title.value}} ({{ item.updated.isoformat() }})
+    {{ item.links[0].href }}
+{% endfor -%}
+{%- if loop.last %}
+------------
+{%- endif -%}
+{%- endfor %}

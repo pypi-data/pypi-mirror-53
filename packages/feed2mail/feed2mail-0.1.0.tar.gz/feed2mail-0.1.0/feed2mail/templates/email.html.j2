@@ -1,0 +1,17 @@
+<html>
+  <body>
+    {%- for title, items in feeds.items() %}
+    <h3>{{ title }}</h3>
+    {%- for item in items %}
+    <p>
+      <a href="{{ item.links[0].href }}">
+        {{ item.title.value }}
+      </a>:<small>{{ item.updated.isoformat() }}</small>
+    </p>
+    {%- endfor -%}
+    {%- if loop.last %}
+    <hr/>
+    {%- endif -%}
+    {%- endfor %}
+  </body>
+</html>
