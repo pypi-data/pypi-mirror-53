@@ -1,0 +1,70 @@
+Metadata-Version: 2.1
+Name: proxydata-scrapy
+Version: 0.0.2b0
+Summary: Middleware for proxying scrapy requests through the service proxyfordevelopers.com
+Home-page: UNKNOWN
+Author: nekidaem
+Author-email: order@nekidaem.ru
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# proxydata-scrapy
+
+**Расширение для проксирования запросов пауков scrapy через сервис [proxyfordevelopers.com][site]**
+
+## Установка
+
+Установка с помощью `pip`
+```
+pip install proxydata-scrapy
+```
+
+Либо скопируйте middleware класс `PFDDownloaderMiddleware` в файл `middlewares.py` своего проекта
+
+Добавьте расширение в переменную `DOWNLOADER_MIDDLEWARES` в `settings.py` вашего проекта.
+Так-же для корретной работы необходимо отключить middlewares `RobotsTxtMiddleware` и `HttpCompressionMiddleware` 
+
+Добавьте переменную `PFD_TOKEN` в `settings.py` вашего проекта.
+Для получения токена вам необходимо зарегистрироваться в сервисе [proxyfordevelopers][site]
+
+```
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware': None,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': None,
+    'proxydata_scrapy.middlewares.PFDDownloaderMiddleware': 800,
+}
+
+PFD_TOKEN = 'xyz'
+```
+
+
+## Использование
+
+При необходимости передачи дополнительных параметров в API **proxyfordevelopers.com** используйте переменную `cb_kwargs` класса `scrapy.http.Request`
+Например:
+```
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+    ]
+
+    def start_requests(self):
+        cb_kwargs = {
+            'proxy_type': 1,
+            'js_enabled': True,
+            'country': 'RU',
+            'protocol': 1
+        }
+        for url in self.start_urls:
+            yield Request(url, dont_filter=True, cb_kwargs=cb_kwargs)
+```
+
+
+[site]: https://proxyfordevelopers.com
+
