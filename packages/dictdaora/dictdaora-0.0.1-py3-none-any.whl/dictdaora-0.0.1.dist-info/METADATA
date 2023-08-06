@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: dictdaora
+Version: 0.0.1
+Summary: dictdaora
+Home-page: https://github.com/dutradda/dictdaora
+License: UNKNOWN
+Author: Diogo Dutra
+Author-email: diogodutradamata@gmail.com
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries
+Requires-Dist: mkdocs; extra == "doc"
+Requires-Dist: mkdocs-material; extra == "doc"
+Requires-Dist: markdown-include; extra == "doc"
+Requires-Dist: black; extra == "test"
+Requires-Dist: bumpversion; extra == "test"
+Requires-Dist: flake8; extra == "test"
+Requires-Dist: isort; extra == "test"
+Requires-Dist: ipython; extra == "test"
+Requires-Dist: mypy; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: pytest-mock; extra == "test"
+Requires-Dist: pytest>=5.1.1; extra == "test"
+Requires-Dist: tox; extra == "test"
+Project-URL: Documentation, https://dutradda.github.io/dictdaora
+Provides-Extra: doc
+Provides-Extra: test
+
+# dictdaora
+Dicts that can be accessed via attributes
+
