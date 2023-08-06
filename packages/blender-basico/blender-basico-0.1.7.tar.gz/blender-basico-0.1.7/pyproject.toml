@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "blender-basico"
+version = "0.1.7"
+description = "Django shared app, featuring essential components for blender.org sites."
+authors = ["Francesco Siddi <francesco@blender.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+django = "^2.1"
+django-pipeline = "^1.6"
+libsasscompiler = "^0.1.5"
+pypugjs = "^5.8"
+jsmin = "^2.2"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+update-bwa = "tools:update"
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+

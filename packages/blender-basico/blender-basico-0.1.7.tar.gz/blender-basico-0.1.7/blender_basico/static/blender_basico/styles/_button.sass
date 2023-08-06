@@ -1,0 +1,127 @@
+/* BUTTONS
+ **  There are simple buttons, squishy, small, big, whole lot!
+ **  Squishy ones feel like you're pressing it, let's not over use them.
+ */
+a.btn, .btn, button
+	+button($color-text-dark-primary, $color-text-dark)
+
+	&.success, &-success
+		+button($color-success, $color-success)
+	&-success-filled, &-filled-success
+		+button($color-success, white, true)
+
+	&.danger, &-danger
+		+button($color-danger, $color-danger)
+	&-danger-filled, &-filled-danger
+		+button($color-danger, white, true)
+
+	&.warning, &-warning
+		+button($color-warning, $color-warning)
+	&-warning-filled, &-filled-warning
+		+button($color-warning, white, true)
+
+	&.info, &-info
+		+button($color-info, $color-info)
+	&-info-filled, &-filled-info
+		+button($color-info, white, true)
+
+	&.primary, &-primary
+		+button($color-primary, $color-primary)
+	&-primary-filled, &-filled-primary
+		+button($color-primary, white, true)
+
+	&.default, &-default
+		+button($color-text, $color-text)
+	&-default-filled, &-filled-default
+		+button($color-text, white, true)
+
+a.btn.btn-outline, .btn.btn-outline
+	background-color: transparent
+	color: white
+	border: 2px solid white
+	padding: 5px 20px
+	box-shadow: none
+
+	&:hover
+		color: white !important
+		background-color: rgba(white, .2)
+
+	&:active, &:focus
+		color: white !important
+		background-color: rgba(white, .5)
+
+.box
+	a.btn.btn-outline, .btn.btn-outline
+		color: $color-text
+		border: 1px solid lighten($color-text, 40%)
+
+		&:hover
+			color: black !important
+			border: 1px solid lighten($color-text, 20%)
+			background-color: rgba(white, .25)
+
+		&:active, &:focus
+			color: black !important
+			border: 1px solid $color-text
+			background-color: rgba(white, .5)
+
+/* BUTTON EXTERNAL */
+a.btn.external
+	border-bottom: 2px solid rgba($color-secondary, .2)
+
+a.btn.external:after
+	content: '\f08e'
+	float: right
+	font-size: 75%
+	color: rgba($color-text, .6)
+	position: absolute
+	top: 6px
+	right: 8px
+	font-family: "FontAwesome"
+/* // BUTTONS */
+
+/* Call to actions. */
+/* Main button, fully opaque and standing out */
+.cta-primary, a.cta-primary
+	+button($color-primary, white, true)
+	padding: 10px 35px
+	text-shadow: 1px 1px 0 rgba(black, .2)
+
+/* Secondary - half-transparent */
+.cta-secondary, a.cta-secondary
+	+button(rgba($color-primary, .5), white, true)
+	padding: 10px 35px
+
+/* Text-only link next to the main button */
+.cta-tertiary, a.cta-tertiary
+	align-items: center
+	display: inline-flex
+	font-size: $font-size-small
+	padding: 10px 20px
+
+	&:hover
+		text-decoration: underline
+
+		i svg
+			fill: $color-secondary
+
+	i
+		margin-right: 5px
+
+		svg
+			fill: $color-primary
+			max-width: 12px
+			position: relative
+			top: 2px
+			width: 12px
+
+.cta-container
+	align-items: center
+	display: flex
+	justify-content: center
+
+	/* If there is a button next to it, add spacing */
+	.cta-primary+.cta-secondary,
+	.cta-secondary+.cta-secondary,
+	.cta-secondary+.cta-tertiary
+		margin-left: 15px

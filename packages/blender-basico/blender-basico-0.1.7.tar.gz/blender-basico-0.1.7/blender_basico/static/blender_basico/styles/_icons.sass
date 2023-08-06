@@ -1,0 +1,22 @@
+/* Generic icon class */
+[class^="i-"]
+	display: inline-block
+	height: 8px
+	width: 8px
+	margin: 0 2.5px
+
+// Generic angle icons
+[class^="i-chevron"]
+	border-right: 3px solid currentColor
+	border-bottom: 3px solid currentColor
+	transform: rotate(45deg)
+
+.i-chevron
+	&-right
+		transform: rotate(-45deg)
+
+	&-left
+		transform: rotate(-225deg)
+
+	&-top
+		transform: rotate(-135deg)

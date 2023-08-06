@@ -1,0 +1,42 @@
+$font-borg-path: $font-path !default
+
+$font-borg-eot: '#{$font-borg-path}/font-borg-webfont.eot' !default
+$font-borg-eot-iefix: '#{$font-borg-path}/font-borg-webfont.eot?#iefix' !default
+$font-borg-woff: '#{$font-borg-path}/font-borg-webfont.woff' !default
+$font-borg-ttf: '#{$font-borg-path}/font-borg-webfont.ttf' !default
+$font-borg-svg: '#{$font-borg-path}/font-borg-webfont.svg#fontborgregular' !default
+
+@font-face
+  font-family: 'FontBorg'
+  src: url($font-borg-eot)
+  src: url($font-borg-eot-iefix) format("embedded-opentype"), url($font-borg-woff) format("woff"), url($font-borg-ttf) format("truetype"), url($font-borg-svg) format("svg")
+  font-weight: normal
+  font-style: normal
+
+[class^="bf-"], [class*=" bf-"]
+  font-family: 'FontBorg'
+  font-weight: normal
+  font-style: normal
+  text-decoration: inherit
+  -webkit-font-smoothing: antialiased
+  display: inline
+  width: auto
+  height: auto
+  line-height: normal
+  vertical-align: baseline
+  background-image: none
+  background-position: 0% 0%
+  background-repeat: repeat
+  margin-top: 0
+
+.bf-blender:before
+  content: "\f000"
+
+.bf-cloud:before
+  content: "\f001"
+
+.bf-network:before
+  content: "\f002"
+
+.bf-creativecommons:before
+  content: "\f003"
