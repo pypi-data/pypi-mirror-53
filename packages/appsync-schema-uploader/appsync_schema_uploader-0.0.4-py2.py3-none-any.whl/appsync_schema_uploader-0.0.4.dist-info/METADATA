@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: appsync-schema-uploader
+Version: 0.0.4
+Summary: Uploads an AWS AppSync GraphQL schema
+Home-page: https://github.com/QuiNovas/appsync-schema-uploader
+Author: Joseph Wortmann
+Author-email: joseph.wortmann@gmail.com
+License: APL 2.0
+Keywords: quinovas
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: System :: Software Distribution
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 2.7
+Requires-Dist: argparse
+Requires-Dist: boto3
+
+app-schema-uploader
+===================
+
+####A command line tool for uploading GraphQL schemas into AWS AppSyncL
+
+This is intended to be used in a CI/CD process for managing AppSync
+schemas
+
+###Usage
+
+::
+
+   python -m appsync_schema_uploader --aws-access-key-id accesskey --aws-secret-access-key secret --aws_region region --api-id id --schema schema.graphql
+
+###Arguments - **aws-access-key-id** The AWS Access Key ID for the IAM
+user - **aws-secret-access-key** The AWS Secret Access Key for the IAM
+user - **aws-region** The AWS Region of the AppSync API to update -
+**api-id** The API ID of the AppSync API to upload the schema to -
+**schema** The filename of the SDL formatted schema to upload
+
+
