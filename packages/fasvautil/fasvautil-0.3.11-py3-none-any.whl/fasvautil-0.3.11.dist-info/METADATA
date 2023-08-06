@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: fasvautil
+Version: 0.3.11
+Summary: Project with utility functions used with FASva
+Home-page: UNKNOWN
+Author: Lars Klitzke
+Author-email: Lars.Klitzke@gmail.com
+License: GNU GPLv3
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Unix Shell
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Manufacturing
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: numba
+Requires-Dist: pandas
+Requires-Dist: colorlog
+Requires-Dist: tqdm
+Requires-Dist: seaborn
+Requires-Dist: utm
+Requires-Dist: tilemapbase
+Requires-Dist: overpy2
+Requires-Dist: fastcache
+Requires-Dist: requests
+Requires-Dist: fasvaorm
+
+# FASva utility functions
+
+This project includes function for file management and visualization used by all project related to 
+the [FASva](https://www.hs-emden-leer.de/en/faculties/faculty-of-technology/projects/fasva/) project.
+
+## Tools
+
+A list of available tools as standalone-applications.
+
+* `image_rename`: Rename images in a specified directory to convert the microseconds to a datetime
+
+
