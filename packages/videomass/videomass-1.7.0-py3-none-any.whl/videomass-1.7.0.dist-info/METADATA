@@ -1,0 +1,81 @@
+Metadata-Version: 2.1
+Name: videomass
+Version: 1.7.0
+Summary: Videomass is a cross-platform GUI for FFmpeg
+Home-page: http://jeanslack.github.io/Videomass/
+Author: Gianluca Pernigotto (aka jeanslack)
+Author-email: <jeanlucperni@gmail.com>
+License: GPL3 (Gnu Public License)
+Platform: All
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows :: Windows 7
+Classifier: Operating System :: Microsoft :: Windows :: Windows 8
+Classifier: Operating System :: Microsoft :: Windows :: Windows 10
+Classifier: Operating System :: POSIX :: BSD :: FreeBSD
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications :: GTK
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Natural Language :: Italian
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Multimedia :: Video :: Conversion
+Classifier: Topic :: Multimedia :: Sound/Audio :: Conversion
+Classifier: Topic :: Utilities
+Description-Content-Type: text/markdown
+Requires-Dist: PyPubSub (>=4.0.0)
+
+# **Videomass** provides a graphical interface for audio and video conversions through FFmpeg.   
+
+* [Videomass on PyPi](https://pypi.org/project/videomass/)
+* [GitHub Page](https://github.com/jeanslack/Videomass)
+* [Support Page and Documentation](http://jeanslack.github.io/Videomass)
+* [Wiki page](https://github.com/jeanslack/Videomass/wiki)
+* [Downloads Source Code](https://github.com/jeanslack/Videomass/releases)
+* [Installers for Windows and MacOsX](https://sourceforge.net/projects/videomass2/)
+
+## News
+
+- October 2019 v.1.7.0: Added EBU R128 and RMS-based audio normalizations. 
+  Added support to VP8, VP9, H.265 and OPUS encoders. See changelog for 
+  more details.
+
+## Features
+
+- Drag n' Drop with multiple files at once.
+- Batch processing for all included features
+- Presets manager interface with fully customizable and expandable profiles.
+- Dedicated interfaces: presets manager, video and audio conversions
+- Displaying streams information.
+- Playback for imported files and last exported file.
+- Real-time video filters preview on the video conversions interface.
+- Peak level-based audio normalization.
+- RMS-based audio normalization.
+- EBU R128 audio normalization.
+- Setting duration portions for imported files, filters, export and tests.
+- Log management.
+- Multi language (English and Italian Languages support for now).
+- Work on many platforms where Python3 and wxPython4 are supported, 
+  including Linux, Unix, MacOs and Windows.
+- Compatible with Python 3 only
+- ...And more
+
+## Requirements
+
+- Python3     
+- wxPython4 (phoenix) 
+- PyPubSub  
+- ffmpeg >= 3.2   
+- ffprobe (for multimedia streams analysis)  
+- ffplay (for playback)   
+
+
+
