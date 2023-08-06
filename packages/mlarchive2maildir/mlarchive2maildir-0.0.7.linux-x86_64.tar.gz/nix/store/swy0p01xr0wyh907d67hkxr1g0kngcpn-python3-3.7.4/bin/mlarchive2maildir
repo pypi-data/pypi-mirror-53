@@ -1,0 +1,12 @@
+#!/nix/store/swy0p01xr0wyh907d67hkxr1g0kngcpn-python3-3.7.4/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'mlarchive2maildir==0.0.7','console_scripts','mlarchive2maildir'
+__requires__ = 'mlarchive2maildir==0.0.7'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('mlarchive2maildir==0.0.7', 'console_scripts', 'mlarchive2maildir')()
+    )
