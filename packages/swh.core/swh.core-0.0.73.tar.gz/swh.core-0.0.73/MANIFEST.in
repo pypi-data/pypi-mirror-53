@@ -1,0 +1,10 @@
+include Makefile
+include requirements.txt
+include requirements-swh.txt
+include requirements-http.txt
+include requirements-db.txt
+include version.txt
+recursive-include swh/core/sql *.sql
+recursive-include swh py.typed
+recursive-include swh/core/tests/data/ *
+recursive-include swh/core/tests/fixture/data/ *
