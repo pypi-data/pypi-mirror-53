@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Display Download Information &mdash; bitpit 1.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="bitpit 1.2.0 documentation" href="index.html"/>
+        <link rel="next" title="Automatic Restart" href="auto-restart.html"/>
+        <link rel="prev" title="Download a File" href="download-a-file.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> bitpit
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick-guide.html">Quick Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download-a-file.html">Download a File</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Display Download Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#display-the-file-size">Display the file size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#display-the-download-speed">Display the download speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#display-the-download-state">Display the download state</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto-restart.html">Automatic Restart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specify-path-and-rate-limit.html">Specify Path and Rate Limit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="additional-tuning.html">Additional Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elegant-output.html">Elegant Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">bitpit Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bitpit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Display Download Information</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/display-info.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="display-download-information">
+<h1>Display Download Information<a class="headerlink" href="#display-download-information" title="Permalink to this headline">¶</a></h1>
+<p>At the moment we are able to download a file. But we have no information on how
+fast our download is and if it is completed or there is some error.</p>
+<p>Before we start, here is the tiny program we made previously if you need to
+refresh your mind:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bitpit</span>
+
+<span class="c1">#will download this</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.python.org/static/img/python-logo.png&#39;</span>
+
+<span class="c1">#this is our downloader</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="n">bitpit</span><span class="o">.</span><span class="n">Downloader</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1">#start downloading and tell user download has started.</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download has started.&#39;</span><span class="p">)</span>
+
+<span class="c1">#end of the main thread</span>
+</pre></div>
+</div>
+<p>Now it is time to make it better.</p>
+<div class="section" id="display-the-file-size">
+<h2>Display the file size<a class="headerlink" href="#display-the-file-size" title="Permalink to this headline">¶</a></h2>
+<p>If we are downloading a file, we probably want to know the file size.
+bitpit is written in an event driven style. It is a little similar to GTK
+library if you have used it before.
+We need to do 2 steps to show the file size. First, we need to define a function
+that will be called when the file size is known:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_size_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">downloader</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function takes 1 argument: <code class="docutils literal"><span class="pre">downloader</span></code> which is the <code class="docutils literal"><span class="pre">Downloader</span></code>
+instance that we just knew its file size. In the function, we print the
+<code class="docutils literal"><span class="pre">Downloader.size</span></code> property, which is just the file size in bytes.</p>
+<p>Next, we need to tell the downloader to call this function as soon as it knows
+the file size. You probably want to do this just before you start the download.
+This is done using <code class="docutils literal"><span class="pre">Downloader.listen()</span></code> method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;size-changed&#39;</span><span class="p">,</span> <span class="n">on_size_changed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Downloader.listen()</span></code> takes at least 2 arguments. The first is the signal to
+listen to. Here we listened to the <code class="docutils literal"><span class="pre">size-changed</span></code> signal which is emitted
+whenever the downloader gets to know the size of the file being downloaded. The
+second argument is the function to call when the signal is emitted. Here we put
+the function we defined above.</p>
+<p>After this call to <code class="docutils literal"><span class="pre">Downloader.listen()</span></code>, our function will be called as soon
+as the file size is known. Our full program now becomes as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bitpit</span>
+
+<span class="k">def</span> <span class="nf">on_size_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The file size is&#39;</span><span class="p">,</span> <span class="n">downloader</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+<span class="c1">#will download this</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.python.org/static/img/python-logo.png&#39;</span>
+
+<span class="c1">#this is our downloader</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="n">bitpit</span><span class="o">.</span><span class="n">Downloader</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1">#listen to signals</span>
+<span class="c1">#print size as soon as it is known</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;size-changed&#39;</span><span class="p">,</span> <span class="n">on_size_changed</span><span class="p">)</span>
+
+<span class="c1">#start downloading and tell user download has started.</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download has started.&#39;</span><span class="p">)</span>
+
+<span class="c1">#end of the main thread</span>
+</pre></div>
+</div>
+<p>If you notice, the size is expressed in bytes. Showing the size in bytes gives
+us a very big number that is difficult for humans to read. It would be easier
+for us if we could display the size in Kilobytes or Megabytes. This can be done
+by modifying the callback function <code class="docutils literal"><span class="pre">on_size_changed()</span></code> to be as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_size_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The file size is&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">downloader</span><span class="o">.</span><span class="n">human_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We just replaced <code class="docutils literal"><span class="pre">Downloader.size</span></code> property with <code class="docutils literal"><span class="pre">Downloader.human_size</span></code>
+property. <code class="docutils literal"><span class="pre">Downloader.human_size</span></code> property gives us a 2-element tuple. The
+first element is a float representing the size and the second element is a
+string suffix with the value KB for kilobytes or MB for megabytes and so on.
+In our call to <code class="docutils literal"><span class="pre">print()</span></code> function, we unpacked the tuple arguments using
+python * operator. If you are not familiar with this, check it out in the python
+<a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists">here</a>.</p>
+<p>When I tried the new callback function, I got the following message printed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">file</span> <span class="n">size</span> <span class="ow">is</span> <span class="mf">9.865234375</span> <span class="n">KB</span>
+</pre></div>
+</div>
+<p>We can use python string formatting to make it look better but we will leave it
+for later.</p>
+</div>
+<div class="section" id="display-the-download-speed">
+<h2>Display the download speed<a class="headerlink" href="#display-the-download-speed" title="Permalink to this headline">¶</a></h2>
+<p>Other than the size, we want to know the download speed. Similar to the size, we
+define a callback function and listen to a signal. The function we will define
+will print the speed just like the size. The property we will use is
+<code class="docutils literal"><span class="pre">Downloader.speed</span></code>. Also like the size, there is a <code class="docutils literal"><span class="pre">Downloader.human_speed</span></code>.
+We will use <code class="docutils literal"><span class="pre">Downloader.human_speed</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_speed_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The speed is&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">downloader</span><span class="o">.</span><span class="n">human_speed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The signal we want to listen to this time is <code class="docutils literal"><span class="pre">speed-changed</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;speed-changed&#39;</span><span class="p">,</span> <span class="n">on_speed_changed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The behaviour of <code class="docutils literal"><span class="pre">speed-changed</span></code> signal is a little bit different than
+<code class="docutils literal"><span class="pre">size-changed</span></code>. When the download starts, the signal is emitted every 1 second
+. It will keep being emitted periodically as long as the download is running. In
+our program, the signal will not work very well because the file size is very
+small. Try to download <a class="reference external" href="http://mirrors.evowise.com/linuxmint/stable/18.3/linuxmint-18.3-cinnamon-64bit.iso">linux mint</a> and you will see the signal working
+properly.</p>
+<p>There are other things we can do to improve our program regarding
+<code class="docutils literal"><span class="pre">speed-changed</span></code> signal. For example, we can show how much we have downloaded
+so far in the callback function because we probably have downloaded something
+since the last time the signal was emitted. We can check
+<code class="docutils literal"><span class="pre">Downloader.downloaded</span></code> and <code class="docutils literal"><span class="pre">Downloader.human_downloaded</span></code> to know that.
+Furthermore, our callback will be printing a message every second which makes
+the terminal full of confusing text. We can make our output better. However, we
+will leave it to the end of the tutorial. For now we will stick to what we have
+done so far.</p>
+<p>Now our program has become as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bitpit</span>
+
+<span class="k">def</span> <span class="nf">on_size_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The file size is&#39;</span><span class="p">,</span> <span class="n">downloader</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_speed_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The speed is&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">downloader</span><span class="o">.</span><span class="n">human_speed</span><span class="p">)</span>
+
+<span class="c1">#will download this</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.python.org/static/img/python-logo.png&#39;</span>
+
+<span class="c1">#this is our downloader</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="n">bitpit</span><span class="o">.</span><span class="n">Downloader</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1">#listen to signals</span>
+<span class="c1">#print size as soon as it is known</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;size-changed&#39;</span><span class="p">,</span> <span class="n">on_size_changed</span><span class="p">)</span>
+
+<span class="c1">#print speed periodically</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;speed-changed&#39;</span><span class="p">,</span> <span class="n">on_speed_changed</span><span class="p">)</span>
+
+<span class="c1">#start downloading and tell user download has started.</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download has started.&#39;</span><span class="p">)</span>
+
+<span class="c1">#end of the main thread</span>
+</pre></div>
+</div>
+<p>Just as a final note in this section, you can change the time between
+<code class="docutils literal"><span class="pre">speed-changed</span></code> signal emissions in <code class="docutils literal"><span class="pre">Downloader.__init__()</span></code> when you create
+the downloader instance by passing the desired number of seconds in the
+<code class="docutils literal"><span class="pre">update_period</span></code> argument. Check the class documentation for more details.</p>
+</div>
+<div class="section" id="display-the-download-state">
+<h2>Display the download state<a class="headerlink" href="#display-the-download-state" title="Permalink to this headline">¶</a></h2>
+<p>Another useful information we need in our download is its state. For example,
+did it start or not? Is it completed or still in progress? Did it stop normally
+or because of an error? This is what we are going to do.</p>
+<p>Similar to the size and speed, we define a callback function and listen to a
+signal:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_state_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">,</span> <span class="n">old_state</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The state changed to:&#39;</span><span class="p">,</span> <span class="n">downloader</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+
+
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;state-changed&#39;</span><span class="p">,</span> <span class="n">on_state_changed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal"><span class="pre">state-changed</span></code> signal takes at least 2 positional argumetns.
+The <code class="docutils literal"><span class="pre">Downloader</span></code> that changed state and the old state the downloader was on.
+The <code class="docutils literal"><span class="pre">state-changed</span></code> signal is emitted whenever the download is started,
+stopped, or completed. To know the new state, check the <code class="docutils literal"><span class="pre">Downloader.state</span></code>
+property. It can be one of the following:
+* <code class="docutils literal"><span class="pre">pause</span></code>: The download is not started or started then stopped by a calling
+<code class="docutils literal"><span class="pre">Downloader.stop()</span></code> method.
+* <code class="docutils literal"><span class="pre">start</span></code>: The download just started but is not download anything yet.
+* <code class="docutils literal"><span class="pre">download</span></code>: The download is running and in progress.
+* <code class="docutils literal"><span class="pre">error</span></code>: The download stopped bacause of an error.
+* <code class="docutils literal"><span class="pre">complete</span></code>: The download completed.</p>
+<p>Our program now has become like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bitpit</span>
+
+<span class="k">def</span> <span class="nf">on_size_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The file size is&#39;</span><span class="p">,</span> <span class="n">downloader</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_speed_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The speed is&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">downloader</span><span class="o">.</span><span class="n">human_speed</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_state_changed</span><span class="p">(</span><span class="n">downloader</span><span class="p">,</span> <span class="n">old_state</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The state changed to:&#39;</span><span class="p">,</span> <span class="n">downloader</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1">#will download this</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.python.org/static/img/python-logo.png&#39;</span>
+
+<span class="c1">#this is our downloader</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="n">bitpit</span><span class="o">.</span><span class="n">Downloader</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1">#listen to signals</span>
+<span class="c1">#print size as soon as it is known</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;size-changed&#39;</span><span class="p">,</span> <span class="n">on_size_changed</span><span class="p">)</span>
+
+<span class="c1">#print speed periodically</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;speed-changed&#39;</span><span class="p">,</span> <span class="n">on_speed_changed</span><span class="p">)</span>
+
+<span class="c1">#print state</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;state-changed&#39;</span><span class="p">,</span> <span class="n">on_state_changed</span><span class="p">)</span>
+
+<span class="c1">#start downloading and tell user download has started.</span>
+<span class="n">dl</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download has started.&#39;</span><span class="p">)</span>
+
+<span class="c1">#end of the main thread</span>
+</pre></div>
+</div>
+<p>In <a class="reference internal" href="auto-restart.html"><span class="doc">Automatic Restart</span></a>, we will make our downloader automatically resume the download when the
+download is interrupted due to an error.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="auto-restart.html" class="btn btn-neutral float-right" title="Automatic Restart" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="download-a-file.html" class="btn btn-neutral" title="Download a File" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Mohammad Alghafli.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
