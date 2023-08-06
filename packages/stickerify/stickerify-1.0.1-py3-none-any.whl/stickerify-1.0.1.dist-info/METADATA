@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: stickerify
+Version: 1.0.1
+Summary: Telegram stickers from screenshots
+Home-page: https://github.com/Akiiino/Stickerify.git
+Author: Akiiino
+Author-email: akiiino@akiiino.me
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: numpy (>=1.11.1)
+Requires-Dist: matplotlib (<3.1,>=1.5.1)
+Requires-Dist: pillow (>=6.0.0)
+Requires-Dist: scipy (>=1.0.0)
+Requires-Dist: scikit-image (>=0.10.0)
+
+# Stickerify
+![PyPI](https://img.shields.io/pypi/v/stickerify)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/stickerify)
+
+Make stickers out of your Telegram messages!
+
+# Installation
+You can install from PyPI:
+```
+pip install stickerify --user
+```
+or from source:
+```
+python setup.py install
+```
+
+If you want to use it in virtualenv on MacOS you *might* need to uninstall python, 
+install tkinter via `brew install tcl-tk` and install python back.
+
+## Usage
+First you have to make screenshots and put them into a folder. 
+See examples in [examples](examples) folder.
+Then you can run the program with optional output directory:
+```
+stickerify input_directory --out output_directory
+```
+You will see you screenshots. Click on messages you want to save. 
+When you click on first message, a contour around all messages will appear.
+To proceed to other image or close the program click on space outside of messages.
+
+
