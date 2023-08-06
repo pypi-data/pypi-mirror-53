@@ -1,0 +1,11 @@
+POST:
+  https://pagure.io/api/0/-/whoami:
+    empty:
+      empty:
+      - content: !!binary |
+          ewogICJ1c2VybmFtZSI6ICJsYWNobWFuZnJhbnRpc2VrIgp9
+        json:
+          username: lachmanfrantisek
+        ok: true
+        reason: OK
+        status_code: 200

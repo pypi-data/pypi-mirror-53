@@ -1,0 +1,391 @@
+GET:
+  https://pagure.io/api/0/fork/lachmanfrantisek/ogr-tests:
+    empty:
+      empty:
+      - content: !!binary |
+          ewogICJhY2Nlc3NfZ3JvdXBzIjogewogICAgImFkbWluIjogW10sCiAgICAiY29tbWl0IjogW10s
+          CiAgICAidGlja2V0IjogW10KICB9LAogICJhY2Nlc3NfdXNlcnMiOiB7CiAgICAiYWRtaW4iOiBb
+          XSwKICAgICJjb21taXQiOiBbXSwKICAgICJvd25lciI6IFsKICAgICAgImxhY2htYW5mcmFudGlz
+          ZWsiCiAgICBdLAogICAgInRpY2tldCI6IFtdCiAgfSwKICAiY2xvc2Vfc3RhdHVzIjogW10sCiAg
+          ImN1c3RvbV9rZXlzIjogW10sCiAgImRhdGVfY3JlYXRlZCI6ICIxNTY4NzAyNjg3IiwKICAiZGF0
+          ZV9tb2RpZmllZCI6ICIxNTY4NzAyNjg3IiwKICAiZGVzY3JpcHRpb24iOiAiVGVzdGluZyByZXBv
+          c2l0b3J5IGZvciBweXRob24tb2dyIHBhY2thZ2UuIiwKICAiZnVsbG5hbWUiOiAiZm9ya3MvbGFj
+          aG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJpZCI6IDY3NDAsCiAgIm1pbGVzdG9uZXMiOiB7
+          fSwKICAibmFtZSI6ICJvZ3ItdGVzdHMiLAogICJuYW1lc3BhY2UiOiBudWxsLAogICJwYXJlbnQi
+          OiB7CiAgICAiYWNjZXNzX2dyb3VwcyI6IHsKICAgICAgImFkbWluIjogW10sCiAgICAgICJjb21t
+          aXQiOiBbXSwKICAgICAgInRpY2tldCI6IFtdCiAgICB9LAogICAgImFjY2Vzc191c2VycyI6IHsK
+          ICAgICAgImFkbWluIjogWwogICAgICAgICJ0dG9tZWNlayIsCiAgICAgICAgImpwb3BlbGthIiwK
+          ICAgICAgICAicGhyYWNlayIsCiAgICAgICAgImpzY290a2EiLAogICAgICAgICJkaG9kb3ZzayIs
+          CiAgICAgICAgInJwaXRvbmFrIiwKICAgICAgICAibGJhcmN6aW8iCiAgICAgIF0sCiAgICAgICJj
+          b21taXQiOiBbXSwKICAgICAgIm93bmVyIjogWwogICAgICAgICJsYWNobWFuZnJhbnRpc2VrIgog
+          ICAgICBdLAogICAgICAidGlja2V0IjogW10KICAgIH0sCiAgICAiY2xvc2Vfc3RhdHVzIjogW10s
+          CiAgICAiY3VzdG9tX2tleXMiOiBbXSwKICAgICJkYXRlX2NyZWF0ZWQiOiAiMTU2MzQ1MTY5NCIs
+          CiAgICAiZGF0ZV9tb2RpZmllZCI6ICIxNTY4MDE3MzEyIiwKICAgICJkZXNjcmlwdGlvbiI6ICJU
+          ZXN0aW5nIHJlcG9zaXRvcnkgZm9yIHB5dGhvbi1vZ3IgcGFja2FnZS4iLAogICAgImZ1bGxuYW1l
+          IjogIm9nci10ZXN0cyIsCiAgICAiaWQiOiA2NDg5LAogICAgIm1pbGVzdG9uZXMiOiB7fSwKICAg
+          ICJuYW1lIjogIm9nci10ZXN0cyIsCiAgICAibmFtZXNwYWNlIjogbnVsbCwKICAgICJwYXJlbnQi
+          OiBudWxsLAogICAgInByaW9yaXRpZXMiOiB7fSwKICAgICJ0YWdzIjogW10sCiAgICAidXJsX3Bh
+          dGgiOiAib2dyLXRlc3RzIiwKICAgICJ1c2VyIjogewogICAgICAiZnVsbG5hbWUiOiAiRnJhbnRp
+          XHUwMTYxZWsgTGFjaG1hbiIsCiAgICAgICJuYW1lIjogImxhY2htYW5mcmFudGlzZWsiCiAgICB9
+          CiAgfSwKICAicHJpb3JpdGllcyI6IHt9LAogICJ0YWdzIjogW10sCiAgInVybF9wYXRoIjogImZv
+          cmsvbGFjaG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJ1c2VyIjogewogICAgImZ1bGxuYW1l
+          IjogIkZyYW50aVx1MDE2MWVrIExhY2htYW4iLAogICAgIm5hbWUiOiAibGFjaG1hbmZyYW50aXNl
+          ayIKICB9Cn0=
+        json:
+          access_groups:
+            admin: []
+            commit: []
+            ticket: []
+          access_users:
+            admin: []
+            commit: []
+            owner:
+            - lachmanfrantisek
+            ticket: []
+          close_status: []
+          custom_keys: []
+          date_created: '1568702687'
+          date_modified: '1568702687'
+          description: Testing repository for python-ogr package.
+          fullname: forks/lachmanfrantisek/ogr-tests
+          id: 6740
+          milestones: {}
+          name: ogr-tests
+          namespace: null
+          parent:
+            access_groups:
+              admin: []
+              commit: []
+              ticket: []
+            access_users:
+              admin:
+              - ttomecek
+              - jpopelka
+              - phracek
+              - jscotka
+              - dhodovsk
+              - rpitonak
+              - lbarczio
+              commit: []
+              owner:
+              - lachmanfrantisek
+              ticket: []
+            close_status: []
+            custom_keys: []
+            date_created: '1563451694'
+            date_modified: '1568017312'
+            description: Testing repository for python-ogr package.
+            fullname: ogr-tests
+            id: 6489
+            milestones: {}
+            name: ogr-tests
+            namespace: null
+            parent: null
+            priorities: {}
+            tags: []
+            url_path: ogr-tests
+            user:
+              fullname: "Franti\u0161ek Lachman"
+              name: lachmanfrantisek
+          priorities: {}
+          tags: []
+          url_path: fork/lachmanfrantisek/ogr-tests
+          user:
+            fullname: "Franti\u0161ek Lachman"
+            name: lachmanfrantisek
+        ok: true
+        reason: OK
+        status_code: 200
+      - content: !!binary |
+          ewogICJhY2Nlc3NfZ3JvdXBzIjogewogICAgImFkbWluIjogW10sCiAgICAiY29tbWl0IjogW10s
+          CiAgICAidGlja2V0IjogW10KICB9LAogICJhY2Nlc3NfdXNlcnMiOiB7CiAgICAiYWRtaW4iOiBb
+          XSwKICAgICJjb21taXQiOiBbXSwKICAgICJvd25lciI6IFsKICAgICAgImxhY2htYW5mcmFudGlz
+          ZWsiCiAgICBdLAogICAgInRpY2tldCI6IFtdCiAgfSwKICAiY2xvc2Vfc3RhdHVzIjogW10sCiAg
+          ImN1c3RvbV9rZXlzIjogW10sCiAgImRhdGVfY3JlYXRlZCI6ICIxNTY4NzAyNjg3IiwKICAiZGF0
+          ZV9tb2RpZmllZCI6ICIxNTY4NzAyNjg3IiwKICAiZGVzY3JpcHRpb24iOiAiVGVzdGluZyByZXBv
+          c2l0b3J5IGZvciBweXRob24tb2dyIHBhY2thZ2UuIiwKICAiZnVsbG5hbWUiOiAiZm9ya3MvbGFj
+          aG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJpZCI6IDY3NDAsCiAgIm1pbGVzdG9uZXMiOiB7
+          fSwKICAibmFtZSI6ICJvZ3ItdGVzdHMiLAogICJuYW1lc3BhY2UiOiBudWxsLAogICJwYXJlbnQi
+          OiB7CiAgICAiYWNjZXNzX2dyb3VwcyI6IHsKICAgICAgImFkbWluIjogW10sCiAgICAgICJjb21t
+          aXQiOiBbXSwKICAgICAgInRpY2tldCI6IFtdCiAgICB9LAogICAgImFjY2Vzc191c2VycyI6IHsK
+          ICAgICAgImFkbWluIjogWwogICAgICAgICJ0dG9tZWNlayIsCiAgICAgICAgImpwb3BlbGthIiwK
+          ICAgICAgICAicGhyYWNlayIsCiAgICAgICAgImpzY290a2EiLAogICAgICAgICJkaG9kb3ZzayIs
+          CiAgICAgICAgInJwaXRvbmFrIiwKICAgICAgICAibGJhcmN6aW8iCiAgICAgIF0sCiAgICAgICJj
+          b21taXQiOiBbXSwKICAgICAgIm93bmVyIjogWwogICAgICAgICJsYWNobWFuZnJhbnRpc2VrIgog
+          ICAgICBdLAogICAgICAidGlja2V0IjogW10KICAgIH0sCiAgICAiY2xvc2Vfc3RhdHVzIjogW10s
+          CiAgICAiY3VzdG9tX2tleXMiOiBbXSwKICAgICJkYXRlX2NyZWF0ZWQiOiAiMTU2MzQ1MTY5NCIs
+          CiAgICAiZGF0ZV9tb2RpZmllZCI6ICIxNTY4MDE3MzEyIiwKICAgICJkZXNjcmlwdGlvbiI6ICJU
+          ZXN0aW5nIHJlcG9zaXRvcnkgZm9yIHB5dGhvbi1vZ3IgcGFja2FnZS4iLAogICAgImZ1bGxuYW1l
+          IjogIm9nci10ZXN0cyIsCiAgICAiaWQiOiA2NDg5LAogICAgIm1pbGVzdG9uZXMiOiB7fSwKICAg
+          ICJuYW1lIjogIm9nci10ZXN0cyIsCiAgICAibmFtZXNwYWNlIjogbnVsbCwKICAgICJwYXJlbnQi
+          OiBudWxsLAogICAgInByaW9yaXRpZXMiOiB7fSwKICAgICJ0YWdzIjogW10sCiAgICAidXJsX3Bh
+          dGgiOiAib2dyLXRlc3RzIiwKICAgICJ1c2VyIjogewogICAgICAiZnVsbG5hbWUiOiAiRnJhbnRp
+          XHUwMTYxZWsgTGFjaG1hbiIsCiAgICAgICJuYW1lIjogImxhY2htYW5mcmFudGlzZWsiCiAgICB9
+          CiAgfSwKICAicHJpb3JpdGllcyI6IHt9LAogICJ0YWdzIjogW10sCiAgInVybF9wYXRoIjogImZv
+          cmsvbGFjaG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJ1c2VyIjogewogICAgImZ1bGxuYW1l
+          IjogIkZyYW50aVx1MDE2MWVrIExhY2htYW4iLAogICAgIm5hbWUiOiAibGFjaG1hbmZyYW50aXNl
+          ayIKICB9Cn0=
+        json:
+          access_groups:
+            admin: []
+            commit: []
+            ticket: []
+          access_users:
+            admin: []
+            commit: []
+            owner:
+            - lachmanfrantisek
+            ticket: []
+          close_status: []
+          custom_keys: []
+          date_created: '1568702687'
+          date_modified: '1568702687'
+          description: Testing repository for python-ogr package.
+          fullname: forks/lachmanfrantisek/ogr-tests
+          id: 6740
+          milestones: {}
+          name: ogr-tests
+          namespace: null
+          parent:
+            access_groups:
+              admin: []
+              commit: []
+              ticket: []
+            access_users:
+              admin:
+              - ttomecek
+              - jpopelka
+              - phracek
+              - jscotka
+              - dhodovsk
+              - rpitonak
+              - lbarczio
+              commit: []
+              owner:
+              - lachmanfrantisek
+              ticket: []
+            close_status: []
+            custom_keys: []
+            date_created: '1563451694'
+            date_modified: '1568017312'
+            description: Testing repository for python-ogr package.
+            fullname: ogr-tests
+            id: 6489
+            milestones: {}
+            name: ogr-tests
+            namespace: null
+            parent: null
+            priorities: {}
+            tags: []
+            url_path: ogr-tests
+            user:
+              fullname: "Franti\u0161ek Lachman"
+              name: lachmanfrantisek
+          priorities: {}
+          tags: []
+          url_path: fork/lachmanfrantisek/ogr-tests
+          user:
+            fullname: "Franti\u0161ek Lachman"
+            name: lachmanfrantisek
+        ok: true
+        reason: OK
+        status_code: 200
+      - content: !!binary |
+          ewogICJhY2Nlc3NfZ3JvdXBzIjogewogICAgImFkbWluIjogW10sCiAgICAiY29tbWl0IjogW10s
+          CiAgICAidGlja2V0IjogW10KICB9LAogICJhY2Nlc3NfdXNlcnMiOiB7CiAgICAiYWRtaW4iOiBb
+          XSwKICAgICJjb21taXQiOiBbXSwKICAgICJvd25lciI6IFsKICAgICAgImxhY2htYW5mcmFudGlz
+          ZWsiCiAgICBdLAogICAgInRpY2tldCI6IFtdCiAgfSwKICAiY2xvc2Vfc3RhdHVzIjogW10sCiAg
+          ImN1c3RvbV9rZXlzIjogW10sCiAgImRhdGVfY3JlYXRlZCI6ICIxNTY4NzAyNjg3IiwKICAiZGF0
+          ZV9tb2RpZmllZCI6ICIxNTY4NzAyNjg3IiwKICAiZGVzY3JpcHRpb24iOiAiVGVzdGluZyByZXBv
+          c2l0b3J5IGZvciBweXRob24tb2dyIHBhY2thZ2UuIiwKICAiZnVsbG5hbWUiOiAiZm9ya3MvbGFj
+          aG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJpZCI6IDY3NDAsCiAgIm1pbGVzdG9uZXMiOiB7
+          fSwKICAibmFtZSI6ICJvZ3ItdGVzdHMiLAogICJuYW1lc3BhY2UiOiBudWxsLAogICJwYXJlbnQi
+          OiB7CiAgICAiYWNjZXNzX2dyb3VwcyI6IHsKICAgICAgImFkbWluIjogW10sCiAgICAgICJjb21t
+          aXQiOiBbXSwKICAgICAgInRpY2tldCI6IFtdCiAgICB9LAogICAgImFjY2Vzc191c2VycyI6IHsK
+          ICAgICAgImFkbWluIjogWwogICAgICAgICJ0dG9tZWNlayIsCiAgICAgICAgImpwb3BlbGthIiwK
+          ICAgICAgICAicGhyYWNlayIsCiAgICAgICAgImpzY290a2EiLAogICAgICAgICJkaG9kb3ZzayIs
+          CiAgICAgICAgInJwaXRvbmFrIiwKICAgICAgICAibGJhcmN6aW8iCiAgICAgIF0sCiAgICAgICJj
+          b21taXQiOiBbXSwKICAgICAgIm93bmVyIjogWwogICAgICAgICJsYWNobWFuZnJhbnRpc2VrIgog
+          ICAgICBdLAogICAgICAidGlja2V0IjogW10KICAgIH0sCiAgICAiY2xvc2Vfc3RhdHVzIjogW10s
+          CiAgICAiY3VzdG9tX2tleXMiOiBbXSwKICAgICJkYXRlX2NyZWF0ZWQiOiAiMTU2MzQ1MTY5NCIs
+          CiAgICAiZGF0ZV9tb2RpZmllZCI6ICIxNTY4MDE3MzEyIiwKICAgICJkZXNjcmlwdGlvbiI6ICJU
+          ZXN0aW5nIHJlcG9zaXRvcnkgZm9yIHB5dGhvbi1vZ3IgcGFja2FnZS4iLAogICAgImZ1bGxuYW1l
+          IjogIm9nci10ZXN0cyIsCiAgICAiaWQiOiA2NDg5LAogICAgIm1pbGVzdG9uZXMiOiB7fSwKICAg
+          ICJuYW1lIjogIm9nci10ZXN0cyIsCiAgICAibmFtZXNwYWNlIjogbnVsbCwKICAgICJwYXJlbnQi
+          OiBudWxsLAogICAgInByaW9yaXRpZXMiOiB7fSwKICAgICJ0YWdzIjogW10sCiAgICAidXJsX3Bh
+          dGgiOiAib2dyLXRlc3RzIiwKICAgICJ1c2VyIjogewogICAgICAiZnVsbG5hbWUiOiAiRnJhbnRp
+          XHUwMTYxZWsgTGFjaG1hbiIsCiAgICAgICJuYW1lIjogImxhY2htYW5mcmFudGlzZWsiCiAgICB9
+          CiAgfSwKICAicHJpb3JpdGllcyI6IHt9LAogICJ0YWdzIjogW10sCiAgInVybF9wYXRoIjogImZv
+          cmsvbGFjaG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJ1c2VyIjogewogICAgImZ1bGxuYW1l
+          IjogIkZyYW50aVx1MDE2MWVrIExhY2htYW4iLAogICAgIm5hbWUiOiAibGFjaG1hbmZyYW50aXNl
+          ayIKICB9Cn0=
+        json:
+          access_groups:
+            admin: []
+            commit: []
+            ticket: []
+          access_users:
+            admin: []
+            commit: []
+            owner:
+            - lachmanfrantisek
+            ticket: []
+          close_status: []
+          custom_keys: []
+          date_created: '1568702687'
+          date_modified: '1568702687'
+          description: Testing repository for python-ogr package.
+          fullname: forks/lachmanfrantisek/ogr-tests
+          id: 6740
+          milestones: {}
+          name: ogr-tests
+          namespace: null
+          parent:
+            access_groups:
+              admin: []
+              commit: []
+              ticket: []
+            access_users:
+              admin:
+              - ttomecek
+              - jpopelka
+              - phracek
+              - jscotka
+              - dhodovsk
+              - rpitonak
+              - lbarczio
+              commit: []
+              owner:
+              - lachmanfrantisek
+              ticket: []
+            close_status: []
+            custom_keys: []
+            date_created: '1563451694'
+            date_modified: '1568017312'
+            description: Testing repository for python-ogr package.
+            fullname: ogr-tests
+            id: 6489
+            milestones: {}
+            name: ogr-tests
+            namespace: null
+            parent: null
+            priorities: {}
+            tags: []
+            url_path: ogr-tests
+            user:
+              fullname: "Franti\u0161ek Lachman"
+              name: lachmanfrantisek
+          priorities: {}
+          tags: []
+          url_path: fork/lachmanfrantisek/ogr-tests
+          user:
+            fullname: "Franti\u0161ek Lachman"
+            name: lachmanfrantisek
+        ok: true
+        reason: OK
+        status_code: 200
+      - content: !!binary |
+          ewogICJhY2Nlc3NfZ3JvdXBzIjogewogICAgImFkbWluIjogW10sCiAgICAiY29tbWl0IjogW10s
+          CiAgICAidGlja2V0IjogW10KICB9LAogICJhY2Nlc3NfdXNlcnMiOiB7CiAgICAiYWRtaW4iOiBb
+          XSwKICAgICJjb21taXQiOiBbXSwKICAgICJvd25lciI6IFsKICAgICAgImxhY2htYW5mcmFudGlz
+          ZWsiCiAgICBdLAogICAgInRpY2tldCI6IFtdCiAgfSwKICAiY2xvc2Vfc3RhdHVzIjogW10sCiAg
+          ImN1c3RvbV9rZXlzIjogW10sCiAgImRhdGVfY3JlYXRlZCI6ICIxNTY4NzAyNjg3IiwKICAiZGF0
+          ZV9tb2RpZmllZCI6ICIxNTY4NzAyNjg3IiwKICAiZGVzY3JpcHRpb24iOiAiVGVzdGluZyByZXBv
+          c2l0b3J5IGZvciBweXRob24tb2dyIHBhY2thZ2UuIiwKICAiZnVsbG5hbWUiOiAiZm9ya3MvbGFj
+          aG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJpZCI6IDY3NDAsCiAgIm1pbGVzdG9uZXMiOiB7
+          fSwKICAibmFtZSI6ICJvZ3ItdGVzdHMiLAogICJuYW1lc3BhY2UiOiBudWxsLAogICJwYXJlbnQi
+          OiB7CiAgICAiYWNjZXNzX2dyb3VwcyI6IHsKICAgICAgImFkbWluIjogW10sCiAgICAgICJjb21t
+          aXQiOiBbXSwKICAgICAgInRpY2tldCI6IFtdCiAgICB9LAogICAgImFjY2Vzc191c2VycyI6IHsK
+          ICAgICAgImFkbWluIjogWwogICAgICAgICJ0dG9tZWNlayIsCiAgICAgICAgImpwb3BlbGthIiwK
+          ICAgICAgICAicGhyYWNlayIsCiAgICAgICAgImpzY290a2EiLAogICAgICAgICJkaG9kb3ZzayIs
+          CiAgICAgICAgInJwaXRvbmFrIiwKICAgICAgICAibGJhcmN6aW8iCiAgICAgIF0sCiAgICAgICJj
+          b21taXQiOiBbXSwKICAgICAgIm93bmVyIjogWwogICAgICAgICJsYWNobWFuZnJhbnRpc2VrIgog
+          ICAgICBdLAogICAgICAidGlja2V0IjogW10KICAgIH0sCiAgICAiY2xvc2Vfc3RhdHVzIjogW10s
+          CiAgICAiY3VzdG9tX2tleXMiOiBbXSwKICAgICJkYXRlX2NyZWF0ZWQiOiAiMTU2MzQ1MTY5NCIs
+          CiAgICAiZGF0ZV9tb2RpZmllZCI6ICIxNTY4MDE3MzEyIiwKICAgICJkZXNjcmlwdGlvbiI6ICJU
+          ZXN0aW5nIHJlcG9zaXRvcnkgZm9yIHB5dGhvbi1vZ3IgcGFja2FnZS4iLAogICAgImZ1bGxuYW1l
+          IjogIm9nci10ZXN0cyIsCiAgICAiaWQiOiA2NDg5LAogICAgIm1pbGVzdG9uZXMiOiB7fSwKICAg
+          ICJuYW1lIjogIm9nci10ZXN0cyIsCiAgICAibmFtZXNwYWNlIjogbnVsbCwKICAgICJwYXJlbnQi
+          OiBudWxsLAogICAgInByaW9yaXRpZXMiOiB7fSwKICAgICJ0YWdzIjogW10sCiAgICAidXJsX3Bh
+          dGgiOiAib2dyLXRlc3RzIiwKICAgICJ1c2VyIjogewogICAgICAiZnVsbG5hbWUiOiAiRnJhbnRp
+          XHUwMTYxZWsgTGFjaG1hbiIsCiAgICAgICJuYW1lIjogImxhY2htYW5mcmFudGlzZWsiCiAgICB9
+          CiAgfSwKICAicHJpb3JpdGllcyI6IHt9LAogICJ0YWdzIjogW10sCiAgInVybF9wYXRoIjogImZv
+          cmsvbGFjaG1hbmZyYW50aXNlay9vZ3ItdGVzdHMiLAogICJ1c2VyIjogewogICAgImZ1bGxuYW1l
+          IjogIkZyYW50aVx1MDE2MWVrIExhY2htYW4iLAogICAgIm5hbWUiOiAibGFjaG1hbmZyYW50aXNl
+          ayIKICB9Cn0=
+        json:
+          access_groups:
+            admin: []
+            commit: []
+            ticket: []
+          access_users:
+            admin: []
+            commit: []
+            owner:
+            - lachmanfrantisek
+            ticket: []
+          close_status: []
+          custom_keys: []
+          date_created: '1568702687'
+          date_modified: '1568702687'
+          description: Testing repository for python-ogr package.
+          fullname: forks/lachmanfrantisek/ogr-tests
+          id: 6740
+          milestones: {}
+          name: ogr-tests
+          namespace: null
+          parent:
+            access_groups:
+              admin: []
+              commit: []
+              ticket: []
+            access_users:
+              admin:
+              - ttomecek
+              - jpopelka
+              - phracek
+              - jscotka
+              - dhodovsk
+              - rpitonak
+              - lbarczio
+              commit: []
+              owner:
+              - lachmanfrantisek
+              ticket: []
+            close_status: []
+            custom_keys: []
+            date_created: '1563451694'
+            date_modified: '1568017312'
+            description: Testing repository for python-ogr package.
+            fullname: ogr-tests
+            id: 6489
+            milestones: {}
+            name: ogr-tests
+            namespace: null
+            parent: null
+            priorities: {}
+            tags: []
+            url_path: ogr-tests
+            user:
+              fullname: "Franti\u0161ek Lachman"
+              name: lachmanfrantisek
+          priorities: {}
+          tags: []
+          url_path: fork/lachmanfrantisek/ogr-tests
+          user:
+            fullname: "Franti\u0161ek Lachman"
+            name: lachmanfrantisek
+        ok: true
+        reason: OK
+        status_code: 200
+POST:
+  https://pagure.io/api/0/-/whoami:
+    empty:
+      empty:
+      - content: !!binary |
+          ewogICJ1c2VybmFtZSI6ICJsYWNobWFuZnJhbnRpc2VrIgp9
+        json:
+          username: lachmanfrantisek
+        ok: true
+        reason: OK
+        status_code: 200
