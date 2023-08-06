@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "primer3plus"
+version = "1.0.0a"
+description = "An easy-to-use Python API for Primer3 primer design."
+authors = ["Justin Vrana <justin.vrana@gmail.com>"]
+homepage = "https://github.com/jvrana/primer3-py-plus"
+documentation = "https://jvrana.github.io/primer3-py-plus/"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+primer3-py = "^0.6.0"
+loggable-jdv = "^0.1.2"
+biopython = "^1.74"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.0"
+black = {version = "^18.3-alpha.0", allows-prereleases = true}
+pre-commit = "^1.18"
+keats = "^0.2.26"
+pytest-benchmark = "^3.2"
+flake8 = "^3.7"
+docformatter = "^1.3"
+sphinx = "^2.2"
+sphinx_autodoc_typehints = "^1.8"
+recommonmark = "^0.6.0"
+
+[tool.black]
+line-length = 88
+target-version = ['py36', 'py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  # The following are specific to Black, you probably don't want those.
+  | blib2to3
+  | tests/data
+  | profiling
+)/
+'''
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
