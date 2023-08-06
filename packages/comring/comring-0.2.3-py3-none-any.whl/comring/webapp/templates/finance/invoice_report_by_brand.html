@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% block title %}Invoice Report Per Brand{% endblock %}
+{% endblock %}
+
+{% block custom_head %}
+<link href="{{ url_for('static', filename='vendor/datatables/datatables.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block custom_scripts %}
+<script src="{{ url_for('static', filename='vendor/datatables/datatables.min.js') }}"></script>
+<script language="javascript">
+    // Call the dataTables jQuery plugin
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "language": {
+                "decimal": ",",
+                "thousands": "."
+            },
+            "dom": "Bfrtip",
+            "buttons": [
+                "copy", "csv", "excelHtml5"
+            ]
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+          <p>Di sini anda dapat menghitung nilai invoice dipecah per brand</p>
+
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Input</h6>
+                  </div>
+                  <div class="card-body">
+                    <form method="post">
+                      <div class="form-group">
+                        <label for="invoiceNumbers">Invoice numbers</label>
+                        <textarea class="form-control" id="invoiceNumbers" name="invoices" rows="5" placeholder="Invoice numbers separated by comma, space, or new line"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          {% if result %}
+          <div class="row">
+            <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Result</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-sm table-bordered thead-dark" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>Invoice Date</th>
+                            <th>Partner Name</th>
+                            <th>Partner ID</th>
+                            <th>Number</th>
+                            <th>Brand</th>
+                            <th>Gross Sales</th>
+                            <th>Promo Discount</th>
+                            <th>Margin Discount</th>
+                            <th>Cash Discount</th>
+                            <th>Distribution Fee Discount</th>
+                            <th>Tax</th>
+                            <th>Total Amount</th>
+                            <th>GT Price</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for inv in result %}
+                            {% for brand in result[inv] %}
+                          <tr>
+                            <td>{{ result[inv][brand]['Invoice Date'] }}</td>
+                            <td>{{ result[inv][brand]['Partner Name'] }}</td>
+                            <td>{{ result[inv][brand]['Partner ID'] }}</td>
+                            <td>{{ result[inv][brand]['Number'] }}</td>
+                            <td>{{ result[inv][brand]['Brand'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Gross Sales'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Promo Discount'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Margin Discount'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Cash Discount'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Distribution Fee Discount'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Tax'] }}</td>
+                            <td align="right">{{ result[inv][brand]['Total Amount'] }}</td>
+                            <td align="right">{{ result[inv][brand]['GT Price'] }}</td>
+                          </tr>
+                            {% endfor %}
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            <div>
+
+          </div>
+          {% endif %}
+
+
+{% endblock %}
