@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: python-configuration
+Version: 0.4.0
+Summary: A library to load configuration parameters from multiple sources and formats
+Home-page: https://github.com/tr11/python-configuration
+Author: Tiago Requeijo
+Author-email: tiago.requeijo.dev@gmail.com
+Keywords: configuration,settings,json,yaml,toml,ini
+Requires-Python: >=3.6,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Provides-Extra: toml
+Provides-Extra: yaml
+Requires-Dist: pyyaml (>=5.1,<6.0); extra == "yaml"
+Requires-Dist: toml (>=0.10.0,<0.11.0); extra == "toml"
+Project-URL: Repository, https://github.com/tr11/python-configuration
