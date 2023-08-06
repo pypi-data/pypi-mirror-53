@@ -1,0 +1,66 @@
+Metadata-Version: 2.1
+Name: textx-gen-vscode
+Version: 0.1.1
+Summary: a VS Code extension generator
+Home-page: https://github.com/danixeee/textx-gen-vscode
+Author: Daniel Elero
+Author-email: danixeee@gmail.com
+License: MIT
+Keywords: textX DSL python domain specific languages VS Code
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: jinja2 (>=2)
+Requires-Dist: textx (>=2)
+Requires-Dist: textx-gen-coloring (>=0.1.1)
+Provides-Extra: ci
+Requires-Dist: bandit ; extra == 'ci'
+Requires-Dist: pytest ; extra == 'ci'
+Requires-Dist: pytest-cov ; extra == 'ci'
+Requires-Dist: pytest-azurepipelines ; extra == 'ci'
+Requires-Dist: black ; extra == 'ci'
+Provides-Extra: dev
+Requires-Dist: bandit (==1.5.1) ; extra == 'dev'
+Requires-Dist: black ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage (==4.5.3) ; extra == 'test'
+Requires-Dist: pytest (==4.3.1) ; extra == 'test'
+Requires-Dist: pytest-cov (==2.6.1) ; extra == 'test'
+
+# VS Code Extension Generator for textX Languages
+
+A _textX_ generator which outputs simple, installable _VS Code_ extension from a registered _textX_ language project.
+
+It is used primary by [textX-LS](https://github.com/textX/textX-LS) project when generating and installing _textX_ languages.
+
+## CLI Examples
+
+Generate a _VS Code_ extension for `tx_workflow` project packaged in archive:
+
+```bash
+textx generate examples/workflow/tx_workflow/workflow.tx -o . --target=vscode --project_name tx-workflow
+```
+
+Generate a _VS Code_ extension for `tx_workflow` project packaged in installable _vsix_ format:
+
+```bash
+textx generate examples/workflow/tx_workflow/workflow.tx -o . --target=vscode --project_name tx-workflow --vsix True
+```
+
+## Other Notes
+
+- textX language project should be registrated in order generator to find it by passed _project name_
+- path to the grammar (`examples/workflow/tx_workflow/workflow.tx`) is not used for now, but idea is to be able to create project from it
+
+
