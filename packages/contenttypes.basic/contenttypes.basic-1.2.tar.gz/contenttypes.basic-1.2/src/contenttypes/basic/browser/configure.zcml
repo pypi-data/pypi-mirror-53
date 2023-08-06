@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="contenttypes.basic">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="contenttypes.basic.interfaces.IContenttypesBasicLayer"
+      />
+
+  <!-- Publish static files -->
+  <plone:static
+      name="contenttypes.basic"
+      type="plone"
+      directory="static"
+      />
+
+  <!-- Sprite -->
+  <browser:page
+      for="*"
+      name="sprite-icons"
+      class=".sprite.SpriteView"
+      template="sprite.pt"
+      permission="zope.Public"
+  />
+
+</configure>
