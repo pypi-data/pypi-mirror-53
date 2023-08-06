@@ -1,0 +1,44 @@
+# PDBX_MMCIF HISTORY
+
+ 1-Aug-2017  - Initial Git Migration
+15-Jan-2018  - Python packaging overhaul
+ 4-Apr-2018  - V012 - remove some deprecated code and a few api extensions
+26-Jun-2018  - V013 - add missing method code accessors
+ 9-Jul-2018  - V014 - preliminary Py37 support, add coverage and code style tests
+26-Jul-2018  - V015 - further changes to support Py2/Py3 compatibility in dictionar API module
+ 6-Aug-2018  - V016 - Add methods to set and get generic properties on base containers.
+ 8-Aug-2018  - V017 - Add support for Ubuntu  16.04.5 & GCC 5.4
+10-Aug-2018  - V018 - Detect uncompress gz, bz2, xz and zip input files
+25-Aug-2018  - V019 - Record the compressed file names and fix tox coverage test runner
+ 9-Sep-2018  - V020 - Adjust return types for failing Container and DataCategory methods
+                      Add implicit method execution priority based method order in category method_list.
+ 4-Oct-2018  - V021 - Add optional method parameter returnCount=0 to selectValueListWhere()
+12-Oct-2018  - V022 - Update language binding code
+19-Oct-2018  - V023 - Add dictionary definition Markdown rendering example
+29-Oct-2018  - V024 - Add support for legacy CifFile() API
+11-Nov-2018  - V025 - Update DataCategory/DataCategoryBase with more consistent handling of raiseExceptions flag,
+                      and harmonize selection of temporary and log file paths.
+27-Nov-2018  - V026 - Adjust exception handling in IoCoreAdapter().
+29-Nov-2018. - V027 - Add explicit option to better control read encoding errors separate from ascii encoding errors.
+ 7-Dec-2018    V028 - Add constructor parameter replaceDefinition=False to allow replacing
+                      defintions during consolidation
+27-Jan-2019    V029 - Add row dictionary initialization, append, and extend methods
+28-Jan-2019    V030 - Relax attribute coverage requirements on dictionary initialization
+ 2-Feb-2019    V031 - Adjust formatting removing spurious comments and newlines and API method getFullDecendentList()
+ 5-Feb-2019    V032 - Add container merge method.
+ 7-Feb-2019    V033 - Adjust initialization error checking to allow empty list
+12-Feb-2019    V034 - Back off some reformatting from V32.
+11-Mar-2019    V035 - Add method getAttributeUniqueValueList().
+12-Apr-2019    V036 - Add dictionary api methods getItemSubCategoryLabelList() and  getItemSubCategoryList()
+ 5-May-2019    V037 - Add selectValuesWhereConditions() and countValuesWhereConditions()
+26-May-2019    V038 - Extend method API to support DDL 2.2.1 extensions
+ 5-Jun-2019    V039 - Incorporate DictMethodRunner class change test naming conventions
+28-Jun-2019    V040 - Update development workflows and cleanup
+22-Jul-2019    V041 - Update arguments in DictMethodRunner()
+28-Jul-2019    V042 - Suppress sorting of attribute and category order in DictionaryApi()
+ 7-Aug-2019    V043 - Suppress raising exceptions for getValueOrDefault() methods.
+13-Aug-2019    V044 - Add placeholder test method for DictionaryApi().
+16-Aug-2019    V045 - Improve handling of dictionary and dictionary history categories for concatenated dictionaries.
+28-Aug-2019    V046 - Add unique identifier properties to each container
+ 7-Oct-2019    V047 - Adjust error handling in IoAdapterCore()
+ 7-Oct-2019    V048 - Exclude setup.py to avoid odd pylint crash.
