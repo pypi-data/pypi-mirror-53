@@ -1,0 +1,61 @@
+Metadata-Version: 2.0
+Name: ingaia-libs
+Version: 0.0.45
+Summary: inGaia Python Utility Library
+Home-page: http://gitlab.ingaia.com.br/operacoes/libs/ingaia-libs
+Author: inGaia Operations
+Author-email: suporte.operacoes@i-value.com.br
+License: MIT
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: google-cloud-firestore
+Requires-Dist: google-cloud-datastore
+Requires-Dist: google-cloud-tasks
+Requires-Dist: google-cloud-storage
+Requires-Dist: google-cloud-bigquery
+Requires-Dist: flask
+Requires-Dist: google-cloud-scheduler
+Requires-Dist: werkzeug
+Requires-Dist: decorator
+Requires-Dist: requests
+Requires-Dist: pyjwt
+Requires-Dist: six
+Requires-Dist: cryptography
+Requires-Dist: PyYAML
+Requires-Dist: m2r
+
+
+inGaia Python Utility Library
+=============================
+
+How to use
+----------
+
+``pip install ingaia-libs==0.0.45``
+
+How to deploy to pypi.org???
+----------------------------
+
+
+#. First: you need to install two python libraries: **bumpversion** and **twine**. 
+#. Second: execute the file ``deploy`` and put the pypi.org username and password 
+
+..
+
+   See "\ `Operations Team Secret Resources <https://i-value.atlassian.net/wiki/spaces/IO/pages/350879767/Operations+Team+Secret+Resources>`_\ " to get pypi login info
+
+
+Libraries
+---------
+
+See the Readme file in subdirectories to know these libraries:
+
+
+* Google Cloud Utils
+* Request Logger 
+
+
