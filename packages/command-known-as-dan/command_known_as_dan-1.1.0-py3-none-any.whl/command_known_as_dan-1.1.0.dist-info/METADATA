@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: command-known-as-dan
+Version: 1.1.0
+Summary: Command is a simple framework for handling command execution within your python application.
+Home-page: https://github.com/known-as-dan/command-pypi
+Author: known-as-dan
+Author-email: dan@gotoindex.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# About
+Command is a simple framework for handling command execution within your Python application.  
+
+**Note:** This is a **Javascript => Python** port of https://github.com/known-as-dan/command-npm
+
+# Usage
+Recreating the common "echo" command using Command & Python:
+```python
+from command import command
+
+def echo(args):
+	separator = " "
+	message = separator.join(args)
+	print(message)
+
+command.Command("echo", "<message>", "Prints out a message.", echo)
+
+command.init()
+```
+
+
