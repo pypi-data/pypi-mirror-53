@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: Flask-Annex
+Version: 0.5.0
+Summary: Efficient integration of external storage services for Flask
+Home-page: https://github.com/4Catalyzer/flask-annex
+Author: Jimmy Jia
+Author-email: tesrin@gmail.com
+License: MIT
+Description: # Flask-Annex [![Travis][build-badge]][build] [![PyPI][pypi-badge]][pypi]
+        Efficient integration of external storage services for
+        [Flask](http://flask.pocoo.org/).
+        
+        Run `pip install -e .[s3,tests]` to install for development and with `S3` support
+        
+        [![Codecov][codecov-badge]][codecov]
+        
+        [build-badge]: https://img.shields.io/travis/4Catalyzer/flask-annex/master.svg
+        [build]: https://travis-ci.org/4Catalyzer/flask-annex
+        
+        [pypi-badge]: https://img.shields.io/pypi/v/Flask-Annex.svg
+        [pypi]: https://pypi.python.org/pypi/Flask-Annex
+        
+        [codecov-badge]: https://img.shields.io/codecov/c/github/4Catalyzer/flask-annex/master.svg
+        [codecov]: https://codecov.io/gh/4Catalyzer/flask-annex
+        
+Keywords: storage s3 flask
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Framework :: Flask
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Provides-Extra: s3
+Provides-Extra: lint
+Provides-Extra: tests
+Provides-Extra: tests-s3
