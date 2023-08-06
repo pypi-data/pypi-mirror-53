@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: sotabenchapi
+Version: 0.0.15
+Summary: Easily benchmark Machine Learning models on selected tasks and datasets.
+Home-page: https://sotabench.com
+Author: Robert Stojnic
+Author-email: hello@sotabench.com
+Maintainer: Robert Stojnic
+Maintainer-email: hello@sotabench.com
+License: Apache-2.0
+Platform: Windows
+Platform: POSIX
+Platform: MacOSX
+Description-Content-Type: text/markdown
+Requires-Dist: click (==7.0)
+Requires-Dist: requests (==2.22.0)
+Requires-Dist: tabulate (==0.8.3)
+
+# sotabench-api
+
+Easily benchmark machine learning models on selected tasks and datasets.
+
+This is a core package with common functions and APIs to interact with the
+[sotabench](https://sotabench.com) website. 
+
+For benchmarks, see the
+[torchbench](https://github.com/paperswithcode/torchbench) repository with
+PyTorch benchmarks (more frameworks to come soon).
+
+
