@@ -1,0 +1,34 @@
+tasks:
+  maintenance-mode:
+    description: Switch application to maintenance mode
+    commands:
+      - description: Scale down all deploymentconfigs
+        args: ["scale", "dc", "--all", "--replicas=0"]
+
+  operational-mode:
+    description: Switch application to operational mode
+    commands:
+      - description: Scale up all deploymentconfigs
+        args: ["scale", "dc", "--all", "--replicas=1"]
+
+  status:
+    description: Return status of the application
+    commands:
+      - description: Print info about Build Configs
+        args: ["get", "bc", "-o", "custom-columns=BUILDCONFIG:.metadata.name,SOURCE BRANCH:.spec.source.git.ref,OUTPUT IMAGESTREAM:.spec.output.to.name"]
+      - description: Print info about Image Streams
+        args: ["get", "is", "-o", "custom-columns=IMAGESTREAM:.metadata.name,TAGS:.status.tags[*].tag"]
+      - description: Print info about Deployment Configs
+        args: ["get", "dc", "-o", "custom-columns=DEPLOYMENTCONFIG:.metadata.name,PODS:.status.replicas,IMAGESTREAM:.spec.triggers[*].imageChangeParams.from.name"]
+
+  single-component-status:
+    parameters:
+      - component
+    description: Return status for single component
+    commands:
+      - description: Print info about Build Configs
+        args: ["get", "bc", "{{ component }}", "-o", "custom-columns=BUILDCONFIG:.metadata.name,SOURCE BRANCH:.spec.source.git.ref,OUTPUT IMAGESTREAM:.spec.output.to.name"]
+      - description: Print info about Image Streams
+        args: ["get", "is", "{{ component }}", "-o", "custom-columns=IMAGESTREAM:.metadata.name,TAGS:.status.tags[*].tag"]
+      - description: Print info about Deployment Configs
+        args: ["get", "dc", "{{ component }}", "-o", "custom-columns=DEPLOYMENTCONFIG:.metadata.name,PODS:.status.replicas,IMAGESTREAM:.spec.triggers[*].imageChangeParams.from.name"]
