@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: create_package
+Version: 1.0.2
+Summary: A package that makes it easy to create Pypi packages
+Home-page: https://github.com/raguiar2/create-python-package
+Author: Rui Aguiar
+Author-email: raguiar1000@gmail.com
+License: UNKNOWN
+Description: # create_package
+        
+        create_package is a python package that allows you to easily create and publish other python packages. The package sets up a python project with a name of your choosing, as well as an already populated README, setup.py and MIT liscense, saving you the boilerplate of having to type these out yourself. It also sets up the project structure of the actual package in a subdirectory.
+        
+        create_package works with Python 3.6+. 
+        
+        ## Usage
+        
+        To install:
+        `pip install create_package`
+        
+        Creating a package:
+        `python -m create_package`
+        
+        Enter the name of the package when prompted, and create_package will take care of the rest. You should see a directory with your Pypi package skeleton once the script has completed. 
+        
+        ## Contributing
+        
+        Submit a pull request to https://github.com/raguiar2/create-python-package
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
