@@ -1,0 +1,7 @@
+image:
+  file: Dockerfile
+
+tasks:
+  - init: ln -s ngs_toolkit/config/example.yaml ~/.ngs_toolkit.config.yaml
+  - command: ipython3
+  - command: sh

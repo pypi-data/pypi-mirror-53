@@ -1,0 +1,63 @@
+on:
+  push:
+    branches:
+    - master
+    - dev
+  schedule:
+    # Run every sunday at 2am
+    - cron: 0 2 * * 0
+
+jobs:
+  test:
+    name: ngs_toolkit - ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: ['3.6', '3.7']
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+    - name: Update pip
+      run: python3 -m pip install --upgrade pip
+    - name: Install bedtools 2.27.1
+      run: |
+        wget http://ftp.br.debian.org/debian/pool/main/b/bedtools/bedtools_2.27.1+dfsg-4_amd64.deb
+        sudo dpkg -i bedtools_2.27.1+dfsg-4_amd64.deb
+    - name: Install R 3.6
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install r-base
+    - name: Install bioconductor libraries
+      run: |
+        sudo apt-get -y install \
+          r-bioc-deseq2 \
+          r-bioc-preprocesscore
+    - name: Install Combat
+      run: |
+        sudo apt-get install python3-setuptools
+        python3 -m pip install --user git+https://github.com/afrendeiro/combat.git
+    - name: Install ngs-toolkit
+      run: python3 -m pip install --user .[testing]
+    - name: Lint with flake8
+      run: |
+        python3 -m pip install --user flake8
+        # stop the build if there are Python syntax errors or undefined names
+        python3 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        python3 -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        python3 -m pytest -n 2 --disable-warnings --show-capture=no --cov ./ --cov-report term --cov-report xml --pyargs ngs_toolkit
+    - name: Report coverage
+      env:
+        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: |
+        python3 -m coverage xml
+        python3 -m codecov -f coverage.xml
+        python3 -m codacy -r coverage.xml
