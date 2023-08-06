@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "name": "bse_table_basis_set",
+    "version": "0.1",
+    "url": "TODO",
+    "description": "JSON for describing how a table-based basis set is composed",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "molssi_bse_schema",
+        "revision_description",
+        "revision_date",
+        "elements"
+    ],
+    "properties":
+    {
+        "molssi_bse_schema": {
+            "description": "Info about which schema the file follows",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "schema_type",
+                "schema_version"
+            ],
+            "properties": {
+                "schema_type" : {
+                    "description": "What type of BSE JSON file this is",
+                    "type": "string",
+                    "enum": [ "table" ]
+                },
+                "schema_version": {
+                    "description": "Version of the BSE table basis set schema being used",
+                    "type": "string"
+                }
+            }
+        },
+        "revision_description": {
+            "description": "Brief description of the difference between this revision and the last",
+            "type": "string"
+        },
+        "revision_date": {
+            "description": "The date when this revision was finalized/uploaded",
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "elements": {
+            "description": "Data for the elements of the basis set",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties":   {
+                "^\\d+$" : {
+                    "description": "Elemental basis data to use for this element",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
