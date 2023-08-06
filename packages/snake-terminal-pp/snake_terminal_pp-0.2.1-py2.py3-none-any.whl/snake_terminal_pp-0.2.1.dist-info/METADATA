@@ -1,0 +1,98 @@
+Metadata-Version: 2.1
+Name: snake-terminal-pp
+Version: 0.2.1
+Summary: A simple snake game on terminal.
+Home-page: https://github.com/lparolari/snake
+Author: Luca Parolari
+Author-email: luca.parolari23@gmail.com
+License: MIT license
+Keywords: snake
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*
+Requires-Dist: Click (>=6.0)
+Requires-Dist: numpy
+Requires-Dist: keyboard
+Requires-Dist: pynput
+Requires-Dist: asciimatics
+
+Snake on Terminal
+=================
+
+.. image:: https://img.shields.io/pypi/v/snake.svg
+.. image:: https://img.shields.io/travis/lparolari/snake.svg
+.. image:: https://readthedocs.org/projects/snake/badge/?version=latest
+
+::
+
+    A simple snake game on terminal with focus on well design, reuse and best practise.
+
+.. image:: snake-1.gif
+.. image:: snake-2.gif
+
+
+Usage
+-----
+
+Play with snake
+
+.. code::
+
+    # run the game with defaults
+    snake
+
+    # or with custom options
+    snake --rows-no 40 --cols-no 80 --speed 5 --initial-length 8
+
+For list of options and documentation run
+
+.. code::
+
+    snake --help  # shows the options list and some docs.
+
+
+Installation
+------------
+
+Install with pip
+
+.. code ::
+
+    pip install XXX
+
+Install with git
+
+.. code ::
+
+    git clone https://github.com/lparolari/snake
+    cd snake
+    python3 setup.py install
+
+
+Author
+------
+
+- Luca Parolari <<luca.parolari23@gmail.com>>
+
+
+License
+-------
+
+This software is MIT Licensed. See [LICENSE](LICENSE) file.
+
+
+=======
+History
+=======
+
+0.1.0 (2019-09-12)
+------------------
+
+* First release on PyPI.
+
+
