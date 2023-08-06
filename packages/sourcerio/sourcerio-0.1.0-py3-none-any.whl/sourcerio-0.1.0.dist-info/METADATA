@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: sourcerio
+Version: 0.1.0
+Summary: Backup tool for Bitbucket Cloud and Github
+Home-page: https://github.com/Devolutions/sourcerio
+Author: Jean-Francois Theroux
+Author-email: jftheroux@devolutions.net
+License: MIT
+Keywords: backup,bitbucket,github
+Platform: any
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: pygithub
+Requires-Dist: requests
+
+# Notarius
+
+Bitbucket Cloud/Github backup tool
+
+## Installation
+
+`pip install sourcerio`
+
+## Usage
+
+~~~
+$ sourcerio -h
+usage: sourcerio [-h] [--bitbucket-user USER] [--bitbucket-password PASSWORD]
+                 -d DIRECTORY [--github-api-token API_KEY] -o ORGANIZATION -t
+                 {bitbucket,github} [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --bitbucket-user USER
+                        Bitbucket user
+  --bitbucket-password PASSWORD
+                        Bitbucket password
+  -d DIRECTORY          Backup directory
+  --github-api-token API_KEY
+                        Github API key
+  -o ORGANIZATION       Bitbucket/Github organization
+  -t {bitbucket,github}
+                        bitbucket/github
+  -v                    verbose output
+~~~
+
+
