@@ -1,0 +1,75 @@
+Metadata-Version: 2.1
+Name: meepo2
+Version: 0.2.5
+Summary: event sourcing for databases.
+Home-page: https://github.com/huskar-org/meepo2
+Author: Lx Yu
+Author-email: i@lxyu.net
+License: MIT
+Description: ======
+        Meepo2
+        ======
+        
+        .. image:: http://img.shields.io/travis/huskar-org/meepo2/master.svg?style=flat
+           :target: https://travis-ci.org/huskar-org/meepo2
+        
+        .. image:: http://img.shields.io/pypi/v/meepo2.svg?style=flat
+           :target: https://pypi.python.org/pypi/meepo2
+        
+        .. image:: http://img.shields.io/pypi/dm/meepo2.svg?style=flat
+           :target: https://pypi.python.org/pypi/meepo2
+        
+        Meepo2 is event sourcing and event broadcasting for databases.
+        
+        Documentation: https://meepo2.readthedocs.org/
+        
+        
+        Installation
+        ============
+        
+        :Requirements: **Python 2.x >= 2.7** or **Python 3.x >= 3.2** or **PyPy**
+        
+        To install the latest released version of Meepo2::
+        
+            $ pip install meepo2
+        
+        
+        Features
+        ========
+        
+        Meepo2 can be used to do lots of things, including replication, eventsourcing,
+        cache refresh/invalidate, real-time analytics etc. The limit is all the tasks
+        should be row-based, since meepo2 only gives ``table_action`` -> ``pk``
+        style events.
+        
+        * Row-based database replication.
+        
+        * Replicate RDBMS to NoSQL and search engine.
+        
+        * Event Sourcing.
+        
+        * Logging and Auditing
+        
+        * Realtime analytics
+        
+        
+        Usage
+        =====
+        
+        Checkout `documentation`_ and `examples/`_.
+        
+        .. _`documentation`: https://meepo2.readthedocs.org/en/latest/
+        .. _`examples/`: https://github.com/huskar-org/meepo2/tree/develop/examples
+        
+Keywords: eventsourcing event sourcing replication cache elasticsearch
+Platform: UNKNOWN
+Classifier: Topic :: Software Development
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Provides-Extra: dev
