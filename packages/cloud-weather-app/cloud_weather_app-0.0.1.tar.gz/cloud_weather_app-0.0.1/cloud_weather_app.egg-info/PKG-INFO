@@ -1,0 +1,111 @@
+Metadata-Version: 2.1
+Name: cloud-weather-app
+Version: 0.0.1
+Summary: Simple Package to connect with weather.com endpoints and get quick info
+Home-page: https://gitlab.com/0xdebug/cloud-weather
+Author: Deepak Natanmai
+License: UNKNOWN
+Description: # Weather Application 
+        
+        A python package to get quick info of weather
+        For more info visit : https://gitlab.com/0xdebug/cloud-weather
+        
+        ## Get Started
+        
+        ### How to Install
+        
+        Use the python package manager [pip](https://pip.pypa.io/en/stable/) to install cloud_weather_app.
+        
+        ```
+        pip install cloud_weather_app
+        ```
+        
+        ### Requirements
+        
+        - python >= 3.6
+        - requests
+        - beautifulsoup4
+        
+        ### Usage
+        
+        ```
+        from cloud_weather_app import cloud_weather
+        
+        # Enter the valid Place Name
+        mumbai = cloud_weather('mumbai')
+        
+        # Choose relevant forecast type and print variable to view outputs
+        daily = mumbai.daily()
+        monthly = mumbai.monthly()
+        hourly = mumbai.hourly()
+        
+        ```
+        
+        ### Sample Output
+        The Ouputs are just indicative and may subject to enhance in future versions
+        
+        - Daily
+        ```
+        Observed at : 2019-10-14 03:03:49
+        Temperature : 22Â°, Feels like : 22Â°, Desc : Thunder
+        ```
+        
+        - Monthly
+        ```
+        --------------------------------------------------------------------------------
+        
+        Date           Temp Day                      Temp Night
+        --------------------------------------------------------------------------------
+        
+        2019-10-15     28Â°  PM T-Storms              21Â°  Scattered T-Storms
+        2019-10-16     27Â°  T-Storms                 20Â°  T-Storms
+        2019-10-17     28Â°  T-Storms                 20Â°  T-Storms
+        2019-10-18     28Â°  PM T-Storms              20Â°  Scattered T-Storms
+        2019-10-19     28Â°  PM T-Storms              20Â°  Scattered T-Storms
+        2019-10-20     28Â°  PM T-Storms              20Â°  T-Storms
+        2019-10-21     27Â°  PM T-Storms              20Â°  T-Storms
+        2019-10-22     27Â°  PM T-Storms              20Â°  T-Storms
+        2019-10-23     27Â°  T-Storms                 20Â°  T-Storms
+        2019-10-24     27Â°  T-Storms                 20Â°  T-Storms
+        2019-10-25     26Â°  T-Storms                 19Â°  Scattered T-Storms
+        2019-10-26     27Â°  PM T-Storms              19Â°  Scattered T-Storms
+        2019-10-27     27Â°  PM T-Storms              19Â°  T-Storms
+        2019-10-28     27Â°  Scattered T-Storms       19Â°  Scattered T-Storms
+        ```
+        
+        - Weekly
+        ```
+        --------------------------------------------------------------------------------
+        
+        Time           Description              Temp           Feels like
+        --------------------------------------------------------------------------------
+        
+        04:00          Cloudy                   22Â°            22Â°
+        05:00          Scattered T-Storms       22Â°            22Â°
+        06:00          Cloudy                   22Â°            22Â°
+        07:00          Mostly Cloudy            21Â°            21Â°
+        08:00          Mostly Cloudy            22Â°            22Â°
+        09:00          Partly Cloudy            23Â°            23Â°
+        10:00          Partly Cloudy            25Â°            25Â°
+        11:30          Partly Cloudy            27Â°            30Â°
+        12:30          Partly Cloudy            28Â°            30Â°
+        13:30          Partly Cloudy            29Â°            30Â°
+        14:30          Partly Cloudy            29Â°            31Â°
+        15:30          Partly Cloudy            29Â°            31Â°
+        16:30          Partly Cloudy            28Â°            30Â°
+        17:30          Partly Cloudy            27Â°            29Â°
+        18:30          Partly Cloudy            26Â°            28Â°
+        ```
+        
+        ### Author
+        Deepak Natanmai [gitlab.com/0xdebug](https://gitlab.com/0xdebug)
+Keywords: Weather api crawling scraping
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
