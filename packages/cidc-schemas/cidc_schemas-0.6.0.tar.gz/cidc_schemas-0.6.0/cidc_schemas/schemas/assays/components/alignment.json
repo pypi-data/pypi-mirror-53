@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "alignment",
+  "title": "WES output align files",
+  "type": "object",
+  "description": "WES output align files.",
+  "properties": {
+    "align_sorted": {
+      "$ref": "artifacts/artifact_bam.json"
+    },
+    "align_sorted_dedup": {
+      "$ref": "artifacts/artifact_bam.json"
+    },
+    "align_recalibrated": {
+      "$ref": "artifacts/artifact_bam.json"
+    }
+  },
+  "required": [
+    "align_sorted",
+    "align_sorted_dedup",
+    "align_recalibrated"
+  ]
+}

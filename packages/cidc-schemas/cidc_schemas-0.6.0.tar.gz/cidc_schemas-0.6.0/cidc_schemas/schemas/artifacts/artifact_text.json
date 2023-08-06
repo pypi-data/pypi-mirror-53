@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "text_artifact",
+  "title": "Text Artifact",
+  "type": "object",
+  "description": "Information about text files.",
+  "allOf": [
+    {
+      "$ref": "artifacts/artifact_core.json"
+    },
+    {
+      "properties": {
+        "data_format": {
+          "description": "Data format.",
+          "const": "TEXT"
+        }
+      }
+    }
+  ],
+  "mergeStrategy": "objectMerge"
+}
