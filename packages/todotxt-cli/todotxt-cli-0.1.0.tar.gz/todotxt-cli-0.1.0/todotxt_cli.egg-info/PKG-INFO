@@ -1,0 +1,194 @@
+Metadata-Version: 1.1
+Name: todotxt-cli
+Version: 0.1.0
+Summary: manage todolist of todotxt
+Home-page: https://github.com/fraoustin/todotxt-cli.git
+Author: FrÃ©dÃ©ric Aoustin
+Author-email: fraoustin@gmail.com
+License: UNKNOWN
+Description: Todotxt-cli
+        ===========
+        
+        Python cli for manage todolist
+        
+        
+        
+        Installation
+        ------------
+        
+        ::
+        
+            pip install todotxt-cli
+                
+        Or
+        
+        ::
+        
+            git clone https://github.com/fraoustin/todotxt-cli.git
+            cd todotxt-cli
+            python setup.py install
+        
+        You can load test by
+        
+        ::
+        
+            python -m unittest discover -s test
+        
+        Usage
+        -----
+        
+        ::
+        
+            >> todo
+            Usage: todo [OPTIONS] COMMAND [ARGS]...
+        
+            Options:
+                -vv, --verbose
+                -c, --conf FILENAME
+                --version            Show the version and exit.
+                --help               Show this message and exit.
+        
+            Commands:
+                add       add task
+                append    append task
+                cancel    cancel words in task
+                done      done task
+                due       change due of task
+                ls        list of tasks
+                priority  change priority of task
+                rm        remove task
+                txt       change txt of task and save due
+                undone    undone task
+        
+        Sample of Usage
+        
+        ::
+        
+            >> todo ls
+            >> todo add test One
+                [ ] 0 test One 
+            >> todo add test two due:2019-11-01
+                [ ] 1 test two due:2019-11-01 
+            >> todo add test Three
+                [ ] 2 test Three 
+            >> todo ls
+                [ ] 0 test One 
+                [ ] 1 test two due:2019-11-01 
+                [ ] 2 test Three
+            >> todo rm 2
+            >> todo ls
+                [ ] 0 test One 
+                [ ] 1 test two due:2019-11-01 
+            >> todo done 1
+                [X] 1 test two due:2019-11-01 
+            >> todo ls
+                [ ] 0 test One 
+                [X] 1 test two due:2019-11-01 
+            >> todo append 1 +project
+                [X] 1 test two due:2019-11-01 +project 
+            >> todo ls
+                [ ] 0 test One 
+                [X] 1 test two due:2019-11-01 +project 
+        
+        Configuration
+        -------------
+        
+        You can add file conf in application folder
+        
+        Mac OS X:
+        ~/Library/Application Support/todocli
+        
+        Mac OS X (POSIX):
+        ~/.todocli
+        
+        Unix:
+        ~/.config/todocli
+        
+        Unix (POSIX):
+        ~/.todocli
+        
+        Win XP (roaming):
+        C:\Documents and Settings\<user>\Local Settings\Application Data\todocli
+        
+        Win XP (not roaming):
+        C:\Documents and Settings\<user>\Application Data\todocli
+        
+        Win 7 (roaming):
+        C:\Users\<user>\AppData\Roaming\todocli
+        
+        Win 7 (not roaming):
+        C:\Users\<user>\AppData\Local\todocli
+        
+        sample of file conf
+        
+        ::
+        
+            [Todo]
+            Log=40 #0,10,20,30,40
+            Path=todo.txt
+            ColorContext=blue
+            ColorDue=red
+            ColorProject=yellow
+            ColorNow=blue
+            ColorEarlier=red
+            ColorNext=black
+        
+        
+        use a specific conf
+        
+        ::
+        
+            >> todo -c myconf.conf ls
+        
+        If you want multi todolist:
+        
+        - todo
+        - shopping
+        
+        create a specific conf: $HOME/shopping.conf with:
+        
+        ::
+        
+            [Todo]
+            Path=shopping.txt
+        
+        and add a alias
+        
+        ::
+        
+            alias shopping="todo -c $HOME/shopping.conf"
+        
+        you can use
+        
+        ::
+        
+            shopping ls
+        
+        
+        Feature
+        -------
+        
+        - graphic
+        - webdav
+        - pretty print
+        - unittest with click
+        
+        V. 0.1.0
+        ========
+        
+        - init
+        
+Platform: any
+Classifier: Programming Language :: Python
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.0
+Classifier: Programming Language :: Python :: 3.1
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
