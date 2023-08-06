@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: tflex
+Version: 1.0.0rc5
+Summary: An edge inference library on embedded device with EPU designed by iluvatar.ai.
+Home-page: http://www.iluvatar.ai/
+Author: jie.hang
+Author-email: jie.hang@iluvatar.ai
+License: Iluvatar.ai Licence
+Keywords: pip,tflex,EPU,edge computing
+Platform: any
+Requires-Dist: keras (>=2.2.4)
+Requires-Dist: numpy (>=1.16.3)
+Requires-Dist: traceback2 (>=1.4.0)
+Requires-Dist: tensorflow-tflex (>=1.12.1)
+
+An edge inference library on embedded device that contains Edge EPU coprocessor. It's ideal for prototyping new projects that demand fast on-device inferencing for machine learning models. tflex library provides three command line tools: tflexconverter is provided to convert .pb/.h5 model to .tflex model directly supported on EPU, tflexviewer is supplied to display the network architecture(.pb and .tflex file are both supported) more intuitively based on advanced tensorboard, and tflexverify is used to validate whether the model was converted successfully. That is, when a pre-trained or custom model are prepared, then you can use tflexconverter command to convert the model to EPU format, and deploy the model in your device for inference.
+
+
