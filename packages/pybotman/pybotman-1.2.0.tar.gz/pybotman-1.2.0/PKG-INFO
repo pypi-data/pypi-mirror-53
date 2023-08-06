@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: pybotman
+Version: 1.2.0
+Summary: Python API wrapper for botman bots
+Home-page: https://github.com/Flowelcat/pybotman
+Author: Flowelcat
+Author-email: flowelcat@gmail.com
+License: apache-2.0
+Download-URL: https://github.com/Flowelcat/pybotman/archive/v.1.2.0.tar.gz
+Description: # PyBotman
+        #### Python Botman API Wrapper
+        Written by Flowelcat
+        
+        Introduction
+        ---
+        This library provides a pure Python interface for the Botman API. It works with Python 3+.
+        
+        Botman API provides bot control features along with providing some methods for fetching data from bot's database.
+        
+        Installing
+        ---
+        You can install pybotman using:
+        
+        ```console
+        $ pip install pybotman
+        ```
+        
+        Using
+        ---
+        ```python
+        from pybotman import BotmanApi
+        
+        botman = BotmanApi("https://example.com/v1/", "some_token")
+        print(botman.get_api_status())
+        ```
+Keywords: botman,pybotman,botmanbot,botmanapi
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.5.0
+Description-Content-Type: text/markdown
