@@ -1,0 +1,15 @@
+#!/bin/sh
+if [ ! -d "$HOME/.tmux" ]; then
+	cd ~ 
+	mkdir -p .byobu
+	git clone https://github.com/whohe/.tmux ~/.tmux --branch master-fish 
+	ln -s .tmux/tmux.conf .tmux.conf
+	cd .tmux 
+	git submodule update --init --recursive 
+	cd ~/.byobu 
+	ln -s ../.tmux.conf . 
+	echo "...ok"
+else
+	echo "...was already"
+fi
+exit 1

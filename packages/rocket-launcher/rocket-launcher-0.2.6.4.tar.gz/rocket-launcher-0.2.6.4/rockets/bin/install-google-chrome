@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ ! -f "/usr/bin/chrome" ]; then
+	pacman -Sy --noconfirm alsa-lib gtk3 libcups libxss libxtst nss
+	su who -c "cd /tmp && yaourt --getpkgbuild aur/google-chrome && cd google-chrome && makepkg"
+	cd /tmp/google-chrome 
+	pacman -U *.tar.xz --noconfirm 
+	cd .. 
+	rm -rf google-chrome
+	echo "...ok"
+else
+	echo "...was already"
+fi
+exit 1

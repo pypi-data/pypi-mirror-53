@@ -1,0 +1,5 @@
+#!/bin/sh
+ssh-keygen -A 
+/usr/bin/sshd
+echo "...ok"
+exit 1
