@@ -1,0 +1,66 @@
+Metadata-Version: 2.1
+Name: jackfruit
+Version: 0.11
+Summary: Generic views for python-telegram-bot
+Home-page: https://github.com/zzzzlzzzz/jackfruit
+Author: Tosha
+Author-email: zzzzlzzzz@yandex.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Communications :: Chat
+Classifier: Topic :: Internet
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: python-telegram-bot
+
+# Jackfruit
+## Introduction
+This library provides a simple way for creating telegram bots with deep level menu.
+## Usage
+```python
+from os import environ
+
+from telegram.ext import Updater
+
+from jackfruit import *
+
+
+class MainMenu(MenuView):
+    text = 'Hello from my bot!'
+    menu_items = [[('Enter my name', 'EnterName'), ('Select my age', 'SelectAge')], ]
+
+
+class EnterName(TextDataInputView):
+    text = 'Enter my name:'
+
+    def process_data(self, state, update, context, data):
+        return 'MainMenu'
+
+
+class SelectAge(MenuView):
+    text = 'Select my age:'
+    menu_items = [[('Below 18', 'MainMenu'), ('Above 18', 'MainMenu')]]
+
+
+updater = Updater(environ['TOKEN'], use_context=True)
+main_menu = MainMenu()
+enter_name = EnterName()
+select_age = SelectAge()
+Jackfruit(updater.dispatcher, main_menu, [('start', 'MainMenu')]).register(enter_name, select_age)
+updater.start_polling()
+updater.idle()
+
+```
+
