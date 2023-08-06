@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: vmapcrawler
+Version: 3.0.0
+Summary: Crawler for Vmap map
+Home-page: https://github.com/vuviethung1998/vmapcrawler
+Author: Vu Viet Hung
+Author-email: vuviethung.98.hust@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+## vmapcrawler
+crawler for vmap map
+
+## Installation
+Run the following to install
+```python
+pip install vmapcrawler
+```
+
+## Usage
+```python
+from vmapcrawler import vmapcrawler
+
+vmapcrawler.getvmapcsv(21.1959357, 21.280875, 105.7317325, 105.829239, 100, '/home/vuviethung/Desktop/alo.csv' , continue_num= -1)
+```
+
+
