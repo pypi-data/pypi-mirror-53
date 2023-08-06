@@ -1,0 +1,91 @@
+# Changelog
+
+## v0.8.7
+
+### Improvements
+
+- Enabled the use of environment variables in the config file.
+
+## v0.8.6
+
+### Fixes
+
+- Fixed file names for package building.
+- Fixed reading version info for /info call.
+
+## v0.8
+
+### Improvements
+
+- TabPy is pip package now
+- Models are deployed with updated script
+
+## v0.7
+
+### Improvements
+
+- Added t-test model
+- Fixed models call with /evaluate for HTTPS
+- Migrated to Tornado 6
+- Timeout is configurable with TABPY_EVALUATE_TIMEOUT config
+  file option
+
+## v0.6.1
+
+### Improvements
+
+- Scripts, documentation, and integration tests for models
+- Small bug fixes 
+- Added request context logging as a feature controlled with
+  TABPY_LOG_DETAILS configuration setting.
+- Updated documentation for /info method and v1 API.
+- Added integration tests.
+
+## v0.4
+
+### Improvements
+
+- Added basic access authentication (all methods except /info)
+- tabpy-tools can deploy models to TabPy with authentication on
+- Increased unit tests coverage
+- Travis CI for merge requests: unit tests executed, code style checking
+
+## v0.3.2
+
+### Breaking changes
+
+- Logger configuration now is in TabPy config file.
+
+### Improvements
+
+- Remove versioneer and just replace it with VERSION file
+- Require Python 3.6.5
+- Require jsonschema to be compatible with 2.3.0
+- Added setup instructions (known issues) for CentOS
+
+## v0.3.1
+
+- Fixed dependency on tabpy-tools in startup scripts
+- Fixed Python version dependency in tabpy-server setup script
+
+## v0.3
+
+### Breaking changes
+
+- The config file is now not just Python code but an actual config
+- Tornado config file has a different setting for CORS
+- Setup scripts are deleted - setup (if needed) happens with the startup script
+- tabpy-client is tabpy-tools now
+
+### Improvements
+
+- Secure connection (HTTPS) is supported with Tableau 2019.2 and newer versions
+- Documentation is improved with more examples added
+- Versioning is done with Versioneer and github release tags
+- Improved logging
+- Unit tests are passing now
+- Configurations for Postman and Swagger are available to use those against running TabPy
+
+## v0.2
+
+- Initial version
