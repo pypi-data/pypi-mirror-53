@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: reversefold.util
+Version: 3.5.1
+Summary: SSH, Proc, Multiproc, tail.py, log.py, stream.py, daemonize.py, etc.
+Home-page: https://github.com/reversefold/util
+License: MIT
+Author: Justin Patrin
+Author-email: papercrane@reversefold.com
+Requires-Python: >3.4,<4
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: colorama (>=0.4.1,<0.5.0)
+Requires-Dist: docopt (>=0.6.2,<0.7.0)
+Requires-Dist: fasteners (>=0.15.0,<0.16.0)
+Requires-Dist: psutil (>=5.6,<6.0)
+Requires-Dist: python-daemon (>=2.1,<3.0)
+Requires-Dist: watchdog (>=0.9.0,<0.10.0)
+Project-URL: Repository, https://github.com/reversefold/util.git
+Description-Content-Type: text/markdown
+
+# reversefold.util
+
+[Available on pypi](https://pypi.python.org/pypi/reversefold.util)
+
+This is a collection of various command-line scripts and libraries which have come in useful over the years I've worked with Python.
+
+
+## log.py
+
+Captures stdout of a process and enables transformation the output (such as adding a timestamp to each line) and is compatible with external logrotate through `WatchedFileHandler`.
+
+## daemonize.py
+
+Useful for daemonizing another process which either does not daemonize itself or for which you want to capture stdout and stderr to log files. Uses `WatchedFileHandler` for output to log files to allow for external log rotation.
+
+## stream.py
+
+Similar to `tail -f` but with some more options for type of buffering and supports streaming the entire current contents of the file before then following the tail of the file.
+
+## reversefold.util
+
+### rate_limit_gen
+
+A generator wrapper which rate-limits another generator. If the rate is exceeded, further values received within the `period` are discarded. Useful, for example, for making sure that the number of lines you display from a log file you're following don't cause your terminal to block while displaying a huge amount of output.
+
+### chunked
+
+Breaks up an iterable into equal-sized chunks.
+
+## reversefold.util.ssh
+
+### SSHHost
+
+A programmatic interface to ssh. Allows easily running a single command or a shell script or interactively sending input and displaying output. Originally written as a drop-in monkeypatch for fabric's use of paramiko.
+
+## reversefold.util.multiproc
+
+### run_subproc
+
+Takes a subprocess as input and sets up threads for handling and displaying stdout and stderr from the process. Defaults to blocking until the process is finished but also supports immediately returning and including the threads in the return value. Also defaults to capturing the stdout and stderr and returning them as lists of lines.
+
+## reversefold.util.proc
+
+Provides context managers to ensure that a process is sent a TERM or KILL signal (or both) to a process when the context block exits. Can optionally find child processes recursively and send the same signal(s) to them. Also provides functions for the same functionality.
+
