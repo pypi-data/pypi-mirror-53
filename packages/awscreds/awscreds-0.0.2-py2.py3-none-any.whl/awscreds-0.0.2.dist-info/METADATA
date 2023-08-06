@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: awscreds
+Version: 0.0.2
+Summary: awscreds stores AWS credentials in Mac OS Keychain
+Home-page: https://github.com/DmitriyLyalyuev/awscreds
+Author: Dmitriy Lyalyuev
+Author-email: dmitriy@lyalyuev.info
+License: MIT
+Keywords: ssh aws devops sysadmin
+Platform: UNKNOWN
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Utilities
+Description-Content-Type: text/markdown
+Requires-Dist: keyring
+
+# Help
+
+`awscreds -h`
+
+# Store credentials
+
+`awscreds add`
+
+# Delete credentials
+
+`awscreds delete`
+
+# Get credentials
+
+`awscreds get -e prj_name`
+
+# Export credentials into your session
+
+```
+eval `awscreds get -e prj_name`
+```
+
+
