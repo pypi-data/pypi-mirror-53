@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!-- group: for employee -->
+        <record model="res.group" id="group_timetracking_employee_editsick">
+            <field name="name">Timetracking - Employee can edit its sick days</field>
+        </record>
+
+        <!-- write to evaluation of employee -->
+        <record model="ir.model.access" id="access_evaluation_employee_edsick">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <!-- access rule group -->
+        <record model="ir.rule.group" id="rule_group_evaluation_employee_edsick">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+            <field name="global_p" eval="False"/>
+            <field name="default_p" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_evaluation_employee_edsick_line1">
+            <field name="domain" pyson="1" 
+                eval="[('employee', '=', Eval('user', {}).get('employee', None))]" />
+            <field name="rule_group" ref="rule_group_evaluation_employee_edsick"/>
+        </record>
+        <record model="ir.rule.group-res.group" 
+                id="rule_group_evaluation_employee_edsick-group_timetracking_employee_editsick">
+            <field name="rule_group" ref="rule_group_evaluation_employee_edsick"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+        </record>
+        <!-- wizard recalc -->
+        <record model="ir.action-res.group" 
+                id="wizard_recalc_evaluation-group_timetracking_employee_editsick">
+            <field name="action" ref="wizard_recalc_evaluation"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+        </record>
+        <!-- field access - evaluation-->
+        <record model="ir.model.field.access" id="access_field-evaluation-needs_recalc-editsick">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluation'), ('name', '=', 'needs_recalc')]"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+        <record model="ir.model.field.access" id="access_field-evaluation-sickdays-editsick">
+            <field name="field"
+                search="[('model.model', '=', 'employee_timetracking.evaluation'), ('name', '=', 'sickdays')]"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+
+
+        <!-- evaluation-sickdays -->
+        <!-- read to employee -->
+        <record model="ir.model.access" id="access_eval_sickday_editsick">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation_sickdays')]"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+        <!-- access rule group - read -->
+        <record model="ir.rule.group" id="rule_group_eval_sickday_editsick">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation_sickdays')]"/>
+            <field name="global_p" eval="False"/>
+            <field name="default_p" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+        <record model="ir.rule" id="rule_group_eval_sickday_editsick_line1">
+            <field name="domain" pyson="1" 
+                eval="[('evaluation.employee', '=', Eval('user', {}).get('employee', None))]" />
+            <field name="rule_group" ref="rule_group_eval_sickday_editsick"/>
+        </record>
+        <record model="ir.rule.group-res.group" 
+                id="rule_group_eval_sickday_editsick-group_timetracking_employee_editsick">
+            <field name="rule_group" ref="rule_group_eval_sickday_editsick"/>
+            <field name="group" ref="group_timetracking_employee_editsick"/>
+        </record>
+
+    </data>
+</tryton>

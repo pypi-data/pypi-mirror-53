@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<form col="4">
+    <label name="name"/>
+    <field name="name"/>
+    <label name="shortname"/>
+    <field name="shortname"/>
+    <label name="color"/>
+    <field name="color"/>
+    <label name="company"/>
+    <field name="company"/>
+    <group colspan="4" col="1" id="grp1" string="Information">
+        <label id="lab1" yalign="0.0" xalign="0.0"
+            string="Time accounts:"/>
+        <label id="lab2" yalign="0.0" xalign="0.0"
+            string="The time accounts save the registered working time."/>
+        <label id="lab3" yalign="0.0" xalign="0.0"
+            string="There can be any number of time accounts in your tariff model."/>
+        <label id="lab4" yalign="0.0" xalign="0.0"
+            string="The assignment of a registered working time to a time account is performed by a time account rule."/>
+    </group>
+</form>

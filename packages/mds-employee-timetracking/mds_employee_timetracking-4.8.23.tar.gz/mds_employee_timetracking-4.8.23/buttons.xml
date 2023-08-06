@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!-- period -->
+        <record model="ir.model.button" id="period_wfcreate_button">
+            <field name="name">wfcreate</field>
+            <field name="string">Create</field>
+            <field name="help">Create period item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.period')]"/>
+        </record>
+        <record model="ir.model.button" id="period_wfexamine_button">
+            <field name="name">wfexamine</field>
+            <field name="string">Examine</field>
+            <field name="help">Check period item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.period')]"/>
+        </record>
+        <record model="ir.model.button" id="period_wflock_button">
+            <field name="name">wflock</field>
+            <field name="string">Lock</field>
+            <field name="help">Lock period item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.period')]"/>
+        </record>
+
+        <!-- break period -->
+        <record model="ir.model.button" id="breakperiod_wfcreate_button">
+            <field name="name">wfcreate</field>
+            <field name="string">Create</field>
+            <field name="help">Create break item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.breakperiod')]"/>
+        </record>
+        <record model="ir.model.button" id="breakperiod_wfexamine_button">
+            <field name="name">wfexamine</field>
+            <field name="string">Examine</field>
+            <field name="help">Check break item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.breakperiod')]"/>
+        </record>
+        <record model="ir.model.button" id="breakperiod_wflock_button">
+            <field name="name">wflock</field>
+            <field name="string">Lock</field>
+            <field name="help">Lock break item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.breakperiod')]"/>
+        </record>
+
+        <!-- evaluation -->
+        <record model="ir.model.button" id="evaluation_wfcreate_button">
+            <field name="name">wfcreate</field>
+            <field name="string">Create</field>
+            <field name="help">Create evaluation item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+        </record>
+        <record model="ir.model.button" id="evaluation_wfactivate_button">
+            <field name="name">wfactivate</field>
+            <field name="string">Activate</field>
+            <field name="help">Activate evaluation item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+        </record>
+        <record model="ir.model.button" id="evaluation_wflock_button">
+            <field name="name">wflock</field>
+            <field name="string">Lock</field>
+            <field name="help">Lock evaluation item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation')]"/>
+        </record>
+
+        <!-- timeaccountitem -->
+        <record model="ir.model.button" id="timeaccountitem_wfcreate_button">
+            <field name="name">wfcreate</field>
+            <field name="string">Create</field>
+            <field name="help">Create account item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.timeaccountitem')]"/>
+        </record>
+        <record model="ir.model.button" id="timeaccountitem_wfexamine_button">
+            <field name="name">wfexamine</field>
+            <field name="string">Examine</field>
+            <field name="help">Check account item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.timeaccountitem')]"/>
+        </record>
+        <record model="ir.model.button" id="timeaccountitem_wflock_button">
+            <field name="name">wflock</field>
+            <field name="string">Lock</field>
+            <field name="help">Lock account item</field>
+            <field name="model" search="[('model', '=', 'employee_timetracking.timeaccountitem')]"/>
+        </record>
+
+    </data>
+</tryton>
