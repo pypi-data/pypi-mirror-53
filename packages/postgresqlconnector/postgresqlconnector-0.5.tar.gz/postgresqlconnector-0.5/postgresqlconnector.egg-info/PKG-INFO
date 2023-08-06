@@ -1,0 +1,84 @@
+Metadata-Version: 2.1
+Name: postgresqlconnector
+Version: 0.5
+Summary: A small module for working quickly with the PostgreSQL
+Home-page: https://github.com/sidan93/postgresql_connector
+Author: Sidorov A.B.
+Author-email: sidan93@gmail.com
+License: MIT
+Download-URL: https://github.com/sidan93/postgresql_connector/archive/v0.5.tar.gz
+Description: # About
+        A small module for working quickly with the PostgreSQL
+        
+        # Simple Start for home project
+        
+        1. Install package from pip
+        ```
+        pip install postgresqlconnector
+        ```
+        2. Use connector
+        ```
+        from postgresqlconnector import DB
+        print(DB.query('''select * from pg_stat_activity'''))
+        ```
+        
+        ## API
+        
+        ### query 
+        Get all rows from your sql query
+        #### Param:
+        * sql: str - Your query
+        * params: dict - Params for query
+        #### Result:
+        * Array of Record
+        ```
+        result = DB.query('''select * from pg_stat_activity''')
+        print(result[0])
+        print(result[0].pid)
+        ```
+        ### row
+        
+        Get first row from your sql query
+        #### Param:
+        * sql: str - Your query
+        * params: dict - Params for query 
+        #### Result:
+        * Record
+        ```
+        result = DB.row('''select * from pg_stat_activity''')
+        print(result.pid)
+        ```
+        ### scalar
+        
+        Get first column from first row from you sql query
+        #### Param:
+        * sql: str - Your query
+        * params: dict - Params for query 
+        #### Result:
+        * Scalar
+        ```
+        result = DB.scalar('''select pid, * from pg_stat_activity''')
+        print(result)
+        ```
+        ### set_connection_info
+        
+        Set database connections
+        #### Param:
+        * host: str = 'localhose' - Host
+        * port: str = '5432' - Port
+        * dbname: str = 'postgres' - Database name
+        * user: str = 'postgres' - User
+        * password: str = 'postgres' - Password
+        
+Keywords: Postgre,PostgreSQL,connector,postgresqlconnection,postgresql connector
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
