@@ -1,0 +1,25 @@
+#! /usr/bin/env python
+
+import optparse, os
+op = optparse.OptionParser()
+opts, args = op.parse_args()
+assert len(args) == 1
+INFILE = args[0]
+
+import hepmcio
+reader = hepmcio.HepMCReader(INFILE)
+evtnum = 0
+#with open(INFILE+".dat", "w") as f:
+while True:
+    evtnum += 1
+    evt = reader.next()
+    if not evt:
+        break
+    # print evtnum, evt.weights, len(evt.particles), len(evt.vertices)
+    print "E", evtnum, len(evt.particles)
+    for ip, p in evt.particles.items():
+        if p.status != 1:
+            continue
+        # print p.pid, " ".join(map(str, p.mom))
+        # print p.pid, "{v[0]:.3e} {v[1]:.3e} {v[2]:.3e} {v[3]:.3e}".format(v=p.mom)
+        print p.pid, "{v[0]:e} {v[1]:e} {v[2]:e} {v[3]:e}".format(v=p.mom)

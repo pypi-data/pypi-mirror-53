@@ -1,0 +1,54 @@
+PyHepMC
+=======
+
+PyHepMC is a collection of Python interfaces to HepMC event record
+objects.
+
+
+New interface: hepmcio
+----------------------
+
+The newer and more convenient interface is a minimal HepMC event file parser and
+set of Particle, Vertex, and Event objects, in the `hepmcio` Python module.
+This doesn't support *all* HepMC functionality, but enough for event structure
+investigations.
+
+USAGE
+
+    $ python
+    >>> import hepmcio
+    >>> reader = hepmcio.HepMCReader(INFILE)
+    >>> evtnum = 0
+    >>> while True:
+    >>>     evtnum += 1
+    >>>     evt = reader.next()
+    >>>     if not evt:
+    >>>         break
+    >>>     print evtnum, evt.weights, len(evt.particles), len(evt.vertices)
+
+This interface is used by the `mcgraph2` event-graph plotter (which uses
+graphviz via the pydot module) and `mcprint2` event summary printer scripts. You
+can adapt these for your own purposes.
+
+
+Old interface: pyhepmc
+----------------------
+
+The older interface uses the SWIG system (www.swig.org) to directly interface to
+the HepMC C++ library -- it currently needs some attention but in principle does
+everything that HepMC itself can do. To build this interface you'll need a copy
+of SWIG, the Python header files, and the HepMC library itself. To build it,
+specify the HepMC path on the command line:
+HEPMCPATH=/path/to/hepmc/installation python setup.py install --prefix=/install/to/here
+
+USAGE
+
+    $ python
+    >>> import hepmc
+    >>> io = hepmc.IO_GenEvent("LEP10.hepmc")
+    >>> e = io.get_next_event()
+
+Object ownership: the SWIG interface will automatically delete the C++ object when the
+Python proxy to it goes out of scope. If you don't want that, e.g. the C++ object will
+somehow clear up its own memory, then call e.g. `myparticle.thisown = 0` to tell SWIG
+not to do any deletion of that object on the C++ side.
