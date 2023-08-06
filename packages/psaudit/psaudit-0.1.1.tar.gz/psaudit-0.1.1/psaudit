@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import subprocess
+import multiprocessing
+
+import psutil
+
+process_paths = {}
+for p in psutil.process_iter(attrs={'pid', 'exe'}):
+    if p.info['pid'] in {0, os.getpid()}:
+        continue
+    process_paths[p.info['pid']] = p.info['exe']
+
+def audit_process(path):
+    p = subprocess.run(['codesign', '-dvv', path], capture_output=True)
+    return path, b'\nAuthority=Apple Root CA\n' in p.stderr
+
+with multiprocessing.Pool() as p:
+    path_audits = dict(p.map(audit_process, set(process_paths.values())))
+
+failed = 0
+for pid, path in process_paths.items():
+    if path_audits[path] is False:
+        print(f'process {pid} ({path}) not signed by Apple', file=sys.stderr)
+        failed += 1
+sys.exit(failed)
