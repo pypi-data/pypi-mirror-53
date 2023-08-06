@@ -1,0 +1,29 @@
+spec: 0.1
+meta:
+  name: my-django-project
+  version: 0.1
+
+services:
+  database1:
+    type: postgres:11.2
+    
+
+addons:
+  addon_example_1:
+    manager: fam-python
+    hash: abcd
+    settings:
+      somevalue: 123
+      someothervalue: 123
+      database: database1
+  addon_example_2:
+    manager: fam-diviocloud-addon
+    hash: abcd
+
+config: 
+  languages:
+    label: Languages
+    required: True
+    type: "scalar/string"
+    default: "en,de"
+    helptext: "WARNING: this field is auto-written. Please do not change it here."
