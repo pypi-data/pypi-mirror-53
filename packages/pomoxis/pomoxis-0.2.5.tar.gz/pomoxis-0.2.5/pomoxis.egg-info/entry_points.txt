@@ -1,0 +1,19 @@
+[console_scripts]
+align_serve = pomoxis.align.common:main
+catalogue_errors = pomoxis.common.catalogue_errors:main
+common_errors_from_bam = pomoxis.common.common_errors_from_bam:main
+coverage_from_bam = pomoxis.common.coverage_from_bam:main
+coverage_from_fastx = pomoxis.common.util:coverage_from_fastx
+fast_convert = pomoxis.common.util:fast_convert
+long_fastx = pomoxis.common.util:extract_long_reads
+pomoxis_path = pomoxis:show_prog_path
+qscores_from_summary = pomoxis.common.qscores_from_summary:main
+read_until_filter = pomoxis.apps.read_until_filter:main
+ref_seqs_from_bam = pomoxis.common.ref_seqs_from_bam:main
+simulate_calls = pomoxis.common.simulate_calls:main
+split_fastx = pomoxis.common.util:split_fastx_cmdline
+stats_from_bam = pomoxis.common.stats_from_bam:main
+subsample_bam = pomoxis.common.subsample_bam:main
+summary_from_stats = pomoxis.common.summary_from_stats:main
+trim_alignments = pomoxis.common.trim_alignments:main
+
