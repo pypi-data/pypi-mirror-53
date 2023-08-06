@@ -1,0 +1,17 @@
+<section id="{{ map_id }}-container" class="map-container">
+    <article>
+        <div id="{{ map_id }}" class="map simple-map"></div>
+    </article>
+</section>
+<script type="text/javascript">
+    let {{ map_id }} = new LeaftletGpxMap('{{ map_id }}', {{ map_options|safe }});
+    window.addEventListener('load', () => {
+        {{ map_id }}.load();
+        {% if map_markers %}
+        let markers = {{ map_markers|safe }};
+        for (let marker of markers) {
+            {{ map_id }}.add_marker(marker.lat, marker.lng, marker.options);
+        }
+        {% endif %}
+    });
+</script>
