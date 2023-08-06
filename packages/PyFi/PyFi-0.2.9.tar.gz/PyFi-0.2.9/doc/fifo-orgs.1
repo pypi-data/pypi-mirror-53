@@ -1,0 +1,80 @@
+.TH fifo-orgs 1  "Jan 1, 2014" "version 0.2.9" "USER COMMANDS"
+.SH NAME
+fifo-orgs \- Organisation related commnads for the FiFo API
+.SH SYNOPSIS
+.B fifo orgs
+[\-h] {metadata,list,get,delete,create,add,remove}
+
+.SH DESCRIPTION
+This programm allows modifying, creating and creating orgs.
+
+.SH OPTIONS
+.TP
+\-h
+displays a inline help.
+
+.SH COMMANDS
+.TP
+orgs list [\-\-raw|\-r] [\-p] [\-H] [\-\-fmt FMT]
+This command lists the orgs currently available on the server.
+
+Valid choices for
+.B FMT
+are: uuid, name.
+
+If the \-\-raw flag is used an array of org json objects is displayed.
+.TP
+orgs get <uuid|name>
+This command returns the JSON representation of a org object stored
+in the fifo server.
+.TP
+orgs delete <uuid|name>
+Deletes a organisation from the FiFo server.
+.TP
+orgs list [\-p] [\-H] [\-\-fmt FMT]
+This command lists the organisations currently available on the server.
+
+Valid choices for
+.B FMT
+are: uuid, name.
+.TP
+orgs create [\-p] NAME
+Creates a new Org, if \-p is passed only the uuid is returned.
+.TP
+orgs metadata <uuid> get
+Reads the metadata.
+.TP
+orgs metadata <uuid> set <key> [\-\-json|\-j|\-\-integer|\-i|
+\-\-float|\-f|\-\-string|\-s] <value>
+Sets the metadata where
+.B <key>
+can be a nested period seperated JSON path. If no type is
+specified the value will be treated as string.
+.TP
+orgs metadata <uuid> delete <key>
+Deletes the
+.B <key>
+in the metadata. The
+.B <key>
+can be a nested period seperated JSON path.
+.TP
+orgs accounting [\-\-raw] [-p] [-H] [\-\-fmt FMT] <uuid> \-\-start|\-s <ts> \-\-end|\-e <ts>
+Will display the accounting information for an organisation
+
+.B \-\-start|\-s <ts>
+Timestamp or date and time (YYYY-MM-DD HH:MM:SS) of the start of the accounting period
+
+.B \-\-end|\-e <ts>
+Timestamp or date and time (YYYY-MM-DD HH:MM:SS) of the end of the accounting period
+
+If the \-\-raw flag is used an array of org json objects is displayed
+
+Valid choices for
+.B FMT
+are: resource, action, timestamp, date.
+
+.SH AUTHOR
+Heinz N. 'Licenser' Gies (heinz (at) licenser.net)
+
+.SH SEE ALSO
+fifo(1), fifo-users(1), fifo-roles(1)
