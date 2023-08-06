@@ -1,0 +1,50 @@
+{% extends '../blank_with_menu.html' %}
+
+
+{% block title %}General{% end %}
+
+
+{% block content %}
+<dl class="dl-horizontal">
+    <dt>Operation system</dt>
+    <dd>{{ computer['os'] }}</dd>
+</dl>
+<dl class="dl-horizontal">
+    <dt>Architecture</dt>
+    <dd>{{ computer['architecture'] }}</dd>
+</dl>
+<dl class="dl-horizontal">
+    <dt>Hostname</dt>
+    <dd>{{ computer['hostname'] }}</dd>
+</dl>
+<dl class="dl-horizontal">
+    <dt>CPU</dt>
+    <dd>{{ computer['cpu_name'] }}</dd>
+</dl>
+<dl class="dl-horizontal">
+    <dt>Boot time</dt>
+    <dd>
+        {{ computer['boot_time'] }}
+        <span class="label label-info" id="uptime" data-init-value="{{ computer['raw_uptime'] }}">
+            {{ computer['uptime'] }}
+        </span>
+    </dd>
+</dl>
+<dl class="dl-horizontal">
+    <dt>Total memory</dt>
+    <dd>{{ computer['total_mem'] }}</dd>
+</dl>
+<dl class="dl-horizontal">
+    <dt>Total disk memory</dt>
+    <dd>{{ computer['total_disk_mem'] }}</dd>
+</dl>
+{% end %}
+
+
+{% block js %}
+<!-- Plugin Scripts - jintervals -->
+<script src="{{ static_url('js/plugins/jintervals/jintervals-0.7-min.js') }}"></script>
+
+<!-- Page-Level Script -->
+<script src="{{ static_url('js/monitor/general.js') }}"></script>
+{% end %}
