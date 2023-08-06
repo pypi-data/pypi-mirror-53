@@ -1,0 +1,104 @@
+Metadata-Version: 2.1
+Name: hyfive
+Version: 0.1.7
+Summary: A Hy library that provides a Lispy functional                 interface by wrapping Python's popular data libraries,                 such as Pandas and Matplotlib.
+Home-page: https://gitlab.com/arithmox/hyfive
+Author: Anthony Khong
+Author-email: anthony@arithmox.ai
+License: gpl-3.0
+Description: # HyFive
+        
+        ## What Is HyFive?
+        
+        HyFive is a [Hy](https://github.com/hylang/hy) library that provides a Lispy functional interface by wrapping Python's popular data libraries, such as [Pandas](https://pandas.pydata.org/) and [Matplotlib](https://matplotlib.org).
+        
+        ## HyFive vs. Vanilla Pandas
+        
+        Pandas `DataFrame` has its own quirks. It ranges from not having a `filter` method to having a different definiton of `join` to that of SQL. This is evident from the bewildering comparison between [Pandas and SQL](https://pandas.pydata.org/pandas-docs/stable/getting_started/comparison/comparison_with_sql.html). HyFive aims to provide a Lispy interface that is as close as possible to that of [Spark's](https://spark.apache.org/) [SQL and DataFrame](https://spark.apache.org/docs/latest/sql-programming-guide.html).
+        
+        From a functional programming perspective, Pandas interfaces are oddly difficult to compose unlike Spark SQL's method-chaining convention. Due to this difficulty, Pandas often perversely incentivises short names for dataframes in favour of creating intermediate variables, which litters the namespace.
+        
+        HyFive utilises Hy's threading macros to mimic Spark DataFrame's method chaining convention, whilst staying with the familiar Pandas dataframe. Consider the following HyFive snippet:
+        
+        ```hy
+        (setv DATAFRAME
+          (-> NAME-REGISTRY
+              (hf.with-column "variant"
+                (let [mod-res-id (hf.mod "resident_id" 3)]
+                  (hf.cond-col [(hf.eq? mod-res-id 1) (hf.lit "a")]
+                               [(hf.eq? mod-res-id 2) (hf.lit "b")]
+                               [:else                 (hf.lit "c")])))
+              (hf.filter (hf.is-in "variant" ["a" "b"]))
+              (hf.join AGE-REGISTRY :on "resident_id")
+              (hf.group-by "variant")
+              (hf.agg {"min_age"  (hf.min "age")
+                       "mean_age" (hf.mean "age")
+                       "std_age"  (hf.std "age")
+                       "max_age"  (hf.max "age")})
+              (hf.order-by "min_age" :desc True)))
+        ```
+        
+        Here, we carry out simple operations of adding a column, filtering rows, joining tables, aggregating groups and sorting rows. Apart from the Lispy `cond`, these operations would have a one-to-one translation to Spark dataframe or SQL.
+        
+        In contrast, one would have to work a bit harder in pure Pandas:
+        
+        ```python
+        mod_res_id = NAME_REGISTRY.resident_id % 3
+        variant = np.where(mod_res_id == 1, 'a', np.where(mod_res_id == 2, 'b', 'c'))
+        select_ix = np.isin(variant, ['a', 'b'])
+        dataframe = (NAME_REGISTRY
+                        .assign(variant=variant)
+                        [select_ix]
+                        .merge(AGE_REGISTRY, on='resident_id')
+                        .groupby('variant')
+                        .apply(lambda df: pd.Series({
+                            'min_age': df.age.min(),
+                            'mean_age': df.age.mean(),
+                            'std_age': df.age.std(),
+                            'max_age': df.age.max()
+                        }))
+                        .reset_index()
+                        .sort_values(by='min_age', ascending=False)
+                        .reset_index(drop=True))
+        ```
+        
+        The Pandas version is less readable and we lose the one-to-one translation to Spark dataframe or SQL.
+        
+        ## Trying HyFive
+        
+        Clone the repository, and on the root directory of the enter the following command on terminal:
+        
+        ```bash
+        ./run build-docker
+        ```
+        
+        Run the unit tests with the following command:
+        
+        ```bash
+        ./run unit-tests .
+        ````
+        
+        Invoke the Hy REPL by running:
+        
+        ```bash
+        ./run repl
+        ```
+        
+        And finally, import HyFive using:
+        
+        ```hy
+        (import [hyfive :as hf])
+        ```
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Database
+Description-Content-Type: text/markdown
