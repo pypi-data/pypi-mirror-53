@@ -1,0 +1,64 @@
+#!python
+
+#  Copyright 2015 Michael Medin
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+# This is a compiler plugin for protoc
+# see http://code.google.com/apis/protocolbuffers/docs/reference/other.html
+#
+# It produces martkdown documentation which describes the protocol buffer API
+#
+__requires__ = 'protobuf>=2.5.0'
+
+#import pkg_resources
+#pkg_resources.run_script('protobuf==2.5.0')
+from md_protobuf.generator import document_file
+from google.protobuf.descriptor import FieldDescriptor
+from google.protobuf.descriptor_pb2 import FileOptions
+from google.protobuf.compiler.plugin_pb2 import CodeGeneratorRequest, CodeGeneratorResponse
+from sys import stdin, stdout, stderr
+
+serialized = stdin.buffer.read()
+request = CodeGeneratorRequest()
+request.ParseFromString(serialized)
+
+response = CodeGeneratorResponse()
+ltag = ''
+
+# each input file to the compiler
+for i in range(0, len(request.proto_file)):
+    file_descriptor = request.proto_file[i]
+    filename = file_descriptor.name
+    package = file_descriptor.package
+
+    if file_descriptor.options.optimize_for == FileOptions.LITE_RUNTIME:
+        ltag = 'Lite'
+
+    # for now, we require package, which is bad
+    # TODO fix this
+    if not package:
+        response.error = 'file seen without package. md-protobuf currently requires a package on every proto file: %s' % filename
+        break
+
+    define_value = package.replace('.', '_').upper()
+    cpp_header = '%s.pb.h' % package.replace('.', '/')
+    cpp_namespace = '::%s' % package.replace('.', '::')
+
+    f = response.file.add()
+    f.name = '%s.md' % package.replace('.', '/').lower()
+    f.content = document_file(file_descriptor)
+
+stdout.buffer.write(response.SerializeToString())
+exit(0)
+
