@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: loon
+Version: 0.1.0
+Summary: Super fast Python toolkit for operating remote host based on SSH
+Home-page: https://github.com/ShixiangWang/loon
+Author: ShixiangWang
+Author-email: wangshx@shanghaitech.edu.cn
+License: mit
+Project-URL: Documentation, https://github.com/ShixiangWang/loon
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Description-Content-Type: text/x-rst; charset=UTF-8
+Requires-Dist: ssh2-python
+Provides-Extra: testing
+Requires-Dist: pytest ; extra == 'testing'
+Requires-Dist: pytest-cov ; extra == 'testing'
+
+UNKNOWN
+
+
