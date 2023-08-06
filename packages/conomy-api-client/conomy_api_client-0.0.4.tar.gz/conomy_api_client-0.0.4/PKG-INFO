@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: conomy_api_client
+Version: 0.0.4
+Summary: Client for access to "Conomy" microservices
+Home-page: https://gitlab.conomy.net/suglobov/conomy-api-client.git
+Author: Andrey Suglobov
+Author-email: suglobov@conomy.ru
+License: UNKNOWN
+Description: Conmy Data Api Client for Python
+        ===================
+        
+        Installation:
+        
+            pip install conomy_api_client
+        
+        Usage
+        
+            from conomy_api_client import DataClient
+        
+            token = 'lalalalalalala'
+            dc = DataClient(token) 
+        
+            issuers = cd.get_issurs()    # return list of issuers
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
