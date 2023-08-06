@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: titanfe
+Version: 0.1.2a41
+Summary: titan Data Flow Engine for Python
+Home-page: http://www.industrial-devops.org/
+Author: wobe-systems GmbH
+Author-email: info@industrial-devops.org
+License: Apache License, Version 2.0
+Project-URL: Bug Tracker, https://tracker.industrial-devops.org
+Project-URL: Documentation, https://readthedocs.org/projects/titanfe
+Project-URL: Source Code, https://git.industrial-devops.org/titan/DataFlowEngine/flowengine-py
+Platform: Windows
+Platform: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: ujotypes (>=0.1.2)
+Requires-Dist: ruamel.yaml
+Requires-Dist: janus
+Requires-Dist: aiokafka
+Requires-Dist: kafka-python
+Requires-Dist: elasticsearch
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: uvloop; platform_system == "Linux"
+
+UNKNOWN
+
+

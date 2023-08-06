@@ -1,0 +1,70 @@
+
+version: 1
+
+disable_existing_loggers: False
+
+filters:
+  hostname:
+    (): titanfe.logutils.filter.HostnameFilter
+
+formatters:
+  debug:
+    format: "%(asctime)s %(hostname)s (%(process)5d|%(thread)-5d) %(name)s [%(funcName)s:%(lineno)d]  %(levelname)-8s  %(message)s"
+  default:
+    format: "%(asctime)s %(hostname)s (%(process)5d|%(thread)-5d) %(name)s  %(levelname)-8s %(message)s"
+
+handlers:
+  debug_console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: debug
+    stream: ext://sys.stdout
+    filters: [hostname]
+
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: default
+    stream: ext://sys.stdout
+    filters: [hostname]
+
+#  kafkalog:
+#    class: titanfe.logutils.handler.KafkaLogHandler
+#    #level: DEBUG
+#    level: INFO
+#    #level: METRIC
+#    #level: WARNING
+#    formatter: default
+#    bootstrap_server: 192.168.171.131:9092
+#    topic: titan.logs
+#    filters: [hostname]
+
+  queue_listener:
+    class: titanfe.logutils.handler.QueueLogHandler
+    handlers:
+    - cfg://handlers.console
+    #- cfg://handlers.kafkalog
+
+loggers:
+  titanfe:
+    propagate: False
+    level:
+      #DEBUG
+      #METRIC
+      #INFO
+      WARNING
+    handlers:
+    - debug_console
+    #- kafkalog
+    #- queue_listener
+
+  titanfe.bricks:
+    propagate: False
+    level: INFO
+    handlers:
+    - console
+
+root:
+  #level: DEBUG  # enable to see asyncio/kafka/etc
+  handlers:
+  - console
