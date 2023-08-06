@@ -1,0 +1,24 @@
+<!DOCTYPE doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>{{title}}</title>
+  <base href="/" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link href="{{favicon}}" rel="icon" type="image/x-icon" />
+  {% for import in gui_imports['css'] %}
+  <link rel="stylesheet" href="{{import}}">
+  {% endfor %}
+</head>
+
+
+<body>
+  <app-root></app-root>
+  {% for import in gui_imports['js'] %}
+  <script nonce="{{ csp_nonce() }}" src="{{import}}" type="text/javascript"></script>
+  {% endfor %}
+</body>
+
+</html>
