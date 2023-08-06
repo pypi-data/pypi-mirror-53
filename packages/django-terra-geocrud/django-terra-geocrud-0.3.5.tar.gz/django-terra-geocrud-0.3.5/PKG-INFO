@@ -1,0 +1,184 @@
+Metadata-Version: 2.1
+Name: django-terra-geocrud
+Version: 0.3.5
+Summary: Geographic CRUD for django-geostore
+Home-page: https://github.com/Terralego/terra.backend.crud.git
+Author: Makina Corpus
+Author-email: terralego-pypi@makina-corpus.com
+License: UNKNOWN
+Description: [![Build Status](https://travis-ci.org/Terralego/django-terra-geocrud.svg?branch=master)](https://travis-ci.org/Terralego/django-terra-geocrud)
+        [![codecov](https://codecov.io/gh/Terralego/django-terra-geocrud/branch/master/graph/badge.svg)](https://codecov.io/gh/Terralego/django-terra-geocrud)
+        [![Maintainability](https://api.codeclimate.com/v1/badges/633c620b6dcfc0e18df2/maintainability)](https://codeclimate.com/github/Terralego/django-terra-geocrud/maintainability)
+        
+        https://django-terra-geocrud.readthedocs.io/
+        
+        CRUD views definition for django-geostore in terra apps
+        
+        * Customize Left menu from gesotore layers
+        * Customized endpoints to manage layers and features
+        * Group properties, order them, define layout and widgets to render them.
+        
+        
+        ## Requirements
+        
+        * django-geostore >= 0.3.1
+        * django-template-models
+        * django-template-engines
+        
+        ## DEVELOPMENT
+        
+        ### with docker :
+        ```bash
+        $ docker-compose build
+        $ docker-compose up
+        ....
+        $ docker-compose run web /code/venv/bin/python3.7 ./manage.py shell
+        $ docker-compose run web coverage run ./manage.py test
+        ```
+        
+        ### with pip :
+        ```bash
+        $ python3.7 -m venv venv
+        $ source activate venv/bin/activate
+        pip install -e .[dev]
+        ```
+        
+        
+        =========
+        CHANGELOG
+        =========
+        
+        0.3.5           (2019-10-07)
+        ----------------------------
+        
+        Feature
+        
+        * ability to define custom widgets for feature property rendering in crud view
+        
+        
+        0.3.4           (2019-10-04)
+        ----------------------------
+        
+        Fixes
+        
+        * feature default list fix
+        
+        
+        0.3.3      (2019-10-04)
+        -----------------------
+        
+        Feature
+        
+        * ui-schema fixed in api with group defined
+        * feature_list_properties are now in object instead of single array element
+        
+        
+        0.3.1      (2019-09-30)
+        -----------------------
+        
+        Features
+        
+        * Ability to groups layers properties in form schema and data display
+        * New layer/<layer/features endpoint that provide custom data. Usage of old geostore endpoint will be deprecated.
+        * Improve CrudView serializer to provide required frontend data, and give frontend urls to follow.
+        
+        0.3.0      (2019-09-24)
+        -----------------------
+        
+        Breaking changes
+        * app renamed from terra_crud to terra_geocrud
+        
+        Update
+        
+        * requirements (`django-template-model>=1.0.1` and `django-template-engines>=1.2.9`)
+        
+        0.1.4      (2019-11-13)
+        -----------------------
+        
+        Breaking change
+        
+        * replace template rendering url parameter from {pk} to {id}
+        
+        
+        0.1.3      (2019-11-13)
+        -----------------------
+        
+        Fix
+        
+        * Unquote template rendered url in API
+        
+        
+        0.1.2      (2019-11-13)
+        -----------------------
+        
+        Update
+        
+        * Default template generation with template original name
+        
+        
+        0.1.1      (2019-11-11)
+        -----------------------
+        
+        Fixes
+        
+        * Compatibility with django external storage
+        
+        
+        0.1.0      (2019-11-11)
+        -----------------------
+        
+        Fixes
+        
+        * Fixup rendering issue
+        
+        
+        0.0.1.dev3 (2019-09-10)
+        -----------------------
+        
+        Features
+        
+        * Manage template models for each crud view
+        
+        
+        Breaking changes
+        
+        * Require django-template-model, django-template-engine and extra configuration (see documentation)
+        
+        
+        0.0.1.dev2 (2019-09-02)
+        -----------------------
+        
+        Update
+        
+        * Require terra-common v0.0.2
+        
+        Fixes
+        
+        * Delete unused null=True
+        
+        0.0.1.dev1 (2019-08-29)
+        -----------------------
+        
+        Add features
+        
+        * Set template M2M
+        
+        0.0.1.dev0 (2019-08-28)
+        -----------------------
+        
+        First release
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Provides-Extra: dev
