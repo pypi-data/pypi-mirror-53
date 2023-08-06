@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1021</width>
+    <height>653</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Pypeline 3.0</string>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>false</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>4</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>4</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QTabWidget" name="graphTab">
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1021</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionVars"/>
+    <addaction name="actionHotkeys"/>
+    <addaction name="actionHelp"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuPrefs">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionLocalSettings"/>
+    <addaction name="actionProjectSettings"/>
+    <addaction name="actionHuds"/>
+    <addaction name="actionImport_Types"/>
+    <addaction name="actionDownload"/>
+   </widget>
+   <widget class="QMenu" name="menuOpen">
+    <property name="title">
+     <string>Open</string>
+    </property>
+    <widget class="QMenu" name="menuFavorites">
+     <property name="title">
+      <string>Favorites</string>
+     </property>
+    </widget>
+    <widget class="QMenu" name="menuGraphTemplates">
+     <property name="title">
+      <string>Graph Templates</string>
+     </property>
+    </widget>
+    <addaction name="menuGraphTemplates"/>
+    <addaction name="menuFavorites"/>
+   </widget>
+   <widget class="QMenu" name="menuProject">
+    <property name="title">
+     <string>Project</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuCreate">
+    <property name="title">
+     <string>Graphs</string>
+    </property>
+    <addaction name="actionManageGraphs"/>
+    <addaction name="actionAutomation"/>
+   </widget>
+   <addaction name="menuProject"/>
+   <addaction name="menuOpen"/>
+   <addaction name="menuCreate"/>
+   <addaction name="menuPrefs"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="status"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>open...</string>
+   </property>
+   <property name="toolTip">
+    <string>openqsqs</string>
+   </property>
+  </action>
+  <action name="actionHotkeys">
+   <property name="text">
+    <string>Hotkeys</string>
+   </property>
+  </action>
+  <action name="actionToDo">
+   <property name="text">
+    <string>ToDo</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Save as...</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionTypes">
+   <property name="text">
+    <string>Types...</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>Options...</string>
+   </property>
+  </action>
+  <action name="actionFilter_by_user">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Filter by user</string>
+   </property>
+  </action>
+  <action name="actionMinuscule2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Minuscule2</string>
+   </property>
+  </action>
+  <action name="actionP001">
+   <property name="text">
+    <string>P001</string>
+   </property>
+  </action>
+  <action name="actionPlamree">
+   <property name="text">
+    <string>Palmtree</string>
+   </property>
+  </action>
+  <action name="actionCoxi">
+   <property name="text">
+    <string>Coxi</string>
+   </property>
+  </action>
+  <action name="actionToto_test">
+   <property name="text">
+    <string>toto_test</string>
+   </property>
+  </action>
+  <action name="actionNew_2">
+   <property name="text">
+    <string>new...</string>
+   </property>
+   <property name="font">
+    <font>
+     <italic>true</italic>
+    </font>
+   </property>
+  </action>
+  <action name="actionTcherno">
+   <property name="text">
+    <string>tcherno</string>
+   </property>
+  </action>
+  <action name="actionTutu">
+   <property name="text">
+    <string>tutu</string>
+   </property>
+  </action>
+  <action name="actionGet_selection">
+   <property name="text">
+    <string>get selection...</string>
+   </property>
+  </action>
+  <action name="actionNew_dir">
+   <property name="text">
+    <string>manage...</string>
+   </property>
+  </action>
+  <action name="actionHaha">
+   <property name="text">
+    <string>haha</string>
+   </property>
+  </action>
+  <action name="actionHoho">
+   <property name="text">
+    <string>hoho</string>
+   </property>
+  </action>
+  <action name="actionVars">
+   <property name="text">
+    <string>Environment Vars</string>
+   </property>
+  </action>
+  <action name="actionAddProject">
+   <property name="text">
+    <string>Add...</string>
+   </property>
+  </action>
+  <action name="actionLocalSettings">
+   <property name="text">
+    <string>Locals</string>
+   </property>
+  </action>
+  <action name="actionSxsx">
+   <property name="text">
+    <string>sxsx</string>
+   </property>
+  </action>
+  <action name="actionSxsx_2">
+   <property name="text">
+    <string>sxsx</string>
+   </property>
+  </action>
+  <action name="actionDdd">
+   <property name="text">
+    <string>ddd</string>
+   </property>
+  </action>
+  <action name="actionProjectSettings">
+   <property name="text">
+    <string>Project</string>
+   </property>
+  </action>
+  <action name="actionManageGraphs">
+   <property name="text">
+    <string>Manage Graphs...</string>
+   </property>
+  </action>
+  <action name="actionAutomation">
+   <property name="text">
+    <string>Automation...</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionTypeSettings">
+   <property name="text">
+    <string>Types</string>
+   </property>
+  </action>
+  <action name="actionImport_Types">
+   <property name="text">
+    <string>Transfert</string>
+   </property>
+  </action>
+  <action name="actionEded">
+   <property name="text">
+    <string>eded</string>
+   </property>
+  </action>
+  <action name="actionHuds">
+   <property name="text">
+    <string>Huds</string>
+   </property>
+  </action>
+  <action name="actionDownload">
+   <property name="text">
+    <string>Download</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
