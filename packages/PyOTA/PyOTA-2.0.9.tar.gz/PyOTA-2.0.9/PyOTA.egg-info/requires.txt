@@ -1,0 +1,26 @@
+pysha3
+requests[security]>=2.4.1
+six
+
+[:python_version < "3.0"]
+typing
+
+[:python_version < "3.5"]
+filters
+
+[:python_version >= "3.5"]
+phx-filters
+
+[ccurl]
+pyota-ccurl
+
+[docs-builder]
+sphinx
+sphinx_rtd_theme
+
+[test-runner]
+tox>=3.7
+nose
+
+[test-runner:python_version < "3.0"]
+mock
