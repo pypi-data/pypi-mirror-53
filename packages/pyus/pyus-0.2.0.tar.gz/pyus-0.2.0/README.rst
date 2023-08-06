@@ -1,0 +1,130 @@
+.. _PyPI: https://pypi.python.org/pypi
+.. _GitLab: https://gitlab.com/
+.. _SetupDoc: https://docs.python.org/3.7/distutils/configfile.html
+
+====
+PyUS
+====
+PyUS is a GPU-accelerated Python package for ultrasound imaging.
+
+Requirements
+------------
+PyUS is based on ``Python>=3.7``, with the following dependencies:
+
+- ``numpy``
+- ``scipy``
+- ``matplotlib``
+- ``tqdm``
+- ``pycuda``
+- ``h5py``
+- ``pyfftw``
+
+These packages will be installed when calling the ``pip`` installation command.
+
+**Important notes:**
+
+- `CUDA 10.0 <https://developer.nvidia.com/cuda-10.0-download-archive>`_
+  is required.
+- CPU-only implementations are also provided, though CUDA 10.0 should still be
+  installed in order to work.
+- Only tested on Ubuntu 16.04 and 18.04 based distributions.
+
+Installation
+------------
+PyUS is currently under development, and beta versions will soon be available
+for installation from the Python Package Index (PyPI_).
+
+For now, the easiest way to install it is by downloading the
+pre-compiled wheel contained in
+`this archive <https://gitlab.com/pyus/pyus/-/jobs/313569983/artifacts/download>`_,
+and install it using `pip` in a dedicated Python environment:
+
+.. code-block:: bash
+
+    unzip artifacts.zip
+    pip install dist/pyus-0.2.0-cp37-cp37m-linux_x86_64.whl
+
+
+Build from sources
+------------------
+Before building the wheel you will need to build the ``pulse``
+library.
+To do so, refer to the `pulse_directory <pulse/README.md>`_.
+
+In order to build the wheel from sources, you will first have to install
+``numpy`` and ``cython``.
+
+.. code-block:: bash
+
+    pip install numpy cython
+
+An option to provide for the build is the CUDA version that should be used.
+To do so, just pass it as an environment variable during the call to ``pip``:
+
+.. code-block:: bash
+
+    CUDA_VERSION=X.Y pip <pip arguments>
+
+If you don't provide it, the version will be automatically detected on your
+system, provided that CUDA is installed in the standard location (i.e.
+``/usr/local/``).
+If you have several versions installed or none, an error will
+be raised and the build will be interrupted. You will then have to provide a
+specific version of CUDA or install one.
+
+To build the package, you have several options:
+
+- you can manually build the wheel:
+
+  .. code-block:: bash
+
+      cd pyus
+      CUDA_VERSION=X.Y pip wheel --wheel-dir=<your/wheel/dst/dir> --no-deps .
+
+  where the ``--wheel-dir`` option allows you to specify the directory to put
+  the built wheel in, and the ``--no-deps`` prevents ``pip`` from downloading
+  all the dependencies and putting them with your built wheel.
+
+
+- you can install the package locally in editable mode:
+
+  .. code-block:: bash
+
+      cd pyus
+      CUDA_VERSION=X.Y pip install -e .
+
+- you can install the package normally:
+
+  .. code-block:: bash
+
+      cd pyus
+      CUDA_VERSION=X.Y pip install .
+
+Getting Started
+---------------
+As PyUS is initially an internal package used for research purposes, it still
+lacks a lot of documentation.
+We did our best to use type hinting that "speak for themselves".
+
+In the meantime, some examples are provided under directory
+`examples/ <examples/>`_.
+
+Contributing
+------------
+See `CONTRIBUTING.rst <CONTRIBUTING.rst>`_.
+
+Team/Contributors
+-----------------
+TODO
+
+License
+-------
+PyUS is released under the terms of the `BSD 3-Clause license <LICENSE>`_.
+
+Acknowledgments
+---------------
+PyUS is initially an internal research package that was started in 2018 at the
+`Signal Processing Laboratory 5 (LTS5) <https://lts5www.epfl.ch>`_,
+`École polytechnique fédérale de Lausanne <https://www.epfl.ch/>`_.
+
+**TODO:** citation
