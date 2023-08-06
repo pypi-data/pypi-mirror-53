@@ -1,0 +1,41 @@
+Arbeitszeitmodell
+- gibt an wieviel Arbeitsstunden ein Mitabeiter pro Woche hat
+- dies kann eine einfache Regel sein, 
+  wie 8-16 uhr, Mo - Fr - ergibt 40 h
+- oder auch mehrere Regeln:
+  1. Mo - Do, 8 - 16 Uhr
+  2. Fr, 8 - 14 Uhr
+  ergibt 38 h
+
+Zeitkonto
+- Konto auf das Arbeitszeiten gebucht werden
+- es ist mindestens ein Zeitkonto nötig
+- bei mehreren Zeitkonten muß eines als Primär betrachtet werden
+- alle anderen Zeitkonten mit Inhalt erscheinen auf der Auswertng als Zuschlag
+
+Tarifmodell
+- legt fest nach welchen Regeln die eingetragenen Arbeitszeiten verbucht werden
+- nur Einträge auf dem primären Zeitkonto werden für die Auswertung verwendet
+- alle anderen Zeitkonten werden als zuschläge dargestellt
+- Zeitkontoregel
+  + eine Regel um eine eingetragene Arbeitszeit auf ein Konto zu buchen
+  + Regeln können nur zu bestimmten Tageszeiten oder an bestimmten tagen aktiv sein
+    oder auch 24h/7Tage
+  + es können gleichzeitig mehrere Regeln aktiv sein, z.B um eine Spätschicht sowohl
+    als normale Arbeit als auch als Spätschichtzuschlag zu buchen
+    (in diesem Fall werden etvl. mehrere Zeitkontoeinträge pro Arbeitszeiteintrag erzeugt)
+
+Urlaubstage
+- der Urlaub wird im Urlaubskalender durch den Mitarbeiter eingetragen 
+- der Urlaubskalender ist der am Mitarbeiter eingestellte Kalender
+- der Cronjob übernimmt periodisch die Urlaube in die aktuelle Auswertung
+- ein Urlaubstag wird gewertet wenn es an diesem Tag eine Sollarbeitszeit gibt und:
+ + es ein 'voller Urlaubstag' ist und an diesem Tag keine Anwesenheit eingetragen ist
+   (es wird Sollarbeitszeit = Istarbeitszeit gerechnet)
+ + es ein halber Urlaubstag ist, Arbeitszeiten sind an diesem Tag erlaubt
+   (es wird halbe Sollarbeitszeit + eingetragene Arbeitszeiten gerechnet)
+- bei einem halben Urlaubstag kann die eingetragene Arbeitszeit durch die Pausenregelung reduziert werden
+- Anzahl Urlaubstage in Auswertung: es werden die tatsächlich gewerteten Urlaubstage ausgegeben (ganze/halbe)
+- verbleibende Urlaubstage werden mit dem aktuellen Wert für die Anzahl der Urlaubstage+Sonderurlaub des Mitarbeiters
+  von Jahresbeginn oder dem Arbeitsbeginn und den bis zur aktuellen Auswertung verwendeten
+  Urlaubstagen berechnet
