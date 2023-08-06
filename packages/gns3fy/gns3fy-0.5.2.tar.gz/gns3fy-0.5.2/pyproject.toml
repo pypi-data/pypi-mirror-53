@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "gns3fy"
+version = "0.5.2"
+description = "Python wrapper around GNS3 Server API"
+authors = ["David Flores <davidflores7_8@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/davidban77/gns3fy"
+homepage = "https://github.com/davidban77/gns3fy"
+keywords = ["network", "gns3", "python", "restapi"]
+classifiers = [
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.6",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+requests = "^2.22"
+pydantic = "^0.*"
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.7"
+pytest = "^5.0"
+flake8 = "^3.7"
+black = {version = "^18.3-alpha.0",allows-prereleases = true}
+requests-mock = "^1.6"
+pytest-cov = "^2.7"
+mkdocs = "^1.0"
+pydoc-markdown = { git = "https://github.com/NiklasRosenstein/pydoc-markdown.git", branch = "develop", category="dev" }
+mkdocs-cinder = "^0.17.0"
+tox = "^3.13"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
