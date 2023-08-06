@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: byprice-scrapingtools
+Version: 0.0.8
+Summary: Useful tools to scrape online stores
+Home-page: https://github.com/ByPrice/scraping-tools
+Author: Oswaldo Cruz Simon
+Author-email: oswaldo@byprice.com
+License: MIT
+Description: ## Compiling
+        ~~~
+        rm -rf build byprice_scrapingtools.egg-info dist
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
+        ~~
+Keywords: scraping,ByPrice,Counter by hierarchy
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
