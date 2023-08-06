@@ -1,0 +1,21 @@
+language: python
+python:
+- '3.6'
+- '3.7'
+install:
+- pip install -r requirements.txt
+- pip install .
+script: pytest
+deploy:
+  skip_cleanup: true
+  skip_existing: true
+  distributions: sdist bdist_wheel
+  provider: pypi
+  user: __token__
+  password:
+    secure: WnKOZBKYDg9VY0gA4ju7WStY+t1EUUw1GUmm/YEtXUS1p2nmubBo/XhMqnM3zhssLysJepziu9Lsk2jT4Jbs0ul2h1mD1cP+G9cm9qBU3mvVM/s3uorLYX5cm2A49MYfQP19nkdh1k4EEUpaOBAqv0KJUj99ltwlkP9L0/mQgLk91rqKyPcaf89527s2D1zwSYP96glublgi9aQUGvie3cnkhLmYmk0meKFkfg70iuYL/MILTFUuxvGqGOLRwUSNUu17SD6hD7eXm4F7tfzxynX/LKBnozWzdWTp0nP7lK/yNtYbAhEP3KebShDoQAAFfVLzelH9LR69ubvQYIKl/vmhsQ/jM4viQBFpDZ0t2FqA5HAReOd+eqtOk4J7zt82BLaY4HoJ7fw8yf8jWK1QgebeqYGfxXajll9iVgakxn0XyVc/FwZ6XrwRiYAx71tw3vChwGWpWw3ghr0wj3jYUSE7wpW2RTmXJYrLZBp5jLYfqFc/ccKLxBiUY3kjJdQJeeTc8Bbh81HleKm4cHHx89Ri415WPDps1GPWi/LmdRYXNu+W/sISXMsOTv8KC2GrDstDdJWyuBE/7ZTRFY4yT3c9GRX4MDH/wty4XcIQfKjkzos6lyrFtXLTIkRPgPpuFPgKzrrd1+Nv7N+tpcEDcZE3UGIdtCWpPYh9XcRHEWc=
+  on:
+    tags: true
+    branch:
+    - master
+    - "/(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$/"
