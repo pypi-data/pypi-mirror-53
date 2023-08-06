@@ -1,0 +1,9 @@
+makefun>=1.5
+wrapt
+six
+
+[:python_version < "3.2"]
+functools32
+
+[:python_version < "3.3"]
+funcsigs
