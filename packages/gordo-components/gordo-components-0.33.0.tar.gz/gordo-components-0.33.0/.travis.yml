@@ -1,0 +1,33 @@
+sudo: required
+
+services: docker
+
+language: python
+
+python:
+  - "3.6"
+
+cache: pip
+
+os:
+  - linux
+
+env:
+  global:
+    - DOCKER_REGISTRY=auroradevacr.azurecr.io
+    - DOCKER_REPO=gordo-components
+
+install: skip
+
+script:
+  - make images
+
+deploy:
+  - provider: script
+    script: make images push-prod-images
+    on:
+      branch: master
+  - provider: script
+    script: make images push-prod-images
+    on:
+      tags: true
