@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: papermap
+Version: 0.1.0
+Summary: A python package and CLI for creating paper maps
+Home-page: https://github.com/sgraaf/papermap
+Author: Steven van de Graaf
+Author-email: steven@vandegraaf.xyz
+License: GNU General Public License (GNU GPL v3 or above)
+Description: # PaperMap
+        
+        A python package and CLI for creating paper maps.
+        
+        ## Package example
+        ```python
+        pm = PaperMap(13.75889, 100.49722)
+        pm.render()
+        pm.save('Bangkok.pdf')
+        ```
+        
+        ## CLI example
+        ```bash
+        papermap 13.75889 100.4972 Bangkok.pdf
+        ```
+        
+        Both of these examples accomplish the exact same thing: creating an A4 map of Bangkok at scale 1:25000.
+        
+        ### Licence
+        PaperMap is open-source and licensed under GNU GPL, Version 3.
+Keywords: paper map image osm openstreetmap package cli
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
