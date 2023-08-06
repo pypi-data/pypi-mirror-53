@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: redis-queue-tool
+Version: 1.3
+Summary: reids高并发队列(高并发爬虫利器)
+Home-page: https://github.com/abo123456789/RedisQueue
+Author: cc
+Author-email: abcdef123456chen@sohu.com
+Maintainer: cc
+Maintainer-email: abcdef123456chen@sohu.com
+License: BSD License
+Platform: all
+Classifier: Development Status :: 4 - Beta
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: Implementation
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries
+Requires-Dist: redis (>=2.10.6)
+Requires-Dist: tomorrow3 (>=1.1.0)
+
+### 包安装
+pip install redis-queue-tool
+
+### 使用实例
+# redis配置连接信息
+redis_host = '127.0.0.1'
+redis_password = ''
+redis_port = 6379
+redis_db = 0
+
+quenen_name = 'test1'
+redis_pub = RedisPublish(queue_name=quenen_name, max_push_size=5)
+
+result = [str(i) for i in range(1, 101)]
+
+for zz in result:
+    redis_pub.publish_redispy(a=zz, b=zz, c=zz)  # 多线程单条记录写入
+
+redis_pub.publish_redispy_list(result)  # 单线程批量写入1
+
+for zz in result:
+    redis_pub.publish_redispy_mutil(zz)  # 单线程批量写入2
+
+
+def print_msg(msg):
+    print(json.loads(msg))
+
+
+# 多线程消费
+redis_customer = RedisCustomer(quenen_name, consuming_function=print_msg, threads_num=100)
+print(redis_customer.threads_num)
+redis_customer.start_consuming_message()
+
