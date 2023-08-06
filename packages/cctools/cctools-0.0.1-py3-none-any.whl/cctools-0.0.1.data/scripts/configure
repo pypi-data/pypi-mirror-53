@@ -1,0 +1,1751 @@
+#!/bin/sh
+
+###########################
+# *** Set for releases. ***
+
+MAJOR=8
+MINOR=0
+MICRO=0
+
+# Optionally set the source/tag for this code (e.g. RC1 or FINAL).  Setting
+# this variable is instead useful for statically naming the source when it will
+# not match the branch name (like RC1 or FINAL).
+RELEASE=DEVELOPMENT
+
+###########################
+# *** You should not need to change anything below this line. ***
+###########################
+
+. ./configure.tools.sh
+
+uname -a
+
+if [ -z "$USER" ]; then
+  USER=`whoami`
+  export USER
+fi
+
+save_arguments "$0" "$@"
+
+# Bourne shell is tricky when you use backtick command substitution backslash
+# has special meaning even when surrounded by single-quotes. It is necessary to
+# escape the backslash.
+# Here's what we want to exec literally:
+#   echo "$*" | sed s/#/\\#/ | sed s/\$/$$/
+# The above sed commands are to escape the output for the Makefile.
+# Arguments to configure which can be printed for version/debug information.
+configure_arguments=`echo "$*" | sed 's/#/\\\\#/' | sed 's/\\$/$$/'`
+
+# Bourne shell is tricky when you use backtick command substitution backslash
+# has special meaning even when surrounded by single-quotes. It is necessary to
+# escape the backslash.
+# Here's what we want to exec literally:
+#   uname -a | sed s/#/\\#/ | sed s/\$/$$/
+# The above sed commands are to escape the output for the Makefile.
+system_information=`uname -a | sed 's/#/\\\\#/' | sed 's/\\$/$$/'`
+
+BUILD_CPU="$(uname -m | tr \[a-z\] \[A-Z\])"
+BUILD_DATE="$NOW"
+BUILD_HOST="$(uname -n)"
+BUILD_SYS="$(uname -s | tr \[a-z\] \[A-Z\] | awk -F_ '{print $1}')"
+BUILD_USER="$USER"
+
+if [ "$BUILD_CPU" = UNKNOWN ]
+then
+	BUILD_CPU=`uname -p | tr \[a-z\] \[A-Z\]`
+fi
+
+case "$BUILD_CPU" in
+	I[0-9]86)
+	BUILD_CPU=I386
+	;;
+	POWER\ MACINTOSH)
+	BUILD_CPU=POWERPC
+	;;
+	SUN4V)
+	BUILD_CPU=SPARC
+	;;
+esac
+
+include_package_apps="apps"
+include_package_chirp="chirp"
+include_package_deltadb="deltadb"
+include_package_doc="doc"
+include_package_ftplite="ftp_lite"
+include_package_grow="grow"
+include_package_makeflow="makeflow"
+include_package_parrot="parrot"
+include_package_prune="prune"
+include_package_resource_monitor="resource_monitor"
+include_package_umbrella="umbrella"
+include_package_weaver="weaver"
+
+swig_bindings=""
+
+install_path="$HOME/cctools"
+
+build_label=
+build_date=
+
+curl_path="/usr"
+cvmfs_path="/usr"
+ext2fs_path="/usr"
+fuse_path="/usr"
+golang_path="/usr"
+globus_path="/usr"
+irods_path="/usr"
+mpi_path="/usr"
+mysql_path="/usr"
+openssl_path="/usr"
+perl_path="/usr"
+python_path="/usr"
+python3_path="/usr"
+readline_path="/usr"
+swig_path="/usr"
+uuid_path="/usr"
+xrootd_path="/usr"
+zlib_path="/usr"
+
+globus_flavor=auto
+irods_flavor=auto
+xrootd_arch=auto
+
+ccompiler=${CC:-gcc}
+cxxcompiler=${CXX:-g++}
+linker="${LD:-${ccompiler}}"
+
+ccflags="${CFLAGS} -D__EXTENSIONS__ -D_LARGEFILE64_SOURCE -D__LARGE64_FILES -Wall -Wextra"
+c_only_flags="-std=c99"
+
+config_zlib_path=yes
+
+config_ext2fs_path=auto
+config_fuse_path=auto
+config_golang_path=auto
+config_mysql_path=auto
+config_perl_path=auto
+config_python_path=auto
+config_python3_path=auto
+config_readline_path=auto
+config_swig_path=auto
+
+config_curl_path=no
+config_cvmfs_path=no
+config_globus_path=no
+config_irods_path=no
+config_mpi_path=no
+config_openssl_path=no
+config_xrootd_path=no
+
+config_static_libgcc=yes
+
+while [ $# -gt 0 ]
+do
+	opt=$1
+	arg=''
+	shift
+
+	case $opt in
+			# handle options of the form --opt=arg
+		--*=*)
+			arg=$(eval echo ${opt#*=})
+			opt=${opt%%=*}
+			;;
+			# empty arg only for these options
+		--debug|--strict|--sanitize|--static|--without-*|--help)
+			arg=''
+			;;
+		--*)
+			# handle options of the form --opt arg
+			arg=$1
+			shift
+		;;
+	esac
+
+	case $opt in
+		--debug)
+			optdebug=1
+			optstrict=1
+			;;
+		--prefix)
+			install_path=$(abspath "${arg}")
+			;;
+		--strict)
+			optstrict=1
+			;;
+		--sanitize)
+			optsanitize=1
+			;;
+		--static)
+			# example: CFLAGS=-D__MUSL__ CC=musl-gcc ./configure --without-system-{doc,apps} --with-readline-path=no --static
+			optstatic=1
+			;;
+		--build-label)
+			build_label=${arg}
+			;;
+		--build-date)
+			build_date=${arg}
+			;;
+		--sge-parameter)
+			if [ -z "$sge_parameters" ]
+			then
+				sge_parameters="\#$ ${arg}"
+			else
+				sge_parameters="${sge_parameters}\n\#$ ${arg}"
+			fi
+			;;
+		--with-curl-path)
+			curl_path=${arg}
+			config_curl_path=$(config_X_path ${arg})
+			;;
+		--with-cvmfs-path)
+			cvmfs_path=${arg}
+			config_cvmfs_path=$(config_X_path ${arg})
+			;;
+		--with-ext2fs-path)
+			ext2fs_path=${arg}
+			config_ext2fs_path=$(config_X_path ${arg})
+			;;
+		--with-fuse-path)
+			fuse_path=${arg}
+			config_fuse_path=$(config_X_path ${arg})
+			;;
+		--with-globus-path)
+			globus_path=${arg}
+			config_globus_path=$(config_X_path ${arg})
+			;;
+		--globus-flavor)
+			globus_flavor=${arg}
+			;;
+		--with-golang-path)
+			golang_path=${arg}
+			config_golang_path=$(config_X_path ${arg})
+			;;
+		--with-irods-path)
+			irods_path=${arg}
+			config_irods_path=$(config_X_path ${arg})
+			;;
+		--irods-flavor)
+			irods_flavor=${arg}
+			;;
+		--with-mpi-path)
+			mpi_path=${arg}
+			config_mpi_path=$(config_X_path ${arg})
+			;;
+		--with-mysql-path)
+			mysql_path=${arg}
+			config_mysql_path=$(config_X_path ${arg})
+			;;
+		--with-openssl-path)
+			openssl_path=${arg}
+			config_openssl_path=$(config_X_path ${arg})
+			;;
+		--with-perl-path)
+			perl_path=${arg}
+			config_perl_path=$(config_X_path ${arg})
+			;;
+		--with-python-path)
+			python_path=${arg}
+			config_python_path=$(config_X_path ${arg})
+			;;
+		--with-python3-path)
+			python3_path=${arg}
+			config_python3_path=$(config_X_path ${arg})
+			;;
+		--with-readline-path)
+			readline_path=${arg}
+			config_readline_path=$(config_X_path ${arg})
+			;;
+		--with-swig-path)
+			swig_path=${arg}
+			config_swig_path=$(config_X_path ${arg})
+			;;
+		--with-uuid-path)
+			uuid_path=${arg}
+			config_uuid_path=$(config_X_path ${arg})
+			;;
+		--with-xrootd-path)
+			xrootd_path=${arg}
+			config_xrootd_path=$(config_X_path ${arg})
+			;;
+		--xrootd-arch)
+			xrootd_arch=${arg}
+			;;
+		--with-zlib-path)
+			zlib_path=${arg}
+			if [ "$zlib_path" = 'no' ];
+			then
+				echo "*** zlib is not optional"
+				exit 1
+			fi
+			;;
+		--without-system-apps)
+			include_package_apps=""
+			;;
+		--without-system-makeflow)
+			include_package_makeflow=""
+			;;
+		--without-system-ftp-lite)
+			include_package_ftplite=""
+			;;
+		--without-system-chirp)
+			include_package_chirp=""
+			;;
+		--without-system-grow)
+			include_package_grow=""
+			;;
+		--without-system-umbrella)
+			include_package_umbrella=""
+			;;
+		--without-system-parrot)
+			include_package_parrot=""
+			;;
+		--without-system-resource_monitor)
+			include_package_resource_monitor=""
+			;;
+		--without-system-weaver)
+			include_package_weaver=""
+			;;
+		--without-system-doc)
+			include_package_doc=""
+			;;
+		--without-system-prune)
+			include_package_prune=""
+			;;
+		--with-*-path)
+			echo "ignoring unknown package ${arg}"
+			;;
+		--tcp-low-port)
+			ccflags="${ccflags} -DTCP_LOW_PORT_DEFAULT=${arg}"
+			;;
+		--tcp-high-port)
+			ccflags="${ccflags} -DTCP_HIGH_PORT_DEFAULT=${arg}"
+			;;
+		--without-static-libgcc)
+			config_static_libgcc=no
+			;;
+		-h | -help | --h | --help)
+			cat <<EOF
+Use: configure [options]
+Where options are:
+  --help
+  --prefix             <path>
+  --debug
+  --build-label        <label>
+  --strict
+  --sanitize
+  --sge-parameter      <parameter>
+  --globus-flavor      <flavor>
+  --irods-flavor       3 | 4
+  --xrootd-arch        <arch>
+  --tcp-low-port       <port>
+  --tcp-high-port      <port>
+  --with-PACKAGE-path  <path>
+  --without-system-SYSTEM
+
+Where PACKAGE may be:
+	curl
+	cvmfs
+	ext2fs
+	fuse
+	globus
+	irods
+	mpi
+	mysql
+	perl
+	python
+	python3
+	readline
+	swig
+	uuid
+	xrootd
+	zlib
+
+And SYSTEM may be:
+	makeflow
+	ftp-lite
+	chirp
+	parrot
+	umbrella
+	resource_monitor
+	doc
+EOF
+			exit 0
+			;;
+		*)
+			echo "Unknown option ${opt}"
+			exit 1
+			;;
+	esac
+done
+
+SOURCE=$RELEASE
+if [ -n "$build_label" ]; then
+	SOURCE="$SOURCE $build_label"
+fi
+
+DATE=$NOW
+if [ -n "$build_date" ]; then
+	DATE=$build_date
+fi
+
+VERSION="$MAJOR.$MINOR.$MICRO $SOURCE"
+
+if [ "$optstrict" = 1 ]; then
+	ccflags="${ccflags} -Werror"
+fi
+
+export HOST_MULTIARCH=$(check_multiarch)
+
+rm -f config.mk
+
+require_path ${ccompiler}
+require_path ${cxxcompiler}
+require_gnu_make
+
+# Lots of warnings are enabled by default, but several are too strict
+# and crop up in third-party code, so we disable those checks.
+# However, not all compilers support these flags, so we check each one.
+
+for flag in no-unused-parameter no-unknown-pragmas no-deprecated-declarations no-unused-const-variable
+do
+	if check_compiler_flag -W$flag
+	then
+		ccflags="${ccflags} -W$flag"
+	fi
+done
+
+# Cygwin has some compiler oddities.
+# 1 - Sloppy definitions of the ctype.h functions cause spurious warnings
+# about char -> int conversions.
+# 2 - All code is PIC by default, and adding the flag causes more warnings.
+
+if [ ${BUILD_SYS} = CYGWIN ]
+then
+	ccflags="${ccflags} -Wno-char-subscripts"
+else
+	ccflags="${ccflags} -fPIC"
+fi
+
+#
+# Currently, we rely on the linker --as-needed flag to sort out
+# which dynamic libraries each executable actually needs.
+# This is apparently a recent addition to gnu ld.
+# A better solution would be to explicitly specify which libraries
+# are needed by which executable, but this will come in a later version.
+#
+
+echon "checking if ld supports the --as-needed flag..."
+if ld --help 2>&1 | grep -- --as-needed 2>&1 >/dev/null
+then
+		echo "yes"
+		link_as_needed="-Xlinker --as-needed"
+		link_no_as_needed="-Xlinker --no-as-needed"
+else
+		echo "no"
+fi
+
+ldflags="${LDFLAGS}"
+
+if [ $BUILD_SYS = LINUX ]
+then
+		if [ "${config_static_libgcc}" = yes ]
+		then
+				ldflags="${ldflags} -Xlinker -Bstatic -static-libgcc"
+		fi
+		
+		ldflags="${ldflags} -Xlinker -Bdynamic ${link_as_needed}"
+elif [ $BUILD_SYS != DARWIN ]
+then
+		if [ "${config_static_libgcc}" = yes ]
+		then
+				ldflags="${ldflags} -static-libgcc"
+		fi
+fi
+
+if [ "$optsanitize" = 1 ]; then
+	ccflags="${ccflags} -fno-omit-frame-pointer -fsanitize=address -fsanitize=undefined"
+	ldflags="-fsanitize=address -lasan -lubsan ${ldflags}"
+	test_ccflags="-lasan -lubsan"
+fi
+
+##########################################################################
+# SWITCH TO STATIC LINKING FOR UNCOMMON THIRD-PARTY PACKAGES
+##########################################################################
+library_search_mode=prefer_static
+##########################################################################
+
+if [ "$globus_flavor" = auto ]
+then
+	if [ $BUILD_CPU = X86_64 ]
+	then
+		globus_flavor=gcc64
+	else
+		globus_flavor=gcc32
+	fi
+fi
+
+echo "using a globus flavor of '$globus_flavor' (if this is wrong, use the --globus-flavor argument)"
+
+if [ $config_globus_path != no ]
+then
+	config_openssl_path=yes
+	if check_file ${globus_path}/include/${globus_flavor}/globus_common.h
+	then
+		ccflags="${ccflags} -DHAS_GLOBUS_GSS"
+		globus_ccflags="-I${globus_path}/include -I${globus_path}/include/${globus_flavor}"
+		#ldflags="${ldflags} -L${globus_path}/lib64 -L${globus_path}/lib"
+		for library in globus_gss_assist globus_gssapi_gsi globus_gsi_proxy_core globus_gsi_credential globus_gsi_callback globus_oldgaa globus_gsi_sysconfig globus_gsi_cert_utils globus_openssl globus_openssl_error globus_callout globus_proxy_ssl globus_common ltdl
+		do
+			if library_search ${library}_${globus_flavor} ${globus_path}
+			then
+				globus_ldflags="${globus_ldflags} ${library_search_result}"
+			fi
+		done
+	elif check_file ${globus_path}/include/globus/globus_common.h
+	then
+		ccflags="${ccflags} -DHAS_GLOBUS_GSS"
+		globus_ccflags="-I${globus_path}/lib/globus/include -I${globus_path}/include/globus"
+		#ldflags="${ldflags} -L${globus_path}/lib64 -L${globus_path}/lib"
+		for library in globus_gss_assist globus_gssapi_gsi globus_gsi_proxy_core globus_gsi_credential globus_gsi_callback globus_oldgaa globus_gsi_sysconfig globus_gsi_cert_utils globus_openssl globus_openssl_error globus_callout globus_proxy_ssl globus_common ltdl
+		do
+			if library_search $library ${globus_path}
+			then
+				globus_ldflags="${globus_ldflags} ${library_search_result}"
+			fi
+		done
+	else
+		if [ $config_globus_path = yes ]
+		then
+			echo "*** Sorry, I couldn't find Globus in $globus_path"
+			echo "*** Check --with-globus-path and try again."
+			exit 1
+		else
+			echo "*** skipping globus support"
+		fi
+	fi
+else
+	echo "*** skipping globus support"
+fi
+
+# irods 4.0 moved all its source to the iRODS subdirectory
+# if auto, we try in this order: 4.2 (4.0,4.1) 3
+
+# irods 4.x uses .so plugins which are found in /var/lib/irods.
+# These require the parrot is linked with -rdynamic so that
+# the plugins can refer to symbols in libRodsAPI.a in parrot.
+
+# irods 4.x changed the API from C to C++, so we must look
+# for .hpp files instead of .h files.
+
+if [ $config_irods_path != no ]
+then
+	if [ "$irods_flavor" = auto -o "$irods_flavor" = 4 ]
+	then
+		irods_flavor=auto
+		if library_search RodsAPIs "${irods_path}/lib"
+		then
+			echo "detected irods 4.x installation"
+			echo "*** warning: irods 4.x requires plugins installed in /var/lib, or for the irods_plugins_home variable to be set."
+
+			ccflags="${ccflags} -DHAS_IRODS -DIRODS_USES_PLUGINS -DIRODS_USES_HPP"
+			ldflags="${ldflags} -rdynamic"
+
+			irods_ldflags="${library_search_result}"
+
+			# needed for 4.2:
+			if library_search irods_client_api "${irods_path}/lib"
+			then
+				echo "detected irods >4.1 installation"
+				irods_ldflags="${irods_ldflags} ${library_search_result}"
+				ccflags="${ccflags} -DIRODS_USES_ERROR_HPP"
+			fi
+
+			for d in ${irods_path}/include/irods
+			do
+				irods_ccflags="${irods_ccflags} -I$d"
+			done
+
+			# irods 4.x depends on a specific version of boost:
+			boost_path=`ls -d ${irods_path}/lib/irods/externals`
+			if [ ! -d ${boost_path} ]
+			then
+				echo "*** Could not find irods boost in ${irods_path}/external !"
+				exit 1
+			fi
+
+			echo "found irods boost in $boost_path"
+			for subtype in system thread chrono filesystem regex
+			do
+				lib=${boost_path}/libboost_${subtype}.a
+				if [ -f $lib ]
+				then
+					echo "found $lib"
+					irods_ldflags="${irods_ldflags} $lib"
+				fi
+			done
+
+			jansson_path=`ls -d ${irods_path}/lib/irods/externals`
+			if [ ! -d ${jansson_path} ]
+			then
+				echo "*** Could not find irods jansson in ${irods_path}/external !"
+				exit 1
+			fi
+
+			echo "found irods jansson in $jansson_path"
+			irods_ldflags="${irods_ldflags} ${jansson_path}/libjansson.a"
+
+			irods_flavor=4
+		fi
+	fi
+
+	if [ "$irods_flavor" = auto -o "$irods_flavor" = 3 ]
+	then
+		irods_flavor=auto
+		if library_search RodsAPIs "${irods_path}/lib/core/obj"
+		then
+			echo "detected irods 3.x installation"
+
+			ccflags="${ccflags} -DHAS_IRODS"
+
+			for d in ${irods_path}/lib/*/include ${irods_path}/server/*/include
+			do
+				irods_ccflags="${irods_ccflags} -I$d"
+			done
+
+			irods_ldflags="${library_search_result}"
+			irods_flavor=3
+		fi
+	fi
+
+	if [ "$irods_flavor" = auto ]
+	then
+		echo "*** Sorry, I couldn't find IRODS in $irods_path"
+		echo "*** Check --with-irods-path and try again."
+		exit 1
+	else
+		# When irods is enabled, we also need ssl
+		config_openssl_path=yes
+	fi
+else
+	echo "*** skipping irods support"
+fi
+
+
+if [ $config_mysql_path != no ] && library_search mysqlclient ${mysql_path} mysql
+then
+	mysql_ldflags="${library_search_result}"
+
+	if [ ${mysql_path} != /usr ]
+	then
+		mysql_ccflags="-I${mysql_path}/include"
+	fi
+
+	ccflags="${ccflags} -DHAS_MYSQL -DHAS_BXGRID"
+
+	# It seems that the various versions move around the key include file,
+	# so we check for it in several places here.
+
+	if [ -f ${mysql_path}/include/mysql.h ]
+	then
+		ccflags="${ccflags} -DHAS_MYSQL_H"
+	fi
+
+	if [ -f ${mysql_path}/include/mysql/mysql.h ]
+	then
+		ccflags="${ccflags} -DHAS_MYSQL_MYSQL_H"
+	fi
+
+	# When mysql is enabled, we also need ssl
+	config_openssl_path=yes
+
+else
+	if [ $config_mysql_path = yes ]
+	then
+		echo "*** Sorry, I couldn't find MySQL in $mysql_path"
+		echo "*** Check --with-mysql-path and try again."
+		exit 1
+	else
+		echo "*** skipping mysql support"
+	fi
+fi
+
+if [ $config_xrootd_path != no ] && check_file ${xrootd_path}/include/xrootd/XrdVersion.hh
+then
+	if [ "$xrootd_arch" = auto ]
+	then
+		if [ "$BUILD_CPU" = X86_64 ]
+		then
+			xrootd_arch=x86_64_linux_26
+		else
+			xrootd_arch=i386_linux26
+		fi
+	fi
+
+	echo "using an xrootd arch of '$xrootd_arch' (if this is wrong, use the --xrootd-arch argument)"
+
+	ccflags="${ccflags} -DHAS_XROOTD"
+	xrootd_ccflags="-I${xrootd_path}/include/xrootd"
+
+	for library in XrdPosix XrdClient XrdSys XrdNet XrdNetUtil XrdOuc
+	do
+		if library_search $library ${xrootd_path} ${xrootd_arch}
+		then
+			xrootd_ldflags="${xrootd_ldflags} ${library_search_result}"
+		else
+			echo "*** Couldn't find $library in ${xrootd_path}"
+			exit 1
+		fi
+
+	done
+else
+	if [ $config_xrootd_path = yes ]
+	then
+		echo "*** Sorry, I couldn't find xrootd in ${xrootd_path}"
+		echo "*** Check --with-xrootd-path and try again."
+		exit 1
+	else
+		echo "*** skipping xrootd support"
+	fi
+fi
+
+if [ $config_cvmfs_path != no ] && check_file ${cvmfs_path}/include/libcvmfs.h
+then
+	config_openssl_path=yes
+
+	ccflags="${ccflags} -DHAS_CVMFS"
+	cvmfs_ccflags="-I${cvmfs_path}/include"
+
+	if library_search cvmfs ${cvmfs_path}
+	then
+		cvmfs_ldflags="${library_search_result}"
+	else
+		echo "*** Couldn't find $library in ${cvmfs_path}"
+		exit 1
+	fi
+
+	cvmfs_version=$(sed -n 's/^#define LIBCVMFS_VERSION \+\([0-9]\+\)/\1/p' ${cvmfs_path}/include/libcvmfs.h)
+	if [ $cvmfs_version -gt 1 ]
+	then
+		if library_search uuid $uuid_path
+		then
+			cvmfs_ldflags="${cvmfs_ldflags} ${library_search_result}"
+		else
+			echo "*** Couldn't find libuuid"
+			echo "*** Check --with-uuid-path and try again."
+			exit 1
+		fi
+	fi
+else
+	if [ $config_cvmfs_path = yes ]
+	then
+		echo "*** Sorry, I couldn't find cvmfs in ${cvmfs_path}"
+		echo "*** Check --with-cvmfs-path and try again."
+		exit 1
+	else
+		echo "*** skipping cvmfs support"
+	fi
+fi
+
+if [ $config_fuse_path != no ]
+then
+		if library_search fuse ${fuse_path} || library_search fuse /
+		then
+				if [ "${fuse_path}" != / -a "${fuse_path}" != /usr ]
+				then
+						fuse_ccflags="-I${fuse_path}/include"
+				fi
+				ccflags="${ccflags} -DHAS_FUSE"
+				fuse_ldflags="${library_search_result}"
+				fuse_avail=yes
+		else
+				if [ $config_fuse_path = yes ]
+				then
+
+				echo "*** Sorry, I couldn't find Fuse in $fuse_path"
+				echo "*** Check --with-fuse-path and try again."
+				exit 1
+				else
+						echo "*** skipping fuse support"
+				fi
+		fi
+else
+	echo "*** skipping fuse support"
+fi
+
+if [ $config_ext2fs_path != no ]
+then
+		if library_search ext2fs ${ext2fs_path} || library_search ext2fs /
+		then
+				if [ "${ext2fs_path}" != / -a "${ext2fs_path}" != /usr ]
+				then
+						ext2fs_ccflags="-I${ext2fs_path}/include"
+				fi
+				ccflags="${ccflags} -DHAS_EXT2FS"
+				ext2fs_ldflags="${library_search_result} -lcom_err"
+				ext2fs_avail=yes
+		else
+				if [ $config_ext2fs_path = yes ]
+				then
+
+				echo "*** Sorry, I couldn't find ext2fs in $ext2fs_path"
+				echo "*** Check --with-ext2fs-path and try again."
+				exit 1
+				else
+						echo "*** skipping ext2fs support"
+				fi
+		fi
+else
+	echo "*** skipping ext2fs support"
+fi
+
+if [ "$config_mpi_path" != no ]
+then
+	if check_file "$mpi_path/bin/mpicc"
+	then
+		mpicc="$mpi_path/bin/mpicc"
+	elif check_file "$mpi_path/mpicc"
+	then
+		mpicc="$mpi_path/mpicc"
+	elif check_file "$mpi_path"
+	then
+		mpicc="$mpi_path"
+	fi
+
+	if [ X$mpicc != X ]
+	then
+		ccflags="-DCCTOOLS_WITH_MPI ${ccflags}"
+		ccompiler=${mpicc}
+		linker=${mpicc}
+	else 
+		echo "*** Sorry, I couldn't find mpicc in $mpi_path"
+		echo "*** Check --with-mpicc-path and try again."
+		exit 1
+	fi
+else
+	echo "*** skipping mpi support"
+fi
+
+##########################################################################
+# SWITCH BACK TO DYNAMIC LINKING FOR COMMON SYSTEM LIBRARIES
+##########################################################################
+library_search_mode=prefer_dynamic
+##########################################################################
+
+if [ $config_readline_path != no ] && library_search readline ${readline_path}
+then
+	external_libraries="${external_libraries} ${library_search_result}"
+
+	if [ ${readline_path} != /usr ]
+	then
+		ccflags="${ccflags} -I${readline_path}/include"
+	fi
+
+	ccflags="${ccflags} -DHAS_LIBREADLINE"
+
+	# We rely on the --as-needed flag to figure out what dynamic
+	# libraries are actually used by each executable.
+	# However, libreadline doesn't properly specify a dependency
+	# on ncurses, termcap, and history, so we must force them to link.
+
+	if [ $BUILD_SYS = LINUX ]
+	then
+		# Remove the -lreadline that was added by "library_search readline" above
+		external_libraries=`echo $external_libraries | sed "s/-lreadline//"`
+
+		# Put the readline flags in a separate variable to be used only where needed.
+		cctools_readline_ldflags="-lreadline ${link_no_as_needed} -lncurses -lhistory ${link_as_needed}"
+	else
+		if library_search ncurses ${readline_path}
+		then
+			external_libraries="${external_libraries} ${library_search_result}"
+		fi
+
+		if library_search termcap ${readline_path}
+		then
+			external_libraries="${external_libraries} ${library_search_result}"
+		fi
+
+		if library_search history ${readline_path}
+		then
+			external_libraries="${external_libraries} ${library_search_result}"
+		fi
+	fi
+else
+	echo "*** skipping readline..."
+fi
+
+if [ $config_curl_path != no ]
+then
+		if library_search curl ${curl_path} || library_search curl /
+		then
+				if [ "${curl_path}" != / -a "${curl_path}" != /usr ]
+				then
+						curl_ccflags="-I${curl_path}/include"
+				fi
+				ccflags="${ccflags} -DHAS_CURL"
+				curl_ldflags="${library_search_result} -lcrypto"
+				curl_avail=yes
+		else
+				if [ $config_curl_path = yes ]
+				then
+
+				echo "*** Sorry, I couldn't find curl in $curl_path"
+				echo "*** Check --with-curl-path and try again."
+				exit 1
+				else
+						echo "*** skipping curl support"
+				fi
+		fi
+else
+	echo "*** skipping curl support"
+fi
+
+system_includes=/usr/include
+
+if [ $BUILD_SYS = DARWIN ]
+then
+        if [ -d "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include" ]
+        then
+                system_includes="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+		osx_getopt_from_sdk=yes
+        else
+                # The version of getopt.h packaged in cctools appears to cause a SIGBUS on Darwin.
+                # Mac OS X Command Line Tools need to be installed to obtain a getopt.h that works.
+                echo "*** Sorry, I can't proceed without Mac OS X Command Line Tools."
+                echo "*** Please refer to the installation instructions."
+                exit 1
+        fi
+fi
+
+found_swig=no
+if [ $config_swig_path != no ]
+then
+	if [ "$optstatic" = 1 ]
+	then
+		echo "*** buildin statically, skipping swig support"
+	else
+		swig=""
+		if check_file ${swig_path}/bin/swig
+		then
+			swig=${swig_path}/bin/swig
+		else
+			if check_path swig
+			then
+				swig=`which swig`
+			else
+				echo "*** skipping swig bindings for work queue and chirp"
+			fi
+		fi
+
+		if [ -n "$swig" ]
+		then
+			swig_version=`${swig} -version | grep -i version | awk '{print $3}'`
+
+			if [ ! \( "$python_major_version" = 2 -a "$python_minor_version" = 4 \) -a `format_version $swig_version` = `format_version 1.3.29` ]
+			then
+				echo "*** Sorry, Swig 1.3.29 does not work with Python $python_version."
+				echo "*** skipping swig bindings for work queue and chirp"
+			elif [ "$python_dev" = no ]
+			then
+				echo "*** Sorry, Swig needs the develovement files for python (e.g., python-devel, or python-dev)."
+				echo "*** skipping swig bindings for work queue and chirp"
+			elif [ "$python3" != 0 -a `format_version $swig_version` -lt `format_version 2.0.4` ]
+			then
+				# Python 3 requires Swig version >= 2.0.4; cf.
+				# http://sourceforge.net/p/swig/bugs/1104/ and
+				# http://sourceforge.net/p/swig/news/?page=1
+				echo "*** Sorry, Swig $swig_version does not work with Python 3 version $python3_version."
+				echo "*** Specifically, Swig >= 2.0.4 is needed for Python 3 support."
+				found_swig=old
+			elif [ `format_version $swig_version` -ge `format_version 1.3.29` ]
+			then
+				found_swig=yes
+			else
+				echo "*** Sorry, I need swig >= 1.3.29"
+				echo "*** skipping swig bindings for work queue and chirp"
+			fi
+		else
+			if [ $config_swig_path = yes ]
+			then
+				echo "*** Sorry, I couldn't find swig in $swig_path"
+				echo "*** Check --with-swig-path and try again."
+				exit 1
+			else
+				echo "*** skipping swig bindings for work queue"
+			fi
+		fi
+	fi
+fi
+
+if [ $config_perl_path != no ]
+then
+	if check_file ${perl_path}/bin/perl
+	then
+		perl=${perl_path}/bin/perl
+	else
+		perl=0
+	fi
+
+	if [ $perl != 0 ]
+	then
+		perl_version=`${perl} -e 'printf "%vd\n",$^V;'`
+		if [ $? = 0 ]
+		then
+			echo "perl version is ${perl_version}"
+		else
+			perl=0
+		fi
+	fi
+
+	if [ $perl != 0 ]
+	then
+
+		if perl -e 'eval { require ExtUtils::Embed }; $@ ? exit(1) : exit(0)'
+		then
+			perl_ccflags=`${perl} -MExtUtils::Embed -e ccopts`
+			perl_ldflags=`${perl} -MExtUtils::Embed -e ldopts`
+
+			if [ $? = 0 ]
+			then
+				# On OSX, the ExtUtils::Embed options contain options
+				# to generate triple-fat binaries, which fails when
+				# we attempt to bring in our thin binaries.
+
+				# To avoid this problem, remove all of the -arch XXX
+				# arguments, so that the compiler produces the default,
+				# which will be compatible with the other objects we compile.
+
+				if [ ${BUILD_SYS} = DARWIN ]
+				then
+					perl_ccflags=`echo ${perl_ccflags} | sed 's/-arch [^ ]* *//g'`
+					perl_ldflags=`echo ${perl_ldflags} | sed 's/-arch [^ ]* *//g'`
+				fi
+
+				swig_bindings="$swig_bindings perl"
+			else
+				perl=0
+			fi
+		else
+			perl=0
+		fi
+	fi
+
+	if [ $perl = 0 ]
+	then
+		if [ $config_perl_path = yes ]
+		then
+			echo "*** Sorry, I couldn't find the perl libraries in $perl_path"
+			echo "*** Check --with-perl-path and try again."
+			exit 1
+		else
+			echo "*** skipping perl support"
+		fi
+	fi
+fi
+
+python=0    #to be set to the python path
+if [ $config_python_path != no ]
+then
+	if [ -n "$PYTHON" ] && check_file ${PYTHON}
+then
+	python=${PYTHON}
+elif check_file ${python_path}/bin/python2
+then
+	python=${python_path}/bin/python2
+elif check_file ${python_path}/bin/python
+then
+	python=${python_path}/bin/python
+else
+	python=0
+fi
+
+if [ $python != 0 ]
+then
+	python_version=`${python} -V 2>&1 | cut -d " " -f 2`
+	echo "python version is ${python_version}"
+	python_major_version=`echo ${python_version} | cut -d . -f 1`
+	python_minor_version=`echo ${python_version} | cut -d . -f 2 | cut -d . -f 1,2`
+	if [ "$python_major_version" = 2 -a "$python_minor_version" -ge 4 ]
+	then
+		if check_file ${python_path}/include/python2.$python_minor_version/Python.h
+		then
+			echo "found python development libraries"
+			python_ccflags_file=`mktemp tmp.XXXXXX`
+			python_ldflags_file=`mktemp tmp.XXXXXX`
+			python_dev=yes
+
+			env HOME=/var/empty ${python} > $python_ccflags_file <<EOF
+from distutils import sysconfig
+flags = ['-I' + sysconfig.get_python_inc(),
+	 '-I' + sysconfig.get_python_inc(plat_specific=True)]
+syscfgflags = sysconfig.get_config_var('CFLAGS')
+if not syscfgflags is None:
+	flags.extend(syscfgflags.split())
+print ' '.join(flags)
+EOF
+			env HOME=/var/empty ${python} > $python_ldflags_file <<EOF
+from distutils import sysconfig
+libs = sysconfig.get_config_var('LIBS').split() + sysconfig.get_config_var('SYSLIBS').split()
+if not sysconfig.get_config_var('Py_ENABLE_SHARED'):
+	libs.insert(0, '-L' + sysconfig.get_config_var('LIBPL'))
+print ' '.join(libs)
+EOF
+
+			python_ccflags=`cat $python_ccflags_file`
+			python_ldflags=`cat $python_ldflags_file`
+			rm $python_ccflags_file
+			rm $python_ldflags_file
+
+# On OSX, the ExtUtils::Embed options contain options
+# to generate triple-fat binaries, which fails when
+# we attempt to bring in our thin binaries.
+
+# To avoid this problem, remove all of the -arch XXX
+# arguments, so that the compiler produces the default,
+# which will be compatible with the other objects we compile.
+
+			if [ ${BUILD_SYS} = DARWIN ]
+			then
+				python_ccflags=`echo ${python_ccflags} | sed 's/-arch [^ ]* *//g'`
+				python_ldflags=`echo ${python_ldflags} | sed 's/-arch [^ ]* *//g'`
+			fi
+
+			if [ $BUILD_SYS = DARWIN ]
+			then
+				python_ldflags="$python_ldflags -undefined dynamic_lookup"
+			fi
+
+			swig_bindings="$swig_bindings python"
+		else
+			python_dev=no
+		fi
+	else
+		echo "*** Sorry, we require Python >= 2.4"
+		python=0
+	fi
+fi
+fi
+
+if [ $python_dev = no ]
+then
+	if [ $config_python_path = yes ]
+	then
+		echo "*** Sorry, I couldn't find the Python >= 2.4 libraries in $python_path"
+		echo "*** Check --with-python-path and try again."
+		exit 1
+	else
+		echo "*** skipping python bindings support"
+	fi
+fi
+
+if [ $config_python3_path != no ]
+then
+	if [ -n "$PYTHON3" ] && check_file ${PYTHON3}
+	then
+		python3=${PYTHON3}
+	elif check_file ${python3_path}/bin/python3
+	then
+		python3=${python3_path}/bin/python3
+	elif check_file ${python3_path}/bin/python
+	then
+		python3=${python3_path}/bin/python
+	else
+		python3=0
+	fi
+
+	if check_file ${python3_path}/bin/2to3
+	then
+		python3_2to3=${python3_path}/bin/2to3
+	else
+		python3=0
+	fi
+	if [ $python3 != 0 ]
+	then
+		python3_version=`${python3} -V 2>&1 | cut -d " " -f 2`
+		echo "python3 version is ${python3_version}"
+		python3_major_version=`echo ${python3_version} | cut -d . -f 1`
+		python3_minor_version=`echo ${python3_version} | cut -d . -f 2 | cut -d . -f 1,2`
+		if [ "$python3_major_version" = 3 ]
+		then
+			python3_include=`${python3} -c 'from distutils import sysconfig; print(sysconfig.get_python_inc())'`
+			if check_file ${python3_include}/Python.h && check_file ${python3}-config
+			then
+				echo "found python3 development libraries"
+				python3_ccflags=$(${python3}-config --includes)
+				# python3_ldflags=$(${python3}-config --ldflags) # it includes static libs, so we need:
+				python3_ldflags_file=`mktemp tmp.XXXXXX`
+				env HOME=/var/empty ${python3} > $python3_ldflags_file <<EOF
+from distutils import sysconfig
+flags = ['-I' + sysconfig.get_python_inc(), '-I' + sysconfig.get_python_inc(plat_specific=True)]
+syscfgflags = sysconfig.get_config_var('CFLAGS')
+if not syscfgflags is None:
+    flags.extend(syscfgflags.split())
+print(' '.join(flags))
+EOF
+				python3_ldflags=$(cat $python3_ldflags_file)
+				rm $python3_ldflags_file
+
+				# On OSX, the ExtUtils::Embed options contain options
+				# to generate triple-fat binaries, which fails when
+				# we attempt to bring in our thin binaries.
+
+				# To avoid this problem, remove all of the -arch XXX
+				# arguments, so that the compiler produces the default,
+				# which will be compatible with the other objects we compile.
+
+				if [ ${BUILD_SYS} = DARWIN ]
+				then
+					python3_ccflags=`echo ${python3_ccflags} | sed 's/-arch [^ ]* *//g'`
+					python3_ldflags=`echo ${python3_ldflags} | sed 's/-arch [^ ]* *//g'`
+				fi
+
+				if [ $BUILD_SYS = DARWIN ]
+				then
+					python3_ldflags="$python3_ldflags -undefined dynamic_lookup"
+				fi
+
+				if [ ${found_swig} = old ]
+				then
+					echo "*** Sorry, for Python3 swig 2.0.4 is required."
+				else
+					swig_bindings="$swig_bindings python3"
+				fi
+			else
+				python3=0
+			fi
+		else
+			echo "*** Sorry, we require Python3 >= 3.0"
+			python3=0
+		fi
+	fi
+
+	if [ $python3 = 0 ]
+	then
+		if [ $config_python3_path = yes ]
+		then
+			echo "*** Sorry, I couldn't find the Python3 >= 3.0 libraries in $python3_path"
+			echo "*** Check --with-python3-path and try again."
+			exit 1
+		else
+			echo "*** skipping python3 support"
+		fi
+	fi
+fi
+
+
+if [ "$fuse_avail" != yes ]; then
+	echo "grow_fuse requires FUSE"
+fi
+
+# If python is not found, then leave out weaver.
+
+if [ "$python" = 0 ]
+then
+	echo "python version is suitable for prune"
+	echo "python version is suitable for weaver"
+else
+	packages=`echo ${packages} | sed 's/umbrella//g'`
+	echo "prune requires python >= 2.6"
+	packages=`echo ${packages} | sed 's/prune//g'`
+	echo "weaver requires python >= 2.6"
+	packages=`echo ${packages} | sed 's/weaver//g'`
+fi
+
+if [ "$python" = 0 -o "$python3" = 0 ]
+then
+	echo "python version is suitable for umbrella"
+else
+	echo "umbrella requires python >= 2.6"
+fi
+
+if [ $config_golang_path != no ]
+then
+	if check_file ${golang_path}/bin/go
+	then
+		golang=${golang_path}/bin/go
+	else
+		golang=0
+	fi
+
+	if [ $golang = 0 ]
+	then
+		if [ $config_golang_path = yes ]
+		then
+			echo "*** Sorry, I couldn't find a go installation in $golang_path"
+			echo "*** Check --with-golang-path and try again."
+			exit 1
+		else
+			echo "*** skipping golang support"
+		fi
+	else
+		if [ $found_swig = yes ] && [ "$(${swig} -go --help | grep '\-cgo')" ]
+		then
+			swig_bindings="${swig_bindings} golang"
+		else
+			if [ $config_golang_path = yes ]
+			then
+				echo "*** Sorry, the swig installation does not support golang"
+				echo "*** Check --with-swig-path and try again."
+				exit 1
+			else
+				echo "*** skipping golang support"
+			fi
+		fi
+	fi
+fi
+
+library_search_standard()
+{
+	if library_search "$@"
+	then
+		external_libraries="${external_libraries} ${library_search_result}"
+	fi
+}
+
+
+if [ $config_openssl_path != no ]
+then
+	if ! library_search_standard ssl $openssl_path
+	then
+		echo "*** Couldn't find libssl"
+		echo "*** Check --with-openssl-path and try again."
+		exit 1
+	fi
+
+	if ! library_search_standard crypto $openssl_path
+	then
+		echo "*** Couldn't find libcrypto"
+		echo "*** Check --with-openssl-path and try again."
+		exit 1
+	fi
+fi
+
+# from glibc:
+library_search_standard resolv /usr
+library_search_standard socket /usr
+library_search_standard nsl /usr
+
+# Finally, add in standard system libraries found everywhere
+
+if [ $BUILD_SYS != DARWIN ]
+then
+	external_libraries="${external_libraries} -lrt"
+fi
+
+if [ $BUILD_SYS != FREEBSD ] || [ $BUILD_SYS != DRAGONFLY ]
+then
+	external_libraries="${external_libraries} -ldl"
+fi
+
+if library_search z ${zlib_path}
+then
+	external_libraries="${external_libraries} ${library_search_result}"
+	if [ "$zlib_path" != /usr ]
+	then
+		ccflags="${ccflags} -I${zlib_path}/include"
+		ldflags="${ldflags} -L${zlib_path}/lib"
+	fi
+else
+	echo "*** Sorry, I couldn't find zlib in $zlib_path"
+	echo "*** Check --with-zlib-path and try again."
+	exit 1
+fi
+
+if [ "$optstatic" = 1 ]
+then
+	static_libraries="../../dttools/src/libdttools.a ${zlib_path}/lib/libz.a"
+elif [ ${BUILD_SYS} != CYGWIN ]
+then
+	external_libraries="${external_libraries} -lstdc++ -lpthread -lz -lc -lm"
+else
+	external_libraries="${external_libraries} -lstdc++ -lpthread -lz -lm"
+fi
+
+if [ $BUILD_SYS = DARWIN ]
+then
+	cctools_dynamic_suffix=dylib
+	cctools_dynamic_flag=-dynamiclib
+else
+	cctools_dynamic_suffix=so
+	cctools_dynamic_flag=-shared
+fi
+
+# sqlite3 uses define "HAVE_*"
+optional_function gmtime_r ${system_includes}/time.h HAVE_GMTIME_R
+optional_function fdatasync ${system_includes}/unistd.h HAVE_FDATASYNC
+optional_function isnan ${system_includes}/math.h HAS_ISNAN HAVE_ISNAN SQLITE_HAVE_ISNAN
+optional_function localtime_r ${system_includes}/time.h HAVE_LOCALTIME_R
+optional_function localtime_s ${system_includes}/time.h HAVE_LOCALTIME_S
+optional_function openat ${system_includes}/fcntl.h HAS_OPENAT
+optional_function pread ${system_includes}/unistd.h HAS_PREAD USE_PREAD
+optional_function pread64 ${system_includes}/unistd.h USE_PREAD64
+optional_function pwrite ${system_includes}/unistd.h HAS_PWRITE USE_PWRITE
+optional_function pwrite64 ${system_includes}/unistd.h USE_PWRITE64
+optional_function strchrnul ${system_includes}/string.h HAVE_STRCHRNUL
+optional_function strsignal ${system_includes}/string.h HAS_STRSIGNAL
+optional_function usleep ${system_includes}/unistd.h HAS_USLEEP HAVE_USLEEP
+optional_function utime ${system_includes}/utime.h HAS_UTIME HAVE_UTIME
+optional_function utimensat ${system_includes}/sys/stat.h HAS_UTIMENSAT
+
+# sqlite3 uses define "HAVE_*"
+
+if [ "$include_package_chirp" = chirp ]
+then
+	optional_include attr/xattr.h HAS_ATTR_XATTR_H
+	optional_include sys/xattr.h  HAS_SYS_XATTR_H
+fi
+
+optional_include ifaddrs.h     HAS_IFADDRS
+optional_include inttypes.h    HAS_INTTYPES_H HAVE_INTTYPES_H
+optional_include stdint.h      HAS_STDINT_H HAVE_STDINT_H
+optional_include sys/statfs.h  HAS_SYS_STATFS_H
+optional_include sys/statvfs.h HAS_SYS_STATVFS_H
+optional_include syslog.h      HAS_SYSLOG_H
+
+#if optional_library_function systemd/sd-journal.h sd_journal_print systemd HAS_SYSTEMD_JOURNAL_H; then
+#	external_libraries="${external_libraries} -lsystemd"
+#fi
+
+cctools_doctargets=
+if check_path doxygen
+then
+	cctools_doctargets="${cctools_doctargets} apipages"
+else
+	echo "*** not building API documentation"
+fi
+
+if check_path m4
+then
+	cctools_doctargets="${cctools_doctargets} htmlpages"
+	if check_path nroff
+	then
+		cctools_doctargets="${cctools_doctargets} manpages"
+	else
+		echo "*** not building man pages"
+	fi
+else
+	echo "*** not building html or man pages"
+fi
+
+# Check which packages we can build, according to the results above
+echo "checking for package compatibility..."
+
+if [ "${include_package_chirp}" = chirp ]
+then
+		internal_ccflags="${internal_ccflags} -DCCTOOLS_WITH_CHIRP"
+fi
+
+if [ "$include_package_parrot" = parrot ]
+then
+	if [ -d parrot -a $BUILD_SYS = LINUX ]
+	then
+		if [ $BUILD_CPU = I386 -o $BUILD_CPU = X86_64 ]
+		then
+			:
+		else
+			echo "parrot is NOT supported on ${BUILD_SYS} ${BUILD_CPU}"
+			include_package_parrot=""
+		fi
+	else
+		echo "parrot is NOT supported on ${BUILD_SYS} for any cpu type"
+		include_package_parrot=""
+	fi
+fi
+
+if [ "$include_package_resource_monitor" = resource_monitor ]
+then
+	if [ -d resource_monitor -a $BUILD_SYS = LINUX ]
+	then
+		echo "resource_monitor IS supported on ${BUILD_SYS}"
+		include_package_resource_monitor="resource_monitor"
+	else
+		echo "resource_monitor is NOT supported on ${BUILD_SYS}"
+		include_package_resource_monitor=""
+	fi
+fi
+
+if [ "${include_package_ftplite}" = ftp_lite ]
+then
+	if [ "$optstatic" = 1 ]
+	then
+		echo "ftplite cannot currently be build statically".
+		include_package_ftplite=""
+	fi
+fi
+
+if [ "${include_package_parrot}" = parrot ]
+then
+	if [ "$optstatic" = 1 ]
+	then
+		echo "parrot cannot currently be build statically".
+		include_package_parrot=""
+	fi
+fi
+
+if [ "${include_package_grow}" = grow ]
+then
+	if [ "$optstatic" = 1 ]
+	then
+		echo "grow cannot currently be build statically".
+		include_package_grow=""
+	fi
+fi
+
+
+potential_packages="dttools batch_job ${include_package_grow} ${include_package_makeflow} work_queue ${include_package_apps} ${include_package_ftplite} ${include_package_parrot} ${include_package_resource_monitor} ${include_package_chirp} ${include_package_weaver} ${include_package_umbrella} ${include_package_deltadb} ${include_package_prune} ${include_package_doc}"
+
+echo "checking for all the things I know how to build..."
+for p in $potential_packages
+do
+	if [ -d $p ]
+	then
+		echo "package $p found"
+		packages="${packages} $p"
+		if [ -d `pwd`/$p/src ]
+		then
+			internal_ccflags="${internal_ccflags} -I $(pwd)/$p/src"
+		fi
+	else
+		echo "package $p not found (that's ok)"
+	fi
+done
+
+
+# We always compile with debugging enabled,
+# however on Solaris, the -g option results in a different
+# debugging format that causes linking errors in getopt code.
+
+if [ $BUILD_SYS = SUNOS ]
+then
+	debug_flag="-gstabs+"
+else
+	debug_flag="-g"
+fi
+
+ccflags_append_define \
+	"BUILD_DATE='\"$BUILD_DATE\"'" \
+	"BUILD_HOST='\"$BUILD_HOST\"'" \
+	"BUILD_USER='\"$BUILD_USER\"'" \
+	"CCTOOLS_COMMIT='\"$COMMIT\"'" \
+	"CCTOOLS_CONFIGURE_ARGUMENTS='\"$configure_arguments\"'" \
+	"CCTOOLS_CPU_${BUILD_CPU}" \
+	"CCTOOLS_CVMFS_BUILD_FLAGS='\"${cvmfs_ldflags} ${cvmfs_ccflags}\"'" \
+	"CCTOOLS_OPSYS_${BUILD_SYS}" \
+	"CCTOOLS_RELEASE_DATE='\"$DATE\"'" \
+	"CCTOOLS_SOURCE='\"$SOURCE\"'" \
+	"CCTOOLS_SYSTEM_INFORMATION='\"$system_information\"'" \
+	"CCTOOLS_VERSION='\"$VERSION\"'" \
+	"CCTOOLS_VERSION_MAJOR=$MAJOR" \
+	"CCTOOLS_VERSION_MICRO=$MICRO" \
+	"CCTOOLS_VERSION_MINOR=$MINOR" \
+	"INSTALL_PATH='\"${install_path}\"'" \
+	"_GNU_SOURCE" \
+	"_REENTRANT"
+
+if [ "${osx_getopt_from_sdk}" = yes ]
+then
+	ccflags_append_define CCTOOLS_OSX_GETOPT_FROM_SDK
+fi
+
+
+ccflags_append "$debug_flag"
+ldflags="${ldflags} ${debug_flag}"
+
+if [ X$include_package_parrot = "Xparrot" ]
+then
+
+	cat <<EOF > libparrot.test.c
+int main() { return 0; }
+EOF
+	echon "testing creation of 64-bit libparrot_helper.so..."
+	$ccompiler $internal_ccflags -m64 libparrot.test.c -o libparrot.test > /dev/null 2>&1
+	if [ $? = 0 ]
+	then
+		build_lib64parrot_helper="yes"
+	else
+		build_lib64parrot_helper="no"
+	fi
+	echo $build_lib64parrot_helper
+
+	echon "testing creation of 32-bit libparrot_helper.so..."
+	$ccompiler $internal_ccflags -m32 libparrot.test.c -o libparrot.test > /dev/null 2>&1
+	if [ $? = 0 ]
+	then
+		build_lib32parrot_helper="yes"
+	else
+		build_lib32parrot_helper="no"
+	fi
+	echo $build_lib32parrot_helper
+
+	rm -f libparrot.test.c libparrot.test
+fi
+
+echo "Creating config.mk..."
+
+if [ "$optdebug" = 1 ]; then
+	CCTOOLS_CC="${ccompiler}"
+	CCTOOLS_CXX="${cxxcompiler}"
+	CCTOOLS_LD="${linker}"
+else
+	CCTOOLS_CC='@echo COMPILE $@;'"${ccompiler}"
+	CCTOOLS_CXX='@echo COMPILE $@;'"${cxxcompiler}"
+	CCTOOLS_LD='@echo LINK $@;'"${linker}"
+fi
+
+swig_workqueue_bindings=""
+swig_chirp_bindings=""
+if [ "$found_swig" != no ]
+then
+	for binding in $swig_bindings
+	do
+		if [ -d work_queue/src/bindings/${binding} ]
+		then
+			swig_workqueue_bindings="$binding $swig_workqueue_bindings"
+		fi
+
+		if [ -d chirp/src/bindings/${binding} ]
+		then
+			swig_chirp_bindings="$binding $swig_chirp_bindings"
+		fi
+	done
+fi
+
+source_path=$(pwd)
+
+cat <<EOF >>config.mk
+# Generated at `date` by $USER@`uname -n`
+
+CCTOOLS_HOME=${source_path}
+CCTOOLS_INSTALL_DIR=${install_path}
+
+CCTOOLS_PACKAGES=${packages}
+
+CCTOOLS_CC=${CCTOOLS_CC}
+
+CCTOOLS_BASE_CCFLAGS=${ccflags}
+
+CCTOOLS_INTERNAL_CCFLAGS=${internal_ccflags} \${CCTOOLS_BASE_CCFLAGS} ${c_only_flags}
+
+CCTOOLS_CCFLAGS=-I\${CCTOOLS_INSTALL_DIR}/include/cctools \${CCTOOLS_BASE_CCFLAGS} ${c_only_flags}
+
+CCTOOLS_CXX=${CCTOOLS_CXX}
+
+CCTOOLS_BASE_CXXFLAGS=\${CCTOOLS_BASE_CCFLAGS}
+
+CCTOOLS_INTERNAL_CXXFLAGS=${internal_ccflags} \${CCTOOLS_BASE_CCFLAGS}
+
+CCTOOLS_CXXFLAGS=-I\${CCTOOLS_INSTALL_DIR}/include/cctools \${CCTOOLS_BASE_CCFLAGS}
+
+CCTOOLS_LD = ${CCTOOLS_LD}
+
+CCTOOLS_BASE_LDFLAGS = ${ldflags}
+
+CCTOOLS_INTERNAL_LDFLAGS = \$(CCTOOLS_BASE_LDFLAGS) ${internal_ldflags}
+
+CCTOOLS_EXTERNAL_LINKAGE = ${external_libraries}
+
+CCTOOLS_STATIC_LINKAGE = ${static_libraries}
+
+CCTOOLS_LDFLAGS = -L\$(CCTOOLS_INSTALL_DIR)/lib \$(CCTOOLS_BASE_LDFLAGS)
+
+CCTOOLS_READLINE_LDFLAGS=${cctools_readline_ldflags}
+
+CCTOOLS_STATIC=${optstatic}
+
+CCTOOLS_DYNAMIC_SUFFIX=${cctools_dynamic_suffix}
+CCTOOLS_DYNAMIC_FLAG=${cctools_dynamic_flag}
+
+CC=\$(CCTOOLS_CC)
+CCFLAGS=\$(CCTOOLS_CCFLAGS)
+LD=\$(CCTOOLS_LD)
+LDFLAGS=\$(CCTOOLS_LDFLAGS)
+CXX=\$(CCTOOLS_CXX)
+CXXFLAGS=\$(CCTOOLS_CXXFLAGS)
+
+CCTOOLS_AR=ar
+
+CCTOOLS_CHIRP=${include_package_chirp}
+
+CCTOOLS_SWIG=${swig}
+CCTOOLS_SWIG_WORKQUEUE_BINDINGS=${swig_workqueue_bindings}
+CCTOOLS_SWIG_CHIRP_BINDINGS=${swig_chirp_bindings}
+
+CCTOOLS_PERL=${perl}
+CCTOOLS_PERL_CCFLAGS=${perl_ccflags}
+CCTOOLS_PERL_LDFLAGS=${perl_ldflags}
+CCTOOLS_PERL_VERSION=${perl_version}
+
+CCTOOLS_PYTHON=\$(CCTOOLS_PYTHON2)
+CCTOOLS_PYTHON_CCFLAGS=\$(CCTOOLS_PYTHON2_CCFLAGS)
+CCTOOLS_PYTHON_LDFLAGS=\$(CCTOOLS_PYTHON2_LDFLAGS)
+CCTOOLS_PYTHON_VERSION=\$(CCTOOLS_PYTHON2_VERSION)
+CCTOOLS_PYTHON_PATH=\$(CCTOOLS_INSTALL_DIR)/lib/python\$(CCTOOLS_PYTHON_VERSION)/site-packages
+
+CCTOOLS_PYTHON2=${python}
+CCTOOLS_PYTHON2_CCFLAGS=${python_ccflags}
+CCTOOLS_PYTHON2_LDFLAGS=${python_ldflags}
+CCTOOLS_PYTHON2_VERSION=${python_major_version}.${python_minor_version}
+CCTOOLS_PYTHON2_PATH=\$(CCTOOLS_INSTALL_DIR)/lib/python\$(CCTOOLS_PYTHON2_VERSION)/site-packages
+
+CCTOOLS_PYTHON3=${python3}
+CCTOOLS_PYTHON3_CCFLAGS=${python3_ccflags}
+CCTOOLS_PYTHON3_LDFLAGS=${python3_ldflags}
+CCTOOLS_PYTHON3_VERSION=${python3_major_version}.${python3_minor_version}
+CCTOOLS_PYTHON3_2TO3=${python3_2to3}
+CCTOOLS_PYTHON3_PATH=\$(CCTOOLS_INSTALL_DIR)/lib/python\$(CCTOOLS_PYTHON3_VERSION)/site-packages
+
+CCTOOLS_PYDOC=$(which pydoc 2> /dev/null || which pydoc2 2> /dev/null || which pydoc3 > /dev/null)
+
+CCTOOLS_SGE_PARAMETERS=$(echo ${sge_parameters} | sed -e 's/\$/\\\$\$/g')
+
+CCTOOLS_DOCTARGETS=${cctools_doctargets}
+
+CCTOOLS_M4_ARGS=-DCCTOOLS_VERSION="${VERSION}" -DCCTOOLS_RELEASE_DATE="${RELEASE_DATE}"
+
+CCTOOLS_BUILD_LIB64PARROT_HELPER=${build_lib64parrot_helper}
+CCTOOLS_BUILD_LIB32PARROT_HELPER=${build_lib32parrot_helper}
+
+CCTOOLS_VERSION=${VERSION}
+CCTOOLS_RELEASEDATE=${RELEASE_DATE}
+
+CCTOOLS_IRODS_LDFLAGS=${irods_ldflags}
+CCTOOLS_IRODS_CCFLAGS=${irods_ccflags}
+
+CCTOOLS_MYSQL_LDFLAGS=${mysql_ldflags}
+CCTOOLS_MYSQL_CCFLAGS=${mysql_ccflags}
+
+CCTOOLS_XROOTD_LDFLAGS=${xrootd_ldflags}
+CCTOOLS_XROOTD_CCFLAGS=${xrootd_ccflags}
+
+CCTOOLS_CVMFS_LDFLAGS=${cvmfs_ldflags}
+CCTOOLS_CVMFS_CCFLAGS=${cvmfs_ccflags}
+
+CCTOOLS_EXT2FS_AVAILABLE=${ext2fs_avail}
+CCTOOLS_EXT2FS_LDFLAGS=${ext2fs_ldflags}
+CCTOOLS_EXT2FS_CCFLAGS=${ext2fs_ccflags}
+
+CCTOOLS_FUSE_AVAILABLE=${fuse_avail}
+CCTOOLS_FUSE_LDFLAGS=${fuse_ldflags}
+CCTOOLS_FUSE_CCFLAGS=${fuse_ccflags}
+
+CCTOOLS_CURL_AVAILABLE=${curl_avail}
+CCTOOLS_CURL_LDFLAGS=${curl_ldflags}
+CCTOOLS_CURL_CCFLAGS=${curl_ccflags}
+
+CCTOOLS_GLOBUS_LDFLAGS=${globus_ldflags}
+CCTOOLS_GLOBUS_CCFLAGS=${globus_ccflags}
+
+export CCTOOLS_TEST_CCFLAGS=${test_ccflags}
+EOF
+
+echo ""
+echo "To re-configure, type './configure.rerun'"
+echo "To build, type '${MAKE}'"
+echo "To build and install, type '${MAKE} install'"
+echo ""
+
+exit 0
+
+
+# vim: set noexpandtab tabstop=4:
