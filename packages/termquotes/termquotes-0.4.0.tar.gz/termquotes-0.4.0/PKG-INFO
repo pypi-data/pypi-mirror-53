@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: termquotes
+Version: 0.4.0
+Summary: A little CLI tool to record, categorize and display quotes
+Home-page: https://github.com/tsoporan/termquotes
+License: MIT
+Keywords: terminal,cli,quotes
+Author: Titus Soporan
+Author-email: titus@tsoporan.com
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: click (>=7.0,<8.0)
+Requires-Dist: colorama (>=0.4.1,<0.5.0)
+Project-URL: Repository, https://github.com/tsoporan/termquotes
+Description-Content-Type: text/markdown
+
+# termquotes
+
+A little CLI tool to record, categorize and display quotes.
+
+## Install
+
+`pip install --user termquotes`
+
+## Usage
+
+`termquotes --help`
+
+#### Shell
+
+In `.zshrc`
+
+`termquotes get | cowsay -f vader | lolcat`
+
+```
+ ________________________________________
+/ APIs should be easy to use and hard to \
+\ misuse. -- Josh Bloch                  /
+ ----------------------------------------
+        \    ,-^-.
+         \   !oYo!
+          \ /./=\.\______
+               ##        )\/\
+                ||-----w||
+                ||      ||
+
+               Cowth Vader
+```
+
