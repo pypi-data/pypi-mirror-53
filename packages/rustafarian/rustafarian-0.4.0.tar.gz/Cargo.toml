@@ -1,0 +1,27 @@
+[package]
+name = "rustafarian"
+version = "0.4.0"
+edition = "2018"
+authors = ["Roberto Di Remigio <roberto.diremigio@gmail.com>"]
+build = "build.rs"
+
+[package.metadata.maturin]
+requires-python = ">=3.6"
+requires-dist = ["click>=7.0"]
+scripts = {rustafarian = "rustafarian.cli:cli"}
+classifier = ["Programming Language :: Python"]
+
+[dependencies]
+pyo3 = { version = "0.8.0", features = ["extension-module"]}
+
+[build-dependencies]
+vergen = { version = "3.0.4" }
+
+[lib]
+name = "rustafarian"
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = true

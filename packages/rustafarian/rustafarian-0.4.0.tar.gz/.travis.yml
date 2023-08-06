@@ -1,0 +1,55 @@
+dist: bionic
+
+language: python
+
+services:
+  - docker
+
+python:
+  - 3.6
+  - 3.7
+  - 3.8-dev
+
+allow_failures:
+  - 3.8-dev
+
+cache:
+  pip: true
+  cargo: true
+
+before_cache:
+  - rm -rfv target/debug/incremental/{rustafarian,build_script_build,common}-*
+  - rm -rfv target/debug/.fingerprint/rustafarian-*
+  - rm -rfv target/debug/build/rustafarian-*
+  - rm -rfv target/debug/deps/librustafarian-*
+  - rm -rfv target/debug/deps/rustafarian-*
+  - rm -rfv target/debug/{rustafarian,librustafarian}.d
+  - cargo clean -p rustafarian
+
+env:
+  global:
+    - PIPENV_VERBOSITY=-1
+    - TRAVIS_RUST_VERSION=nightly
+    - RUST_BACKTRACE=1
+
+install:
+  - pip install --upgrade pip
+  - pip install -U pipenv
+  - curl https://sh.rustup.rs -sSf | sh -s -- -y -v --default-toolchain=$TRAVIS_RUST_VERSION
+  - source "$HOME"/.cargo/env
+  - pipenv install --dev .
+
+before_script:
+  - rustc --version
+  - python --version
+
+script:
+  - pipenv run py.test -rws -v tests/
+
+deploy:
+  provider: script
+  script: ".ci/deploy_to_pypi.sh"
+  on:
+    tags: true
+    repo: robertodr/rustafarian
+    python: 3.6
