@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+"""LICENSE
+Copyright 2019 Hermann Krumrey <hermann@krumreyh.com>
+
+This file is part of nasharia-led-remote.
+
+nasharia-led-remote is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+nasharia-led-remote is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with nasharia-led-remote.  If not, see <http://www.gnu.org/licenses/>.
+LICENSE"""
+
+import time
+import argparse
+from puffotter.init import cli_start, argparse_add_verbosity
+from nasharia_led_remote import sentry_dsn
+from nasharia_led_remote.commands import command_map
+from nasharia_led_remote.irsend import send_command
+
+
+def main(args: argparse.Namespace):
+    """
+    The led-remote main method
+    :return: None
+    """
+    for key in args.keys:
+        send_command(key, args.duration)
+
+        if len(args.keys) > 1:
+            time.sleep(1)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    argparse_add_verbosity(parser)
+    parser.add_argument("keys", choices=command_map.keys(), nargs="+",
+                        help="The key to send")
+    parser.add_argument("--duration", type=int, default=0,
+                        help="How long to send the key press signal")
+
+    cli_start(
+        main,
+        parser,
+        "Thanks for using nasharia-led-remote!",
+        "nasharia_led_remote",
+        sentry_dsn
+    )
