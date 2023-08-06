@@ -1,0 +1,53 @@
+stages:
+  - test
+  - publish
+before_script:
+  - apk add --update alpine-sdk
+
+dev:tests:py36:
+  image: library/python:3.6.5-alpine3.7
+  stage: test
+  script:
+    - python3 -m pip install tox
+    - tox -e py36
+  except:
+    - master
+    - tags
+  artifacts:
+    paths:
+      - report
+
+dev:tests:py37:
+  image: library/python:3.7-alpine3.9
+  stage: test
+  script:
+    - python3 -m pip install tox
+    - tox -e py37
+  except:
+    - master
+    - tags
+  artifacts:
+    paths:
+      - report
+
+release:publish:
+  image: library/python:3.6.5-alpine3.7
+  stage: publish
+  only:
+    - tags
+  script:
+    - make release
+  artifacts:
+    paths:
+      - dist
+
+pages:
+  image: library/python:3.6.5-alpine3.7
+  stage: publish
+  only:
+    - tags
+  script:
+    - make public
+  artifacts:
+    paths:
+      - public
