@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: kubetools
+Version: 10.0
+Summary: Client library for Kubetools
+Home-page: http://github.com/EDITD/kubetools-client
+Author: Devs @ EDITED
+Author-email: nick@edited.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: click (>=7)
+Requires-Dist: docker (<4.0,>=3.7)
+Requires-Dist: docker-compose
+Requires-Dist: pyyaml (<4.3,>=3)
+Requires-Dist: pydash
+Requires-Dist: pyretry
+Requires-Dist: requests (<2.21,>2.18)
+Requires-Dist: six
+Requires-Dist: setuptools
+Provides-Extra: dev
+Requires-Dist: ipdb; extra == 'dev'
+
+UNKNOWN
+
+
