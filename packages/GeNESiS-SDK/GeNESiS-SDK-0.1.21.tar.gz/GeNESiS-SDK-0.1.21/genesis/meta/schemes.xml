@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<schemes>
+<!--
+    ############################################################################
+    #######################  CAIN'S VALIDATION SCHEMES   #######################
+    ############################################################################
+  -->
+
+  <scheme class="Mesh" root="mesh" caption="Mesh definition">
+    <param type="string" default="none"> decomposer </param>
+  </scheme>
+
+  <scheme class="StructuredMesh" root="mesh" caption="">
+    <param type="int"> size </param>
+    <param type="array"> discretization </param>
+    <param type="array" default="0.0 0.0 0.0"> origin </param>
+    <param type="float" default="5"> halo_weight </param>
+  </scheme>
+
+  <scheme class="UnstructuredMesh" root="mesh" caption="">
+    <param type="string"> fileformat </param>
+    <param type="string"> filepath </param>
+    <param type="array" default=""> isperiodic_dir </param>
+    <param type="string"> mapfile </param>
+  </scheme>
+
+  <scheme class="ForeignUDomainDecomposer" root="mesh.decomposition" caption="">
+    <param type="string"> fileformat </param>
+    <param type="string"> filepath </param>
+    <param type="string" default="sharedsides"> type </param>
+  </scheme>
+
+<!--
+    ############################################################################
+    #######################  EVA'S VALIDATION SCHEMES   #######################
+    ############################################################################
+  -->
+
+  <scheme class="EVA" root="eva.clustering" caption="">
+    <param type="string" default="simple">
+      <description> Clusterization type </description>
+      type
+    </param>
+  </scheme>
+
+<!--
+    ############################################################################
+    #######################  ADAN'S VALIDATION SCHEMES   #######################
+    ############################################################################
+  -->
+
+<!--
+    TODO
+  -->
+
+<!--
+    ############################################################################
+    #######################  ABEL'S VALIDATION SCHEMES   #######################
+    ############################################################################
+  -->
+
+<!--
+    TODO
+  -->
+
+
+</schemes>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<links>
+  <link type="Message passing" left="GP" right="GP" remote="true">
+    <aliases>
+      <alias> MPI </alias>
+      <alias> Remote </alias>
+    </aliases>
+  </link>
+
+  <link type="Shared memory" left="GP" right="GP" priority="0" remote="false">
+    <aliases>
+      <alias> Classic </alias>
+      <alias> GPGP </alias>
+    </aliases>
+  </link>
+
+  <link type="NVPCIeLink" left="GPU" right="GP" priority="1" remote="false">
+    <aliases>
+      <alias> PCIe </alias>
+      <alias> GPUGP </alias>
+    </aliases>
+  </link>
+
+  <link type="NVlink" left="GPU" right="GPU" priority="2" remote="false">
+    <aliases>
+      <alias> GPUGPU </alias>
+    </aliases>
+  </link>
+</links>
