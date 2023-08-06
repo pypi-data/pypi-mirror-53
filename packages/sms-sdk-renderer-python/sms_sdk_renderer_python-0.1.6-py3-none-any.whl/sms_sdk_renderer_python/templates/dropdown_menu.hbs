@@ -1,0 +1,5 @@
+<select name="{{message.name}}" required="{{message.required}}">
+    {{#each message.options}}
+      <option value="{{this.value}}" selected="{{this.selected}}">{{this.text}}</option>
+    {{/each}}
+</select>
