@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: MoonNectar
+Version: 0.6.0
+Summary: Moon Nectar Media Player
+Home-page: https://gitlab.com/othalan/moon-nectar
+Author: David Morris
+Author-email: othalan@othalan.net
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Multimedia :: Sound/Audio :: Players
+Requires-Python: >=3.7
+Requires-Dist: ConfigArgParse
+Requires-Dist: lark-parser
+Requires-Dist: mutagen
+Requires-Dist: pkginfo
+Requires-Dist: PluginRegistry (>=0.3.0)
+Requires-Dist: python-vlc
+Requires-Dist: setuptools
+Requires-Dist: tinydb (>=3.14.0)
+Requires-Dist: watchdog
+Provides-Extra: console
+Requires-Dist: pyqtconsole ; extra == 'console'
+Provides-Extra: gui
+Requires-Dist: pyqt5 (>=5.13.1) ; extra == 'gui'
+Provides-Extra: mmkey
+Requires-Dist: pyobjc ; (sys_platform == "darwin") and extra == 'mmkey'
+Provides-Extra: test
+Requires-Dist: coveralls ; extra == 'test'
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pytest-clarity ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: pytest-mock ; extra == 'test'
+Requires-Dist: pytest-qt ; extra == 'test'
+Requires-Dist: pytest-sugar ; extra == 'test'
+
+UNKNOWN
+
+
