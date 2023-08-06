@@ -1,0 +1,88 @@
+@import "custom-variables.less";
+@plone-version: "5.0.8";
+@barceloneta-version: "1.6.23";
+@plone-base: "https://raw.githubusercontent.com/plone/Products.CMFPlone/@{plone-version}/Products/CMFPlone/static";
+@barceloneta-base: "https://raw.githubusercontent.com/plone/plonetheme.barceloneta/@{barceloneta-version}/plonetheme/barceloneta/theme/less";
+
+@import url("@{plone-base}/patterns/toolbar/src/css/variables.less");
+@import (reference) url("@{barceloneta-base}/variables.plone.less");
+@import (reference) url("@{barceloneta-base}/grid.plone.less");
+
+@import url("@{barceloneta-base}/mixin.clearfix.plone.less");
+@import url("@{barceloneta-base}/mixin.gridframework.plone.less");
+@import url("@{barceloneta-base}/mixin.grid.plone.less");
+@import url("@{barceloneta-base}/mixin.prefixes.plone.less");
+@import url("@{barceloneta-base}/mixin.tabfocus.plone.less");
+@import url("@{barceloneta-base}/mixin.forms.plone.less");
+@import url("@{barceloneta-base}/mixin.buttons.plone.less");
+@import url("@{barceloneta-base}/mixin.borderradius.plone.less");
+
+@import url("@{barceloneta-base}/modal.plone.less");
+@import url("@{barceloneta-base}/forms.plone.less");
+@import url("@{barceloneta-base}/formtabbing.plone.less");
+@import url("@{barceloneta-base}/buttons.plone.less");
+@import url("@{barceloneta-base}/alerts.plone.less");
+@import url("@{barceloneta-base}/search.plone.less");
+@import url("@{barceloneta-base}/portlets.plone.less");
+
+.mosaic-toolbar {
+  z-index: 10000 !important;
+}
+.castle-toolbar-container .castle-toolbar-container-side {
+  z-index: 81;
+}
+
+.mosaic-enabled {
+  margin-top: 55px;
+}
+
+
+// toolbar integration
+// -------------------
+
+.pat-structure{
+  .label-success,.label-default{
+    padding: 3px;
+  }
+
+  .popover.columns{
+    ul{
+      li{
+        padding: 0 5px;
+
+        input::after{
+          padding-right: 6px;
+          content: " ";
+        }
+      }
+    }
+  }
+  table.table.table-striped{
+    border-spacing:0;
+    thead{
+      tr{
+        border-spacing:0;
+        th{
+          padding: 3px;
+          font-size: 15px;
+          vertical-align: middle;
+          border-width: 1px;
+        }
+        td{
+          border-bottom-width: 1px;
+        }
+      }
+    }
+    tbody{
+      tr{
+        border-spacing:0;
+        td{
+          font-size: 15px;
+          vertical-align: middle;
+          padding: 2px 4px;
+          border-width: 1px;
+        }
+      }
+    }
+  }
+}
