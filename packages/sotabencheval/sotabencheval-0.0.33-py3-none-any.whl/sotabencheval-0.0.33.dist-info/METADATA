@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: sotabencheval
+Version: 0.0.33
+Summary: Easily benchmark Machine Learning models on selected tasks and datasets
+Home-page: https://sotabench.com
+Author: Atlas ML
+Author-email: hello@sotabench.com
+Maintainer: Atlas ML
+Maintainer-email: hello@sotabench.com
+License: Apache-2.0
+Platform: Windows
+Platform: POSIX
+Platform: MacOSX
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: Cython
+Requires-Dist: numpy
+Requires-Dist: pycocotools (>=2.0.0)
+Requires-Dist: sotabenchapi (>=0.0.13)
+Requires-Dist: tqdm (>=4.32.2)
+Requires-Dist: beautifulsoup4 (>=4.7.0)
+Requires-Dist: sacrebleu (==1.4.1)
+
+<p align="center"><img width=500 src="/docs/images/torchbench.png"></p>
+
+Easily benchmark ML models on selected tasks and datasets. 
+
+## Installation
+
+Requires Python 3.6+. 
+
+```bash
+pip install sotabench-eval
+```
+
+## Documentation
+
+You can access the [full documentation here](https://paperswithcode.github.io/sotabench-eval/index.html).
+
+## Contributing
+
+All contributions welcome!
+
+
+
+
+
