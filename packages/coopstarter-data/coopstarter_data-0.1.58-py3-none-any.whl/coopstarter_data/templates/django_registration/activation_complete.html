@@ -1,0 +1,25 @@
+{% extends "django_registration/registration_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Activation complete" %}{% endblock %}
+{% block content %}
+{% url 'login' as auth_login_url %}
+
+<div>
+  <p class="flex">
+    {% blocktrans %}
+    Thanks, activation complete!
+    {% endblocktrans %}
+  </p>
+  <p class="flex">
+    {% blocktrans %}
+    You may now return to the knowledge base client you were creating an account for, and login from there !
+    {% endblocktrans %}
+  </p>
+  <p class="flex">
+      {% blocktrans %}
+        It is probably
+      {% endblocktrans %}
+       <a href="https://coopstarter.happy-dev.fr/"> https://coopstarter.happy-dev.fr/</a>
+    </p>
+</div>
+{% endblock %}
