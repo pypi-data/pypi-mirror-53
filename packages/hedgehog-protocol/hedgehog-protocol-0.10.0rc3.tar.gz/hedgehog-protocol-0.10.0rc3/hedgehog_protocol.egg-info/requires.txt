@@ -1,0 +1,12 @@
+hedgehog-utils[protobuf,trio,zmq]~=0.7.0rc1
+
+[dev]
+invoke
+hedgehog-protocol-spec~=0.10.0rc1
+pytest
+pytest-runner
+pytest-asyncio
+pytest-trio
+pytest-cov
+pytest-timeout
+mypy
