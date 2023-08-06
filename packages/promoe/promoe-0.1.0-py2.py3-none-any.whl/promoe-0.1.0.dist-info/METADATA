@@ -1,0 +1,75 @@
+Metadata-Version: 2.1
+Name: promoe
+Version: 0.1.0
+Summary: Protonize a selection of atoms of protein binding sites.
+Home-page: https://github.com/zethson/promoe
+Author: Lukas Heumos
+Author-email: lukas.heumos@posteo.net
+License: GNU General Public License v3
+Keywords: promoe
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*
+Requires-Dist: click (==7.0)
+Requires-Dist: pyyaml (==5.1.2)
+Requires-Dist: tqdm (==4.36.1)
+Requires-Dist: biopython (==1.74)
+
+======
+promoe
+======
+
+
+.. image:: https://img.shields.io/pypi/v/promoe.svg
+        :target: https://pypi.python.org/pypi/promoe
+
+.. image:: https://img.shields.io/travis/zethson/promoe.svg
+        :target: https://travis-ci.org/zethson/promoe
+
+.. image:: https://readthedocs.org/projects/promoe/badge/?version=latest
+        :target: https://promoe.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. image:: https://pyup.io/repos/github/zethson/promoe/shield.svg
+     :target: https://pyup.io/repos/github/zethson/promoe/
+     :alt: Updates
+
+
+Protonize selected atoms with the use of MOE and Pymol.
+
+
+* Free software: GNU General Public License v3
+* Documentation: https://promoe.readthedocs.io.
+
+Overview
+--------
+
+.. image:: images/overview.png
+    :alt: overview of promoe
+
+Features
+--------
+
+* Protonize the binding site of a pdb id automatically
+* Remove water atoms that are unable to interact with the ligand after protonization
+* Extract charges for residues
+* Extract all ligand IDs
+* Extract all alternative locations
+
+
+=======
+History
+=======
+
+0.1.0 (2019-09-30)
+------------------
+
+* First release on PyPI.
+
+
