@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block head %}
+
+<script async src="https://www.googletagmanager.com/gtag/js?id={{GOOGLE_ANALYTICS_TRACKING_ID}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{GOOGLE_ANALYTICS_TRACKING_ID}}');
+</script>
+
+{{ block.super }}
+
+<style>
+</style>
+
+{% endblock head %}
+
+
+{% block main %}
+    <noscript>
+    {% blocktrans %}Please enable javascript.{% endblocktrans %}
+    </noscript>
+
+    <div id="app">
+        {% if DISABLE_JS %}
+        <div id="allauth">
+            <div class="head">
+                <img src="{% static '/frontend/img/logo.png' %}" alt="{{meta.site_name}}">
+            </div>
+            <div class="content">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+        {% else %}
+            {% blocktrans %}Loading..{% endblocktrans %}
+        {% endif %}
+    </div>
+
+    <p class="footer_copyright">
+    &copy; {% now "Y" %} {{meta.site_name}}
+    {% if REPOSITORY_REV %} | {{REPOSITORY_REV}} {% endif %}
+    </p>
+{% endblock main %}
+
+
+{% block script %}
+{{ block.super }}
+
+{% if not DISABLE_JS %}
+
+<!-- konqueror polyfill -->
+<!--<script src="https://cdn.jsdelivr.net/npm/mutationobserver-shim@0.3.2/dist/mutationobserver.min.js"></script>-->
+<script src="{% static 'cdn/mutationobserver.0.3.2.min.js' %}"></script>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>-->
+<!--<script src="{% static 'cdn/vue.2.5.17.js' %}"></script>-->
+<script src="{% static 'cdn/vue.2.5.17.min.js' %}"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>-->
+<script src="{% static 'cdn/swiper.4.3.3.min.js' %}"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>-->
+<script src="{% static 'cdn/axios.0.17.1.min.js' %}"></script>
+
+
+<script src="https://cdn.ravenjs.com/3.26.4/vue/raven.min.js" crossorigin="anonymous"></script>
+<script>Raven.config('{{RAVEN_JS_DSN}}').install();</script>
+
+
+<script>
+  var gettext = window.gettext || function(s){ return s };
+  window.app = window.app || {};
+
+  window.app.LANGUAGE_CODE = "{{LANGUAGE_CODE}}";
+  window.app.DEFAULT_REFERRER = "{{SSO_DEFAULT_REFERRER}}";
+  window.app.COOKIE_DOMAIN = "{{COOKIE_DOMAIN}}";
+
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?v={{GOOGLE_MAPS_API_VERSION}}&key={{GOOGLE_API_KEY}}&libraries=places&callback=initGoogleMaps" async defer="defer"></script>
+
+<script>
+function initGoogleMaps() {
+  console.log('intMap', google)
+  var event = new CustomEvent('googleMapsLoaded', {
+    detail: google.maps
+  });
+  document.dispatchEvent(event);
+}
+</script>
+
+{% endif %}
+
+{% endblock %}
