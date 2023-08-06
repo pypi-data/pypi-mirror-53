@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ ! -f "$HOME/.gitconfig" ]; then
+	cd ~ 
+	wget https://gist.githubusercontent.com/whohe/9bf4574b1d2d00a613e2/raw/68015b37ae4cf1479b081c9813a9a0e54c703754/.gitconfig
+	echo "...ok"
+else
+	echo "...was already"
+fi
+exit 0
