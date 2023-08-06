@@ -1,0 +1,22 @@
+Changelog
+=========
+
+
+1.1 (2019-10-01)
+----------------
+
+- Require `openpyxl < 2.6` since newer ones no longer support Python 2.7 [jone]
+- Add support for Plone 5.1.x. [mbaechtold]
+- Add new profiles for Plone 5 (differentiated by title) [djowett-ftw]
+
+1.0.1 (2016-02-26)
+------------------
+
+- Match exact path element, not "startswith". [jone]
+
+
+1.0.0 (2015-11-23)
+------------------
+
+- Initial implementation
+  [jone]
