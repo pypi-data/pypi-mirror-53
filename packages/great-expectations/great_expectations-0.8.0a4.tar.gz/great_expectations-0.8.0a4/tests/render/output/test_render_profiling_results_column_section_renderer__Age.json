@@ -1,0 +1,680 @@
+{
+  "section_name": "Age",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": {
+        "template": "Age",
+        "tooltip": {
+          "content": "expect_column_to_exist",
+          "placement": "top"
+        }
+      },
+      "subheader": {
+        "template": "Type: None",
+        "tooltip": {
+          "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+        }
+      },
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "header_row": [],
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Distinct (n)",
+              "tooltip": {
+                "content": "expect_column_unique_value_count_to_be_between"
+              }
+            }
+          },
+          75
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Distinct (%)",
+              "tooltip": {
+                "content": "expect_column_proportion_of_unique_values_to_be_between"
+              }
+            }
+          },
+          "9.9%"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Missing (n)",
+              "tooltip": {
+                "content": "expect_column_values_to_not_be_null"
+              }
+            }
+          },
+          557
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Missing (%)",
+              "tooltip": {
+                "content": "expect_column_values_to_not_be_null"
+              }
+            }
+          },
+          "42.4%"
+        ]
+      ],
+      "header": "Properties",
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        },
+        "body": {
+          "classes": [
+            "table",
+            "table-sm",
+            "table-unbordered"
+          ],
+          "styles": {
+            "width": "100%"
+          }
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "header": "Quantiles",
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "0.05",
+              "tooltip": {
+                "content": "expect_column_quantile_values_to_be_between"
+              }
+            }
+          },
+          6.0
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Q1",
+              "tooltip": {
+                "content": "expect_column_quantile_values_to_be_between"
+              }
+            }
+          },
+          21.0
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Median",
+              "tooltip": {
+                "content": "expect_column_quantile_values_to_be_between \n expect_column_median_to_be_between"
+              }
+            }
+          },
+          28.0
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Q3",
+              "tooltip": {
+                "content": "expect_column_quantile_values_to_be_between"
+              }
+            }
+          },
+          39.0
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "0.95",
+              "tooltip": {
+                "content": "expect_column_quantile_values_to_be_between"
+              }
+            }
+          },
+          57.0
+        ]
+      ],
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        },
+        "body": {
+          "classes": [
+            "table",
+            "table-sm",
+            "table-unbordered"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "header": "Statistics",
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Mean",
+              "tooltip": {
+                "content": "expect_column_mean_to_be_between"
+              }
+            }
+          },
+          "30.40"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Minimum",
+              "tooltip": {
+                "content": "expect_column_min_to_be_between"
+              }
+            }
+          },
+          "0.17"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Maximum",
+              "tooltip": {
+                "content": "expect_column_max_to_be_between"
+              }
+            }
+          },
+          "71.00"
+        ]
+      ],
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        },
+        "body": {
+          "classes": [
+            "table",
+            "table-sm",
+            "table-unbordered"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "graph",
+      "header": {
+        "template": "Histogram",
+        "tooltip": {
+          "content": "expect_column_kl_divergence_to_be_less_than"
+        }
+      },
+      "graph": "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v3.4.0.json\",\n  \"autosize\": \"fit\",\n  \"config\": {\n    \"mark\": {\n      \"tooltip\": null\n    },\n    \"view\": {\n      \"height\": 300,\n      \"width\": 400\n    }\n  },\n  \"data\": {\n    \"name\": \"data-7abf2671a553b14728940028d070128f\"\n  },\n  \"datasets\": {\n    \"data-7abf2671a553b14728940028d070128f\": [\n      {\n        \"bin_max\": 4.1,\n        \"bin_min\": 0.2,\n        \"weights\": 4.365079365079365\n      },\n      {\n        \"bin_max\": 8.0,\n        \"bin_min\": 4.1,\n        \"weights\": 1.7195767195767195\n      },\n      {\n        \"bin_max\": 12.0,\n        \"bin_min\": 8.0,\n        \"weights\": 1.5873015873015872\n      },\n      {\n        \"bin_max\": 15.9,\n        \"bin_min\": 12.0,\n        \"weights\": 1.984126984126984\n      },\n      {\n        \"bin_max\": 19.8,\n        \"bin_min\": 15.9,\n        \"weights\": 10.052910052910052\n      },\n      {\n        \"bin_max\": 23.8,\n        \"bin_min\": 19.8,\n        \"weights\": 14.814814814814813\n      },\n      {\n        \"bin_max\": 27.7,\n        \"bin_min\": 23.8,\n        \"weights\": 13.35978835978836\n      },\n      {\n        \"bin_max\": 31.7,\n        \"bin_min\": 27.7,\n        \"weights\": 11.11111111111111\n      },\n      {\n        \"bin_max\": 35.6,\n        \"bin_min\": 31.7,\n        \"weights\": 8.201058201058201\n      },\n      {\n        \"bin_max\": 39.5,\n        \"bin_min\": 35.6,\n        \"weights\": 8.068783068783068\n      },\n      {\n        \"bin_max\": 43.5,\n        \"bin_min\": 39.5,\n        \"weights\": 5.158730158730158\n      },\n      {\n        \"bin_max\": 47.4,\n        \"bin_min\": 43.5,\n        \"weights\": 5.952380952380952\n      },\n      {\n        \"bin_max\": 51.3,\n        \"bin_min\": 47.4,\n        \"weights\": 4.894179894179894\n      },\n      {\n        \"bin_max\": 55.3,\n        \"bin_min\": 51.3,\n        \"weights\": 2.91005291005291\n      },\n      {\n        \"bin_max\": 59.2,\n        \"bin_min\": 55.3,\n        \"weights\": 2.2486772486772484\n      },\n      {\n        \"bin_max\": 63.1,\n        \"bin_min\": 59.2,\n        \"weights\": 1.7195767195767195\n      },\n      {\n        \"bin_max\": 67.1,\n        \"bin_min\": 63.1,\n        \"weights\": 1.1904761904761905\n      },\n      {\n        \"bin_max\": 71.0,\n        \"bin_min\": 67.1,\n        \"weights\": 0.6613756613756614\n      }\n    ]\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"bin_min\",\n      \"type\": \"ordinal\"\n    },\n    \"x2\": {\n      \"field\": \"bin_max\"\n    },\n    \"y\": {\n      \"field\": \"weights\",\n      \"type\": \"quantitative\"\n    }\n  },\n  \"height\": 300,\n  \"mark\": \"bar\",\n  \"width\": 300\n}",
+      "styling": {
+        "classes": [
+          "col-6"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        }
+      }
+    },
+    {
+      "content_block_type": "value_list",
+      "header": {
+        "template": "Example Values",
+        "tooltip": {
+          "content": "expect_column_values_to_be_in_set"
+        }
+      },
+      "value_list": [
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "22.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "21.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "30.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "18.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "36.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "24.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "26.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "27.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "28.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "19.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "20.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "23.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "25.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "32.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "45.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "29.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "31.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "33.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "35.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "39.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        }
+      }
+    }
+  ]
+}

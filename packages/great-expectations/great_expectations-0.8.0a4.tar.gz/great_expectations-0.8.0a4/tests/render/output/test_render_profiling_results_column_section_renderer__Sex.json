@@ -1,0 +1,182 @@
+{
+  "section_name": "Sex",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": {
+        "template": "Sex",
+        "tooltip": {
+          "content": "expect_column_to_exist",
+          "placement": "top"
+        }
+      },
+      "subheader": {
+        "template": "Type: None",
+        "tooltip": {
+          "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+        }
+      },
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "header_row": [],
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Distinct (n)",
+              "tooltip": {
+                "content": "expect_column_unique_value_count_to_be_between"
+              }
+            }
+          },
+          2
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Distinct (%)",
+              "tooltip": {
+                "content": "expect_column_proportion_of_unique_values_to_be_between"
+              }
+            }
+          },
+          "0.2%"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Missing (n)",
+              "tooltip": {
+                "content": "expect_column_values_to_not_be_null"
+              }
+            }
+          },
+          0
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Missing (%)",
+              "tooltip": {
+                "content": "expect_column_values_to_not_be_null"
+              }
+            }
+          },
+          "0.0%"
+        ]
+      ],
+      "header": "Properties",
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        },
+        "body": {
+          "classes": [
+            "table",
+            "table-sm",
+            "table-unbordered"
+          ],
+          "styles": {
+            "width": "100%"
+          }
+        }
+      }
+    },
+    {
+      "content_block_type": "value_list",
+      "header": {
+        "template": "Example Values",
+        "tooltip": {
+          "content": "expect_column_values_to_be_in_set"
+        }
+      },
+      "value_list": [
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "male"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "female"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        }
+      }
+    },
+    {
+      "content_block_type": "graph",
+      "header": {
+        "template": "Value Counts",
+        "tooltip": {
+          "content": "expect_column_distinct_values_to_be_in_set"
+        }
+      },
+      "graph": "{\n  \"$schema\": \"https://vega.github.io/schema/vega-lite/v3.4.0.json\",\n  \"autosize\": \"fit\",\n  \"config\": {\n    \"mark\": {\n      \"tooltip\": null\n    },\n    \"view\": {\n      \"height\": 300,\n      \"width\": 400\n    }\n  },\n  \"data\": {\n    \"name\": \"data-45d63c35cf141cfb27d06ce421c0fd3c\"\n  },\n  \"datasets\": {\n    \"data-45d63c35cf141cfb27d06ce421c0fd3c\": [\n      {\n        \"count\": 462,\n        \"value\": \"female\"\n      },\n      {\n        \"count\": 851,\n        \"value\": \"male\"\n      }\n    ]\n  },\n  \"encoding\": {\n    \"x\": {\n      \"field\": \"value\",\n      \"type\": \"ordinal\"\n    },\n    \"y\": {\n      \"field\": \"count\",\n      \"type\": \"quantitative\"\n    }\n  },\n  \"height\": 200,\n  \"mark\": {\n    \"size\": 20,\n    \"type\": \"bar\"\n  },\n  \"width\": 200\n}",
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        }
+      }
+    }
+  ]
+}
