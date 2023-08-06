@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: pyfair
+Version: 0.1-alpha.6
+Summary: FAIR Monte Carlo creator
+Home-page: https://github.com/theonaunheim/pyfair
+Author: Theo Naunheim
+Author-email: theonaunheim@gmail.com
+License: MIT
+Description: 
+                Factor Analysis of Information Risk (FAIR) model written in Python.
+        
+                This package endeavors to create a simple API for automating the
+                creation of FAIR Monte Carlo risk simulations.
+        
+                This is based in large part on:
+                    * the Technical Standard published by the Open Group; and,
+                    * Measuring and Managing Information Risk.
+            
+Keywords: FAIR,risk
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Requires: pandas
+Requires: numpy
+Requires: scipy
+Requires: matplotlib
+Requires: xlrd
