@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: mostx
+Version: 0.1.0
+Summary: Quiz Generator
+Home-page: https://github.com/gottadiveintopython/mostx
+Author: Nattōsai Mitō
+Author-email: flow4re2c@gmail.com
+License: MIT
+Description: # Mostx : Quiz Generator
+        
+        ```python
+        import mostx
+        
+        print(sorted(mostx.get_available_langs()))
+        # => ['chinese', 'english', 'japanese', 'korean', ]
+        
+        qgen = mostx.QuizGenerator(lang='english')
+        q = qgen.generate(choices='ABC', n_adjectives=1)
+        
+        for s in q.statements:
+            print(s)
+        # B is quieter than A
+        # C is quieter than A
+        # B is quieter than C
+        print(q.question)  # => Which is the noisiest?
+        print(tuple(q.choices))  # => ('A', 'B', 'C')
+        print(q.answer)  # => A
+        ```
+        
+Keywords: Game,Quiz
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Education
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
