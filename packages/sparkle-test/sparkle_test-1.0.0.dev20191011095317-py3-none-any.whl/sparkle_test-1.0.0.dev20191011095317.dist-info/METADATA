@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: sparkle-test
+Version: 1.0.0.dev20191011095317
+Summary: A small and simple base class for fast and clean PySpark unit tests
+Home-page: https://github.com/machielg/sparkle-test/
+Author: Machiel Keizer Groeneveld
+Author-email: machielg@gmail.com
+License: GPLv3+
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Environment :: Console
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Testing
+Requires-Dist: pandas
+
+
+Unit testing in Spark is made easier with sparkle-test, the settings are tuned for performance and your unit tests
+don't leave any files in your workspace. There is one convenience method for asserting dataframe equality.
+
+
