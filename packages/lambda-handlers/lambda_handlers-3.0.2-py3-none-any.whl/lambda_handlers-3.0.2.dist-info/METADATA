@@ -1,0 +1,77 @@
+Metadata-Version: 2.1
+Name: lambda-handlers
+Version: 3.0.2
+Summary: A collection of useful decorators for making AWS Lambda handlers
+Home-page: UNKNOWN
+Author: Steffen Leistner, Alexandre Savio
+Author-email: info@enterat.de
+License: Apache License Version 2.0
+Project-URL: Documentation, http://lambda-handlers.readthedocs.io
+Project-URL: Source Code, https://github.com/enter-at/lambda-handlers
+Project-URL: Bug Tracker, https://github.com/enter-at/lambda-handlers/issues
+Project-URL: Changelog, https://github.com/enter-at/lambda-handlers/blob/master/CHANGELOG.md
+Keywords: aws,lambda,serverless,decorator,http,api,rest,json,validation,jsonschema,marshmallow
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Other Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Provides-Extra: jsonschema
+Requires-Dist: jsonschema (==3.0.1) ; extra == 'jsonschema'
+Provides-Extra: marshmallow
+Requires-Dist: marshmallow (==3.2.1) ; extra == 'marshmallow'
+
+# lambda-handlers
+
+[![](https://img.shields.io/pypi/v/lambda-handlers.svg)](https://pypi.org/project/lambda-handlers/)
+[![](https://travis-ci.org/enter-at/lambda-handlers.svg?branch=master)](https://travis-ci.org/enter-at/lambda-handlers)
+[![](https://api.codeclimate.com/v1/badges/a39e55b85bfcc31204b9/maintainability)](https://codeclimate.com/github/enter-at/lambda-handlers/maintainability)
+[![](https://api.codeclimate.com/v1/badges/a39e55b85bfcc31204b9/test_coverage)](https://codeclimate.com/github/enter-at/lambda-handlers/test_coverage)
+[![](https://readthedocs.org/projects/lambda-handlers/badge/?version=latest)](https://lambda-handlers.readthedocs.io/en/latest/)
+[![](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![](https://badges.renovateapi.com/github/enter-at/lambda-handlers)](https://renovatebot.com/)
+
+An opinionated Python package that facilitates specifying AWS Lambda handlers.
+
+It includes input validation, error handling and response formatting.
+
+## Documentation
+Read more about the project motivation and API documentation at:
+
+- [https://lambda-handlers.readthedocs.io/en/latest/](https://lambda-handlers.readthedocs.io/en/latest/)
+
+## How to collaborate
+
+This project uses [pipenv](https://pipenv.readthedocs.io) to manage its dependencies
+and Python environment. You can install it by:
+
+```bash
+pip install --user pipenv
+```
+
+We recommend using a Python virtual environment for each separate project you do.
+For that, we suggest using [pyenv](https://github.com/pyenv/pyenv-installer).
+
+### Installation
+
+For development you should also install the development dependencies,
+so run instead:
+
+```bash
+cd <clone_dest>
+make install-dev
+```
+
+This will install all dependencies and this project in development mode.
+
+### Testing
+
+We use [tox](https://tox.readthedocs.io/en/latest/) to run the code checkers.
+
+You can run the tests by running `tox` in the top-level of the project.
+
+
