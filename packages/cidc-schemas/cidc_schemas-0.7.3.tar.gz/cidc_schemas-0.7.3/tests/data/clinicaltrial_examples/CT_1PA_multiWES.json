@@ -1,0 +1,231 @@
+{
+    "protocol_identifier": "2/1PA_multiWES",
+    "participants": [
+        {
+            "cimac_participant_id": "CM-TEST-PA21",
+            "participant_id": "trial_PA_2.1",
+            "cohort_name": "Arm_Z",
+            "samples": [
+                {
+                    "cimac_id":  "CM-TRIA-PA21-S1",
+                    "parent_sample_id":  "site_SA_2.1.1",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                         ]
+                },
+                {
+                    "cimac_id":  "CM-TEST-PA21-S2",
+                    "parent_sample_id":  "site_SA_2.1.2",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                    ] 
+                },
+                {
+                    "cimac_id":  "CM-TRIA-PA21-S3",
+                    "parent_sample_id":  "site_SA_2.1.3",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                    ] 
+                }
+            ]
+        }
+    ], 
+    "assays": {
+        "wes": [
+            {
+                "assay_creator":        "DFCI",
+                "paired_end_reads":     "Paired",
+                "read_length":          100,
+                "sequencer_platform":   "Illumina - HiSeq 3000",
+                "library_vendor_kit":   "KAPA - Hyper Prep",
+                "records": [
+                    {
+                        "enrichment_vendor_lot":    "$ enrichment_vendor_lot",
+                        "cimac_id":                 "CM-TEST-PA21-S1",
+                        "library_kit_lot":          "$ library_kit_lot",
+                        "library_prep_date":        "4_12_2012",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    },
+                    {
+                        "enrichment_vendor_lot":    "$ enrichment_vendor_lot",
+                        "cimac_id":                 "CM-TEST-PA21-S2",
+                        "library_kit_lot":          "$ library_kit_lot",
+                        "library_prep_date":        "4_12_2012",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "assay_creator":        "DFCI",
+                "paired_end_reads":     "Paired",
+                "read_length":          100,
+                "sequencer_platform":   "Illumina - HiSeq 3000",
+                "library_vendor_kit":   "KAPA - Hyper Prep",
+                "records": [
+                    {
+                        "enrichment_vendor_lot":    "$ enrichment_vendor_lot",
+                        "cimac_id":                 "CM-TEST-PA21-S1",
+                        "library_kit_lot":          "$ library_kit_lot",
+                        "library_prep_date":        "4_12_2012",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    },
+                    {
+                        "enrichment_vendor_lot":    "$ enrichment_vendor_lot",
+                        "cimac_id":                 "CM-TEST-PA21-S3",
+                        "library_kit_lot":          "$ library_kit_lot",
+                        "library_prep_date":        "4_12_2012",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

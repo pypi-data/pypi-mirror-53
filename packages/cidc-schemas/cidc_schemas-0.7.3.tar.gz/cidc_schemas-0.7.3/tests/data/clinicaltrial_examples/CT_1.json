@@ -1,0 +1,320 @@
+{
+    "protocol_identifier": "10021",
+    "participants": [
+        {
+            "cimac_participant_id": "CM-TEST-PAR1",
+            "participant_id": "trial.PA.1",
+            "cohort_name": "Arm_Z",
+            "samples": [
+                {
+                    "cimac_id": "CM-TEST-PAR1-S1",
+                    "parent_sample_id": "SA.1.1",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                    ] 
+                }, 
+                {
+                    "cimac_id": "CM-TEST-PAR1-S2",
+                    "parent_sample_id": "SA.1.2",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cimac_participant_id": "CM-TEST-PAR2",
+            "participant_id": "trial.PA.2",
+            "cohort_name": "Arm_Z",
+            "samples": [
+                {
+                    "cimac_id": "CM-TEST-PAR2-S1",
+                    "parent_sample_id": "SA.2.1",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                    ]
+                },
+                {
+                    "cimac_id": "CM-TEST-PAR2-S2",
+                    "parent_sample_id": "SA.2.2",
+                    "collection_event_name": "Baseline",
+                    "sample_location": "---",
+                    "type_of_sample": "Other",
+                    "type_of_primary_container": "Other",
+                    "aliquots": [
+                        {
+                            "slide_number": "1",
+                            "sample_volume_units": "Other",
+                            "material_used": 1,
+                            "material_remaining": 0,
+                            "quality_of_shipment": "Other",
+                            "aliquot_replacement": "N/A",
+                            "aliquot_status": "Other"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "assays": {
+        "olink": {
+            "assay_creator": "Mount Sinai",
+            "panel": "ol_panel_1",
+            "npx_manager_version": "ol_npx_v1",
+            "records": [
+                {
+                    "assay_prefix": "ol1_",
+                    "filetype": "assay",
+                    "number_of_samples": 88,
+                    "npx_manager_version": "ol_npx_v1",
+                    "files": {
+                        "assay_npx": {
+                            "file_name" :           "...",
+                            "object_url" :          "...",
+                            "uploaded_timestamp" :  "...",
+                            "file_size_bytes" :     0,
+                            "md5_hash" :            "...",
+                            "artifact_category" :   "Assay Artifact from CIMAC",
+                            "data_format" :           "NPX",
+                            "number_of_samples":   3,
+                            "samples": ["CM-TEST-PAR2-S2", "CM-TEST-PAR1-S1", "CM-TEST-PAR2-S1"]
+                        },
+                        "assay_raw_ct": {
+                            "file_name" :           "...",
+                            "object_url" :          "...",
+                            "uploaded_timestamp" :  "...",
+                            "file_size_bytes" :     0,
+                            "md5_hash" :            "...",
+                            "artifact_category" :   "Assay Artifact from CIMAC",
+                            "data_format" :           "XLSX"
+                        }
+                    }
+                }, 
+                {
+                    "assay_prefix": "ol2_",
+                    "filetype": "study",
+                    "number_of_samples": 45,
+                    "npx_manager_version": "ol_npx_v1",
+                    "files": {
+                        "assay_npx": {
+                            "file_name" :           "...",
+                            "object_url" :          "...",
+                            "uploaded_timestamp" :  "...",
+                            "file_size_bytes" :     0,
+                            "md5_hash" :            "...",
+                            "artifact_category" :   "Assay Artifact from CIMAC",
+                            "data_format" :           "NPX",
+                            "number_of_samples":   3,
+                            "samples": ["CM-TEST-PAR2-S2", "CM-TEST-PAR1-S1", "CM-TEST-PAR2-S1"]
+                        },
+                        "assay_raw_ct": {
+                            "file_name" :           "...",
+                            "object_url" :          "...",
+                            "uploaded_timestamp" :  "...",
+                            "file_size_bytes" :     0,
+                            "md5_hash" :            "...",
+                            "artifact_category" :   "Assay Artifact from CIMAC",
+                            "data_format" :           "XLSX"
+                        }
+                    }
+                }
+            ]
+        },
+        "wes": [
+            {
+                "assay_creator": "Mount Sinai",
+                "paired_end_reads": "Paired",
+                "read_length": 100,
+                "sequencer_platform": "Illumina - HiSeq 3000",
+                "library_vendor_kit": "KAPA - Hyper Prep",
+                "records": [
+                    {
+                        "enrichment_vendor_lot":    "...",
+                        "library_kit_lot":          "...",
+                        "library_prep_date":        "...",
+                        "cimac_id":          "CM-TEST-PAR1-S1",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format":          "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format":          "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format":          "TEXT"
+                            }
+                        }
+                    }, 
+                    {
+                        "enrichment_vendor_lot":    "...",
+                        "library_kit_lot":          "...",
+                        "library_prep_date":        "...",
+                        "cimac_id":          "CM-TEST-PAR1-S2",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "assay_creator": "DFCI",
+                "paired_end_reads": "Paired",
+                "read_length": 100,
+                "sequencer_platform": "Illumina - HiSeq 3000",
+                "library_vendor_kit": "KAPA - Hyper Prep",
+                "records": [
+                    {
+                        "enrichment_vendor_lot":    "...",
+                        "library_kit_lot":          "...",
+                        "library_prep_date":        "...",
+                        "cimac_id":          "CM-TEST-PAR2-S1",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    }, 
+                    {
+                        "enrichment_vendor_lot":    "...",
+                        "library_kit_lot":          "...",
+                        "library_prep_date":        "...",
+                        "cimac_id":          "CM-TEST-PAR2-S2",
+                        "files": {
+                            "r1":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "r2":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "FASTQ"
+                            },
+                            "read_group_mapping_file":{
+                                "file_name" :           "...",
+                                "object_url" :          "...",
+                                "uploaded_timestamp" :  "...",
+                                "file_size_bytes" :     0,
+                                "md5_hash" :            "...",
+                                "artifact_category" :   "Assay Artifact from CIMAC",
+                                "data_format" :           "TEXT"
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
