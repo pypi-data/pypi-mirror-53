@@ -1,0 +1,75 @@
+CHANGES
+=======
+
+1.2.1
+-----
+
+* OpenDev Migration Patch
+* Replace openstack.org git:// URLs with https://
+* Rename agent queue - fixes broken minor update
+* Ensure notifications are consumed from non-pool queue
+* Set amqp\_auto\_delete=true for notifications transport
+* Rocky - Fix docs job
+* import zuul job settings from project-config
+* Update UPPER\_CONSTRAINTS\_FILE for stable/rocky
+* Update .gitreview for stable/rocky
+
+1.2.0
+-----
+
+* Remove testrepository and .testr.conf
+* Update neutron-lib requirement for rocky
+* Add release notes link in README
+* Updating required neutron version
+* Switch to using stestr
+* fix tox python3 overrides
+* Remove the duplicated "the"
+
+1.1.0
+-----
+
+* fix tox python3 overrides
+* add lower-constraints job
+* Do not run functional (API) tests in the CI
+* ML2 Agent: Handle SIGHUP mutable config options
+* Change Launchpad references to Storyboard
+* Updated from global requirements
+* Avoid tox\_install.sh
+* use common agent topics from neutron-lib
+* Update reno for stable/queens
+
+1.0.0
+-----
+
+* Add unit tests for member manager
+* Make the agent distributed using hashring and notifications
+* Fix devstack example
+* Node state configuration - add log\_agent\_heartbeat
+* Fix nits in networking-baremetal docs
+* Add dsvm job
+* Update docs and generate config file example
+* Add support to bind type vlan networks
+* Devstack - Add ironic-neutron-agent
+* Use reporting\_interval option from neutron
+* Switch from MechanismDriver to SimpleAgentMechanismDriverBase
+* Updated from global requirements
+* start\_flag = True, only first time, or conf change
+* Add baremetal neutron agent
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Use constants from neutron-lib
+* Update URLs in documents according to document migration
+* Fix to use "." to source script files
+* Update reno for stable/pike
+
+0.1.0
+-----
+
+* Add initial release note
+* Add installation documentation
+* Add devstack plugin to install networking\_baremetal
+* Add baremetal ML2 driver
+* Add .gitignore
+* Initial commit from cookiecutter
+* Added .gitreview
