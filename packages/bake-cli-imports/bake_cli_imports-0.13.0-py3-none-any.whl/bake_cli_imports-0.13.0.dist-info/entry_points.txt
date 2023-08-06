@@ -1,0 +1,7 @@
+[console_scripts]
+bake = bake.cli:entrypoint
+bake_indent = bake.scripts.indent:entrypoint
+bake_step = bake.scripts.step:entrypoint
+notred = bake.scripts.notred:entrypoint
+red = bake.scripts.red:entrypoint
+
