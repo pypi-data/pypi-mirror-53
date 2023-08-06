@@ -1,0 +1,24 @@
+#! /bin/env python
+
+import os
+import json
+import sys
+from cerberusctl import CerberusCtl
+
+def main():
+    try:
+        file = open('{}/.cerberus/config.json'.format(os.path.expanduser("~")), 'r').read()
+        configuration_file = json.loads(file)
+    except FileNotFoundError:
+        print("You need to create the configuration file first")
+        exit()
+
+    ctl = CerberusCtl(
+        configurations=configuration_file
+    )
+
+    return ctl.start()
+
+if __name__ == "__main__":
+    sys.exit(main())
+
