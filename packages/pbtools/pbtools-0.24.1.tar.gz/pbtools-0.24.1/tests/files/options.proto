@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package options;
+
+option foo = true;
+option (bar).fie = true;
+
+message Message {
+    bool value = 1 [deprecated=true];
+}
