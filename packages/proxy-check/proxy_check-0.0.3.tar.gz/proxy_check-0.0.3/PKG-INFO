@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: proxy_check
+Version: 0.0.3
+Summary: proxy_check
+Home-page: https://github.com/remorses/proxy_check
+Author: Tommaso De Rossi
+Author-email: daer.tommy@gmail.com
+License: Apache Software License 2.0
+Description: 
+        ## Usage:
+        ```
+        from proxy_check import check
+        ok, error = await check(os.getenv('PROXY'))
+        if not ok:
+            print(error)
+        ```
+        
+Keywords: TODO
+Platform: UNKNOWN
+Classifier: Intended Audience :: Information Technology
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
