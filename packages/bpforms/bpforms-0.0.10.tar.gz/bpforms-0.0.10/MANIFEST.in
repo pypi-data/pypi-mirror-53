@@ -1,0 +1,35 @@
+# description
+README.rst
+
+# version
+include bpforms/VERSION
+
+# license
+include LICENSE
+
+# requirements
+include requirements.txt
+include requirements.optional.txt
+
+# configuration
+recursive-include bpforms/config *.cfg
+
+# grammar
+include bpforms/grammar.lark
+
+# alphabets
+recursive-include bpforms/alphabet *.yml
+
+# crosslink ontology
+recursive-include xlink *.yml
+
+# visualization files
+include bpforms/genomic_viz.template.svg
+
+# website
+graft bpforms/web
+prune bpforms/web/data
+prune bpforms/web/img
+
+# examples
+recursive-include examples *.ipynb

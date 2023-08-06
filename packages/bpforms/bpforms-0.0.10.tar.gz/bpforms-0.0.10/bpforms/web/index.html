@@ -1,0 +1,1103 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BpForms: a toolkit for concretely describing non-canonical DNA, RNA, and proteins</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-icon-fonts@0.1.1/foundation-icons.css"
+        integrity="sha256-CWltC/W+elkkUKhitcztPiSfE3AEpzAvrkmEqB68Lx0="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css"
+      integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg=="
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <h1><i>BpForms</i>: a toolkit for concretely describing non-canonical DNA, RNA, and proteins</h1>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <div class="large-7 cell">
+          <p><i>BpForms</i> is a toolkit for unambiguously describing the molecular structure (atoms and bonds) of DNA, RNA, and proteins, including non-canonical monomeric forms (subunits which compose polymers), crosslinks, nicks, and circular topologies. By concretely describing the molecular structure of biopolymers, <i>BpForms</i> aims to help epigenomics, transcriptomics, proteomics, systems biology, and synthetic biology researchers share and integrate information about DNA modification, post-transcriptional modification, post-translational modification, expanded genetic codes, and synthetic parts. In particular, <i>BpForms</i> was developed to help researchers collaboratively develop whole-cell computational models <a href="https://www.wholecell.org"><i class="fi-link"></i></a>.</p>
+
+          <p><i>BpForms</i> includes a grammar for describing biopolymer forms and three consensus alphabets of non-canonical monomeric forms of DNA nucleotide monophosphates, RNA nucleotide monophosphates, and protein amino acids. <i>BpForms</i> also includes four software tools for verifying descriptions of biopolymer forms and calculating properties such as their molecular structure, formula, molecular weight, and charge: this website, a JSON REST API <a href="https://www.bpforms.org/api"><i class="fi-link"></i></a>, a command line interface <a href="https://pypi.python.org/pypi/bpforms"><i class="fi-link"></i></a>, and a Python API <a href="https://pypi.python.org/pypi/bpforms"><i class="fi-link"></i></a>. <i>BpForms</i> is available open-source <a href="https://github.com/KarrLab/bpforms"><i class="fi-social-github"></i></a> under the MIT license.</p>
+          <p><i>BpForms</i> can be combined with <i>BcForms</i> to concretely describe the primary structure of complexes.</p>
+        </div>
+        <div class="large-5 cell">
+          <div class="toc">
+            <h3>Table of contents</h3>
+            <div class="grid-x grid-padding-x">
+              <div class="large-6 cell">
+                <ul>
+                  <li><a href="#calculator">Web application</a></li>
+                  <li><a href="#grammar">Grammar</a>
+                    <ul>
+                      <li><a href="#alphabets">Alphabets</a></li>
+                      <li><a href="#inline-monomers">Inline monomeric forms</a>
+                        <ul>
+                          <li><a href="#molecular-structure">Molecular structure</a></li>
+                          <li><a href="#adjacent-bonds">Bonds with adjacent monomers</a></li>
+                          <li><a href="#uncertainty">Uncertainty</a></li>
+                          <li><a href="#metadata">Metadata</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#crosslinks">Crosslinks</a></li>
+                      <li><a href="#nicks">Nicks</a></li>
+                      <li><a href="#topology">Circularity</a></li>
+                      <li><a href="#coordinate-system">Coordinate system</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#interfaces">User interfaces</a>
+                    <ul>
+                      <li><a href="#calculator">Webform</a></li>
+                      <li><a href="#rest">REST API</a></li>
+                      <li><a href="#cli">Command line interface</a></li>
+                      <li><a href="#library">Python library</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="large-6 cell">
+                <ul>
+                  <li><a href="#use-cases">Use cases</a>
+                    <ul>
+                      <li><a href="#epigenomics">Epigenomics</a></li>
+                      <li><a href="#transcriptomics">Transcriptomics</a></li>
+                      <li><a href="#proteomics">Proteomics</a></li>
+                      <li><a href="#sys-bio">Systems biology</a></li>
+                      <li><a href="#syn-bio">Synthetic biology</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#integration">Integration with standards</a>
+                    <ul>
+                      <li><a href="#pdb">3D structures: PDB</a></li>
+                      <li><a href="#fasta">Sequences: FASTA</a></li>
+                      <li><a href="#biopax">Pathways: BioPAX</a></li>
+                      <li><a href="#cellml">Models: CellML</a></li>
+                      <li><a href="#sbml">Models: SBML</a></li>
+                      <li><a href="#sbol">Genetic designs: SBOL</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#resources">Other useful resources</a></li>
+                  <li><a href="#help">Tutorials, docs, and help</a></li>
+                  <li><a href="#contributing">Contributing to <i>BpForms</i></a></li>
+                  <li><a href="#about">About <i>BpForms</i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="calculator"></a>
+        <div class="large-12 cell">
+            <h2><i>BpForms</i> verifier/calculator</h2>
+        </div>
+        <div class="large-6 cell">
+            <a name="form"></a>
+            <h3>Enter a biopolymer form</h3>
+            <form>
+            <label>Select an alphabet
+                <select id="alphabet">
+                </select>
+            </label>
+
+            <label>Enter a sequence of monomeric forms and, optionally, sets of crosslinks and nicks. See the documentation below for more information about the syntax.
+                <textarea
+                    id="monomer_seq_in"
+                    placeholder='AC{m2A}CC{dI}G'></textarea>
+            </label>
+
+            <label>Select the topology
+                <select id="circular">
+                  <option value=1>Circular</option>
+                  <option value=0 selected>Linear</option>
+                </select>
+            </label>
+
+            <label>Optionally, enter a pH at which to calculate the major the protonation state
+                <input type="number" id="ph" placeholder="7.4"/>
+            </label>
+
+            <label>Optionally, calculate the major tautomer state at the entered pH
+                <select id="major_tautomer">
+                  <option value=1>Yes</option>
+                  <option value=0 selected>No</option>
+                </select>
+            </label>
+
+
+            <div id="warnings" style="color: #da663b;">
+            </div>
+
+            <div id="errors" style="color: #da3b60;">
+            </div>
+
+            <input id="submit" type="button" class="button" value="Submit"/>
+            </form>
+        </div>
+        <div class="large-6 cell">
+            <h3>Calculated properties of the biopolymer form</h3>
+            <form class="out">
+                <div id="structure-img" style="text-align: center;"></div>
+                <label>Length
+                    <input type="number" id="length"/>
+                </label>
+                <label>Structure (canonical SMILES)
+                    <textarea id="structure"></textarea>
+                </label>
+                <label>Chemical formula
+                    <input type="text" id="formula"/>
+                </label>
+                <label>Molecular weight
+                    <input type="number" id="mol_wt"/>
+                </label>
+                <label>Charge
+                    <input type="number" id="charge"/>
+                </label>
+            </form>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="grammar"></a>
+        <div class="large-12 cell">
+            <h2><i>BpForms</i> grammar</h2>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <h3>Overview</h3>
+          <p class="before_list">The <i>BpForms</i> grammar extends the IUPAC/IUBMB notation commonly used to represent unmodified DNA, RNA, and proteins to describe non-canonical forms of DNA, RNA, and proteins:</p>
+          <ul>
+            <li><i>BpForms</i> can represent a wider range of monomeric forms, including monomeric forms that are not described in pre-defined alphabets. See the Alphabets section below for more information.</li>
+            <li><i>BpForms</i> can capture left and right caps such as 5' caps.</li>
+            <li><i>BpForms</i> can capture intrastrand crosslinks (additional bonds between non-adjacent monomeric forms).</li>
+            <li><i>BpForms</i> can capture nicks (absence of a bond between adjacent monomeric forms).</li>
+            <li><i>BpForms</i> can capture linear and circular topologies of polymers.</li>
+            <li><i>BpForms</i> has concrete semantics for generating molecular structures from its compressed representation of sequences of monomeric forms.</li>
+          </ul>
+
+          <p class="before_list"><i>BpForms</i> descriptions of biopolymers consists of three parts separated by pipes ("|") (e.g., <tt>A{pSer}Y | circular | x-link: [...]</tt>):</p>
+          <ul>
+            <li>A sequence of strings that indicate monomeric forms of an alphabet bonded together (e.g., <tt>A{pSer}Y</tt>. As described below, <i>BpForms</i> includes six alphabets of hundreds of monomeric forms of DNA, RNA, and proteins, and users can define additional alphabets.</li>
+            <li>An optional set of crosslinks which describe bonds between non-adjacent monomeric forms (e.g., <tt>x-link: [...]</tt>). See below <a href="#crosslinks"><i class="fi-link"></i></a> for additional information.</li>
+            <li>An optional set of nicks which describe adjacent monomeric forms that are not covalently bonded (e.g., <tt>A:C</tt>). See below <a href="#nicks"><i class="fi-link"></i></a> for additional information.</li>
+            <li>An optional attribute for indicating the circularity of the polymer (e.g., <tt>circular</tt>). See below for additional information.</li>
+          </ul>
+
+          <p class="before_list">The monomeric forms in the sequence of monomeric forms can be described in three ways:</p>
+          <ul>
+            <li>Individual characters (e.g., <tt>A</tt>) can be used to indicate monomeric forms that have single character codes in the defined alphabets.</li>
+            <li>Multiple characters delimited by curly brackets (e.g., <tt>{pSer}</tt>) can be used to indicate monomeric forms that have multi-character codes in the defined alphabets.</li>
+            <li>Monomeric forms which are not defined in the alphabets can be defined "inline" using multiple attributes delimited by square brackets (e.g., <tt>[id: "m2A" | ...]</tt>). See below for additional information.</li>
+          </ul>
+
+          <p>The <i>BpForms</i> grammar <a href="https://raw.githubusercontent.com/KarrLab/bpforms/master/bpforms/grammar.lark"><i class="fi-link"></i></a> is defined in Lark syntax <a href="https://lark-parser.readthedocs.io"><i class="fi-link"></i></a>, which is based on EBNF syntax <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form"><i class="fi-link"></i></a>.</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Examples</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-4 cell">
+              <h5>DNA</h5>
+              <p style="text-align: center;"><tt>{dI}ACGC</tt></p>
+              <a data-fancybox="gallery"
+                href="img/example/form-DNA.svg"
+                data-width="600">
+                <img src="img/example/form-DNA.svg" style="margin-bottom: 0.5rem;"/>
+              </a>
+              <p class="form-properties">
+                Length: 5<br/>
+                Formula: C<sub>53</sub>H<sub>64</sub>N<sub>20</sub>O<sub>33</sub>P<sub>5</sub><br/>
+                Molecular weight: 1664.1<br/>
+                Charge: -5
+              </p>
+              <p>Deoxyinosine at the first position</p>
+            </div>
+            <div class="large-4 cell">
+              <h5>RNA</h5>
+              <p style="text-align: center;"><tt>AC{9A}GC</tt></p>
+              <a data-fancybox="gallery"
+                href="img/example/form-RNA.svg"
+                data-width="600">
+                <img src="img/example/form-RNA.svg"
+                  style="margin-bottom: 0.5rem;"/>
+              </a>
+              <p class="form-properties">
+                Length: 5<br/>
+                Formula: C<sub>48</sub>H<sub>55</sub>N<sub>20</sub>O<sub>35</sub>P<sub>5</sub><br/>
+                Molecular weight: 1626.9<br/>
+                Charge: -6
+              </p>
+              <p>Inosine at the third position</p>
+            </div>
+            <div class="large-4 cell">
+              <h5>Protein</h5>
+              <p style="text-align: center;"><tt>AC[id: "U" | structure: "N[C@H](C(=O)O)C[SeH]" | ... ]C</tt></p>
+              <a data-fancybox="gallery"
+                href="img/example/form-Protein.svg"
+                data-width="600">
+                <img src="img/example/form-Protein.svg"
+                  style="margin-bottom: 0.5rem;"/>
+              </a>
+              <p class="form-properties">
+                Length: 4<br/>
+                Formula: C<sub>12</sub>H<sub>23</sub>N<sub>4</sub>O<sub>5</sub>S<sub>2</sub>Se<sub>1</sub><br/>
+                Molecular weight: 446.4<br/>
+                Charge: 1
+              </p>
+              <p>L-selenocysteine at the third position</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="alphabets"></a>
+          <h3>Alphabets</h3>
+          <p style="margin-bottom: 0px;"><i>BpForms</i> includes several alphabets. Each alphabet describes hundreds of monomeric forms.</p>
+          <ul id="alphabet_descriptions">
+          </ul>
+          <p>As described above, monomeric forms with single characters codes can be indicated by their codes (e.g., <tt>C</tt>) and monomeric forms with multi-character codes can be indicated by their codes delimited by curly brackets (e.g., <tt>{m2A}</tt>).</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Examples</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-4 cell">
+              <h5>DNA: 422 nucleotide monophosphates and 3' and 5' caps</h5>
+              <a data-fancybox="gallery"
+                href="img/example/dna-m2A.svg"
+                data-width="600">
+                <img src="img/example/dna-m2A.svg"
+                  style="margin-bottom: 0.5rem;"/>
+              </a>
+              <p style="text-align: center; margin-bottom: 0.0rem;">m2A: 2-methyladenine</p>
+              <p style="text-align: center;" class="form-properties">
+                Formula: C<sub>10</sub>H<sub>13</sub>N<sub>6</sub>O<sub>6</sub>P<sub>1</sub><br/>
+                Molecular weight: 344.224<br/>
+                Charge: -2
+              </p>
+            </div>
+            <div class="large-4 cell">
+              <h5>RNA: 378 nucleotide monophosphates and 3' and 5' caps</h5>
+              <a data-fancybox="gallery"
+                href="img/example/rna-21C.svg"
+                data-width="600">
+                <img src="img/example/rna-21C.svg" style="margin-bottom: 0.5rem;"/>
+              </a>
+              <p style="text-align: center; margin-bottom: 0rem;">21C: 2-lysidine</p>
+              <p style="text-align: center;" class="form-properties">
+                Formula: C<sub>15</sub>H<sub>27</sub>N<sub>5</sub>O<sub>9</sub>P<sub>1</sub><br/>
+                Molecular weight: 452.381<br/>
+                Charge: -1
+              </p>
+            </div>
+            <div class="large-4 cell">
+              <h5>Protein: 1,435 amino acids and carboxy and amine termini</h5>
+              <a data-fancybox="gallery"
+                href="img/example/protein-AA0037.svg"
+                data-width="600">
+                <img src="img/example/protein-AA0037.svg"
+                  style="margin-bottom: 0.5rem;"/>
+              </a>
+              <p style="text-align: center; margin-bottom: 0rem;">AA0037: phosphoserine</p>
+              <p style="text-align: center;" class="form-properties">
+                Formula: C<sub>3</sub>H<sub>7</sub>N<sub>1</sub>O<sub>6</sub>P<sub>1</sub><br/>
+                Molecular weight: 184.064<br/>
+                Charge: -1
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="inline-monomers"></a>
+          <h3>"Inline" monomeric forms</h3>
+          <p>Monomeric forms which are not defined in the alphabet can be defined "inline" within the sequence of monomeric forms.</p>
+
+          <p>Inline monomeric forms can be defined by enclosing multiple attributes separated by pipes ("|") in square brackets (e.g., <tt>[id: "a-short-name" | name: "a long name " | ...]</tt>).</p>
+
+          <p class="before_list">The inline monomeric forms support seven types of attributes. See below for more information about each attribute.</p>
+          <ul>
+            <li><tt>id</tt>, <tt>name</tt>, <tt>synonym</tt>: These attributes indicate human-readable names for the monomeric form.</li>
+            <li><tt>structure</tt>: This attribute indicates the molecular structure of the monomeric form.</li>
+            <li><tt>l-bond-atom</tt>, <tt>l-displaced-atom</tt>, <tt>r-bond-atom</tt>, <tt>r-displaced-atom</tt>: These attributes indicate the atoms in the structure that participate in bonds with the preceding and following monomeric forms in the sequence and the atoms that are displaced by the formation of these bonds.</li>
+            <li><tt>delta-mass</tt>, <tt>delta-charge</tt>, <tt>position</tt>: These attributes can be used to describe uncertainty in the structure and location of the monomeric form.</li>
+            <li><tt>identifier</tt>: This attribute indicates an entry in a database or ontology which is equivalent to the monomeric form.</li>
+            <li><tt>comment</tt>: This attribute can be used to store comments about monomeric forms.</li>
+          </ul>
+
+          <p>All of these attributes are optional. However, the <tt class="attribute">structure</tt>, <tt class="attribute">l-bond-atom</tt>, <tt class="attribute">l-displaced-atom</tt>, <tt class="attribute">r-bond-atom</tt>, and <tt class="attribute">r-displaced-atom</tt> attributes are required to calculate the molecular structure, chemical formula, molecular weight, and charge of the polymer.</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Examples</h3>
+          <pre>[id: "dI"
+    | name: "hypoxanthine"
+    | structure: "OC[C@H]1O[C@H](C[C@@H]1O)[N+]1(C=Nc2c1nc[nH]c2=O)
+                  C1CC(C(O1)COP(=O)([O-])[O-])O"
+    ]</pre><br/>
+          <pre>[id: "AA0305"
+    | name: "N5-methyl-L-arginine"
+    | structure: "OC(=O)[C@H](CCCN(C(=[NH2])N)C)[NH3+]"
+    | l-bond-atom: N16-1
+    | l-displaced-atom: H16+1
+    | l-displaced-atom: H16
+    | r-bond-atom: C2
+    | r-displaced-atom: O1
+    | r-displaced-atom: H1
+    | comments: "Methylated form of L-arginine"
+    ]</pre>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="molecular-structure"></a>
+          <h4>Molecular structure</h4>
+          <p>The <tt class="attribute">structure</tt> attribute describes the molecular structure of the monomeric form. This attribute must be a SMILES-encoded string, and the atoms should be canonically ordered (i.e., Open Babel canonical SMILES format). Each monomeric form can only have one structure attribute. This attribute is required to calculate the molecular structure of the polymer.</p>
+        </div>
+        <div class="large-7 cell example">
+          <h4>Example</h4>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The text below illustrates how to describe the modified DNA nucleotide monophosphate 2'-deoxy-2-O-methylcytosine-5'-monophosphate, and the image below illustrates the molecule that the text specifies. The atom labels indicate the numbers of the atoms within the molecule. These numbers can be generated with Open Babel <a href="http://openbabel.org/wiki/Category:Installation"><i class="fi-link"></i></a>.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <pre>[id: "m2C"
+    | name: "2-O-methylcytosine"
+    | structure: "COC1=NC(=CCN1C1CC(C(O1)COP(=O)
+                  ([O-])[O-])O)N"
+    ]</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="img/example/structure-m2C.svg"
+                data-width="600">
+                <img src="img/example/structure-m2C.svg"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="adjacent-bonds"></a>
+          <h4>Bonds with adjacent monomers</h4>
+          <p>The <tt class="attribute">l-bond-atom</tt> and <tt class="attribute">l-displaced-atom</tt> attributes describe bonds with preceding monomeric forms; the <tt class="attribute">r-bond-atom</tt> and <tt class="attribute">r-displaced-atom</tt> attributes describe bonds with succeeding monomeric forms.</p>
+
+          <p>The values of these attributes are the element of the atom, the position of the atom within the monomeric form, and the charge of the atom (e.g., <tt>N3+1</tt>). Open Babel can be used to display the numbers of the atoms within monomeric forms.</p>
+
+          <p>Each monomeric form can have one or more bonds and displaced atoms with the preceding and following monomeric forms. In addition, the number of left bond atoms must be equal to the number of right bond atoms for the preceding monomeric form, and the number of right bond atoms must be equal to the number of left bond atoms for the following monomeric form. The <i>BpForms</i> software verifies these constraints. These attributes are required to calculate the molecular structure of the polymer.</p>
+        </div>
+        <div class="large-7 cell example">
+          <h4>Example</h4>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The example below illustrates how to describe the modified amino acid N<sup>5</sup>-methyl-L-arginine.</p>
+
+              <p>The blue atoms indicate atoms (N terminus) involved in left bonds to preceding monomeric forms; the dark blue N atom indicates the atom which bonds with preceding monomeric forms; the light blue H atom indicates atoms displaced by the formation of these bonds.</p>
+
+              <p>The green atoms indicate the atoms (C terminus) involved in right bonds to succeeding monomeric forms. The dark green C atom indicates the atom which bonds with succeeding monomeric forms; the light green H atom (not shown) indicates atoms which are displaced by the formation of these bonds.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <pre>[id: "AA0305"
+  | name: "N5-methyl-L-arginine"
+  | structure: "OC(=O)[C@H](CCCN(C(=[NH2])N)C)
+                [NH3+]"
+  | l-bond-atom: N16-1
+  | l-displaced-atom: H16+1
+  | l-displaced-atom: H16
+  | r-bond-atom: C2
+  | r-displaced-atom: O1
+  | r-displaced-atom: H1
+  ]</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="img/example/left-right-bonds-AA0305.svg"
+                data-width="600">
+                <img src="img/example/left-right-bonds-AA0305.svg"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="uncertainty"></a>
+          <h4>Structure and positional uncertainty</h4>
+          <p class="before_list">Through the inline monomeric forms, <i>BpForms</i> can represent two types of uncertainty in the molecular structure of forms of biopolymers:</p>
+          <ul>
+          <li>The <tt class="attribute">delta-mass</tt> and <tt class="attribute">delta-charge</tt> attributes can describe additional mass and charge beyond that of the canonical monomeric form which have been observed, but which cannot be resolved to a specific molecular structure. The value of <tt class="attribute">delta-mass</tt> attribute must be a float. The value of the <tt class="attribute">delta-charge</tt> attribute must be an integer. Such mass and charge uncertainty can arise from mass spectrometry studies which often cannot resolve the exact molecular structure of each monomeric form.</li>
+          <li>The <tt class="attribute">position</tt> attribute can be used to indicate a range of positions within the sequence in which the monomeric form is believed to be located, rather than a single position within the sequence. The value of the <tt class="attribute">position</tt> should be two integers separated by a dash (e.g., <tt>2-3</tt>), optionally, followed by a pipe-delimited list of possible originating monomeric forms that the non-canonical monomeric form is derived from enclosed in square brackets (e.g., <tt>2-3 [A | C | G]</tt>). Such positional uncertainty can arise from enzymatic assays which do not have single nucleotide resolution.</li>
+          </ul>
+        </div>
+        <div class="large-7 cell example">
+          <h4>Examples</h4>
+          <ul>
+          <li><tt>[id: "dAMP" | delta-mass: -18 | delta-charge: 0]</tt>: indicates the dehydration of dAMP whose exact structure is not known.</li>
+          <li><tt>[id: "dI" | position: 2-3]</tt>: indicates that deoxyinosine may occur anywhere between the second and third position.</li>
+          <li><tt>[id: "dI" | position: 4-8 [A | C]]</tt>: indicates that deoxyinosine may occur at any A or C between the fourth and eighth positions.</li>
+          </ul>
+        </div>
+
+
+        <div class="large-5 cell grammar">
+          <a name="metadata"></a>
+          <h4>Metadata</h4>
+          <p class="before_list"><i>BpForms</i> can represent several types of metadata about inline monomeric forms:</p>
+          <ul>
+            <li>The <tt class="attribute">id</tt> and <tt class="attribute">name</tt> attributes are human-readable labels for monomeric forms. The id attribute should be used to represent a short label. Only one id and one name are allowed per monomeric form.</li>
+            <li>The <tt class="attribute">synonym</tt> attribute is an additional human-readable label. Monomeric forms can have multiple synonyms.</li>
+            <li>The <tt class="attribute">identifier</tt> attribute indicates entries in namespaces (e.g., databases and ontologies) which are equivalent to the monomeric form. The value of this attribute should be an id within a namespace and the prefix of the namespace as registered at Identifiers.org <a href="https://identifiers.org/"><i class="fi-link"></i></a> separated by "@" (e.g., <tt>"65058" @ "pubchem.compound"</tt>). Monomeric forms can have multiple identifiers.</li>
+            <li>The <tt class="attribute">comments</tt> attribute can describe additional information about the monomeric form. Each monomeric forms is limited to one comment.</li>
+          </ul>
+        </div>
+        <div class="large-7 cell example">
+          <h4>Examples</h4>
+          <ul>
+          <li><tt>[id: "dI" | name: "deoxyinosine"]</tt>: represents the id and name of deoxyinosine.</li>
+          <li><tt>[id: "dI" | synonym: "deoxyinosine" | synonym: "2'-deoxyinosine"]</tt>: represents multiple synonyms of deoxyinosine.</li>
+          <li><tt>[id: "dI" | identifier: "65058" @ "pubchem.compound" | identifier: "65058" @ "pubchem.compound"]</tt>: represents equivalent entries in ChEBI and PubChem to deoxyinosine.</li>
+          <li><tt>[id: "dI" | comments: "A purine 2'-deoxyribonucleotide monophosphate that is inosine ..."]</tt>: represents comments about deoxyinosine.</li>
+          </ul>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="crosslinks"></a>
+          <h3>Crosslinks between non-adjacent monomers</h3>
+          <p>The <tt class="attribute">x-link</tt> polymer attribute can be used to indicate a bond between non-adjacent monomeric forms. For example, this attribute can be used to describe intrastrand crosslinks in DNA and disulfide bonds between cysteines in proteins.</p>
+
+          <p>Crosslinks can be described our ontology of crosslinks or defined inline.</p>
+
+          <p>Polymers can have zero, one, or more crosslinks.</p>
+
+          <h4>Ontology-defined crosslinks</h4>
+          <p>Crosslinks defined using our ontology can be described by enclosing attributes which indicate the monomeric forms involved in the crosslink within square brackets and delimiting the attributes with pipes (e.g., <tt>CAC | x-link: [type: disfulfide | l: 1 | r: 3]</tt>).</p>
+
+          <p>The value of the <tt>type</tt> attribute must be the id of a crosslink in our ontology. See the crosslinks browser <a href="crosslink.html"><i class="fi-link"></i></a> for a list of the defined crosslinks.</p>
+
+          <p>The values of the <tt>l</tt> and <tt>r</tt> attributes should be integers which indicates the positions of the monomeric forms involved in the crosslink. The left/right orientation of the monomeric forms must be matched to the definition of the crosslink in the ontology.</p>
+
+          <h4>User-defined crosslinks</h4>
+          <p>Users can also define crosslinks "inline" by enclosing attributes which indicate the atoms involved in the bond within square brackets and delimiting the attributes with pipes (e.g., <tt>| x-link: [l-bond-atom: 1C1 | r-bond-atom: 3C2 | ...]</tt>).</p>
+
+          <p class="before_list">Each user-defined crosslink can be described with the following attributes:</p>
+          <ul>
+            <li><tt>l-bond-atom</tt> and <tt>r-bond-atom</tt>: These attributes indicate the atoms involved in the bond. The values of these attributes are the position of the monomeric form within the sequence, the element of the atom, the position of the atom within the monomeric form, and the charge of the atom (e.g., <tt>8N3+1</tt>). Open Babel can be used to display the numbers of the atoms within monomeric forms.</li>
+            <li><tt>l-displaced-atom</tt> and <tt>r-displaced-atom</tt>: These attributes indicate the atoms displaced by the formation of the bond. The values of these attributes are also the position of the monomeric form within the sequence, the element of the atom, the position of the atom within the monomeric form, and the charge of the atom.</li>
+            <li><tt>order</tt>: This attribute can indicate the order (single, double, triple, aromatic) of the bond.</li>
+            <li><tt>stereo</tt>: This attribute can indicate the stereochemistry of the bond (wedge, hash, up, down).</li>
+            <li><tt>comments</tt>: This attribute can indicate comments about the crosslink, such as uncertainty about its location or structure.</li>
+          </ul>
+
+          <p>Each user-defined crosslink can have one or more left and right bond atoms and zero or more left and right displaced atoms. Furthermore, each user-defined crosslink must have the same number of left and right bond atoms. This constraint is verified by the <i>BpForms</i> software.</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Example</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The example below illustrates how to describe a tripeptide with a disulfide bond. The blue line indicates the disulfide bond (crosslink). The green lines indicate the bonds between the successive amino acids. The black labels indicate the positions of monomeric forms within the sequence.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <p class="before_list">Ontology-defined crosslink</p>
+              <pre>CAC | x-link: [type: "disulfide"
+      l: 1
+    | r: 3
+]</pre>
+              <p class="before_list" style="margin-top: 1rem;">User-defined crosslink</p>
+              <pre>CAC | x-link: [
+      l-bond-atom: 1S11
+    | l-displaced-atom: 1H11
+    | r-bond-atom: 3S11
+    | r-displaced-atom: 3H11
+    | comments: "Disulfide bond"
+]</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="img/example/crosslink-protein-sulfide-bond.svg"
+                data-width="600">
+                <img src="img/example/crosslink-protein-sulfide-bond.svg"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      <div class="large-5 cell grammar">
+          <a name="nicks"></a>
+          <h3>Nicks between adjacent monomers</h3>
+          <p>The <tt>:</tt> notation can be used to indicate a nick between adjacent monomeric forms.</p>
+      </div>
+      <div class="large-7 cell example">
+          <h3>Example</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The example below illustrates how to describe a tripeptide with nick between the first and second residues and a disulfide bond between the first and third residues. Such a peptide could be generated by nicking the form of the peptide that doesn't contain the nick. The blue line indicates the disulfide bond (crosslink). The green lines indicate the bonds between the successive amino acids. The black labels indicate the positions of monomeric forms within the sequence.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <p class="before_list">Ontology-defined crosslink</p>
+              <pre>C:AC | x-link: [type: "disulfide"
+      l: 1
+    | r: 3
+]</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="img/example/nick-protein.svg"
+                data-width="600">
+                <img src="img/example/nick-protein.svg"/>
+              </a>
+            </div>
+          </div>
+      </div>
+
+      <div class="large-5 cell grammar">
+          <a name="topology"></a>
+          <h3>Circular and linear topologies</h3>
+          <p>By default, <i>BpForms</i> describes linear polymers. The <tt class="attribute">circular</tt> polymer attribute can be used to indicate that the polymer is circular (there is a bond between the last and first monomeric forms).</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Example</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The example below illustrates how to describe the circular DNA dimer of the DNA nucleotides deoxyadenosine monophosphate and deoxycytosine monophosphate. The green lines indicate the bonds between successive nucleotides. The black labels indicate the positions of monomeric forms within the sequence.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <pre>AC | circular</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="img/example/circular-DNA-AC.svg"
+                data-width="600">
+                <img src="img/example/circular-DNA-AC.svg"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="coordinate-system"></a>
+          <h3>Coordinate system</h3>
+          <p>Each residue, and atom represented by <i>BpForms</i> has a unique coordinate. The coordinate of each residue is its position within the residue sequence of its parent polymer. The coordinate of each atom is a tuple of the coordinate of its parent residue and its position within the canonical SMILES ordering of the atoms in its parent residue prior to incorporation into polymers (which can be displayed by Open Babel).</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Example</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The example below illustrates the atom coordinates for the modified amino acid N<sup>5</sup>-methyl-L-arginine.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <pre>[id: "AA0305"
+  | name: "N5-methyl-L-arginine"
+  | structure: "OC(=O)[C@H](CCCN(C(=[NH2])N)C)
+                [NH3+]"
+  | l-bond-atom: N16-1
+  | l-displaced-atom: H16+1
+  | l-displaced-atom: H16
+  | r-bond-atom: C2
+  | r-displaced-atom: O1
+  | r-displaced-atom: H1
+  ]</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="img/example/left-right-bonds-AA0305.svg"
+                data-width="600">
+                <img src="img/example/left-right-bonds-AA0305.svg"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="interfaces"></a>
+        <div class="large-12 cell">
+          <h2>User interfaces</h2>
+          <p class="before_list"><i>BpForms</i> includes four software interfaces for verifying descriptions of biopolymers and calculating properties such as their molecular structures, formulae, molecular weights, and charges.</p>
+        </div>
+        <div class="large-3 cell">
+          <h3>Webform</h3>
+          The webform above <a href="#form"><i class="fi-link"></i></a> can be used to validate <i>BpForms</i> and calculate their properties.
+        </div>
+        <div class="large-3 cell">
+          <a name="rest"></a>
+          <h3>JSON REST API</h3>
+          A JSON REST API is available at <a href="https://bpforms.org/api">https://bpforms.org/api</a>.
+        </div>
+        <div class="large-3 cell">
+          <a name="cli"></a>
+          <h3>Command line interface</h3>
+          A command line interface is available from PyPI <a href="https://pypi.python.org/pypi/bpforms"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-3 cell">
+          <a name="library"></a>
+          <h3>Python library</h3>
+          A Python library is available from PyPI <a href="https://pypi.python.org/pypi/bpforms"><i class="fi-link"></i></a>.
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="use-cases"></a>
+        <div class="large-12 cell">
+          <h2>Use cases: Epigenomics, proteomics, systems biology, synthetic biology, and proteomics</h2>
+          <p class="before_list">By concretely capturing the molecular structure of biopolymers, <i>BpForms</i> can facilitate a wide range of epigenomics, proteomics, proteomics systems biology, and synthetic biology research.</p>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="epigenomics"></a>
+          <h3>Epigenomics</h3>
+          <p><i>BpForms</i> can help researchers precisely communicate the structures of modified DNA, such as methylations that bacteria use to distinguish self from non-self DNA. We anticipate that this will be increasingly important as researchers continue to discover new types of modifications and begin to investigate their impact on the interactions of proteins with DNA.</p>
+        </div>
+        <div class="large-8 cell">
+          <h3>Example</h3>
+          <p>Several chemotherapeutics, such as cisplatin, cause toxic side effects by damaging the DNA of healthy cells. Cells have several pathways with overlapping functions to repair DNA damage. This includes direct repair, base excision repair, nucleotide excision repair, and homologous recombination. Because chemotherapeutics cause a wide range of damage, and because cells have several pathways to repair DNA damage, it is challenging to assemble an integrated understanding of the repair of DNA damage caused by chemotherapeutics. <i>BpForms</i> can help researchers develop an integrated understanding of DNA repair by helping researchers concretely communicate the damage caused by each chemotherapeutic and the types of damage repaired by each pathway.</p>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="transcriptomics"></a>
+          <h3>Transcriptomics</h3>
+          <p><i>BpForms</i> can help researchers precisely communicate the sequences of rRNA, tRNA, and other non-coding RNA; analyze RNA modifications; and improve the quality of reported sequences by identifying errors in the descriptions of modified RNA such as undefined monomeric forms and inconsistent bonds (e.g., 3' caps that are not located at the 3' position).
+          </p>
+        </div>
+        <div class="large-8 cell">
+          <h3>Example: Analysis of the metabolic load of rRNA and tRNA modification in <i>E. coli</i></h3>
+          <p>MODOMICS contains 732 curated sequences of rRNA and tRNA <a href="http://modomics.genesilico.pl/sequences/"><i class="fi-link"></i></a>. We used <i>BpForms</i> together with MODOMICS to assess the metabolic cost of RNA modification in <i>Escherichia coli</i>. We found that <i>E. coli</i> tRNA have 7.8 &plusmn; 2.2 modifications per transcript that increase their mass by 166.2 &plusmn; 103.7 Da and charge by 0.40 &plusmn; 0.63 per transcript. This analysis also led us to add missing information about the origin of several of the monomeric forms derived from MODOMICS and correct three types of errors in the MODOMICS RNA sequences. The code is available at GitHub <a href="https://github.com/KarrLab/bpforms/blob/master/examples/modomics.py"><i class="fi-link"></i></a>.</p>
+          <!-- <ol>
+            <li>We added missing information about origin of several monomeric forms.</li>
+            <li>We corrected three types of errors in the sequences. (a) Lower case codes which do not correspond to a monomeric form, and which could be confused with descriptions of repetitive elements. (b) Trailing spaces which could be confused with monomeric forms. (c) Underscores used to represent insertions that were not described as a part of the MODOMICS syntax, and which could be confused with monomeric forms.</li>
+            <li>involving 7.8 &plusmn; 4.4 carbon atoms,
+              18.3 &plusmn; 8.6 hydrogen atoms, 1.9 &plusmn; 1.2 nitrogen atoms, 1.8 &plusmn; 2.5 oxygen atoms, and 1.7 &plusmn; 0.7 sulfur atoms.</li>
+          </ol> -->
+
+          <a data-fancybox="gallery"
+                href="img/example/modomics.trna.code-freq.svg"
+                data-width="1200">
+            <img src="img/example/modomics.trna.code-freq.svg" style="margin-bottom: 0.5rem;" />
+          </a>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="proteomics"></a>
+          <h3>Proteomics</h3>
+          <p><i>BpForms</i> can help researchers precisely communicate the sequences of proteoforms, analyze modifications, and improve the quality of reported sequences by identifying errors in the descriptions of proteoforms, such as monomeric forms that are inconsistent with the unmodified sequence (e.g., selenocysteine modification of a non-cysteine amino acid) and inconsistent bonds (e.g., N,N,N-trimethyl-L-alanine (which has no N-terminus) located in the middle of a peptide).</p>
+        </div>
+        <div class="large-8 cell">
+          <h3>Example: Analysis of the metabolic load of protein modification in humans</h3>
+          <p>The PRO database contains curated modifications of 2,312 human proteins <a href="https://proconsortium.org/"><i class="fi-link"></i></a>. We used <i>BpForms</i> together with PRO to assess the metabolic cost of protein modification in humans. We found that human proteins have 1.7 &plusmn;1.6 modifications per protein that increase their mass by 146.4 &plusmn; 154.3 Da per protein and decrease their charge by 3.05 &plusmn; 3.30 per protein. This analysis also led us to improve PRO by correcting four types of errors in the curated modifications. The code is available at GitHub <a href="https://github.com/KarrLab/bpforms/blob/master/examples/pro.py"><i class="fi-link"></i></a>.</p>
+          <!--
+          <ol>
+            <li>Identified 1 entry with a obsolete UniProt ids.</li>
+            <li>Identified 3 entries with processing positions that are longer than the length of the sequence.</li>
+            <li>Identified 58 entries with modifications whose positions and residues are inconsistent.</li>
+            <li>Identified 4 entries with multiple modifications annotated for the same position.</li>
+          </ol>
+          -->
+
+          <a data-fancybox="gallery"
+                href="img/example/pro_nonreasoned.svg"
+                data-width="1200">
+            <img src="img/example/pro_nonreasoned.svg" style="margin-bottom: 0.5rem;" />
+          </a>
+        </div>
+
+        <div class="large-6 cell">
+          <a name="sys-bio"></a>
+          <h3>Systems biology</h3>
+          <p><i>BpForms</i> can help modelers describe the semantic meaning of models by helping modelers precisely describe the species in models. Importantly, this precision makes it easier for other researchers to understand, reuse, extend, and compose models for other studies. <i>BpForms</i> can also help modelers build more comprehensive models by helping researchers identify gaps in models such as missing intermediate modification states of proteins and missing interactions between modification states. In particular, <i>BpForms</i> can help modelers identify the full combinatorial complexity of biochemistry that should be modeled. In addition, <i>BpForms</i> can help researchers increase the quality of models by helping identify errors such as element imbalances.</p>
+        </div>
+        <div class="large-6 cell">
+          <h3>Example</h3>
+          <p>The Kholodenko model of the eukaryotic MAPK signaling cascade (DOI: 10.1046/j.1432-1327.2000.01197.x <a href="https://doi.org/10.1046/j.1432-1327.2000.01197.x"><i class="fi-link"></i></a>, BioModels: BIOMD0000000010 <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000010"><i class="fi-link"></i></a>) represents the biphosporylation of Mek1/MAPKK by Mos/MAPKKK and the biphosporylation of Erk2/MAPK by Mek1/MAPKK. Annotating the structures of the species in the model with <i>BpForms</i>, enabled us to identify two gaps in the model: two additional intermediate phosphorylation forms of Mek1 and Erk2 and the reactions involving these species. <i>BpForms</i> also enabled us to identify several unbalanced reactions that do not capture phosphate donors.</p>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="syn-bio"></a>
+          <h3>Synthetic biology</h3>
+          <p><i>BpForms</i> can help engineers precisely represent and communicate the structures of parts for synthetic organisms. In addition, <i>BpForms</i> could help engineers identify the dependencies and interfaces of parts which, in turn, could help engineers use parts in alternative hosts, compose parts, and share parts more reliably.</p>
+        </div>
+        <div class="large-8 cell">
+          <h3>Example</h3>
+          <p><i>E. coli</i> pyruvate dehydrogenase requires lipoate ligation at L43 of the active site of the E1 subunit (UniProt: P96104 <a href="https://www.uniprot.org/uniprot/P96104"><i class="fi-link"></i></a>). By representing lipoate ligation of the E1 subunit, <i>BpForms</i> can help capture the dependence of <i>E. coli</i> pyruvate dehydrogenase on lipoate ligase. In turn, this could help engineers recognize that <i>E. coli</i> pyruvate dehydrogenase can only be used in other hosts that have a lipoate ligase, or that a lipoate ligase, such as LplA (UnitProt: P32099 <a href="https://www.uniprot.org/uniprot/P32099"><i class="fi-link"></i></a>), must be co-transformed with <i>E. coli</i> pyruvate dehydrogenase.</p>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="integration"></a>
+        <div class="large-12 cell">
+          <h2>Integrating <i>BpForms</i> into the BioPAX, CellML, FASTA, PDB, SBML, and SBOL standards</h2>
+          <p class="before_list"><i>BpForms</i> can be used in conjunction with several commonly used standards in genomics, transcriptomics, proteomics, systems biology, and synthetic biology. In addition, <i>BpForms</i> can easily be embedded within other documents such as Excel workbooks and comma-separated tables.</p>
+        </div>
+
+                <div class="large-4 cell">
+          <a name="pdb"></a>
+          <h3>Macromolecule 3D structures: PDB</h3>
+          <p><i>BpForms</i> can be used to provide human-readable annotations of protein structures encoded in PDB files <a href="http://www.wwpdb.org/documentation/file-format"><i class="fi-link"></i></a>. <i>BpForms</i> can be embedded within <tt>REMARK</tt> records.
+          </p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Example</h3>
+          <p style="margin-bottom: 0.5rem;"><b>Protein:</b> <i>Bos taurus</i> selenocysteine synthase Gpx1 <a href="https://www.rcsb.org/structure/1gp1"><i class="fi-link"></i></a></p>
+          <pre class="small">...
+REMARK   1
+REMARK   1 >1GP1:A
+REMARK   1 <span class="bpform">AAALAAAAPRTVYAFSARPLAGGEPFNLSSLRGKVLLIENVASL<span class="modification">{SE7}</span>GTTVRDYTQMNDLQRRLGPRGLVVLGFPCNQFGHQENAKNEEIL</span>
+REMARK   1 <span class="bpform">NCLKYVRPGGGFEPNFMLFEKCEVNGEKAHPLFAFLREVLPTPSDDATALMTDPKFITWSPVCRNDVSWNFEKFLVGPDGVPVRRYSRRFLTI</span>
+REMARK   1 <span class="bpform">DIEPDIETLLSQGASA</span>
+REMARK   1 >1GP1:B
+REMARK   1 <span class="bpform">AAALAAAAPRTVYAFSARPLAGGEPFNLSSLRGKVLLIENVASL<span class="modification">{SE7}</span>GTTVRDYTQMNDLQRRLGPRGLVVLGFPCNQFGHQENAKNEEIV</span>
+REMARK   1 <span class="bpform">VLGFPCNQFGHQENAKNEEILNCLKYVRPGGGFEPNFMLFEKCEVNGEKAHPLFAFLREVLPTPSDDATALMTDPKFITWSPVCRNDVSWNFE</span>
+REMARK   1 <span class="bpform">KFLVGPDGVPVRRYSRRFLTIDIEPDIETLLSQGASA</span>
+...</pre>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="fasta"></a>
+          <h3>Sets of sequences: FASTA</h3>
+          <p>Sets of <i>BpForms</i> can be encoded in FASTA files. Such files can be written with the <tt>bpforms.util.write_to_fasta</tt> function or packages such as BioPython <a href="https://biopython.org/wiki/SeqIO"><i class="fi-link"></i></a>.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Example</h3>
+          <p style="margin-bottom: 0.5rem;"><b>Protein:</b> multiple phosphorylated forms of <i>H. sapiens</i> MAPK <a href="https://www.uniprot.org/uniprot/Q02750"><i class="fi-link"></i></a></p>
+          <pre class="small">&gt; y | MEK | Q02750
+<span class="bpform">MPKKKPTPIQLNPAPDGSAVNGTSSAETNLEALQKKLEELELDEQQRKRLEAFLTQKQKVGELKDDDFEKISELGAGNGGVVFKVSHKPSGLVMARKLIH
+LEIKPAIRNQIIRELQVLHECNSPYIVGFYGAFYSDGEISICMEHMDGGSLDQVLKKAGRIPEQILGKVSIAVIKGLTYLREKHKIMHRDVKPSNILVNS
+RGEIKLCDFGVSGQLIDSMANSFVGTRSYMSPERLQGTHYSVQSDIWSMGLSLVEMAVGRYPIPPPDAKELELMFGCQVEGDAAETPPRPRTPGRPLSSY
+GMDSRPPMAIFELLDYIVNEPPPKLPSGVFSLEFQDFVNKCLIKNPAERADLKQLMVHAFIKRSDAEEVDFAGWLCSTIGLNQPSTPTHAAGV</span>
+
+&gt; yp | phosphorylated MEK | Q02750 | pS218
+<span class="bpform">MPKKKPTPIQLNPAPDGSAVNGTSSAETNLEALQKKLEELELDEQQRKRLEAFLTQKQKVGELKDDDFEKISELGAGNGGVVFKVSHKPSGLVMARKLIH
+LEIKPAIRNQIIRELQVLHECNSPYIVGFYGAFYSDGEISICMEHMDGGSLDQVLKKAGRIPEQILGKVSIAVIKGLTYLREKHKIMHRDVKPSNILVNS
+RGEIKLCDFGVSGQLID<span class="modification">{AA0037}</span>MANSFVGTRSYMSPERLQGTHYSVQSDIWSMGLSLVEMAVGRYPIPPPDAKELELMFGCQVEGDAAETPPRPRTP
+GRPLSSYGMDSRPPMAIFELLDYIVNEPPPKLPSGVFSLEFQDFVNKCLIKNPAERADLKQLMVHAFIKRSDAEEVDFAGWLCSTIGLNQPSTPTHAAGV</span></pre>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="biopax"></a>
+          <h3>Knowledge of pathways: BioPAX</h3>
+          <p><i>BpForms</i> can be used to concretely describe all of the DNA, RNA, and proteins involved in pathways encoded in BioPAX <a href="https://www.biopax.org/"><i class="fi-link"></i></a>. <i>BpForms</i> can be used with the <tt>sequence</tt> child of <tt>DNAReference</tt>, <tt>RNAReference</tt>, and <tt>ProteinReference</tt> objects.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Examples</h3>
+          <p style="margin-bottom: 0.5rem;"><b>DNA:</b> <i>E. coli</i> K-12 MG1655 Dam 6-methyladenine sites (701..914) involved in host recognition <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3"><i class="fi-link"></i></a></p>
+          <pre class="small">...
+  &lt;bp:DNA&gt;
+    &lt;bp:entityReference&gt;
+      &lt;bp:DNAReference&gt;
+        &lt;bp:sequence
+          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          <span class="bpform-attr">rdf:about</span>="<span class="bpform-val">http://edamontology.org/format_3909#dna</span>"&gt;
+          <span class="bpform">...
+          TGATTTGCCGTGGCGAGAAAATGTCG<span class="modification">{a}</span>TCGCCATTATGGCCGGCGTATTAGAAGCGCGCGGTCACAAC
+          GTTACTGTTATCG<span class="modification">{a}</span>TCCGGTCGAAAAACTGCTGGCAGTGGGGCATTACCTCGAATCTACCGTCGATAT
+          TGCTGAGTCCACCCGCCGTATTGCGGCAAGCCGCATTCCGGCTG<span class="modification">{a}</span>TCACATGGTGCTGATGGCAGGTT
+          ...</span>
+        &lt;/bp:sequence&gt;
+      &lt;/bp:DNAReference&gt;
+    &lt;/bp:entityReference&gt;
+  &lt;/bp:DNA&gt;
+...
+</pre>
+
+          <p style="margin-top: 1rem; margin-bottom: 0.5rem;"><b>RNA:</b> Modifications of <i>B. subtilis</i> tRNA<sup>UGC</sup> involved in stability <a href="http://modomics.genesilico.pl/sequences/list/?type_field=tRNA&subtype=Ala&species=4&display=Display&nomenclature=abbrev"><i class="fi-link"></i></a></p>
+          <pre class="small">...
+  &lt;bp:RNA&gt;
+    &lt;bp:entityReference&gt;
+      &lt;bp:RNAReference&gt;
+        &lt;bp:sequence
+          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          <span class="bpform-attr">rdf:about</span>="<span class="bpform-val">http://edamontology.org/format_3909#rna</span>"&gt;
+          <span class="bpform">GGAGCCUUAGCUCAGC<span class="modification">{8U}</span>GGGAGAGCGCCUGCUU<span class="modification">{501U}</span>GC<span class="modification">{6A}</span>CGCAGGAG<span class="modification">{7G}</span>UCAGCGG<span class="modification">{5U}</span><span class="modification">{9U}</span>CGAUCCCGCUAGGCUCCA
+          CCA</span>
+        &lt;/bp:sequence&gt;
+      &lt;/bp:RNAReference&gt;
+    &lt;/bp:entityReference&gt;
+  &lt;/bp:RNA&gt;
+...</pre>
+
+          <p style="margin-top: 1rem; margin-bottom: 0.5rem;"><b>Protein:</b> Modifications of <i>H. sapiens</i> MAPK3 involved in signaling <a href="https://www.uniprot.org/uniprot/P27361#ptm_processing"><i class="fi-link"></i></a></p>
+          <pre class="small">...
+  &lt;bp:Protein&gt;
+    &lt;bp:entityReference&gt;
+      &lt;bp:ProteinReference&gt;
+        &lt;bp:sequence
+          rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          <span class="bpform-attr">rdf:about</span>="<span class="bpform-val">http://edamontology.org/format_3909#protein</span>"&gt;
+          <span class="bpform">M<span class="modification">{AA0041}</span>AAAAQGGGGGEPRRTEGVGPGVPGEVEMVKGQPFDVGPRYTQLQYIGEGAYGMVSSAYDHVRKTRVAIKKISPFEHQTYCQRTL
+          REIQILLRFRHENVIGIRDILRASTLEAMRDVYIVQDLMETDLYKLLKSQQLSNDHICYFLYQILRGLKYIHSANVLHRDLKPSNLLINTTCD
+          LKICDFGLARIADPEHDH<span class="modification">{AA0038}</span>GFL<span class="modification">{AA0038}</span>E<span class="modification">{AA0039}</span>VA<span class="modification">{AA0038}</span>RWYRAPEIMLNSKGYTKSIDIWSVGCILAEMLSNRPI
+          FPGKHYLDQLNHILGILGSPSQEDLNCIINMKARNYLQSLPSKTKVAWAKLFPKSDSKALDLLDRMLTFNPNKRITVEEALAHPYLEQYYDPT
+          DEPVAEEPFTFAMELDDLPKERLKELIFQETARFQPGVLEAP</span>
+        &lt;/bp:sequence&gt;
+      &lt;/bp:ProteinReference&gt;
+    &lt;/bp:entityReference&gt;
+  &lt;/bp:Protein&gt;
+...</pre>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="cellml"></a>
+          <h3>Kinetic models: CellML</h3>
+          <p style="margin-bottom: 0.5rem;"><i>BpForms</i> can be used to concretely describe the meaning of each component of a model encoded in CellML <a href="https://www.cellml.org/"><i class="fi-link"></i></a>. <i>BpForms</i> can be used with the <tt class="attribute">RDF</tt> element of <tt class="attribute">component</tt> objects.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Example</h3>
+          <p style="margin-bottom: 0.5rem;"><b>Protein:</b> Phosphorylated Erk and Mek in signal transduction (DOI: 10.1038/msb.2009.4 <a href="https://doi.org/10.1038/msb.2009.4"><i class="fi-link"></i></a>, Physiome Model Repository <a href="https://models.physiomeproject.org/e/31"><i class="fi-link"></i></a>). See complete CellML file <a href="https://github.com/KarrLab/bpforms/blob/master/examples/wang_cirit_haugh_2009.cellml"><i class="fi-link"></i></a>.</p>
+
+<pre class="small">...
+  &lt;component cmeta:id="ypp" name="ypp"&gt;
+      &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+        &lt;rdf:Description rdf:about="#ypp"&gt;
+          &lt;<span class="bpform-attr">bpforms:ProteinForm</span> <span class="bpform-attr">xmlns:bpforms</span>="<span class="bpform-val">https://bpforms.org</span>"&gt;
+            <span class="bpform">MPKKKPTPIQLNPAPDGSAVNGTSSAETNLEALQKKLEELELDEQQRKRLEAFLTQKQKVGELKDDDFEKISELGAGNGGVVFKVSHKPSG
+            LVMARKLIHLEIKPAIRNQIIRELQVLHECNSPYIVGFYGAFYSDGEISICMEHMDGGSLDQVLKKAGRIPEQILGKVSIAVIKGLTYLRE
+            KHKIMHRDVKPSNILVNSRGEIKLCDFGVSGQLID<span class="modification">{AA0037}</span>MAN<span class="modification">{AA0037}</span>FVGTRSYMSPERLQGTHYSVQSDIWSMGLSLVEMAVG
+            RYPIPPPDAKELELMFGCQVEGDAAETPPRPRTPGRPLSSYGMDSRPPMAIFELLDYIVNEPPPKLPSGVFSLEFQDFVNKCLIKNPAERA
+            DLKQLMVHAFIKRSDAEEVDFAGWLCSTIGLNQPSTPTHAAGV</span>
+          &lt;/<span class="bpform-attr">bpforms:ProteinForm</span>&gt;
+        &lt;/rdf:Description&gt;
+      &lt;/rdf:RDF&gt;
+    &lt;/component&gt;
+...</pre>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="sbml"></a>
+          <h3>Kinetic models: SBML</h3>
+          <p><i>BpForms</i> can be used to concretely describe the meaning of each species in a model encoded in Systems Biology Markup Language (SBML) <a href="https://sbml.org"><i class="fi-link"></i></a>. <i>BpForms</i> can be used with the <tt class="attribute">annotation</tt> element of <tt class="attribute">species</tt> objects.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Examples</h3>
+
+          <p style="margin-bottom: 0.5rem;"><b>Protein:</b> Phosphorylated Cdc2 and Cdc12 in the yeast cell cycle (DOI: 10.1073/pnas.88.16.7328 <a href="https://doi.org/10.1073/pnas.88.16.7328"><i class="fi-link"></i></a>, BioModels: BIOMD0000000005 <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000005"><i class="fi-link"></i></a>). See complete SBML file <a href="https://github.com/KarrLab/bpforms/blob/master/examples/BIOMD0000000005.xml"><i class="fi-link"></i></a>.</p>
+          <pre class="small">...
+  &lt;species name="cdc2k-p" metaid="cdc2k"&gt;
+    &lt;annotation&gt;
+      &lt;rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+        &lt;rdf:Description rdf:about="#cdc2k-p"&gt;
+          &lt;<span class="bpform-attr">bpforms:ProteinForm</span> <span class="bpform-attr">xmlns:bpforms</span>="<span class="bpform-val">https://bpforms.org</span>"&gt;
+            <span class="bpform">MENYQKVEKIGEG<span class="modification">{AA0038}</span><span class="modification">{AA0039}</span>GVVYKARHKLSGRIVAMKKIRLEDESEGVPSTAIREISLLKEVNDENNRSNCVRLLDI
+            LHAESKLYLVFEFLDMDLKKYMDRISETGATSLDPRLVQKFTYQLVNGVNFCHSRRIIHRDLKPQNLLIDKEGNLKLADFGLARSFGVPLRN
+            Y<span class="modification">{AA0038}</span>HEIVTLWYRAPEVLLGSRHYSTGVDIWSVGCIFAEMIRRSPLFPGDSEIDEIFKIFQVLGTPNEEVWPGVTLLQDYKSTFPRW
+            KRMDLHKVVPNGEEDAIELLSAMLVYDPAHRISAKRALQQNYLRDFH</span>
+          &lt;/<span class="bpform-attr">bpforms:ProteinForm</span>&gt;
+        &lt;/rdf:Description&gt;
+      &lt;/rdf:RDF&gt;
+    &lt;/annotation&gt;
+  &lt;/species&gt;
+...</pre>
+
+          <p style="margin-top: 1rem; margin-bottom: 0.5rem;"><b>Protein:</b> Phosphorylated Mos/Raf1, Mek1, and Erk2 in the eukaryote MAPK cascade (DOI: 10.1046/j.1432-1327.2000.01197.x <a href="https://doi.org/10.1046/j.1432-1327.2000.01197.x"><i class="fi-link"></i></a>, BioModels: BIOMD0000000010 <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000010"><i class="fi-link"></i></a>). See complete SBML file <a href="https://github.com/KarrLab/bpforms/blob/master/examples/BIOMD0000000010.xml"><i class="fi-link"></i></a>.</p>
+          <pre class="small">...
+  &lt;species name="Erk2-PP" metaid="_584615"&gt;
+    &lt;annotation&gt;
+      &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+        &lt;rdf:Description rdf:about="#_584615"&gt;
+          &lt;<span class="bpform-attr">bpforms:ProteinForm</span> <span class="bpform-attr">xmlns:bpforms</span>="<span class="bpform-val">https://bpforms.org</span>"&gt;
+            <span class="bpform">MAAAGAASNPGGGPEMVRGQAFDVGPRYINLAYIGEGAYGMVCSAHDNVNKVRVAIKKISPFEHQTYCQRTLREIKILLRFKHENIIGINDI
+            IRAPTIEQMKDVYIVQDLMETDLYKLLKTQHLSNDHICYFLYQILRGLKYIHSANVLHRDLKPSNLLLNTTCDLKICDFGLARVADPDHDHT
+            GFL<span class="modification">{AA0038}</span>E<span class="modification">{AA0039}</span>VATRWYRAPEIMLNSKGYTKSIDIWSVGCILAEMLSNRPIFPGKHYLDQLNHILGILGSPSQEDLNCIINLK
+            ARNYLLSLPHKNKVPWNRLFPNADPKALDLLDKMLTFNPHKRIEVEAALAHPYLEQYYDPSDEPVAEAPFKFEMELDDLPKETLKELIFEET
+            ARFQPGY</span>
+          &lt;/<span class="bpform-attr">bpforms:ProteinForm</span>&gt;
+        &lt;/rdf:Description&gt;
+      &lt;/rdf:RDF&gt;
+    &lt;/annotation&gt;
+  &lt;/species&gt;
+...</pre>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="sbol"></a>
+          <h3>SBOL: Genetic designs</h3>
+          <p><i>BpForms</i> can be used to describe the meaning of each DNA, RNA, and protein molecule in genetic designs encoded in the Synthetic Biology Open Language (SBOL) <a href="http://sbolstandard.org/"><i class="fi-link"></i></a>. <i>BpForms</i> can be used with the <tt>elements</tt> attribute of <tt>Sequence</tt> objects.</p>
+          <p style="margin-bottom: 0rem;">The following URIs should be used to indicate the encodings for the sequences of DNA, RNA, and protein molecules.</p>
+          <ul>
+            <li>DNA: http://edamontology.org/format_3909#dna</li>
+            <li>RNA: http://edamontology.org/format_3909#rna</li>
+            <li>Protein: http://edamontology.org/format_3909#protein</li>
+          </ul>
+          <p>See SBOL SEP 033 <a href="https://github.com/SynBioDex/SEPs/blob/master/sep_033.md"><i class="fi-link"></i></a> and issue 77 <a href="https://github.com/SynBioDex/SEPs/issues/77"><i class="fi-link"></i></a> for more information.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Examples</h3>
+
+          <p style="margin-bottom: 0.5rem;"><b>RNA:</b> Modified <i>B. subtilis</i> tRNA<sup>ILE</sup> 69 (SynBioHub: BO_28687 <a href="https://synbiohub.org/public/bsu/BO_28687"><i class="fi-link"></i></a>). See complete SBOL file <a href="https://github.com/KarrLab/bpforms/blob/master/examples/BO_28687.xml"><i class="fi-link"></i></a>.</p>
+          <pre class="small">...
+  &lt;sbol:Sequence&gt;
+    &lt;sbol:elements>
+      <span class="bpform">GGGCCUGUAGCUCAGC<span class="modification">{8U}</span>GG<span class="modification">{8U}</span><span class="modification">{8U}</span>AGAGCGCACGCCUGAU<span class="modification">{62A}</span>AGCGUGAG<span class="modification">{7G}</span>UCGAUGG<span class="modification">{5U}</span><span class="modification">{9U}</span>CGAGUCCAUUCAGGCCCACCA</span>
+    &lt;/sbol:elements&gt;
+    &lt;<span class="bpform-attr">sbol:encoding</span> <span class="bpform-attr">rdf:resource</span>="<span class="bpform-val">http://edamontology.org/format_3909#rna</span>"/&gt;
+  &lt;/sbol:Sequence&gt;
+...</pre>
+
+          <p style="margin-top: 1rem; margin-bottom: 0.5rem;"><b>Protein:</b> Lipoate-ligated acetyltransferase component PdhC of <i>B. subtilis</i> pyruvate dehydrogenase complex (SynBioHub: BO_32431 <a href="https://synbiohub.org/public/bsu/BO_32431"><i class="fi-link"></i></a>). See complete SBOL file <a href="https://github.com/KarrLab/bpforms/blob/master/examples/BO_32431.xml"><i class="fi-link"></i></a>.</p>
+          <pre class="small">...
+  &lt;sbol:Sequence&gt;
+    &lt;sbol:elements>
+      <span class="bpform">MAFEFKLPDIGEGIHEGEIVKWFVKPNDEVDEDDVLAEVQND<span class="modification">{AA0118}</span>AVVEIPSPVKGKVLELKVEEGTVATVGQTIITFDAPGYEDLQFKGSDE
+      SDDAKTEAQVQSTAEAGQDVAKEEQAQEPAKATGAGQQDQAEVDPNKRVIAMPSVRKYAREKGVDIRKVTGSGNNGRVVKEDIDSFVNGGAQEAAPQE
+      TAAPQETAAKPAAAPAPEGEFPETREKMSGIRKAIAKAMVNSKHTAPHVTLMDEVDVTNLVAHRKQFKQVAADQGIKLTYLPYVVKALTSALKKFPVL
+      NTSIDDKTDEVIQKHYFNIGIAADTEKGLLVPVVKNADRKSVFEISDEINGLATKAREGKLAPAEMKGASCTITNIGSAGGQWFTPVINHPEVAILGI
+      GRIAEKAIVRDGEIVAAPVLALSLSFDHRMIDGATAQNALNHIKRLLNDPQLILMEA</span>
+    &lt;/sbol:elements&gt;
+    &lt;<span class="bpform-attr">sbol:encoding</span> <span class="bpform-attr">rdf:resource</span>="<span class="bpform-val">http://edamontology.org/format_3909#protein</span>"/&gt;
+  &lt;/sbol:Sequence&gt;
+...</pre>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="resources"></a>
+        <div class="large-12 cell">
+          <h2>Resources for determining the sequences of biopolymer forms</h2>
+          <p class="before_list">Below are several resources which can be helpful for determining the sequences of natural biopolymers and designing the sequences of synthetic biopolymers.</p>
+        </div>
+        <div class="large-6 cell">
+          <h3>DNA</h3>
+          <ul>
+            <li><i>DNAMod</i> <a href="https://dnamod.hoffmanlab.org/"><i class="fi-link"></i></a>: Database of non-canonical DNA nucleobases</li>
+            <li><i>MethDB</i> <a href="http://www.methdb.net/"><i class="fi-link"></i></a>: Database of non-canonical DNA</li>
+            <li><i>MethSMRT</i> <a href="http://sysbio.gzzoc.com/methsmrt/"><i class="fi-link"></i></a>: Database of non-canonical DNA</li>
+            <li><i>PDB Chemical Component Dictionary</i> <a href="http://www.wwpdb.org/data/ccd"><i class="fi-link"></i></a>: Database of modified deoxyribonucleic acids</li>
+            <li><i>REPAIRtoire</i> <a href="http://repairtoire.genesilico.pl/damage/"><i class="fi-link"></i></a>: Database of DNA damages</li>
+          </ul>
+
+          <h3>RNA</h3>
+          <ul>
+            <li><i>MODOMICS</i> <a href="http://modomics.genesilico.pl/modifications/"><i class="fi-link"></i></a>: Database of non-canonical RNA nucleosides</li>
+            <li><i>PDB Chemical Component Dictionary</i> <a href="http://www.wwpdb.org/data/ccd"><i class="fi-link"></i></a>: Database of modified ribonucleic acids</li>
+            <li><i>RMBase</i> <a href="http://rna.sysu.edu.cn/rmbase/"><i class="fi-link"></i></a>: Database of modified RNA</li>
+            <li><i>RNA Modification Database</i> <a href="https://mods.rna.albany.edu/"><i class="fi-link"></i></a>: Database of modified RNA</li>
+          </ul>
+
+          <h3>Drawing structures of monomeric forms</h3>
+          <ul>
+            <li><i>ChemAxon Marvin</i> <a href="https://chemaxon.com/products/marvin"><i class="fi-link"></i></a>: Software for drawing structures of monomeric forms</li>
+            <li><i>Open Babel</i> <a href="http://openbabel.org/wiki/Category:Installation"><i class="fi-link"></i></a>: Software for calculating the numbers of the atoms in monomeric forms</li>
+          </ul>
+        </div>
+        <div class="large-6 cell">
+          <h3>Proteins</h3>
+          <ul>
+            <li><i>dbPTM</i> <a href="http://dbptm.mbc.nctu.edu.tw/"><i class="fi-link"></i></a>: Database of non-canonical amino acids</li>
+            <li><i>Delta Mass</i> <a href="https://abrf.org/delta-mass"><i class="fi-link"></i></a>: Database of modified amino acids</li>
+            <li><i>FindMod</i> <a href="https://web.expasy.org/findmod/findmod_masses.html"><i class="fi-link"></i></a>: Database of post-translational modifications</li>
+            <li><i>iPTMnet</i> <a href="https://research.bioinformatics.udel.edu/iptmnet"><i class="fi-link"></i></a>: Database of post-translational modifications</li>
+            <li><i>ProForma</i> <a href="https://www.topdownproteomics.org/resources/proforma/"><i class="fi-link"></i></a>: Notation for protein forms.  Note, this notation is not unambiguous. This limits its ability to facilitate data integration and the calculation of properties of protein forms.</li>
+            <li><i>PDB Chemical Component Dictionary</i> <a href="http://www.wwpdb.org/data/ccd"><i class="fi-link"></i></a>: Database of modified amino acids</li>
+            <li><i>PDB in Europe Chemical Components</i> <a href="https://www.ebi.ac.uk/pdbe/pdb-component-library/index.html>"><i class="fi-link"></i></a>: Database of modified amino acids</li>
+            <li><i>PhosphoSitePlus</i> <a href="https://www.phosphosite.org"><i class="fi-link"></i></a>: Database of protein phosphorylations</li>
+            <li><i>Protein Ontology</i> <a href="https://pir.georgetown.edu/pro/"><i class="fi-link"></i></a>: Database of modified proteins</li>
+            <li><i>PSIMOD</i> <a href="https://bioportal.bioontology.org/ontologies/PSIMOD"><i class="fi-link"></i></a>: Ontology of non-canonical amino acids</li>
+            <li><i>RESID</i> <a href="https://pir.georgetown.edu/resid/"><i class="fi-link"></i></a>: Database of non-canonical protein residues</li>
+            <li><i>UniMod</i> <a href="http://www.unimod.org/"><i class="fi-link"></i></a>: Database of non-canonical amino acids</li>
+            <li><i>UniProt</i> <a href="https://www.uniprot.org/"><i class="fi-link"></i></a>: Database of modified amino acids in proteins</li>
+            <li><i>UniProt Controlled Vocabulary of Posttranslational Modifications</i> <a href="https://www.uniprot.org/docs/ptmlist"><i class="fi-link"></i></a>: Database of modified amino acids</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="help"></a>
+        <div class="large-12 cell">
+          <h2>Tutorials, documentation, and help</h2>
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the grammar</h3>
+          Documentation for the grammar is available above <a href="#grammar"><i class="fi-link"></i></a>. The definition of the grammar is available at GitHub <a href="https://raw.githubusercontent.com/KarrLab/bpforms/master/bpforms/grammar.lark"><i class="fi-link"></i>.</a>
+        </div>
+        <div class="large-6 cell">
+          <h3>Definitions of the monomeric forms in the alphabets</h3>
+          Documentation for the alphabets is available above <a href="#alphabets"><i class="fi-link"></i></a>. This includes images and detailed information about each monomeric form in each alphabet.
+        </div>
+        <div class="large-6 cell">
+          <h3>Query builder for the REST API</h3>
+          A visual interface for building REST queries is available at bpforms.org/api <a href="https://www.bpforms.org/api"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the REST API</h3>
+          Documentation for the REST API is available at bpforms.org/api <a href="https://www.bpforms.org/api"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the command line program</h3>
+          Documentation for the command line program is available inline by running <tt>bpforms --help</tt>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Tutorial for the Python API</h3>
+          A Jupyter notebook with an interactive tutorial is available at sandbox.karrlab.org <a href="http://sandbox.karrlab.org/tree/bpforms"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the Python API</h3>
+          Detailed documentation for the Python API is available at docs.karrlab.org <a href="https://docs.karrlab.org/bpforms"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Comparison with other resources</h3>
+          Please see the documentation <a href="https://docs.karrlab.org/bpforms"><i class="fi-link"></i></a> for a detailed comparison of <i>BpForms</i> with other formats and alphabet-like resources.
+        </div>
+        <div class="large-6 cell">
+          <h3>Questions</h3>
+          Please contact the Karr Lab <a href="mailto:info@karrlab.org"><i class="fi-mail"></i></a> with any questions.
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="contributing"></a>
+        <div class="large-12 cell">
+          <h2>Contributing to <i>BpForms</i></h2>
+        </div>
+        <div class="large-6 cell">
+          <h3>Contributing to the alphabets</h3>
+          The alphabets are defined by YAML files (see GitHub <a href="https://github.com/KarrLab/bpforms/tree/master/bpforms/alphabet"><i class="fi-link"></i></a>). To contribute to the alphabets or to contribute a new alphabet, please edit or create a YAML file and submit your changes via a Git pull request <a href="https://github.com/karrlab/bpforms/pulls"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Contributing to the software</h3>
+          To contribute to the software, please submit a Git pull request <a href="https://github.com/karrlab/bpforms/pulls"><i class="fi-link"></i></a>.
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="about"></a>
+        <div class="large-12 cell">
+          <h2>About <i>BpForms</i></h2>
+        </div>
+        <div class="large-4 cell">
+          <h3>Source code</h3>
+          <i>BpForms</i> is available open-source from GitHub <a href="https://github.com/KarrLab/bpforms"><i class="fi-social-github"></i></a>.
+        </div>
+        <div class="large-4 cell">
+          <h3>License</h3>
+          <i>BpForms</i> is released under the MIT license <a href="https://github.com/KarrLab/bpforms/blob/master/LICENSE"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-4 cell">
+          <h3>Citing <i>BpForms</i></h3>
+          Lang PF, Chebaro Y &amp; Jonathan R. Karr. BpForms: a toolkit for concretely describing modified DNA, RNA and proteins. arXiv:1903.10042 <a href="https://arxiv.org/abs/1903.10042"><i class="fi-link"></i></a>
+        </div>
+        <div class="large-4 cell">
+          <h3>Team</h3>
+          <i>BpForms</i> was developed by Yassmine Chebaro <a href="https://www.linkedin.com/in/yassmine-chebaro-6bb8a05/"><i class="fi-social-linkedin"></i></a>, Jonathan Karr <a href="https://www.karrlab.org/"><i class="fi-link"></i></a> <a href="https://www.linkedin.com/in/jonrkarr/"><i class="fi-social-linkedin"></i></a>, Paul Lang <a href="http://www.dtc.ox.ac.uk/people/17/langp/"><i class="fi-link"></i></a>, and John Sekar <a href="https://www.linkedin.com/in/john-sekar"><i class="fi-social-linkedin"></i></a> in the Karr Lab <a href="https://www.karrlab.org"><i class="fi-link"></i></a> at the Icahn School of Medicine at Mount Sinai <a href="https://www.mssm.edu/"><i class="fi-link"></i></a> in New York, USA.
+        </div>
+        <div class="large-4 cell">
+          <h3>Acknowledgements</h3>
+          <i>BpForms</i> was supported by a National Institute of Health P41 award <a href="https://projectreporter.nih.gov/project_info_details.cfm?aid=9460251"><i class="fi-link"></i></a>, a National Institute of Health MIRA R35 award <a href="https://projectreporter.nih.gov/project_info_details.cfm?aid=9509480"><i class="fi-link"></i></a>, and a National Science Foundation INSPIRE award <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1649014"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-4 cell">
+          <h3>Questions/comments</h3>
+          Please contact the Karr Lab <a href="mailto:info@karrlab.org"><i class="fi-mail"></i></a> with any questions or comments.
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"
+      integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw=="
+      crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

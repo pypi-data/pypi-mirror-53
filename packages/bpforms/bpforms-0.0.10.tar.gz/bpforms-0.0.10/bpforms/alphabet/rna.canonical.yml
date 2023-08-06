@@ -1,0 +1,132 @@
+id: canonical_rna
+name: Canonical RNA nucleotide monophosphates
+description: The canonical RNA nucleotide monophosphates
+monomers:
+  A:
+    id: adenosine
+    name: adenosine
+    identifiers:
+    - ns: pubchem.compound
+      id: '60961'
+    - ns: metacyc.compound
+      id: ADENOSINE
+    - ns: chebi
+      id: CHEBI:16335
+    - ns: modomics.new_nomenclature
+      id: A
+    - ns: modomics.short_name
+      id: A
+    structure: OC1C(O)C(OC1n1cnc2c1ncnc2N)COP(=O)([O-])[O-]
+    l_bond_atoms:
+    - molecule: Monomer
+      element: P
+      position: 20
+    l_displaced_atoms:
+    - molecule: Monomer
+      element: O
+      position: 23
+      charge: -1
+    r_bond_atoms:
+    - molecule: Monomer
+      element: O
+      position: 4
+    r_displaced_atoms:
+    - molecule: Monomer
+      element: H
+      position: 4
+  C:
+    id: cytidine
+    name: cytidine
+    identifiers:
+    - ns: metacyc.compound
+      id: CYTIDINE
+    - ns: pubchem.compound
+      id: '6175'
+    - ns: chebi
+      id: CHEBI:17562
+    - ns: modomics.new_nomenclature
+      id: C
+    - ns: modomics.short_name
+      id: C
+    structure: OC1C(O)C(OC1n1ccc(nc1=O)N)COP(=O)([O-])[O-]
+    l_bond_atoms:
+    - molecule: Monomer
+      element: P
+      position: 18
+    l_displaced_atoms:
+    - molecule: Monomer
+      element: O
+      position: 21
+      charge: -1
+    r_bond_atoms:
+    - molecule: Monomer
+      element: O
+      position: 4
+    r_displaced_atoms:
+    - molecule: Monomer
+      element: H
+      position: 4
+  G:
+    id: guanosine
+    name: guanosine
+    identifiers:
+    - ns: pubchem.compound
+      id: '6802'
+    - ns: metacyc.compound
+      id: GUANOSINE
+    - ns: chebi
+      id: CHEBI:16750
+    - ns: modomics.new_nomenclature
+      id: G
+    - ns: modomics.short_name
+      id: G
+    structure: OC1C(O)C(OC1n1cnc2c1nc(N)[nH]c2=O)COP(=O)([O-])[O-]
+    l_bond_atoms:
+    - molecule: Monomer
+      element: P
+      position: 22
+    l_displaced_atoms:
+    - molecule: Monomer
+      element: O
+      position: 25
+      charge: -1
+    r_bond_atoms:
+    - molecule: Monomer
+      element: O
+      position: 4
+    r_displaced_atoms:
+    - molecule: Monomer
+      element: H
+      position: 4
+  U:
+    id: uridine
+    name: uridine
+    identifiers:
+    - ns: pubchem.compound
+      id: '6029'
+    - ns: metacyc.compound
+      id: URIDINE
+    - ns: chebi
+      id: CHEBI:16704
+    - ns: modomics.new_nomenclature
+      id: U
+    - ns: modomics.short_name
+      id: U
+    structure: OC1C(O)C(OC1n1ccc(=O)[nH]c1=O)COP(=O)([O-])[O-]
+    l_bond_atoms:
+    - molecule: Monomer
+      element: P
+      position: 19
+    l_displaced_atoms:
+    - molecule: Monomer
+      element: O
+      position: 22
+      charge: -1
+    r_bond_atoms:
+    - molecule: Monomer
+      element: O
+      position: 4
+    r_displaced_atoms:
+    - molecule: Monomer
+      element: H
+      position: 4
