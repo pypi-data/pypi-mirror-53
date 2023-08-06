@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo 'hello world'
+
+sed -e '$i \(sleep 5; su - pi -c /home/pi/Documents/onine_radio_1.py)&\n' /etc/rc.local
