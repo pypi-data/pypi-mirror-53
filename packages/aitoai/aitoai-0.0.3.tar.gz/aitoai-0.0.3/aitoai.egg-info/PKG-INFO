@@ -1,0 +1,93 @@
+Metadata-Version: 1.2
+Name: aitoai
+Version: 0.0.3
+Summary: A collection of python support tools and scripts for Aito.ai
+Home-page: https://github.com/AitoDotAI/aito-python-tools
+Author: aito.ai
+Author-email: admin@aito.ai
+License: UNKNOWN
+Description: aito-python-tools
+        =================
+        
+        |PyPI| |PyPI version|
+        
+        A useful library for `Aito <https://aito.ai/>`__ users containg: \* CLI
+        for using Aito \* Integration with
+        `Pandas <https://pandas.pydata.org/>`__
+        
+        Installation
+        ------------
+        
+        To install with pip, run: ``pip install aitoai``
+        
+        To install from source, first clone the repository and then run:
+        ``python setup.py install``
+        
+        Basic Usage
+        -----------
+        
+        Command line interface support tools
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        .. code:: bash
+        
+            ➜ usage:  aito [-h] <action> [<args>]
+                    To see help text, you can run:
+                        aito -h
+                        aito <action> -h
+        
+                    The most commonly actions are:
+                        infer-table-schema  infer Aito table schema from a file
+                        convert             convert data of table entries into ndjson (for file-upload) or json (for batch-upload)
+                        client              set up a client and perform CRUD operations
+                    
+        
+            positional arguments:
+              action      action to perform
+        
+            optional arguments:
+              -h, --help  show this help message and exit
+        
+        ***NOTE:*** For client action, remember to set up your Aito instance,
+        either through environment variable or dotenv file or using the command
+        line arguments
+        
+        For addition guide of the cli tool, see `Using the Aito CLI
+        page <docs/cli.md>`__
+        
+        Integrating with `pandas <https://pandas.pydata.org/>`__
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        -  Generate Aito Schema from a pandas DataFrame: \`\`\`python from
+           aito.schema\_handler import SchemaHandler
+        
+        schema\_handler = SchemaHandler()
+        schema\_handler.generate\_table\_schema\_from\_pandas\_dataframe(df)
+        \`\`\`
+        
+        Feedback & bug reports
+        ----------------------
+        
+        We take our quality seriously and aim for the smoothest developer
+        experience possible. If you run into problems, please send an email to
+        support@aito.ai containing reproduction steps and we'll fix it as soon
+        as possible.
+        
+        License
+        -------
+        
+        `MIT License <LICENSE>`__
+        
+        `Change logs <docs/change_logs.md>`__
+        -------------------------------------
+        
+        .. |PyPI| image:: https://img.shields.io/pypi/pyversions/aitoai?style=plastic
+           :target: https://github.com/AitoDotAI/aito-python-tools
+        .. |PyPI version| image:: https://badge.fury.io/py/aitoai.svg
+           :target: https://badge.fury.io/py/aitoai
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
