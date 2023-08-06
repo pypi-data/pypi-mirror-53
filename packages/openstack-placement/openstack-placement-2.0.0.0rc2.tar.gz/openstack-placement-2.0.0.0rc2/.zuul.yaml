@@ -1,0 +1,96 @@
+# Initial set of jobs that will be extended over time as
+# we get things working.
+- project:
+    templates:
+      # The integrated-gate-placement template adds the
+      # tempest-integrated-placement and grenade-py3 jobs.
+      # tempest-integrated-placement runs a subset of tempest tests which are
+      # relevant for placement, e.g. it does not run keystone tests.
+      - integrated-gate-placement
+      - publish-openstack-docs-pti
+      - openstack-cover-jobs
+      - openstack-lower-constraints-jobs
+      - openstack-python-jobs
+      - openstack-python3-train-jobs
+      - release-notes-jobs-python3
+    check:
+      jobs:
+        - openstack-tox-functional
+        - openstack-tox-functional-py36
+        - openstack-tox-functional-py37
+        - placement-nova-tox-functional-py37
+        - placement-nested-perfload:
+            voting: false
+        - placement-perfload:
+            voting: false
+        - tempest-integrated-placement:
+            # Alias 'gate-irrelevant-files' define the set of irrelevant-files
+            # for which integrated testing jobs not required to run. If
+            # changes are only to those files then, zuul can skip the
+            # integrated testing job to save the infra resources.
+            # 'gate-irrelevant-files' should be used for integrated gate
+            # jobs only not for any other jobs like functional, unit, doc
+            # jobs.
+            irrelevant-files: &gate-irrelevant-files
+              - ^api-.*$
+              - ^.*\.rst$
+              - ^.git.*$
+              - ^doc/.*$
+              - ^placement/tests/.*$
+              - ^releasenotes/.*$
+              - ^tools/.*$
+              - ^tox.ini$
+        - grenade-py3:
+            irrelevant-files: *gate-irrelevant-files
+        - tempest-ipv6-only:
+            irrelevant-files: *gate-irrelevant-files
+    gate:
+      jobs:
+        - openstack-tox-functional
+        - openstack-tox-functional-py36
+        - openstack-tox-functional-py37
+        - placement-nova-tox-functional-py37
+        - tempest-integrated-placement:
+            irrelevant-files: *gate-irrelevant-files
+        - grenade-py3:
+            irrelevant-files: *gate-irrelevant-files
+        - tempest-ipv6-only:
+            irrelevant-files: *gate-irrelevant-files
+
+- job:
+    name: placement-nova-tox-functional-py37
+    parent: nova-tox-functional-py37
+    description: |
+        Run the nova functional tests to confirm that we aren't breaking
+        the PlacementFixture.
+    vars:
+        # Skip the api and notification _sample_tests, and db-related tests
+        tox_extra_args: '^((?!(?:api|notification)_sample_tests|functional\.db\.).)*$'
+
+- job:
+    name: placement-perfload
+    parent: base
+    description: |
+        A simple node on which to run placement with the barest of configs and
+        make performance related tests against it.
+    required-projects:
+        - opendev.org/openstack/placement
+    irrelevant-files:
+        - ^.*\.rst$
+        - ^api-ref/.*$
+        - ^doc/.*$
+        - ^releasenotes/.*$
+        - ^.git.*$
+        - ^placement/tests/.*$
+        - ^tox.ini$
+    run: playbooks/perfload.yaml
+    post-run: playbooks/post.yaml
+
+- job:
+    name: placement-nested-perfload
+    parent: placement-perfload
+    description: |
+        A simple node on which to run placement with the barest of configs and
+        make nested performance related tests against it.
+    timeout: 3600
+    run: playbooks/nested-perfload.yaml
