@@ -1,0 +1,7 @@
+include scripts/etcd.conf
+include scripts/swarmrobd-worker
+include scripts/swarmrobd-worker.service
+include scripts/swarmrobns
+include scripts/swarmrobns.service
+recursive-include externals *
+
