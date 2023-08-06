@@ -1,0 +1,22 @@
+#!python
+
+########################################################
+##### Markdown to HTML Converter for Documentation #####
+#####                by Chris Pyles                #####
+########################################################
+
+import argparse
+import md2html
+
+def make_parser():
+	# create CLI argument parser and extract arguments
+	parser = argparse.ArgumentParser(description="convert Markdown to HTML")
+	parser.add_argument("-s", "--site-info", dest="site", help="add metadata to the HTML files")
+	parser.add_argument("-n", "--nav", dest="nav", help="add a YAML file to use for navigation menu")
+	parser.add_argument(dest="files", nargs=argparse.REMAINDER, help="files to be converted to HTML")
+	return parser
+
+if __name__ == "__main__":
+	parser = make_parser()
+	namespace = vars(parser.parse_args())
+	md2html.main(namespace)
