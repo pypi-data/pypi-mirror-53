@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "pywrench"
+version = "0.0.1"
+description = "Pluggable configuration system"
+authors = ["Robert Wikman <rbw@vault13.org>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
