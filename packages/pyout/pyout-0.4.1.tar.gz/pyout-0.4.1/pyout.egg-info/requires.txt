@@ -1,0 +1,28 @@
+six
+
+[:sys_platform != "win32"]
+blessings
+
+[core]
+six
+
+[core:sys_platform != "win32"]
+blessings
+
+[full]
+six
+pytest
+pytest-timeout
+mock
+jsonschema
+
+[full:sys_platform != "win32"]
+blessings
+
+[tests]
+pytest
+pytest-timeout
+mock
+
+[validation]
+jsonschema
