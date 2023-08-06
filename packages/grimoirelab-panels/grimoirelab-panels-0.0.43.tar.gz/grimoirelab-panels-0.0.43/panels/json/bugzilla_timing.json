@@ -1,0 +1,217 @@
+{
+    "dashboard": {
+        "id": "Bugzilla-Timing",
+        "value": {
+            "description": "Bugzilla Timing panel by Bitergia",
+            "hits": 0,
+            "kibanaSavedObjectMeta": {
+                "searchSourceJSON": "{\"version\":true,\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[{\"meta\":{\"index\":\"bugzilla\",\"negate\":true,\"disabled\":false,\"alias\":\"Bots\",\"type\":\"phrase\",\"key\":\"author_bot\",\"value\":\"true\",\"params\":{\"query\":true,\"type\":\"phrase\"}},\"query\":{\"match\":{\"author_bot\":{\"query\":true,\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"highlightAll\":true}"
+            },
+            "optionsJSON": "{\"darkTheme\":false,\"hidePanelTitles\":false,\"useMargins\":true}",
+            "panelsJSON": "[{\"title\":\"Summary\",\"panelIndex\":\"1\",\"id\":\"cd064280-7eb5-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":0,\"w\":6,\"i\":\"1\",\"h\":2},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Issues by Status\",\"panelIndex\":\"2\",\"id\":\"7ebb4570-7eb6-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":6,\"y\":0,\"w\":3,\"i\":\"2\",\"h\":3},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Issues by Resolution\",\"panelIndex\":\"3\",\"id\":\"90c81720-7eb6-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":6,\"y\":3,\"w\":3,\"i\":\"3\",\"h\":3},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Issues by Severity\",\"panelIndex\":\"4\",\"id\":\"00fee5a0-7eb7-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":9,\"y\":3,\"w\":3,\"i\":\"4\",\"h\":3},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Issues by Assigned Organization\",\"panelIndex\":\"5\",\"id\":\"6b7eb0e0-7eb7-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":9,\"y\":0,\"w\":3,\"i\":\"5\",\"h\":3},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Median Open Time (days)\",\"panelIndex\":\"6\",\"id\":\"3799c760-7eb7-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":2,\"w\":3,\"i\":\"6\",\"h\":2},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"80 Percent Open Time (days)\",\"panelIndex\":\"7\",\"id\":\"934f9a70-7eb8-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":3,\"y\":2,\"w\":3,\"i\":\"7\",\"h\":2},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Issues\",\"panelIndex\":\"8\",\"id\":\"acd9e110-7ec4-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":4,\"w\":6,\"i\":\"8\",\"h\":2},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Submitters\",\"panelIndex\":\"9\",\"id\":\"f272cde0-7ec4-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":6,\"w\":6,\"i\":\"9\",\"h\":2},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Submitters\",\"panelIndex\":\"10\",\"id\":\"bugzilla_issues_submitters\",\"gridData\":{\"x\":0,\"y\":8,\"w\":6,\"i\":\"10\",\"h\":6},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Organizations\",\"panelIndex\":\"11\",\"id\":\"d9132670-7ec8-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":6,\"y\":6,\"w\":6,\"i\":\"11\",\"h\":4},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Projects\",\"panelIndex\":\"12\",\"id\":\"f87cdcb0-7ed0-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":6,\"y\":10,\"w\":6,\"i\":\"12\",\"h\":4},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Products\",\"panelIndex\":\"13\",\"id\":\"e5dce0d0-7ed2-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":14,\"w\":12,\"i\":\"13\",\"h\":6},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"Latest Issues\",\"panelIndex\":\"14\",\"id\":\"4e5eead0-7ed4-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":20,\"w\":12,\"i\":\"14\",\"h\":6},\"version\":\"6.1.0-3\",\"type\":\"visualization\"},{\"title\":\"The Oldest Issues\",\"panelIndex\":\"15\",\"id\":\"02c6ffd0-7ed5-11e8-a4e7-6b1c6a13c58d\",\"gridData\":{\"x\":0,\"y\":26,\"w\":12,\"i\":\"15\",\"h\":6},\"version\":\"6.1.0-3\",\"type\":\"visualization\"}]",
+            "release_date": "2019-06-26T14:55:58.101918",
+            "timeRestore": false,
+            "title": "Bugzilla Timing",
+            "uiStateJSON": "{\"P-10\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null},\"config\":{\"searchKeyword\":\"\"}}}},\"P-11\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null},\"config\":{\"searchKeyword\":\"\"}}}},\"P-12\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null},\"config\":{\"searchKeyword\":\"\"}}}},\"P-13\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null},\"config\":{\"searchKeyword\":\"\"}}}},\"P-14\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null},\"config\":{\"searchKeyword\":\"\"}}}},\"P-15\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null},\"config\":{\"searchKeyword\":\"\"}}}},\"P-6\":{\"vis\":{\"legendOpen\":false}},\"P-7\":{\"vis\":{\"legendOpen\":false}},\"P-9\":{\"vis\":{\"legendOpen\":false}}}",
+            "version": 1
+        }
+    },
+    "searches": [],
+    "visualizations": [
+        {
+            "id": "cd064280-7eb5-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_main_metrics_timing",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_main_metrics_timing\",\"type\":\"metric\",\"params\":{\"addTooltip\":true,\"addLegend\":false,\"type\":\"metric\",\"metric\":{\"percentageMode\":false,\"useRanges\":false,\"colorSchema\":\"Green to Red\",\"metricColorMode\":\"None\",\"colorsRange\":[{\"from\":0,\"to\":10000}],\"labels\":{\"show\":true},\"invertColors\":false,\"style\":{\"bgFill\":\"#000\",\"bgColor\":false,\"labelColor\":false,\"subText\":\"\",\"fontSize\":12}}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"# Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"author_uuid\",\"customLabel\":\"# Submitters\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"assigned_to_uuid\",\"customLabel\":\"# Assignees\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"percents\":[50],\"customLabel\":\"Median Time Open (Days)\"}}]}"
+            }
+        },
+        {
+            "id": "7ebb4570-7eb6-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_by_status",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_by_status\",\"type\":\"pie\",\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"# Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"status\",\"size\":15,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Status\"}}]}"
+            }
+        },
+        {
+            "id": "90c81720-7eb6-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_by_resolution",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_by_resolution\",\"type\":\"pie\",\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"# Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"resolution\",\"size\":15,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Resolution\"}}]}"
+            }
+        },
+        {
+            "id": "00fee5a0-7eb7-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_by_severity",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_by_severity\",\"type\":\"pie\",\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"# Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"severity\",\"size\":15,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Severity\"}}]}"
+            }
+        },
+        {
+            "id": "6b7eb0e0-7eb7-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_by_assigned_organization",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_by_assigned_organization\",\"type\":\"pie\",\"params\":{\"type\":\"pie\",\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":true,\"labels\":{\"show\":false,\"values\":true,\"last_level\":true,\"truncate\":100}},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"# Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"assigned_to_org_name\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Assigned Organization\"}}]}"
+            }
+        },
+        {
+            "id": "3799c760-7eb7-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_median_open_time",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_median_open_time\",\"type\":\"histogram\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Days\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"histogram\",\"mode\":\"stacked\",\"data\":{\"label\":\"Days\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"percents\":[50],\"customLabel\":\"Days\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"grimoire_creation_date\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{},\"customLabel\":\"Issue Creation\"}}]}"
+            }
+        },
+        {
+            "id": "934f9a70-7eb8-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_80_percent_open_time",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_80_percent_open_time\",\"type\":\"histogram\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"Percentiles of timeopen_days\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"histogram\",\"mode\":\"stacked\",\"data\":{\"label\":\"Percentiles of timeopen_days\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"percentiles\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"percents\":[80]}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"grimoire_creation_date\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{},\"customLabel\":\"Issue Creation\"}}]}"
+            }
+        },
+        {
+            "id": "acd9e110-7ec4-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_evolutionary",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_evolutionary\",\"type\":\"histogram\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"# Issues\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"histogram\",\"mode\":\"stacked\",\"data\":{\"label\":\"# Issues\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"# Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"grimoire_creation_date\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{},\"customLabel\":\"Time\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"status\",\"size\":1000,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Status\"}}]}"
+            }
+        },
+        {
+            "id": "f272cde0-7ec4-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_evolutionary_submitters",
+                "uiStateJSON": "{}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_evolutionary_submitters\",\"type\":\"histogram\",\"params\":{\"type\":\"histogram\",\"grid\":{\"categoryLines\":false,\"style\":{\"color\":\"#eee\"}},\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"type\":\"category\",\"position\":\"bottom\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\"},\"labels\":{\"show\":true,\"truncate\":100},\"title\":{}}],\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"name\":\"LeftAxis-1\",\"type\":\"value\",\"position\":\"left\",\"show\":true,\"style\":{},\"scale\":{\"type\":\"linear\",\"mode\":\"normal\"},\"labels\":{\"show\":true,\"rotate\":0,\"filter\":false,\"truncate\":100},\"title\":{\"text\":\"# Submitters\"}}],\"seriesParams\":[{\"show\":\"true\",\"type\":\"histogram\",\"mode\":\"stacked\",\"data\":{\"label\":\"# Submitters\",\"id\":\"1\"},\"valueAxis\":\"ValueAxis-1\",\"drawLinesBetweenPoints\":true,\"showCircles\":true}],\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"times\":[],\"addTimeMarker\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"author_uuid\",\"customLabel\":\"# Submitters\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"grimoire_creation_date\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{},\"customLabel\":\"Time\"}}]}"
+            }
+        },
+        {
+            "id": "bugzilla_issues_submitters",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"query\":{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true,\"default_field\":\"*\"}},\"language\":\"lucene\"},\"filter\":[]}"
+                },
+                "title": "bugzilla_issues_submitters",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_submitters\",\"type\":\"table\",\"params\":{\"perPage\":15,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Issues\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"author_name\",\"size\":1000,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Submitter\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"project\",\"customLabel\":\"Projects\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"assigned_to_uuid\",\"customLabel\":\"Assignees\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"customLabel\":\"Avg. Open Days\"}}]}"
+            }
+        },
+        {
+            "id": "d9132670-7ec8-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_organizations_timing",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_organizations_timing\",\"type\":\"table\",\"params\":{\"perPage\":5,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Issues Open\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"author_uuid\",\"customLabel\":\"Submitters\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"assigned_to_uuid\",\"customLabel\":\"Assignees\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"customLabel\":\"Avg. Open Days\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"author_org_name\",\"size\":1000,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Organization\"}}]}"
+            }
+        },
+        {
+            "id": "f87cdcb0-7ed0-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_projects_timing",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_projects_timing\",\"type\":\"table\",\"params\":{\"perPage\":5,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Issues Open\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"author_uuid\",\"customLabel\":\"Submitters\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"product\",\"customLabel\":\"Products\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"customLabel\":\"Avg. Open Days\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"project\",\"size\":1000,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Project\"}}]}"
+            }
+        },
+        {
+            "id": "e5dce0d0-7ed2-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_repositories_timing",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_repositories_timing\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Issues Open\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"author_uuid\",\"customLabel\":\"Submitters\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"product\",\"size\":1000,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Product\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"assigned_to_uuid\",\"customLabel\":\"Assignees\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"customLabel\":\"Avg. Open Days\"}}]}"
+            }
+        },
+        {
+            "id": "4e5eead0-7ed4-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_last_issues",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_last_issues\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"creation_date\",\"customLabel\":\"Created on\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"main_description\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Title\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"product\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Product\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"reporter_user_name\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Submitter\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"url\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"URL\"}},{\"id\":\"6\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"bug_id\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Id\"}}]}"
+            }
+        },
+        {
+            "id": "02c6ffd0-7ed5-11e8-a4e7-6b1c6a13c58d",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"bugzilla\",\"filter\":[],\"query\":{\"query\":\"\",\"language\":\"lucene\"}}"
+                },
+                "title": "bugzilla_issues_oldest_issues",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+                "version": 1,
+                "visState": "{\"title\":\"bugzilla_issues_oldest_issues\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"timeopen_days\",\"customLabel\":\"Open Days\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"main_description\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Title\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"product\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Product\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"reporter_user_name\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Submitter\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"url\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"URL\"}},{\"id\":\"6\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"bug_id\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"id\"}}]}"
+            }
+        }
+    ]
+}
