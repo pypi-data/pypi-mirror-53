@@ -1,0 +1,7 @@
+[console_scripts]
+configure_db = feedback_tool.scripts.configure_db:cli
+feedback_tool = feedback_tool.scripts.feedback_app:main
+
+[paste.app_factory]
+main = feedback_tool:main
+
