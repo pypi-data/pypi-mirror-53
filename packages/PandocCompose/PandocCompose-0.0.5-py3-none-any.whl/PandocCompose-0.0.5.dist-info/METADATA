@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: PandocCompose
+Version: 0.0.5
+Summary: PandocCompose lets you manage your documentation base using Pandoc
+Home-page: https://git.feneas.org/christophehenry/pandoc-compose
+Author: Christophe Henry
+Author-email: contact@c-henry.fr
+License: UNKNOWN
+Project-URL: Bug Tracker, https://git.feneas.org/christophehenry/pandoc-compose/issues
+Project-URL: Documentation, https://git.feneas.org/christophehenry/pandoc-compose/blob/master/DOCUMENTATION.md
+Project-URL: Source Code, https://git.feneas.org/christophehenry/pandoc-compose
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Text Processing :: General
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: pypandoc (==1.4)
+Requires-Dist: PyYAML (==5.1.1)
+Requires-Dist: panflute (==1.11.2)
+Requires-Dist: deepmerge (==0.0.5)
+
+# Usage
+
+`pandoc-compose` lets you manage your documentation base by automating
+conversion of mutiple markdown or other formatted text files using Pandoc.
+
+Pandoc should be already installed on you computer.
+
+## How does it work?
+
+Just like `docker-compose`, when executed, `pandoc-compose` will search for a
+`pandoc-compose.yml` file either in current working directory or in a sepcified
+destination (see [Synopsis](https://git.feneas.org/christophehenry/pandoc-compose/blob/master/DOCUMENTATION.md#synopsis)) and extract configuration from it to
+automate the conversion of you document base from any input format to any output
+format supported by Pandoc.
+
+See [the documentation](https://git.feneas.org/christophehenry/pandoc-compose/blob/master/DOCUMENTATION.md) for more informations on how to use it.
+
+# TODO
+
+* auto-install pandoc 
+* add or remove [extensions](https://pandoc.org/MANUAL.html#extensions)
+
+
