@@ -1,0 +1,42 @@
+Metadata-Version: 2.0
+Name: streamsx.jms
+Version: 0.3.0
+Summary: IBM Streams JMS integration
+Home-page: https://github.com/IBMStreams/streamsx.jms
+Author: IBM Streams @ github.com
+Author-email: schulz2@de.ibm.com
+License: Apache License - Version 2.0
+Keywords: streams,ibmstreams,streaming,analytics,streaming-analytics,jms
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: streamsx
+Requires-Dist: streamsx.toolkits
+
+Overview
+========
+
+Provides functions to exchange messages with a JMS broker.
+
+This package exposes the `com.ibm.streamsx.jms <https://ibmstreams.github.io/streamsx.jms/>`_ toolkit as Python methods for use with Streaming Analytics service on
+IBM Cloud and IBM Streams including IBM Cloud Pak for Data.
+
+* `Streaming Analytics service <https://console.ng.bluemix.net/catalog/services/streaming-analytics>`_
+* `IBM Streams developer community <https://developer.ibm.com/streamsdev/>`_
+
+
+Sample
+======
+
+ToDo
+
+
+Documentation
+=============
+
+* `streamsx.jms package documentation <http://streamsxjms.readthedocs.io>`_
+
+
