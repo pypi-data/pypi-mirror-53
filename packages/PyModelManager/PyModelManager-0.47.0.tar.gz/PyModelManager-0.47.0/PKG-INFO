@@ -1,0 +1,95 @@
+Metadata-Version: 2.1
+Name: PyModelManager
+Version: 0.47.0
+Summary: ModelManager API
+Home-page: UNKNOWN
+Author: Alexander Litvinov
+Author-email: alektron@yandex.ru
+License: UNKNOWN
+Description: 
+        # PyModelManager
+        PyModelManager это Python библиотека для взаимодействия с ModelManager API.
+        
+        ## Установка
+        
+        ```bash
+        $ pip install PyModelManager
+        ```
+        
+        ## Пример использования
+        
+        ```python
+        from modelmanager import ModelManager
+        
+        # Сначала создаем экземпляр ModelManager
+        mm = ModelManager(base_url='http://{hostname}/api', login='{login}', password='{password}')
+        
+        # Получим список проектов
+        projects = mm.get_projects()
+        
+        # Получим все существующие версии моделей всех проектов
+        models = [project.get_models() for project in projects]
+        
+        # Выводим в stdout все модели
+        for model in models:
+            print(model)
+        
+        # Получим реестр признаков
+        registry = mm.get_feature_registry()
+        
+        # Получим список всех признаков
+        features = registry.all()
+        
+        # Выводим в stdout все признаки
+        for feature in features:
+            print('Feature: %s, %s' % (feature.name, feature.description))
+            
+        # Создадим в реестре новый признак
+        feature = registry.create('birthday', "Дата рождения в формате 'yyyy-mm-dd'")
+        
+        # Изменим признак
+        feature.description = "Дата рождения в формате 'yyyy.mm.dd"
+        feature.update()
+        
+        # Удалим признак
+        registry.delete(feature)
+        
+        # Создадим модель описание модели
+        model = project.create_model(
+                    author='RAffghi',
+                    name='Africa Economic, Banking and Systemic Crisis',
+                    title='Africa Economic, Banking and Systemic Crisis',
+                    description='Africa Economic, Banking and Systemic Crisis : A Logistic Regression Model Approch',
+                    algorithm='LogisticRegression',
+                    label='no_crisis',
+                    features=[feature(name) for name in ['case', 'cc3', 'country', 'year', 'systemic_crisis', 'exch_usd',
+                     'domestic_debt_in_default', 'sovereign_external_debt_default',
+                     'gdp_weighted_default', 'inflation_annual_cpi', 'independence',
+                     'currency_crises', 'inflation_crises', 'banking_crisis']],
+                    characteristics={}
+                )
+        
+        # Удаление модели
+        model.delete()
+        
+        # Загрузка бинарного файла модели
+        file = '/your/model/file/path'
+        model.upload(file)
+        
+        # Скачивание бинарного фала модели
+        bytes = model.download()
+        ```
+        
+        ## Документация
+        
+        TBD
+        
+        ## Как собрать пакет
+        ```bash
+        python3 setup.py sdist
+        python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+        ```
+        
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
