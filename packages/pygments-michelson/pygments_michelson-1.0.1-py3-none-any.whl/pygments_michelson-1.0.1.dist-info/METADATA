@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: pygments-michelson
+Version: 1.0.1
+Summary: Pygments lexer for Michelson contracts
+Home-page: https://gitlab.com/arvidnl/pygments-michelson
+Author: Arvid Jakobsson
+Author-email: arvid.jakobsson@nomadic-labs.com
+License: MIT
+Keywords: pygments michelson tezos lexer
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.4
+Description-Content-Type: text/markdown
+Requires-Dist: Pygments (>=2)
+
+# Pygments Lexer for Michelson contracts
+
+A lexer class for Michelson contracts.
+
+## Installing
+
+From pip:
+
+```
+# pip --user install pygments-michelson-1.0.0
+```
+
+
+## Usage
+
+### On the command line
+
+```bash
+$ pygmentize contract.tz
+```
+
+### From python script to generate HTML
+
+```python
+from pygments import highlight
+from pygments_michelson import MichelsonLexer
+from pygments.formatters import HtmlFormatter
+
+code = 'parameter unit; storage unit; code { CDR; NIL operation; PAIR };'
+print(highlight(code, MichelsonLexer(), HtmlFormatter()))
+```
+
+
