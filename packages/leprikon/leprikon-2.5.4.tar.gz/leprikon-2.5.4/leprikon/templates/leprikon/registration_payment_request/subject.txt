@@ -1,0 +1,18 @@
+{% load i18n leprikon_tags %}{% blocktrans %}Hello,
+thank You for submitting registration.{% endblocktrans %}
+
+{% include 'leprikon/registration_mail_details.txt' %}
+{% trans 'Price' %}: {{ object.current_receivable | currency }}
+
+{% if site.payment_gateway %}{% trans 'Please, use following link to perform online payment' %}:
+{{ object.payment_url }}
+
+{% endif %}{% if site.bank_account %}{% trans 'Please, use following information for bank transfer' %}:
+{% trans 'Bank account' %}: {{ site.bank_account }}
+{% trans 'Variable symbol' %}: {{ object.variable_symbol }}
+
+{% endif %}{% if not site.payment_gateway and not site.bank_account %}{% trans 'Currently we only accept payments in cash.' %}
+
+{% endif %}{% trans 'If You have already made the payment recently, please ignore this message.' %}
+
+{% include 'leprikon/registration_mail_footer.txt' %}
