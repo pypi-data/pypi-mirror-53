@@ -1,0 +1,61 @@
+Metadata-Version: 2.1
+Name: Diofant
+Version: 0.11.0a13
+Summary: Computer algebra system (CAS) in Python
+Home-page: https://diofant.readthedocs.io/
+Author: Sergey B Kirpichev et al
+Maintainer: Sergey B Kirpichev
+Maintainer-email: diofant@googlegroups.com
+License: BSD
+Project-URL: Source Code, https://github.com/diofant/diofant/
+Project-URL: Bug Tracker, https://github.com/diofant/diofant/issues/
+Project-URL: Download, https://github.com/diofant/diofant/releases/
+Description: Diofant
+        =======
+        
+        .. image:: https://github.com/diofant/diofant/workflows/test/badge.svg
+           :target: https://github.com/diofant/diofant/actions?workflow=test
+        
+        .. image:: https://codecov.io/gh/diofant/diofant/branch/master/graph/badge.svg
+            :target: https://codecov.io/gh/diofant/diofant
+        
+        .. image:: https://readthedocs.org/projects/diofant/badge/?style=flat
+            :target: https://diofant.readthedocs.io/en/latest/
+        
+        A `Python`_ library for symbolic mathematics.
+        
+        For `installation instructions`_ and usage information,
+        see the `online documentation`_.
+        
+        `New BSD License`_ covers all files in `this repository`_
+        unless stated otherwise.
+        
+        .. _Python: https://www.python.org/
+        .. _online documentation: https://diofant.readthedocs.io/en/latest/
+        .. _installation instructions: https://diofant.readthedocs.io/en/latest/install.html#installation
+        .. _New BSD License: https://github.com/diofant/diofant/blob/master/LICENSE.rst
+        .. _this repository: https://github.com/diofant/diofant/
+        
+Keywords: Math,CAS
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Requires-Python: >=3.7
+Provides-Extra: tests
+Provides-Extra: docs
+Provides-Extra: develop
+Provides-Extra: exports
+Provides-Extra: interactive
+Provides-Extra: plot
+Provides-Extra: gmpy
