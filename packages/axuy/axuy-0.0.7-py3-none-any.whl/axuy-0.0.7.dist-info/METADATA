@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: axuy
+Version: 0.0.7
+Summary: Minimalist first-person shooter
+Home-page: https://github.com/McSinyx/axuy
+Author: Nguyễn Gia Phong
+Author-email: vn.mcsinyx@gmail.com
+License: AGPLv3+
+Keywords: fps p2p opengl glfw
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Games/Entertainment :: First Person Shooters
+Description-Content-Type: text/markdown
+Requires-Dist: Pillow
+Requires-Dist: appdirs
+Requires-Dist: glfw (>=1.8)
+Requires-Dist: moderngl
+Requires-Dist: numpy
+Requires-Dist: pyrr
+
+# axuy
+
+Mininalist peer-to-peer first-person shooter
+
+![icon](https://raw.githubusercontent.com/McSinyx/axuy/master/axuy/icon.png)
+
+## Goals
+
+* Written in pure Python and thus be portable
+* Easy to read codebase as well as easy on resources
+* Generative visuals
+* Functional when possible
+* P2P communication based on calculated *trust*
+* Modularized for the ease of bot scripting
+
+## Installation
+
+The game is still work-in-progress. For testing, first install GLFW version 3.3
+(or higher), then install the game in editable mode:
+
+```sh
+$ git clone https://github.com/McSinyx/axuy.git
+$ pip3 install --user --editable axuy
+$ axuy --port=42069 &
+$ axuy --seeder=:42069
+```
+
+
