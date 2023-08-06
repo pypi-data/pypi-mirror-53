@@ -1,0 +1,29 @@
+Metadata-Version: 2.0
+Name: dcplib
+Version: 3.9.0
+Summary: Modules shared among multiple Data Coordination Platform components.
+Home-page: http://github.com/HumanCellAtlas/dcplib
+Author: Sam Pierson
+Author-email: spierson@chanzuckerberg.com
+License: MIT
+Platform: MacOS X
+Platform: Posix
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: boto3 (>=1.7.13)
+Requires-Dist: crc32c
+Requires-Dist: puremagic (==1.4)
+Requires-Dist: requests (<3,>=2.18.4)
+Requires-Dist: pyjwt (<2,>=1.5.3)
+Requires-Dist: cryptography (<3,>=2.3)
+Requires-Dist: furl (>=1.2.1)
+Requires-Dist: termcolor (<2,>=1.1.0)
+
+UNKNOWN
+
+
