@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: bmtools
+Version: 0.1.1
+Summary: System informations
+Home-page: http://github.com/ipselium/bmtools
+Author: Cyril Desjouy
+Author-email: cyril.desjouy@univ-lemans.fr
+License: GPL
+Description: Introducing bmtools
+        ===================
+        
+        |Pypi| |Build| |Licence|
+        
+        
+        **bmtools** provides some tools dedicated to benchmarking.
+        
+        
+        Requirements
+        ------------
+        
+        :matplotlib: >= 3.0
+        :numpy: >= 1.1
+        
+        Installation
+        ------------
+        
+        Clone the github repo and
+        
+        .. code:: console
+        
+            $ python setup.py install
+        
+        or install via Pypi
+        
+        .. code:: console
+        
+            $ pip install bmtools
+        
+        
+        .. |Pypi| image:: https://badge.fury.io/py/bmtools.svg
+            :target: https://pypi.org/project/bmtools
+            :alt: Pypi Package
+        
+        .. |Licence| image:: https://img.shields.io/github/license/ipselium/bmtools.svg
+        
+        .. |Build| image:: https://travis-ci.org/ipselium/bmtools.svg?branch=master
+            :target: https://travis-ci.org/ipselium/bmtools
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Description-Content-Type: text/x-rst
