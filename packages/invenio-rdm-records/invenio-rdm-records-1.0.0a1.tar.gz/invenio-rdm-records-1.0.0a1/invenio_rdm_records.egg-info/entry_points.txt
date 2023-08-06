@@ -1,0 +1,9 @@
+[invenio_base.apps]
+invenio_rdm_records = invenio_rdm_records:InvenioRDMRecords
+
+[invenio_base.blueprints]
+invenio_rdm_records = invenio_rdm_records.views:blueprint
+
+[invenio_i18n.translations]
+messages = invenio_rdm_records
+
