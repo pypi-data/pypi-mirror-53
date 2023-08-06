@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: BMPxlsx
+Version: 0.0.2
+Summary: The library takes a dictionary of form {Sheet: {Cell: Value}} and updates the specified Excel file accordingly.
+Home-page: https://github.com/TheAcademyofNaturalSciences/BMPxlsx
+Author: Mike Campagna
+Author-email: msc94@drexel.edu
+License: MIT
+Download-URL: https://github.com/TheAcademyofNaturalSciences/BMPxlsx/archive/v_002.tar.gz
+Description: # BMPxlsx
+        [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+        
+        The library takes a dictionary of form {Sheet: {Cell: Value}} and updates the specified Excel file accordingly.
+        
+        This function was created in support of the Model My Watershed Web application WikiWatersheds that models Best Management Practice (BMP) impacts to reducing water quality impacts. (https://modelmywatershed.org/)
+        
+        https://pypi.org/project/BMPxlsx/
+        
+        ### Example Function Run
+        ```sh
+        ## Function(dataDictionary, FileName)
+        
+        ## Dictionary - {"SHEET": {"CELL": VALUE, "CELL": VALUE}}
+        
+        datadict = {
+        'Sheet1': {'D1': 123.4, 'D2': 567.8},
+        'Sheet2': {'D1': 123.4, 'D2': 567.8},
+        'Sheet3': {'D1': 123.4, 'D2': 567.8},
+        }
+        
+        ## Full Path to File
+        
+        loc = os.getcwd()
+        fnme = 'MMW_BMP_Spreadsheet_Tool(Skippack).xlsx'
+        file = os.path.join(loc, fnme)
+        
+        ## Run Function
+        
+        writer = BMPxlsx.Writer(file)
+        input1 = {'Sheet1': {'D1': 13.4, 'D2': 47.8},
+                'Sheet2': {'D1': 23.4, 'D2': 57.8},
+                'Sheet3': {'D1': 33.4, 'D2': 67.8},
+            }
+        input2 = {'Sheet1': {'D1': 23.4, 'D2': 57.8},
+                'Sheet2': {'D1': 33.4, 'D2': 67.8},
+                'Sheet3': {'D1': 43.4, 'D2': 77.8},
+            }
+        writer.write(input1)
+        writer.close()
+        
+        ```
+        
+        ### Installation
+        
+        BMPxlsx was written and for Python version 2.7.15
+        
+        ```sh
+        $ pip install BMPxslx
+        ```
+        
+Keywords: Excel,Write,XLSX,BMP
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Description-Content-Type: text/markdown
