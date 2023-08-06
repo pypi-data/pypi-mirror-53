@@ -1,0 +1,13 @@
+molecule>=2.22rc6
+pytest>=3.50
+pyyaml<6,>=5.1
+
+[:python_version < "3.0"]
+more_itertools<6,>=5
+
+[:python_version >= "3.0"]
+more_itertools>=6
+
+[docker]
+docker>=4.0.1
+paramiko>=2.5.0
