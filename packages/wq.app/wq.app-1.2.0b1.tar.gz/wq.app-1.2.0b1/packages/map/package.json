@@ -1,0 +1,35 @@
+{
+    "name": "@wq/map",
+    "version": "1.2.0-beta.1",
+    "description": "Leaflet integration for @wq/app pages",
+    "main": "dist/index.js",
+    "module": "dist/index.es.js",
+    "scripts": {
+        "test": "cd ../../ && npm run jest packages/map",
+        "build": "cd ../../ && npm run rollup -- -c packages/map/rollup.config.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wq/wq.app.git"
+    },
+    "keywords": [
+        "wq",
+        "leaflet",
+        "map",
+        "gis"
+    ],
+    "author": "S. Andrew Sheppard",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/wq/wq.app/issues"
+    },
+    "homepage": "https://wq.io/wq.app",
+    "dependencies": {
+        "@wq/template": "^1.2.0-beta.1",
+        "esri-leaflet": "^2.3.0",
+        "leaflet": "^1.5.1",
+        "leaflet-draw": "^1.0.4",
+        "leaflet.markercluster": "^1.4.1",
+        "leaflet.wms": "^0.2.0"
+    }
+}
