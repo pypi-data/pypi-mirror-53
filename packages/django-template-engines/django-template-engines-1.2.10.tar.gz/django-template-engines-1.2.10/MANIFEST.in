@@ -1,0 +1,5 @@
+include *.md
+recursive-include template_engines *.md
+recursive-exclude template_engines/tests/ *
+global-exclude __pycache__
+global-exclude *.py[co]
