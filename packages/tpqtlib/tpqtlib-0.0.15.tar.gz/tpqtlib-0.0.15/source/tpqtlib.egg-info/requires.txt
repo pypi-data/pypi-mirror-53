@@ -1,0 +1,15 @@
+Qt.py
+tpPyUtils
+tpDccLib
+
+[:python_version <= "3.4"]
+PySide
+
+[:python_version > "3.4"]
+PySide2
+
+[dev]
+wheel
+
+[test]
+pytest
