@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: sqltemplate
+Version: 0.5.4
+Summary: Core library for database querying tools based on templates
+Home-page: https://github.com/marcinn/sqltemplate
+Author: Marcin Nowak
+Author-email: marcin.j.nowak@gmail.com
+License: UNKNOWN
+Keywords: python sql template
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Requires-Dist: flatdict (<2.0.0,>=1.2.0)
+Requires-Dist: six
+Provides-Extra: prettysql
+Requires-Dist: sqlparse (<1.0,>=0.1.19) ; extra == 'prettysql'
+
+UNKNOWN
+
+
