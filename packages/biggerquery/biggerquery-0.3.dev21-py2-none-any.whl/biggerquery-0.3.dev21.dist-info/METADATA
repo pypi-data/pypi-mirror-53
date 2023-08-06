@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: biggerquery
+Version: 0.3.dev21
+Summary: BigQuery client wrapper with clean API
+Home-page: https://github.com/allegro/biggerquery
+Author: Chi
+Author-email: chibox-team@allegrogroup.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: google-cloud-bigquery (<=1.18,>=1.12)
+Requires-Dist: pandas (<=0.24,>=0.23)
+Requires-Dist: google-cloud-storage (<=1.18,>=1.16)
+Requires-Dist: mock (>=3.0.5)
+Requires-Dist: pyarrow (>=0.14)
+Provides-Extra: beam
+Requires-Dist: apache-beam (==2.15.0) ; extra == 'beam'
+Requires-Dist: avro (<=1.9.0,>=1.8.2) ; extra == 'beam'
+
+# BiggerQuery &mdash; The Python framework for the BigQuery
+
+Tired of the limiting BigQuery console? Open your Jupyter notebook and start working with the BigQuery using Python!
+
+BiggerQuery lets you:
+* Work with the BigQuery using a Python code.
+* Create a workflow that you can automatically convert to a Airflow DAG.
+* Implement a configurable environments for your workflows.
+* Organize your data processing.
+* Create a workflow from a Jupyter notebook.
+* Work with BigQuery from any other environment.
+* Run and schedule the Apache-Beam piplines.
+* Mix BigQuery, Python and Apache-Beam in your workflows.
+
+BiggerQuery scales to you needs. It's very easy to start making queries and creating workflows. If needed, 
+BiggerQuery lets you implement complex stuff(the Allegro experimentation platform is created using the BiggerQuery framework).
+
+## Installation
+
+`pip install biggerquery`
+
+## Compatibility
+
+BiggerQuery is compatible with Python >= 3.7.
+
+## Tutorial
+
+In these Jupyter notebooks you can find the interactive BiggerQuery tutorial.
+
