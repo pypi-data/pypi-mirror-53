@@ -1,0 +1,27 @@
+<style data-style="{{ "bokeh" | id }}">
+  #{{ "bokeh" | id }} .cd-BokehPlot {
+    max-height:{{ scale }}vh;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #{{ "bokeh" | id }} .cd-BokehPlot__inner {
+    margin: auto;
+    width: 95%;
+  }
+</style>
+
+<div id="{{ "bokeh" | id }}"
+     class="cd-BokehPlot"
+     data-model-id="{{ model_id }}"
+>
+  <div class="cd-BokehPlot__inner">
+    {{ dom }}
+  </div>
+  <script type="text/javascript" data-id="{{ "bokeh" | id }}">
+    window.CAULDRON.on.ready
+        .then(function () {
+          {{ script }}
+        });
+  </script>
+</div>
