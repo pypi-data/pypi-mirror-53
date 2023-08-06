@@ -1,0 +1,6 @@
+[console_scripts]
+pymdgen = pymdgen.cli:main
+
+[markdown.extensions]
+pymdgen = pymdgen.md:Extension
+
