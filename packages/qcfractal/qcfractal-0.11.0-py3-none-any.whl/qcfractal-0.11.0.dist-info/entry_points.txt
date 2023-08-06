@@ -1,0 +1,8 @@
+[console_scripts]
+qcfractal-dashboard = qcfractal.cli.qcfractal_dashboard:main
+qcfractal-manager = qcfractal.cli.qcfractal_manager:main
+qcfractal-server = qcfractal.cli.qcfractal_server:main
+
+[pytest11]
+qcfractal_testing = qcfractal.testing
+
