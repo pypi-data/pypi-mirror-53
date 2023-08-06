@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: komand
+Version: 3.2.0
+Summary: Komand Plugin SDK
+Home-page: https://github.com/rapid7/komand-plugin-sdk-python
+Author: Rapid7 Integrations Alliance
+Author-email: integrationalliance@rapid7.com
+License: UNKNOWN
+Description: 
+        # Komand Python SDK [![Build Status](https://travis-ci.org/rapid7/komand-plugin-sdk-python.svg?branch=master)](https://travis-ci.org/rapid7/komand-plugin-sdk-python)
+        
+        The Komand Python SDK is used for building plugins in Python for
+        Rapid7 InsightConnect (previously Komand).
+        
+        [Documentation](https://komand.github.io/python/start.html)
+        
+        ## Changelog
+        
+        * 3.2.0 - Add new ConnectionTestException/PluginException presets:
+         UNKNOWN, BASE64_ENCODE, BASE64_DECODE, INVALID_JSON |
+         Add an optional data parameter for formatting response output
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 2
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Topic :: Software Development :: Build Tools
+Description-Content-Type: text/markdown
