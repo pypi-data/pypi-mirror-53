@@ -1,0 +1,72 @@
+%YAML 1.2
+---
+# - Xenon 2 -------------------------------------------------------------------
+# Configuration file for the website generation
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# Parameter to update and download the layout
+# Parameters will erase the folder ${root}/${template_conf_path}
+layout:
+
+  # ---------------------------------------------------------------------------
+  # name of the layout (template_ge, template_gp, template_gq)
+  name:
+    template_ge
+
+  # ---------------------------------------------------------------------------
+  # version of the template
+  version:
+    latest
+
+# -----------------------------------------------------------------------------
+# all folders needed
+# Paths definitions
+paths:
+
+  # ---------------------------------------------------------------------------
+  # root for the folders if needed
+  # if blanck, all realtives path will start at the conf file location
+  # if not blanck, all relative path will start at this folder
+  #         and the folde can be a relative to the conf file
+  root: ./
+
+  # ---------------------------------------------------------------------------
+  # Main page for the web site (absolute or relative)
+  # ${root}/${main_entries_dict[key]} for key in main_entries_dict
+  entries:
+    main:
+      index:
+        {{md_filename|forceescape}}
+     
+  # ---------------------------------------------------------------------------
+  # The template configuration to use for the generation
+  # ${root}/${template_conf_path}
+  template_conf:
+    {{template_conf_path|forceescape}}
+     
+  # ---------------------------------------------------------------------------
+  # Destination of the build
+  destination:
+    # -------------------------------------------------------------------------
+    # Destination main folder
+    # ${root}/${destination.root}
+    root:
+      build
+    
+    # -------------------------------------------------------------------------
+    # Destination of the website
+    # the destination dictonnary has the same keys as entries_dict
+    # ${root}/${destination.root}/${destination.websites_dict}
+    websites:
+      main: 'www'
+
+    # -------------------------------------------------------------------------
+    # Destination for the resources if differents
+    # ${root}/${destination.root}/${destination.resources}
+    resources: 'www/resources'
+
+# ---------------------------------------------------------------------------
+# The context for the site generation
+context:
+  i18n_off: off
