@@ -1,0 +1,45 @@
+{% extends "default-base.html" %}
+
+    {% block title %}IMPACT - Change Department{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <form action="" method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+
+    <div class="card generic-card-card">
+        <div class="card-header generic-card-header">
+            <h4>Change Department</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row">
+                <div class="col col-sm-5">
+                    <label for="ip-email">Which department would you like to change to?</label>
+                    {{ department_form.faculty }}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" name="save" value="Save">Save</button>
+        <button type="submit" class="btn btn-primary" name="cancel" formnovalidate value="Cancel">Cancel</button>
+    </div>
+    </form>
+
+    </div>
+
+    </main>
+
+{% endblock %}
+

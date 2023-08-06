@@ -1,0 +1,34 @@
+{% extends "default-base.html" %}
+
+    {% block title %}IMPACT - Account Expired{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <div class="form-group">
+
+    <div class="card generic-card-card">
+        <div class="card-header generic-card-header">
+            <h4>Account Expired</h4>
+        </div>
+        <div class="card-body">
+            <p>Your account has expired.</p>
+            <p>Please contact Hashtag Learning to renew your subscription.
+            </p>
+            <p>Email: contact@hashtag-learning.co.uk</p>
+            <p>Twitter: @hashtag_impact</p>
+        </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <a href="{% url 'account_logout' %}" class="btn btn-primary" role="button">Logout</a>
+    </div>
+
+    </div>
+
+    </main>
+
+{% endblock %}

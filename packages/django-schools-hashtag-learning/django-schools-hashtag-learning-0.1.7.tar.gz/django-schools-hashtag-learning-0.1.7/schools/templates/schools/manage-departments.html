@@ -1,0 +1,57 @@
+{% extends "generic-base.html" %}
+
+    {% block title %}IMPACT - Departments{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <div class="form-group">
+    <div class="card generic-card-card">
+        <div class="card-header generic-card-header">
+            <h4>Departments</h4>
+        </div>
+        <table class="table table-bordered table-container mb-0">
+            <thead class="generic-table-card">
+            <tr>
+                <th style="width: 70%;">Department</th>
+                <th style="width: 20%;text-align:center" >Members</th>
+                <th style="width: 10%; text-align:center">View</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            {% for faculty in faculty_list %}
+
+                <tr>
+                    <td style="width: 70%;vertical-align: middle;"><strong>{{ faculty.faculty_name }}</strong></td>
+                    <td style="width: 20%;vertical-align: middle; text-align:center">{{ faculty.member_count }}</td>
+                    <td style="width: 10%;vertical-align: middle;" align="center">
+                        <a href="{% url 'schools:view-department' faculty.faculty_pk %}"
+                            class="btn btn-secondary btn-sm" role="button"><i class="material-icons">visibility</i>
+                        </a>
+                    </td>
+
+
+                </tr>
+            {% empty %}
+                <tr>
+                <td style="width: 100%;vertical-align: middle;">No departments have been created</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+
+    <div class="form-group">
+        <a href="{% url 'schools:create-department' %}" class="btn btn-primary" role="button">Create New Department</a>
+        <a href="{% url 'core_nav:settings' %}" class="btn btn-primary" role="button">Done</a>
+    </div>
+
+    </div>
+
+    </main>
+
+{% endblock %}
+
