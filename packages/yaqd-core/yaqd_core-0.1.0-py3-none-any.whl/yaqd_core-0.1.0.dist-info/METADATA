@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: yaqd-core
+Version: 0.1.0
+Summary: Core structures for yaq component daemons
+Home-page: http://gitlab.com/yaq/yaqd-core-python
+Author: yaq Developers
+License: LGPL v3
+Keywords: spectroscopy science multidimensional hardware
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.7
+Requires-Dist: appdirs
+Requires-Dist: toml
+Provides-Extra: dev
+Requires-Dist: black ; extra == 'dev'
+Requires-Dist: pre-commit ; extra == 'dev'
+Requires-Dist: pydocstyle ; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: sphinx ; extra == 'docs'
+Requires-Dist: sphinx-gallery (>=0.3.0) ; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme ; extra == 'docs'
+
+UNKNOWN
+
+
