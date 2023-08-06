@@ -1,0 +1,33 @@
+{
+  "BagIt-Profile-Info":{
+    "BagIt-Profile-Identifier":"http://raw.githubusercontent.com/fair-research/bdbag/master/profiles/bdbag-ro-profile.json",
+    "Source-Organization":"https://fair-research.github.io/",
+    "External-Description":"BDBag BagIt profile that includes support for Research Objects. See https://github.com/ResearchObject/bagit-ro-ex1",
+    "Version":"0.1.20180319"
+   },
+   "Bag-Info": {
+     "Payload-Oxum":{
+       "required":true
+     }
+   },
+   "Manifests-Required":[
+      "md5", "sha256"
+   ],
+   "Allow-Fetch.txt": true,
+   "Serialization": "required",
+   "Accept-Serialization":[
+     "application/zip",
+     "application/x-zip-compressed",
+     "application/x-tar",
+     "application/x-tar+gzip"
+   ],
+   "Tag-Manifests-Required":[
+     "md5", "sha256"
+   ],
+   "Tag-Files-Required":[
+     "metadata/manifest.json"
+   ],
+   "Accept-BagIt-Version":[
+      "0.97"
+   ]
+}
