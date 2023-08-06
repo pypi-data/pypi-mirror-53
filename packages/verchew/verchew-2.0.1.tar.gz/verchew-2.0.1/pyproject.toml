@@ -1,0 +1,90 @@
+[tool.poetry]
+
+name = "verchew"
+version = "2.0.1"  # also update verchew/script.py
+description = "System dependency version checker."
+
+license = "MIT"
+
+authors = ["Jace Browning <jacebrowning@gmail.com>"]
+
+readme = "README.md"
+
+homepage = "https://pypi.org/project/verchew"
+documentation = "https://verchew.readthedocs.io"
+repository = "https://github.com/jacebrowning/verchew"
+
+keywords = [
+    "dependencies",
+    "configuration management",
+    "continuous integration",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3.3",
+    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Installation/Setup",
+    "Topic :: Utilities",
+]
+
+[tool.poetry.dependencies]
+
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+
+# Formatters
+black = "=19.3b0"
+isort = "=4.3.21"
+
+# Linters
+mypy = "*"
+pydocstyle = "^3"
+pylint = "^2"
+
+# Testing
+pytest = "^5"
+pytest-cov = "*"
+pytest-describe = "*"
+pytest-expecter = "*"
+pytest-random = "*"
+scripttest = "*"
+
+# Reports
+coveragespace = "*"
+
+# Documentation
+mkdocs = "^1.0.4"
+pygments = "*"
+
+# Tooling
+pyinstaller = "*"
+sniffer = "*"
+MacFSEvents = { version = "*", platform = "darwin" }
+pync = { version = "*", platform = "darwin" }
+
+[tool.poetry.scripts]
+
+verchew = "verchew.script:main"
+
+[tool.black]
+
+target_version = ['py36', 'py37']
+skip-string-normalization = true
+
+[build-system]
+
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
