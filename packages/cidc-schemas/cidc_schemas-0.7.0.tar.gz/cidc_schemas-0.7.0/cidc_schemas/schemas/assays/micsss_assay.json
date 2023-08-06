@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "micsss",
+  "title": "MICSSS Assay",
+  "type": "object",
+  "description": "Multiplexed immunohistochemical consecutive staining on single slide.",
+  "allOf": [
+    { "$ref": "assays/components/assay_core.json" },
+    { "$ref": "assays/components/image.json" },
+    { "$ref": "assays/components/imaging_data.json" }
+  ],
+  "properties": {
+    "records": {
+      "type": "array",
+      "description": "A single data record from micsss assay.",
+      "items": {
+        "$ref": "assays/components/imaging/micsss_entry.json"
+      }
+    }
+  },
+  "antibody": {
+    "type": "array",
+    "items": {
+      "$ref": "assays/components/micsss_antibody.json"
+    }
+  },
+  "required": ["records"]
+}

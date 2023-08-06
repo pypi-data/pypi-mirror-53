@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "olink_assay",
+  "title": "OLink Assay",
+  "type": "object",
+  "description": "High-throughput multiplexed assays for protein biomarker discovery.",
+  "properties": {
+    "records": {
+      "type": "array",
+      "description": "A single data record from Olink assay.",
+      "items": {
+        "$ref": "assays/components/olink/olink_entry.json"
+      }, 
+      "mergeStrategy": "arrayMergeById",
+      "mergeOptions": {
+        "idRef": "/chip_barcode"
+      }
+    },
+    "panel": {
+      "description": "Panel used for the assay.",
+      "type": "string"
+    },
+    "assay_panel_lot": {
+      "description": "Lot number of the assay panel.",
+      "type": "number"
+    },
+    "study": {
+      "$ref": "assays/components/olink/olink_combined.json"
+    }
+  },
+  "required": ["panel", "records"]
+}
