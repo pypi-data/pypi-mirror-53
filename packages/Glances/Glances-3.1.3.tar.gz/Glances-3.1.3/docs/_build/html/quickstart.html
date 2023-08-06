@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quickstart &mdash; Glances 3.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Command Reference" href="cmds.html" />
+    <link rel="prev" title="Install" href="install.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Glances
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#standalone-mode">Standalone Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#client-server-mode">Client/Server Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#central-client">Central client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#snmp">SNMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipv6">IPv6</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#web-server-mode">Web Server Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmds.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aoa/index.html">Anatomy Of The Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gw/index.html">Gateway To Other Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">F.A.Q</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Glances</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quickstart</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quickstart">
+<span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<p>This page gives a good introduction in how to get started with Glances.
+Glances offers 3 modes:</p>
+<ul class="simple">
+<li>Standalone</li>
+<li>Client/Server</li>
+<li>Web server</li>
+</ul>
+<div class="section" id="standalone-mode">
+<h2>Standalone Mode<a class="headerlink" href="#standalone-mode" title="Permalink to this headline">¶</a></h2>
+<p>If you want to monitor your local machine, open a console/terminal
+and simply run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> glances
+</pre></div>
+</div>
+<p>Glances should start (press ‘q’ or ‘ESC’ to exit):</p>
+<img alt="_images/screenshot-wide.png" src="_images/screenshot-wide.png" />
+<p>It is also possible to display RAW JSON stats directly to stdout using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> glances --stdout cpu.user,mem.used,load
+<span class="go">cpu.user: 30.7</span>
+<span class="go">mem.used: 3278204928</span>
+<span class="go">load: {&#39;cpucore&#39;: 4, &#39;min1&#39;: 0.21, &#39;min5&#39;: 0.4, &#39;min15&#39;: 0.27}</span>
+<span class="go">cpu.user: 3.4</span>
+<span class="go">mem.used: 3275251712</span>
+<span class="go">load: {&#39;cpucore&#39;: 4, &#39;min1&#39;: 0.19, &#39;min5&#39;: 0.39, &#39;min15&#39;: 0.27}</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>or in a CSV format thanks to the stdout-csv option:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> glances --stdout-csv now,cpu.user,mem.used,load
+<span class="go">now,cpu.user,mem.used,load.cpucore,load.min1,load.min5,load.min15</span>
+<span class="go">2018-12-08 22:04:20 CEST,7.3,5948149760,4,1.04,0.99,1.04</span>
+<span class="go">2018-12-08 22:04:23 CEST,5.4,5949136896,4,1.04,0.99,1.04</span>
+<span class="go">...</span>
+</pre></div>
+</div>
+<p>Note: It will display one line per stat per refresh.</p>
+</div>
+<div class="section" id="client-server-mode">
+<h2>Client/Server Mode<a class="headerlink" href="#client-server-mode" title="Permalink to this headline">¶</a></h2>
+<p>If you want to remotely monitor a machine, called <code class="docutils literal notranslate"><span class="pre">server</span></code>, from
+another one, called <code class="docutils literal notranslate"><span class="pre">client</span></code>, just run on the server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">server$ glances -s</span>
+</pre></div>
+</div>
+<p>and on the client:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">client$ glances -c @server</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&#64;server</span></code> is the IP address or hostname of the server.</p>
+<p>In server mode, you can set the bind address with <code class="docutils literal notranslate"><span class="pre">-B</span> <span class="pre">ADDRESS</span></code> and
+the listening TCP port with <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">PORT</span></code>.</p>
+<p>In client mode, you can set the TCP port of the server with <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">PORT</span></code>.</p>
+<p>Default binding address is <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> (Glances will listen on all the
+available network interfaces) and TCP port is <code class="docutils literal notranslate"><span class="pre">61209</span></code>.</p>
+<p>In client/server mode, limits are set by the server side.</p>
+<p>You can set a password to access to the server using the <code class="docutils literal notranslate"><span class="pre">--password</span></code>.
+By default, the username is <code class="docutils literal notranslate"><span class="pre">glances</span></code> but you can change it with
+<code class="docutils literal notranslate"><span class="pre">--username</span></code>.</p>
+<p>If you want, the SHA password will be stored in <code class="docutils literal notranslate"><span class="pre">username.pwd</span></code> file.
+Next time your run the server/client, password will not be asked. To set a
+specific username you can used the -u &lt;username&gt; option.</p>
+<p>It is also possible to set the password in the
+Glances configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[passwords]</span>
+<span class="c1"># Define the passwords list</span>
+<span class="c1"># Syntax: host=password</span>
+<span class="c1"># Where: host is the hostname</span>
+<span class="c1">#        password is the clear password</span>
+<span class="c1"># Additionally (and optionally) a default password could be defined</span>
+<span class="na">localhost</span><span class="o">=</span><span class="s">mylocalhostpassword</span>
+<span class="na">default</span><span class="o">=</span><span class="s">mydefaultpassword</span>
+</pre></div>
+</div>
+<div class="section" id="central-client">
+<h3>Central client<a class="headerlink" href="#central-client" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/browser.png" src="_images/browser.png" />
+<p>Glances can centralize available Glances servers using the <code class="docutils literal notranslate"><span class="pre">--browser</span></code>
+option. The server list can be statically defined via the configuration
+file (section <code class="docutils literal notranslate"><span class="pre">[serverlist]</span></code>).</p>
+<p>Example:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[serverlist]</span>
+<span class="c1"># Define the static servers list</span>
+<span class="na">server_1_name</span><span class="o">=</span><span class="s">xps</span>
+<span class="na">server_1_alias</span><span class="o">=</span><span class="s">xps</span>
+<span class="na">server_1_port</span><span class="o">=</span><span class="s">61209</span>
+<span class="na">server_2_name</span><span class="o">=</span><span class="s">win</span>
+<span class="na">server_2_port</span><span class="o">=</span><span class="s">61235</span>
+</pre></div>
+</div>
+<p>Glances can also detect and display all Glances servers available on
+your network via the <code class="docutils literal notranslate"><span class="pre">zeroconf</span></code> protocol (not available on Windows):</p>
+<p>To start the central client, use the following option:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">client$ glances --browser</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Use <code class="docutils literal notranslate"><span class="pre">--disable-autodiscover</span></code> to disable the auto discovery mode.</p>
+</div>
+<p>When the list is displayed, you can navigate through the Glances servers with
+up/down keys. It is also possible to sort the server using:
+- ‘1’ is normal (do not sort)
+- ‘2’ is using sorting with ascending order (ONLINE &gt; SNMP &gt; PROTECTED &gt; OFFLINE &gt; UNKNOWN)
+- ‘3’ is using sorting with descending order (UNKNOW &gt; OFFLINE &gt; PROTECTED &gt; SNMP &gt; ONLINE)</p>
+</div>
+<div class="section" id="snmp">
+<h3>SNMP<a class="headerlink" href="#snmp" title="Permalink to this headline">¶</a></h3>
+<p>As an experimental feature, if Glances server is not detected by the
+client, the latter will try to grab stats using the <code class="docutils literal notranslate"><span class="pre">SNMP</span></code> protocol:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">client$ glances -c @snmpserver</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Stats grabbed by SNMP request are limited and OS dependent.
+A SNMP server should be installed and configured…</p>
+</div>
+</div>
+<div class="section" id="ipv6">
+<h3>IPv6<a class="headerlink" href="#ipv6" title="Permalink to this headline">¶</a></h3>
+<p>Glances is <code class="docutils literal notranslate"><span class="pre">IPv6</span></code> compatible. Just use the <code class="docutils literal notranslate"><span class="pre">-B</span> <span class="pre">::</span></code> option to bind to
+all IPv6 addresses.</p>
+</div>
+</div>
+<div class="section" id="web-server-mode">
+<h2>Web Server Mode<a class="headerlink" href="#web-server-mode" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/screenshot-web.png" src="_images/screenshot-web.png" />
+<p>If you want to remotely monitor a machine, called <code class="docutils literal notranslate"><span class="pre">server</span></code>, from any
+device with a web browser, just run the server with the <code class="docutils literal notranslate"><span class="pre">-w</span></code> option:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">server$ glances -w</span>
+</pre></div>
+</div>
+<p>then on the client enter the following URL in your favorite web browser:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="nd">@server</span><span class="p">:</span><span class="mi">61208</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&#64;server</span></code> is the IP address or hostname of the server.</p>
+<p>To change the refresh rate of the page, just add the period in seconds
+at the end of the URL. For example, to refresh the page every <code class="docutils literal notranslate"><span class="pre">10</span></code>
+seconds:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="nd">@server</span><span class="p">:</span><span class="mi">61208</span><span class="o">/</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>The Glances web interface follows responsive web design principles.</p>
+<p>Here’s a screenshot from Chrome on Android:</p>
+<img alt="_images/screenshot-web2.png" src="_images/screenshot-web2.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cmds.html" class="btn btn-neutral float-right" title="Command Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral" title="Install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Nicolas Hennion.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.1.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

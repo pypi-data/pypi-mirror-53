@@ -1,0 +1,432 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration &mdash; Glances 3.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Anatomy Of The Application" href="aoa/index.html" />
+    <link rel="prev" title="Command Reference" href="cmds.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Glances
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmds.html">Command Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#location">Location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aoa/index.html">Anatomy Of The Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gw/index.html">Gateway To Other Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">F.A.Q</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Glances</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuration">
+<span id="config"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>No configuration file is mandatory to use Glances.</p>
+<p>Furthermore a configuration file is needed to access more settings.</p>
+<div class="section" id="location">
+<h2>Location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A template is available in the <code class="docutils literal notranslate"><span class="pre">/usr{,/local}/share/doc/glances</span></code>
+(Unix-like) directory or directly on <a class="reference external" href="https://raw.githubusercontent.com/nicolargo/glances/master/conf/glances.conf">GitHub</a>.</p>
+</div>
+<p>You can put your own <code class="docutils literal notranslate"><span class="pre">glances.conf</span></code> file in the following locations:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Linux</span></code>, <code class="docutils literal notranslate"><span class="pre">SunOS</span></code></td>
+<td>~/.config/glances, /etc/glances</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">*BSD</span></code></td>
+<td>~/.config/glances, /usr/local/etc/glances</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">macOS</span></code></td>
+<td>~/Library/Application Support/glances, /usr/local/etc/glances</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Windows</span></code></td>
+<td>%APPDATA%\glances</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>On Windows XP, <code class="docutils literal notranslate"><span class="pre">%APPDATA%</span></code> is: <code class="docutils literal notranslate"><span class="pre">C:\Documents</span> <span class="pre">and</span> <span class="pre">Settings\&lt;USERNAME&gt;\Application</span> <span class="pre">Data</span></code>.</li>
+<li>On Windows Vista and later: <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;USERNAME&gt;\AppData\Roaming</span></code>.</li>
+</ul>
+<p>User-specific options override system-wide options and options given on
+the command line override either.</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>Glances reads configuration files in the <em>ini</em> syntax.</p>
+<p>A first section (called global) is available:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[global]</span>
+<span class="c1"># Does Glances should check if a newer version is available on PyPI?</span>
+<span class="na">check_update</span><span class="o">=</span><span class="s">true</span>
+</pre></div>
+</div>
+<p>Each plugin, export module and application monitoring process (AMP) can
+have a section. Below an example for the CPU plugin:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="na">disable</span><span class="o">=</span><span class="s">False</span>
+<span class="na">user_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">user_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">user_critical</span><span class="o">=</span><span class="s">90</span>
+<span class="na">iowait_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">iowait_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">iowait_critical</span><span class="o">=</span><span class="s">90</span>
+<span class="na">system_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">system_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">system_critical</span><span class="o">=</span><span class="s">90</span>
+<span class="na">steal_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">steal_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">steal_critical</span><span class="o">=</span><span class="s">90</span>
+</pre></div>
+</div>
+<p>an InfluxDB export module:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[influxdb]</span>
+<span class="c1"># Configuration for the --export influxdb option</span>
+<span class="c1"># https://influxdb.com/</span>
+<span class="na">host</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">port</span><span class="o">=</span><span class="s">8086</span>
+<span class="na">user</span><span class="o">=</span><span class="s">root</span>
+<span class="na">password</span><span class="o">=</span><span class="s">root</span>
+<span class="na">db</span><span class="o">=</span><span class="s">glances</span>
+<span class="na">prefix</span><span class="o">=</span><span class="s">localhost</span>
+<span class="c1">#tags=foo:bar,spam:eggs</span>
+</pre></div>
+</div>
+<p>or a Nginx AMP:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[amp_nginx]</span>
+<span class="c1"># Nginx status page should be enable (https://easyengine.io/tutorials/nginx/status-page/)</span>
+<span class="na">enable</span><span class="o">=</span><span class="s">true</span>
+<span class="na">regex</span><span class="o">=</span><span class="s">\/usr\/sbin\/nginx</span>
+<span class="na">refresh</span><span class="o">=</span><span class="s">60</span>
+<span class="na">one_line</span><span class="o">=</span><span class="s">false</span>
+<span class="na">status_url</span><span class="o">=</span><span class="s">http://localhost/nginx_status</span>
+</pre></div>
+</div>
+<p>With Glances 3.0 or higher it is also possible to use dynamic configuration
+value using system command. For example, if you to set the prefix of an
+InfluxDB export to the current hostname, use:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[influxdb]</span>
+<span class="na">...</span>
+<span class="na">prefix</span><span class="o">=</span><span class="s">`hostname`</span>
+</pre></div>
+</div>
+<p>Or if you want to add the Operating System name as a tag:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[influxdb]</span>
+<span class="na">...</span>
+<span class="na">tags</span><span class="o">=</span><span class="s">system:`uname -a`</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>Glances logs all of its internal messages to a log file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> messages can been logged using the <code class="docutils literal notranslate"><span class="pre">-d</span></code> option on the command
+line.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">glances-USERNAME.log</span></code> file is under the temporary directory:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="65%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">*nix</span></code></td>
+<td>/tmp</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Windows</span></code></td>
+<td>%TEMP%</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>On Windows XP, <code class="docutils literal notranslate"><span class="pre">%TEMP%</span></code> is: <code class="docutils literal notranslate"><span class="pre">C:\Documents</span> <span class="pre">and</span> <span class="pre">Settings\&lt;USERNAME&gt;\Local</span> <span class="pre">Settings\Temp</span></code>.</li>
+<li>On Windows Vista and later: <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;USERNAME&gt;\AppData\Local\Temp</span></code>.</li>
+</ul>
+<p>If you want to use another system path or change the log message, you
+can use your own logger configuration. First of all, you have to create
+a <code class="docutils literal notranslate"><span class="pre">glances.json</span></code> file with, for example, the following content (JSON
+format):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;disable_existing_loggers&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;standard&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;%(asctime)s -- %(levelname)s -- %(message)s&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;short&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;%(levelname)s: %(message)s&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;free&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;%(message)s&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.handlers.RotatingFileHandler&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/tmp/glances.log&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;console&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;free&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;verbose&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;standard&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;requests&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;elasticsearch&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;elasticsearch.trace&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and start Glances using the following command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">LOG_CFG=&lt;path&gt;/glances.json glances</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Replace <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> by the folder where your <code class="docutils literal notranslate"><span class="pre">glances.json</span></code> file
+is hosted.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="aoa/index.html" class="btn btn-neutral float-right" title="Anatomy Of The Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cmds.html" class="btn btn-neutral" title="Command Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Nicolas Hennion.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.1.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

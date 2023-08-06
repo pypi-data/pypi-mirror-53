@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Processes List &mdash; Glances 3.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Monitored Processes List" href="monitor.html" />
+    <link rel="prev" title="Sensors" href="sensors.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Glances
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmds.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Anatomy Of The Application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="header.html">Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quicklook.html">Quick Look</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu.html">CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="load.html">Load</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports.html">Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk.html">Disk I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fs.html">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="folders.html">Folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="irq.html">IRQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Processes List</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#columns-display">Columns display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-filtering">Process filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extended-info">Extended info</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Monitored Processes List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amps.html">Applications Monitoring Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gw/index.html">Gateway To Other Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">F.A.Q</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Glances</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Anatomy Of The Application</a> &raquo;</li>
+        
+      <li>Processes List</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="processes-list">
+<span id="ps"></span><h1>Processes List<a class="headerlink" href="#processes-list" title="Permalink to this headline">¶</a></h1>
+<p>Compact view:</p>
+<img alt="../_images/processlist.png" src="../_images/processlist.png" />
+<p>Full view:</p>
+<img alt="../_images/processlist-wide.png" src="../_images/processlist-wide.png" />
+<p>Filtered view:</p>
+<img alt="../_images/processlist-filter.png" src="../_images/processlist-filter.png" />
+<p>The process view consists of 3 parts:</p>
+<ul class="simple">
+<li>Processes summary</li>
+<li>Monitored processes list (optional)</li>
+<li>Processes list</li>
+</ul>
+<p>The processes summary line displays:</p>
+<ul class="simple">
+<li>Tasks number (total number of processes)</li>
+<li>Threads number</li>
+<li>Running tasks number</li>
+<li>Sleeping tasks number</li>
+<li>Other tasks number (not running or sleeping)</li>
+<li>Sort key</li>
+</ul>
+<p>By default, or if you hit the <code class="docutils literal notranslate"><span class="pre">a</span></code> key, the processes list is
+automatically sorted by:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">CPU</span></code>: if there is no alert (default behavior)</li>
+<li><code class="docutils literal notranslate"><span class="pre">CPU</span></code>: if a CPU or LOAD alert is detected</li>
+<li><code class="docutils literal notranslate"><span class="pre">MEM</span></code>: if a memory alert is detected</li>
+<li><code class="docutils literal notranslate"><span class="pre">DISK</span> <span class="pre">I/O</span></code>: if a CPU iowait alert is detected</li>
+</ul>
+<p>The number of processes in the list is adapted to the screen size.</p>
+<div class="section" id="columns-display">
+<h2>Columns display<a class="headerlink" href="#columns-display" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">CPU%</span></code></td>
+<td><p class="first">% of CPU used by the process</p>
+<p class="last">If Irix/Solaris mode is off, the value is
+divided by logical core number</p>
+</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">MEM%</span></code></td>
+<td>% of MEM used by the process</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">VIRT</span></code></td>
+<td><p class="first">Virtual Memory Size</p>
+<p>The total amount of virtual memory used by the
+process.</p>
+<p class="last">It includes all code, data and shared
+libraries plus pages that have been swapped out
+and pages that have been mapped but not used.</p>
+</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">RES</span></code></td>
+<td><p class="first">Resident Memory Size</p>
+<p class="last">The non-swapped physical memory a process is
+using (what’s currently in the physical memory).</p>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">PID</span></code></td>
+<td>Process ID</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">USER</span></code></td>
+<td>User ID</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">THR</span></code></td>
+<td>Threads number of the process</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">TIME+</span></code></td>
+<td>Cumulative CPU time used by the process</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">NI</span></code></td>
+<td>Nice level of the process</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">S</span></code></td>
+<td><p class="first">Process status</p>
+<p>The status of the process:</p>
+<ul class="last simple">
+<li><code class="docutils literal notranslate"><span class="pre">R</span></code>: running or runnable (on run queue)</li>
+<li><code class="docutils literal notranslate"><span class="pre">S</span></code>: interruptible sleep (waiting for an event)</li>
+<li><code class="docutils literal notranslate"><span class="pre">D</span></code>: uninterruptible sleep (usually I/O)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Z</span></code>: defunct (“zombie”) process</li>
+<li><code class="docutils literal notranslate"><span class="pre">T</span></code>: traced/stopped by job control signal</li>
+<li><code class="docutils literal notranslate"><span class="pre">X</span></code>: dead (should never be seen)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">R/s</span></code></td>
+<td>Per process I/O read rate in B/s</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">W/s</span></code></td>
+<td>Per process I/O write rate in B/s</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">COMMAND</span></code></td>
+<td><p class="first">Process command line or command name</p>
+<p class="last">User can switch to the process name by
+pressing on the <code class="docutils literal notranslate"><span class="pre">'/'</span></code> key</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="process-filtering">
+<h2>Process filtering<a class="headerlink" href="#process-filtering" title="Permalink to this headline">¶</a></h2>
+<p>It’s possible to filter the processes list using the <code class="docutils literal notranslate"><span class="pre">ENTER</span></code> key.</p>
+<p>Filter syntax is the following (examples):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">python</span></code>: Filter processes name or command line starting with
+<em>python</em> (regexp)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.*python.*</span></code>: Filter processes name or command line containing
+<em>python</em> (regexp)</li>
+<li><code class="docutils literal notranslate"><span class="pre">username:nicolargo</span></code>: Processes of nicolargo user (key:regexp)</li>
+<li><code class="docutils literal notranslate"><span class="pre">cmdline:\/usr\/bin.*</span></code>: Processes starting by <em>/usr/bin</em></li>
+</ul>
+</div>
+<div class="section" id="extended-info">
+<h2>Extended info<a class="headerlink" href="#extended-info" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/processlist-top.png" src="../_images/processlist-top.png" />
+<p>In standalone mode, additional information are provided for the top
+process:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">CPU</span> <span class="pre">affinity</span></code></td>
+<td>Number of cores used by the process</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">info</span></code></td>
+<td><p class="first">Extended memory information about the process</p>
+<p class="last">For example, on Linux: swap, shared, text,
+lib, data and dirty</p>
+</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Open</span></code></td>
+<td>The number of threads, files and network
+sessions (TCP and UDP) used by the process</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">nice</span></code></td>
+<td>The process I/O niceness (priority)</td>
+</tr>
+</tbody>
+</table>
+<p>The extended stats feature can be enabled using the
+<code class="docutils literal notranslate"><span class="pre">--enable-process-extended</span></code> option (command line) or the <code class="docutils literal notranslate"><span class="pre">e</span></code> key
+(curses interface).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Limit for CPU and MEM percent values can be overwritten in the
+configuration file under the <code class="docutils literal notranslate"><span class="pre">[processlist]</span></code> section. It is also
+possible to define limit for Nice values (comma separated list).
+For example: nice_warning=-20,-19,-18</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="monitor.html" class="btn btn-neutral float-right" title="Monitored Processes List" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sensors.html" class="btn btn-neutral" title="Sensors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Nicolas Hennion.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,934 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>glances &mdash; Glances 3.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Glances
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmds.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aoa/index.html">Anatomy Of The Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gw/index.html">Gateway To Other Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">F.A.Q</a></li>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Glances</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>glances</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="glances">
+<h1>glances<a class="headerlink" href="#glances" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>glances</strong> [OPTIONS]</p>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><strong>glances</strong> is a cross-platform curses-based monitoring tool which aims
+to present a maximum of information in a minimum of space, ideally to
+fit in a classical 80x24 terminal or higher to have additional
+information. It can adapt dynamically the displayed information
+depending on the terminal size. It can also work in client/server mode.
+Remote monitoring could be done via terminal or web interface.</p>
+<p><strong>glances</strong> is written in Python and uses the <em>psutil</em> library to get
+information from your system.</p>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="command-reference">
+<span id="cmds"></span><h1>Command Reference<a class="headerlink" href="#command-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="command-line-options">
+<h2>Command-Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cmdoption-h">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-v">
+<code class="descname">-V</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>show program’s version number and exit</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-d">
+<code class="descname">-d</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--debug</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>enable debug mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-c">
+<code class="descname">-C</code><code class="descclassname"> CONF_FILE</code><code class="descclassname">, </code><code class="descname">--config</code><code class="descclassname"> CONF_FILE</code><a class="headerlink" href="#cmdoption-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>path to the configuration file</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-modules-list">
+<code class="descname">--modules-list</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-modules-list" title="Permalink to this definition">¶</a></dt>
+<dd><p>display modules (plugins &amp; exports) list and exit</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-plugin">
+<code class="descname">--disable-plugin</code><code class="descclassname"> PLUGIN</code><a class="headerlink" href="#cmdoption-disable-plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable PLUGIN (comma separed list)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-enable-plugin">
+<code class="descname">--enable-plugin</code><code class="descclassname"> PLUGIN</code><a class="headerlink" href="#cmdoption-enable-plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>enable PLUGIN (comma separed list)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-stdout">
+<code class="descname">--stdout</code><code class="descclassname"> PLUGINS_STATS</code><a class="headerlink" href="#cmdoption-stdout" title="Permalink to this definition">¶</a></dt>
+<dd><p>display stats to stdout (comma separated list of plugins/plugins.attribute)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-export">
+<code class="descname">--export</code><code class="descclassname"> EXPORT</code><a class="headerlink" href="#cmdoption-export" title="Permalink to this definition">¶</a></dt>
+<dd><p>enable EXPORT module (comma separed list)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-export-csv-file">
+<code class="descname">--export-csv-file</code><code class="descclassname"> EXPORT_CSV_FILE</code><a class="headerlink" href="#cmdoption-export-csv-file" title="Permalink to this definition">¶</a></dt>
+<dd><p>file path for CSV exporter</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-export-json-file">
+<code class="descname">--export-json-file</code><code class="descclassname"> EXPORT_JSON_FILE</code><a class="headerlink" href="#cmdoption-export-json-file" title="Permalink to this definition">¶</a></dt>
+<dd><p>file path for JSON exporter</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-process">
+<code class="descname">--disable-process</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-disable-process" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable process module (reduce Glances CPU consumption)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-webui">
+<code class="descname">--disable-webui</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-disable-webui" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable the Web UI (only the RESTful API will respond)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-light">
+<code class="descname">--light</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--enable-light</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-light" title="Permalink to this definition">¶</a></dt>
+<dd><p>light mode for Curses UI (disable all but top menu)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-0">
+<code class="descname">-0</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--disable-irix</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-0" title="Permalink to this definition">¶</a></dt>
+<dd><p>task’s CPU usage will be divided by the total number of CPUs</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-1">
+<code class="descname">-1</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--percpu</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-1" title="Permalink to this definition">¶</a></dt>
+<dd><p>start Glances in per CPU mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-2">
+<code class="descname">-2</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--disable-left-sidebar</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-2" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable network, disk I/O, FS and sensors modules</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-3">
+<code class="descname">-3</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--disable-quicklook</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-3" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable quick look module</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-4">
+<code class="descname">-4</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--full-quicklook</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-4" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable all but quick look and load</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-5">
+<code class="descname">-5</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--disable-top</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-5" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable top menu (QuickLook, CPU, MEM, SWAP and LOAD)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-6">
+<code class="descname">-6</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--meangpu</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-6" title="Permalink to this definition">¶</a></dt>
+<dd><p>start Glances in mean GPU mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-enable-history">
+<code class="descname">--enable-history</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-enable-history" title="Permalink to this definition">¶</a></dt>
+<dd><p>enable the history mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-bold">
+<code class="descname">--disable-bold</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-disable-bold" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable bold mode in the terminal</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-bg">
+<code class="descname">--disable-bg</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-disable-bg" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable background colors in the terminal</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-enable-process-extended">
+<code class="descname">--enable-process-extended</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-enable-process-extended" title="Permalink to this definition">¶</a></dt>
+<dd><p>enable extended stats on top process</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-client">
+<code class="descname">-c</code><code class="descclassname"> CLIENT</code><code class="descclassname">, </code><code class="descname">--client</code><code class="descclassname"> CLIENT</code><a class="headerlink" href="#cmdoption-client" title="Permalink to this definition">¶</a></dt>
+<dd><p>connect to a Glances server by IPv4/IPv6 address, hostname or hostname:port</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-s">
+<code class="descname">-s</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--server</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-s" title="Permalink to this definition">¶</a></dt>
+<dd><p>run Glances in server mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-browser">
+<code class="descname">--browser</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-browser" title="Permalink to this definition">¶</a></dt>
+<dd><p>start the client browser (list of servers)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-autodiscover">
+<code class="descname">--disable-autodiscover</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-disable-autodiscover" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable autodiscover feature</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-p">
+<code class="descname">-p</code><code class="descclassname"> PORT</code><code class="descclassname">, </code><code class="descname">--port</code><code class="descclassname"> PORT</code><a class="headerlink" href="#cmdoption-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>define the client/server TCP port [default: 61209]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-b">
+<code class="descname">-B</code><code class="descclassname"> BIND_ADDRESS</code><code class="descclassname">, </code><code class="descname">--bind</code><code class="descclassname"> BIND_ADDRESS</code><a class="headerlink" href="#cmdoption-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>bind server to the given IPv4/IPv6 address or hostname</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-username">
+<code class="descname">--username</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-username" title="Permalink to this definition">¶</a></dt>
+<dd><p>define a client/server username</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-password">
+<code class="descname">--password</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-password" title="Permalink to this definition">¶</a></dt>
+<dd><p>define a client/server password</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-snmp-community">
+<code class="descname">--snmp-community</code><code class="descclassname"> SNMP_COMMUNITY</code><a class="headerlink" href="#cmdoption-snmp-community" title="Permalink to this definition">¶</a></dt>
+<dd><p>SNMP community</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-snmp-port">
+<code class="descname">--snmp-port</code><code class="descclassname"> SNMP_PORT</code><a class="headerlink" href="#cmdoption-snmp-port" title="Permalink to this definition">¶</a></dt>
+<dd><p>SNMP port</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-snmp-version">
+<code class="descname">--snmp-version</code><code class="descclassname"> SNMP_VERSION</code><a class="headerlink" href="#cmdoption-snmp-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>SNMP version (1, 2c or 3)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-snmp-user">
+<code class="descname">--snmp-user</code><code class="descclassname"> SNMP_USER</code><a class="headerlink" href="#cmdoption-snmp-user" title="Permalink to this definition">¶</a></dt>
+<dd><p>SNMP username (only for SNMPv3)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-snmp-auth">
+<code class="descname">--snmp-auth</code><code class="descclassname"> SNMP_AUTH</code><a class="headerlink" href="#cmdoption-snmp-auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>SNMP authentication key (only for SNMPv3)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-snmp-force">
+<code class="descname">--snmp-force</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-snmp-force" title="Permalink to this definition">¶</a></dt>
+<dd><p>force SNMP mode</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-t">
+<code class="descname">-t</code><code class="descclassname"> TIME</code><code class="descclassname">, </code><code class="descname">--time</code><code class="descclassname"> TIME</code><a class="headerlink" href="#cmdoption-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>set refresh time in seconds [default: 3 sec]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-w">
+<code class="descname">-w</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--webserver</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-w" title="Permalink to this definition">¶</a></dt>
+<dd><p>run Glances in web server mode (bottle lib needed)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-cached-time">
+<code class="descname">--cached-time</code><code class="descclassname"> CACHED_TIME</code><a class="headerlink" href="#cmdoption-cached-time" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the server cache time [default: 1 sec]</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-arg-open-web-browser">
+<code class="descname">open-web-browser</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-arg-open-web-browser" title="Permalink to this definition">¶</a></dt>
+<dd><p>try to open the Web UI in the default Web browser</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-q">
+<code class="descname">-q</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--quiet</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-q" title="Permalink to this definition">¶</a></dt>
+<dd><p>do not display the curses interface</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-f">
+<code class="descname">-f</code><code class="descclassname"> PROCESS_FILTER</code><code class="descclassname">, </code><code class="descname">--process-filter</code><code class="descclassname"> PROCESS_FILTER</code><a class="headerlink" href="#cmdoption-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the process filter pattern (regular expression)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-process-short-name">
+<code class="descname">--process-short-name</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-process-short-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>force short name for processes name</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-hide-kernel-threads">
+<code class="descname">--hide-kernel-threads</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-hide-kernel-threads" title="Permalink to this definition">¶</a></dt>
+<dd><p>hide kernel threads in process list (not available on Windows)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-byte">
+<code class="descname">-b</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--byte</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-byte" title="Permalink to this definition">¶</a></dt>
+<dd><p>display network rate in byte per second</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-diskio-show-ramfs">
+<code class="descname">--diskio-show-ramfs</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-diskio-show-ramfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>show RAM FS in the DiskIO plugin</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-diskio-iops">
+<code class="descname">--diskio-iops</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-diskio-iops" title="Permalink to this definition">¶</a></dt>
+<dd><p>show I/O per second in the DiskIO plugin</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-fahrenheit">
+<code class="descname">--fahrenheit</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-fahrenheit" title="Permalink to this definition">¶</a></dt>
+<dd><p>display temperature in Fahrenheit (default is Celsius)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-fs-free-space">
+<code class="descname">--fs-free-space</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-fs-free-space" title="Permalink to this definition">¶</a></dt>
+<dd><p>display FS free space instead of used</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-theme-white">
+<code class="descname">--theme-white</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-theme-white" title="Permalink to this definition">¶</a></dt>
+<dd><p>optimize display colors for white background</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-disable-check-update">
+<code class="descname">--disable-check-update</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-disable-check-update" title="Permalink to this definition">¶</a></dt>
+<dd><p>disable online Glances version ckeck</p>
+</dd></dl>
+
+</div>
+<div class="section" id="interactive-commands">
+<h2>Interactive Commands<a class="headerlink" href="#interactive-commands" title="Permalink to this headline">¶</a></h2>
+<p>The following commands (key pressed) are supported while in Glances:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ENTER</span></code></dt>
+<dd><p class="first">Set the process filter</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On macOS please use <code class="docutils literal notranslate"><span class="pre">CTRL-H</span></code> to delete filter.</p>
+</div>
+<p>Filter is a regular expression pattern:</p>
+<ul class="last simple">
+<li><code class="docutils literal notranslate"><span class="pre">gnome</span></code>: matches all processes starting with the <code class="docutils literal notranslate"><span class="pre">gnome</span></code>
+string</li>
+<li><code class="docutils literal notranslate"><span class="pre">.*gnome.*</span></code>: matches all processes containing the <code class="docutils literal notranslate"><span class="pre">gnome</span></code>
+string</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">a</span></code></dt>
+<dd><p class="first">Sort process list automatically</p>
+<ul class="last simple">
+<li>If CPU <code class="docutils literal notranslate"><span class="pre">&gt;70%</span></code>, sort processes by CPU usage</li>
+<li>If MEM <code class="docutils literal notranslate"><span class="pre">&gt;70%</span></code>, sort processes by MEM usage</li>
+<li>If CPU iowait <code class="docutils literal notranslate"><span class="pre">&gt;60%</span></code>, sort processes by I/O read and write</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">A</span></code></dt>
+<dd>Enable/disable Application Monitoring Process</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">b</span></code></dt>
+<dd>Switch between bit/s or Byte/s for network I/O</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">B</span></code></dt>
+<dd>View disk I/O counters per second</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">c</span></code></dt>
+<dd>Sort processes by CPU usage</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">d</span></code></dt>
+<dd>Show/hide disk I/O stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">D</span></code></dt>
+<dd>Enable/disable Docker stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">e</span></code></dt>
+<dd>Enable/disable top extended stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">E</span></code></dt>
+<dd>Erase current process filter</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">f</span></code></dt>
+<dd>Show/hide file system and folder monitoring stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">F</span></code></dt>
+<dd>Switch between file system used and free space</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">g</span></code></dt>
+<dd>Generate graphs for current history</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">h</span></code></dt>
+<dd>Show/hide the help screen</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">i</span></code></dt>
+<dd>Sort processes by I/O rate</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">I</span></code></dt>
+<dd>Show/hide IP module</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">k</span></code></dt>
+<dd>Show/hide TCP connections</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">l</span></code></dt>
+<dd>Show/hide log messages</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">m</span></code></dt>
+<dd>Sort processes by MEM usage</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">M</span></code></dt>
+<dd>Reset processes summary min/max</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">n</span></code></dt>
+<dd>Show/hide network stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">N</span></code></dt>
+<dd>Show/hide current time</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">p</span></code></dt>
+<dd>Sort processes by name</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">q|ESC|CTRL-C</span></code></dt>
+<dd>Quit the current Glances session</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Q</span></code></dt>
+<dd>Show/hide IRQ module</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">r</span></code></dt>
+<dd>Reset history</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">R</span></code></dt>
+<dd>Show/hide RAID plugin</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">s</span></code></dt>
+<dd>Show/hide sensors stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">t</span></code></dt>
+<dd>Sort process by CPU times (TIME+)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">T</span></code></dt>
+<dd>View network I/O as combination</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">u</span></code></dt>
+<dd>Sort processes by USER</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">U</span></code></dt>
+<dd>View cumulative network I/O</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">w</span></code></dt>
+<dd>Delete finished warning log messages</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">W</span></code></dt>
+<dd>Show/hide Wifi module</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">x</span></code></dt>
+<dd>Delete finished warning and critical log messages</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">z</span></code></dt>
+<dd>Show/hide processes stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">0</span></code></dt>
+<dd><p class="first">Enable/disable Irix/Solaris mode</p>
+<p class="last">Task’s CPU usage will be divided by the total number of CPUs</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">1</span></code></dt>
+<dd>Switch between global CPU and per-CPU stats</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">2</span></code></dt>
+<dd>Enable/disable left sidebar</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">3</span></code></dt>
+<dd>Enable/disable the quick look module</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">4</span></code></dt>
+<dd>Enable/disable all but quick look and load module</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">5</span></code></dt>
+<dd>Enable/disable top menu (QuickLook, CPU, MEM, SWAP and LOAD)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">6</span></code></dt>
+<dd>Enable/disable mean GPU mode</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/</span></code></dt>
+<dd>Switch between process command line or command name</dd>
+</dl>
+<p>In the Glances client browser (accessible through the <code class="docutils literal notranslate"><span class="pre">--browser</span></code>
+command line argument):</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ENTER</span></code></dt>
+<dd>Run the selected server</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UP</span></code></dt>
+<dd>Up in the servers list</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DOWN</span></code></dt>
+<dd>Down in the servers list</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">q|ESC</span></code></dt>
+<dd>Quit Glances</dd>
+</dl>
+</div>
+<div class="section" id="configuration">
+<h2>CONFIGURATION<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="config">
+<span id="id1"></span><h1>Configuration<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h1>
+<p>No configuration file is mandatory to use Glances.</p>
+<p>Furthermore a configuration file is needed to access more settings.</p>
+<div class="section" id="location">
+<h2>Location<a class="headerlink" href="#location" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A template is available in the <code class="docutils literal notranslate"><span class="pre">/usr{,/local}/share/doc/glances</span></code>
+(Unix-like) directory or directly on <a class="reference external" href="https://raw.githubusercontent.com/nicolargo/glances/master/conf/glances.conf">GitHub</a>.</p>
+</div>
+<p>You can put your own <code class="docutils literal notranslate"><span class="pre">glances.conf</span></code> file in the following locations:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Linux</span></code>, <code class="docutils literal notranslate"><span class="pre">SunOS</span></code></td>
+<td>~/.config/glances, /etc/glances</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">*BSD</span></code></td>
+<td>~/.config/glances, /usr/local/etc/glances</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">macOS</span></code></td>
+<td>~/Library/Application Support/glances, /usr/local/etc/glances</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Windows</span></code></td>
+<td>%APPDATA%\glances</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>On Windows XP, <code class="docutils literal notranslate"><span class="pre">%APPDATA%</span></code> is: <code class="docutils literal notranslate"><span class="pre">C:\Documents</span> <span class="pre">and</span> <span class="pre">Settings\&lt;USERNAME&gt;\Application</span> <span class="pre">Data</span></code>.</li>
+<li>On Windows Vista and later: <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;USERNAME&gt;\AppData\Roaming</span></code>.</li>
+</ul>
+<p>User-specific options override system-wide options and options given on
+the command line override either.</p>
+</div>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>Glances reads configuration files in the <em>ini</em> syntax.</p>
+<p>A first section (called global) is available:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[global]</span>
+<span class="c1"># Does Glances should check if a newer version is available on PyPI?</span>
+<span class="na">check_update</span><span class="o">=</span><span class="s">true</span>
+</pre></div>
+</div>
+<p>Each plugin, export module and application monitoring process (AMP) can
+have a section. Below an example for the CPU plugin:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="na">disable</span><span class="o">=</span><span class="s">False</span>
+<span class="na">user_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">user_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">user_critical</span><span class="o">=</span><span class="s">90</span>
+<span class="na">iowait_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">iowait_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">iowait_critical</span><span class="o">=</span><span class="s">90</span>
+<span class="na">system_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">system_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">system_critical</span><span class="o">=</span><span class="s">90</span>
+<span class="na">steal_careful</span><span class="o">=</span><span class="s">50</span>
+<span class="na">steal_warning</span><span class="o">=</span><span class="s">70</span>
+<span class="na">steal_critical</span><span class="o">=</span><span class="s">90</span>
+</pre></div>
+</div>
+<p>an InfluxDB export module:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[influxdb]</span>
+<span class="c1"># Configuration for the --export influxdb option</span>
+<span class="c1"># https://influxdb.com/</span>
+<span class="na">host</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">port</span><span class="o">=</span><span class="s">8086</span>
+<span class="na">user</span><span class="o">=</span><span class="s">root</span>
+<span class="na">password</span><span class="o">=</span><span class="s">root</span>
+<span class="na">db</span><span class="o">=</span><span class="s">glances</span>
+<span class="na">prefix</span><span class="o">=</span><span class="s">localhost</span>
+<span class="c1">#tags=foo:bar,spam:eggs</span>
+</pre></div>
+</div>
+<p>or a Nginx AMP:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[amp_nginx]</span>
+<span class="c1"># Nginx status page should be enable (https://easyengine.io/tutorials/nginx/status-page/)</span>
+<span class="na">enable</span><span class="o">=</span><span class="s">true</span>
+<span class="na">regex</span><span class="o">=</span><span class="s">\/usr\/sbin\/nginx</span>
+<span class="na">refresh</span><span class="o">=</span><span class="s">60</span>
+<span class="na">one_line</span><span class="o">=</span><span class="s">false</span>
+<span class="na">status_url</span><span class="o">=</span><span class="s">http://localhost/nginx_status</span>
+</pre></div>
+</div>
+<p>With Glances 3.0 or higher it is also possible to use dynamic configuration
+value using system command. For example, if you to set the prefix of an
+InfluxDB export to the current hostname, use:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[influxdb]</span>
+<span class="na">...</span>
+<span class="na">prefix</span><span class="o">=</span><span class="s">`hostname`</span>
+</pre></div>
+</div>
+<p>Or if you want to add the Operating System name as a tag:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[influxdb]</span>
+<span class="na">...</span>
+<span class="na">tags</span><span class="o">=</span><span class="s">system:`uname -a`</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>Glances logs all of its internal messages to a log file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> messages can been logged using the <code class="docutils literal notranslate"><span class="pre">-d</span></code> option on the command
+line.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">glances-USERNAME.log</span></code> file is under the temporary directory:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="65%" />
+<col width="35%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">*nix</span></code></td>
+<td>/tmp</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Windows</span></code></td>
+<td>%TEMP%</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>On Windows XP, <code class="docutils literal notranslate"><span class="pre">%TEMP%</span></code> is: <code class="docutils literal notranslate"><span class="pre">C:\Documents</span> <span class="pre">and</span> <span class="pre">Settings\&lt;USERNAME&gt;\Local</span> <span class="pre">Settings\Temp</span></code>.</li>
+<li>On Windows Vista and later: <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;USERNAME&gt;\AppData\Local\Temp</span></code>.</li>
+</ul>
+<p>If you want to use another system path or change the log message, you
+can use your own logger configuration. First of all, you have to create
+a <code class="docutils literal notranslate"><span class="pre">glances.json</span></code> file with, for example, the following content (JSON
+format):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;disable_existing_loggers&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;standard&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;%(asctime)s -- %(levelname)s -- %(message)s&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;short&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;%(levelname)s: %(message)s&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;free&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;%(message)s&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.handlers.RotatingFileHandler&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;/var/tmp/glances.log&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;console&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;free&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;verbose&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;standard&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;requests&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;elasticsearch&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;elasticsearch.trace&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">],</span>
+            <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;ERROR&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and start Glances using the following command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">LOG_CFG=&lt;path&gt;/glances.json glances</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Replace <code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> by the folder where your <code class="docutils literal notranslate"><span class="pre">glances.json</span></code> file
+is hosted.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>EXAMPLES<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Monitor local machine (standalone mode):</p>
+<blockquote>
+<div>$ glances</div></blockquote>
+<p>Note: The standalone mode is not available on Microsoft Windows (c).
+Glances will start in Web server mode on this operating system.</p>
+<p>Monitor local machine with the web interface (Web UI):</p>
+<blockquote>
+<div>$ glances -w</div></blockquote>
+<p>Monitor local machine and export stats to a CSV file:</p>
+<blockquote>
+<div>$ glances –export csv –export-csv-file /tmp/glances.csv</div></blockquote>
+<p>Monitor local machine and export stats to a InfluxDB server with 5s
+refresh time (also possible to export to OpenTSDB, Cassandra, Statsd,
+ElasticSearch, RabbitMQ and Riemann):</p>
+<blockquote>
+<div>$ glances -t 5 –export influxdb</div></blockquote>
+<p>It is also possible to export stats to multiple endpoints:</p>
+<blockquote>
+<div>$ glances -t 5 –export influxdb,statsd,csv</div></blockquote>
+<p>Start a Glances server (server mode):</p>
+<blockquote>
+<div>$ glances -s</div></blockquote>
+<p>Connect Glances to a Glances server (client mode):</p>
+<blockquote>
+<div>$ glances -c &lt;ip_server&gt;</div></blockquote>
+<p>Connect to a Glances server and export stats to a StatsD server:</p>
+<blockquote>
+<div>$ glances -c &lt;ip_server&gt; –export statsd</div></blockquote>
+<p>Start the client browser (browser mode):</p>
+<blockquote>
+<div>$ glances –browser</div></blockquote>
+</div>
+<div class="section" id="author">
+<h2>AUTHOR<a class="headerlink" href="#author" title="Permalink to this headline">¶</a></h2>
+<p>Nicolas Hennion aka Nicolargo &lt;<a class="reference external" href="mailto:contact&#37;&#52;&#48;nicolargo&#46;com">contact<span>&#64;</span>nicolargo<span>&#46;</span>com</a>&gt;</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Nicolas Hennion.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.1.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

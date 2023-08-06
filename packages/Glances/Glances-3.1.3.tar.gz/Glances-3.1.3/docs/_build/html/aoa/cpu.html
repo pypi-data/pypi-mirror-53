@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CPU &mdash; Glances 3.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GPU" href="gpu.html" />
+    <link rel="prev" title="Quick Look" href="quicklook.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Glances
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmds.html">Command Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Anatomy Of The Application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="header.html">Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quicklook.html">Quick Look</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="load.html">Load</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ports.html">Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk.html">Disk I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fs.html">File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="folders.html">Folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="irq.html">IRQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ps.html">Processes List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Monitored Processes List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amps.html">Applications Monitoring Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gw/index.html">Gateway To Other Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docker.html">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">F.A.Q</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Glances</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Anatomy Of The Application</a> &raquo;</li>
+        
+      <li>CPU</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cpu">
+<span id="id1"></span><h1>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h1>
+<p>The CPU stats are shown as a percentage or values and for the configured
+refresh time.</p>
+<p>The total CPU usage is displayed on the first line.</p>
+<img alt="../_images/cpu.png" src="../_images/cpu.png" />
+<p>If enough horizontal space is available, extended CPU information are
+displayed.</p>
+<img alt="../_images/cpu-wide.png" src="../_images/cpu-wide.png" />
+<p>A character is also displayed just after the CPU header and shows the
+trend value:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Trend</th>
+<th class="head">Status</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">-</span></code></td>
+<td>CPU value is equal to the mean of the six latests refreshes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">\</span></code></td>
+<td>CPU value is lower than the mean of the six latests refreshes</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">/</span></code></td>
+<td>CPU value is higher than the mean of the six latests refreshes</td>
+</tr>
+</tbody>
+</table>
+<p>CPU stats description:</p>
+<ul class="simple">
+<li><strong>user</strong>: percent time spent in user space. User CPU time is the time
+spent on the processor running your program’s code (or code in
+libraries).</li>
+<li><strong>system</strong>: percent time spent in kernel space. System CPU time is the
+time spent running code in the Operating System kernel.</li>
+<li><strong>idle</strong>: percent of CPU used by any program. Every program or task
+that runs on a computer system occupies a certain amount of processing
+time on the CPU. If the CPU has completed all tasks it is idle.</li>
+<li><strong>nice</strong> <em>(*nix)</em>: percent time occupied by user level processes with
+a positive nice value. The time the CPU has spent running users’
+processes that have been <em>niced</em>.</li>
+<li><strong>irq</strong> <em>(Linux, *BSD)</em>: percent time spent servicing/handling
+hardware/software interrupts. Time servicing interrupts (hardware +
+software).</li>
+<li><strong>iowait</strong> <em>(Linux)</em>: percent time spent by the CPU waiting for I/O
+operations to complete.</li>
+<li><strong>steal</strong> <em>(Linux)</em>: percentage of time a virtual CPU waits for a real
+CPU while the hypervisor is servicing another virtual processor.</li>
+<li><strong>ctx_sw</strong>: number of context switches (voluntary + involuntary) per
+second. A context switch is a procedure that a computer’s CPU (central
+processing unit) follows to change from one task (or process) to
+another while ensuring that the tasks do not conflict.</li>
+<li><strong>inter</strong>: number of interrupts per second.</li>
+<li><strong>sw_inter</strong>: number of software interrupts per second. Always set to
+0 on Windows and SunOS.</li>
+<li><strong>syscal</strong>: number of system calls per second. Do not displayed on
+Linux (always 0).</li>
+</ul>
+<p>To switch to per-CPU stats, just hit the <code class="docutils literal notranslate"><span class="pre">1</span></code> key:</p>
+<img alt="../_images/per-cpu.png" src="../_images/per-cpu.png" />
+<p>By default, <code class="docutils literal notranslate"><span class="pre">steal</span></code> CPU time alerts aren’t logged. If you want that,
+just add to the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[cpu]</span>
+<span class="na">steal_log</span><span class="o">=</span><span class="s">True</span>
+</pre></div>
+</div>
+<p>Legend:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="59%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">CPU (user/system)</th>
+<th class="head">Status</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">&lt;50%</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">OK</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">&gt;50%</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">CAREFUL</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">&gt;70%</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">WARNING</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">&gt;90%</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Limit values can be overwritten in the configuration file under
+the <code class="docutils literal notranslate"><span class="pre">[cpu]</span></code> and/or <code class="docutils literal notranslate"><span class="pre">[percpu]</span></code> sections.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gpu.html" class="btn btn-neutral float-right" title="GPU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quicklook.html" class="btn btn-neutral" title="Quick Look" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Nicolas Hennion.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
