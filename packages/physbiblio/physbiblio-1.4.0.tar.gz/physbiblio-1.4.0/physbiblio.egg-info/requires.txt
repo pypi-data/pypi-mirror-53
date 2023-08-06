@@ -1,0 +1,23 @@
+ads
+appdirs
+argparse
+bibtexparser>=1.1.0
+dictdiffer
+feedparser
+outdated
+pylatexenc
+pymarc
+pyoai
+pyparsing>=2.4.0
+pyside2>=5.12.2
+requests
+six
+
+[:python_version < "3"]
+faulthandler
+matplotlib<3,>2.2.0
+mock
+unittest2
+
+[:python_version > "3"]
+matplotlib>3.0.0
