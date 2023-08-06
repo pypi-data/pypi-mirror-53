@@ -1,0 +1,20 @@
+name = "PqrUploadModule"
+import sys
+sys.path.insert(0,".")
+
+from . import scan
+from . import action_notes_counterparts
+from . import api_functions
+from . import attachment_counterparts
+from . import attachments
+from . import contacts_update
+from . import contacts
+from . import incidents
+from . import notes
+from . import scanning
+from . import authorizations 
+from . import start_settings
+from . import tickets_incidents_counterparts
+from . import tickets
+
+from scanning import Scan
