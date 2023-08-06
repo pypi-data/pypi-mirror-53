@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: haskpy
+Version: 0.0.2
+Summary: Functions and classes inspired by Haskell and Hask category
+Home-page: https://github.com/jluttine/HaskPy
+Author: Jaakko Luttinen
+Author-email: jaakko.luttinen@iki.fi
+License: UNKNOWN
+Description: # HaskPy - Haskell types and functions in Python
+        
+        Hask is the category of types and functions in Haskell. This package provides
+        classes and functions inspired by Hask.
+        
+        **This is currently in planning phase, consider this a proof of concept.**
+        
+        Quite minimal example with two-layers of functor structure:
+        
+        ```python
+        >>> from haskpy import map, List, Just, Nothing
+        >>> map(map(lambda x: x**2))(List(Just(1), Nothing, Just(3), Just(4), Nothing))
+        List(Just(1), Nothing, Just(9), Just(16), Nothing)
+        ```
+        
+Keywords: functional programming,category theory,Hask category,Haskell,functor,monad
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries
+Provides-Extra: dev
