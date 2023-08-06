@@ -1,0 +1,66 @@
+{% extends "django_registration/registration_base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+{% block content %}
+
+<div class="no-sidebar container" id="splash">
+  <div class="flex">
+    <div class="block_log">
+        <figure class="img_log">
+            <img src="{% static 'coopstarter/img/mentor.png' %}" alt="Create your account">
+        </figure>
+        
+      <form method='post' action=''>
+          {% csrf_token %}
+          <sib-form-label-text>
+              <label>
+                  <div>
+                      {{ form.username.label_tag }}
+                  </div>
+              </label>
+              {{ form.username }}
+          </sib-form-label-text>
+          
+          <div class="helptext">
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          </div>
+          
+          <sib-form-label-text>
+              <label>
+                  <div>
+                      {{ form.email.label_tag }}
+                  </div>
+              </label>
+              {{ form.email }}
+          </sib-form-label-text>
+
+          <sib-form-label-text>
+              <label>
+                  <div>
+                      {{ form.password1.label_tag }}
+                  </div>
+              </label>
+              {{ form.password1 }}
+          </sib-form-label-text>
+
+          <sib-form-label-text>
+              <label>
+                  <div>
+                      {{ form.password2.label_tag }}
+                  </div>
+              </label>
+              {{ form.password2 }}
+          </sib-form-label-text>
+
+          <div class="helptext">
+            Enter the same password as before, for verification.
+          </div>
+          
+          <input type="submit" class="button_base" value="{% trans 'Send activation email' %}" />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
