@@ -1,0 +1,15 @@
+Django==2.2.5
+terra-common<0.4,>=0.3.1
+django-terra-accounts<0.4,>=0.3.3
+django-terra-utils>=0.3.6
+drf-yasg>=1.9
+packaging
+deepmerge
+requests>=2.19
+mercantile>=1.0
+psycopg2>=2.7
+
+[dev]
+factory-boy
+flake8
+coverage
