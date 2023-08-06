@@ -1,0 +1,213 @@
+stages:
+  - test
+  - integration
+  - package
+  - deploy
+
+centos7:
+  stage: test
+  except:
+    - tags
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:centos7
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+slc6:
+  stage: test
+  except:
+    - tags
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:slc6
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+slc5:
+  stage: test
+  except:
+    - tags
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:slc5
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+python2.7:
+  stage: test
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-2.7
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+python3.5:
+  stage: test
+  except:
+    - tags
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.5
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+python3.6:
+  stage: test
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.6
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+python3.7:
+  stage: test
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.7
+  script:
+    - python --version
+    - pip install -e .
+    - python setup.py nosetests --cover-package xenv
+    - mkdir -p cover_report && mv -f cover cover_report/$CI_JOB_NAME
+    - xenv --help
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
+  artifacts:
+    paths:
+      - cover_report
+    when: always
+    expire_in: 1 week
+
+integration-test:
+  stage: integration
+  image: gitlab-registry.cern.ch/lhcb-core/lbdocker/centos7-build
+  tags:
+    - cvmfs
+  variables:
+    NO_LBLOGIN: "1"
+    BINARY_TAG: "x86_64-centos7-gcc7-opt"
+    LCG_hostos: "x86_64-centos7"
+    LCG_release_area: "/cvmfs/sft.cern.ch/lcg/releases"
+    LCG_contrib: "/cvmfs/sft.cern.ch/lcg/contrib"
+    BUILDDIR: "build"
+  before_script:
+    - export PATH=/cvmfs/lhcb.cern.ch/lib/contrib/CMake/3.12.1/Linux-x86_64/bin:${LCG_contrib}/ninja/1.7.1/x86_64-slc6:${LCG_release_area}/Python/2.7.13-597a5/${BINARY_TAG}/bin:${PATH}
+    - export PATH=/cvmfs/lhcb.cern.ch/lib/lhcb/LBSCRIPTS/dev/InstallArea/scripts:${PATH}
+    - export PYTHONPATH=/cvmfs/lhcb.cern.ch/lib/lhcb/LBSCRIPTS/dev/InstallArea/python:${PYTHONPATH}
+    - export CMAKE_PREFIX_PATH=${LCG_release_area}:/cvmfs/projects.cern.ch/intelsw/psxe/linux/x86_64/2017/vtune_amplifier_xe
+    # special environment required for LCG binutils
+    - export PATH=${LCG_contrib}/bintuils/2.28/${LCG_hostos}/bin:${PATH}
+    - export LD_LIBRARY_PATH=${LCG_contrib}/bintuils/2.28/${LCG_hostos}/lib:${LD_LIBRARY_PATH}
+  script:
+    - sudo pip install --upgrade pip setuptools virtualenv
+    - virtualenv venv
+    - . venv/bin/activate
+    - export PYTHONPATH=${PWD}:${PYTHONPATH}
+    - pip install -e .
+    - xenv --version
+    - git clone https://gitlab.cern.ch/gaudi/Gaudi.git
+    - cd Gaudi
+    - make BUILDDIR=${BUILDDIR}
+    - make BUILDDIR=${BUILDDIR} test
+  dependencies: []
+
+
+package-src:
+  stage: package
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.7
+  script:
+    - python setup.py sdist --dist-dir public/${CI_PROJECT_NAME,,}
+  dependencies: []
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+
+package-py2:
+  stage: package
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-2.7
+  script:
+    - python setup.py bdist_wheel --dist-dir public/${CI_PROJECT_NAME,,}
+  dependencies: []
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+
+package-py3:
+  stage: package
+  image: gitlab-registry.cern.ch/lhcb-docker/python-deployment:python-3.7
+  script:
+    - python setup.py bdist_wheel --dist-dir public/${CI_PROJECT_NAME,,}
+  dependencies: []
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+
+
+# see https://gitlab.cern.ch/gitlabci-examples/deploy_eos for the details
+# of the configuration
+deploy-packages:
+  stage: deploy
+  only:
+    - tags
+  image: gitlab-registry.cern.ch/ci-tools/ci-web-deployer:latest
+  script:
+    - test -z "$EOS_ACCOUNT_USERNAME" -o -z "$EOS_ACCOUNT_PASSWORD" -o -z "$EOS_PATH" && exit 0 || true
+    # Script that performs the deploy to EOS. Makes use of the variables defined in the project
+    # It will copy the generated content to the folder in EOS
+    - deploy-eos
+  # do not run any globally defined before_script or after_script for this step
+  before_script: []
+  after_script: []
+  dependencies:
+    - package-src
+    - package-py2
+    - package-py3
