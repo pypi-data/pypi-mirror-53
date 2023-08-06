@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: headliner
+Version: 0.0.1
+Summary: Generating headlines from news articles using seq2seq models.
+Home-page: UNKNOWN
+Author: Christian Schäfer
+Author-email: c.schaefer.home@gmail.com
+License: MIT
+Description: 
+        Headliner is a library that was internally created to generate headlines from news articles. 
+        In particular, we use sequence-to-sequence (seq2seq) under the hood, 
+        an encoder-decoder framework. We provide a very simple interface to train 
+        and deploy seq2seq models. Although this library was created internally to 
+        generate headlines, you can also use it for other tasks like machine translations,
+        text summarization and many more.
+        
+        Read the documentation at: https://as-ideas.github.io/headliner/
+        
+        Headliner is compatible with Python 3.6 and is distributed under the MIT license.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: docs
+Provides-Extra: tests
+Provides-Extra: gpu
+Provides-Extra: dev
