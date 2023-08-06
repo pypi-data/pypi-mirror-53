@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: lofarSun
+Version: 0.1.1
+Summary: tools to process the lofar solar data
+Home-page: https://github.com/Pjer-zhang/LOFAR_Solar
+Author: Peijin
+Author-email: pjer1316@gmail.com
+License: MIT
+Download-URL: https://github.com/Pjer-zhang/LOFAR_Solar/archive/master.zip
+Description: # LOFAR data processing tool
+        
+        ## example 
+        
+        ```python
+        from lofarSun.lofarData import LofarDataBF
+        
+        lofar_bf = LofarDataBF()
+        lofar_bf.load_sav("path/to/data.sav")
+        [X,Y,data_bf] = lofar_bf.bf_image_by_idx(30,100)
+        ```
+        
+        ![demo](https://raw.githubusercontent.com/Pjer-zhang/LOFAR_Solar/master/src/img/demo.gif)
+Keywords: LOFAR,Solar,radio
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
