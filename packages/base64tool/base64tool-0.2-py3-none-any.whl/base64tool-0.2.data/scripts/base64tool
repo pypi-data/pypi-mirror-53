@@ -1,0 +1,242 @@
+#!python
+
+
+from tkinter import *
+from tkinter import ttk
+import base64
+
+####
+
+#Calculate function to do all the encoding and decodings and produce result based on the result format
+
+####
+def calculate(*args):
+
+    inputValue=TextArea.get("1.0","end-1c")
+
+    if(choiceInput.get()=='Comma Separated'):
+        inputValue=(inputValue.split(","))
+    else:
+        inputValue=(inputValue.split("\n"))
+
+    ResultArea.delete(1.0,END)
+    choiceFlag = bool(choice.get()=='Comma Separated')
+    #print(choiceFlag)
+    if(topic.get()=='Encode'):
+        cnt = 0
+        topicValue=topic.get()
+        #print("Here")
+        #print(inputValue)
+        
+        result=""
+        for s in range(len(inputValue)):
+
+            if(choiceQuotesInput.get()=='Single Quotes'):
+                item = inputValue[s].strip("'")
+            elif(choiceQuotesInput.get()=='Double Quotes'):
+                item = inputValue[s].strip('"')
+            else:
+                item = inputValue[s]
+
+            try:
+                data = base64.b64encode(item.encode('ascii')).decode('ascii')
+                #print(item,data)
+                quotesVal=choiceQuotes.get()
+                if(quotesVal=='Single Quotes'):
+                    data=("'")+data+("'")
+                elif(quotesVal=='Double Quotes'):
+                    data=('"')+data+('"')
+                result=result+(data)
+                if s < len(inputValue)-1 and choiceFlag:
+                    result=result+(",")
+                result=result+("\n")
+            except ValueError:
+                result=result+'Error Encoding the value='+item
+                if s < len(inputValue)-1:
+                    result=result+(",")
+                result=result+("\n")
+
+        ResultArea.insert(str(float(cnt)), result)
+
+
+
+    if(topic.get()=='Decode'):
+        cnt = 0
+        topicValue=topic.get()
+        ##print("Here")
+        ##print(inputValue)
+        result=""
+        for s in range(len(inputValue)):
+
+            if(choiceQuotesInput.get()=='Single Quotes'):
+                item = inputValue[s].strip("'")
+            elif(choiceQuotesInput.get()=='Double Quotes'):
+                item = inputValue[s].strip('"')
+            else:
+                item = inputValue[s]
+
+            try:
+
+                data = base64.b64decode(item).decode('ascii')
+                ##print(inputValue[s],data)
+                quotesVal=choiceQuotes.get()
+                if(quotesVal=='Single Quotes'):
+                    data=("'")+data+("'")
+                elif(quotesVal=='Double Quotes'):
+                    data=('"')+data+('"')
+                result=result+(data)
+                if s < len(inputValue)-1 and choiceFlag:
+                    result=result+(",")
+                result=result+("\n")
+            except ValueError:
+                result=result+'Error Decoding the value='+inputValue[s]
+                if s < len(inputValue)-1:
+                    result=result+(",")
+                result=result+("\n")
+
+        ResultArea.insert(str(float(cnt)), result)
+
+def reset():
+    topic.set('Encode')
+    choice.set('Comma Separated')
+    choiceQuotes.set('Double Quoted')
+    TextArea.delete(1.0,END)
+    ResultArea.delete(1.0,END)
+
+def on_option_change1(*args):
+    # desc1=ttk.Label(page, text=topic.get()+" Function Selected")
+    # desc1.grid(column=2, row=2, sticky=W)
+    # desc1.config(font=("Courier", 9))
+    return
+
+def on_option_change2(*args):   
+    # #print('test')
+    # desc2=ttk.Label(page, text=choice.get()+" Selected         ")
+    # desc2.grid(column=4, row=7, sticky=W)
+    # desc2.config(font=("Courier", 9))
+    return
+
+
+
+####
+
+#Initialise Tkinter fot the UI
+
+####
+root = Tk()
+root.resizable(width=False, height=False)
+root.title("Base64 Encode/Decode")
+
+universal_height = 500
+topic = StringVar()
+choice = StringVar()
+choiceQuotes = StringVar()
+choiceInput = StringVar()
+choiceQuotesInput = StringVar()
+result_row_global= IntVar()
+result_row_global.set(1)
+duration = StringVar()
+dur_value = IntVar()
+topic_val = StringVar()
+time1 = ''
+currentDate1 = ''
+
+# Dictionary with options to choose function
+topics = {'Encode' , 'Decode'}
+topic.set('Encode')
+
+
+# Dictionary with choices of Result format 
+choices = {'Comma Separated' , 'Without Comma Separated'}
+choice.set('Without Comma Separated')
+choiceInput.set('Without Comma Separated')
+
+choicesQuotes = {'Double Quotes' , 'Without Quotes', 'Single Quotes'}
+choiceQuotes.set('Without Quotes')
+choiceQuotesInput.set('Without Quotes')
+
+
+####
+
+#Create the Initial window and add internal page to reside all the buttons and text windows.
+
+####
+nb = ttk.Notebook(root)
+defaultPage = ttk.Frame(nb, width=300 ,height = universal_height)
+page = ttk.Frame(nb, width= 300 ,height = universal_height)
+
+nb.add(page, text='Encode/Decode')
+nb.grid(column=0)
+
+
+####
+
+#Add Components to the page based on the per Row
+
+####
+
+#First Row - Function to Choose
+desc=ttk.Label(page, text="Choose Encode/Decode Function")
+desc.grid(column=1, row=1, sticky=W)
+desc.config(font=("Courier New", 12))
+
+popupMenu = OptionMenu(page, topic, *topics, command=on_option_change1)
+popupMenu.grid(column=2, row=1, sticky=W)
+
+# desc1=ttk.Label(page, text=topic.get()+" Function Selected")
+# desc1.grid(column=2, row=2, sticky=W)
+# desc1.config(font=("Courier", 9))
+
+
+#Second Row --COL=1  Input
+ttk.Label(page, text="Input").grid(column=1, row=5, sticky=W)
+
+desc=ttk.Label(page, text="Choose format for your Input")
+desc.grid(column=1, row=6, sticky=W)
+desc.config(font=("Courier New", 12))
+
+popupMenu1 = OptionMenu(page, choiceInput, *choices, command=on_option_change2)
+popupMenu1.grid(column=1, row=7, sticky=W)
+
+popupMenu2 = OptionMenu(page, choiceQuotesInput, *choicesQuotes, command=on_option_change2)
+popupMenu2.grid(column=1, row=8, sticky=W)
+
+
+
+#Second Row --COL=2   Result
+ttk.Label(page, text="Results").grid(column=4, row=5, sticky=W)
+
+desc2=ttk.Label(page, text="Choose format for Result")
+desc2.grid(column=4, row=6, sticky=W)
+desc2.config(font=("Courier New", 12))
+
+popupMenu1 = OptionMenu(page, choice, *choices, command=on_option_change2)
+popupMenu1.grid(column=4, row=7, sticky=W)
+
+popupMenu2 = OptionMenu(page, choiceQuotes, *choicesQuotes, command=on_option_change2)
+popupMenu2.grid(column=4, row=8, sticky=W)
+
+
+#Third Row -Input Area
+TextArea = Text(page, relief=GROOVE ,wrap=WORD, height=20, width=40, borderwidth=2)
+TextArea.pack(expand=True)
+TextArea.pack(side="left")
+TextArea.insert(END, "")
+TextArea.grid(column=1, row=10, sticky=(W, E))
+
+#Third Row -Result Area
+ResultArea = Text(page, relief=GROOVE ,wrap=WORD, height=20, width=40, borderwidth=2)
+ResultArea.pack(expand=True)
+ResultArea.pack(side="left")
+ResultArea.insert(END, "")
+ResultArea.grid(column=4, row=10, sticky=(W, E))
+
+
+
+#Final Row -  RESET, EXIT AND CALCULATE
+
+ttk.Button(page, text="Reset",command=reset).grid(column=1, row=60)
+ttk.Button(page, text="Result", command=calculate).grid(column=4, row=60)
+# ttk.Button(page, text="Exit",command=page.quit).grid(column=4, row=61)
+
+root.mainloop()
