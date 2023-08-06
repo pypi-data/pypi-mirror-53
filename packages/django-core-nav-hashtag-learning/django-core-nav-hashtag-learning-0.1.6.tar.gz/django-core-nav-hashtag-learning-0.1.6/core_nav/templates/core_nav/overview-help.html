@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}{{ program_name }} Guide{% endblock %}
+{% load static %}
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <form method="post" action="">
+    {% csrf_token %}
+
+    {% for page in paginated_pages %}
+    <div class="form-group">
+    <div class="card impact-card">
+        <div class="card-header impact-card-header">
+            <h4>{{ page.header }}</h4>
+        </div>
+
+        {% for content_block in page.content_blocks %}
+            <div class="card-body mb-4">
+                <div class="form-group">
+                {% autoescape off %}
+                    {{ content_block.body }}
+                {% endautoescape %}
+                </div>
+                <div class="form-group">
+                {% if content_block.image is not None %}
+                    <img src="{% static content_block.image %}">
+                {% endif %}
+                </div>
+
+            </div>
+        {% endfor %}
+    <div class="card card-footer">
+                <div class="row">
+                <div class="col-sm-4">
+                    Do not show this guide again
+                </div>
+                <div class="col-sm-1">
+                    {{ show_help_form.dont_show_help }}
+                </div>
+                </div>
+            </div>
+
+    </div>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+
+        <div class="row">
+        <div class="col-sm-10">
+            <nav aria-label="Page navigation">
+              <ul class="pagination">
+                {% for i in paginator.page_range %}
+                      {% if paginated_pages.number == i %}
+                          <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% else %}
+                          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                {% endfor %}
+            </ul>
+            </nav>
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary float-right" name="done" value="Done">Start <i class="material-icons">chevron_right</i></button>
+        </div>
+        </div>
+    </div>
+    </form>
+
+    </div>
+
+    </main>
+{% endblock %}

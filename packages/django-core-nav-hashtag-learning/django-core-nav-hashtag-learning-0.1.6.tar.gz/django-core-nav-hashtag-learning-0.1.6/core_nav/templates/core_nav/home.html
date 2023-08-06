@@ -1,0 +1,57 @@
+{% extends "default-home.html" %}
+
+{% block title %}{{ program_name }} - Home{% endblock %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+
+    <main role="main" class="content">
+     <div class="intro-block text-center">
+		 <div class="homepage-logo"><img src="{% static 'images/Impact-homepage-logo.png' %}" alt=""/></div>
+		<h4>The Quality Improvement Toolkit for Scottish Schools</h4>
+    </div>
+    <div class="container">
+       <div class="row">
+
+           <div class="col-md-4">
+
+          </div>
+
+          <div class="col-md-4">
+            {% if show_overview_help %}
+                <a href="{% url 'core_nav:overview-help' %}">
+            {% else %}
+                <a href={{ launch_page }}>
+            {% endif %}
+
+			<div class="block-container square box1 square-100 tint t4" >
+				<h4 class="block-title">{{ program_name }}</h4>
+
+			<div class="">
+			<div class="">
+					<h4 class="block-title">{{ program_name }}</h4>
+
+			</div>
+			</div>
+			</div>
+                <div class="block-description">
+                    <h5>{{ program_description }}</h5>
+				</div>
+            </a>
+          </div>
+
+
+
+          <div class="col-md-4">
+
+          </div>
+       </div>
+        <br/>
+
+
+    </div>
+    </main>
+
+{% endblock %}

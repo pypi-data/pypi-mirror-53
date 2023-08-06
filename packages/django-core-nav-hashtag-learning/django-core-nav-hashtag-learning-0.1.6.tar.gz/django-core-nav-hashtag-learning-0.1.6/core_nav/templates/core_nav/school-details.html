@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to {{ program_name }}{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <form method="post" action="">
+    {% csrf_token %}
+
+    <div class="form-group">
+    <div class="card impact-card">
+        <div class="card-header impact-card-header">
+            <h4>School Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="s-name">School name:</label>
+                {{ school_details_form.school_name }}
+                {{ school_details_form.school_name.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="a-name">Local Authority:</label>
+                {{ school_details_form.authority }}
+                {{ school_details_form.authority.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="s-type">School Type:</label>
+                {{ school_details_form.school_type }}
+                {{ school_details_form.school_type.errors }}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" name="save_school" value="Save">Next <i class="material-icons">chevron_right</i></button>
+    </div>
+
+    </form>
+
+    </div>
+
+    </main>
+{% endblock %}

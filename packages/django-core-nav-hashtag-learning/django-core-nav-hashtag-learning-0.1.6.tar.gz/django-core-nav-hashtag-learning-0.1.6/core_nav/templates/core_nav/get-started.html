@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to {{ program_name }}{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <div class="form-group">
+    <div class="card impact-card">
+        <div class="card-header impact-card-header">
+            <h4>Get Started</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                {% if new_account %}
+                    <p>An account for {{ school_name }} has been set up and will expire in {{ trial_length }} days.</p>
+                {% else %}
+                    <p>Your account has been linked to {{ school_name }}.</p>
+                {% endif %}
+                <p>You can find information about how to use {{ program_name }}
+                    <a href="https://www.hashtag-learning.co.uk/frequently-asked-questions/" target="_blank">on our website</a>
+                </p>
+                <p>You can also contact us via email on contact@hashtag-learning.co.uk, or
+                    <a href="https://twitter.com/hashtag_impact" target="_blank">via Twitter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+        <a href="{% url 'home' %}" class="btn btn-success" role="button">Start <i class="material-icons">chevron_right</i></a>
+    </div>
+    </div>
+
+    </main>
+{% endblock %}

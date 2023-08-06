@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to {{ program_name }}{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="content">
+	<div class="container">
+
+    <form method="post" action="">
+    {% csrf_token %}
+
+    <div class="form-group">
+    <div class="card impact-card">
+        <div class="card-header impact-card-header">
+            <h4>Welcome to {{ program_name }}</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <p>Welcome to {{ program_name }}. We need a bit more information in order to set up your account.</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+    <div class="card impact-card">
+        <div class="card-header impact-card-header">
+            <h4>Your Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="s-name">First name:</label>
+                {{ user_details_form.first_name }}
+                {{ user_details_form.first_name.errors }}
+            </div>
+
+            <div class="form-group">
+                <label for="s-name">Last name:</label>
+                {{ user_details_form.last_name }}
+                {{ user_details_form.last_name.errors }}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" name="save_name" value="Save">Next <i class="material-icons">chevron_right</i></button>
+    </div>
+
+    </form>
+
+    </div>
+
+    </main>
+{% endblock %}
