@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Formats &mdash; Siren - Interactive Redescription Mining - User Guide</title>
+    
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+    <script type="text/javascript" src="doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="siren_icon.ico"/>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Siren - Interactive Redescription Mining - User Guide" href="index.html" />
+    <link rel="next" title="Parameters" href="preferences.html" />
+    <link rel="prev" title="Interface" href="interface.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+ 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="preferences.html" title="Parameters"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="interface.html" title="Interface"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Siren - Interactive Redescription Mining - User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-formats">Data formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#redescriptions-formats">Redescriptions formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preferences.html">Parameters</a></li>
+</ul>
+
+
+
+<h4><a href="http://siren.gforge.inria.fr/">Main Siren webpage</a></h4>
+
+  <div class="logo">
+  <a href="index.html">
+      <img class="logo" src="siren_icon.png" alt="Logo"/>
+    </a>
+  </div>
+
+          <!-- -->
+          <!--   <p class="logo"><a href="index.html"> -->
+          <!--     <img class="logo" src="siren_icon.png" alt="Logo"/> -->
+          <!--   </a></p> -->
+          <!-- -->
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="formats">
+<span id="id1"></span><h1>Formats<a class="headerlink" href="#formats" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data-formats">
+<span id="id2"></span><h2>Data formats<a class="headerlink" href="#data-formats" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For redescription mining, one considers entities discribed by variables divided into two sets, hereafter arbitrarily called left-hand side and right-hand side.
+This can be seen as a pair of data matrices, where entities are identified with rows and variables with columns. Both sets of variables describe the same entities, hence, the matrices have the same number of rows.</p>
+<p class="last">If you provide the same dataset for the left and right hand sides, this will be interpreted as a settings with a single datasets, where variables can appear on either side of redescriptions, but not both in the same redescription.
+Variables can be selectively disabled on either side, to prevent them from being used in either query.</p>
+</div>
+<p>In <em>Siren</em>, data include:</p>
+<ul class="simple">
+<li><strong>Variables</strong>: The variables describing the entities are divided in two sets. They can be of three types:<ol class="arabic">
+<li>Boolean,</li>
+<li>categorical,</li>
+<li>or real-valued.</li>
+</ol>
+</li>
+</ul>
+<p>Obviously, this is required.</p>
+<ul class="simple">
+<li><strong>Entities names</strong>: Optional additional information, providing names for the entities.</li>
+<li><strong>Variable names</strong>: Optional additional information, providing names for the variables.</li>
+<li><strong>Coordinates</strong>: Optional location information, i.e. geographic coordinates of the entities. This makes the data geospatial.</li>
+</ul>
+<p>Data can be imported to <em>Siren</em> via the interface menu <span class="menuselection">File ‣ Import ‣ Import Data</span>. Below, we present the data formats supported by <em>Siren</em>.</p>
+<p>Data can be imported into <em>Siren</em> as CSV files. The program expects a pair of files, one for either side in <a class="reference external" href="http://tools.ietf.org/html/rfc4180">character-separated values</a>, as can be imported and exported to and from spreadsheet programms, for instance.</p>
+<p>There are two main formats,</p>
+<ul class="simple">
+<li><strong>Full</strong>: standard table format, or</li>
+<li><strong>Sparse</strong>: compact format for dataset with few non-zeros entries.</li>
+</ul>
+<p>The two data files need not be in the same format.</p>
+<p>If entities names and/or coordinates are provided, they will be used to match entities across the two sides.
+Otherwise, rows will be match in order and an error will occur if the two side do not contain the same number of rows.</p>
+<div class="section" id="full-format">
+<span id="data-csv-full"></span><h3>Full format<a class="headerlink" href="#full-format" title="Permalink to this headline">¶</a></h3>
+<p>The data is stored as a table with one column for each variable and one row each entity.
+The first row can contain the names of the variables.
+The entities names can be included as columns named <em>id</em>. Similarly the coordinates can be included as a pair of columns named <em>longitude</em> and <em>latitude</em>, respectively.</p>
+</div>
+<div class="section" id="sparse-format">
+<span id="data-csv-sparse"></span><h3>Sparse format<a class="headerlink" href="#sparse-format" title="Permalink to this headline">¶</a></h3>
+<p>This format allows to store data that contains few non-zero entries more compactly, as in the Matlab sparse format (or like the edge list of a bipartite graph).</p>
+<p>Each line contains an entry of the data as a triple (entity, variable, value). This way, the data is stored as in three columns and as many rows as there are entries.
+In this case the first line of the data file must contains <em>id</em>, <em>cid</em> and <em>value</em>, indicating the three columns containing the enities, variables and corresponding value, respectively.
+Coordinates can be provided in a similar way under the variable names <em>longitude</em> and <em>latitude</em>.</p>
+<p>Variable names can be provided inline, that is, simply by using the name of the variable for each entry involving it.
+Alternatively, variable names can be specified separately with a special “-1” entity.
+Similarly, entity names can be provided inline or separatly with a special “-1” variable.
+For example, the following five lines</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="p">;</span> <span class="n">cid</span><span class="p">;</span> <span class="n">value</span>
+<span class="n">Espoo</span><span class="p">;</span> <span class="n">population</span><span class="p">;</span> <span class="mi">260981</span>
+<span class="n">Helsinki</span><span class="p">;</span> <span class="n">population</span><span class="p">;</span> <span class="mi">614074</span>
+<span class="n">Tampere</span><span class="p">;</span> <span class="n">population</span><span class="p">;</span> <span class="mi">220609</span>
+<span class="n">Turku</span><span class="p">;</span> <span class="n">population</span><span class="p">;</span> <span class="mi">182281</span>
+</pre></div>
+</div>
+<p>are equivalent to the following:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="p">;</span> <span class="n">cid</span><span class="p">;</span> <span class="n">value</span>
+<span class="mi">20</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">Espoo</span>
+<span class="mi">7</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">Tampere</span>
+<span class="mi">2</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">Turku</span>
+<span class="mi">13</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">Helsinki</span>
+<span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">population</span>
+<span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">182281</span>
+<span class="mi">7</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">220609</span>
+<span class="mi">13</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">614074</span>
+<span class="mi">20</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">260981</span>
+</pre></div>
+</div>
+<p>Finally, in case of fully Boolean data without coordinates, the value can be left out. Each pair of (entity, variable) appearing is considered as True, the rest as False.</p>
+<p>For both full and sparse formats a mention of type can be append to the first row, in such case all variable will be parse to the given type.
+For instance, in the example above the first line would be turned to <code class="docutils literal"><span class="pre">id;</span> <span class="pre">cid;</span> <span class="pre">value;</span> <span class="pre">type=N</span></code> to ensure that all variables, including population are interpreted as numerical (N) variables. Respectively B and C can be used to ensure that all variables are Boolean and categorical, respectively.</p>
+<p>This can be useful when handling a dataset of numerical variables where some contains only two distinct values and might otherwise be interpreted as Boolean variables. It can also be a handy way to turn a dataset to fully Boolean based on zero/non-zero values. However, be warned that this can cause some troubles…</p>
+</div>
+</div>
+<div class="section" id="redescriptions-formats">
+<span id="red-formats"></span><h2>Redescriptions formats<a class="headerlink" href="#redescriptions-formats" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The product of redescription mining is a list of redescriptions. A redescription consist of a pair of queries over the variables describing the entities, one query for each set. The two sets of variables are arbitrarily called left-hand side and right-hand side, and so are the corresponding queries.</p>
+</div>
+<div class="section" id="supports">
+<span id="id3"></span><h3>Supports<a class="headerlink" href="#supports" title="Permalink to this headline">¶</a></h3>
+<p>The support of a query is the set of entities for which the query holds. Any given redescription partitions the entities into four sets (In the absence of missing entries):</p>
+<ul class="simple">
+<li>E<sub>10</sub> is the set of rows for which only the left hand side query holds,</li>
+<li>E<sub>01</sub> is the set of rows for which only the right hand side query holds,</li>
+<li>E<sub>11</sub> is the set of rows for which both queries hold,</li>
+<li>and E<sub>00</sub> is the set of rows for which neither of the queries hold.</li>
+</ul>
+<p>Redescriptions can be imported to <em>Siren</em> via the interface menu <span class="menuselection">File ‣ Import ‣ Import Redescriptions</span>. More importantly, they can be exported via the interface menu <span class="menuselection">File ‣ Export Redescriptions</span> and the contextual menu for a list of redescription. Below, we present the redescription formats supported by <em>Siren</em>.</p>
+</div>
+<div class="section" id="queries">
+<span id="id4"></span><h3>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h3>
+<p>A query is formed by combining literal using Boolean operators.</p>
+<p>While <em>ReReMi</em> only generate linearly parsable query (see references for more details), <em>Siren</em> can actually evaluates arbitrary queries, as long as they are well formed following the informal grammar below.
+In particular, parenthesis should be used to separated conjunctive blocks and disjunctive block, alternating between operators.
+For example, while the later cannot be generated by <em>ReReMi</em>, <span class="math">\((a \land{} b) \lor{} \lnot{} c\)</span> and <span class="math">\((a \land{} b) \lor{} (c \land{} d)\)</span> are both supported. <span class="math">\((a \land{} b) \land{} (c \land{} d)\)</span> is not, because of incorrect alternance of operators between parenthesis blocks. It should simply be written as <span class="math">\(a \land{} b \land{} c \land{} d\)</span>.</p>
+<p>We consider three types of literals, defined over a Boolean, categorical or numerical variable respectively.</p>
+<p>Below is an unformal grammar of <em>Siren</em>’s query language. The actual grammar can be found in the <code class="docutils literal"><span class="pre">redquery.ebnf</span></code> file in the <code class="docutils literal"><span class="pre">siren.reremi</span></code> source repertory.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<div class="last line-block">
+<div class="line">query = disjunction | conjunction | literal ;</div>
+<div class="line">conjunction = conj_item { ( “&amp;” | <span class="math">\(&quot;\land&quot;\)</span> ) conj_item }+ ;</div>
+<div class="line">disjunction = disj_item { ( “|” | <span class="math">\(&quot;\lor&quot;\)</span> ) disj_item }+ ;</div>
+<div class="line">conj_item = literal | ( “(” disjunction “)” ) ;</div>
+<div class="line">disj_item = literal | ( “(” conjunction “)” ) ;</div>
+<div class="line">literal = categorical_literal | realvalued_literal | boolean_literal ;</div>
+<div class="line">categorical_literal = ( “[” )? variable_name ( <span class="math">\(&quot;=&quot;\)</span> | <span class="math">\(&quot;\neq&quot;\)</span> | <span class="math">\(&quot;\in&quot;\)</span> | <span class="math">\(&quot;\in&quot;\)</span> ) category ( “]” )?  ;</div>
+<div class="line">realvalued_literal = [ neg ] ( “[” )? [ variable_value lth ] variable_name lth variable_value ( “]” )? ;</div>
+<div class="line">realvalued_literal = [ neg ] ( “[” )? variable_value lth variable_name ( “]” )? ;</div>
+<div class="line">boolean_literal = [ neg ] ( “[” )? variable_name ( “]” )? ;</div>
+<div class="line">variable_name = STRING | ?/vd+/? ;</div>
+<div class="line">category = STRING | ?/d+/? ;</div>
+<div class="line">variable_value =  ?/[+-]?d+([.])?d*([Ee][-+]d+)?/? ;</div>
+<div class="line">lth = “&lt;” | <span class="math">\(&quot;\leq&quot;\)</span> ;</div>
+<div class="line">neg = “!” | <span class="math">\(&quot;\lnot&quot;\)</span> ;</div>
+</div>
+</div>
+<p>Naturally, the type of literal and the type of variable should match, i.e., <span class="math">\([4.0 \leq{} Va \leq{} 8.32]\)</span> is a valid numerical literal only if the corresponding variable <span class="math">\(Va\)</span> is a numerical variable. Furthermore, the upper bound of a numerical variable should always be greater or equal to the lower bound and either of them should be specified.</p>
+</div>
+<div class="section" id="redescription-statistics">
+<span id="statistics"></span><h3>Redescription statistics<a class="headerlink" href="#redescription-statistics" title="Permalink to this headline">¶</a></h3>
+<p>The statistics of a redescription include:</p>
+<ul class="simple">
+<li>accuracy, as measured by Jaccard coefficient <span class="math">\(|E_{11}| / (|E_{10}|+|E_{11}|+|E_{01}|)\)</span>,</li>
+<li>p-value,</li>
+<li>cardinality of the <a class="reference internal" href="#supports"><span class="std std-ref">support sets</span></a>  <span class="math">\(E_{10}\)</span>, <span class="math">\(E_{01}\)</span>, <span class="math">\(E_{11}\)</span>, <span class="math">\(E_{00}\)</span> (sometimes also referred to as alpha, beta, gamma and delta, respectively).</li>
+</ul>
+</div>
+<div class="section" id="exporting-redescriptions">
+<span id="export"></span><h3>Exporting Redescriptions<a class="headerlink" href="#exporting-redescriptions" title="Permalink to this headline">¶</a></h3>
+<p>Redescriptions from the <code class="docutils literal"><span class="pre">Redescriptions</span></code> tab can be exported to a file, one redescription per line, with both queries and basic statistics tab separated. Three of formatting options are available, determined by the provided filename:</p>
+<ul class="simple">
+<li><strong>named</strong>: Uses the names of the variables instead of variable ids in the queries. Activated if the filename matches the pattern <code class="docutils literal"><span class="pre">*[^a-zA-Z0-9]named[^a-zA-Z0-9]*</span></code>.</li>
+<li><strong>all</strong> By default disabled redescriptions will not be printed when exporting redescriptions. If the filename matches the pattern <code class="docutils literal"><span class="pre">*[^a-zA-Z0-9]all[^a-zA-Z0-9]*</span></code>, disabled redescriptions will also be printed.</li>
+<li><strong>tex</strong> Rather than tab separated format, if the filename as <code class="docutils literal"><span class="pre">.tex</span></code> extension, a tex file is produced that can be compiled to obtain a table of the redescriptions. Three table layouts are available, where the information for each redescription is listed respectively on one, two or three rows, if the filename matches the pattern <code class="docutils literal"><span class="pre">*[^a-zA-Z0-9][1-3].[a-z]*$</span></code>. Note that this format cannot be imported back.</li>
+</ul>
+<p>Inside a siren package, the redescriptions are stored in tab separated format.</p>
+<p>The fields included when exporting redescriptions and when displaying them in the interface can be set via the <span class="menuselection">File ‣ Fields setup</span> menu entries.</p>
+</div>
+<div class="section" id="importing-redescriptions">
+<span id="import"></span><h3>Importing Redescriptions<a class="headerlink" href="#importing-redescriptions" title="Permalink to this headline">¶</a></h3>
+<p>Tab separated formats can be imported into <em>Siren</em>, <em>TeX</em> cannot.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>  
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="preferences.html" title="Parameters"
+             >next</a></li>
+        <li class="right" >
+          <a href="interface.html" title="Interface"
+             >previous</a> |</li>
+        <li><a href="index.html">Siren - Interactive Redescription Mining - User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Esther Galbrun and Pauli Miettinen.
+      Last updated on Oct 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.6.7.
+<br/>
+The source code hosted in a Git repository on <a href="https://gforge.inria.fr/projects/siren/">InriaForge</a>. You can <a href="https://gforge.inria.fr/scm/?group_id=8278">clone it.</a>
+<br/>
+    ::<a href="https://www.inria.fr/informations-pratiques/mentions-legales">Mentions légales</a>::
+</div>
+  </body>
+</html>

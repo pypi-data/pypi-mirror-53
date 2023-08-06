@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Parameters &mdash; Siren - Interactive Redescription Mining - User Guide</title>
+    
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+    <script type="text/javascript" src="doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="siren_icon.ico"/>
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Siren - Interactive Redescription Mining - User Guide" href="index.html" />
+    <link rel="prev" title="Formats" href="formats.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+ 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="formats.html" title="Formats"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Siren - Interactive Redescription Mining - User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Formats</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mining-parameters">Mining parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization-parameters">Visualization parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-parameters">Other parameters</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+<h4><a href="http://siren.gforge.inria.fr/">Main Siren webpage</a></h4>
+
+  <div class="logo">
+  <a href="index.html">
+      <img class="logo" src="siren_icon.png" alt="Logo"/>
+    </a>
+  </div>
+
+          <!-- -->
+          <!--   <p class="logo"><a href="index.html"> -->
+          <!--     <img class="logo" src="siren_icon.png" alt="Logo"/> -->
+          <!--   </a></p> -->
+          <!-- -->
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="parameters">
+<span id="preferences"></span><h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Siren allows to tune various parameters via an interface menu <span class="menuselection">Edit ‣ Preferences</span>.</p>
+<p class="last">An XML preferences file stores all non-default parameters.</p>
+</div>
+<p>The parameters that can be set through the preference interface can be mainly divided into two categories, <strong>mining parameters</strong>, that pertain to the mining algorithm, and <strong>visualization parameters</strong>, that pertain to the interactive visualizations, each split over several tabs.</p>
+<div class="section" id="mining-parameters">
+<span id="id1"></span><h2>Mining parameters<a class="headerlink" href="#mining-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Mining parameters are specified <a class="reference external" href="miner_confdef.xml">here</a> and can be set through the interface.</p>
+<p>Quite many parameters are available for tuning, but in general only a few of them need to be adjusted.
+In particular, the parameters setting threshold values on the support of the queries, on the accuracy of the returned redescriptions, as well as on the type of queries, are the most important ones.</p>
+</div>
+<div class="section" id="visualization-parameters">
+<span id="interface-parameters"></span><h2>Visualization parameters<a class="headerlink" href="#visualization-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Visualization parameters are specified <a class="reference external" href="views_confdef.xml">here</a>  and can be set through the interface.
+For instance, they allows to modify the appearance of the maps, choose the colors of the different support subsets, etc.</p>
+</div>
+<div class="section" id="other-parameters">
+<h2>Other parameters<a class="headerlink" href="#other-parameters" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to adjust the parameters through the interface then export them to a file.
+In particular, a template can be generated and exported which can be used to run the <em>ReReMi</em> mining algorithm from the command line, after filling in input/output parameters, which are specified <a class="reference external" href="inout_confdef.xml">here.</a></p>
+<p>Interface parameters, such as the splits and external server parameters, set through dedicated menu in the interface are specified <a class="reference external" href="ui_confdef.xml">here</a> .</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>  
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="formats.html" title="Formats"
+             >previous</a></li>
+        <li><a href="index.html">Siren - Interactive Redescription Mining - User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Esther Galbrun and Pauli Miettinen.
+      Last updated on Oct 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.6.7.
+<br/>
+The source code hosted in a Git repository on <a href="https://gforge.inria.fr/projects/siren/">InriaForge</a>. You can <a href="https://gforge.inria.fr/scm/?group_id=8278">clone it.</a>
+<br/>
+    ::<a href="https://www.inria.fr/informations-pratiques/mentions-legales">Mentions légales</a>::
+</div>
+  </body>
+</html>
