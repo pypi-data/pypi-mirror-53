@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: sitri
+Version: 0.4.17
+Summary: Library for one endpoint config and credentials managment
+Home-page: https://github.com/Egnod/sitri
+License: MIT
+Keywords: packaging,poetry
+Author: Alexander Lavrov
+Author-email: egnod@ya.ru
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Project-URL: Documentation, https://sitri.readthedocs.io
+Project-URL: Repository, https://github.com/Egnod/sitri
+Description-Content-Type: text/markdown
+
+
+<p align="center">
+  <a href="https://github.com/lemegetonx/sitri">
+    <img src="docs/_static/logo.gif">
+  </a>
+  <h1 align="center">
+    Sitri Configuration Library
+  </h1>
+</p>
+
+Sitri - library for managing authorization and configuration data from a single object with possibly different or identical providers
+
+#  Installation
+
+```bash
+poetry add sitri
+```
+
+or
+```bash
+pip3 install sitri
+```
+
+# Basics with SystemProvider
+
+```python
+from sitri.contrib.system import SystemCredentialProvider, SystemConfigProvider
+from sitri import Sitri
+
+conf = Sitri(config_provider=SystemConfigProvider(prefix="basics"),
+             credential_provider=SystemCredentialProvider(prefix="basics"))
+```
+System provider use system environment for get config and credential data. For unique sitri lookup to "namespace" by prefix.
+
+Example:
+
+*In console:*
+```bash
+export BASICS_NAME=Huey
+```
+
+*In code:*
+```python
+name = conf.get_config("name")
+print(name)  # output: Huey
+```
+
+#  Docs
+Read base API references and other part documentation on https://sitri.readthedocs.io/
+
