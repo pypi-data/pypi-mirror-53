@@ -1,0 +1,47 @@
+language: python
+cache: pip
+env:
+  global:
+    - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
+    - SEGFAULT_SIGNALS=all
+
+matrix:
+  include:
+    - python: '3.5'
+      env:
+        - TOXENV=py35,coveralls,codecov
+    - python: '3.6'
+      env:
+        - TOXENV=py36,coveralls,codecov,check,docs
+
+services:
+  - xvfb
+
+before_install:
+  - python --version
+  - uname -a
+  - lsb_release -a
+
+install:
+  - pip install tox
+  - pip install pyensembl
+  - virtualenv --version
+  - easy_install --version
+  - pip --version
+  - tox --version
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "pyensembl install --release 87 --species homo_sapiens"
+
+script:
+  - tox -v
+
+after_failure:
+  - more .tox/log/* | cat
+  - more .tox/*/log/* | cat
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
