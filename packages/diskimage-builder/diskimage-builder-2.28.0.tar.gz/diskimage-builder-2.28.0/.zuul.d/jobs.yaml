@@ -1,0 +1,422 @@
+- job:
+    name: dib-functests-base
+    abstract: true
+    parent: base
+    run: playbooks/dib-functests/run.yaml
+    post-run: playbooks/dib-functests/post.yaml
+    timeout: 5400
+    required-projects:
+      - openstack/diskimage-builder
+      - openstack/requirements
+    irrelevant-files:
+      - ^.*\.rst$
+      - ^doc/.*$
+
+- job:
+    name: dib-functests-default
+    description: |
+      This is the base set of stable tests
+    abstract: true
+    parent: dib-functests-base
+    vars:
+      dib_functests:
+        - apt-sources/test-sources
+        - centos-minimal/7-build-succeeds
+        - centos-minimal/8-build-succeeds
+        - fedora-minimal/build-succeeds
+        - ironic-agent/build-succeeds-fedora
+        - pip-and-virtualenv/source-install-fedora
+        - pip-and-virtualenv/source-install-ubuntu
+        - ubuntu-minimal/trusty-build-succeeds
+        - ubuntu-minimal/xenial-build-succeeds
+        - ubuntu-minimal/bionic-build-succeeds
+
+- job:
+    name: dib-functests-image
+    description: |
+      This is tests that rely on downloading an upstream
+      image.  We generally do not have mirrors for these images
+      so they can be slighlty unreliable.
+    abstract: true
+    voting: false
+    parent: dib-functests-base
+    vars:
+      dib_functests:
+        - centos7/build-succeeds
+        - opensuse/build-succeeds
+        - opensuse/opensuse15-build-succeeds
+        - fedora/build-succeeds
+        - ubuntu/trusty-build-succeeds
+        - ubuntu/xenial-build-succeeds
+        - ubuntu/bionic-build-succeeds
+
+- job:
+    name: dib-functests-extras
+    description: |
+      These are tests which are not as widely supported as the
+      core platforms
+    abstract: true
+    voting: false
+    parent: dib-functests-base
+    vars:
+      dib_functests:
+        - gentoo/build-succeeds
+        - debian-minimal/stable-vm
+
+- job:
+    name: dib-functests-containers
+    description: |
+      These are tests for elements focused on containers or other
+      small deployments
+    abstract: true
+    voting: false
+    parent: dib-functests-base
+    vars:
+      dib_functests:
+        - ubuntu-systemd-container/bionic-build-succeeds
+        - ubuntu-systemd-container/xenial-build-succeeds
+
+# Trusty / Python 2 tests
+- job:
+    name: dib-functests-trusty-python2
+    description: |
+      Run the default tests on a Trusty build host with Python 2
+    parent: dib-functests-default
+    nodeset: ubuntu-trusty
+    vars:
+      dib_python: python2
+
+- job:
+    name: dib-functests-trusty-python2-image
+    description: |
+      The image tests on a Trusty build host with Python 2
+    parent: dib-functests-image
+    nodeset: ubuntu-trusty
+    vars:
+      dib_python: python2
+
+- job:
+    name: dib-functests-trusty-python2-extras
+    description: |
+      The extras tests on a Trusty build host with Python 2
+    parent: dib-functests-extras
+    nodeset: ubuntu-trusty
+    vars:
+      dib_python: python2
+
+# Bionic / Python3 tests
+- job:
+    name: dib-functests-bionic-python3
+    description: |
+      Run the default tests on a Bionic build host with Python 3
+    parent: dib-functests-default
+    nodeset: ubuntu-bionic
+    voting: false
+
+- job:
+    name: dib-functests-bionic-python3-image
+    description: |
+      The image tests on a Bionic build host with Python 3
+    parent: dib-functests-image
+    nodeset: ubuntu-bionic
+    voting: false
+
+- job:
+    name: dib-functests-bionic-python3-extras
+    description: |
+      The extras tests on a Bionic build host with Python 3
+    parent: dib-functests-extras
+    nodeset: ubuntu-bionic
+    voting: false
+
+- job:
+    name: dib-functests-bionic-python3-containers
+    description: |
+      The containers tests on a Bionic build host with Python 3
+    parent: dib-functests-containers
+    nodeset: ubuntu-bionic
+    voting: false
+
+# Xenial / Python3 tests
+- job:
+    name: dib-functests-xenial-python3
+    description: |
+      Run the default tests on a Xenial build host with Python 3
+    parent: dib-functests-default
+    nodeset: ubuntu-xenial
+
+- job:
+    name: dib-functests-xenial-python3-image
+    description: |
+      The image tests on a Xenial build host with Python 3
+    parent: dib-functests-image
+    nodeset: ubuntu-xenial
+
+- job:
+    name: dib-functests-xenial-python3-extras
+    description: |
+      The extras tests on a Xenial build host with Python 3
+    parent: dib-functests-extras
+    nodeset: ubuntu-xenial
+    vars:
+      # opensuse-minimal can only build on xenial ATM, as other
+      # platforms don't have zypper
+      dib_functests_extra:
+        - opensuse-minimal/opensuse15-build-succeeds
+
+- job:
+    name: dib-functests-xenial-python3-containers
+    description: |
+      The containers tests on a Xenial build host with Python 3
+    parent: dib-functests-containers
+    nodeset: ubuntu-xenial
+    voting: false
+
+# Centos 7 / Python2 tests
+- job:
+    name: dib-functests-centos7-python2
+    description: |
+      Run the default tests on a Centos 7 build host with Python 2
+    parent: dib-functests-default
+    nodeset: centos-7
+    vars:
+      dib_python: python2
+
+- job:
+    name: dib-functests-centos7-python2-image
+    description: |
+      The image tests on a Centos 7 build host with Python 2
+    parent: dib-functests-image
+    nodeset: centos-7
+    vars:
+      dib_python: python2
+
+- job:
+    name: dib-functests-centos7-python2-extras
+    description: |
+      The extras tests on a Centos 7 build host with Python 2
+    parent: dib-functests-extras
+    nodeset: centos-7
+    vars:
+      dib_python: python2
+
+# Build and boot functional tests
+
+- job:
+    name: dib-nodepool-functional-src-base
+    description: |
+      Base job for DIB functional tests, which build and boot a node under
+      nodepool
+    parent: nodepool-functional-openstack-src-base
+    vars:
+      nodepool_debug: true
+
+- job:
+    name: dib-nodepool-functional-openstack-centos-7-src
+    description: |
+      Test building and booting a Centos 7 image with Nodepool and OpenStack
+    parent: dib-nodepool-functional-src-base
+    vars:
+      nodepool_extra_packages:
+        - rpm
+        - yum-utils
+      nodepool_diskimage:
+        base_element: centos-minimal
+        release: '7'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/centos"
+
+- job:
+    name: dib-nodepool-functional-openstack-centos-8-src
+    description: |
+      Test building and booting a Centos 8 image with Nodepool and OpenStack
+    parent: dib-nodepool-functional-src-base
+    vars:
+      nodepool_extra_packages:
+        - rpm
+        - yum-utils
+      nodepool_diskimage:
+        base_element: centos-minimal
+        release: '8'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/centos"
+
+- job:
+    name: dib-nodepool-functional-openstack-fedora-29-src
+    description: |
+      Test building and booting a Fedora 29 image with Nodepool and OpenStack
+    parent: dib-nodepool-functional-src-base
+    vars:
+      nodepool_extra_packages:
+        - rpm
+        - yum-utils
+      nodepool_diskimage:
+        base_element: fedora-minimal
+        release: '29'
+
+- job:
+    name: dib-nodepool-functional-openstack-fedora-30-src
+    description: |
+      Test building and booting a Fedora 30 image with Nodepool and OpenStack
+    parent: dib-nodepool-functional-src-base
+    vars:
+      nodepool_extra_packages:
+        - rpm
+        - yum-utils
+      nodepool_diskimage:
+        base_element: fedora-minimal
+        release: '30'
+
+- job:
+    name: dib-nodepool-functional-openstack-ubuntu-trusty-src
+    description: |
+      Test building and booting an Ubuntu trusty image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    pre-run: playbooks/dib-nodepool/debootstrap.yaml
+    nodeset: ubuntu-xenial  # Backported debootstrap only available for xenial
+    vars:
+      nodepool_extra_packages:
+        - debootstrap
+      nodepool_diskimage:
+        base_element: ubuntu-minimal
+        release: 'trusty'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/ubuntu"
+
+- job:
+    name: dib-nodepool-functional-openstack-ubuntu-xenial-src
+    description: |
+      Test building and booting an Ubuntu xenial image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    pre-run: playbooks/dib-nodepool/debootstrap.yaml
+    nodeset: ubuntu-xenial  # Backported debootstrap only available for xenial
+    vars:
+      nodepool_extra_packages:
+        - debootstrap
+      nodepool_diskimage:
+        base_element: ubuntu-minimal
+        release: 'xenial'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/ubuntu"
+
+- job:
+    name: dib-nodepool-functional-openstack-ubuntu-bionic
+    description: |
+      Test building and booting an Ubuntu bionic image with Nodepool
+      and OpenStack (using released libraries)
+    parent: nodepool-functional-openstack-base
+    pre-run: playbooks/dib-nodepool/debootstrap.yaml
+    nodeset: ubuntu-xenial  # Backported debootstrap only available for xenial
+    vars:
+      nodepool_debug: true
+      nodepool_extra_packages:
+        - debootstrap
+      nodepool_diskimage:
+        base_element: ubuntu-minimal
+        release: 'bionic'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/ubuntu"
+
+- job:
+    name: dib-nodepool-functional-openstack-ubuntu-bionic-src
+    description: |
+      Test building and booting an Ubuntu bionic image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    pre-run: playbooks/dib-nodepool/debootstrap.yaml
+    nodeset: ubuntu-xenial  # Backported debootstrap only available for xenial
+    vars:
+      nodepool_extra_packages:
+        - debootstrap
+      nodepool_diskimage:
+        base_element: ubuntu-minimal
+        release: 'bionic'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/ubuntu"
+
+- job:
+    name: dib-nodepool-functional-openstack-gentoo-src
+    description: |
+      Test building and booting a Gentoo image with Nodepool and OpenStack
+    parent: dib-nodepool-functional-src-base
+    vars:
+      nodepool_diskimage:
+        base_element: gentoo
+        release: ''
+        env-vars:
+          GENTOO_PROFILE: 'default/linux/amd64/17.0/systemd'
+
+- job:
+    name: dib-nodepool-functional-openstack-debian-stretch-src
+    description: |
+      Test building and booting a Debian stretch image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    pre-run: playbooks/dib-nodepool/debootstrap.yaml
+    nodeset: ubuntu-xenial  # Backported debootstrap only available for xenial
+    vars:
+      nodepool_extra_packages:
+        - debootstrap
+      nodepool_diskimage:
+        base_element: debian-minimal
+        release: 'stretch'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/debian"
+
+- job:
+    name: dib-nodepool-functional-openstack-debian-buster-src
+    description: |
+      Test building and booting a Debian buster image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    pre-run: playbooks/dib-nodepool/debootstrap.yaml
+    nodeset: ubuntu-xenial  # Backported debootstrap only available for xenial
+    vars:
+      nodepool_extra_packages:
+        - debootstrap
+      nodepool_diskimage:
+        base_element: debian-minimal
+        release: 'buster'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/debian"
+
+- job:
+    name: dib-nodepool-functional-openstack-opensuse-150-src
+    description: |
+      Test building and booting an openSUSE 15.0 image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    nodeset: ubuntu-xenial  # Bionic lacks zypper
+    vars:
+      nodepool_extra_packages:
+        - zypper
+        - gnupg2
+      nodepool_diskimage:
+        base_element: opensuse-minimal
+        release: '15.0'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/opensuse"
+
+- job:
+    name: dib-nodepool-functional-openstack-opensuse-15-src
+    description: |
+      Test building and booting an openSUSE 15.x image with Nodepool
+      and OpenStack
+    parent: dib-nodepool-functional-src-base
+    nodeset: ubuntu-xenial  # Bionic lacks zypper
+    vars:
+      nodepool_extra_packages:
+        - zypper
+        - gnupg2
+      nodepool_diskimage:
+        base_element: opensuse-minimal
+        release: '15.1'
+        mirror: "http://{{ zuul_site_mirror_fqdn }}/opensuse"
+
+- job:
+    name: dib-nodepool-functional-openstack-opensuse-tumbleweed-src
+    description: |
+      Test building and booting an openSUSE tumbleweed image with
+      Nodepool and OpenStack
+    parent: dib-nodepool-functional-src-base
+    nodeset: ubuntu-xenial  # Bionic lacks zypper
+    vars:
+      nodepool_extra_packages:
+        - zypper
+        - gnupg2
+      nodepool_diskimage:
+        base_element: opensuse-minimal
+        release: 'tumbleweed'
