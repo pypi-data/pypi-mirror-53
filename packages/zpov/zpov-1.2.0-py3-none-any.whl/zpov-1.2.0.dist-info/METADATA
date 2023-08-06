@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: zpov
+Version: 1.2.0
+Summary: A minimalist note engine
+Home-page: https://github.com/dmerejkowsky/zpov
+Author: d.merej@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >="3.6"
+Requires-Dist: attrs
+Requires-Dist: flask
+Requires-Dist: flask-httpauth
+Requires-Dist: houdini.py
+Requires-Dist: misaka
+Requires-Dist: path.py
+Requires-Dist: pygments
+Requires-Dist: pynacl
+Requires-Dist: pygit2
+Requires-Dist: ruamel.yaml
+Requires-Dist: whoosh
+Provides-Extra: dev
+Requires-Dist: black ; extra == 'dev'
+Requires-Dist: bs4 ; extra == 'dev'
+Requires-Dist: flake8 ; extra == 'dev'
+Requires-Dist: flake8-comprehensions ; extra == 'dev'
+Requires-Dist: pytest ; extra == 'dev'
+Requires-Dist: pytest-flask ; extra == 'dev'
+Requires-Dist: mypy ; extra == 'dev'
+Requires-Dist: twine ; extra == 'dev'
+
+zpov
+====
+
+.. image:: screenshot.png
+
+A minimalist note engine
+------------------------
+
+* ~500 lines of code
+* no javascript
+* usable on any browser, including on mobile
+* no database, just a bare git repo for storage and sync
+* http basic auth
+* pages are markdown files in the git repo. earch "directory" *must* have
+  an ``index.md`` at the top
+* title of each page is the top line of the markdown file
+* sub-pages are sorted alphabetically
+* edition is a text area containing the markdown
+
+Usage
+-----
+
+``zpov`` is a python application built using ``flask``. refer to the flask
+documentation to learn about developement and/or debugging.
+
+``zpov`` needs a git repository and a configuration file to work. If public access is
+not wanted, users and passwords must be stored in the configuration file too.
+
+To ease up installation, a ``zpov-admin`` CLI is provided in the ``zpov`` package:
+
+.. code-block:: console
+
+    zpov-admin init [--public-access ] /path/to/empty/directory
+    zpov-admin add-user --login LOGIN --name NAME --email EMAIL --password PASSWORD
+
+
+
