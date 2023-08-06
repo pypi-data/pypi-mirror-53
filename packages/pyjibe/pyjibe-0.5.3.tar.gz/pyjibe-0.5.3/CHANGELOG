@@ -1,0 +1,37 @@
+0.5.3
+ - enh: improved visualization of meta data parameters in the Info tab
+ - setup: bump afmformats from 0.3.0 to 0.4.1
+ - setup: bump nanite from 1.2.0 to 1.2.2
+0.5.2
+ - ref: bump nanite to 1.2.0
+ - ref: migrate to afmformats (0.3.0)
+0.5.1
+ - fix: missing title in FD window and missing FD number in export menu
+ - enh: add help menu with link to docs, about, and software used (#1)
+ - docs: add quick guide for importing a nanite training set
+ - docs: add black/white logo
+0.5.0
+ - feat: allow to import training sets produced with nanite
+ - ref: major code refactoring of force-distance interface and cleanup
+ - setup: bump nanite dependency to >=1.1.1
+0.4.4
+ - ci: pin 'joblib==0.11.0' on travis-CI (workaround for infinite loop
+   in macOS build, https://github.com/pyinstaller/pyinstaller/issues/4067)
+ - docs: add installation instructions
+0.4.3
+ - maintenance release (migrate to GitHub infrastructure)
+ - experimental macOS builds
+0.4.2
+ - enh: merge training set and regressor selection into scheme selection
+   (prevents confusion for users that are unsure what to choose)
+ - enh: user rating is saved during rating, not afterwards
+ - enh: rating containers for user rating can be reused explicitly
+ - enh: qmap plot now better distinguishes between unavailable and
+   invalid data
+ - ref: migrate user rating output to nanite
+0.4.1
+ - fix: autoscaling according to fitting range did not work
+ - fix: not possible to load .jpk-force-map files
+ - ref: migrate qmap generation to nanite
+0.4.0
+ - migration to GitHub
