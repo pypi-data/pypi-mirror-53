@@ -1,0 +1,37 @@
+value1 Listmodedata ::= header : {
+  standardID "IEC 63047 Ed. 1.0",
+  listModeDataPart 0,
+  listModeDataNParts 1,
+  iec62755 single : NULL,
+  start {
+    date-time "2000-01-01T00:00:00Z",
+    fractional-seconds 0.0
+  },
+  deviceList {
+    {
+    }
+  },
+  channelList {
+    {
+      deviceID 0,
+      kind physicalkind,
+      delay 0,
+      adcSamplingRate real32 : 0.0,
+      adcBitResolution 0,
+      clockFrequency real32 : 0.0,
+      eventPropertyList {
+        eventPulseProperty : {
+        }
+      }
+    }
+  },
+  messageList {
+    {
+      timeStamp 0,
+      binMessage {
+        binFormat "000",
+        binData '00'H
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+    "value_name": "value",
+    "type_name": "S1AP-PDU",
+    "value": {
+        "initiatingMessage": {
+            "procedureCode": 0,
+            "criticality": "reject",
+            "value": {
+                "HandoverRequired": {
+                    "protocolIEs": [
+                        {
+                            "id": 0,
+                            "criticality": "reject",
+                            "value": {
+                                "MME-UE-S1AP-ID": 321
+                            }
+                        },
+                        {
+                            "id": 8,
+                            "criticality": "reject",
+                            "value": {
+                                "ENB-UE-S1AP-ID": 321
+                            }
+                        },
+                        {
+                            "id": 1,
+                            "criticality": "reject",
+                            "value": {
+                                "HandoverType": "intralte"
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "criticality": "ignore",
+                            "value": {
+                                "Cause": {
+                                    "radioNetwork": "unspecified"
+                                }
+                            }
+                        },
+                        {
+                            "id": 4,
+                            "criticality": "reject",
+                            "value": {
+                                "TargetID": {
+                                    "targeteNB-ID": {
+                                        "global-ENB-ID": {
+                                            "pLMNidentity": "111111",
+                                            "eNB-ID": {
+                                                "macroENB-ID": "00000000001111111111"
+                                            }
+                                        },
+                                        "selected-TAI": {
+                                            "pLMNidentity": "111111",
+                                            "tAC": "abcd"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "id": 79,
+                            "criticality": "ignore",
+                            "value": {
+                                "Direct-Forwarding-Path-Availability": "directPathAvailable"
+                            }
+                        },
+                        {
+                            "id": 104,
+                            "criticality": "reject",
+                            "value": {
+                                "Source-ToTarget-TransparentContainer": "001100"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
