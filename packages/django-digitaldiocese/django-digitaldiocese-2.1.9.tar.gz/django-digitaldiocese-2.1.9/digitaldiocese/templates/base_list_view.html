@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load pagination_links %}
+
+
+{% block title %}
+    {{ block.super }} - {% block extra_title %}{% endblock extra_title %}
+{% endblock title %}
+
+{% block breadcrumb %}
+    {% block extra_breadcrumb %}
+    {% endblock extra_breadcrumb %}
+{% endblock breadcrumb %}
+
+
+{% block content %}
+    <div class="header"></div>
+    <div class="nav {% block nav_class %}{% endblock nav_class %}">
+        <h1>{% block h1_title %}{% endblock h1_title %}</h1>
+        <hr />
+        {% block left_side %}
+            <ul class="lined filter">
+                {% include "includes/left_side_categories.html" %}
+            </ul>
+        {% endblock %}
+    </div>
+    <div class="content">
+        <div class="{% block content_class %}news-list {% endblock content_class %}">
+            {% block h2_title %}
+            <hr />
+            {% endblock h2_title %}
+
+            <ul class="items-list">
+                {% block app_content %}
+                {% endblock app_content %}
+            </ul>
+
+            {% block pagination %}
+                {% if page_obj.has_other_pages %}
+                    {% get_pagination_links paginator page_obj as pagination_links %}
+                    <p class="btn-row">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}" class="back">Back</a>
+                        {% else %}
+                            <span class="back disabled">Back</span>
+                        {% endif %}
+
+                        <span>
+                            {% for page_num in pagination_links %}
+                                {% if page_num.is_current %}
+                                    {{ page_num.number }}
+                                {% elif page_num.is_filler %}
+                                    &hellip;
+                                {% else %}
+                                    <a href="?page={{ page_num.number }}">{{ page_num.number }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
+                        {% else %}
+                            <span class="next disabled">Next</span>
+                        {% endif %}
+                    </p>
+                {% endif %}
+            {% endblock pagination %}
+        </div>
+    </div>
+
+    <div class="footer"></div>
+{% endblock content %}

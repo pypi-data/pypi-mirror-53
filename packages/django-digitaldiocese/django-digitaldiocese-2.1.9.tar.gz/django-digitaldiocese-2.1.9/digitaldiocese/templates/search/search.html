@@ -1,0 +1,104 @@
+{% extends "base_list_view.html" %}
+{% load search_tags pagination_links crispy_forms_tags %}
+
+
+{% block title %}Search - {{ block.super }}{% endblock %}
+
+
+{% block extra_breadcrumb %}
+    <li><a href="{% url 'search:search' %}">Search</a></li>
+{% endblock extra_breadcrumb %}
+
+
+{% block h1_title %}
+    Search{% if query %} results{% endif %}
+{% endblock h1_title %}
+
+{% block left_side %}
+    <div class="search-block">
+        <form method="GET" action="{% url 'search:search' %}">
+            <fieldset>
+                {{ form.q }}
+                <p class="btn-row">
+                    <button type="submit" class="btn search">Search{% if query %} again{% endif %}</button>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+    {% if query %}
+        <div class="filter">
+            <h2>Filter your results</h2>
+            <hr />
+            <ul class="lined">
+                {% for content_type_choice, content_type_text in content_type_list %}
+                    <li{% if content_type_choice == content_type %} class="active"{% endif %}>
+                        <a href="?{% update_qs request.GET content_type=content_type_choice page=1 %}">
+                            {{ content_type_text }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock left_side %}
+
+
+{% block content_class %}
+{% endblock content_class %}
+
+
+{% block h2_title %}
+    {% if query %}
+        <h2 class="l1">"{{ query }}" returned {{ total_found }} result{{ total_found|pluralize }}</h2>
+        <hr />
+    {% endif %}
+{% endblock h2_title %}
+
+
+{% block app_content %}
+    {% if query %}
+        {% for result in page.object_list %}
+            {% if result.object %}
+                {% with result_template=result|result_template %}
+                    {% include result_template with object=result.object %}
+                {% endwith %}
+            {% endif %}
+        {% empty %}
+            <p>No search results.</p>
+        {% endfor %}
+    {% endif %}
+{% endblock app_content %}
+
+
+{% block pagination %}
+    {% with page_obj=page %}
+        {% if page_obj.has_other_pages %}
+            {% get_pagination_links paginator page_obj as pagination_links %}
+            <p class="btn-row">
+                {% if page_obj.has_previous %}
+                    <a href="?{% update_qs request.GET page=page_obj.previous_page_number %}" class="btn back">Back</a>
+                {% else %}
+                    <span class="btn back disabled">Back</span>
+                {% endif %}
+
+                <span>
+                    {% for page_num in pagination_links %}
+                        {% if page_num.is_current %}
+                            {{ page_num.number }}
+                        {% elif page_num.is_filler %}
+                            &hellip;
+                        {% else %}
+                            <a href="?{% update_qs request.GET page=page_num.number %}">{{ page_num.number }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?{% update_qs request.GET page=page_obj.next_page_number %}" class="btn next">Next</a>
+                {% else %}
+                    <span class="btn next disabled">Next</span>
+                {% endif %}
+            </p>
+        {% endif %}
+    {% endwith %}
+{% endblock pagination %}

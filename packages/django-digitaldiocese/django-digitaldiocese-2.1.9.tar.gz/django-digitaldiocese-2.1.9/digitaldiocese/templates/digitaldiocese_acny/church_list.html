@@ -1,0 +1,26 @@
+{% extends "digitaldiocese_acny/base_church_list.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+  {% if deanery %}
+    {{deanery}} -
+  {% else %}
+    ACNY -
+  {% endif %}{{ block.super }}
+{% endblock %}
+
+{% block acny_sidebar %}
+  <h1>General search</h1>
+  <hr />
+  <form method="GET" action="{% url "search:search" %}">
+      {{ search_form.q }}
+      <p class="btn-row">
+          <button type="submit" class="btn right arrow">Search</button>
+      </p>
+  </form>
+
+  <h1>Search Result</h1>
+  <hr />
+{{ block.super }}
+{% endblock acny_sidebar %}

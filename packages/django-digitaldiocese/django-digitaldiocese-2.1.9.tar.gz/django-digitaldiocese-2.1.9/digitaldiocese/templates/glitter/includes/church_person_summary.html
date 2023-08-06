@@ -1,0 +1,29 @@
+<li class="list-item-page  list-item">
+    <h6>{{ role.role_name }}</h6>
+    <h1 class="result-title"><a href="{{ person.get_absolute_url }}">{{ person.get_full_name }}</a></h1>
+
+    <dl class="meta">
+        {% if person.addresses.all|length > 0 %}
+            {% for address in person.addresses.all %}
+                <dt>{% firstof address.label "Address" %}</dt>
+                <dd>{{ address.get_address_parts|join:", " }}</dd>
+            {% endfor %}
+        {% endif %}
+
+        {% if person.phone_numbers.all|length > 0 %}
+            {% for phone_number in person.phone_numbers.all %}
+                {% if phone_number.number|length > 2 %}
+                    <dt>{{ phone_number.phone_type|capfirst }} Phone</dt>
+                    <dd><a href="tel:{{ phone_number.number }}">{{ phone_number.number }}</a></dd>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if person.emails.all|length > 0 %}
+            {% for email in person.emails.all %}
+                <dt>{% firstof email.label "E-mail" %}</dt>
+                <dd><a href="mailto:{{ email.address }}">{{ email.address }}</a></dd>
+            {% endfor %}
+        {% endif %}
+    </dl>
+</li>

@@ -1,0 +1,21 @@
+{% extends "registration/base.html" %}
+
+
+{% block title %}Login - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+    <form method="POST" action="{% url 'login' %}">
+        <h1>Log in</h1>
+        <hr />
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+
+        <p class="btn-row">
+            <a class="btn left" href="{% url 'password_reset' %}">Forgot Password?</a>
+            <button class="arrow" type="submit">Log in</button>
+        </p>
+    </form>
+{% endblock content %}

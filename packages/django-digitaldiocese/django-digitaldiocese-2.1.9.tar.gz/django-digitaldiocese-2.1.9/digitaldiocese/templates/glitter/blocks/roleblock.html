@@ -1,0 +1,12 @@
+{% load thumbnail %}
+
+<div class="{{ css_classes }}">
+  {% if object.get_roles %}
+    <h2>{{ object.role_name }}</h2>
+    <p>{{ object.content|safe }}</p>
+    {% for role in object.get_roles %}
+      <div class="role_description">{{ role.role_description|linebreaks }}</div>
+      {% include "digitaldiocese_acny/person_summary.html" with person=role.person %}
+    {% endfor %}
+  {% endif %}
+</div>

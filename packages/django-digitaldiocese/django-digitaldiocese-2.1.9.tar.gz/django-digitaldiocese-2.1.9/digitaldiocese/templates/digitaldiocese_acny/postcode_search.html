@@ -1,0 +1,15 @@
+{% extends "digitaldiocese_acny/base_church_list.html" %}
+{% load crispy_forms_tags %}
+
+{% block acny_sidebar %}
+<h1>Search result</h1>
+<hr />
+<form method="GET" action="">
+    {{ form.q }}
+    <p class="btn-row">
+        <button type="submit" class="btn right arrow">Search</button>
+    </p>
+</form>
+
+{{ block.super }}
+{% endblock acny_sidebar %}

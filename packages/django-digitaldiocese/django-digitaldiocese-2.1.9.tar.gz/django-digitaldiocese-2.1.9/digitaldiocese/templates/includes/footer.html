@@ -1,0 +1,48 @@
+{% load footer_pages %}
+
+<div class="wrap full">
+    <ul class="foot-social">
+        <li class="facebook"><a href="#"><span class="hide">Facebook</span></a></li>
+        <li class="twitter"><a href="#"><span class="hide">Twitter</span></a></li>
+        <li class="instagram"><a href="#"><span class="hide">Instagram</span></a></li>
+        <li class="vimeo"><a href="#"><span class="hide">Vimeo</span></a></li>
+    </ul>
+    <div class="foot-address">
+        <a href="/" class="foot-brand">{{ request.site.name }}</a>
+        <p>The Diocese, Church Street, Townsville, England, B5 5SE<br />
+        0121 426 0400 <a href="mailto:diocese@example.org">diocese@example.org</a></p>
+    </div>
+
+    <ul class="foot-links">
+        {% footer_pages as footer_links %}
+        {% for link in footer_links|show_nav|slice:"12" %}
+            <li {% if forloop.counter0|divisibleby:3 %}class="first"{% endif %}>
+                <h3>
+                    <a href="{{ link.get_absolute_url }}">
+                        {{ link.title }}
+                    </a>
+                </h3>
+                <small>
+                    {% for child_link in link.get_children|show_nav %}
+                        <a href="{{ child_link.get_absolute_url }}">{{ child_link.title }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </small>
+            </li>
+        {% endfor %}
+    </ul>
+    <ul class="foot-links header-duplicate">
+        {% for header in header_links %}
+            <li class="{% if forloop.counter0|divisibleby:3 %}first{% endif %} no-secondary">
+                <a class="{% ifequal request.path header.get_url_path %}active{% endifequal %}"
+                    href="{{ header.url }}">
+                    {{ header.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="foot-legal">
+        <p class="foot-legal-copyright">Copyright &copy; {% now "Y" %} {{ request.site.name }}.</p>
+        <p class="foot-legal-creator">Design by <a href="https://www.dev.ngo/">DEV</a></p>
+    </div>
+</div>

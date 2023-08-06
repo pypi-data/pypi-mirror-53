@@ -1,0 +1,27 @@
+{% load thumbnail %}
+
+<li class="list-item-document list-item with-image {% if object.valid_image %}show-image{% endif %}">
+    <a class="{{ object.document_format.title|slugify }}" href="{{ object.get_absolute_url }}">
+        {% if object.valid_image %}
+            {% thumbnail object.document "150x150" crop="center" as thumb %}
+                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ object.title }}" class="thumb">
+            {% endthumbnail %}
+        {% endif %}
+    </a>
+
+    {% if object.category %}
+        <span class="category">
+            <h6>FILE</h6>
+            <ul class="pebbles">
+                <li>
+                    <a href="{{ object.category_get_absolute_url }}">{{ object.category }}</a>
+                </li>
+            </ul>
+        </span>
+    {% endif %}
+
+    <h6 class="date">{{ object.current_version.modified|date:"j M Y" }}</h6>
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
+
+    <p>{{ object.summary }} <a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

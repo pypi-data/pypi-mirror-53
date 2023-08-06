@@ -1,0 +1,39 @@
+{% extends "base_list_view.html" %}
+
+{% block extra_title %}
+    Vacancies
+    {% if object %}
+        - {{ object.title }}
+    {% else %}
+        {% if current_category %}
+            - {{ current_category.title }}
+        {% endif %}
+    {% endif %}
+{% endblock extra_title %}
+
+{% block breadcrumb %}
+    <li><a class="active" href="{% url 'digitaldiocese-vacancies:list' %}">Vacancies</a></li>
+    {% block extra_breadcrumb %}
+    {% endblock extra_breadcrumb %}
+
+{% endblock %}
+
+{% block h1_title %}
+    Vacancies
+{% endblock h1_title %}
+
+{% block h2_title %}
+    <h2>Vacancies List</h2>
+    {{ block.super }}
+{% endblock h2_title %}
+
+{% block app_content %}
+    {% for vacancy in object_list %}
+        <li>
+            {% include "includes/render_list_object.html" with published=vacancy.created_at obj=vacancy%}
+        </li>
+    {% empty %}
+        <p>No vacancies available.</p>
+    {% endfor %}
+{% endblock app_content %}
+

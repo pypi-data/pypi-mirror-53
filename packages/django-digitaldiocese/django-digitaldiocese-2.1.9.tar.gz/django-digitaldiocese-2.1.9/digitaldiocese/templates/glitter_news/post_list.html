@@ -1,0 +1,42 @@
+{% extends "base_list_view.html" %}
+
+{% block extra_title %}
+    News
+    {% if object %}
+        - {{ object.title }}
+    {% else %}
+        {% if current_category %}
+            - {{ current_category.title }}
+        {% endif %}
+    {% endif %}
+{% endblock extra_title %}
+
+{% block breadcrumb %}
+    <li><a class="active" href="{% url 'glitter-news:list' %}">News</a></li>
+    {% block extra_breadcrumb %}
+    {% endblock extra_breadcrumb %}
+
+{% endblock %}
+
+{% block h1_title %}
+    News
+{% endblock h1_title %}
+
+{% block h2_title %}
+    <h2>News Stories</h2>
+    {{ block.super }}
+{% endblock h2_title %}
+
+{% block app_content %}
+    {% for post in object_list %}
+        <li>
+            {% include "includes/render_list_object.html" with published=post.date|date:'j N Y' obj=post %}
+        </li>
+    {% empty %}
+        <p>No posts available.</p>
+    {% endfor %}
+{% endblock app_content %}
+
+
+
+

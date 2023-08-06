@@ -1,0 +1,6 @@
+{% load thumbnail %}
+
+
+{% if object.person %}
+    {% include "digitaldiocese_acny/person_summary.html" with person=object.person %}
+{% endif %}

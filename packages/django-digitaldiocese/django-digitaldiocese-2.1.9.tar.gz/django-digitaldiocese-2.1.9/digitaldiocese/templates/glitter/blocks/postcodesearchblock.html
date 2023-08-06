@@ -1,0 +1,12 @@
+{% load acny_tags %}
+
+{% get_acny_form as form %}
+
+<div class="{{ css_classes }}">
+    <form method="GET" action="{% url 'digitaldiocese-acny:postcode-search' %}">
+        {{ form.as_p }}
+        <p class="btn-row">
+            <button type="submit" class="btn right arrow">Search</button>
+        </p>
+    </form>
+</div>

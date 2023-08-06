@@ -1,0 +1,36 @@
+{% load thumbnail %}
+
+
+{% if object.carousel %}
+    <div id="imageonlycarousel-{{ content_block.id }}" class="{{ css_classes }} block-carousel carousel slide" data-ride="carousel">
+        {% with carousel_images=object.carousel.carousel_images.select_related.all %}
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                {% for image in carousel_images %}
+                    <li data-target="#imageonlycarousel-{{ content_block.id }}" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                {% for image in carousel_images %}
+                    <div class="item {% if forloop.first %}active{% endif %}">
+                        {% thumbnail image.image.file thumb_dimensions crop="center"  as thumb %}
+                            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="" />
+                        {% endthumbnail %}
+                    </div>
+                {% endfor %}
+                <!-- Controls -->
+                <a class="left carousel-control" href="#" data-target="#imageonlycarousel-{{ content_block.id }}" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only previous-slide"><span class="hide">Previous</span></span>
+                </a>
+                <a class="right carousel-control" href="#" role="button" data-target="#imageonlycarousel-{{ content_block.id }}"  data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only next-slide"><span class="hide">Next</span></span>
+                </a>
+            </div>
+        {% endwith %}
+    </div>
+{% endif %}

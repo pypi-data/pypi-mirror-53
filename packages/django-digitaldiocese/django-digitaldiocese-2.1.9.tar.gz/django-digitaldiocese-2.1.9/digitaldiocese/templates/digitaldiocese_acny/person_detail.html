@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+
+{% block title %}{{ object.get_full_name }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<div class="header"></div>
+<div class="nav demo">
+    <h1>Associated places</h1>
+    <hr />
+    <ul class="lined filter">
+        <li{% if not object and not deanery %} class="active"{% endif %}><a href="{% url 'digitaldiocese-acny:church-list' %}">Directory Homepage</a></li>
+
+        {% if object.roles.values|length > 0 %}
+            {% regroup object.roles.all by church.deanery as deanery_list %}
+
+            {% for rolegroup in deanery_list %}
+                {% if rolegroup.grouper %}
+                    <li>
+                        <a href="{{ rolegroup.grouper.get_absolute_url }}">{{ rolegroup.grouper }} Deanery</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if object.roles.values|length > 0 %}
+            {% regroup object.roles.all by church as role_list %}
+
+            {% for rolegroup in role_list %}
+                {% if rolegroup.grouper %}
+                    <li>
+                        <a href="{{ rolegroup.grouper.get_absolute_url }}">{{ rolegroup.grouper }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </ul>
+</div>
+
+<div class="content demo acny-detail">
+    <h1>{{ object.get_full_name }}</h1>
+    <hr />
+
+    <div class="person-detail">
+        <dl class="meta">
+            {% if object.addresses.values|length > 0 %}
+                {% for address in object.addresses.all %}
+                    <dt>{% if address.label %}{{ address.label }}{% else %}Address{% endif %}</dt>
+                    <dd>{{ address.get_address_parts|join:", " }}</dd>
+                {% endfor %}
+            {% endif %}
+
+            {% if object.phone_numbers.values|length > 0 %}
+                {% for phone_number in object.phone_numbers.all %}
+                    {% if phone_number.number|length > 2 %}
+                        <dt>
+                            {% if phone_number.phone_type == 'home' %}Home
+                            {% elif phone_number.phone_type == 'office' %}Office
+                            {% elif phone_number.phone_type == 'mobile' %}Mobile
+                            {% elif phone_number.phone_type == 'fax' %}Fax
+                            {% endif %}
+                        </dt>
+                        <dd>{{ phone_number.number }}</dd>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if object.emails.values|length > 0 %}
+                {% for email in object.emails.all %}
+                    <dt>{% if email.label %}{{ email.label }}{% else %}Email{% endif %}</dt>
+                    <dd><a href="mailto:{{ email.address }}">{{ email.address }}</a></dd>
+                {% endfor %}
+            {% endif %}
+
+            {% if object.roles.values|length > 0 %}
+                <dt>Roles</dt>
+                {% regroup object.roles.all by role_name as role_list %}
+                <dd>
+                    <ul class="m-l-0 p-l-0">
+                        {% for rolegroup in role_list %}
+                            <li>
+                                <strong>{{ rolegroup.grouper }}</strong>
+                                <p>
+                                    {% for role in rolegroup.list %}
+                                        <a href="{{ role.church.get_absolute_url }}">{{ role.church.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </p>
+                                <br />
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </dd>
+            {% endif %}
+
+        </dl>
+    </div>
+
+</div>
+{% endblock %}

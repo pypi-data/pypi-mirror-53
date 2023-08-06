@@ -1,0 +1,37 @@
+{% extends "glitter/base.html" %}
+
+
+{% block title %}{{ glitter.obj.title }}{% endblock %}
+
+{% block primary_nav %}
+    {% include "includes/primary_nav.html" with current_page=glitter.obj homepage=True only %}
+{% endblock primary_nav %}
+
+{% block breadcrumb %}{% endblock %}
+
+{% block billboard_top %}
+     {{ columns.billboard_top }}
+{% endblock billboard_top %}
+
+{% block content %}
+    <main class="main">
+        <div class="wrap">
+            <div class="header">
+                {{ columns.header }}
+            </div>
+            <div class="content">
+                {{ columns.content }}
+            </div>
+            <div class="aside">
+                {{ columns.aside }}
+            </div>
+        </div>
+        <div class="footer">
+            {{ columns.footer }}
+        </div>
+    </main>
+{% endblock content %}
+
+{% block billboard_bottom %}
+     {{ columns.billboard_bottom }}
+{% endblock billboard_bottom %}

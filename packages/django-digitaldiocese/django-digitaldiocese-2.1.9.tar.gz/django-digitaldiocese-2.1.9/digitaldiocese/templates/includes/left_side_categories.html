@@ -1,0 +1,46 @@
+{% load colour_tags %}
+
+{% if categories %}
+    <li {% if not current_category %}
+          {% if not current_location %}
+            class="active"
+          {% endif %}
+        {% endif %}>
+        {% if news_categories %}
+            <a href="{% url 'glitter-news:list' %}">All News</a>
+        {% endif %}
+
+        {% if events_categories %}
+            <a href="{% url 'glitter-events:current-month' %}">Events by Month</a>
+        {% endif %}
+
+        {% if vacancies_categories %}
+            <a href="{% url 'digitaldiocese-vacancies:list' %}">All Vacancies</a>
+        {% endif %}
+
+        {% if documents_categories %}
+            <a href="{% url 'glitter-documents:list' %}">All Documents</a>
+        {% endif %}
+    </li>
+
+    {% for category in categories %}
+        <li class="sq{{ forloop.counter0|category_colour }} {% if category.id == current_category.id %}active{% endif %}">
+            <a href="{{ category.get_absolute_url }}">
+                {{ category.title }}
+            </a>
+        </li>
+    {% endfor %}
+{% else %}
+    No categories
+{% endif %}
+
+{% if events_locations %}
+    <h3 class="events-filter-headline">By Location</h3><hr/>
+    {% for location in locations %}
+        <li class="sq{{ forloop.counter0|category_colour }} {% if location.id == current_location.id %}active{% endif %}">
+            <a href="{{ location.get_absolute_url }}">
+                {{ location.title }}
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}

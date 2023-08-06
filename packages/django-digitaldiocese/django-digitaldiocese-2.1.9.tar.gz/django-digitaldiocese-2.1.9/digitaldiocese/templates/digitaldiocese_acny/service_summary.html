@@ -1,0 +1,49 @@
+<li class="list-item-page  list-item">
+    <h2 class="m-b-0">{{ service.name }}</h2>
+
+    {% if service.notes %}
+        <p>{{ service.notes | linebreaks }}</p>
+    {% endif %}
+
+    <footer>
+        <p class="schedule">
+            {% if service.recurring %}
+                Every
+                {% for r in service.get_friendly_recurrences %}
+                    {% if forloop.first %}{% else %}
+                        {% if forloop.last %} and {% else %}, {% endif %}
+                    {% endif %}{{ r }}
+                {% endfor %}
+
+                {% for d in service.get_days %}
+                    {% if forloop.first %}{% else %}
+                        {% if forloop.last %} and {% else %}, {% endif %}
+                    {% endif %}{{ d|title }}
+                {% endfor %}
+                at {{ service.time }}
+                {% if service.duration %}
+                    for {{ service.duration }} minutes
+                {% endif %}
+            
+            {% else %}
+                {{ service.date }} at {{ service.time }} for {{ service.duration }} minutes
+            {% endif %}
+        </p>
+
+
+        {% if service.r_notes %}
+            <p class="schedule-notes">{{ service.r_notes|linebreaks }}</p>
+        {% endif %}
+
+        {% if service.labels.all|length > 0 %}
+            <p class="service-labels">
+                <strong>
+                    {% for label in service.labels.all %}
+                        {{ label.text|capfirst }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </strong>
+            </p>
+        {% endif %}
+
+    </footer>
+</li>

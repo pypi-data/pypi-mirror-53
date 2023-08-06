@@ -1,0 +1,26 @@
+{% load glitter_navigation mptt_tags %}
+
+{% tree_from_root current_page as page_tree %}
+{% get_page_ancestor_ids current_page as ancestor_ids %}
+{% get_active_page object as active_page %}
+
+<ul class="lined">
+    {% recursetree page_tree %}{% spaceless %}
+        {% if node.show_in_navigation %}
+            {% if node.id in ancestor_ids %}
+                <li class="active">
+                    <a href="{{ node.url }}" class="{% if node == active_page %}page{% endif %}">{{ node.title }}</a>
+                    {% if not node.is_leaf_node and node.level < 3 and children %}
+                        <ul>
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ node.url }}">{{ node.title }}</a>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}{% endrecursetree %}
+</ul>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ glitter.obj.title }} - {{ block.super }}{% endblock %}
+
+{% block primary_nav %}
+    {% include "includes/primary_nav.html" with current_page=glitter.obj only %}
+{% endblock primary_nav %}
+
+{% block breadcrumb %}
+    {% for parent_page in glitter.obj.get_ancestors %}
+        <li><a href="{{ parent_page.get_absolute_url }}">{{ parent_page.title }}</a></li>
+    {% endfor %}
+    <li><a href="{{ glitter.obj.get_absolute_url }}">{{ glitter.obj.title }}</a></li>
+{% endblock breadcrumb %}

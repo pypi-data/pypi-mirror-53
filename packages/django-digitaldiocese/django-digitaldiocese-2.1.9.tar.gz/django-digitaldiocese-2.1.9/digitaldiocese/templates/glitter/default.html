@@ -1,0 +1,43 @@
+{% extends "glitter/base.html" %}
+
+
+{% block body_class %}default{% endblock body_class %}
+
+{% block billboard_top %}
+     {{ columns.billboard_top }}
+{% endblock billboard_top %}
+
+{% block content %}
+    <main class="main">
+
+        <div class="full wrap">
+            <div class="header">
+                {{ columns.header }}
+            </div>
+            <div class="nav">
+                <h1>In this section</h1>
+                <hr />
+                {% include "includes/side_nav.html" with current_page=glitter.obj %}
+            </div>
+            <div class="content">
+                {{ columns.content }}
+                <div class="half-left">
+                    {{ columns.half_left }}
+                </div>
+                <div class="half-right">
+                    {{ columns.half_right }}
+                </div>
+                 {{ columns.content_2 }}
+            </div>
+
+            <div class="footer">
+                {{ columns.footer }}
+            </div>
+        </div>
+
+    </main>
+{% endblock content %}
+
+{% block billboard_bottom %}
+    {{ columns.billboard_bottom }}
+{% endblock billboard_bottom %}

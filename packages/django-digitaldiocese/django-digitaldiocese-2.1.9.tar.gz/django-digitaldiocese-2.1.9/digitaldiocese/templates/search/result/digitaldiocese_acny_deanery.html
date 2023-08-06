@@ -1,0 +1,10 @@
+{% load thumbnail %}
+<li class="list-item-acny list-item">
+    <span class="category">
+        <h6>DEANERY</h6>
+    </span>
+
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h1>
+
+    <p>{{ object.summary }} <a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

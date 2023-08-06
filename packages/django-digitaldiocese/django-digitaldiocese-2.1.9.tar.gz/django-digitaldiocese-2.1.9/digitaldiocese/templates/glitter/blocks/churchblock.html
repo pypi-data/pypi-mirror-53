@@ -1,0 +1,24 @@
+{% load thumbnail static %}
+
+{% if object.church %}
+  <div class="{{ css_classes }} churchblock">
+    {% with church=object.church %}
+      <h2>{{ church.name }}</h2>
+      <hr />
+
+      {% if object.get_map_json %}
+        <div id="map-canvas-{{ object.id }}" class="acny-canvas acny-map"
+          data-mapzoom="13"
+          data-mapjson="{{ object.get_map_json|escape }}"
+          {% if church.parish.boundary_data %}
+            data-mapregion="{ &quot;data&quot;: {{ church.parish.boundary_data|escape }} }"
+          {% endif %}
+        ></div>
+      {% endif %}
+      <p class="church-detail">{{ church.address }}</p>
+      <p class="btn-row">
+        <a href="{{ church.get_absolute_url }}" class="btn right arrow">More info</a>
+      </p>
+    {% endwith %}
+  </div>
+{% endif %}

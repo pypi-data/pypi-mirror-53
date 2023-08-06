@@ -1,0 +1,36 @@
+{% load documents_tags thumbnail %}
+
+{% if object.category %}
+    {% get_latest_documents 3 category=object.category.slug as latest_documents %}
+{% else %}
+    {% get_latest_documents 3 as latest_documents %}
+{% endif %}
+
+{% if latest_documents %}
+    <div class="{{ css_classes }} latestblock">
+    <h1 class="l1">Latest documents</h1>
+    <hr/>
+        <ul>
+            {% for document in latest_documents %}
+                <li>
+                    <a href="{{ document.get_absolute_url }}">
+                        <div class="file-format {% if object.valid_image %}show-image{% else %}{{ document.document_format.title|slugify }}{% endif %}">
+                            {% if object.valid_image %}
+                                {% thumbnail object.document "480x480" crop="center" as thumb %}
+                                    <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ object.title }}">
+                                {% endthumbnail %}
+                            {% endif %}
+                        </div>
+                    </a>
+                    <h3><a href="{{ document.category.get_absolute_url }}">{{ document.category }}</a></h3>
+                    <h2><a href="{{ document.get_absolute_url }}">{{ document.title }}</a></h2>
+                    <p>{{ document.summary|truncatewords:15 }} <a href="{{ document.get_absolute_url }}">Read more</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+        {% url 'glitter-documents:list' as documents_home %}
+        <p class="btn-row">
+            <a href="{{ object.category.get_absolute_url|default:documents_home }}" class="btn arrow">More documents</a>
+        </p>
+    </div>
+{% endif %}

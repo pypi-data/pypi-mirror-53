@@ -1,0 +1,69 @@
+{% load glitter_navigation mptt_tags %}
+{% get_root_pages current_page as root_pages %}
+
+<ul class="nav-primary">
+    {% for page, page_active in root_pages %}
+        <li class="c{{ forloop.counter }}{% if page_active %} active{% endif %}">
+            <a href="{{ page.get_absolute_url }}">
+                {{ page.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+<input type="checkbox" id="mobile-menu-toggle" class="menu-toggle">
+
+{% for page, page_active in root_pages %}
+    {% if page_active %}
+        <ul class="mobile-menu">
+            <li class="home-label c{{ forloop.counter }}">
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a class="c{{ forloop.counter }}{% if page_active %} active{% endif %}"
+                    href="{{ page.get_absolute_url }}">
+                    {{ page.title }}
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endfor %}
+
+<ul class="mobile-menu">
+    {% for page, page_active in root_pages %}
+        <li>
+            <a class="c{{ forloop.counter }}{% if page_active %} active{% endif %}"
+                href="{{ page.get_absolute_url }}">
+                {{ page.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if current_page %}
+    {% tree_from_root current_page as page_tree %}
+    {% get_page_ancestor_ids current_page as ancestor_ids %}
+
+    {% if page_tree %}
+        <ul class="mobile-tree lined">
+            {% recursetree page_tree %}{% spaceless %}
+                {% if node.show_in_navigation %}
+                    {% if node.id in ancestor_ids %}
+                        <li class="active">
+                            <a href="{{ node.url }}" class="active">{{ node.title }}</a>
+                            {% if not node.is_leaf_node and node.level < 3 and children %}
+                                <ul>
+                                    {{ children }}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ node.url }}">{{ node.title }}</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endspaceless %}{% endrecursetree %}
+        </ul>
+    {% endif %}
+{% endif %}

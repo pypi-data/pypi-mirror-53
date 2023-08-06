@@ -1,0 +1,42 @@
+<li class="list-item-acny list-item">
+
+    <span class="category">
+        <h6>DIRECTORY /</h6>
+        <ul class="pebbles">
+            <li>
+                <a href="{{ object.get_absolute_url }}">{{ object.get_full_name }}</a>
+            </li>
+        </ul>
+    </span>
+
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.get_full_name }}</a></h1>
+
+    {% if object.addresses.values|length > 0 %}
+        {% with address=object.addresses.all.0 %}
+            <p>Contact address: {{ address.get_address_parts|join:", " }}</p>
+        {% endwith %}
+    {% endif %}
+
+    {% if object.phone_numbers.values|length > 0 %}
+        {% with phone_number=object.phone_numbers.all.0 %}
+            {% if phone_number.number %}
+                <p>
+                    {% if phone_number.phone_type == 'home' %}Home
+                    {% elif phone_number.phone_type == 'office' %}Office
+                    {% elif phone_number.phone_type == 'mobile' %}Mobile
+                    {% elif phone_number.phone_type == 'fax' %}Fax
+                    {% endif %}:
+                    {{ phone_number.number }}</p>
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+
+    {% if object.emails.values|length > 0 %}
+        {% with email=object.emails.all.0 %}
+            <p>{% if email.label %}{{ email.label }}{% else %}Email{% endif %}
+            <a href="mailto:{{ email.address }}">{{ email.address }}</a></p>
+        {% endwith %}
+    {% endif %}
+
+    <p>{{ object.full_name }} <a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

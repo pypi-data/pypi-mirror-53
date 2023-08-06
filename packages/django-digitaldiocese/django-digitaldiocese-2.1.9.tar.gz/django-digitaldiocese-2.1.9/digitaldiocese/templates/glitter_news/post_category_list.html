@@ -1,0 +1,14 @@
+{% extends "glitter_news/post_list.html" %}
+
+{% block extra_title %}
+    News
+    {% if current_category %}
+        - {{ current_category.title }}
+    {% endif %}
+{% endblock extra_title %}
+
+{% block extra_breadcrumb %}
+    <li><a class="active">{{ current_category.title }}</a></li>
+{% endblock extra_breadcrumb %}
+
+

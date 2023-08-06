@@ -1,0 +1,14 @@
+<dt>Share</dt>
+<dd>
+    <ul class="social">
+        <li>
+            <a href="https://twitter.com/intent/tweet?{% if social_title %}text={{ social_title|urlencode }}&{% endif %}url={% filter urlencode:"" %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endfilter %}" class="twitter-icon"></a>
+        </li>
+        <li>
+            <a href="mailto:?{% if social_title %}subject={{ social_title|urlencode }}&{% endif %}body={% filter urlencode:"" %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endfilter %}" class="mail-icon"></a>
+        </li>
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?{% if social_title %}title={{ social_title|urlencode }}&{% endif %}u={% filter urlencode:"" %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endfilter %}" class="facebook-icon"></a>
+        </li>
+    </ul>
+</dd>

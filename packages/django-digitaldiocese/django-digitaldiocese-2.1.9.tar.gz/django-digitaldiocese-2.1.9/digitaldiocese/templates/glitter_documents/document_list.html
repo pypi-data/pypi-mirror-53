@@ -1,0 +1,51 @@
+{% extends "base_list_view.html" %}
+{% load thumbnail %}
+
+{% block extra_title %}
+    Documents
+    {% if object %}
+        - {{ object.title }}
+    {% else %}
+        {% if current_category %}
+            - {{ current_category.title }}
+        {% endif %}
+    {% endif %}
+{% endblock extra_title %}
+
+{% block breadcrumb %}
+    <li><a class="active" href="{% url 'glitter-documents:list' %}">Documents</a></li>
+    {% block extra_breadcrumb %}
+    {% endblock extra_breadcrumb %}
+
+{% endblock %}
+
+{% block h1_title %}
+    Documents
+{% endblock h1_title %}
+
+{% block h2_title %}
+    <h2>Documents List</h2>
+    {{ block.super }}
+{% endblock h2_title %}
+
+{% block app_content %}
+    {% for document in object_list %}
+        <li class="list-item-document list-item with-image {% if document.image or document.valid_image %}show-image{% endif %}">
+            <a class="{{ document.document_format.title|slugify }}" href="{{ document.get_absolute_url }}">
+                {% if document.image %}
+                    {% thumbnail document.image.file "280x280" crop="center" as thumb %}
+                        <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ document.title }}" class="thumb">
+                    {% endthumbnail %}
+                {% elif document.valid_image %}
+                    {% thumbnail document.document "280x280" crop="center" as thumb %}
+                        <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ document.title }}" class="thumb">
+                    {% endthumbnail %}
+                {% endif %}
+            </a>
+            {% include "includes/render_list_object.html" with published=document.created_at obj=document hide_thumb=True %}
+        </li>
+    {% empty %}
+        <p>No documents available.</p>
+    {% endfor %}
+{% endblock app_content %}
+

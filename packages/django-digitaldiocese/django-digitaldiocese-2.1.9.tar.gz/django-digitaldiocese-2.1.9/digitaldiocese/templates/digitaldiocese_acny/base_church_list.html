@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static pagination_links colour_tags %}
+
+
+{% block content %}
+<div class="header"></div>
+<div class="nav demo">
+    {% block acny_sidebar %}
+    <ul class="lined filter acny-list">
+        <li{% if not object and not deanery %} class="active"{% endif %}><a href="{% url 'digitaldiocese-acny:church-list' %}">Everything</a></li>
+        {% for deanery_obj in deanery_list %}
+            <li class="sq{{ forloop.counter0|category_colour }} {% if deanery == deanery_obj %} active {% endif %}"><a href="{{ deanery_obj.get_absolute_url }}">{{ deanery_obj }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endblock acny_sidebar %}
+</div>
+<div class="content demo">
+    <div class="acny">
+        <h2>{{ deanery|default:"Everything" }}</h2>
+        <hr />
+        <div data-mapjson="{{ map_json|escape }}" id="map-canvas" class="acny-canvas acny-map"></div>
+
+        <ul>
+            {% for church in object_list %}
+                <li class="sq{% object_colour obj=church.deanery obj_list=deanery_list %}">
+                    <a href="{{ church.get_absolute_url }}">
+                        <div>
+                            {% if church.location %}
+                                <div class="details">
+                                    <span>{{ forloop.counter0|add:start_index }}</span>
+                                    {% if church.distance %}
+                                        <span>{{ church.distance.mi|stringformat:".1f" }} miles</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                            <h2>{{ church }}</h2>
+                            <h6>{{ church.parish }}, {{ church.deanery }}</h6>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if is_paginated %}
+            {% get_pagination_links paginator page_obj as pagination_links %}
+            <p class="btn-row">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn back">Back</a>
+                {% else %}
+                    <a class="btn back disabled">Back</a>
+                {% endif %}
+
+                <span>
+                    {% for page_num in pagination_links %}
+                        {% if page_num.is_current %}
+                            <span class="current">{{ page_num.number }}</span>
+                        {% elif page_num.is_filler %}
+                            <span class="ellipsis">&hellip;</span>
+                        {% else %}
+                            <a href="?page={{ page_num.number }}">{{ page_num.number }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn next">Next</a>
+                {% else %}
+                    <a class="btn next disabled">Next</a>
+                {% endif %}
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="footer"></div>
+
+{% endblock content %}

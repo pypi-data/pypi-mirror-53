@@ -1,0 +1,9 @@
+{% extends "digitaldiocese_vacancies/vacancy_list.html" %}
+
+{% block extra_breadcrumb %}
+    <li>
+        <a class="active" href="{% url 'digitaldiocese-vacancies:category-list' current_category.slug %}">{{ current_category.title }}</a>
+    </li>
+{% endblock extra_breadcrumb %}
+
+

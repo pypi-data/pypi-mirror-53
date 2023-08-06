@@ -1,0 +1,57 @@
+{% load thumbnail %}
+
+{% if object.carousel %}
+
+  <div class="{{ css_classes }} js-carousel" data-autoplay="{% if object.auto_play %}{{ object.interval }}{% endif %}">
+
+    {% with object.carousel.carousel_images.select_related.all as slides %}
+
+      <div class="diocese-carousel__wrapper navigation-{{ object.navigation_panel_position }} slide-count-{{ slides|length }} navigation-{{ object.display_navigation|lower }}">
+
+        <div class="diocese-carousel transition-{{ object.transition_style }}">
+          {% for slide in slides %}
+            {% thumbnail slide.image.file "1200" as thumb %}
+              {% if slide.link and not slide.is_video %}
+                <a href="{{ slide.link }}" class="slide">
+              {% else %}
+                <div class="slide">
+              {% endif %}
+              <div class="relative">
+                <div class="diocese-carousel__slide aspect-{{ object.aspect_ratio }} {% if slide.is_video %}slide-video{% endif %}" {% if slide.is_video %}data-iframe="{{ slide.html }}"{% endif %} style="background-image: url({{ thumb.url }})"></div>
+                <div class="carousel-responsive-content">
+                  <p class="carousel-slide__title">{{ slide.title }}</p>
+                  {% if slide.subtitle %}
+                    <p class="carousel-slide__subtitle">
+                      {{ slide.subtitle }}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+              {% if slide.link and not slide.is_video %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+            {% endthumbnail %}
+          {% endfor %}
+        </div>
+
+        <div class="diocese-carousel__navigation">
+          {% for slide in slides %}
+            <div class="carousel__navigation-item js-carousel-button {% if forloop.first %}active{% endif %}">
+              <p class="carousel-slide__title">{{ slide.title }}</p>
+              <p class="carousel-slide__subtitle">
+                {{ slide.subtitle }}
+                {% if slide.link and not slide.is_video %}
+                  <a href="{{ slide.link }}">Read more</a>
+                {% endif %}
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    {% endwith %}
+  </div>
+{% endif %}

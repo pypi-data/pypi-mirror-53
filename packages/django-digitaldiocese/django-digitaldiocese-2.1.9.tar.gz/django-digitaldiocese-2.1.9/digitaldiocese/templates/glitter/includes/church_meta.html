@@ -1,0 +1,31 @@
+<dl class="meta full">
+    <dt>Church</dt>
+    <dd>{{ object.name }}{% if object.parish %}, {{ object.parish }}{% endif %}</dd>
+
+    <dt>Address</dt>
+    <dd>{{ object.address }}</dd>
+
+    {% if object.deanery %}
+        <dt>Deanery</dt>
+        <dd>
+            <a href="{{ object.deanery.get_absolute_url }}">{{ object.deanery }}</a>
+        </dd>
+    {% endif %}
+
+    {% if object.website %}
+        <dt>Website</dt>
+        <dd>
+            <a href="{{ object.website }}" target="_blank">{{ object.website }}</a>
+        </dd>
+    {% endif %}
+
+    <dt>Share</dt>
+    <dd>
+        <ul class="social">
+            <li><a class="twitter-icon" target="_blank" href="https://twitter.com/home?status={{ request.build_absolute_uri|urlencode }}" rel="noopener noreferrer nofollow"><span class="hide">Twitter</span></a></li>
+            <li><a class="mail-icon" target="_blank" href="mailto:?subject={{ object.name|urlencode }}&amp;body={{ request.build_absolute_uri|urlencode }}" rel="noopener noreferrer nofollow"><span class="hide">Email</span></a></li>
+            <li><a class="facebook-icon" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" rel="noopener noreferrer nofollow"><span class="hide">Facebook</span></a></li>
+        </ul>
+    </dd>
+
+</dl>

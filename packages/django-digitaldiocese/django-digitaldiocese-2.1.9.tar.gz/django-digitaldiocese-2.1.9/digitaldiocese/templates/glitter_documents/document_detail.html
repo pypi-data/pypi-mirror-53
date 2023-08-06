@@ -1,0 +1,54 @@
+{% extends "glitter_documents/document_list.html" %}
+{% load thumbnail %}
+
+{% load static %}
+
+{% block extra_breadcrumb %}
+    <li>
+        <a class="active" href="{% url 'digitaldiocese-vacancies:list' %}">{{ object.title }}</a>
+    </li>
+{% endblock extra_breadcrumb %}
+
+{% block h2_title %}
+{% endblock h2_title %}
+
+
+{% block app_content %}
+    <div class="content">
+        <h1>{{ object.title }}</h1><hr />
+        <div class="meta-with-image">
+            <a href="{{ object.document.url }}">
+                <div class="meta-image {% if object.image or object.valid_image %}show-image{% else %}{{ object.document_format.title|slugify }}{% endif %}">
+                    {% if object.image %}
+                        {% thumbnail object.image.file "480x480" crop="center" as thumb %}
+                            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ object.title }}">
+                        {% endthumbnail %}
+                    {% elif object.valid_image %}
+                        {% thumbnail object.document "480x480" crop="center" as thumb %}
+                            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ object.title }}">
+                        {% endthumbnail %}
+                    {% endif %}
+                </div>
+            </a>
+            <dl class="meta with-download">
+                <dt>Type</dt>
+                <dd>{{ object.document_format }}</dd>
+
+                {% if object.author %}
+                    <dt>Author</dt>
+                    <dd>{{ object.author }}</dd>
+                {% endif %}
+
+                <dt>File size</dt>
+                <dd>{{ object.file_size|filesizeformat }}</dd>
+
+                {% include "includes/social_share.html" with social_title=object.title %}
+            </dl>
+            <p class="btn-row"><a href="{{ object.document.url }}" class="btn download">Download file</a></p>
+        </div>
+        {{ columns.content }}
+    </div>
+    <div class="footer"></div>
+
+{% endblock app_content %}
+

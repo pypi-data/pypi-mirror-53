@@ -1,0 +1,41 @@
+{% extends "glitter_news/post_list.html" %}
+{% load thumbnail %}
+
+
+{% block breadcrumb %}
+    <li><a class="active" href="{% url 'glitter-news:list' %}">News</a></li>
+    <li><a class="active" href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
+{% endblock breadcrumb %}
+
+{% block h2_title %}
+{% endblock h2_title %}
+
+
+{% block app_content %}
+    <div class="content">
+        <h1>{{ object.title }}</h1><hr />
+        <dl class="meta halves">
+            <dt>Category</dt>
+            <dd>{{ object.category }}</dd>
+
+            <dt>Date</dt>
+            <dd>{{ object.date|date:'j N Y' }}</dd>
+
+            {% if object.author %}
+                <dt>Author</dt>
+                <dd>{{ object.author }}</dd>
+            {% endif %}
+
+            {% include "includes/social_share.html" with social_title=object.title %}
+        </dl>
+
+        {% block news_image %}
+            {% thumbnail object.image.file "640" as thumb %}
+                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" class="latest-thumb">
+            {% endthumbnail %}
+        {% endblock news_image %}
+
+        {{ columns.content }}
+    </div>
+    <div class="footer"></div>
+{% endblock app_content %}

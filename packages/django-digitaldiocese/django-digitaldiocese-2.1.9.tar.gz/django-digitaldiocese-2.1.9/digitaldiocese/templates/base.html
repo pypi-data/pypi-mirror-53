@@ -1,0 +1,89 @@
+{% load static from staticfiles %}<!DOCTYPE html>
+
+{% load glitter %}
+
+<html lang="en">
+<head>
+    {% glitter_head %}
+
+    <title>{% block title %}{{ request.site.name }}{% endblock %}</title>
+    <meta name="author" content="{{ request.site.name }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="{% static 'css/styles.min.css' %}" rel="stylesheet" />
+
+    {# NOTE: Remove IE conditional comments if you're using Modernizr for more than the html5shiv #}
+    <!--[if lt IE 9]>
+        <script src="{% static 'js/modernizr.js' %}"></script>
+    <![endif]-->
+</head>
+
+<body class="{% block body_class %}{% endblock body_class %}">
+    {% glitter_startbody %}
+
+    <header class="head">
+        <h1 class="head-brand">
+            <a href="/">{{ request.site.name }}</a>
+        </h1>
+
+        {% block header_links %}
+            {% include "includes/header_links.html" %}
+        {% endblock header_links %}
+    </header>
+
+    <nav class="nav">
+        {% block primary_nav %}
+            {% include "includes/primary_nav.html" %}
+        {% endblock primary_nav %}
+
+        <ul class="nav-pebble">
+            <li><a class="active" href="/">Home</a></li>
+            {% block breadcrumb %}
+            {% endblock breadcrumb %}
+        </ul>
+    </nav>
+
+    <main class="main">
+        <div class="billboard-top">
+            {% block billboard_top %}
+            {% endblock billboard_top %}
+        </div>
+        <div class="full wrap">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div class="billboard-bottom">
+            {% block billboard_bottom %}
+            {% endblock billboard_bottom %}
+        </div>
+    </main>
+
+    <footer class="foot">
+        {% block footer %}
+            {% include "includes/footer.html" %}
+        {% endblock footer %}
+    </footer>
+
+    <div id="lightbox">
+        <div id="lightbox_backdrop"></div>
+        <a href="#" id="lightbox_close">&times;</a>
+        <div id="lightbox_content"></div>
+    </div>
+
+    <script type="text/javascript">
+        var search = document.getElementById('search-btn');
+        var linkbar = document.getElementById('head_links');
+        var search_input = document.getElementById('search-input');
+        var menu_btn = document.getElementById('mobile-menu-btn');
+        search.onclick=function() { linkbar.classList.add('search-active'); search_input.focus(); }
+        menu_btn.onclick=function() { this.classList.toggle('active'); }
+    </script>
+    <script src="{% static 'admin/js/jquery.min.js' %}"></script>
+    <script src="{% static 'glitter/libs/bootstrap/carousel/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'acny/js/acny-map.js' %}"></script>
+    <script src="{% static 'js/flickity.js' %}"></script>
+    <script src="{% static 'js/diocese_carousel.js' %}"></script>
+</body>
+</html>

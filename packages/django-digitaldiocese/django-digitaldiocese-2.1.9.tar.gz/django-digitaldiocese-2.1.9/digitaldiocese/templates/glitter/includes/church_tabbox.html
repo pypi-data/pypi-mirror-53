@@ -1,0 +1,130 @@
+{% load acny_tags %}
+{% get_services church=object as all_services %}
+
+<div class="tab-box">
+    {% if object.people.all|length > 0 %}
+        <input id="tab1" type="radio" name="tabs" class="tab-control" checked>
+        <label for="tab1">Who's who</label>
+    {% endif %}
+
+    {% if all_services.regular_services %}
+        <input id="tab2" type="radio" name="tabs" class="tab-control" {% if object.people.all|length == 0 %}checked{% endif %}>
+        <label for="tab2">Regular Services</label>
+    {% endif %}
+
+    {% if all_services.other_events %}
+        <input id="tab3" type="radio" name="tabs" class="tab-control" {% if object.people.all|length == 0 and all_services.regular_services == 0 %}checked{% endif %}>
+        <label for="tab3">Other Events</label>
+    {% endif %}
+
+    <input id="tab4" type="radio" name="tabs" class="tab-control" {% if object.people.all|length == 0 and all_services.regular_services == 0 %}checked{% endif %}>
+    <label for="tab4">More Info</label>
+
+    <hr />
+    <div class="tab-content">
+        {% if object.get_relevant_people|length > 0 %}
+            <div class="tab tab-content1">
+                <ul class="items-list">
+                    {% sort_by_role_name object.get_relevant_people 'Headteacher' as sorted_roles %}
+                    {% for role in sorted_roles  %}
+                        {% with person=role.person %}
+                            {% include 'glitter/includes/church_person_summary.html' %}
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if all_services.regular_services %}
+            <div class="tab tab-content2">
+                {% for weekday, services in all_services.regular_services.items %}
+                    <h1> {{ weekday }} </h1>
+                    <hr />
+                    {% for service in services %}
+                        <ul class="items-list">
+                            {% include 'digitaldiocese_acny/service_summary.html' %}
+                        </ul>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if all_services.other_events %}
+            <div class="tab tab-content3">
+                {% for service in all_services.other_events %}
+                    <ul class="items-list">
+                        {% include 'digitaldiocese_acny/service_summary.html' %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="tab tab-content4">
+            <dl class="meta">
+                {% if object.name %}
+                    <dt>Full name</dt>
+                    <dd>{{ object.name }}</dd>
+                {% endif %}
+
+                {% if object.patron %}
+                    <dt>Patron</dt>
+                    <dd>{{ object.patron }}</dd>
+                {% endif %}
+
+                {% if object.diocesan_reference %}
+                    <dt>Diocesan reference</dt>
+                    <dd>{{ object.diocesan_reference }}</dd>
+                {% endif %}
+
+                {% if object.acny_id %}
+                    <dt>A Church Near You ID</dt>
+                    <dd>{{ object.acny_id }}</dd>
+                {% endif %}
+
+                {% if object.archbishop_reference %}
+                    <dt>Archbishop's Council Reference</dt>
+                    <dd>{{ object.archbishop_reference }}</dd>
+                {% endif %}
+
+                {% if object.charity_number %}
+                    <dt>Charity number</dt>
+                    <dd>{{ object.charity_number }}</dd>
+                {% endif %}
+
+                {% if object.built %}
+                    <dt>Built</dt>
+                    <dd>{{ object.built }}</dd>
+                {% endif %}
+
+                {% if object.architect %}
+                    <dt>Architect</dt>
+                    <dd>{{ object.architect }}</dd>
+                {% endif %}
+
+                {% if object.worship_style %}
+                    <dt>Style of worship</dt>
+                    <dd>{{ object.worship_style }}</dd>
+                {% endif %}
+
+                {% if object.deanery %}
+                    <dt>Deanery</dt>
+                    <dd>
+                        <a href="{{ object.deanery.get_absolute_url }}">{{ object.deanery }}</a>
+                    </dd>
+
+                    <dt>Related</dt>
+                    <dd>
+                        {% if object.deanery.church_set.all|length > 0 %}
+                            <p><strong>Other churches in {{ object.deanery }}:</strong>
+                            <ul class="p-l-0">
+                            {% for church in object.deanery.church_set.all %}
+                                <li><a href="{{ church.get_absolute_url }}">{{ church }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </dd>
+                {% endif %}
+            </dl>
+        </div>
+    </div>
+</div>

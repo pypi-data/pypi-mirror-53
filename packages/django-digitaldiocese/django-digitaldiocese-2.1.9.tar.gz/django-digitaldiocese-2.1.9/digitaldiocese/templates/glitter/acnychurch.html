@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static thumbnail colour_tags %}
+
+
+{% block title %}{{ object.name }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<div class="header"></div>
+<div class="nav demo">
+    <h1>Search Result</h1>
+    <hr />
+    <ul class="lined filter acny-list">
+        <li{% if not object and not deanery %} class="active"{% endif %}><a href="{% url 'digitaldiocese-acny:church-list' %}">Everything</a></li>
+        {% for deanery_obj in deanery_list %}
+            <li class="sq{{ forloop.counter0|category_colour }} {% if object.deanery == deanery_obj %}
+            active{% endif %}"><a href="{{ deanery_obj.get_absolute_url }}">{{ deanery_obj }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="content demo acny-detail">
+    <h1>{{ object }}</h1>
+    <hr />
+
+    {% if object.location or object.image %}
+        <div class="full">
+            {% if object.image %}
+                <div class="{% if object.location %}half{% endif %}">
+                    {% thumbnail object.image.file "640x640" crop="center" as thumb %}
+                        <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ object }}">
+                    {% endthumbnail %}
+                </div>
+            {% endif %}
+            {% if object.location %}
+                {% if map_json %}
+                    <div class="{% if object.image %}half{% endif %}">
+                        <div data-mapzoom="13"
+                             data-mapjson="{{ map_json|escape }}"
+                             {% if church.parish.boundary_data %}
+                                 data-mapregion="{ &quot;data&quot;: {{ church.parish.boundary_data|escape }} }"
+                             {% endif %}
+                             id="map-canvas" class="acny-canvas acny-map"></div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="meta">
+        {% include 'glitter/includes/church_meta.html' %}
+    </div>
+
+    {% if object.description %}
+        <p>{{ object.description|safe }}</p>
+    {% endif %}
+
+    {{ columns.content }}
+
+    {% include 'glitter/includes/church_detail_footer.html' %}
+
+    {% include 'glitter/includes/church_tabbox.html' %}
+</div>
+
+<div class="footer"></div>
+
+{% endblock content %}

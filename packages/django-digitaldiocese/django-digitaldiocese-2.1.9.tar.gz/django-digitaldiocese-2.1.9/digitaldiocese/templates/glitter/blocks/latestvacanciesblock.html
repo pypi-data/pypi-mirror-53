@@ -1,0 +1,32 @@
+{% load vacancies_tags thumbnail %}
+
+{% if object.category %}
+    {% get_latest_vacancies category=object.category.slug as latest_vacancies %}
+{% else %}
+    {% get_latest_vacancies as latest_vacancies %}
+{% endif %}
+
+{% if latest_vacancies %}
+    <div class="{{ css_classes }} latestblock">
+        {% url 'digitaldiocese-vacancies:list' as vacancies_home %}
+        <h1 class="l1">Latest vacancies</h1>
+        <hr/>
+        <ul>
+            {% for vacancy in latest_vacancies %}
+                <li>
+                    {% if vacancy.image %}
+                        {% thumbnail vacancy.image.file "300x225" crop="center" as thumb %}
+                            <a href="{{ vacancy.get_absolute_url }}"><img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ vacancy.title }}"></a>
+                        {% endthumbnail %}
+                    {% endif %}
+                    <h3><a href="{{ vacancy.category.get_absolute_url }}">{{ vacancy.category }}</a></h3>
+                    <h2><a href="{{ vacancy.get_absolute_url }}">{{ vacancy.title }}</a></h2>
+                    <p>{{ vacancy.summary|truncatewords:15 }} <a href="{{ vacancy.get_absolute_url }}">Read more</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+        <p class="btn-row">
+            <a href="{{ object.category.get_absolute_url|default:vacancies_home }}" class="btn arrow">More vacancies</a>
+        </p>
+    </div>
+{% endif %}

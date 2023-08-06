@@ -1,0 +1,25 @@
+{% load thumbnail %}
+
+<li class="list-item-vacancy {% if object.image %}with-image{% endif %} list-item">
+    {% thumbnail object.image.file "140x140" crop="center" as thumb %}
+        <a href="{{ object.get_absolute_url }}">
+            <img src="{{ thumb.url }}" alt="{{ object.title }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+        </a>
+    {% endthumbnail %}
+
+    {% if object.category %}
+        <span class="category">
+            <h6>VACANCY</h6>
+            <ul class="pebbles">
+                <li>
+                    <a href="{{ object.category_get_absolute_url }}">{{ object.category }}</a>
+                </li>
+            </ul>
+        </span>
+    {% endif %}
+
+    <h6 class="date">{{ object.current_version.modified|date:"j M Y" }}</h6>
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
+
+    <p>{{ object.summary }} <a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

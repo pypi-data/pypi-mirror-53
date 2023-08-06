@@ -1,0 +1,10 @@
+<div class="{{ css_classes }}">
+  <h2>{{ object.title }}</h2>
+  <form method="GET" action="{% url 'search:search' %}">
+    {% if object.content_type %}
+      <input type="hidden" name="content_type" id="content_type" value="{{ object.content_type }}" />
+    {% endif %}
+    <input name="q" id="q" type="text" placeholder="{{ object.placeholder_text }}" />
+    <p class="btn-row"><button type="submit" class="arrow">{{ object.button_text }}</button></p>
+  </form>
+</div>

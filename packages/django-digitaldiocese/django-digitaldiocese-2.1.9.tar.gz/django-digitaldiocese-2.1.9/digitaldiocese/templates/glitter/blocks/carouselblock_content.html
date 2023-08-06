@@ -1,0 +1,46 @@
+{% load thumbnail %}
+
+
+{% if object.carousel %}
+    <div id="carousel-{{ content_block.id }}" class="{{ css_classes }} block-carousel carousel slide" data-ride="carousel">
+        {% with carousel_images=object.carousel.carousel_images.select_related.all %}
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                {% for image in carousel_images %}
+                    <div class="item {% if forloop.first %}active{% endif %}">
+                        {% thumbnail image.image.file '1200' as thumb %}
+                            <a href="{{ image.link }}" style="background-image: url({{ thumb.url }})"></a>
+                        {% endthumbnail %}
+                    </div>
+                {% endfor %}
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#" data-target="#carousel-{{ content_block.id }}" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only previous-slide"><span class="hide">Previous</span></span>
+                </a>
+                <a class="right carousel-control" href="#" role="button" data-target="#carousel-{{ content_block.id }}"  data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only next-slide"><span class="hide">Next</span></span>
+                </a>
+            </div>
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators slides">
+                {% for image in carousel_images %}
+                    <li {% if forloop.first %}class="active"{% endif %}>
+                        <div class="slide-info">
+                            <h2 data-target="#carousel-{{ content_block.id }}" data-slide-to="{{ forloop.counter0 }}">{{ image.title }}</h2>
+                            <h2 class="show-mobile-only">
+                                <a href="{{ image.link }}">
+                                    {{ image.title }}
+                                </a>
+                            </h2>
+                            <p>{{ image.subtitle }} <a href="{{ image.link }}">Read more</a></p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endwith %}
+    </div>
+{% endif %}

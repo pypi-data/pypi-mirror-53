@@ -1,0 +1,28 @@
+{% load news_tags thumbnail %}
+
+{% get_latest_news 3 object.category.slug object.tags as latest_news %}
+
+{% if latest_news %}
+    <div class="{{ css_classes }} latestblock">
+        {% url 'glitter-news:list' as news_home %}
+        <h1>{{ object.category|default:"Latest News" }}</h1>
+        <hr/>
+        <ul>
+            {% for post in latest_news %}
+                <li>
+                    {% if post.image %}
+                        {% thumbnail post.image.file "300x225" crop="center" as thumb %}
+                            <a href="{{ post.get_absolute_url }}"><img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ post.title }}"></a>
+                        {% endthumbnail %}
+                    {% endif %}
+                    <h3>{{ post.date|date:"j F Y" }}</h3>
+                    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                    <p>{{ post.summary|truncatewords:15 }} <a href="{{ post.get_absolute_url }}">read more</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+        <p class="btn-row">
+            <a href="{{ object.category.get_absolute_url|default:news_home }}" class="btn arrow">More news</a>
+        </p>
+    </div>
+{% endif %}

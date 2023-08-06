@@ -1,0 +1,31 @@
+from setuptools import find_packages, setup
+
+setup(
+    name='django-digitaldiocese',
+    packages=find_packages(),
+    version='2.1.9',
+    author='The Developer Society',
+    author_email='studio@dev.ngo',
+    description='Handbook',
+    license='BSD',
+    url='https://github.com/developersociety/django-digitaldiocese',
+    include_package_data=True,
+    install_requires=[
+        'tqdm>=4.9.0',
+        'simplejson>=3.0.0',
+        'django>=1.8.0,<1.9.0',
+        'django-glitter>=0.2',
+        'sorl-thumbnail>=12.0',
+        'django-mptt>=0.8.0',
+        'django-glitter-news>=0.2.0',
+        'django-glitter-events>=0.1.4',
+        'django-localflavor>=1.4.0',
+        'requests>=2.0.0',
+        'django-glitter-documents>=0.2.0',
+        'django-haystack>=2.6.0',
+        'django-admin-sortable>=2.0.0',
+        'django-latest-tweets>=0.4.0',
+        'django-crispy-forms>=1.6.0',
+        'django-groot>=0.1.1',
+    ],
+)

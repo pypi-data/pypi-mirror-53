@@ -1,0 +1,16 @@
+<li class="list-item-page {% if object.image %}with-image{% endif %} list-item">
+    <span class="category">
+        <h6>PAGE</h6>
+
+        <ul class="pebbles">
+            {% for parent_page in object.get_ancestors %}
+                <li><a href="{{ parent_page.get_absolute_url }}">{{ parent_page.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </span>
+
+    <h6 class="date">{{ object.current_version.modified|date:"j M Y" }}</h6>
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
+
+    <p><a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

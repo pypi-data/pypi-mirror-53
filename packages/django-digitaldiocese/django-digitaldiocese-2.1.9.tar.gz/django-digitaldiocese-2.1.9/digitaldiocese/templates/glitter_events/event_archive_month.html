@@ -1,0 +1,85 @@
+{% extends "glitter_events/base.html" %}
+{% load static thumbnail colour_tags %}
+
+
+{% block extra_breadcrumb %}
+    {% if current_category %}
+        <li>
+            <a class="active" href="{{ current_category.get_absolute_url }}">{{ current_category }}</a>
+        </li>
+    {% elif month %}
+        <li>
+            <a class="active" href="{% url 'glitter-events:calendar-month' year=month.year month=month|date:'m' %}">{{ month|date:"F Y" }}</a>
+        </li>
+    {% endif %}
+{% endblock extra_breadcrumb %}
+
+{% block app_content %}
+    <div id="light-box" class="hidden">
+        <ul class="items-list" id="items-list">
+        <a href="#" id="close-btn"><span class="hide">close</span></a>
+        </ul>
+    </div>
+    <div class="content calendar-page">
+        <section class="events-list">
+            <ul class="items-list calendar">
+                <div class="events-block-title">
+                    <h2 class="section-title">
+                        {{ object_list.count }} event{{ object_list.count|pluralize }}
+                    </h2>
+                    <hr />
+                </div>
+                {% block month_controls %}
+                    <p class="control-row">
+                        <span class="controls">
+                            <a href="{% url 'glitter-events:calendar-month' year=previous_month.year month=previous_month|date:'m' %}" class="back">{{ previous_month|date:"F" }}</a>
+                            <a href="#" class="current-month">{{ month|date:"F" }}</a>
+                            <a href="{% url 'glitter-events:calendar-month' year=next_month.year month=next_month|date:'m' %}" class="next">{{ next_month|date:"F" }}</a>
+                        </span>
+                    </p>
+                {% endblock month_controls %}
+
+                {% for day_name in calendar_headings %}
+                    <li class="day-label">{{ day_name }}</li>
+                {% endfor %}
+
+                {% for cal_day, day_events in calendar_events %}
+                    <li class="day {% if not day_events %}no-{% endif %}event {% if cal_day.month != month.month %}previous-month{% endif %}">
+                        <span class="dotm">{{ cal_day.day }}</span>
+                        {% if day_events %}
+                            <ul>
+                                {% for event in day_events %}
+                                <li {% if event.image %}class="with-image"{% endif %} id="item-content">
+                                    <div class="item sq{% object_colour obj=event.category obj_list=categories %}">
+                                        {% thumbnail event.image.file "140" as thumb %}
+                                            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" class="latest-thumb">
+                                        {% endthumbnail %}
+
+                                        <h6 class="post-date">{{ event.start|date:"d F" }}</h6>
+                                        <div class="subtitle right">
+                                            <em>in</em>
+                                            <a href="{{ event.category.get_absolute_url }}">
+                                                {{ event.category }}  {{ event.category.id }}
+                                            </a>
+                                        </div>
+                                        <h1 class="post-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h1>
+                                        <p>
+                                            {{ event.summary }}
+                                            <a href="{{ event.get_absolute_url }}">
+                                                Read more
+                                            </a>
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <script type="text/javascript" src="{% static 'js/lightbox.js' %}"></script>
+    <div class="footer"></div>
+
+    </div>
+{% endblock app_content %}

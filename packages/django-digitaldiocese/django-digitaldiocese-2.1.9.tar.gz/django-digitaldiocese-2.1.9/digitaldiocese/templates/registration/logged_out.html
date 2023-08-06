@@ -1,0 +1,18 @@
+{% extends "registration/base.html" %}
+
+
+{% block title %}Logged Out - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+    <div class="content fullscreen">
+        <h1>Goodbye!</h1>
+        <hr />
+        <p>You are now logged out.</p>
+
+        <p class="btn-row">
+            <a class="btn left arrow" href="/">Homepage</a>
+            <a class="btn arrow" href="{% url 'login' %}">Log in again</a>
+        </p>
+    </div>
+{% endblock content %}

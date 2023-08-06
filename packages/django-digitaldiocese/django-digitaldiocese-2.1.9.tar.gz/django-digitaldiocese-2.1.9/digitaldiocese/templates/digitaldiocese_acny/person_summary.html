@@ -1,0 +1,49 @@
+{% load thumbnail %}
+
+{% if person %}
+<div class="{{ css_classes }} person-summary">
+    <h1><a href="{{ person.get_absolute_url }}">{{ person.get_full_name }}</a></h1>
+    <hr/>
+    <div class="person-profile {% if person.image %}with-image{% endif %}">
+        {% if person.image %}
+            <div class="person-profile-image">
+                {% thumbnail person.image.file "300x300" crop="center" as thumb %}
+                    <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ person.get_full_name }}">
+                {% endthumbnail %}
+            </div>
+        {% endif %}
+        <div class="person-profile-details">
+            {% for address in person.addresses.all|slice:':1' %}
+                <p class="person-address">
+                    <span>{% firstof address.label "Address" %}: </span>
+                    {% for part in address.get_address_parts %}
+                        {{ part }}{% if not forloop.last %},<br>{% endif %}
+                    {% endfor %}
+                </p>
+            {% endfor %}
+
+            {% for phone in person.phone_numbers.all|slice:':1' %}
+                <p class="person-phone"><span>{{ phone.type|title }}</span>{{ phone.phone_number }}</p>
+            {% endfor %}
+
+            {% for email in person.emails.all|slice:':1' %}
+                <p class="person-email">
+                    <span>{% firstof person.emails.all.0.label "Email" %}: </span>
+                    <a href="mailto:{{ person.emails.all.0 }}">{{ person.emails.all.0.address }}</a>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if object.content %}
+        <hr>
+        <div class="person-profile-content">
+            {{ object.content|safe }}
+        </div>
+    {% endif %}
+
+    <p class="btn-row">
+        <a href="{{ person.get_absolute_url }}" class="btn right arrow">More info</a>
+    </p>
+</div>
+{% endif %}

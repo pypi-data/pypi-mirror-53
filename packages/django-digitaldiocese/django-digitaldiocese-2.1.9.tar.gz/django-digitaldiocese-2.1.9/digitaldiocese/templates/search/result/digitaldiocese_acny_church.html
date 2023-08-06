@@ -1,0 +1,23 @@
+{% load thumbnail %}
+<li class="list-item-acny {% if object.image %}with-image{% endif %} list-item">
+    {% if object.image %}
+        {% thumbnail object.image.file "140x140" crop="center" as thumb %}
+            <a href="{{ object.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="object.title" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+            </a>
+        {% endthumbnail %}
+    {% endif %}
+
+    <span class="category">
+        <h6>{{ object.get_place_type_display|upper }}</h6>
+        <ul class="pebbles">
+            <li>
+                <a href="{{ object.deanery.get_absolute_url }}">{{ object.deanery }}</a>
+            </li>
+        </ul>
+    </span>
+
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h1>
+
+    <p>{{ object.summary }} <a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

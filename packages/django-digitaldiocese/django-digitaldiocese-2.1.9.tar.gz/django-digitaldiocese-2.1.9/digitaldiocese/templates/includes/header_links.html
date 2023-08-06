@@ -1,0 +1,22 @@
+<ul class="head-links" id="head_links">
+    {% for header in header_links %}
+    <li>
+        <a class="{% ifequal request.path header.get_url_path %}active{% endifequal %}"
+            href="{{ header.url }}">
+            {{ header.title }}
+        </a>
+    </li>
+    {% endfor %}
+    <li class="search">
+         <form method="GET" action="{% url 'search:search' %}">
+            <input type="text" class="search-query" name="q" placeholder="Keyword Search" id="search-input">
+            <a href="#" id="search-btn">Search</a>
+            <button value="submit" type="submit" class="go">Go</button>
+        </form>
+    </li>
+</ul>
+<label for="mobile-menu-toggle" class="menu-btn" id="mobile-menu-btn"><span class="open">Menu</span><span class="close">Close</span></label>
+<form method="GET" action="{% url 'search:search' %}">
+    <input type="text" class="mobile-search-query" name="q" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" id="mobile-search-input">
+    <button value="submit" type="submit" class="mobile-go">search</button>
+</form>

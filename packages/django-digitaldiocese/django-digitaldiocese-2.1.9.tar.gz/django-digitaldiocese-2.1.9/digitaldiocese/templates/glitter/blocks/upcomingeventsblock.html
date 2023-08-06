@@ -1,0 +1,28 @@
+{% load events_tags thumbnail %}
+
+{% get_upcoming_events count=3 category=object.category.slug tags=object.tags as upcoming_events %}
+
+{% if upcoming_events %}
+    <div class="{{ css_classes }} latestblock">
+    {% url 'glitter-events:current-month' as events_home %}
+        <h1 class="l1">Upcoming Events</h1>
+        <hr/>
+        <ul>
+            {% for event in upcoming_events %}
+                <li>
+                    {% if event.image %}
+                        {% thumbnail event.image.file "300x225" crop="center" as thumb %}
+                            <a href="{{ event.get_absolute_url }}"><img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ event.title }}"></a>
+                        {% endthumbnail %}
+                    {% endif %}
+                    <h3 class="post-date">{{ event.start|date:"d F" }}, IN: <a href="{{ event.category.get_absolute_url }}">{{ event.category }}</a></h3>
+                    <h2 class="post-title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h2>
+                    <p>{{ event.summary|truncatewords:15 }} <a href="{{ event.get_absolute_url }}">read more</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+        <p class="btn-row">
+            <a href="{{ object.category.get_absolute_url|default:events_home }}" class="btn arrow">More events</a>
+        </p>
+    </div>
+{% endif %}

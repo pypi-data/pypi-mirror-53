@@ -1,0 +1,26 @@
+{% load thumbnail %}
+<li class="list-item-event {% if object.image %}with-image{% endif %} list-item">
+    {% if object.image %}
+        {% thumbnail object.image.file "140x140" crop="center" as thumb %}
+            <a href="{{ object.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="object.title" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+            </a>
+        {% endthumbnail %}
+    {% endif %}
+
+    {% if object.category %}
+        <span class="category">
+            <h6>EVENTS</h6>
+            <ul class="pebbles">
+                <li>
+                    <a href="{{ object.category.get_absolute_url }}">{{ object.category }}</a>
+                </li>
+            </ul>
+        </span>
+    {% endif %}
+
+    <h6 class="date">{{ object.start|date:"j M Y" }}</h6>
+    <h1 class="result-title"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
+
+    <p>{{ object.summary }} <a href="{{ object.get_absolute_url }}">Read more</a></p>
+</li>

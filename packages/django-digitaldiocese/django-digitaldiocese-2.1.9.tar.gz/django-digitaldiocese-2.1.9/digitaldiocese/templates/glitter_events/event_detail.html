@@ -1,0 +1,46 @@
+{% extends "glitter_events/base.html" %}
+{% load thumbnail %}
+
+
+{% block extra_breadcrumb %}
+    <li>
+        <a class="active" href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+    </li>
+{% endblock extra_breadcrumb %}
+
+{% block app_content %}
+    <div class="content">
+        <h1>{{ object.title }}</h1><hr />
+        <dl class="meta">
+            <dt>Start date</dt>
+            <dd>{{ object.start }}</dd>
+
+            <dt>End date</dt>
+            <dd>{{ object.end }}</dd>
+
+            {% if object.locations.count > 0 %}
+                <dt>Location{% if object.locations.count > 1 %}s{% endif %}</dt>
+                {% if object.address %}
+                    <dd>{{ object.address }}</dd>
+                {% endif %}
+                {% for location in object.locations.all %}
+                    <dd>{{ location.location }}</dd>
+                {% endfor %}
+            {% elif object.address %}
+                 <dt>Location</dt>
+                 <dd>{{ object.address }}</dd>
+            {% endif %}
+
+            {% include "includes/social_share.html" with social_title=object.title %}
+        </dl>
+
+        {% block event_image %}
+            {% thumbnail object.image.file "640" as thumb %}
+                <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" class="latest-thumb">
+            {% endthumbnail %}
+        {% endblock event_image %}
+
+        {{ columns.content }}
+    </div>
+    <div class="footer"></div>
+{% endblock app_content %}

@@ -1,0 +1,68 @@
+{% extends "digitaldiocese_vacancies/vacancy_list.html" %}
+{% load thumbnail %}
+
+
+{% block extra_breadcrumb %}
+    <li><a class="active">{{ object.title }}</a></li>
+{% endblock extra_breadcrumb %}
+
+{% block h2_title %}
+{% endblock h2_title %}
+
+{% block app_content %}
+    <div class="content">
+        <h1>{{ object.title }}</h1><hr />
+        <dl class="meta">
+            <dt>Category</dt>
+            <dd>{{ object.category }}</dd>
+
+            {% if object.address %}
+                <dt>Address</dt>
+                <dd>{{ object.address }}</dd>
+            {% endif %}
+
+            {% if object.phone %}
+                <dt>Phone</dt>
+                <dd>{{ object.phone }}</dd>
+            {% endif %}
+
+            {% if object.email %}
+                <dt>Email</dt>
+                <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
+            {% endif %}
+
+            {% if object.website %}
+                <dt>Website</dt>
+                <dd><a href="{{ object.website }}">{{ object.website }}</a></dd>
+            {% endif %}
+
+            {% if object.deadline %}
+                <dt>Deadline</dt>
+                <dd>{{ object.deadline }}</dd>
+            {% endif %}
+
+            {% if object.interview_date %}
+                <dt>Interview</dt>
+                <dd>{{ object.interview_date }}</dd>
+            {% endif %}
+
+            {% include "includes/social_share.html" with social_title=object.title %}
+
+            {% if object.attachment_set.all %}
+                <p class="btn-row downloads downloads-{{ object.attachment_set.all.count }}">
+                    {% for attachment in object.attachment_set.all %}
+                        <a href="{{ attachment.document.url }}" class="btn download">Download {{ attachment.title }}</a>
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </dl>
+
+        {% thumbnail object.image.file "640" as thumb %}
+            <img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" class="latest-thumb">
+        {% endthumbnail %}
+
+        {{ columns.content }}
+    </div>
+    <div class="footer"></div>
+
+{% endblock app_content %}

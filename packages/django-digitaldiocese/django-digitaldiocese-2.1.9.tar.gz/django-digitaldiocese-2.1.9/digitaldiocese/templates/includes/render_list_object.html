@@ -1,0 +1,34 @@
+{% load thumbnail %}
+
+<h6 class="post-date">{{ published }}</h6>
+
+<div class="subtitle right">
+    <em>in</em>
+    <a href="{{ obj.category.get_absolute_url }}">
+        {{ obj.category }}
+    </a>
+</div>
+
+<h1>
+    <a {% if obj.url %}target="_blank"{% endif %} href="{{ obj.get_absolute_url }}">
+        {{ obj.title|safe }}
+    </a>
+</h1>
+
+{% if not hide_thumb %}
+    {% thumbnail obj.image.file "640" as thumb %}
+        <a href="{{ obj.get_absolute_url }}"><img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" class="latest-thumb"></a>
+    {% endthumbnail %}
+{% endif %}
+
+<p>
+    {{ obj.summary|linebreaksbr }}
+
+    {% if not obj.url %}
+        <a href="{{ obj.get_absolute_url }}">Read more</a>
+    {% endif %}
+</p>
+
+{% if obj.url %}
+    <p><a target="_blank" href="{{ obj.get_absolute_url }}">Read more</a></p>
+{% endif %}
