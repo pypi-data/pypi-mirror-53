@@ -1,0 +1,100 @@
+session: &session
+  !Device:kamzik3.devices.deviceSession.DeviceSession
+  device_id: Dummy client
+  config:
+    master_server: &Server 127.0.0.1
+    master_port: &Port 60000
+    attributes:
+      !!python/tuple [Log directory, Value]: ./examples/gui_log
+      !!python/tuple [Resource directory, Value ]: ./examples/resources
+      !!python/tuple [Allow attribute log, Value ]: False
+session_console: &session_console
+  !Widget:kamzik3.gui.consoleWidget.ConsoleWidget
+  config: {}
+devices:
+  X: &X !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: X
+  Y: &Y !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: Y
+  Z: &Z !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: Z
+  Detector: &Detector !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: Detector
+  MacroServer: &MacroServer !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: MacroServer
+  Scanner: !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: Scanner
+  FlyScanner: !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: FlyScanner
+  SaveAttributeFile: &SaveAttributeFile !Device:kamzik3.devices.deviceClient.DeviceClient
+    host: *Server
+    port: *Port
+    device_id: SaveAttributeFile
+saveAttributesWidget: &saveTool !Widget:kamzik3.gui.savedAttributesWidget.SavedAttributesWidget
+  device: *SaveAttributeFile
+a1: &w1 !Widget:kamzik3.gui.deviceNumAttributeWidget.DeviceNumAttributeWidget
+  device: *X
+  attribute: Position
+  config:
+    unit: mm
+a2: &w2 !Widget:kamzik3.gui.deviceNumAttributeWidget.DeviceNumAttributeWidget
+  device: *Y
+  attribute: Position
+  config:
+    unit: mm
+a3: &w3 !Widget:kamzik3.gui.deviceNumAttributeWidget.DeviceNumAttributeWidget
+  device: *Z
+  attribute: Position
+  config:
+    unit: mm
+a4: &w4 !Widget:kamzik3.gui.deviceMethodWidget.DeviceMethodWidget
+    device: *Detector
+    method: start_acquisition
+a5: &w5 !Widget:kamzik3.gui.deviceMethodWidget.DeviceSimpleMethodsListWidget
+    device: *Z
+    methods_list: [stop, find_reference]
+deviceGroupWidget: &groupTool !Widget:kamzik3.gui.deviceGroupedListWidget.DeviceGroupedListWidget
+  config:
+    groups:
+      Detector:
+        widgets:
+          - *w4
+      Sample:
+        model_image: :/icons/icons/deviceExample.png
+        widgets:
+          - *w1
+          - *w2
+          - *w3
+          - *w5
+seesion_devices_list_tool: &seesion_devices_list_tool
+  !Widget:kamzik3.gui.deviceListWidget.DeviceListWidgetSession
+  columns: 1
+macro_tool: &macroTool !Widget:kamzik3.gui.macroToolWidget.MacroToolWidget
+  device: *MacroServer
+seesion_sp_history_tool: &seesion_sp_history_tool !Widget:kamzik3.gui.attributeSetpointHistoryWidget.AttributeSetpointHistoryWidget
+  config:
+    None
+session_window:
+  !Widget:kamzik3.gui.sessionWindow.SessionWindow
+  config:
+    tools:
+      - [Devices, *groupTool, ":/icons/icons/motherboard.png"]
+      - [Saved attributes, *saveTool, ":/icons/icons/floppy-disk.png"]
+      - [Device clients, *seesion_devices_list_tool, ":/icons/icons/data-transfer.png"]
+      - [Scans, *macroTool, ":/icons/icons/scanning.png"]
+      - [Setpoints history, *seesion_sp_history_tool, ":/icons/icons/record.png"]
+      - [Standard output, *session_console, ":/icons/icons/terminal.png"]
