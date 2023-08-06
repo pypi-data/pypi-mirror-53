@@ -1,0 +1,8 @@
+name: *project_name*
+
+docker_env:
+  image: *project_name*
+
+entry_points:
+  main:
+    command: "python src/train.py"

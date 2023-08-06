@@ -1,0 +1,13 @@
+click>=7.0
+numpy
+pandas
+mlflow
+
+[extras]
+boto3>=1.7.12
+
+[extras:python_version < "3.5"]
+scikit-learn==0.20
+
+[extras:python_version >= "3.5"]
+scikit-learn
