@@ -1,0 +1,162 @@
+Metadata-Version: 1.2
+Name: creopyson
+Version: 0.4.0
+Summary: Python library for Creoson
+Home-page: https://github.com/Zepmanbc/creopyson
+Author: Benjamin C.
+Author-email: zepman@gmail.com
+License: MIT license
+Description: =========
+        Creopyson
+        =========
+        
+        
+        .. image:: https://img.shields.io/pypi/v/creopyson.svg
+                :target: https://pypi.python.org/pypi/creopyson
+        
+        .. image:: https://img.shields.io/travis/Zepmanbc/creopyson.svg
+                :target: https://travis-ci.org/Zepmanbc/creopyson
+        
+        .. image:: https://coveralls.io/repos/github/Zepmanbc/creopyson/badge.svg?branch=master
+                :target: https://coveralls.io/github/Zepmanbc/creopyson?branch=master
+        
+        .. image:: https://readthedocs.org/projects/creopyson/badge/?version=latest
+                :target: https://creopyson.readthedocs.io/en/latest/?badge=latest
+                :alt: Documentation Status
+        
+        
+        
+        Creopyson is a python library that aim to control `PTC's CREO Parametric`_ via JLink via CREOSON.
+        
+        CREOSON uses JSON Requests to send commands/functions to CREO, JSON Responses are used to communicate the results of your requests.
+        
+        Creopyson creates a Client to send JSON Requests to CREOSON server.
+        
+        * Free software: MIT license
+        * Documentation: https://creopyson.readthedocs.io.
+        
+        .. _`PTC's CREO Parametric`: https://www.ptc.com/en/products/cad/creo/parametric
+        
+        Features
+        --------
+        
+        Creopyson can be used to automate actions in CREO:
+        
+        * Get BOM
+        * Manage files, Working directories
+        * Support Familytables
+        * Export 3D/2D: pdf3d, pdf, STEP, IGES, JPEG...
+        * Interact with layers, views
+        * Read/Write parameters, dimensions
+        * Support Windchill
+        
+        Basic usage video:
+        
+        .. image:: https://github.com/Zepmanbc/creopyson/raw/master/docs/_static/video.png
+                :target: https://youtu.be/NjkvRZJQzXs
+        
+        See documentation for more informations...
+        
+        Credits
+        -------
+        
+        CREOSON_ from `Simplified Logic, Inc.`_
+        
+        This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+        
+        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
+        .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+        .. _CREOSON: http://www.creoson.com/
+        .. _`Simplified Logic, Inc.`: http://www.simplifiedlogic.com/
+        
+        
+        =======
+        History
+        =======
+        
+        0.4.0 (2019-10-12)
+        ------------------
+        
+        * Update for `Creoson 2.5.0 release`_.
+            * New functions:
+                * file_delete_material
+                * drawing_get_sheet_format
+                * dimension_set_text
+            * Add parameters:
+                * windchill_clear_workspace: filenames
+                * dimension_list: select
+                * dimension_list_detail: select
+                * feature_resume: `name` can be an integer for *feat_ID*
+                * feature_suppress: `name` can be an integer for *feat_ID*
+            * New returns:
+                * note_get: location
+                * dimension_list: dwg_dim
+                * dimension_list_detail: dwg_dim
+            * Few notes updates
+        
+        .. _`Creoson 2.5.0 release`: https://github.com/SimplifiedLogic/creoson/releases/tag/v2.5.0
+        
+        0.3.3 (2019-07-13)
+        ------------------
+        
+        * bugfix:
+            * feature_resume: `with_children` paramt set default to `False` (`issue #3`_)
+        
+        .. _`issue #3`: https://github.com/Zepmanbc/creopyson/issues/3
+        
+        0.3.2 (2019-07-03)
+        ------------------
+        
+        * bugfix:
+            * creo_list_dirs: return empty list if there is no folder in the directory (`issue #1`_)
+        
+        * Add basic usage video on README
+        
+        .. _`issue #1`: https://github.com/Zepmanbc/creopyson/issues/1
+        
+        
+        0.3.1 (2019-06-30)
+        ------------------
+        
+        * bugfixes:
+            * view_list: default query name="*"
+        
+        
+        0.3.0 (2019-06-29)
+        ------------------
+        
+        * bugfixes:
+            * file_set_mass_units: function param correction
+            * file_list: function param correction
+            * general: set active file when file is optionnal
+        * improvement:
+            * file_open: `activate` and `display` default to True
+            * dimension_set: file is optionnal
+        
+        
+        0.2.0 (2019-06-28)
+        ------------------
+        
+        * Update for Creoson 2.4.0 release. New functions:
+            * parameter_set_designated
+            * feature_list_group_features
+            * feature_list_pattern_features
+        * Add missing function: 
+            * feature_list_params
+        
+        
+        0.1.0 (2019-06-22)
+        ------------------
+        
+        * First release on PyPI.
+        
+Keywords: creopyson
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
