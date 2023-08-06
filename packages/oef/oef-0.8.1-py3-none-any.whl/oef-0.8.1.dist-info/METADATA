@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: oef
+Version: 0.8.1
+Summary: SDK for OEF Agent development.
+Home-page: https://github.com/fetchai/oef-sdk-python.git
+Author: Fetch.AI Limited
+Author-email: community@fetch.ai
+License: Apache 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: protobuf
+Requires-Dist: graphviz
+
+# OEF Python SDK
+
+![](https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-blue.svg)
+![](https://img.shields.io/badge/license-Apache--2.0-lightgrey.svg)
+
+This is the Python SDK for OEF agent development, allowing:
+
+ * registration of agents and services in the OEF
+ * searching for agents and services in the OEF
+ * constructing a direct communication channel with another agent
+
+
+
+## Installing for Use
+
+This system can be installed using pip3.
+
+- `pip3 install oef`
+
+
