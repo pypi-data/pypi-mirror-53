@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: tchannel
+Version: 2.0.1
+Summary: Network multiplexing and framing protocol for RPC
+Home-page: https://github.com/uber/tchannel-python
+Author: Abhinav Gupta, Aiden Scandella, Bryce Lampe, Grayson Koonce, Junchao Wu
+Author-email: abg@uber.com
+License: MIT
+Keywords: rpc
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: contextlib2
+Requires-Dist: futures
+Requires-Dist: crcmod (<2,>=1)
+Requires-Dist: tornado (<5,>=4.3)
+Requires-Dist: thriftrw (<2,>=0.4)
+Requires-Dist: threadloop (<2,>=1)
+Requires-Dist: opentracing (>2)
+Requires-Dist: opentracing-instrumentation (>3)
+Requires-Dist: six
+Requires-Dist: future
+Provides-Extra: vcr
+Requires-Dist: PyYAML ; extra == 'vcr'
+Requires-Dist: mock ; extra == 'vcr'
+Requires-Dist: wrapt ; extra == 'vcr'
+
+UNKNOWN
+
+
