@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: energyplus
+Version: 0.0.1
+Summary: EnergyPlus API Python Bindings
+Home-page: https://github.com/myoldmopar/energyplusapi
+Author: Edwin Lee
+Author-email: edwin@dummy.org
+License: UNKNOWN
+Description: # EnergyPlus API Python Bindings
+        
+        This package provides the Python bindings for accessing the EnergyPlus API to do:
+         - Functional API calls into the EnergyPlus library
+         - Python plugins to allow EnergyPlus to call your python scripts
+         - Runtime actuation where you can control the EnergyPlus time stepping through callbacks
+         - Data transfer API where you can get sensor/meter data from EnergyPlus and set actuator values during a simulation
+         - In the future, access helper methods for creating input structures programmatically
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
