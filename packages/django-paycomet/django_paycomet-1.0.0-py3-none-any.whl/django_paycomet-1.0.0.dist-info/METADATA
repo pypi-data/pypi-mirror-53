@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: django-paycomet
+Version: 1.0.0
+Summary: PAYCOMET payment tools for Django
+Home-page: https://github.com/semicolom/django-paycomet
+Author: Toni Colom
+Author-email: toni@semicolom.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.0
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Description-Content-Type: text/markdown
+Requires-Dist: pycrypto
+Requires-Dist: zeep
+
+# Django PAYCOMET
+
+PAYCOMET payment tools for Django.
+
+This package provides a full functional view to integrate BankStore JET-IFRAME into your Django project following the examples found [here](https://www.bsdev.es/en/documentacion/bankstore-jetiframe).
+
+Test cards can be found [here](https://www.bsdev.es/en/cards/testcards).
+
+SOAP API Error codes can be found [here])(https://www.bsdev.es/en/documentacion/codigos-de-error).
+
+## Installation
+
+1. Install it with pip install `django-paycomet`.
+It has a dependency over `pycrypto` and `zeep`. Follow their instructions if needed:
+- [pycrypto](https://pypi.org/project/pycrypto/)
+- [zeep](https://pypi.org/project/zeep/)
+
+2. Add your PAYCOMET codes in your settings file:
+```
+PAYCOMET_MERCHANT_CODE = '1234'
+PAYCOMET_TERMINAL = 'abcd'
+PAYCOMET_PASSWORD = 'password'
+PAYCOMET_JET_ID = 'jet_id'
+```
+
+3. Extend yor view with `paycomet.views.PaymentView` and override the missing methods.
+4.  Add the payment form in your checkout template with `{% include 'paycomet.payment_form.html' %}`
+
+

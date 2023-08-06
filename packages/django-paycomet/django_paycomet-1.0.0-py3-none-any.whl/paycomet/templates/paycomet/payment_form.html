@@ -1,0 +1,71 @@
+<form role="form" id="paycometPaymentForm" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="amount" value="{{ amount }}">
+    <input type="hidden" data-paycomet="jetID" value="{{ PAYCOMET_JET_ID }}">
+
+    <div class="form-group">
+        <label for="username">Titular de la tarjeta</label>
+        <div class="input-group">
+            <input type="text" class="form-control" name="username" data-paycomet="cardHolderName" placeholder="Titular de la tarjeta" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cardNumber">Número de tarjeta</label>
+        <div class="input-group">
+            <div id="paycomet-pan" class="form-control" style="height: 46px;"></div>
+            <input paycomet-style="width: 360px; height: 28px; font-size:18px; padding-top:3px;" paycomet-name="pan">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label><span class="hidden-xs">Fecha de caducidad</span></label>
+                <div class="form-inline">
+                    <select class="form-control" style="width:45%" data-paycomet="dateMonth">
+                        <option value="" disabled selected hidden>MM</option>
+                        {% for month in card_months %}
+                            <option value="{{ month }}">{{ month }}</option>
+                        {% endfor %}
+                    </select>
+                    <span style="width:10%; text-align: center"> / </span>
+                    <select class="form-control" style="width:45%" data-paycomet="dateYear">
+                        <option value="" disabled selected hidden>YY</option>
+                        {% for year in card_years %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label title="Código de 3 dígitos en el reverso de la tarjeta">CVV <i class="fa fa-question-circle"></i></label>
+                <div id="paycomet-cvc2" class="form-control"></div>
+                <input paycomet-name="cvc2" paycomet-style="border: 0; width: 100%; height: 25px; font-size:18px; padding-left:7px; padding-tap:8px;" class="form-control" required type="text">
+            </div>
+        </div>
+    </div>
+
+    <div id="paymentErrorMsg" style="margin-bottom: 10px; color: red;">
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <input type="submit" class="subscribe btn btn-action btn-block" value="Pagar {{ amount }}€" />
+</form>
+<script src="https://api.paycomet.com/gateway/paycomet.jetiframe.js?lang=es"></script>
