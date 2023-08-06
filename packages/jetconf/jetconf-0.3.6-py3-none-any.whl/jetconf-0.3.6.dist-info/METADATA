@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: jetconf
+Version: 0.3.6
+Summary: Pure Python implementation of the RESTCONF protocol
+Home-page: https://github.com/CZ-NIC/jetconf
+Author: Ales Mrazek
+Author-email: ales.mrazek@nic.cz
+License: UNKNOWN
+Keywords: restconf,yang,data model,configuration,json
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: System :: Monitoring
+Classifier: Topic :: System :: Systems Administration
+Requires-Dist: yangson
+Requires-Dist: h2
+Requires-Dist: colorlog
+Requires-Dist: pyaml
+Requires-Dist: pytz
+
+*******
+Jetconf
+*******
+
+Jetconf is an implementation of the RESTCONF_ protocol written in
+Python 3.
+
+* `Documentation`_
+* `Git repository`_
+
+Main features:
+
+* HTTP/2 over TLS, certificate-based authentication of clients
+
+* JSON data encoding
+
+* Per-user candidate datastores with transactions
+
+* Support for NACM_
+
+Installation
+============
+Python 3.5 or newer is required::
+
+    ~$ apt-get install python3
+    ~$ apt-get install python3-pip
+
+Jetconf can be installed by PyPI::
+
+   $ python3 -m pip install jetconf
+
+Run Jetconf
+===========
+::
+
+    ~$ jetconf -c <path_to_config_file.yaml>
+
+.. _RESTCONF: https://tools.ietf.org/html/draft-ietf-netconf-restconf-18
+.. _NACM: https://datatracker.ietf.org/doc/rfc6536/
+.. _Git repository: https://github.com/CZ-NIC/jetconf
+.. _Documentation: https://jetconf.readthedocs.io
+
+
