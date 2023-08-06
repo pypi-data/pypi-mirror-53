@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "netmagus"
+version = "0.8.0"
+description = "Python module for JSON data exchange via files or RPC with the Intelligent Visibility NetMagus system."
+authors = ["Richard Collins <richardc@intelligentvisibility.com>"]
+license = "LGPL-3.0"
+readme = "README.rst"
+homepage = "https://www.intelligentvisibility.com/netmagus/"
+repository = "https://github.com/sdispater/pendulum"
+keywords = ["netmagus", "network", "automation", "netops"]
+classifiers=[
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Natural Language :: English",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Topic :: System :: Networking"
+]
+
+packages = [
+    {include = "netmagus"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+autobahn = "^19.10"
+autobahn-sync = "^0.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+tox = "^3.0"
+coverage = "^4.5"
+sphinx = "^2.2.0"
+flake8 = "^3.7.8"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py36,py37
+
+[testenv]
+whitelist_externals = poetry
+commands = poetry install -vvv
+    poetry run pytest tests/
+"""
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
