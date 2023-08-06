@@ -1,0 +1,253 @@
+Assorted decorator functions.
+
+
+*Latest release 20191012*:
+New @contextual decorator to turn a simple function into a context manager.
+@strable: mention context manager requirement and @contextual as workaround.
+
+Assorted decorator functions.
+
+## Function `cached(*a, **kw)`
+
+Compatibility wrapper for `@cachedmethod`, issuing a warning.
+
+## Function `cachedmethod(*da, **dkw)`
+
+Decorator to cache the result of a method and keep a revision
+counter for changes.
+
+The cached values are stored on the instance (`self`).
+The revision counter supports the `@revised` decorator.
+
+This decorator may be used in 2 modes.
+Directly:
+
+    @cachedmethod
+    def method(self, ...)
+
+or indirectly:
+
+    @cachedmethod(poll_delay=0.25)
+    def method(self, ...)
+
+Optional keyword arguments:
+* `attr_name`: the basis name for the supporting attributes.
+  Default: the name of the method.
+* `poll_delay`: minimum time between polls; after the first
+  access, subsequent accesses before the `poll_delay` has elapsed
+  will return the cached value.
+  Default: `None`, meaning no poll delay.
+* `sig_func`: a signature function, which should be significantly
+  cheaper than the method. If the signature is unchanged, the
+  cached value will be returned. The signature function
+  expects the instance (`self`) as its first parameter.
+  Default: `None`, meaning no signature function;
+  the first computed value will be kept and never updated.
+* `unset_value`: the value to return before the method has been
+  called successfully.
+  Default: `None`.
+
+If the method raises an exception, this will be logged and
+the method will return the previously cached value,
+unless there is not yet a cached value
+in which case the exception will be reraised.
+
+If the signature function raises an exception
+then a log message is issued and the signature is considered unchanged.
+
+An example use of this decorator might be to keep a "live"
+configuration data structure, parsed from a configuration
+file which might be modified after the program starts. One
+might provide a signature function which called `os.stat()` on
+the file to check for changes before invoking a full read and
+parse of the file.
+
+*Note*: use of this decorator requires the `cs.pfx` module.
+
+## Function `contextual(func)`
+
+Wrap a simple function as a context manager.
+
+This was written to support `@strable`,
+which requires its `open_func` to be a context manager.
+
+>>> f = lambda: 3
+>>> cf = contextual(f)
+>>> with cf() as x: print(x)
+3
+
+## Function `decorator(deco)`
+
+Wrapper for decorator functions to support optional arguments.
+
+The actual decorator function ends up being called as:
+
+    mydeco(func, *da, **dkw)
+
+allowing `da` and `dkw` to affect the behaviour of the decorator `mydeco`.
+
+Examples:
+
+    @decorator
+    def mydeco(func, *da, kw=None):
+      ... decorate func subject to the values of da and kw
+
+    @mydeco
+    def func1(...):
+      ...
+
+    @mydeco('foo', arg2='bah')
+    def func2(...):
+      ...
+
+## Function `fmtdoc(func)`
+
+Decorator to replace a function's docstring with that string
+formatted against the function's module `__dict__`.
+
+This supports simple formatted docstrings:
+
+    ENVVAR_NAME = 'FUNC_DEFAULT'
+
+    @fmtdoc
+    def func():
+        """Do something with os.environ[{ENVVAR_NAME}]."""
+        print(os.environ[ENVVAR_NAME])
+
+This gives `func` this docstring:
+
+    Do something with os.environ[FUNC_DEFAULT].
+
+*Warning*: this decorator is intended for wiring "constants"
+into docstrings, not for dynamic values. Use for other types
+of values should be considered with trepidation.
+
+## Function `observable_class(property_names, only_unequal=False)`
+
+Class decorator to make various instance attributes observable.
+
+Parameters:
+* `property_names`:
+  an interable of instance property names to set up as
+  observable properties. As a special case a single `str` can
+  be supplied if only one attribute is to be observed.
+* `only_unequal`:
+  only call the observers if the new property value is not
+  equal to the previous proerty value. This requires property
+  values to be comparable for inequality.
+  Default: `False`, meaning that all updates will be reported.
+
+## Function `strable(*da, **dkw)`
+
+Decorator for functions which may accept a `str`
+instead of their core type.
+
+Parameters:
+* `func`: the function to decorate
+* `open_func`: the "open" factory to produce the core type
+  if a string is provided;
+  the default is the builtin "open" function.
+  The returned value should be a context manager.
+  Simpler functions can be decorated with `@contextual`
+  to turn them into context managers if need be.
+
+The usual (and default) example is a function to process an
+open file, designed to be handed a file object but which may
+be called with a filename. If the first argument is a `str`
+then that file is opened and the function called with the
+open file.
+
+Examples:
+
+    @strable
+    def count_lines(f):
+      return len(line for line in f)
+
+    class Recording:
+      "Class representing a video recording."
+      ...
+    @strable(open_func=Recording)
+    def process_video(r):
+      ... do stuff with `r` as a Recording instance ...
+
+*Note*: use of this decorator requires the `cs.pfx` module.
+
+
+
+# Release Log
+
+*Release 20191012*:
+New @contextual decorator to turn a simple function into a context manager.
+@strable: mention context manager requirement and @contextual as workaround.
+
+*Release 20191006*:
+Rename @cached to @cachedmethod, leave compatible @cached behind which issues a warning (will be removed in a future release).
+
+*Release 20191004*:
+Avoid circular import with cs.pfx by removing requirement and doing the import later if needed.
+
+*Release 20190905*:
+Bugfix @deco: it turns out that you may not set the .__module__ attribute on a property object.
+
+*Release 20190830.2*:
+Make some getattr calls robust.
+
+*Release 20190830.1*:
+@decorator: set the __module__ of the wrapper.
+
+*Release 20190830*:
+@decorator: set the __module__ of the wrapper from the decorated target, aids cs.distinf.
+
+*Release 20190729*:
+@cached: sidestep uninitialised value.
+
+*Release 20190601.1*:
+@strable: fix the example in the docstring.
+
+*Release 20190601*:
+Bugfix @decorator to correctly propagate the docstring of the subdecorator.
+Improve other docstrings.
+
+*Release 20190526*:
+@decorator: add support for positional arguments and rewrite - simpler and clearer.
+
+*Release 20190512*:
+@fmtdoc: add caveat against misuse of this decorator.
+
+*Release 20190404*:
+New @fmtdoc decorator to format a function's doctsring against its module's globals.
+
+*Release 20190403*:
+@cached: bugfix: avoid using unset sig_func value on first pass.
+@observable_class: further tweaks.
+
+*Release 20190322.1*:
+@observable_class: bugfix __init__ wrapper function.
+
+*Release 20190322*:
+New class decorator @observable_class.
+Bugfix import of "warning".
+
+*Release 20190309*:
+@cached: improve the exception handling.
+
+*Release 20190307.2*:
+Fix docstring typo.
+
+*Release 20190307.1*:
+Bugfix @decorator: final plumbing step for decorated decorator.
+
+*Release 20190307*:
+@decorator: drop unused arguments, they get used by the returned decorator.
+Rework the @cached logic.
+
+*Release 20190220*:
+Bugfix @decorator decorator, do not decorate twice.
+Have a cut at inheriting the decorated function's docstring.
+
+*Release 20181227*:
+New decoartor @strable for function which may accept a str instead of their primary type.
+Improvements to @cached.
+
+*Release 20171231*:
+Initial PyPI release.
