@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+import sys
+from pygenerator3 import package_generator
+
+
+def main():
+    """ MAIN FUNCTION """
+
+    # run the main function
+    package_generator.main()
+
+
+if __name__ == '__main__':
+    sys.exit(main())

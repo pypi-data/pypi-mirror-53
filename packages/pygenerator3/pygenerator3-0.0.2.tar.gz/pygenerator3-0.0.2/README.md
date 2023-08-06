@@ -1,0 +1,81 @@
+# PYGENERATOR3
+
+- The **pygenerator3** is a python package that used to automate the creation
+  of a python package skeleton using the **package-generator** tool that
+  actually perform the work.
+- This package includes a **templates** directory which holds
+  all the necessary files and directories that are required to build the 
+  package skeleton.
+```
+templates/
+├── MANIFEST.in.template
+├── README.md.template
+├── package
+│   ├── __init__.py
+│   └── scripts
+├── requirements.txt.template
+└── setup.py.template
+```
+**NOTE:** 
+Additional files can be added before and after package skeleton generation.
+- Before: By adding additional files into the **package** directory, they will
+  be transferred to the package skeleton during the package skeleton generation.
+
+- After: Additional files can be added after package skeleton creation and
+  before the tarball (*.tar.gz) wrap up. 
+
+## Requirements:
+    * python >= 3.5
+    * pylib3
+
+## Usage:
+- Install the pygenerator3 package (inside your project's virtual environment)
+```
+pip install pygenerator3
+```
+
+- Run the package-generator tool to create the python package skeleton
+```
+usage: package-generator [--help] [--version] [--log-file NAME] [--verbose]
+                         [--python-version NUM] [--url URL]
+                         [--description TEXT] [--version-file TEXT]
+                         [--dst PATH] [--package-version TEXT] --package-name
+                         TEXT --author TEXT --author-email EMAIL
+
+optional arguments:
+  --help                show this help message and exit
+  --version             shows program version
+  --log-file NAME       log file name
+  --verbose             if added will print more information
+  --python-version NUM  python version (default: 3.5)
+  --url URL             url to package source code
+  --description TEXT    python package description
+  --version-file TEXT   python package version file name
+  --dst PATH            destination path where the python package will be
+                        created
+  --package-version TEXT
+                        python package version number (default: 0.0.1)
+
+required arguments:
+  --package-name TEXT   python package name
+  --author TEXT         Author's full name
+  --author-email EMAIL  Author's email address
+```
+
+## Examples:
+
+- To create 'simplepackage' python package skeleton in /tmp directory 
+```
+package-generator \
+--name simplepackage \
+--author 'Shlomi Ben-David' \
+--author-email 'shlomi.ben.david@gmail.com' \
+--dst /tmp/
+```
+**NOTE:** By omitting the --dst argument, the python package skeleton will be
+created in the current directory.
+
+- To wrap up the 'simplepackage' into a tarball so it could be installed via pip
+```
+python setup.py sdist
+```

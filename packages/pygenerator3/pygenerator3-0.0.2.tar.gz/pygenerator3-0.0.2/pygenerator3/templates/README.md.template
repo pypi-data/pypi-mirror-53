@@ -1,0 +1,33 @@
+# $package_name
+Add few words that describes this package
+
+## Usage:
+Add the usage of the module/script that will be output from the --help argument
+
+For example:
+usage: script <action> [arguments]
+
+optional arguments:
+  --help                show this help message and exit
+  --version             shows program version
+  --log-file NAME       log file name
+  --verbose             if added will print more information
+
+actions:
+
+    list                list all files
+    dir                 list all directories
+
+## Examples:
+Add some examples for the main usage
+
+For example:
+- To list all existing files
+```
+myscript list
+```
+
+- To list all existing directories
+```
+myscript dir
+```
