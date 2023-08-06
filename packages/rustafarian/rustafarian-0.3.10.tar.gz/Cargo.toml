@@ -1,0 +1,20 @@
+[package]
+name = "rustafarian"
+version = "0.3.10"
+edition = "2018"
+authors = ["Roberto Di Remigio <roberto.diremigio@gmail.com>"]
+
+[package.metadata.maturin.scripts]
+rustafarian = 'rustafarian.cli:cli'
+
+[dependencies]
+pyo3 = { version = "0.8.0", features = ["extension-module"]}
+
+[lib]
+name = "rustafarian"
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = true
