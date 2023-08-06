@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: dstools
+Version: 0.8
+Summary: Utility functions for Data Science projects.
+Home-page: https://github.com/edublancas/dstools
+Author: Eduardo Blancas
+Author-email: fkq8@blancas.io
+License: A license
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: Unix
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Utilities
+Requires-Dist: pyyaml
+Requires-Dist: networkx
+Requires-Dist: click
+Requires-Dist: jinja2
+Requires-Dist: tabulate
+Requires-Dist: pygraphviz
+Requires-Dist: humanize
+Requires-Dist: tqdm
+Requires-Dist: numpydoc
+Requires-Dist: pyarrow
+Requires-Dist: sqlalchemy
+Requires-Dist: paramiko
+Requires-Dist: psycopg2-binary
+Requires-Dist: pandas
+
+dstools
+=======
+
+.. image:: https://travis-ci.org/edublancas/dstools.svg?branch=master
+    :target: https://travis-ci.org/edublancas/dstools.svg?branch=master
+
+
+
+Examples are available in the `examples/` directory
+
+
