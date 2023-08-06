@@ -1,0 +1,134 @@
+Metadata-Version: 2.1
+Name: aicsimageio
+Version: 3.0.1
+Summary: Python library for reading and writing image data with special handlers for bio-formats from Allen Institute for Cell Science.
+Home-page: https://github.com/AllenCellModeling/aicsimageio
+Author: Allen Institute for Cell Science
+Author-email: jacksonb@alleninstitute.org, bowdenm@spu.edu
+License: BSD-3-Clause
+Keywords: aicsimageio,allen cell,imaging,computational biology
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: numpy (>=1.16)
+Requires-Dist: imageio (>=2.3.0)
+Requires-Dist: scipy (>=1.1.0)
+Requires-Dist: tifffile (==0.15.1)
+Provides-Extra: all
+Requires-Dist: numpy (>=1.16) ; extra == 'all'
+Requires-Dist: imageio (>=2.3.0) ; extra == 'all'
+Requires-Dist: scipy (>=1.1.0) ; extra == 'all'
+Requires-Dist: tifffile (==0.15.1) ; extra == 'all'
+Requires-Dist: codecov ; extra == 'all'
+Requires-Dist: flake8 ; extra == 'all'
+Requires-Dist: pytest ; extra == 'all'
+Requires-Dist: pytest-cov ; extra == 'all'
+Requires-Dist: pytest-raises ; extra == 'all'
+Requires-Dist: pytest-runner ; extra == 'all'
+Requires-Dist: bumpversion (>=0.5.3) ; extra == 'all'
+Requires-Dist: coverage (>=5.0a4) ; extra == 'all'
+Requires-Dist: flake8 (>=3.7.7) ; extra == 'all'
+Requires-Dist: ipython (>=7.5.0) ; extra == 'all'
+Requires-Dist: pytest (>=4.3.0) ; extra == 'all'
+Requires-Dist: pytest-cov (==2.6.1) ; extra == 'all'
+Requires-Dist: pytest-raises (>=0.10) ; extra == 'all'
+Requires-Dist: pytest-runner (>=4.4) ; extra == 'all'
+Requires-Dist: Sphinx (>=2.0.0b1) ; extra == 'all'
+Requires-Dist: tox (>=3.5.2) ; extra == 'all'
+Requires-Dist: twine (>=1.13.0) ; extra == 'all'
+Requires-Dist: wheel (>=0.33.1) ; extra == 'all'
+Requires-Dist: altair ; extra == 'all'
+Requires-Dist: jupyterlab ; extra == 'all'
+Requires-Dist: matplotlib ; extra == 'all'
+Requires-Dist: pillow ; extra == 'all'
+Provides-Extra: dev
+Requires-Dist: bumpversion (>=0.5.3) ; extra == 'dev'
+Requires-Dist: coverage (>=5.0a4) ; extra == 'dev'
+Requires-Dist: flake8 (>=3.7.7) ; extra == 'dev'
+Requires-Dist: ipython (>=7.5.0) ; extra == 'dev'
+Requires-Dist: pytest (>=4.3.0) ; extra == 'dev'
+Requires-Dist: pytest-cov (==2.6.1) ; extra == 'dev'
+Requires-Dist: pytest-raises (>=0.10) ; extra == 'dev'
+Requires-Dist: pytest-runner (>=4.4) ; extra == 'dev'
+Requires-Dist: Sphinx (>=2.0.0b1) ; extra == 'dev'
+Requires-Dist: tox (>=3.5.2) ; extra == 'dev'
+Requires-Dist: twine (>=1.13.0) ; extra == 'dev'
+Requires-Dist: wheel (>=0.33.1) ; extra == 'dev'
+Provides-Extra: interactive
+Requires-Dist: altair ; extra == 'interactive'
+Requires-Dist: jupyterlab ; extra == 'interactive'
+Requires-Dist: matplotlib ; extra == 'interactive'
+Requires-Dist: pillow ; extra == 'interactive'
+Provides-Extra: setup
+Requires-Dist: pytest-runner ; extra == 'setup'
+Provides-Extra: test
+Requires-Dist: codecov ; extra == 'test'
+Requires-Dist: flake8 ; extra == 'test'
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: pytest-raises ; extra == 'test'
+
+# AICSImageIO
+
+[![Build Status](https://github.com/AllenCellModeling/aicsimageio/workflows/Build%20Master/badge.svg)](https://github.com/AllenCellModeling/aicsimageio/actions)
+[![Code Coverage](https://codecov.io/gh/AllenCellModeling/aicsimageio/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/aicsimageio)
+
+A Python library for reading and writing image data with specific support for handling bio-formats.
+
+---
+
+## Features
+* Supports reading metadata and imaging data from file path or buffered bytes for:
+    * `CZI`
+    * `OME-TIFF`
+    * `TIFF`
+    * Any additional format supported by `imageio`
+* Supports writing metadata and imaging data for:
+    * `OME-TIFF`
+    * `TIFF`
+    * Any additional format supported by `imageio`
+
+### Disclaimer:
+This package is under heavy revision in preparation for version 3.0.0 release. The quick start below is representative
+of how to interact with the package under 3.0.0 and not under the current stable release.
+
+## Quick Start
+```python
+from aicsimageio import AICSImage, imread
+
+# For numpy array of image data
+im = imread("/path/to/your/file_or_buffer.ome.tiff")
+
+# For AICSImage object that
+im = AICSImage("/path/to/your/file_or_buffer.ome.tiff")
+
+# Image data is stored in `data` attribute
+im.data  # returns the image data numpy array
+
+# Image metadata is stored in `metadata` attribute
+im.metadata  # returns whichever metadata parser best suites the file format
+```
+
+## Notes
+* Image data numpy arrays are always returned as six dimensional in dimension order `STCZYX`
+or `Scene`, `Time`, `Channel`, `Z`, `Y`, and `X`.
+* Each file format may use a different metadata parser it is dependent on the reader's implementation.
+
+## Installation
+**Stable Release:** `pip install aicsimageio`<br>
+**Development Head:** `pip install git+https://github.com/AllenCellModeling/aicsimageio.git`
+
+## Development
+See [CONTRIBUTING.md](CONTRIBUTING.md) for information related to developing the code.
+
+***Free software: BSD-3-Clause***
+
+
