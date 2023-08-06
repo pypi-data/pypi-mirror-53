@@ -1,0 +1,49 @@
+
+
+{% load i18n admin_urls static admin_list %}
+
+{% block extrastyle %}
+ <link rel="icon" href="{% static '/admin/simpleui-x/img/favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}?_=20180905"/>
+        <link rel="stylesheet" type="text/css" href="{% static "admin/css/base.css" %}">
+
+        <style>
+            #changelist table thead th:first-child {
+                width: inherit
+            }
+        </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="content-main">
+
+        {% if cl.formset.errors %}
+            <p class="errornote">
+                {% if cl.formset.total_error_count == 1 %}{% trans "Please correct the error below." %}{% else %}
+                    {% trans "Please correct the errors below." %}{% endif %}
+            </p>
+            {{ cl.formset.non_form_errors }}
+        {% endif %}
+        <div  id="changelist">
+
+            {% block filters %}
+        {% if cl.has_filters %}
+          <div id="changelist-filter">
+            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+          </div>
+        {% endif %}
+      {% endblock %}
+
+            <form id="changelist-form" >{% csrf_token %}
+
+                {% block result_list %}
+                    {% result_list cl %}
+
+                {% endblock %}
+                {% block pagination %}{% pagination cl %}{% endblock %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
