@@ -1,0 +1,53 @@
+Metadata-Version: 2.1
+Name: nanome-realtime-scoring
+Version: 0.1.0
+Summary: Nanome Plugin displaying docking score of complexes in the workspace, in realtime
+Home-page: https://github.com/nanome-ai/plugin-realtime-scoring
+Author: Nanome
+Author-email: hello@nanome.ai
+License: MIT
+Keywords: virtual-reality,chemistry,python,api,plugin
+Platform: any
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: nanome
+
+# Nanome - Realtime Scoring
+
+Displays the docking score of all molecules in the workspace, in realtime.
+
+Runs only on Linux for now
+
+### Installation
+
+```sh
+$ pip install nanome-realtime-scoring
+```
+
+### Usage
+
+To start the plugin:
+
+```sh
+$ nanome-realtime-scoring -a plugin_server_address
+```
+
+In Nanome:
+
+- Activate Plugin
+- In the plugin window, select a receptor and ligands, then start scoring
+- Plugin will display a list of all other complexes, with their docking score
+- Moving a complex around will update its score
+
+### License
+
+MIT
+
+
