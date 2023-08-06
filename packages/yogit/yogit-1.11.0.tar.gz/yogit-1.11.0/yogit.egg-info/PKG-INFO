@@ -1,0 +1,228 @@
+Metadata-Version: 2.1
+Name: yogit
+Version: 1.11.0
+Summary: Command line utility for GitHub daily work.
+Home-page: https://github.com/hasboeuf/yogit
+Author: Adrien Gavignet
+Author-email: adrien.gavignet@gmail.com
+License: MIT
+Description: # yogit
+        
+        [![Build Status](https://dev.azure.com/hasboeuf/yogit/_apis/build/status/hasboeuf.yogit?branchName=master)](https://dev.azure.com/hasboeuf/yogit/_build/latest?definitionId=1&branchName=master)
+        [![Build Status](https://travis-ci.org/hasboeuf/yogit.svg?branch=master)](https://travis-ci.org/hasboeuf/yogit)
+        ![License](https://img.shields.io/github/license/mashape/apistatus.svg)
+        [![PyPI version](https://badge.fury.io/py/yogit.svg)](https://pypi.org/project/yogit/)
+        [![Downloads](https://pepy.tech/badge/yogit)](https://pepy.tech/project/yogit)
+        
+        Command line utility for git daily work.
+        
+        ## Requirements
+        
+        * `Python3` and `pip3`
+        * `yogit` is tested with Python `3.5`, `3.6`, `3.7`
+        * `yogit` is mostly tested on `Linux` but also works on `macOS` and `Windows` (if using [Windows Terminal](https://github.com/microsoft/terminal)).
+        * For now only GitHub API is supported
+        
+        ## Continuous integration
+        
+        * [Azure Pipelines](https://dev.azure.com/hasboeuf/yogit)
+        * [TravisCI](https://travis-ci.org/hasboeuf/yogit)
+        
+        ## Installation
+        
+        * `pip3 install yogit`
+        * `yogit account setup`
+        
+        `yogit` internal files are stored in `~/.yogit` folder.
+        
+        ### Auto completion
+        
+        `yogit` supports auto-completion. To activate it, you need to setup your shell.
+        
+        * For Bash, edit your `.bashrc` and add `eval "$(_YOGIT_COMPLETE=source yogit)"`
+        * For Zsh, edit your `.zshrc` and add `eval "$(_YOGIT_COMPLETE=source_zsh yogit)"`
+        
+        ## Principle
+        
+        `yogit` is able to:
+        
+        * Show pull requests
+        * Show pull request reviews
+        * Show branches
+        * Show contributions
+        * Show organization's information
+        * Help in writing a daily scrum report
+        
+        See documentation below for more details.
+        
+        ## Documentation
+        
+        ### Usage
+        
+        `yogit --help`
+        
+        ### Account
+        
+        `yogit account setup`: Setup yogit
+        
+        `yogit account usage`: Account API usage
+        
+        ### Pull request
+        
+        `yogit pr list [--orga TEXT]`: List your opened pull requests. If `--orga` is provided, results will be expanded to this specific organization.
+        
+        ### Review
+        
+        `yogit review list`: List your reviews on opened pull requests
+        
+        `yogit review requested [--missed]`: List pull requests where your review is requested. If `--missed` is set, only closed pull requests will be listed.
+        
+        ### Branch
+        
+        `yogit branch list [--dangling]`: List your branches. If `--dangling` is set, only branches without associated pull request will be listed.
+        
+        ### Contributions
+        
+        `yogit contrib list [--from TEXT] [--to TEXT]`: List your GitHub contributions within a range of dates.
+        
+        A contribution is either a pull request or pull request review.
+        
+        By default this command is listing today's contributions.
+        
+        `yogit contrib stats`: Show some GitHub statistics.
+        
+        ### Organization
+        
+        `yogit orga list`: List organizations you belong to.
+        
+        `yogit orga member list [--orga TEXT]`: List members of one organization you belong to.
+        
+        `yogit orga member pickone [--orga TEXT]`: Randomly pick one member of one organization you belong to.
+        
+        ### SCRUM
+        
+        `yogit scrum report [--date TEXT]`: Generate your daily activity report
+        
+        Template of the report can be changed by editing `~/.yogit/scrum_report.yaml`
+        
+        You might need to install `xcopy` to fully enjoy this command.
+        
+        
+        # Changelog
+        
+        ## 1.11.0
+        
+        * Change `yogit review requested` output: print pull request title, don't print repository url anymore
+        * Add `--missed` option to `yogit review requested` command
+        
+        ## 1.10.0
+        
+        * Add `yogit br` becomes `yogit branch` command
+        * Add `yogit rv` becomes `yogit review` command
+        
+        ## 1.9.0
+        
+        * Add `yogit orga list` command
+        * Add `--orga` discrimator option to `yogit orga member list`
+        * Add `--orga` discrimator option to `yogit orga member pickone`
+        * Improve doc regarding auto completion
+        
+        ## 1.8.0
+        
+        * Add `yogit orga member list` command
+        * Add `yogit orga member pickone` command
+        * Add `--dangling` option to `yogit br list`
+        * `yogit ct` command is renamed to `yogit contrib`
+        * Improve update warning wording
+        * Improve `yogit --version` wording
+        
+        ## 1.7.2
+        
+        * Fix `yogit` upgrade from `1.6.0`
+        
+        ## 1.7.1
+        
+        * Shit happens
+        
+        ## 1.7.0
+        
+        * Add `yogit ct stats` command
+        
+        ## 1.6.0
+        
+        * Add `yogit ct list` command
+        * Add `--date` arg to `yogit scrum report` command
+        * Add indentation ability to `yogit scrum report`
+        * Print pretty bullet points in generated scrum report
+        * Improve documentation
+        
+        ## 1.5.1
+        
+        * Replace `yaspin` by `Halo` dep to handle spinner: better handling of pipes and redirects
+        
+        ## 1.5.0
+        
+        * Tried `yogit` on Windows Terminal and workaround a spinner issue
+        * Print count little by little if request is big
+        
+        ## 1.4.1
+        
+        * Fix missing `packaging` dependency
+        
+        ## 1.4.0
+        
+        * See if pull requests are conflicted in `yogit pr list`
+        * Improve `yogit scrum report` UX and make it robust to network access failure
+        * Shorten PR titles in tabulated results (max 50 chars)
+        
+        ## 1.3.0
+        
+        * Add update available check
+        
+        ## 1.2.1
+        
+        * Improve help
+        
+        ## 1.2.0
+        
+        * Add ability to list your current reviews and see outdated ones with `yogit rv list`
+        * Dedicated wording when there is no result
+        * Add "Count: X" statement right after result list
+        * Show a spinner during request time
+        * Use bold and emojis to make outputs fancier
+        
+        ## 1.1.1
+        
+        * Reinforce `scrum report` command (better error handling)
+        
+        ## 1.1.0
+        
+        * Add abilitiy to list pull requests of an organization `yogit pr list --orga TEXT`
+        
+        ## 1.0.4
+        
+        * Fix typo in scrum report, thx @genygilles
+        
+        ## 1.0.3
+        
+        * Fix unauthorized error due to too old PyYAML version
+        
+        ## 1.0.2
+        
+        * Support pagination for branch listing (fix request timeout)
+        
+        ## 1.0.1
+        
+        * Be more specific on GitHub required scopes
+        * Improve code regarding account setup flow
+        * Fix sort of pull request list
+        
+        ## 1.0.0
+        
+        * Project bootstrap
+        
+Keywords: git github utility branch pull requests
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
