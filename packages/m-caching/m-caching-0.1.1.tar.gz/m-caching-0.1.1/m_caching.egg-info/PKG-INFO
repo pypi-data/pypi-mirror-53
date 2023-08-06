@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: m-caching
+Version: 0.1.1
+Summary: Setup normal class to mobio lru cache
+Home-page: https://github.com/mobiovn
+Author: MOBIO
+Author-email: contact@mobio.vn
+License: MIT
+Description: # <h2 id="title">LRU Cache</h2>
+        Thư viện caching của MOBIO. Hỗ trợ cache trên memory hoặc Redis.
+        
+        #### Cài đặt:
+        `pip3 install m-caching`
+        
+        #### Sử dụng:
+        ```
+        __store_type = StoreType.REDIS # for redis cache
+        __store_type = StoreType.LOCAL # for memory cache
+        __file_config = 'config-file-path'
+        
+        lru_cache = LruCache(store_type=__store_type, config_file_name=__file_config)
+        
+        ```
+        Ignore empty values from cache
+        ```
+        __store_type = StoreType.REDIS
+        __file_config = 'config-file-path'
+        lru_cache = LruCache(store_type=__store_type, config_file_name=__file_config)
+        lru_cache.accept_none(False) # => ignore none values
+        ``` 
+        
+        #### Example config
+        ```
+        [REDIS]
+        host=redis-server
+        port=6379
+        expired_time_for_key=1200
+        expired_time_for_group=86400
+        number_db_redis = 1
+        expired_time_reset_password = 3600
+        expire_t1 = 600
+        expire_t2 = 1200
+        cache_prefix=test_cache
+        ```
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
