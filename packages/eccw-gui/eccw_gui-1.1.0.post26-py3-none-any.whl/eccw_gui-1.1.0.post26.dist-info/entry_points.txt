@@ -1,0 +1,7 @@
+[console_scripts]
+eccw_windows_install = eccw_gui.windows.win_post_install:install
+eccw_windows_remove = eccw_gui.windows.win_post_install:remove
+
+[gui_scripts]
+eccw = eccw_gui.__main__:launch
+
