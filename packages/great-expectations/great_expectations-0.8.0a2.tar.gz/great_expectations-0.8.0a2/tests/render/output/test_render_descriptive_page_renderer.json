@@ -1,0 +1,966 @@
+{
+  "renderer_type": "DescriptivePageRenderer",
+  "data_asset_name": null,
+  "full_data_asset_identifier": "",
+  "page_title": "1955-11-05T000000Z-default",
+  "utm_medium": "descriptive-validation-page",
+  "sections": [
+    {
+      "section_name": "Overview",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": "Overview",
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "table",
+          "header": "Dataset info",
+          "table_rows": [
+            [
+              "Number of variables",
+              6
+            ],
+            [
+              {
+                "template": "Number of observations",
+                "tooltip": {
+                  "content": "expect_table_row_count_to_be_between"
+                },
+                "params": {
+                  "tooltip_text": "Number of observations"
+                }
+              },
+              "?"
+            ],
+            [
+              "Missing cells",
+              "?"
+            ]
+          ],
+          "styling": {
+            "classes": [
+              "col-6",
+              "table-responsive"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "body": {
+              "classes": [
+                "table",
+                "table-sm"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "table",
+          "header": "Variable types",
+          "table_rows": [
+            [
+              "int",
+              "0"
+            ],
+            [
+              "float",
+              "0"
+            ],
+            [
+              "string",
+              "0"
+            ],
+            [
+              "--",
+              "6"
+            ]
+          ],
+          "styling": {
+            "classes": [
+              "col-6",
+              "table-responsive"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "body": {
+              "classes": [
+                "table",
+                "table-sm"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $expectation_count",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "expectation_count": 6
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "expectation_count": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $expectation_count",
+              "params": {
+                "expectation_type": "expect_column_mean_to_be_between",
+                "expectation_count": 1
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "expectation_count": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $expectation_count",
+              "params": {
+                "expectation_type": "expect_column_values_to_be_between",
+                "expectation_count": 1
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "expectation_count": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $expectation_count",
+              "params": {
+                "expectation_type": "expect_column_values_to_match_regex",
+                "expectation_count": 1
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "expectation_count": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $expectation_count",
+              "params": {
+                "expectation_type": "expect_column_values_to_be_in_set",
+                "expectation_count": 1
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "expectation_count": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section_name": "Age",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": {
+            "template": "Age",
+            "tooltip": {
+              "content": "expect_column_to_exist",
+              "placement": "top"
+            }
+          },
+          "sub_header": {
+            "template": "Type: --",
+            "tooltip": {
+              "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+            }
+          },
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "table",
+          "header": "Statistics",
+          "table_rows": [
+            [
+              {
+                "template": "Mean",
+                "tooltip": {
+                  "content": "expect_column_mean_to_be_between"
+                }
+              },
+              "30.40"
+            ]
+          ],
+          "styling": {
+            "classes": [
+              "col-4"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "body": {
+              "classes": [
+                "table",
+                "table-sm",
+                "table-unbordered"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_mean_to_be_between",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_values_to_be_between",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "role": "button",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section_name": "Name",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": {
+            "template": "Name",
+            "tooltip": {
+              "content": "expect_column_to_exist",
+              "placement": "top"
+            }
+          },
+          "sub_header": {
+            "template": "Type: --",
+            "tooltip": {
+              "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+            }
+          },
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_values_to_match_regex",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "role": "button",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section_name": "PClass",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": {
+            "template": "PClass",
+            "tooltip": {
+              "content": "expect_column_to_exist",
+              "placement": "top"
+            }
+          },
+          "sub_header": {
+            "template": "Type: --",
+            "tooltip": {
+              "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+            }
+          },
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "value_list",
+          "header": {
+            "template": "Example Values",
+            "tooltip": {
+              "content": "expect_column_values_to_be_in_set"
+            }
+          },
+          "value_list": [
+            {
+              "template": "$value",
+              "params": {
+                "value": "*"
+              },
+              "styling": {
+                "default": {
+                  "classes": [
+                    "badge",
+                    "badge-info"
+                  ]
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-4"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_values_to_be_in_set",
+                "is_passing": "False"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "role": "button",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section_name": "Sex",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": {
+            "template": "Sex",
+            "tooltip": {
+              "content": "expect_column_to_exist",
+              "placement": "top"
+            }
+          },
+          "sub_header": {
+            "template": "Type: --",
+            "tooltip": {
+              "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+            }
+          },
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "role": "button",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section_name": "SexCode",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": {
+            "template": "SexCode",
+            "tooltip": {
+              "content": "expect_column_to_exist",
+              "placement": "top"
+            }
+          },
+          "sub_header": {
+            "template": "Type: --",
+            "tooltip": {
+              "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+            }
+          },
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "role": "button",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section_name": "Survived",
+      "content_blocks": [
+        {
+          "content_block_type": "header",
+          "header": {
+            "template": "Survived",
+            "tooltip": {
+              "content": "expect_column_to_exist",
+              "placement": "top"
+            }
+          },
+          "sub_header": {
+            "template": "Type: --",
+            "tooltip": {
+              "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+            }
+          },
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "header": {
+              "classes": [
+                "alert",
+                "alert-secondary"
+              ]
+            }
+          }
+        },
+        {
+          "content_block_type": "bullet_list",
+          "header": "Expectation types <span class=\"mr-3 triangle\"></span>",
+          "bullet_list": [
+            {
+              "template": "$expectation_type $is_passing",
+              "params": {
+                "expectation_type": "expect_column_to_exist",
+                "is_passing": "True"
+              },
+              "styling": {
+                "classes": [
+                  "list-group-item",
+                  "d-flex",
+                  "justify-content-between",
+                  "align-items-center"
+                ],
+                "params": {
+                  "is_passing": {
+                    "classes": [
+                      "badge",
+                      "badge-secondary",
+                      "badge-pill"
+                    ]
+                  }
+                }
+              }
+            }
+          ],
+          "styling": {
+            "classes": [
+              "col-12"
+            ],
+            "styles": {
+              "margin-top": "20px"
+            },
+            "header": {
+              "classes": [
+                "collapsed"
+              ],
+              "attributes": {
+                "data-toggle": "collapse",
+                "href": "#{{content_block_id}}-body",
+                "role": "button",
+                "aria-expanded": "true",
+                "aria-controls": "collapseExample"
+              },
+              "styles": {
+                "cursor": "pointer"
+              }
+            },
+            "body": {
+              "classes": [
+                "list-group",
+                "collapse"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

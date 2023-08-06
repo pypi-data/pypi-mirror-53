@@ -1,0 +1,178 @@
+{
+  "section_name": "SexCode",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "SexCode",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "bullet_list",
+      "bullet_list": [
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "value types must belong to this set: $v__0 $v__1 $v__2 $v__3 $v__4 $v__5.",
+            "params": {
+              "column": "SexCode",
+              "type_list": [
+                "BIGINT",
+                "INTEGER",
+                "IntegerType",
+                "LongType",
+                "SMALLINT",
+                "int"
+              ],
+              "mostly": null,
+              "v__0": "BIGINT",
+              "v__1": "INTEGER",
+              "v__2": "IntegerType",
+              "v__3": "LongType",
+              "v__4": "SMALLINT",
+              "v__5": "int"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-secondary"
+                ]
+              },
+              "params": {
+                "column": {
+                  "classes": [
+                    "badge",
+                    "badge-primary"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "may have any number of unique values.",
+            "params": {
+              "column": "SexCode",
+              "min_value": null,
+              "max_value": null,
+              "mostly": null
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-secondary"
+                ]
+              },
+              "params": {
+                "column": {
+                  "classes": [
+                    "badge",
+                    "badge-primary"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "may have any percentage of unique values.",
+            "params": {
+              "column": "SexCode",
+              "min_value": null,
+              "max_value": null
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-secondary"
+                ]
+              },
+              "params": {
+                "column": {
+                  "classes": [
+                    "badge",
+                    "badge-primary"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "values must not be null, at least $mostly_pct % of the time.",
+            "params": {
+              "column": "SexCode",
+              "mostly": 0.5,
+              "mostly_pct": "50.0"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-secondary"
+                ]
+              },
+              "params": {
+                "column": {
+                  "classes": [
+                    "badge",
+                    "badge-primary"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "distinct values must belong to a set, but that set is not specified.",
+            "params": {
+              "column": "SexCode",
+              "value_set": null
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-secondary"
+                ]
+              },
+              "params": {
+                "column": {
+                  "classes": [
+                    "badge",
+                    "badge-primary"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ]
+      }
+    }
+  ]
+}

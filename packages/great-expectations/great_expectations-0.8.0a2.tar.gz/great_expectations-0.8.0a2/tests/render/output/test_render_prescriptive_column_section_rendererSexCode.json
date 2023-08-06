@@ -1,0 +1,53 @@
+{
+  "section_name": "SexCode",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "SexCode",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "bullet_list",
+      "bullet_list": [
+        {
+          "template": "is a required field.",
+          "params": {
+            "column": "SexCode",
+            "column_index": null
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ]
+      }
+    }
+  ]
+}

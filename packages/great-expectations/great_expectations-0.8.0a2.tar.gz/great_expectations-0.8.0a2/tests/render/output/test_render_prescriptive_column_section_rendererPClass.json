@@ -1,0 +1,85 @@
+{
+  "section_name": "PClass",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": "PClass",
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "bullet_list",
+      "bullet_list": [
+        {
+          "template": "is a required field.",
+          "params": {
+            "column": "PClass",
+            "column_index": null
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "template": "values must belong to this set: $v__0 $v__1 $v__2.",
+          "params": {
+            "column": "PClass",
+            "value_set": [
+              "1st",
+              "2nd",
+              "3rd"
+            ],
+            "mostly": null,
+            "parse_strings_as_datetimes": null,
+            "v__0": "1st",
+            "v__1": "2nd",
+            "v__2": "3rd"
+          },
+          "styling": {
+            "default": {
+              "classes": [
+                "badge",
+                "badge-secondary"
+              ]
+            },
+            "params": {
+              "column": {
+                "classes": [
+                  "badge",
+                  "badge-primary"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ]
+      }
+    }
+  ]
+}
