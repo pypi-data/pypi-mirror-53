@@ -1,0 +1,140 @@
+#!/bin/bash
+
+# This script outputs the environment for the application or shell.
+
+WARPDRIVE_PHASE=deploy
+export WARPDRIVE_PHASE
+
+echo "export WARPDRIVE_PHASE=$WARPDRIVE_PHASE"
+
+# Root directory for the runtime environment of the application.
+
+WARPDRIVE_APP_ROOT=${WARPDRIVE_APP_ROOT:-/opt/app-root}
+export WARPDRIVE_APP_ROOT
+
+echo "export WARPDRIVE_APP_ROOT=$WARPDRIVE_APP_ROOT"
+
+# Root directory for the source code of the application.
+
+WARPDRIVE_SRC_ROOT=${WARPDRIVE_SRC_ROOT:-$WARPDRIVE_APP_ROOT/src}
+export WARPDRIVE_SRC_ROOT
+
+echo "export WARPDRIVE_SRC_ROOT=$WARPDRIVE_SRC_ROOT"
+
+# Home directory of the application within the source code.
+
+if [ -f ${WARPDRIVE_SRC_ROOT}/.warpdrive/home ]; then
+    WARPDRIVE_APP_HOME="`cat ${WARPDRIVE_SRC_ROOT}/.warpdrive/home`"
+fi
+
+case "$WARPDRIVE_APP_HOME" in
+    /*)
+        ;;
+    "")
+        WARPDRIVE_APP_HOME=$WARPDRIVE_SRC_ROOT
+        ;;
+    *)
+        WARPDRIVE_APP_HOME=$WARPDRIVE_SRC_ROOT/$WARPDRIVE_APP_HOME
+        ;;
+esac
+
+export WARPDRIVE_APP_HOME
+
+echo "export WARPDRIVE_APP_HOME=$WARPDRIVE_APP_HOME"
+
+# Set the default listener port for the web application server.
+
+WARPDRIVE_HTTP_PORT=${WARPDRIVE_HTTP_PORT:-8080}
+export WARPDRIVE_HTTP_PORT
+
+echo "export WARPDRIVE_HTTP_PORT=$WARPDRIVE_HTTP_PORT"
+
+# Override uid and gid lookup to cope with being randomly assigned IDs
+# using the -u option to 'docker run'.
+#
+# For now we base whether we can run this on whether /etc/passwd is writable
+# as non root user, or on the existence of the libnss_wrapper.so file.
+# This really should be gated on whether running inside of Docker which
+# is where it needs to be done.
+
+running_in_docker() {
+    awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+}
+
+WARPDRIVE_USER_ID=$(id -u)
+WARPDRIVE_BUILDER_ID=${WARPDRIVE_BUILDER_ID:-1001}
+
+NSS_WRAPPER_PASSWD=$WARPDRIVE_APP_ROOT/tmp/passwd
+NSS_WRAPPER_GROUP=/etc/group
+
+NSS_WRAPPER_LIBRARY=
+
+NSS_WRAPPER_PASSWD_UPDATE=
+
+if [ -f /usr/local/nss_wrapper/lib64/libnss_wrapper.so ]; then
+    NSS_WRAPPER_LIBRARY=/usr/local/nss_wrapper/lib64/libnss_wrapper.so
+else
+    if [ -f /lib64/libnss_wrapper.so ]; then
+        NSS_WRAPPER_LIBRARY=/lib64/libnss_wrapper.so
+    fi
+fi
+
+if [ $WARPDRIVE_USER_ID != 0 -a $WARPDRIVE_USER_ID != $WARPDRIVE_BUILDER_ID ]; then
+    if [ ! -f $NSS_WRAPPER_PASSWD ]; then
+        cat /etc/passwd | sed -e "s/^.*:x:$WARPDRIVE_BUILDER_ID:0:/warpfield:x:$WARPDRIVE_BUILDER_ID:0:/" > $NSS_WRAPPER_PASSWD
+        echo "warpdrive:x:$WARPDRIVE_USER_ID:0:Warp Drive,,,:$HOME:/bin/bash" >> $NSS_WRAPPER_PASSWD
+        NSS_WRAPPER_PASSWD_UPDATE=1
+    fi
+fi
+
+if [ x"$NSS_WRAPPER_PASSWD_UPDATE" != x"" ]; then
+    if [ -w /etc/passwd ]; then
+        cat $NSS_WRAPPER_PASSWD > /etc/passwd
+    else
+        if [ "$NSS_WRAPPER_LIBRARY" != "" ]; then
+            echo "export NSS_WRAPPER_PASSWD=$NSS_WRAPPER_PASSWD"
+            echo "export NSS_WRAPPER_GROUP=$NSS_WRAPPER_GROUP"
+
+            echo "export LD_PRELOAD=$NSS_WRAPPER_LIBRARY"
+        fi
+    fi
+fi
+
+# Ensure that the source directory and application home directory are
+# in the Python module search path and that they are searched first.
+
+PYTHONPATH=$WARPDRIVE_SRC_ROOT:$PYTHONPATH
+
+if [ "$WARPDRIVE_APP_HOME" != "$WARPDRIVE_SRC_ROOT" ]; then
+    PYTHONPATH=$WARPDRIVE_APP_HOME:$PYTHONPATH
+fi
+
+echo "export PYTHONPATH=$PYTHONPATH"
+
+# Add the bin directory for the Python virtual environment if it exists.
+
+if [ -f $WARPDRIVE_APP_ROOT/bin/activate ]; then
+    PATH=$WARPDRIVE_APP_ROOT/bin:$PATH
+fi
+
+echo "export PATH=$PATH"
+
+# Now source environment variables. First evaluate common environment
+# variables from '.warpdrive/environment' if it exists. Then source
+# variables from '.warpdrive/action_hooks/deploy-env' if it exists. Any
+# variables set in either script will be automatically exported. It is
+# possible to use script logic, but temporary variables would need to be
+# cleaned up manually due to variables set being automatically exported.
+
+if [ -f $WARPDRIVE_SRC_ROOT/.warpdrive/environment ]; then
+    set -a; . $WARPDRIVE_SRC_ROOT/.warpdrive/environment; set +a
+fi
+
+if [ -f $WARPDRIVE_SRC_ROOT/.warpdrive/action_hooks/deploy-env ]; then
+    set -a; . $WARPDRIVE_SRC_ROOT/.warpdrive/action_hooks/deploy-env; set +a
+fi
+
+# Output how environment variables should be incorporated.
+
+echo '# Run this command to configure your shell:'
+echo '# eval "$(warpdrive env)"'
