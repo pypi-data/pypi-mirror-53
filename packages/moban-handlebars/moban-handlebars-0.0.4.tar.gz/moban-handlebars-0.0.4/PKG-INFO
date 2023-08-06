@@ -1,0 +1,111 @@
+Metadata-Version: 1.1
+Name: moban-handlebars
+Version: 0.0.4
+Summary: Provide handlebars templating capability to moban.
+Home-page: https://github.com/moremoban/moban-handlebars
+Author: Charlie Liu, C.W. et al
+Author-email: wangc_2011@hotmail.com
+License: MIT
+Download-URL: https://github.com/moremoban/moban-handlebars/archive/0.0.4.tar.gz
+Description: ================================================================================
+        moban-handlebars
+        ================================================================================
+        
+        .. image:: https://api.travis-ci.org/moremoban/moban-handlebars.svg
+           :target: http://travis-ci.org/moremoban/moban-handlebars
+        
+        .. image:: https://codecov.io/github/moremoban/moban-handlebars/coverage.png
+           :target: https://codecov.io/github/moremoban/moban-handlebars
+        
+        
+        
+        With `pybars3 <https://github.com/wbond/pybars3>`_, this library allow moban users to
+        have handlebars template in their next documentation endeavour. 
+        
+        Installation
+        ================================================================================
+        
+        
+        You can install moban-handlebars via pip:
+        
+        .. code-block:: bash
+        
+            $ pip install moban-handlebars
+        
+        
+        or clone it and install it:
+        
+        .. code-block:: bash
+        
+            $ git clone https://github.com/moremoban/moban-handlebars.git
+            $ cd moban-handlebars
+            $ python setup.py install
+        
+        Author
+        ================================================================================
+        
+        Charlie Liu
+        
+        Contributors
+        ================================================================================
+        
+        In alphabetical order:
+        
+        * `C. W. <https://github.com/chfw>`_
+        * `John Vandenberg <https://github.com/jayvdb>`_
+        * `PRAJWAL M <https://github.com/PrajwalM2212>`_
+        
+        Change log
+        ================================================================================
+        
+        0.0.4 - 14.10.2019
+        --------------------------------------------------------------------------------
+        
+        **Updated**
+        
+        #. `#10 <https://github.com/moremoban/moban-handlebars/issues/10>`_: support
+           moban v6.5
+        
+        0.0.3 - 10.09.2019
+        --------------------------------------------------------------------------------
+        
+        **Updated**
+        
+        #. `#7 <https://github.com/moremoban/moban-handlebars/issues/7>`_: support moban
+           v4.1
+        #. `#9 <https://github.com/moremoban/moban-handlebars/issues/9>`_: support moban
+           v6
+        
+        0.0.2 - 22-01-2019
+        --------------------------------------------------------------------------------
+        
+        **Updated**
+        
+        #. `#1 <https://github.com/moremoban/moban-handlebars/issues/1>`_: support moban
+           v0.3.8
+        #. `#2 <https://github.com/moremoban/moban-handlebars/issues/2>`_: add license
+           file
+        #. `#3 <https://github.com/moremoban/moban-handlebars/issues/3>`_: support moban
+           v0.3.9
+        
+        0.0.1 - 18-11-2018
+        --------------------------------------------------------------------------------
+        
+        **First release**
+        
+        #. render .hbr .handlebars files for moban
+        
+        
+Keywords: python
+Platform: UNKNOWN
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
