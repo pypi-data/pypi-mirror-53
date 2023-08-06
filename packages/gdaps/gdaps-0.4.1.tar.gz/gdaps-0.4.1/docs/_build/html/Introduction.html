@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; GDAPS  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://gdaps.readthedocs.io/Introduction.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="Installation.html" />
+    <link rel="prev" title="GDAPS - Generic Django Apps Plugin System" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> GDAPS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gdaps-working-modes">GDAPS working modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="APIs.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GDAPS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Introduction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="GDAPS - Generic Django Apps Plugin System" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This library allows Django to make real “pluggable” apps.</p>
+<p>A standard Django “app” is <em>reusable</em> (if done correctly), but is not <em>pluggable</em>,
+like being distributed and “plugged” into a Django main application without modifications. GDAPS is filling this gap.</p>
+<p>The reason you want to use GDAPS is: <strong>you want to create an application that should be extended via plugins</strong>. GDAPS consists of a few bells and twistles where Django lacks “automagic”:</p>
+<p>GDAPS apps…
+* are automatically found using setuptools’ entry points
+* can provide their own URLs which are included and merged into urlpatterns automatically
+* can define <code class="docutils literal notranslate"><span class="pre">Interfaces</span></code>, that other GDAPS apps then can implement
+* can provide Javascript frontends that are found and compiled automatically (WorkInProgress)</p>
+<div class="section" id="gdaps-working-modes">
+<h2>GDAPS working modes<a class="headerlink" href="#gdaps-working-modes" title="Permalink to this headline">¶</a></h2>
+<p>The “observer pattern” plugin system is completely decoupled from the PluginManager
+(which manages GDAPS pluggable Django apps), so basically you have two choices to use GDAPS:</p>
+<dl>
+<dt>Simple</dt><dd><p>Use <a class="reference internal" href="usage.html#interfaces"><span class="std std-ref">Interfaces</span></a>, and <a class="reference internal" href="usage.html#implementations"><span class="std std-ref">Implementations</span></a>  <strong>without a plugin/module system</strong>. It’s not necessary to divide your application into GDAPS apps to use GDAPS.
+Just code your application as usual and have an
+easy-to-use “observer pattern” plugin system.</p>
+<ul class="simple">
+<li><p>Define an interface</p></li>
+<li><p>Create one or more implementations for it and</p></li>
+<li><p>iterate over the interface to get all plugins.</p></li>
+</ul>
+<p>Just <em>importing</em> the python files with your implementations will make them work.</p>
+<p>Use this if you just want to structure your Django software using an “observer pattern”.
+This is used  within  GDAPS itself, for the Javascript frontend implementations
+(e.g. Vue.js).</p>
+</dd>
+<dt>Full</dt><dd><p>Use GDAPS as <strong>complete module/app system</strong>.</p>
+<ul class="simple">
+<li><p>You’ll have to add “gdaps” to your INSTALLED_APPS first.</p></li>
+<li><p>Create plugins using the <code class="docutils literal notranslate"><span class="pre">startplugin</span></code> managemant command, and install them via pip/pipenv.</p></li>
+</ul>
+<p>You have a <span class="xref std std-ref">PluginManager</span> available then, and after a <code class="docutils literal notranslate"><span class="pre">manage.py</span> <span class="pre">migrate</span></code>
+and <code class="docutils literal notranslate"><span class="pre">manage.py</span> <span class="pre">syncplugins</span></code>,
+Django will have all GDAPS plugins recognized as models too, so you can easily
+administer them in your Django admin.</p>
+<p>This mode enables you to create fully-fledged extensible applications with real
+plugins that can be written by different parties and distributed via PyPi.</p>
+<p>See <span class="xref std std-ref">usage</span> for further instructions.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="GDAPS - Generic Django Apps Plugin System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Christian González
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
