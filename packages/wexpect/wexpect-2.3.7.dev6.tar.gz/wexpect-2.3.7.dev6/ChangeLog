@@ -1,0 +1,78 @@
+CHANGES
+=======
+
+* [FIX] #9 fixed by removing repeted read in readConsole
+* [REM] cmd example, use cmd wrapper instead
+* [ADD] issues folder for active issues
+* [CLN] Readme; [ADD] interact testcase, to improve coverage
+* [FIX] replace pypirc redirect to append to fix appveyor deploy
+* [FIX] trying appveyor deployment
+
+v2.3.6
+------
+
+* [ADD] offitial pypi upload
+* [FIX] appveyor test deploy05; [FIX] long description02
+* [FIX] appveyor test deploy; [FIX] long description
+* [FIX] .pypirc file
+* [FIX][ADD] twine as test dependency
+* [ADD] appveyor test deploy 01
+* [FIX] fix issue #6. Debug print remained in the write process
+* Update CODE\_OF\_CONDUCT.md
+* Update issue templates
+* [CLN] clean up around the example scripts
+* [FIX] python example issue: #7, [TEST] appveyor codecov
+* [TEST] fix appveyor codecov command
+* [ADD] codecov; update readme
+* [REF] refactor init functions
+* [FIX] Deprecation of the time.clock()
+* [TEST] fix appvevor
+* [TEST] fix appvevor
+* [TEST] fix appveyor and travis
+* [TST] fixes for travis and appveyor
+* [FIX] setup.cfg, add test extras
+* [TEST] add CI test: appveyor and travis SH
+* [TEST] add CI test: travis-ci
+
+v2.3.5
+------
+
+* [UDT] Readme, add release chapter
+* [FIX] TEST of test\_command\_list\_split, escape character change; [FIX] process killing. Based on issue: Pywin32-224 TerminateProcess Function Moved #5
+
+v2.3.4
+------
+
+* [FIX] Windows escape characters
+* [FIX] removing debug print from wexpect; [UDT] cmd example, double backslash needed
+* [UDT] update README to python-3
+* [FIX] command and args now can be given in one string
+* [ADD] first unittests copied from pexpect
+* [UDT] examples to python3; [FIX] which command uses shutils.which
+
+v2.3.3
+------
+
+* [ADD] First working version on python-3.x
+* [FIX] setup.cfg
+* uninstall working
+* [FIX] remove bytes encoding: use str everywhere; [STS] cmd.py passes
+* 2to3 runned
+
+v2.3.2
+------
+
+* [ADD] pbr for coherent versioning
+* [FIX] classifiers
+* [ADD] coherent versions using pbr
+* [ADD] common versioning
+* [CLN] Replace wildcard imports to standard import
+* [UDT] version 0.0.2
+* [CLN] README
+* [ADD] examples
+* [UDT] updated wexpect with a working one
+* [ADD] setup script; now can be installed via pip install
+* [ADD] License
+* [ADD] README
+* Added in wexpect.py to repo
+* Initial commit
