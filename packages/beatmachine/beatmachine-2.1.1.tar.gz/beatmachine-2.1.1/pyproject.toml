@@ -1,0 +1,21 @@
+[build-system]
+requires = [
+    "flit",
+    "Cython"  # For `madmom`
+]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "beatmachine"
+requires = [
+    "pydub",
+    "madmom",
+    "click",
+    "pyfftw",
+    "deprecation"
+]
+description-file="README.md"
+author = "dhsavell"
+author-email = "dhsavell05@gmail.com"
+home-page = "https://github.com/dhsavell/beat-machine"
+classifiers = ["License :: OSI Approved :: MIT License"]
