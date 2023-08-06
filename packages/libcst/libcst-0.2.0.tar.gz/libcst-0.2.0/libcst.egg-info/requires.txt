@@ -1,0 +1,19 @@
+typing_extensions>=3.7.2
+typing_inspect>=0.3.1
+
+[:python_version < "3.7"]
+dataclasses
+
+[dev]
+black
+codecov
+coverage
+hypothesis>=4.36.0
+hypothesmith>=0.0.4
+isort
+flake8
+jupyter
+nbsphinx
+pyre-check
+Sphinx
+sphinx-rtd-theme
