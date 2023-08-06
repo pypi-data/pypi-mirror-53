@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: pygeckodriver
+Version: 0.26.0
+Summary: A package to sync gecko driver to lastest version
+Home-page: https://github.com/parklam/pygeckodriver
+Author: Park Lam
+Author-email: lqmonline@gmail.com
+License: UNKNOWN
+Keywords: geckodriver gecko firefox driver
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# pygeckodriver
+## Installation:
+```
+# From PyPI
+pip install pygeckodriver
+```
+## Usage:
+```
+from selenium import webdriver
+from pygeckodriver import geckodriver_path
+
+bs = webdriver.Firefox(executable_path=geckodriver_path)
+bs.get('https://www.pypi.org')
+```
+
+
