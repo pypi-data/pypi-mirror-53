@@ -1,0 +1,189 @@
+CHANGES
+=======
+
+1.3.1
+-----
+
+* Use correct version string
+* setup: set proper content type for description
+* Use the public keystone interface
+* Document keystone policy configuration
+
+1.3.0
+-----
+
+* tox: remove py34
+* Improve and fix duration calculation and server status
+* record: use properties for {start,end}\_time
+* Use correct server's start time
+* Fix lock path management
+* Avoid iteritems
+* Add locking so that cASO does not run in parallel
+* Update configuration files
+
+1.2.0
+-----
+
+* Fix record extraction and do not request only deleted records
+* Do not lazy-load the extra specs for each flavor
+* github: add pull request and issue template
+* Add python 3.6 as supported version
+* Add and change some meta files to the repository
+* Remove old references to "tenant(s)" in the docs and examples
+* Do not create records for instances outside the reporting period
+
+1.1.0
+-----
+
+* Deprecate underscored options
+* Report correct durations using periods
+* Take pagination into account
+* fix test failure due to oslo.cfg update
+* remove old helper script
+
+1.0.1
+-----
+
+* Include "OpenStack" string in the user agent
+* Use scope in flavor properties
+
+1.0.0
+-----
+
+* update sample configuration file
+* Fix missing flavor name in logging
+* Fix failure when server does not have image\_id
+* extract benchmark information
+* doc: Update user creation section in configuration
+* log additional message before extracting records
+* do not use tenant\_id but project\_id
+* do not use nova.images but glance client
+* do not use absolute path for cfg files
+* add bandit security linter
+* Add shields.io badges
+* update python3 version
+* Fix typo in log message
+* Improve documentation
+* Use keystoneauth1 and sessions for authentication
+* remove redundant help message
+* Do not put extractors options under CONF.extractor
+* Add service name to the nova extractor
+* Implement version 0.4 of the SSM messenger
+* Implement v0.4 of the CloudRecord
+* Add initial version to CloudRecord
+* Implement a base SSM messenger
+* Deprecate old ssm messager
+* Move "messenger" option to caso manager
+
+0.3.3
+-----
+
+* update sample configuration file
+* update from global requirements
+* Fix pep8 and flake8
+* Adapt extractors to use the new extract\_to parameter
+* Add option --extract-to to the parameters
+* Use a list for the tenant mapping
+
+0.3.2
+-----
+
+* remove debian packaging stuff
+* travis: migrate to containers infra
+* tox: add py34 testing
+* coveralls: fix build
+* Handle exceptions getting records
+* Do not use deprecated get\_client\_class() function
+* Generate config samples directly from oslo
+* Switch logging to oslo.log
+* Switch to using oslo\_\* instead of oslo.\*
+
+0.3.1
+-----
+
+* Update changelog for 0.3.1-1 release
+* Fix TZ not being actually removed
+
+0.3
+---
+
+* Update changelog for 0.3-1 release
+* Fix CPU duration reporting
+* Add docstrings
+* Add missing method on BaseExtractor
+* Add unit tests for base extractor manager
+* Add license information to pbr metadata
+* Initial debian packaging stuff
+
+0.2
+---
+
+* Ceilometer extractor now extends nova information
+* Added information about SSL certificate checking
+* Update to support python3
+* Improve CentOS 6 information
+* Added info on migration from osssm
+* Use coherent capitalization of cASO
+* Update installation.rst
+
+0.1.2
+-----
+
+* add proper mailmap entry
+* Update requirements.txt
+* Update base.py
+* pass version when setting up caso configuration
+
+0.1.1
+-----
+
+* fix setup.cfg metadata
+* add script for doing releases
+
+0.1
+---
+
+* add cron job information
+* add policy and user configuration information
+* add note on API limiting in nova
+* New configuration documentation
+* Documentation update
+* Update README.md
+* add travis-ci.org configuration file
+* use six.StringIO instead of StringIO
+* fix SSM messenger without records
+* normalize dates to use UTC timezone
+* Do not use six's text\_type but string\_types
+* Removed readme.rst
+* Basic intro to caso
+* Changed format of README to md
+* Changed README.rst to README.md
+* Fixed build, removed oslosphinx
+* Fixed build, removed oslosphinx
+* first set of unit tests
+* do not fail if we receive a datetime.datetime object
+* do not pass default config files
+* put all configuration into a subdirectory
+* add a simple logstash messenger
+* substitute print statements with LOG entries
+* capture and log exception in messenger
+* fixes in logging
+* refactor messengers
+* add loadables module
+* add exception module and base class
+* add log facilities
+* record: add JSON rendering
+* uncomment configuration files stuff
+* Added ceilometer options
+* Removed PEP8 issues
+* Allow to specify the extractor
+* New ceilometer extractor
+* fix typo in help option
+* Add configuration samples and generator
+* fix failure when there are no usages
+* Actually push records to SSM
+* Actually save last run and add a dry\_run option
+* Start populating accounting records
+* Added initial cloud accounting record
+* Initial skeleton to work on
+* Initial commit from cookiecutter template
