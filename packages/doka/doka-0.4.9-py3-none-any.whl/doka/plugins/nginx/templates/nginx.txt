@@ -1,0 +1,16 @@
+worker_processes  2;
+user www-data;
+
+events {
+    use  epoll;
+    worker_connections  128;
+}
+
+error_log  /var/log/nginx_error.log info;
+
+http {
+    server_names_hash_bucket_size  128;
+
+[[http_servers]]
+
+}
