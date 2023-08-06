@@ -1,0 +1,15 @@
+{% extends "frame.html" %}
+{% block content %}
+
+<div class="block">
+    <p>List of methods groups of API.</p>
+    <ul>
+    {% for group in groups %}
+        <li>
+            <a href="{{docs_path}}/methods/{{group}}">{{group}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

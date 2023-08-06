@@ -1,0 +1,28 @@
+{% extends "frame.html" %}
+{% block content %}
+
+<div class="block">
+    <em>Error description</em>
+    <pre>{{error.description}}</pre>
+</div>
+
+<div class="block">
+    <em>Error code</em>
+    <pre>{{error.code}}</pre>
+</div>
+
+<div class="block">
+    <em>Error example</em>
+    <pre class="code">
+{
+    "error": {
+        "code": "{{error.name}}",
+        "failure_param": null,
+        "msg": "{{error.description}}",
+        "params": {}
+    }
+}</pre>
+
+</div>
+
+{% endblock content %}

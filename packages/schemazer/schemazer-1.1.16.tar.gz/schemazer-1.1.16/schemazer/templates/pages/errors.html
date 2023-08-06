@@ -1,0 +1,15 @@
+{% extends "frame.html" %}
+{% block content %}
+
+<div class="block">
+    <p>Error codes API.</p>
+    <ul>
+    {% for error in errors %}
+        <li>
+            <a href="{{docs_path}}/errors/{{error.code}}">{{error.code}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

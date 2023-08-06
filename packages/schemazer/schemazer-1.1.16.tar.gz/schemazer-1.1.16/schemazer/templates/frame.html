@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='doc/base-style.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url_for('static', filename='doc/controls.css') }}" rel="stylesheet">
+    <title>{{project_name}} API {{title}}</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top_block" style="overflow: hidden;">
+            <a href="{{docs_path}}" class="name">
+                <p class="logo">{{project_name}}<sup>by Schemazer</sup></p>
+            </a>
+            <div class="nav">
+                <a href="{{docs_path}}/methods" class="button">Methods groups of API</a>
+                <a href="{{docs_path}}/errors" class="button">Errors</a>
+            </div>
+        </div>
+
+        <div>
+            <article class=''>
+            {% block content%}
+            {% endblock content %}
+            </article>
+        </div>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" type="text/javascript"></script>
+    </div>
+</body>
+</html>
