@@ -1,0 +1,64 @@
+Metadata-Version: 2.1
+Name: terra-common
+Version: 0.3.1
+Summary: The Terra API
+Home-page: https://gitlab.makina-corpus.net/Terralego/Core/terra-back/
+Author: Terralego
+Author-email: terralego-pypi@makina-corpus.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
+Requires-Dist: Django (==2.2.5)
+Requires-Dist: django-terra-utils (>=0.3.6)
+Requires-Dist: django-geostore (>=0.3.4)
+Requires-Dist: python-magic (>=0.4)
+Requires-Dist: djangorestframework-jwt (<1.12,>=1.11)
+Requires-Dist: django-cors-headers (<2.3,>=2.2)
+Requires-Dist: django-storages (<1.8,>=1.7)
+Requires-Dist: django-versatileimagefield (<2.0,>=1.10)
+Requires-Dist: boto3 (<=1.10,>=1.9)
+Requires-Dist: weasyprint (>=44)
+Requires-Dist: simpleeval (>=0.9)
+Requires-Dist: docxtpl (>=0.5)
+
+This is the Terra API.
+
+## Requirements
+
+On Ubuntu, do not use the system packages, which are too old.
+* **docker-ce**: https://docs.docker.com/install/linux/docker-ce/ubuntu/
+* **docker-compose**: `sudo pip3 install docker-compose`
+
+
+## Usage
+
+### First launch
+Create a docker.env file:
+* `mv docker.env.dist docker.env`
+* Edit the settings
+
+### Build Container
+`docker-compose build`
+
+### Running the project
+`docker-compose up`
+
+`docker-compose down`
+
+`docker-compose up` (postgres image)
+
+### Running tests
+
+`docker-compose exec django bash`
+
+`django@container_id:/code$ source venv/bin/activate`
+
+`(venv) django@353cfc271a48:/code$ tox` (global)
+
+### Applying Django migrations
+`docker-compose run --rm django /code/venv/bin/python3.6 ./manage.py migrate`
+
+
