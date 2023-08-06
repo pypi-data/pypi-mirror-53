@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: procrastinate
+Version: 0.2.0
+Summary: Postgres-based distributed task processing library
+Home-page: https://github.com/peopledoc/procrastinate
+Author: PeopleDoc
+Author-email: joachim.jablon@people-doc.com
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
+Requires-Dist: attrs
+Requires-Dist: pendulum
+Requires-Dist: click
+Requires-Dist: typing-extensions
+Requires-Dist: importlib-metadata
+Requires-Dist: importlib-resources
+Requires-Dist: psycopg2 ; platform_system != "Darwin"
+Requires-Dist: psycopg2-binary ; platform_system == "Darwin"
+Provides-Extra: async
+Requires-Dist: aiopg ; extra == 'async'
+Provides-Extra: dev
+Requires-Dist: black ; extra == 'dev'
+Requires-Dist: isort ; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: doc8 ; extra == 'docs'
+Requires-Dist: sphinx ; extra == 'docs'
+Requires-Dist: sphinx-autodoc-typehints ; extra == 'docs'
+Requires-Dist: sphinxcontrib-programoutput ; extra == 'docs'
+Provides-Extra: lint
+Requires-Dist: black ; extra == 'lint'
+Requires-Dist: flake8 ; extra == 'lint'
+Requires-Dist: isort ; extra == 'lint'
+Requires-Dist: mypy ; extra == 'lint'
+Requires-Dist: check-manifest ; extra == 'lint'
+Provides-Extra: test
+Requires-Dist: aiopg ; extra == 'test'
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pytest-mock ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: pytest-click ; extra == 'test'
+Requires-Dist: pytest-asyncio ; extra == 'test'
+
+UNKNOWN
+
+
