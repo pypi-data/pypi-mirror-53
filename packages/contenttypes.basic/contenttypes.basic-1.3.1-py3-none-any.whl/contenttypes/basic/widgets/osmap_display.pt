@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="contenttypes.basic"
+      tal:omit-tag="">
+
+  <link rel="stylesheet" type="text/css" href="${view/portal_url}/++plone++contenttypes.basic/osmap/leaflet.css">
+  <script src="${view/portal_url}/++plone++contenttypes.basic/osmap/leaflet.js"></script>
+
+  <div tal:condition="python:view.value and view.value != '0|0'" id="osmap-widget-map-${view/timestamp}" data-value="${view/value}" style="height: 500px;"></div>
+
+  <script tal:condition="python:view.value and view.value != '0|0'">
+    $( document ).ready(function() {
+      // Vars
+      var timestamp = ${view/timestamp};
+      var mapIdSelector = '#osmap-widget-map-'+timestamp;
+      var value = parseLatLng($(mapIdSelector).attr('data-value'));
+
+      // Map
+      var osmap = L.map('osmap-widget-map-'+timestamp).setView([value.lat, value.lng], 15);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="//osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(osmap);
+
+      // Marker
+      L.marker([value.lat, value.lng]).addTo(osmap);
+
+      // Parse coordinates
+      function parseLatLng(input){
+        if (typeof input ==  'object') {
+          if (typeof input.lat == 'function') {
+            return input.lat() + '|' + input.lng()
+          } else {
+            return input.lat + '|' + input.lng
+          }
+        } else if (typeof input == 'string') {
+          var coor = input.split('|')
+          return {
+            lat: parseFloat(coor[0]),
+            lng: parseFloat(coor[1])
+          }
+        }
+      }
+
+    });
+  </script>
+
+</html>
