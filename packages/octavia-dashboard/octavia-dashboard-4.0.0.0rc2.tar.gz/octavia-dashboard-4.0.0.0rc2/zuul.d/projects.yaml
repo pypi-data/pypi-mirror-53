@@ -1,0 +1,11 @@
+- project:
+    templates:
+      - check-requirements
+      - horizon-nodejs10-jobs
+      - openstack-lower-constraints-jobs
+      - openstack-python-jobs-horizon
+      - openstack-python3-train-jobs-horizon
+      - publish-openstack-docs-pti
+      - release-notes-jobs-python3
+    gate:
+      fail-fast: true
