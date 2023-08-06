@@ -1,0 +1,66 @@
+Metadata-Version: 2.1
+Name: textx-gen-coloring
+Version: 0.1.1
+Summary: a syntax highlight generator for textX languages
+Home-page: https://github.com/danixeee/textx-gen-coloring
+Author: Daniel Elero
+Author-email: danixeee@gmail.com
+License: MIT
+Keywords: textX DSL python domain specific languages syntax highlighting
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: jinja2
+Requires-Dist: textx
+Provides-Extra: ci
+Requires-Dist: bandit ; extra == 'ci'
+Requires-Dist: pytest ; extra == 'ci'
+Requires-Dist: pytest-cov ; extra == 'ci'
+Requires-Dist: pytest-azurepipelines ; extra == 'ci'
+Requires-Dist: black ; extra == 'ci'
+Provides-Extra: dev
+Requires-Dist: bandit (==1.5.1) ; extra == 'dev'
+Requires-Dist: black ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage (==4.5.3) ; extra == 'test'
+Requires-Dist: pytest (==4.3.1) ; extra == 'test'
+Requires-Dist: pytest-cov (==2.6.1) ; extra == 'test'
+
+# Syntax Highlighting Generator for textX Languages
+
+This project uses [textX](https://github.com/textx/textx) grammar and generates syntax highlighting file for it.
+
+Supported syntax highlighting languages:
+
+- textmate (used by VS Code and [textx-gen-vscode](https://github.com/danixeee/textx-gen-vscode) project)
+
+## CLI Examples
+
+Generate a default syntax highlighting for _workflow_ language:
+
+```bash
+textX generate --target textmate ./examples/workflow/workflow.tx --name Workflow
+```
+
+Generate a custom syntax highlighting for _workflow_ language:
+
+```bash
+textX generate --target textmate ./examples/workflow/workflow.tx --name Workflow --syntax_spec ./examples/workflow/workflow.txcl
+```
+
+## Other Notes
+
+Some parts of code are used from [textX-languageserver](https://github.com/textX/textX-languageserver) project.
+
+
