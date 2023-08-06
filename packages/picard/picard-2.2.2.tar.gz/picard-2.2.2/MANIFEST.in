@@ -1,0 +1,13 @@
+graft po
+prune test
+
+recursive-include scripts *.in
+recursive-exclude scripts picard
+
+include tagger.py
+include *.in
+
+include *.md
+include *.txt
+
+exclude org.musicbrainz.Picard.appdata.xml

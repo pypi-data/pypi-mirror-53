@@ -1,0 +1,3150 @@
+# Translations template for picard.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the picard project.
+# 
+# Translators:
+# Shen-Ta Hsieh(BestSteve) <ibmibmibm.tw@gmail.com>, 2014
+# Shen-Ta Hsieh(BestSteve) <ibmibmibm.tw@gmail.com>, 2016
+# Shen-Ta Hsieh(BestSteve) <ibmibmibm.tw@gmail.com>, 2016-2019
+# riotism, 2017-2018
+msgid ""
+msgstr ""
+"Project-Id-Version: MusicBrainz\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-10-04 09:41+0200\n"
+"PO-Revision-Date: 2019-10-04 12:49+0000\n"
+"Last-Translator: Michael Wiencek <mwtuea@gmail.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/musicbrainz/musicbrainz/language/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: picard/album.py:112
+msgid "Unmatched Files"
+msgstr "未配對的檔案"
+
+#: picard/album.py:265
+#, python-format
+msgid "[could not load album %s]"
+msgstr "[無法載入專輯《%s》]"
+
+#: picard/album.py:360
+#, python-format
+msgid "Album %(id)s loaded: %(artist)s - %(album)s"
+msgstr "已載入專輯《%(id)s》：%(artist)s - %(album)s"
+
+#: picard/album.py:415
+#, python-format
+msgid "Loading album %(id)s ..."
+msgstr "正在載入專輯《%(id)s》…"
+
+#: picard/album.py:419
+msgid "[loading album information]"
+msgstr "[正在載入專輯資訊]"
+
+#: picard/album.py:626
+#, python-format
+msgid "; %i image"
+msgid_plural "; %i images"
+msgstr[0] "；%i張圖片"
+
+#: picard/album.py:629
+#, python-format
+msgid "; %i image not in all tracks"
+msgid_plural "; %i different images among tracks"
+msgstr[0] "；音軌中有%i張不同的圖片"
+
+#: picard/cluster.py:205
+#, python-format
+msgid "No matching releases for cluster %(album)s"
+msgstr "找不到符合叢集「%(album)s」的發行品"
+
+#: picard/cluster.py:207
+#, python-format
+msgid "Cluster %(album)s identified!"
+msgstr "已辨識叢集「%(album)s」 ！"
+
+#: picard/cluster.py:229
+#, python-format
+msgid "Looking up the metadata for cluster %(album)s..."
+msgstr "正在查找叢集「%(album)s」的後設資料…"
+
+#: picard/cluster.py:309
+msgid "Unclustered Files"
+msgstr "不在叢集中的檔案"
+
+#: picard/collection.py:73
+#, python-format
+msgid "Added %(count)i release to collection \"%(name)s\""
+msgid_plural "Added %(count)i releases to collection \"%(name)s\""
+msgstr[0] "已將%(count)i個發行品加入收藏「%(name)s」"
+
+#: picard/collection.py:81
+#, python-format
+msgid "Removed %(count)i release from collection \"%(name)s\""
+msgid_plural "Removed %(count)i releases from collection \"%(name)s\""
+msgstr[0] "已從收藏「%(name)s」移除%(count)i個發行品"
+
+#: picard/collection.py:92
+#, python-format
+msgid "Error while modifying collections: %(error)s"
+msgstr ""
+
+#: picard/collection.py:114
+#, python-format
+msgid "Error loading collections: %(error)s"
+msgstr "載入收藏時發生錯誤：%(error)s"
+
+#: picard/config_upgrade.py:69 picard/config_upgrade.py:82
+msgid "Various Artists file naming scheme removal"
+msgstr "多位創作者專輯個別檔案命名格式功能的移除"
+
+#: picard/config_upgrade.py:70
+msgid ""
+"The separate file naming scheme for various artists albums has been removed in this version of Picard.\n"
+"Your file naming scheme has automatically been merged with that of single artist albums."
+msgstr "給多位創作者專輯設定個別檔案命名格式的功能已在目前版本的Picard被移除。\n你的檔案命名格式已自動合併到單獨創作者專輯內。"
+
+#: picard/config_upgrade.py:83
+msgid ""
+"The separate file naming scheme for various artists albums has been removed in this version of Picard.\n"
+"You currently do not use this option, but have a separate file naming scheme defined.\n"
+"Do you want to remove it or merge it with your file naming scheme for single artist albums?"
+msgstr "給多位創作者專輯設定個別檔案命名格式的功能已在目前版本的 Picard 被移除。\n你目前沒有使用這個選項，但是你有定義個別檔案命名格式。\n你想要移除它，或是合併到給單獨創作者專輯的檔案命名格式？"
+
+#: picard/config_upgrade.py:90
+msgid "Merge"
+msgstr "合併"
+
+#: picard/config_upgrade.py:91 picard/ui/metadatabox.py:346
+#: picard/ui/options/interface.py:89 picard/ui/ui_options_interface.py:142
+msgid "Remove"
+msgstr "移除"
+
+#: picard/file.py:674
+#, python-format
+msgid "No matching tracks above the threshold for file '%(filename)s'"
+msgstr "檔案「%(filename)s」沒有符合程度超過閥值的音軌"
+
+#: picard/file.py:676
+#, python-format
+msgid "File '%(filename)s' identified!"
+msgstr "檔案「%(filename)s」已辨識！"
+
+#: picard/file.py:687
+#, python-format
+msgid "No matching tracks for file '%(filename)s'"
+msgstr "檔案「%(filename)s」沒有任何符合的音軌"
+
+#: picard/file.py:718
+#, python-format
+msgid "Looking up the metadata for file %(filename)s ..."
+msgstr "正在查找檔案「%(filename)s」的後設資料…"
+
+#: picard/pluginmanager.py:231
+#, python-format
+msgid "Failed loading zipped plugin %r"
+msgstr "載入已壓縮插件 %r 失敗"
+
+#: picard/pluginmanager.py:241
+#, python-format
+msgid "Failed loading plugin %r"
+msgstr "載入插件 %r 失敗"
+
+#: picard/pluginmanager.py:277
+#, python-format
+msgid "Plugin '%s' from '%s' is not compatible with this version of Picard."
+msgstr ""
+
+#: picard/pluginmanager.py:281
+#, python-format
+msgid "Plugin %r has an invalid API version string : %s"
+msgstr "插件 %r 含有無效的 API 版本字串：%s"
+
+#: picard/pluginmanager.py:284
+#, python-format
+msgid "Plugin %r : %s"
+msgstr "插件 %r：%s"
+
+#: picard/pluginmanager.py:421
+#, python-format
+msgid "Error loading plugins list: %(error)s"
+msgstr "載入插件清單時發生錯誤：%(error)s"
+
+#: picard/releasegroup.py:58 picard/ui/searchdialog/album.py:153
+msgid "Tracks"
+msgstr "音軌"
+
+#: picard/releasegroup.py:59
+msgid "Year"
+msgstr "年份"
+
+#: picard/releasegroup.py:60 picard/ui/cdlookup.py:60
+#: picard/ui/searchdialog/album.py:155 picard/ui/searchdialog/track.py:66
+msgid "Country"
+msgstr "國家"
+
+#: picard/releasegroup.py:61 picard/ui/searchdialog/album.py:152
+msgid "Format"
+msgstr "格式"
+
+#: picard/releasegroup.py:62
+msgid "Label"
+msgstr "標籤"
+
+#: picard/releasegroup.py:63
+msgid "Cat No"
+msgstr "型錄編號"
+
+#: picard/releasegroup.py:95
+msgid "[no barcode]"
+msgstr "[無條碼編號]"
+
+#: picard/releasegroup.py:109
+msgid "[no release info]"
+msgstr "[無發行品資訊]"
+
+#: picard/tagger.py:289 picard/ui/ui_options_general.py:135
+msgid "MusicBrainz Account"
+msgstr "MusicBrainz 帳號"
+
+#: picard/tagger.py:289
+msgid "Authorization code:"
+msgstr "授權代碼："
+
+#: picard/tagger.py:511 picard/tagger.py:544
+#, python-format
+msgid "Adding %(count)d file from '%(directory)s' ..."
+msgid_plural "Adding %(count)d files from '%(directory)s' ..."
+msgstr[0] "正在從「%(directory)s」新增 %(count)d 個檔案…"
+
+#: picard/tagger.py:729
+#, python-format
+msgid "Removing album %(id)s: %(artist)s - %(album)s"
+msgstr "正在移除專輯「%(id)s」：%(artist)s - %(album)s"
+
+#: picard/tagger.py:747
+msgid "CD Lookup Error"
+msgstr "CD 查找錯誤"
+
+#: picard/tagger.py:748
+#, python-format
+msgid ""
+"Error while reading CD:\n"
+"\n"
+"%s"
+msgstr "讀取 CD 時發生錯誤：\n\n%s"
+
+#: picard/track.py:333
+msgid "[loading recording information]"
+msgstr ""
+
+#: picard/track.py:368
+#, python-format
+msgid "[could not load recording %s]"
+msgstr ""
+
+#: picard/acoustid/__init__.py:70
+#, python-format
+msgid "AcoustID lookup network error for '%(filename)s'!"
+msgstr "在AcoustID查找「%(filename)s」發生網絡錯誤！"
+
+#: picard/acoustid/__init__.py:100
+#, python-format
+msgid "AcoustID lookup failed for '%(filename)s'!"
+msgstr "在AcoustID查找「%(filename)s」時發生錯誤！"
+
+#: picard/acoustid/__init__.py:125
+#, python-format
+msgid "AcoustID lookup returned no result for file '%(filename)s'"
+msgstr "在AcoustID查找檔案「%(filename)s」時沒有回傳任何結果"
+
+#: picard/acoustid/__init__.py:136
+#, python-format
+msgid "Looking up the fingerprint for file '%(filename)s' ..."
+msgstr "正在查找檔案「%(filename)s」的特徵碼…"
+
+#: picard/acoustid/manager.py:81
+msgid "Submitting AcoustIDs ..."
+msgstr "正在上傳 AcoustIDs…"
+
+#: picard/acoustid/manager.py:102
+#, python-format
+msgid "AcoustID submission failed with error '%(error)s': %(message)s"
+msgstr "AcoustID提交失敗，錯誤為「%(error)s」：%(message)s"
+
+#: picard/acoustid/manager.py:110
+msgid "AcoustIDs successfully submitted."
+msgstr "已成功提交 AcoustID。"
+
+#: picard/const/__init__.py:124
+msgid "Stable releases only"
+msgstr ""
+
+#: picard/const/__init__.py:130
+msgid "Stable and Beta releases"
+msgstr ""
+
+#: picard/const/__init__.py:136
+msgid "Stable, Beta and Dev releases"
+msgstr ""
+
+#: picard/const/__init__.py:151
+#, python-format
+msgid "My script %d"
+msgstr "我的腳本「%d」"
+
+#: picard/const/__init__.py:152
+msgid "My script"
+msgstr "我的腳本"
+
+#: picard/const/languages.py:25
+msgid "Arabic"
+msgstr "阿拉伯文"
+
+#: picard/const/languages.py:28
+msgid "Catalan"
+msgstr "加泰羅尼亞語"
+
+#: picard/const/languages.py:29
+msgid "Czech"
+msgstr "捷克語"
+
+#: picard/const/languages.py:31
+msgid "Danish"
+msgstr "丹麥語"
+
+#: picard/const/languages.py:32
+msgid "German"
+msgstr "德語"
+
+#: picard/const/languages.py:33
+msgid "Greek"
+msgstr "希臘語"
+
+#: picard/const/languages.py:34
+msgid "English"
+msgstr "英語"
+
+#: picard/const/languages.py:35
+msgid "English (Australia)"
+msgstr ""
+
+#: picard/const/languages.py:36
+msgid "English (Canada)"
+msgstr "英語 (加拿大)"
+
+#: picard/const/languages.py:37
+msgid "English (UK)"
+msgstr "英語 (英國)"
+
+#: picard/const/languages.py:39
+msgid "Spanish"
+msgstr "西班牙語"
+
+#: picard/const/languages.py:40
+msgid "Estonian"
+msgstr "愛沙尼亞語"
+
+#: picard/const/languages.py:42
+msgid "Finnish"
+msgstr "芬蘭語"
+
+#: picard/const/languages.py:44
+msgid "French"
+msgstr "法語"
+
+#: picard/const/languages.py:45
+msgid "French (Canada)"
+msgstr ""
+
+#: picard/const/languages.py:47
+msgid "Galician"
+msgstr "加里斯亞語"
+
+#: picard/const/languages.py:48
+msgid "Hebrew"
+msgstr "希伯來語"
+
+#: picard/const/languages.py:52
+msgid "Icelandic"
+msgstr "冰島語"
+
+#: picard/const/languages.py:53
+msgid "Italian"
+msgstr "義大利語"
+
+#: picard/const/languages.py:54
+msgid "Japanese"
+msgstr "日語"
+
+#: picard/const/languages.py:56
+msgid "Korean"
+msgstr "韓語"
+
+#: picard/const/languages.py:58
+msgid "Norwegian Bokmal"
+msgstr "巴克摩挪威語"
+
+#: picard/const/languages.py:60
+msgid "Dutch"
+msgstr "荷蘭語"
+
+#: picard/const/languages.py:61
+msgid "Occitan"
+msgstr "奧克西坦語"
+
+#: picard/const/languages.py:62
+msgid "Polish"
+msgstr "波蘭語"
+
+#: picard/const/languages.py:63
+msgid "Portuguese"
+msgstr "葡萄牙語"
+
+#: picard/const/languages.py:64
+msgid "Brazilian Portuguese"
+msgstr "巴西葡萄牙語"
+
+#: picard/const/languages.py:65
+msgid "Romanian"
+msgstr "羅馬尼亞語"
+
+#: picard/const/languages.py:66
+msgid "Russian"
+msgstr "俄語"
+
+#: picard/const/languages.py:68
+msgid "Slovak"
+msgstr "斯洛伐克語"
+
+#: picard/const/languages.py:69
+msgid "Slovenian"
+msgstr "斯洛維尼亞語"
+
+#: picard/const/languages.py:71
+msgid "Swedish"
+msgstr "瑞典語"
+
+#: picard/const/languages.py:73
+msgid "Turkish"
+msgstr "土耳其語"
+
+#: picard/const/languages.py:74
+msgid "Ukrainian"
+msgstr "烏克蘭語"
+
+#: picard/const/languages.py:75
+msgid "Chinese (China)"
+msgstr ""
+
+#: picard/const/languages.py:76
+msgid "Chinese (Taiwan)"
+msgstr ""
+
+#: picard/coverart/__init__.py:106
+#, python-format
+msgid "Cover art of type '%(type)s' downloaded for %(albumid)s from %(host)s"
+msgstr "已從「%(host)s」下載「%(type)s」格式的「%(albumid)s」封面圖片"
+
+#: picard/coverart/__init__.py:194
+#, python-format
+msgid ""
+"Downloading cover art of type '%(type)s' for %(albumid)s from %(host)s ..."
+msgstr "正在從「%(host)s」下載「%(type)s」格式的「%(albumid)s」封面圖片…"
+
+#: picard/coverart/utils.py:32
+msgid "Unknown"
+msgstr "未知"
+
+#: picard/coverart/providers/caa.py:70
+msgid "250 px"
+msgstr "250 像素"
+
+#: picard/coverart/providers/caa.py:71
+msgid "500 px"
+msgstr "500 像素"
+
+#: picard/coverart/providers/caa.py:72
+msgid "1200 px"
+msgstr "1200 像素"
+
+#: picard/coverart/providers/caa.py:73
+msgid "Full size"
+msgstr "完整大小"
+
+#: picard/coverart/providers/caa.py:222
+msgid "Cover art types"
+msgstr "封面圖片類型"
+
+#: picard/coverart/providers/caa.py:242
+msgid ""
+"Please select the contents of the image type 'Include' and 'Exclude' lists."
+msgstr ""
+
+#: picard/coverart/providers/caa.py:267
+msgid "Include types list"
+msgstr ""
+
+#: picard/coverart/providers/caa.py:274
+msgid "Exclude types list"
+msgstr ""
+
+#: picard/coverart/providers/caa.py:281
+msgid ""
+"CAA images with an image type found in the 'Include' list will be downloaded"
+" and used UNLESS they also have an image type found in the 'Exclude' list. "
+"Images with types found in the 'Exclude' list will NEVER be used. Image "
+"types not appearing in the 'Include' or 'Exclude' lists will not be "
+"considered when determining whether or not to download and use a CAA "
+"image.\n"
+msgstr ""
+
+#: picard/coverart/providers/caa.py:302
+msgid "I&nclude all"
+msgstr ""
+
+#: picard/coverart/providers/caa.py:303
+msgid "E&xclude all"
+msgstr ""
+
+#: picard/coverart/providers/caa.py:304
+msgid "C&lear all"
+msgstr ""
+
+#: picard/coverart/providers/caa.py:305 picard/ui/options/dialog.py:102
+msgid "Restore &Defaults"
+msgstr "恢復預設值(&D)"
+
+#: picard/coverart/providers/caa.py:491
+msgid "Cover Art Archive"
+msgstr "Cover Art Archive"
+
+#: picard/coverart/providers/caa_release_group.py:41
+msgid "CAA Release Group"
+msgstr "CAA 發行組"
+
+#: picard/coverart/providers/local.py:68
+msgid "Local Files"
+msgstr "本地檔案"
+
+#: picard/coverart/providers/whitelist.py:37
+msgid "Whitelist"
+msgstr "白名單"
+
+#: picard/ui/cdlookup.py:60 picard/ui/mainwindow.py:732 picard/util/tags.py:21
+msgid "Album"
+msgstr "專輯"
+
+#: picard/ui/cdlookup.py:60 picard/ui/itemviews.py:126
+#: picard/ui/mainwindow.py:733 picard/ui/searchdialog/album.py:151
+#: picard/ui/searchdialog/track.py:63 picard/util/tags.py:22
+msgid "Artist"
+msgstr "創作者"
+
+#: picard/ui/cdlookup.py:60 picard/ui/searchdialog/album.py:154
+#: picard/ui/searchdialog/track.py:65 picard/util/tags.py:24
+msgid "Date"
+msgstr "日期"
+
+#: picard/ui/cdlookup.py:61 picard/ui/searchdialog/album.py:156
+msgid "Labels"
+msgstr "標籤"
+
+#: picard/ui/cdlookup.py:61 picard/ui/searchdialog/album.py:157
+msgid "Catalog #s"
+msgstr "型錄編號 #s"
+
+#: picard/ui/cdlookup.py:61 picard/ui/searchdialog/album.py:158
+#: picard/util/tags.py:79
+msgid "Barcode"
+msgstr "條碼編號"
+
+#: picard/ui/collectionmenu.py:56
+msgid "Refresh List"
+msgstr "重新整理清單"
+
+#: picard/ui/collectionmenu.py:169
+#, python-format
+msgid "%s (%i release)"
+msgid_plural "%s (%i releases)"
+msgstr[0] "%s（%i 個發行品）"
+
+#: picard/ui/colors.py:33
+msgid "Errored entity"
+msgstr ""
+
+#: picard/ui/colors.py:34
+msgid "Pending entity"
+msgstr ""
+
+#: picard/ui/colors.py:35
+msgid "Saved entity"
+msgstr ""
+
+#: picard/ui/colors.py:36
+msgid "Log view text (debug)"
+msgstr ""
+
+#: picard/ui/colors.py:37
+msgid "Log view text (error)"
+msgstr ""
+
+#: picard/ui/colors.py:38
+msgid "Log view text (info)"
+msgstr ""
+
+#: picard/ui/colors.py:39
+msgid "Log view text (warning)"
+msgstr ""
+
+#: picard/ui/colors.py:40
+msgid "Tag added"
+msgstr ""
+
+#: picard/ui/colors.py:41
+msgid "Tag changed"
+msgstr ""
+
+#: picard/ui/colors.py:42
+msgid "Tag removed"
+msgstr ""
+
+#: picard/ui/coverartbox.py:261
+msgid "View release on MusicBrainz"
+msgstr "於 MusicBrainz 檢視發行品"
+
+#: picard/ui/coverartbox.py:267
+msgid "Common images on all tracks"
+msgstr "所有音軌使用相同的圖片"
+
+#: picard/ui/coverartbox.py:269
+msgid "Tracks contain different images"
+msgstr "音軌使用不同的圖片"
+
+#: picard/ui/coverartbox.py:313
+msgid "Show more details"
+msgstr "顯示更多資料"
+
+#: picard/ui/coverartbox.py:350
+msgid "New Cover Art"
+msgstr "新封面"
+
+#: picard/ui/coverartbox.py:351
+msgid "Original Cover Art"
+msgstr "原本封面"
+
+#: picard/ui/coverartbox.py:515
+msgid "Show more details..."
+msgstr "顯示更多資料…"
+
+#: picard/ui/coverartbox.py:521
+msgid "Keep original cover art"
+msgstr "保留原來的封面"
+
+#: picard/ui/coverartbox.py:530
+msgid "Replace front cover art on drop"
+msgstr "拖放時取代封面圖片"
+
+#: picard/ui/coverartbox.py:535
+msgid "Append front cover art on drop"
+msgstr "拖放時附加封面圖片"
+
+#: picard/ui/filebrowser.py:49
+msgid "&Move Tagged Files Here"
+msgstr "移動已標籤檔案到此處(&M)"
+
+#: picard/ui/filebrowser.py:52
+msgid "Show &Hidden Files"
+msgstr "顯示隱藏檔案(&H)"
+
+#: picard/ui/filebrowser.py:57
+msgid "&Set as starting directory"
+msgstr "設為起點資料夾(&S)"
+
+#: picard/ui/infodialog.py:89
+msgid "Existing Cover"
+msgstr "現有的封面"
+
+#: picard/ui/infodialog.py:89 picard/ui/infodialog.py:94
+#: picard/ui/searchdialog/album.py:160 picard/ui/searchdialog/artist.py:51
+#: picard/ui/searchdialog/track.py:67
+msgid "Type"
+msgstr "類型"
+
+#: picard/ui/infodialog.py:90
+msgid "New Cover"
+msgstr "新封面"
+
+#: picard/ui/infodialog.py:94 picard/ui/searchdialog/album.py:162
+msgid "Cover"
+msgstr "封面"
+
+#: picard/ui/infodialog.py:140 picard/ui/infodialog.py:283
+#: picard/ui/options/interface.py:85
+msgid "Info"
+msgstr "資訊"
+
+#: picard/ui/infodialog.py:184
+#, python-format
+msgid ""
+"Double-click to open in external viewer\n"
+"Temporary file: %s\n"
+"Source: %s"
+msgstr "點擊兩下來開啟外部檢視程式\n暫存檔案： %s\n原始檔案： %s"
+
+#: picard/ui/infodialog.py:250
+msgid "Filename:"
+msgstr "檔名："
+
+#: picard/ui/infodialog.py:252
+msgid "Format:"
+msgstr "格式："
+
+#: picard/ui/infodialog.py:256
+msgid "Size:"
+msgstr "大小："
+
+#: picard/ui/infodialog.py:260
+msgid "Length:"
+msgstr "長度："
+
+#: picard/ui/infodialog.py:262
+msgid "Bitrate:"
+msgstr "位元率："
+
+#: picard/ui/infodialog.py:264
+msgid "Sample rate:"
+msgstr "取樣率："
+
+#: picard/ui/infodialog.py:266
+msgid "Bits per sample:"
+msgstr "樣本位元數："
+
+#: picard/ui/infodialog.py:270
+msgid "Mono"
+msgstr "單聲道"
+
+#: picard/ui/infodialog.py:272
+msgid "Stereo"
+msgstr "雙聲道"
+
+#: picard/ui/infodialog.py:273
+msgid "Channels:"
+msgstr "聲道："
+
+#: picard/ui/infodialog.py:295
+msgid "Album Info"
+msgstr "專輯資訊"
+
+#: picard/ui/infodialog.py:303
+msgid "&Errors"
+msgstr "錯誤 (&E)"
+
+#: picard/ui/infodialog.py:313 picard/ui/infodialog.py:329
+#: picard/ui/infodialog.py:333 picard/ui/infodialog.py:352
+#: picard/ui/ui_infodialog.py:59
+msgid "&Info"
+msgstr "錯誤 (&I)"
+
+#: picard/ui/infodialog.py:321
+msgid "Track Info"
+msgstr "音軌資料"
+
+#: picard/ui/infodialog.py:334
+#, python-format
+msgid "%i file in this track"
+msgid_plural "%i files in this track"
+msgstr[0] "在此音軌內有 %i 個檔案"
+
+#: picard/ui/infodialog.py:345
+msgid "Cluster Info"
+msgstr "叢集資訊"
+
+#: picard/ui/infodialog.py:354
+msgid "Album:"
+msgstr "專輯："
+
+#: picard/ui/infodialog.py:356
+msgid "Artist:"
+msgstr "創作者："
+
+#: picard/ui/infodialog.py:379
+msgid "Tracklist:"
+msgstr "音軌清單"
+
+#: picard/ui/infostatus.py:56 picard/ui/options/plugins.py:584
+msgid "Files"
+msgstr "檔案"
+
+#: picard/ui/infostatus.py:57
+msgid "Albums"
+msgstr "專輯"
+
+#: picard/ui/infostatus.py:58
+msgid "Pending files"
+msgstr "待處理檔案"
+
+#: picard/ui/infostatus.py:59
+msgid "Pending requests"
+msgstr "待處理請求"
+
+#: picard/ui/itemviews.py:124 picard/util/tags.py:23
+msgid "Title"
+msgstr "標題"
+
+#: picard/ui/itemviews.py:125 picard/ui/searchdialog/track.py:62
+#: picard/util/tags.py:87
+msgid "Length"
+msgstr "長度"
+
+#: picard/ui/itemviews.py:194
+msgid "Bad match"
+msgstr "不符合"
+
+#: picard/ui/itemviews.py:195
+msgid "Poor match"
+msgstr "勉強符合"
+
+#: picard/ui/itemviews.py:196
+msgid "Ok match"
+msgstr "大約符合"
+
+#: picard/ui/itemviews.py:197
+msgid "Good match"
+msgstr "符合"
+
+#: picard/ui/itemviews.py:198
+msgid "Great match"
+msgstr "非常符合"
+
+#: picard/ui/itemviews.py:199
+msgid "Excellent match"
+msgstr "完美符合"
+
+#: picard/ui/itemviews.py:268
+msgid "&Expand all"
+msgstr "全部展開 (&E)"
+
+#: picard/ui/itemviews.py:270
+msgid "&Collapse all"
+msgstr "全部收合 (&C) "
+
+#: picard/ui/itemviews.py:272
+msgid "Select &all"
+msgstr "全選 (&A)"
+
+#: picard/ui/itemviews.py:274
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#: picard/ui/itemviews.py:340
+msgid "&Other versions"
+msgstr "其他版本 (&O)"
+
+#: picard/ui/itemviews.py:343
+msgid "Loading..."
+msgstr "載入中…"
+
+#: picard/ui/itemviews.py:395
+#, python-format
+msgid "&Other versions (%d)"
+msgstr ""
+
+#: picard/ui/itemviews.py:419
+msgid "Collections"
+msgstr "收藏"
+
+#: picard/ui/itemviews.py:427
+msgid "P&lugins"
+msgstr "插件 (&L)"
+
+#: picard/ui/itemviews.py:443
+msgid "&Run scripts"
+msgstr ""
+
+#: picard/ui/itemviews.py:614
+msgid "file view"
+msgstr "檔案檢視模式"
+
+#: picard/ui/itemviews.py:615
+msgid "Contains unmatched files and clusters"
+msgstr "包含未配對的檔案與叢集"
+
+#: picard/ui/itemviews.py:635
+msgid "Clusters"
+msgstr "叢集"
+
+#: picard/ui/itemviews.py:644
+msgid "album view"
+msgstr "專輯檢視"
+
+#: picard/ui/itemviews.py:645
+msgid "Contains albums and matched files"
+msgstr "包含專輯與已配對的檔案"
+
+#: picard/ui/itemviews.py:754 picard/ui/options/renaming.py:207
+msgid "Error"
+msgstr "錯誤"
+
+#: picard/ui/itemviews.py:758
+msgid "Album modified and complete"
+msgstr "已修改且已儲存的專輯"
+
+#: picard/ui/itemviews.py:761
+msgid "Album unchanged and complete"
+msgstr "未修改且已儲存的專輯"
+
+#: picard/ui/itemviews.py:765
+msgid "Album modified"
+msgstr "已修改專輯"
+
+#: picard/ui/itemviews.py:768
+msgid "Album unchanged"
+msgstr "未修改專輯"
+
+#: picard/ui/itemviews.py:879
+msgid "Track saved"
+msgstr "音軌已儲存"
+
+#: picard/ui/itemviews.py:881 picard/ui/itemviews.py:885
+msgid "Pending"
+msgstr "等待中"
+
+#: picard/ui/logview.py:152
+msgid "Log"
+msgstr "日誌"
+
+#: picard/ui/logview.py:162
+msgid "Verbosity"
+msgstr "詳細度"
+
+#: picard/ui/logview.py:172
+msgid "String to highlight"
+msgstr "要強調的文字"
+
+#: picard/ui/logview.py:177
+msgid "Highlight"
+msgstr "強調"
+
+#: picard/ui/logview.py:186
+msgid "Clear Highlight"
+msgstr "清除強調"
+
+#: picard/ui/logview.py:192 picard/ui/logview.py:273
+msgid "Clear Log"
+msgstr "清除日誌"
+
+#: picard/ui/logview.py:197
+msgid "Save As..."
+msgstr "另存為…"
+
+#: picard/ui/logview.py:242 picard/ui/logview.py:249
+msgid "Save Log View to File"
+msgstr "儲存日誌檢視到檔案"
+
+#: picard/ui/logview.py:250
+msgid "File already exists, do you really want to save to this file?"
+msgstr "檔案已存在，您真的想要儲存到這個檔案嗎？"
+
+#: picard/ui/logview.py:262
+msgid "Failed to save Log View to file"
+msgstr "儲存日誌檢視檔案失敗"
+
+#: picard/ui/logview.py:263
+#, python-format
+msgid "Something prevented data to be written to '%s'"
+msgstr "有人阻止了資料寫入到「%s」"
+
+#: picard/ui/logview.py:274
+msgid "Are you sure you want to clear the log?"
+msgstr "您確定要清除日誌嗎？"
+
+#: picard/ui/logview.py:308
+msgid "Activity History"
+msgstr "操作紀錄"
+
+#: picard/ui/mainwindow.py:125
+msgid "MusicBrainz Picard"
+msgstr "MusicBrainz Picard"
+
+#: picard/ui/mainwindow.py:224
+msgid "Unsaved Changes"
+msgstr "未儲存的變更"
+
+#: picard/ui/mainwindow.py:225
+msgid "Are you sure you want to quit Picard?"
+msgstr "你確定要離開 Picard 嗎？"
+
+#: picard/ui/mainwindow.py:226
+#, python-format
+msgid ""
+"There is %d unsaved file. Closing Picard will lose all unsaved changes."
+msgid_plural ""
+"There are %d unsaved files. Closing Picard will lose all unsaved changes."
+msgstr[0] "仍有 %d 個未儲存的檔案。關閉 Picard 將會失去所有未儲存的變更。"
+
+#: picard/ui/mainwindow.py:233
+msgid "&Quit Picard"
+msgstr "離開 Picard (&Q)"
+
+#: picard/ui/mainwindow.py:269
+msgid "Ready"
+msgstr "就緒"
+
+#: picard/ui/mainwindow.py:273
+msgid ""
+"Picard listens on this port to integrate with your browser. When you "
+"\"Search\" or \"Open in Browser\" from Picard, clicking the \"Tagger\" "
+"button on the web page loads the release into Picard."
+msgstr "Picard 透過此連接埠來與您的瀏覽器整合。當您使用 Picard 中的「搜尋」或「在瀏覽器中開啟」的功能時，在網頁中按下「Tagger」按鈕會將該發行品載入至 Picard 。"
+
+#: picard/ui/mainwindow.py:296
+#, python-format
+msgid " Listening on port %(port)d "
+msgstr "開啟連接埠 %(port)d"
+
+#: picard/ui/mainwindow.py:352
+msgid "Submission Error"
+msgstr "提交錯誤"
+
+#: picard/ui/mainwindow.py:353
+msgid ""
+"You need to configure your AcoustID API key before you can submit "
+"fingerprints."
+msgstr "在你提交特徵碼之前，必須先設定 AcoustID API 金鑰。"
+
+#: picard/ui/mainwindow.py:358
+msgid "&Options..."
+msgstr "設定 (&O)…"
+
+#: picard/ui/mainwindow.py:362
+msgid "&Cut"
+msgstr "剪下 (&C)"
+
+#: picard/ui/mainwindow.py:367
+msgid "&Paste"
+msgstr "貼上 (&P)"
+
+#: picard/ui/mainwindow.py:372
+msgid "&Help..."
+msgstr "說明 (&H)…"
+
+#: picard/ui/mainwindow.py:376
+msgid "&About..."
+msgstr "關於 (&A)…"
+
+#: picard/ui/mainwindow.py:380
+msgid "&Donate..."
+msgstr "捐獻 (&D)…"
+
+#: picard/ui/mainwindow.py:383
+msgid "&Report a Bug..."
+msgstr "回報錯誤 (&R)…"
+
+#: picard/ui/mainwindow.py:386
+msgid "&Support Forum..."
+msgstr "網頁論壇 (&S)…"
+
+#: picard/ui/mainwindow.py:389
+msgid "&Add Files..."
+msgstr "新增檔案 (&A)…"
+
+#: picard/ui/mainwindow.py:390
+msgid "Add files to the tagger"
+msgstr "新增檔案到標籤器"
+
+#: picard/ui/mainwindow.py:395
+msgid "A&dd Folder..."
+msgstr "新增資料夾 (&d)…"
+
+#: picard/ui/mainwindow.py:396
+msgid "Add a folder to the tagger"
+msgstr "新增資料夾到標籤器"
+
+#: picard/ui/mainwindow.py:398
+msgid "Ctrl+D"
+msgstr "Ctrl+D"
+
+#: picard/ui/mainwindow.py:402
+msgid "Close Window"
+msgstr "關閉視窗"
+
+#: picard/ui/mainwindow.py:403
+msgid "Ctrl+W"
+msgstr "Ctrl+W"
+
+#: picard/ui/mainwindow.py:406
+msgid "&Save"
+msgstr "儲存 (&S)"
+
+#: picard/ui/mainwindow.py:407
+msgid "Save selected files"
+msgstr "儲存已選擇的檔案"
+
+#: picard/ui/mainwindow.py:413
+msgid "S&ubmit AcoustIDs"
+msgstr "提交 AcoustID (&u)"
+
+#: picard/ui/mainwindow.py:414
+msgid "Submit acoustic fingerprints"
+msgstr "提交音訊特徵碼"
+
+#: picard/ui/mainwindow.py:418
+msgid "E&xit"
+msgstr "結束 (&x)"
+
+#: picard/ui/mainwindow.py:421
+msgid "Ctrl+Q"
+msgstr "Ctrl+Q"
+
+#: picard/ui/mainwindow.py:424
+msgid "&Remove"
+msgstr "移除 (&R)"
+
+#: picard/ui/mainwindow.py:425
+msgid "Remove selected files/albums"
+msgstr "移除已選擇的檔案或專輯"
+
+#: picard/ui/mainwindow.py:429 picard/ui/metadatabox.py:332
+#: picard/ui/ui_cdlookup.py:56
+msgid "Lookup in &Browser"
+msgstr "以瀏覽器查找 (&B)"
+
+#: picard/ui/mainwindow.py:430
+msgid "Lookup selected item on MusicBrainz website"
+msgstr "在 MusicBrainz 網頁中查找已選擇的項目"
+
+#: picard/ui/mainwindow.py:433
+msgid "Ctrl+Shift+L"
+msgstr "Ctrl+Shift+L"
+
+#: picard/ui/mainwindow.py:436
+msgid "Search for similar albums..."
+msgstr "搜尋類似的專輯…"
+
+#: picard/ui/mainwindow.py:437
+msgid "View similar releases and optionally choose a different release"
+msgstr "檢視相似的出版品，並從中選擇"
+
+#: picard/ui/mainwindow.py:440
+msgid "Search for similar tracks..."
+msgstr "搜尋類似的音軌…"
+
+#: picard/ui/mainwindow.py:441
+msgid "View similar tracks and optionally choose a different release"
+msgstr "檢視相似的音軌，並從中選擇"
+
+#: picard/ui/mainwindow.py:444
+msgid "File &Browser"
+msgstr "檔案瀏覽器 (&B)"
+
+#: picard/ui/mainwindow.py:448
+msgid "Ctrl+B"
+msgstr "Ctrl+B"
+
+#: picard/ui/mainwindow.py:451
+msgid "&Cover Art"
+msgstr "封面圖片(&C)"
+
+#: picard/ui/mainwindow.py:457
+msgid "&Actions"
+msgstr "&動作"
+
+#: picard/ui/mainwindow.py:463 picard/ui/mainwindow.py:726
+#: picard/ui/searchdialog/__init__.py:79
+msgid "Search"
+msgstr "搜尋"
+
+#: picard/ui/mainwindow.py:467 picard/ui/mainwindow.py:473
+msgid "Lookup &CD..."
+msgstr "查找 &CD…"
+
+#: picard/ui/mainwindow.py:468
+msgid "Lookup the details of the CD in your drive"
+msgstr "在您的光碟內查找詳細資訊"
+
+#: picard/ui/mainwindow.py:470 picard/ui/mainwindow.py:582
+msgid "Ctrl+K"
+msgstr "Ctrl+K"
+
+#: picard/ui/mainwindow.py:481
+msgid "&Scan"
+msgstr "掃描 (&S)"
+
+#: picard/ui/mainwindow.py:482
+msgid ""
+"Use AcoustID audio fingerprint to identify the files by the actual music, "
+"even if they have no metadata"
+msgstr "使用 AcoustID 音訊特徵碼來從實際的音樂內容中辨識檔案，即使這些檔案沒有後設資料"
+
+#: picard/ui/mainwindow.py:484
+msgid "Identify the file using its AcoustID audio fingerprint"
+msgstr "使用 AcoustID 音訊指紋辨識檔案"
+
+#: picard/ui/mainwindow.py:486
+msgid "Ctrl+Y"
+msgstr "Ctrl+Y"
+
+#: picard/ui/mainwindow.py:489
+msgid "Cl&uster"
+msgstr "叢集 (&u)"
+
+#: picard/ui/mainwindow.py:490
+msgid "Cluster files into album clusters"
+msgstr "將檔案並列為叢集"
+
+#: picard/ui/mainwindow.py:493
+msgid "Ctrl+U"
+msgstr "Ctrl+U"
+
+#: picard/ui/mainwindow.py:496
+msgid "&Lookup"
+msgstr "查找 (&L)"
+
+#: picard/ui/mainwindow.py:497
+msgid "Lookup selected items in MusicBrainz"
+msgstr "在 MusicBrainz 中查找已選擇的項目"
+
+#: picard/ui/mainwindow.py:502
+msgid "Ctrl+L"
+msgstr "Ctrl+L"
+
+#: picard/ui/mainwindow.py:505
+msgid "&Info..."
+msgstr "資訊 (&I)…"
+
+#: picard/ui/mainwindow.py:508
+msgid "Ctrl+I"
+msgstr "Ctrl+I"
+
+#: picard/ui/mainwindow.py:511
+msgid "&Refresh"
+msgstr "重新整理 (&R)"
+
+#: picard/ui/mainwindow.py:512
+msgid "Ctrl+R"
+msgstr "Ctrl+R"
+
+#: picard/ui/mainwindow.py:515
+msgid "&Rename Files"
+msgstr "重新命名檔案 (&R)"
+
+#: picard/ui/mainwindow.py:520
+msgid "&Move Files"
+msgstr "移動檔案 (&M)"
+
+#: picard/ui/mainwindow.py:525
+msgid "Save &Tags"
+msgstr "儲存標籤 (&T)"
+
+#: picard/ui/mainwindow.py:530
+msgid "Tags From &File Names..."
+msgstr "由檔名來上標籤 (&F)…"
+
+#: picard/ui/mainwindow.py:534
+msgid "&Open My Collections in Browser"
+msgstr "在瀏覽器中開啟我的收藏 (&O)"
+
+#: picard/ui/mainwindow.py:538
+msgid "View &Error/Debug Log"
+msgstr "檢視錯誤/偵錯日誌 (&E)"
+
+#: picard/ui/mainwindow.py:541
+msgid "Ctrl+E"
+msgstr "Ctrl+E"
+
+#: picard/ui/mainwindow.py:543
+msgid "View Activity &History"
+msgstr "檢視活動歷史紀錄 (&H)"
+
+#: picard/ui/mainwindow.py:546
+msgid "Ctrl+H"
+msgstr "Ctrl+H"
+
+#: picard/ui/mainwindow.py:552
+msgid "Open in &Player"
+msgstr "在撥放器中開啟 (&P)"
+
+#: picard/ui/mainwindow.py:553
+msgid "Play the file in your default media player"
+msgstr "使用您的預設媒體播放器來播放"
+
+#: picard/ui/mainwindow.py:557
+msgid "Open Containing &Folder"
+msgstr "開啟包含的資料夾 (&F)"
+
+#: picard/ui/mainwindow.py:558
+msgid "Open the containing folder in your file explorer"
+msgstr "在您的檔案總管中開啟包含該檔案的資料夾"
+
+#: picard/ui/mainwindow.py:563
+msgid "&Check for Update…"
+msgstr ""
+
+#: picard/ui/mainwindow.py:609
+msgid "&File"
+msgstr "檔案 (&F)"
+
+#: picard/ui/mainwindow.py:622
+msgid "&Edit"
+msgstr "編輯 (&E)"
+
+#: picard/ui/mainwindow.py:628
+msgid "&View"
+msgstr "檢視 (&V)"
+
+#: picard/ui/mainwindow.py:636
+msgid "&Options"
+msgstr "選項 (&O)"
+
+#: picard/ui/mainwindow.py:642
+msgid "&Tools"
+msgstr "工具 (&T)"
+
+#: picard/ui/mainwindow.py:656 picard/ui/util.py:43
+msgid "&Help"
+msgstr "說明 (&H)"
+
+#: picard/ui/mainwindow.py:691 picard/ui/ui_options_plugins.py:132
+msgid "Actions"
+msgstr "動作"
+
+#: picard/ui/mainwindow.py:734
+msgid "Track"
+msgstr "音軌"
+
+#: picard/ui/mainwindow.py:751
+msgid "&Advanced search"
+msgstr "進階搜尋 (&A)"
+
+#: picard/ui/mainwindow.py:752
+msgid "&Builtin search"
+msgstr "基本搜尋 (&B)"
+
+#: picard/ui/mainwindow.py:841
+msgid "All Supported Formats"
+msgstr "所有支援的格式"
+
+#: picard/ui/mainwindow.py:867
+#, python-format
+msgid "Adding multiple directories from '%(directory)s' ..."
+msgstr "從「%(directory)s」新增多個資料夾…"
+
+#: picard/ui/mainwindow.py:872
+#, python-format
+msgid "Adding directory: '%(directory)s' ..."
+msgstr "新增資料夾：「%(directory)s」…"
+
+#: picard/ui/mainwindow.py:953
+msgid "Configuration Required"
+msgstr "需要設定"
+
+#: picard/ui/mainwindow.py:954
+msgid ""
+"Audio fingerprinting is not yet configured. Would you like to configure it "
+"now?"
+msgstr "尚未設定音訊特徵碼。請問您想要現在設定嗎？"
+
+#: picard/ui/mainwindow.py:1068
+#, python-format
+msgid "%(filename)s (error: %(error)s)"
+msgstr "%(filename)s (錯誤：%(error)s)"
+
+#: picard/ui/mainwindow.py:1074
+#, python-format
+msgid "%(filename)s"
+msgstr "%(filename)s"
+
+#: picard/ui/mainwindow.py:1085
+#, python-format
+msgid "%(filename)s (%(similarity)d%%) (error: %(error)s)"
+msgstr "%(filename)s (%(similarity)d%%) (錯誤：%(error)s)"
+
+#: picard/ui/mainwindow.py:1092
+#, python-format
+msgid "%(filename)s (%(similarity)d%%)"
+msgstr "%(filename)s (%(similarity)d%%)"
+
+#: picard/ui/mainwindow.py:1138
+msgid "Authentication Required"
+msgstr "需要鑑認"
+
+#: picard/ui/mainwindow.py:1139
+msgid ""
+"Picard needs authorization to access your personal data on the MusicBrainz "
+"server. Would you like to log in now?"
+msgstr "Picard 需要鑑認來存取您在 MusicBrainz 伺服器上的個人資料。您想要現在登入嗎？"
+
+#: picard/ui/metadatabox.py:96
+#, python-format
+msgid "(different across %d item)"
+msgid_plural "(different across %d items)"
+msgstr[0] "（不同處共%d筆項目）"
+
+#: picard/ui/metadatabox.py:104
+#, python-format
+msgid "(missing from %d item)"
+msgid_plural "(missing from %d items)"
+msgstr[0] "（缺少%d筆項目）"
+
+#: picard/ui/metadatabox.py:194
+msgid "metadata view"
+msgstr "後設資料檢視"
+
+#: picard/ui/metadatabox.py:195
+msgid "Displays original and new tags for the selected files"
+msgstr "顯示選擇的檔案中原來與修改後的標籤"
+
+#: picard/ui/metadatabox.py:197
+msgid "Tag"
+msgstr "標籤"
+
+#: picard/ui/metadatabox.py:197
+msgid "Original Value"
+msgstr "原值"
+
+#: picard/ui/metadatabox.py:197
+msgid "New Value"
+msgstr "新值"
+
+#: picard/ui/metadatabox.py:215
+msgid "Add New Tag..."
+msgstr "新增標籤…"
+
+#: picard/ui/metadatabox.py:217
+msgid "Show Changes First"
+msgstr "先顯示更改"
+
+#: picard/ui/metadatabox.py:223
+msgid "Alt+Shift+A"
+msgstr "Alt+Shift+A"
+
+#: picard/ui/metadatabox.py:226
+msgid "Alt+Shift+E"
+msgstr "Alt+Shift+E"
+
+#: picard/ui/metadatabox.py:228
+msgid "Alt+Shift+R"
+msgstr "Alt+Shift+R"
+
+#: picard/ui/metadatabox.py:308
+msgid "Edit..."
+msgstr "編輯…"
+
+#: picard/ui/metadatabox.py:313
+msgid "Add to 'Preserve Tags' List"
+msgstr "新增到「保留標籤」清單"
+
+#: picard/ui/metadatabox.py:317
+msgid "Remove from 'Preserve Tags' List"
+msgstr "從「保留標籤」清單移除"
+
+#: picard/ui/metadatabox.py:351
+msgid "Use Original Value"
+msgid_plural "Use Original Values"
+msgstr[0] "使用原值"
+
+#: picard/ui/passworddialog.py:35
+#, python-format
+msgid ""
+"The server %s requires you to login. Please enter your username and "
+"password."
+msgstr "伺服器%s需要您登入。請輸入您的使用者名稱與密碼。"
+
+#: picard/ui/passworddialog.py:55
+#, python-format
+msgid ""
+"The proxy %s requires you to login. Please enter your username and password."
+msgstr "代理伺服器%s需要您登入。請輸入您的使用者名稱與密碼。"
+
+#: picard/ui/playertoolbar.py:166
+msgid ""
+"Internal player: The format of a media resource isn't (fully) supported"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:168
+msgid ""
+"Internal player: There are not the appropriate permissions to play a media "
+"resource"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:170
+msgid ""
+"Internal player: A valid playback service was not found, playback cannot "
+"proceed"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:172
+#, python-format
+msgid "Internal player: error, code=%d, msg=%s"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:178
+msgid "Player"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:186
+msgid "Play"
+msgstr "話劇"
+
+#: picard/ui/playertoolbar.py:187
+msgid "Play selected files"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:193
+msgid "Pause"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:194
+msgid "Pause or resume current playback"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:410
+#, python-format
+msgid "%1.1f ×"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:416
+msgid "Change playback speed"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:423
+msgid "Playback speed"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:470
+#, python-format
+msgid "%d%%"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:476
+msgid "Change audio volume"
+msgstr ""
+
+#: picard/ui/playertoolbar.py:482
+msgid "Audio volume"
+msgstr ""
+
+#: picard/ui/scriptsmenu.py:58
+#, python-format
+msgid "Script error in \"%(script)s\": %(message)s"
+msgstr ""
+
+#: picard/ui/tagsfromfilenames.py:66 picard/ui/tagsfromfilenames.py:113
+msgid "File Name"
+msgstr "檔案名稱"
+
+#: picard/ui/options/cdlookup.py:43 picard/ui/ui_cdlookup.py:53
+#: picard/ui/ui_options_cdlookup.py:38
+#: picard/ui/ui_options_cdlookup_select.py:45
+msgid "CD Lookup"
+msgstr "CD 查找"
+
+#: picard/ui/ui_cdlookup.py:54
+msgid "The following releases on MusicBrainz match the CD:"
+msgstr "以下的 MusicBrainz 發行品與 CD 符合："
+
+#: picard/ui/ui_cdlookup.py:55
+msgid "&Load into Picard"
+msgstr "載入到 Picard (&L)"
+
+#: picard/ui/ui_cdlookup.py:57 picard/ui/util.py:42
+msgid "&Cancel"
+msgstr "取消 (&C)"
+
+#: picard/ui/ui_edittagdialog.py:89
+msgid "Edit Tag"
+msgstr "編輯標籤"
+
+#: picard/ui/ui_edittagdialog.py:90
+msgid "Edit value"
+msgstr "編輯值"
+
+#: picard/ui/ui_edittagdialog.py:91
+msgid "Add value"
+msgstr "新增值"
+
+#: picard/ui/ui_edittagdialog.py:92
+msgid "Remove value"
+msgstr "移除值"
+
+#: picard/ui/ui_infodialog.py:60
+msgid "A&rtwork"
+msgstr "圖片(&r)"
+
+#: picard/ui/ui_infostatus.py:91 picard/ui/ui_provider_options_caa.py:79
+#: picard/ui/ui_provider_options_local.py:50
+msgid "Form"
+msgstr ""
+
+#: picard/ui/ui_options.py:44
+msgid "Options"
+msgstr "選項"
+
+#: picard/ui/ui_options_advanced.py:104
+msgid "Advanced options"
+msgstr "進階選項"
+
+#: picard/ui/ui_options_advanced.py:105
+msgid "Include sub-folders when adding files from folder"
+msgstr ""
+
+#: picard/ui/ui_options_advanced.py:106
+msgid "Ignore track duration difference under this number of seconds"
+msgstr ""
+
+#: picard/ui/ui_options_advanced.py:107
+msgid "Ignore file paths matching the following regular expression:"
+msgstr "忽略符合以下正規表式的檔名："
+
+#: picard/ui/ui_options_advanced.py:108
+msgid "Ignore hidden files"
+msgstr "忽略隱藏檔案"
+
+#: picard/ui/ui_options_advanced.py:109
+msgid ""
+"Ignore the following tracks when determining whether a release is complete"
+msgstr ""
+
+#: picard/ui/ui_options_advanced.py:110
+msgid "Video tracks"
+msgstr "視訊音軌"
+
+#: picard/ui/ui_options_advanced.py:111
+msgid "Pregap tracks"
+msgstr ""
+
+#: picard/ui/ui_options_advanced.py:112
+msgid "Data tracks"
+msgstr "數據音軌"
+
+#: picard/ui/ui_options_advanced.py:113
+msgid "Silent tracks"
+msgstr "無聲音軌"
+
+#: picard/ui/ui_options_cdlookup.py:39
+msgid "CD-ROM device to use for lookups:"
+msgstr "要查找的 CD-ROM 裝置："
+
+#: picard/ui/ui_options_cdlookup_select.py:46
+msgid "Default CD-ROM drive to use for lookups:"
+msgstr "要查找的預設 CD-ROM 裝置："
+
+#: picard/ui/ui_options_cover.py:86
+msgid "Location"
+msgstr "位置"
+
+#: picard/ui/ui_options_cover.py:87
+msgid "Embed cover images into tags"
+msgstr "嵌入封面圖片至標籤"
+
+#: picard/ui/ui_options_cover.py:88
+msgid "Only embed a front image"
+msgstr "只嵌入正面的封面圖片"
+
+#: picard/ui/ui_options_cover.py:89
+msgid "Save cover images as separate files"
+msgstr "儲存封面圖片於別的檔案"
+
+#: picard/ui/ui_options_cover.py:90
+msgid "Use the following file name for images:"
+msgstr "對圖片使用以下檔名："
+
+#: picard/ui/ui_options_cover.py:91
+msgid "Overwrite the file if it already exists"
+msgstr "檔案存在時取代"
+
+#: picard/ui/ui_options_cover.py:92
+msgid "Cover Art Providers"
+msgstr "封面圖片提供者"
+
+#: picard/ui/ui_options_cover.py:93
+msgid "Reorder Priority: "
+msgstr ""
+
+#: picard/ui/ui_options_cover.py:94 picard/ui/ui_options_interface.py:137
+msgid "Move selected item up"
+msgstr "向上移動已選取的項目"
+
+#: picard/ui/ui_options_cover.py:95 picard/ui/ui_options_interface.py:139
+msgid "Move selected item down"
+msgstr "向下移動已選取的項目"
+
+#: picard/ui/ui_options_fingerprinting.py:73
+msgid "Audio Fingerprinting"
+msgstr "音訊特徵碼"
+
+#: picard/ui/ui_options_fingerprinting.py:74
+msgid "Do not use audio fingerprinting"
+msgstr "不使用音訊特徵碼"
+
+#: picard/ui/ui_options_fingerprinting.py:75
+msgid "Use AcoustID"
+msgstr "使用 AcoustID"
+
+#: picard/ui/ui_options_fingerprinting.py:76
+msgid "AcoustID Settings"
+msgstr "AcoustID 設定"
+
+#: picard/ui/ui_options_fingerprinting.py:77
+msgid "Ignore existing AcoustID fingerprints"
+msgstr "忽略已存在的 AcoustID 特徵碼"
+
+#: picard/ui/ui_options_fingerprinting.py:78
+msgid "Fingerprint calculator:"
+msgstr "特徵碼計算器："
+
+#: picard/ui/ui_options_fingerprinting.py:79
+#: picard/ui/ui_options_interface.py:130 picard/ui/ui_options_renaming.py:146
+msgid "Browse..."
+msgstr "瀏覽…"
+
+#: picard/ui/ui_options_fingerprinting.py:80
+msgid "Download..."
+msgstr "下載…"
+
+#: picard/ui/ui_options_fingerprinting.py:81
+msgid "API key:"
+msgstr "API 金鑰："
+
+#: picard/ui/ui_options_fingerprinting.py:82
+msgid "Get API key..."
+msgstr "取得 API 金鑰…"
+
+#: picard/ui/ui_options_general.py:132
+msgid "MusicBrainz Server"
+msgstr "MusicBrainz 伺服器"
+
+#: picard/ui/ui_options_general.py:133 picard/ui/ui_options_network.py:110
+msgid "Port:"
+msgstr "連接埠："
+
+#: picard/ui/ui_options_general.py:134 picard/ui/ui_options_network.py:111
+msgid "Server address:"
+msgstr "伺服機位址："
+
+#: picard/ui/ui_options_general.py:136
+msgid "Log in"
+msgstr "登入"
+
+#: picard/ui/ui_options_general.py:137
+msgid "Log out"
+msgstr "登出"
+
+#: picard/ui/options/general.py:38 picard/ui/ui_options_general.py:138
+msgid "General"
+msgstr "一般"
+
+#: picard/ui/ui_options_general.py:139
+msgid "Automatically scan all new files"
+msgstr "自動掃描所有新檔案"
+
+#: picard/ui/ui_options_general.py:140
+msgid "Ignore MBIDs when loading new files"
+msgstr "當讀取新檔案時忽略 MBID"
+
+#: picard/ui/ui_options_general.py:141
+msgid "Update Checking"
+msgstr ""
+
+#: picard/ui/ui_options_general.py:142
+msgid "Check for updates during start-up"
+msgstr ""
+
+#: picard/ui/ui_options_general.py:143
+msgid "Days between checks:"
+msgstr ""
+
+#: picard/ui/ui_options_general.py:144
+msgid "Updates to check:"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:118
+msgid "Use genres from MusicBrainz"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:119
+msgid "Only use my genres"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:120
+msgid ""
+"Fall back on album's artists genres if no genres are found for the release "
+"or release group"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:121
+msgid "Use folksonomy tags as genre"
+msgstr "使用 Folksonomy 標籤為音樂類型"
+
+#: picard/ui/ui_options_genres.py:122
+msgid "Minimal genre usage:"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:123 picard/ui/ui_options_matching.py:71
+#: picard/ui/ui_options_matching.py:72 picard/ui/ui_options_matching.py:73
+msgid " %"
+msgstr " %"
+
+#: picard/ui/ui_options_genres.py:124
+msgid "Maximum number of genres:"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:125
+msgid "Join multiple genres with:"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:126
+msgid " / "
+msgstr "/"
+
+#: picard/ui/ui_options_genres.py:127
+msgid ", "
+msgstr ", "
+
+#: picard/ui/ui_options_genres.py:128
+msgid "Genres or folksonomy tags to include or exclude, one per line:"
+msgstr ""
+
+#: picard/ui/ui_options_genres.py:129
+msgid "Playground for genres or folksonomy tags filters (cleared on exit):"
+msgstr ""
+
+#: picard/ui/ui_options_interface.py:123
+msgid "Miscellaneous"
+msgstr "其他"
+
+#: picard/ui/ui_options_interface.py:124
+msgid "Show text labels under icons"
+msgstr "在圖示下顯示文字標籤"
+
+#: picard/ui/ui_options_interface.py:125
+msgid "Allow selection of multiple directories"
+msgstr "允許選擇多個資料夾"
+
+#: picard/ui/ui_options_interface.py:126
+msgid "Use builtin search rather than looking in browser"
+msgstr ""
+
+#: picard/ui/searchdialog/__init__.py:119
+#: picard/ui/ui_options_interface.py:127
+msgid "Use advanced query syntax"
+msgstr "使用進階查詢語法"
+
+#: picard/ui/ui_options_interface.py:128
+msgid "Show a quit confirmation dialog for unsaved changes"
+msgstr ""
+
+#: picard/ui/ui_options_interface.py:129
+msgid "Begin browsing in the following directory:"
+msgstr ""
+
+#: picard/ui/ui_options_interface.py:131
+msgid "User interface language:"
+msgstr "使用者界面語言："
+
+#: picard/ui/ui_options_interface.py:132
+msgid "Customize Action Toolbar"
+msgstr "自訂工具列"
+
+#: picard/ui/ui_options_interface.py:133
+msgid "Add a new button to Toolbar"
+msgstr "新增按鈕至工具列"
+
+#: picard/ui/ui_options_interface.py:134
+msgid "Add Action"
+msgstr "新增動作"
+
+#: picard/ui/ui_options_interface.py:135
+msgid "Insert a separator"
+msgstr "插入分隔"
+
+#: picard/ui/ui_options_interface.py:136
+msgid "Add Separator"
+msgstr "增加分隔"
+
+#: picard/ui/ui_options_interface.py:138 picard/ui/ui_options_interface.py:140
+msgid "..."
+msgstr "…"
+
+#: picard/ui/ui_options_interface.py:141
+msgid "Remove button from toolbar"
+msgstr "從工具列種移除按鈕"
+
+#: picard/ui/options/interface_colors.py:82
+#: picard/ui/ui_options_interface_colors.py:48
+msgid "Colors"
+msgstr ""
+
+#: picard/ui/ui_options_matching.py:69
+msgid "Thresholds"
+msgstr "閥值"
+
+#: picard/ui/ui_options_matching.py:70
+msgid "Minimal similarity for matching files to tracks:"
+msgstr "檔案配對音軌的最小相似度："
+
+#: picard/ui/ui_options_matching.py:74
+msgid "Minimal similarity for file lookups:"
+msgstr "檔案查找的最小相似度："
+
+#: picard/ui/ui_options_matching.py:75
+msgid "Minimal similarity for cluster lookups:"
+msgstr "叢集查找的最小相似度："
+
+#: picard/ui/options/metadata.py:33 picard/ui/ui_options_metadata.py:96
+msgid "Metadata"
+msgstr "後設資料"
+
+#: picard/ui/ui_options_metadata.py:97
+msgid "Translate artist names to this locale where possible:"
+msgstr "可能的話翻譯創作者名稱到此語系："
+
+#: picard/ui/ui_options_metadata.py:98
+msgid "Use standardized artist names"
+msgstr "使用標準化的創作者名稱"
+
+#: picard/ui/ui_options_metadata.py:99
+msgid "Use standardized instrument and vocal credits"
+msgstr ""
+
+#: picard/ui/ui_options_metadata.py:100
+msgid "Convert Unicode punctuation characters to ASCII"
+msgstr "將 Unicode 標點符號轉換為 ASCII"
+
+#: picard/ui/ui_options_metadata.py:101
+msgid "Use release relationships"
+msgstr "使用發行品關係"
+
+#: picard/ui/ui_options_metadata.py:102
+msgid "Use track relationships"
+msgstr "使用音軌關係"
+
+#: picard/ui/ui_options_metadata.py:103
+msgid "Custom Fields"
+msgstr "自訂欄位"
+
+#: picard/ui/ui_options_metadata.py:104
+msgid "Various artists:"
+msgstr "多位創作者："
+
+#: picard/ui/ui_options_metadata.py:105
+msgid "Non-album tracks:"
+msgstr "非專輯音軌："
+
+#: picard/ui/ui_options_metadata.py:106 picard/ui/ui_options_metadata.py:107
+#: picard/ui/ui_options_renaming.py:153
+#: picard/ui/ui_provider_options_local.py:52
+msgid "Default"
+msgstr "預設"
+
+#: picard/ui/ui_options_network.py:107
+msgid "Web Proxy"
+msgstr "網頁代理伺服器"
+
+#: picard/ui/ui_options_network.py:108 picard/ui/ui_passworddialog.py:62
+msgid "Password:"
+msgstr "密碼："
+
+#: picard/ui/ui_options_network.py:109 picard/ui/ui_passworddialog.py:61
+msgid "Username:"
+msgstr "使用者名稱："
+
+#: picard/ui/ui_options_network.py:112
+msgid "Browser Integration"
+msgstr "瀏覽器整合"
+
+#: picard/ui/ui_options_network.py:113
+msgid "Default listening port:"
+msgstr "預設的聆聽連接埠："
+
+#: picard/ui/ui_options_network.py:114
+msgid "Listen only on localhost"
+msgstr "只在本機端的連接埠聆聽"
+
+#: picard/ui/options/plugins.py:204 picard/ui/ui_options_plugins.py:129
+msgid "Plugins"
+msgstr "插件"
+
+#: picard/ui/options/plugins.py:579 picard/ui/searchdialog/album.py:150
+#: picard/ui/searchdialog/artist.py:50 picard/ui/searchdialog/track.py:61
+#: picard/ui/ui_options_plugins.py:130
+msgid "Name"
+msgstr "名稱"
+
+#: picard/ui/ui_options_plugins.py:131
+msgid "Version"
+msgstr "版本"
+
+#: picard/ui/ui_options_plugins.py:133
+msgid "Install plugin..."
+msgstr "安裝插件…"
+
+#: picard/ui/ui_options_plugins.py:134
+msgid "Open plugin folder"
+msgstr "開啟插件資料夾"
+
+#: picard/ui/ui_options_plugins.py:135
+msgid "Reload List of Plugins"
+msgstr "重新載入插件清單"
+
+#: picard/ui/ui_options_plugins.py:136
+msgid "Details"
+msgstr "詳細說明"
+
+#: picard/ui/ui_options_ratings.py:45
+msgid "Enable track ratings"
+msgstr "啟用音軌評分"
+
+#: picard/ui/ui_options_ratings.py:46
+msgid ""
+"Picard saves the ratings together with an e-mail address identifying the "
+"user who did the rating. That way different ratings for different users can "
+"be stored in the files. Please specify the e-mail you want to use to save "
+"your ratings."
+msgstr ""
+
+#: picard/ui/ui_options_ratings.py:47
+msgid "E-mail:"
+msgstr "電子郵件："
+
+#: picard/ui/ui_options_ratings.py:48
+msgid "Submit ratings to MusicBrainz"
+msgstr "提交評分到 MusicBrainz"
+
+#: picard/ui/ui_options_releases.py:100
+msgid "Preferred release types"
+msgstr "偏好的發行品類型"
+
+#: picard/ui/ui_options_releases.py:101
+msgid "Preferred release countries"
+msgstr "偏好的發行品國家"
+
+#: picard/ui/ui_options_releases.py:102 picard/ui/ui_options_releases.py:105
+msgid ">"
+msgstr ">"
+
+#: picard/ui/ui_options_releases.py:103 picard/ui/ui_options_releases.py:106
+msgid "<"
+msgstr "<"
+
+#: picard/ui/ui_options_releases.py:104
+msgid "Preferred release formats"
+msgstr "偏好的發行品格式"
+
+#: picard/ui/ui_options_renaming.py:144
+msgid "Move files when saving"
+msgstr "儲存時移動檔案"
+
+#: picard/ui/ui_options_renaming.py:145
+msgid "Destination directory:"
+msgstr "目標位置："
+
+#: picard/ui/ui_options_renaming.py:147
+msgid "Move additional files (case insensitive):"
+msgstr ""
+
+#: picard/ui/ui_options_renaming.py:148
+msgid "Delete empty directories"
+msgstr "刪除空資料夾"
+
+#: picard/ui/ui_options_renaming.py:149
+msgid "Rename files when saving"
+msgstr "儲存檔案時更改檔名"
+
+#: picard/ui/ui_options_renaming.py:150
+msgid "Replace non-ASCII characters"
+msgstr "取代非 ASCII 字元"
+
+#: picard/ui/ui_options_renaming.py:151
+msgid "Windows compatibility"
+msgstr "Windows 相容性"
+
+#: picard/ui/ui_options_renaming.py:152
+msgid "Name files like this"
+msgstr ""
+
+#: picard/ui/ui_options_renaming.py:154
+msgid "Examples"
+msgstr "範例"
+
+#: picard/ui/ui_options_script.py:94
+msgid "Tagger Script(s)"
+msgstr ""
+
+#: picard/ui/ui_options_script.py:95 picard/ui/ui_options_script.py:96
+msgid "Add new script"
+msgstr "新增腳本"
+
+#: picard/ui/ui_options_script.py:97
+msgid "Display Name"
+msgstr "顯示名稱"
+
+#: picard/ui/ui_options_tags.py:151
+msgid "Write tags to files"
+msgstr "將標籤寫入檔案"
+
+#: picard/ui/ui_options_tags.py:152
+msgid "Preserve timestamps of tagged files"
+msgstr ""
+
+#: picard/ui/ui_options_tags.py:153
+msgid "Before Tagging"
+msgstr "寫入標籤之前"
+
+#: picard/ui/ui_options_tags.py:154
+msgid "Clear existing tags"
+msgstr "清除原有標籤"
+
+#: picard/ui/ui_options_tags.py:155
+msgid "Remove ID3 tags from FLAC files"
+msgstr "從 FLAC 檔案移除 ID3 標籤"
+
+#: picard/ui/ui_options_tags.py:156
+msgid "Remove APEv2 tags from MP3 files"
+msgstr "從 MP3 檔案移除 APEv2 標籤"
+
+#: picard/ui/ui_options_tags.py:157
+msgid ""
+"Preserve these tags from being cleared or overwritten with MusicBrainz data:"
+msgstr ""
+
+#: picard/ui/ui_options_tags.py:158
+msgid "Tags are separated by commas, and are case-sensitive."
+msgstr "以逗號分隔標籤，並且區別大小寫"
+
+#: picard/ui/ui_options_tags.py:159
+msgid "Tag Compatibility"
+msgstr "標籤相容性"
+
+#: picard/ui/ui_options_tags.py:160
+msgid "ID3v2 Version"
+msgstr "ID3v2 版本"
+
+#: picard/ui/ui_options_tags.py:161
+msgid "2.4"
+msgstr "2.4"
+
+#: picard/ui/ui_options_tags.py:162
+msgid "2.3"
+msgstr "2.3"
+
+#: picard/ui/ui_options_tags.py:163
+msgid "ID3v2 Text Encoding"
+msgstr "ID3v2 文字編碼"
+
+#: picard/ui/ui_options_tags.py:164
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: picard/ui/ui_options_tags.py:165
+msgid "UTF-16"
+msgstr "UTF-16"
+
+#: picard/ui/ui_options_tags.py:166
+msgid "ISO-8859-1"
+msgstr "ISO-8859-1"
+
+#: picard/ui/ui_options_tags.py:167
+msgid "Join multiple ID3v2.3 tags with:"
+msgstr "串接重複的 ID3v2.3 標籤以："
+
+#: picard/ui/ui_options_tags.py:168
+msgid ""
+"<html><head/><body><p>Default is '/' to maintain compatibility with previous"
+" Picard releases.</p><p>New alternatives are ';_' or '_/_' or type your own."
+" </p></body></html>"
+msgstr "<html><head/><body><p>預設為「/」來與舊版 Picard 保持相容性。</p><p>新的選擇為「;_」或是「_/_」或是由您自行輸入。</p></body></html>"
+
+#: picard/ui/ui_options_tags.py:169
+msgid "Save iTunes compatible grouping and work"
+msgstr ""
+
+#: picard/ui/ui_options_tags.py:170
+msgid "Also include ID3v1 tags in the files"
+msgstr ""
+
+#: picard/ui/ui_passworddialog.py:60
+msgid "Authentication required"
+msgstr "需要認證"
+
+#: picard/ui/ui_provider_options_caa.py:80
+msgid "Download only cover art images matching selected types"
+msgstr ""
+
+#: picard/ui/ui_provider_options_caa.py:81
+msgid "Select types..."
+msgstr "選擇類型…"
+
+#: picard/ui/ui_provider_options_caa.py:82
+msgid "Only use images of the following size:"
+msgstr "只使用以下大小的圖片："
+
+#: picard/ui/ui_provider_options_caa.py:83
+msgid "Save only one front image as separate file"
+msgstr ""
+
+#: picard/ui/ui_provider_options_caa.py:84
+msgid "Download only approved images"
+msgstr "只下載受認可的圖片"
+
+#: picard/ui/ui_provider_options_caa.py:85
+msgid ""
+"Use the first image type as the filename. This will not change the filename "
+"of front images."
+msgstr ""
+
+#: picard/ui/ui_provider_options_local.py:51
+msgid "Local cover art files match the following regular expression:"
+msgstr ""
+
+#: picard/ui/ui_provider_options_local.py:53
+msgid ""
+"First group in the regular expression, if any, will be used as type, ie. "
+"cover-back-spine.jpg will be set as types Back + Spine. If no type is found,"
+" it will default to Front type."
+msgstr ""
+
+#: picard/ui/ui_tagsfromfilenames.py:53
+msgid "Convert File Names to Tags"
+msgstr ""
+
+#: picard/ui/ui_tagsfromfilenames.py:54
+msgid "Replace underscores with spaces"
+msgstr "用空格取代底線"
+
+#: picard/ui/ui_tagsfromfilenames.py:55
+msgid "&Preview"
+msgstr "預覽(&P)"
+
+#: picard/ui/util.py:41
+msgid "&Ok"
+msgstr "確定(&O)"
+
+#: picard/ui/util.py:44
+msgid "Clos&e"
+msgstr "關閉 (&e)"
+
+#: picard/ui/options/__init__.py:87
+msgid "Regex Error"
+msgstr "正規表式錯誤"
+
+#: picard/ui/options/about.py:34
+msgid "About"
+msgstr "關於"
+
+#: picard/ui/options/about.py:54
+msgid "translator-credits"
+msgstr "Shen-Ta Hsieh"
+
+#: picard/ui/options/about.py:57
+#, python-format
+msgid "<br/>Translated to LANG by %s"
+msgstr "<br/>由 %s 翻譯為傳統中文"
+
+#: picard/ui/options/about.py:73
+msgid ""
+"Icons made by Sambhav Kothari <sambhavs.email@gmail.com>\n"
+"and <a href=\"http://www.flaticon.com/authors/madebyoliver\">Madebyoliver</a>,\n"
+"<a href=\"http://www.flaticon.com/authors/pixel-buddha\">Pixel Buddha</a>,\n"
+"<a href=\"http://www.flaticon.com/authors/nikita-golubev\">Nikita Golubev</a>,\n"
+"<a href=\"http://www.flaticon.com/authors/maxim-basinski\">Maxim Basinski</a>,\n"
+"<a href=\"https://www.flaticon.com/authors/smashicons\">Smashicons</a>\n"
+"from <a href=\"https://www.flaticon.com\">www.flaticon.com</a>"
+msgstr ""
+
+#: picard/ui/options/about.py:81
+#, python-format
+msgid ""
+"<p align=\"center\"><span style=\"font-size:15px;font-weight:bold;\">MusicBrainz Picard</span><br/>\n"
+"Version %(version)s</p>\n"
+"<p align=\"center\"><small>\n"
+"%(third_parties_versions)s\n"
+"</small></p>\n"
+"<p align=\"center\"><strong>Supported formats</strong><br/>%(formats)s</p>\n"
+"<p align=\"center\"><strong>Please donate</strong><br/>\n"
+"Thank you for using Picard. Picard relies on the MusicBrainz database, which is operated by the MetaBrainz Foundation with the help of thousands of volunteers. If you like this application please consider donating to the MetaBrainz Foundation to keep the service running.</p>\n"
+"<p align=\"center\"><a href=\"%(picard_donate_url)s\">Donate now!</a></p>\n"
+"<p align=\"center\"><strong>Credits</strong><br/>\n"
+"<small>Copyright © %(copyright_years)s %(authors_credits)s and others%(translator_credits)s</small></p>\n"
+"<p align=\"center\"><small>%(icons_credits)s</small></p>\n"
+"<p align=\"center\"><strong>Official website</strong><br/><a href=\"%(picard_doc_url)s\">%(picard_doc_url)s</a></p>\n"
+msgstr ""
+
+#: picard/ui/options/advanced.py:32
+msgid "Advanced"
+msgstr "進階"
+
+#: picard/ui/options/cover.py:35
+msgid "Cover Art"
+msgstr "封面圖片"
+
+#: picard/ui/options/dialog.py:100
+msgid "&Restore all Defaults"
+msgstr "恢復為預設值(&R)"
+
+#: picard/ui/options/dialog.py:101
+msgid "Reset all of Picard's settings"
+msgstr "重設所有 Picard 的設定"
+
+#: picard/ui/options/dialog.py:103
+msgid "Reset all settings for current option page"
+msgstr "重設目前頁面的所有設定"
+
+#: picard/ui/options/dialog.py:106
+msgid "Make It So!"
+msgstr "就這麼辦！"
+
+#: picard/ui/options/dialog.py:190
+msgid "Unexpected error"
+msgstr ""
+
+#: picard/ui/options/dialog.py:210
+msgid "You are about to reset your options for this page."
+msgstr "您將要重設這個頁面上的選項。"
+
+#: picard/ui/options/dialog.py:214
+msgid "Warning! This will reset all of your settings."
+msgstr "警告！這將會重設您所有的設定。"
+
+#: picard/ui/options/dialog.py:221
+msgid "Confirm Reset"
+msgstr "確定重設"
+
+#: picard/ui/options/dialog.py:222
+msgid "Are you sure?"
+msgstr "您確定嗎？"
+
+#: picard/ui/options/fingerprinting.py:45
+msgid "Fingerprinting"
+msgstr "特徵碼計算"
+
+#: picard/ui/options/fingerprinting.py:148
+#: picard/ui/options/fingerprinting.py:152
+msgid "Please select a valid fpcalc executable."
+msgstr "請選擇可用的 fpcalc 執行檔。"
+
+#: picard/ui/options/fingerprinting.py:152
+msgid "Invalid fpcalc executable"
+msgstr "錯誤的 fpcalc 執行檔"
+
+#: picard/ui/options/general.py:98
+#, python-format
+msgid "Logged in as <b>%s</b>."
+msgstr "登入為<b>%s</b>。"
+
+#: picard/ui/options/genres.py:36
+msgid ""
+"<html><head/><body>\n"
+"<p>Lines not starting with <b>-</b> or <b>+</b> are ignored.</p>\n"
+"<p>One expression per line, case-insensitive</p>\n"
+"<p>Examples:</p>\n"
+"<p><b>\n"
+"#comment<br/>\n"
+"!comment<br/>\n"
+"comment\n"
+"</b></p>\n"
+"<p><u>Strict filtering:</u></p>\n"
+"<p>\n"
+"<b>-word</b>: exclude <i>word</i><br/>\n"
+"<b>+word</b>: include <i>word</i>\n"
+"</p>\n"
+"<p><u>Wildcard filtering:</u></p>\n"
+"<p>\n"
+"<b>-*word</b>: exclude all genres ending with <i>word</i><br/>\n"
+"<b>+word*</b>: exclude all genres starting with <i>word</i><br/>\n"
+"<b>-w*rd</b>: exclude all genres starting with <i>w</i> and ending with <i>rd</i>\n"
+"</p>\n"
+"<p><u>Regular expressions filtering (Python re syntax):</u></p>\n"
+"<p><b>-/^w.rd+/</b>: exclude genres starting with <i>w</i> followed by any character, then <i>r</i> followed by at least one <i>d</i>\n"
+"</p>\n"
+"</body></html>"
+msgstr ""
+
+#: picard/ui/options/genres.py:61
+msgid ""
+"<html><head/><body>\n"
+"<p>You can add genres to test filters against, one per line.<br/>\n"
+"This playground will not be preserved on Options exit.\n"
+"</p>\n"
+"<p>\n"
+"Red background means the tag will be skipped<br/>\n"
+"Green background means the tag will be kept\n"
+"</p>\n"
+"</body></html>"
+msgstr ""
+
+#: picard/ui/options/genres.py:75
+msgid "Genres"
+msgstr "種類"
+
+#: picard/ui/options/genres.py:143
+#, python-format
+msgid "Error line %d: %s"
+msgstr ""
+
+#: picard/ui/options/interface.py:50
+msgid "User Interface"
+msgstr "使用者界面"
+
+#: picard/ui/options/interface.py:57
+msgid "Add Folder"
+msgstr "新增資料夾"
+
+#: picard/ui/options/interface.py:61
+msgid "Add Files"
+msgstr "新增檔案"
+
+#: picard/ui/options/interface.py:65
+msgid "Cluster"
+msgstr "叢集"
+
+#: picard/ui/options/interface.py:69
+msgid "Lookup"
+msgstr "查找"
+
+#: picard/ui/options/interface.py:73
+msgid "Scan"
+msgstr "掃描"
+
+#: picard/ui/options/interface.py:77
+msgid "Lookup in Browser"
+msgstr "以瀏覽器查找"
+
+#: picard/ui/options/interface.py:81
+msgid "Save"
+msgstr "儲存"
+
+#: picard/ui/options/interface.py:93
+msgid "Submit AcoustIDs"
+msgstr "提交 AcoustID"
+
+#: picard/ui/options/interface.py:97
+msgid "Open in Player"
+msgstr "以播放器開啟"
+
+#: picard/ui/options/interface.py:101
+msgid "Lookup CD..."
+msgstr "查找 CD…"
+
+#: picard/ui/options/interface.py:140
+msgid "System default"
+msgstr "系統預設"
+
+#: picard/ui/options/interface.py:197
+msgid "Language changed"
+msgstr "已更改語言"
+
+#: picard/ui/options/interface.py:198
+msgid ""
+"You have changed the interface language. You have to restart Picard in order"
+" for the change to take effect."
+msgstr "您更改了界面的語言。您必須重新執行 Picard 來使更改生效。"
+
+#: picard/ui/options/interface.py:222
+msgid "Drag and Drop to re-order"
+msgstr "透過拖拉來調整順序"
+
+#: picard/ui/options/interface_colors.py:57
+msgid "Choose a color"
+msgstr ""
+
+#: picard/ui/options/interface_colors.py:136
+msgid "Colors changed"
+msgstr ""
+
+#: picard/ui/options/interface_colors.py:137
+msgid ""
+"You have changed the interface colors. You may have to restart Picard in "
+"order for the changes to take effect."
+msgstr ""
+
+#: picard/ui/options/matching.py:32
+msgid "Matching"
+msgstr "配對"
+
+#: picard/ui/options/network.py:32
+msgid "Network"
+msgstr "網路"
+
+#: picard/ui/options/plugins.py:123
+msgid "Download and install plugin"
+msgstr "下載並安裝插件"
+
+#: picard/ui/options/plugins.py:131
+#, python-format
+msgid "Download and upgrade plugin to version %s"
+msgstr "下載並升級插件到版本%s"
+
+#: picard/ui/options/plugins.py:137
+msgid "Enabled"
+msgstr ""
+
+#: picard/ui/options/plugins.py:141
+msgid "Disabled"
+msgstr ""
+
+#: picard/ui/options/plugins.py:151
+msgid "Uninstall plugin"
+msgstr "移除插件"
+
+#: picard/ui/options/plugins.py:382
+msgid "Reloading list of available plugins..."
+msgstr ""
+
+#: picard/ui/options/plugins.py:390 picard/ui/options/plugins.py:399
+#: picard/ui/options/plugins.py:420
+#, python-format
+msgid "Plugin '%s'"
+msgstr "插件「%s」"
+
+#: picard/ui/options/plugins.py:391
+#, python-format
+msgid ""
+"An error occurred while loading the plugin '%s':\n"
+"\n"
+"%s"
+msgstr ""
+
+#: picard/ui/options/plugins.py:400
+#, python-format
+msgid "The plugin '%s' is not compatible with this version of Picard."
+msgstr "插件「%s」與 Picard 目前版本不相容。"
+
+#: picard/ui/options/plugins.py:421
+#, python-format
+msgid "The plugin '%s' will be upgraded to version %s on next run of Picard."
+msgstr "插件「%s」將會在 Picard 下次執行時升級到版本%s。"
+
+#: picard/ui/options/plugins.py:442
+#, python-format
+msgid "Uninstall plugin '%s'?"
+msgstr "移除插件「%s」？"
+
+#: picard/ui/options/plugins.py:443
+#, python-format
+msgid "Do you really want to uninstall the plugin '%s' ?"
+msgstr "您真的想要移除插件「%s」嗎？"
+
+#: picard/ui/options/plugins.py:572
+msgid "Restart Picard to upgrade to new version"
+msgstr "重新啟動 Picard 來更新到新版本"
+
+#: picard/ui/options/plugins.py:574
+msgid "New version available"
+msgstr "可安裝新版本"
+
+#: picard/ui/options/plugins.py:581
+msgid "Authors"
+msgstr "作者"
+
+#: picard/ui/options/plugins.py:583 picard/util/tags.py:44
+msgid "License"
+msgstr "授權"
+
+#: picard/ui/options/plugins.py:620
+#, python-format
+msgid "The plugin '%s' could not be downloaded."
+msgstr "插件「%s」無法下載。"
+
+#: picard/ui/options/plugins.py:621
+msgid "Please try again later."
+msgstr "請稍候再試。"
+
+#: picard/ui/options/ratings.py:32
+msgid "Ratings"
+msgstr "評分"
+
+#: picard/ui/options/releases.py:146
+msgid "Preferred Releases"
+msgstr "偏好的發行品"
+
+#: picard/ui/options/releases.py:182
+msgid "Reset all"
+msgstr "全部重設"
+
+#: picard/ui/options/renaming.py:64
+msgid "File Naming"
+msgstr "檔案命名"
+
+#: picard/ui/options/renaming.py:194 picard/ui/options/scripting.py:434
+msgid ""
+"<a href=\"%(picard-doc-scripting-url)s\">Open Scripting Documentation in "
+"your browser</a>"
+msgstr "<a href=\"%(picard-doc-scripting-url)s\">在瀏覽器中開啟腳本指南</a>"
+
+#: picard/ui/options/renaming.py:207
+msgid "The location to move files to must not be empty."
+msgstr "移動檔案的目的地不能空置"
+
+#: picard/ui/options/renaming.py:217
+msgid "The file naming format must not be empty."
+msgstr "檔案命名格式不能為空值。"
+
+#: picard/ui/options/scripting.py:140
+msgid "Move script up"
+msgstr "往上移動腳本"
+
+#: picard/ui/options/scripting.py:144
+msgid "Move script down"
+msgstr "往下移動腳本"
+
+#: picard/ui/options/scripting.py:152
+msgid "Other options"
+msgstr "其他選項"
+
+#: picard/ui/options/scripting.py:154
+msgid "Rename script"
+msgstr "重新命名腳本"
+
+#: picard/ui/options/scripting.py:155
+msgid "Remove script"
+msgstr "移除腳本"
+
+#: picard/ui/options/scripting.py:218
+msgid "Scripting"
+msgstr "腳本"
+
+#: picard/ui/options/scripting.py:317
+msgid "Are you sure you want to remove this script?"
+msgstr "您確定要移除此腳本嗎？"
+
+#: picard/ui/options/scripting.py:318
+msgid "Confirm Remove"
+msgstr "確認移除"
+
+#: picard/ui/options/scripting.py:402
+msgid "Script Error"
+msgstr "腳本錯誤"
+
+#: picard/ui/options/tags.py:40
+msgid "Tags"
+msgstr "標籤"
+
+#: picard/ui/searchdialog/__init__.py:124
+msgid ""
+"&#160;(<a href='https://musicbrainz.org/doc/Indexed_Search_Syntax'>Syntax "
+"Help</a>)"
+msgstr "&#160;（<a href='https://musicbrainz.org/doc/Indexed_Search_Syntax'>語法說明</a>）"
+
+#: picard/ui/searchdialog/__init__.py:264
+msgid "Search in browser"
+msgstr ""
+
+#: picard/ui/searchdialog/__init__.py:297
+msgid "<strong>Loading...</strong>"
+msgstr "<strong>載入中…</strong>"
+
+#: picard/ui/searchdialog/__init__.py:328
+msgid "Retry"
+msgstr "重試"
+
+#: picard/ui/searchdialog/__init__.py:363
+#, python-format
+msgid ""
+"<strong>Following error occurred while fetching "
+"results:<br><br></strong>Network request error for %s:<br>%s (QT code %d, "
+"HTTP code %s)<br>"
+msgstr "<strong>取得結果時發生已下錯誤：<br><br></strong>網路請求錯誤於%s：<br>%s（QT 代碼 %d，HTTP代碼 %s）<br>"
+
+#: picard/ui/searchdialog/__init__.py:374
+msgid ""
+"<strong>No results found. Please try a different search query.</strong>"
+msgstr "<strong>沒有找到結果。請嘗試不同的查詢。</strong>"
+
+#: picard/ui/searchdialog/album.py:145 picard/ui/searchdialog/track.py:56
+msgid "Load into Picard"
+msgstr "載入至Picard"
+
+#: picard/ui/searchdialog/album.py:148
+msgid "Album Search Results"
+msgstr "專輯搜尋結果"
+
+#: picard/ui/searchdialog/album.py:159 picard/util/tags.py:85
+msgid "Language"
+msgstr "語言"
+
+#: picard/ui/searchdialog/album.py:161
+msgid "Status"
+msgstr "狀態"
+
+#: picard/ui/searchdialog/album.py:163 picard/ui/searchdialog/artist.py:58
+#: picard/ui/searchdialog/track.py:68
+msgid "Score"
+msgstr "分數"
+
+#: picard/ui/searchdialog/artist.py:46
+msgid "Show in browser"
+msgstr "在瀏覽器中開啟"
+
+#: picard/ui/searchdialog/artist.py:48
+msgid "Artist Search Dialog"
+msgstr "創作者搜尋對話框"
+
+#: picard/ui/searchdialog/artist.py:52
+msgid "Gender"
+msgstr "性別"
+
+#: picard/ui/searchdialog/artist.py:53
+msgid "Area"
+msgstr "地區"
+
+#: picard/ui/searchdialog/artist.py:54
+msgid "Begin"
+msgstr "開始"
+
+#: picard/ui/searchdialog/artist.py:55
+msgid "Begin Area"
+msgstr "開始地區"
+
+#: picard/ui/searchdialog/artist.py:56
+msgid "End"
+msgstr "結束"
+
+#: picard/ui/searchdialog/artist.py:57
+msgid "End Area"
+msgstr "結束地區"
+
+#: picard/ui/searchdialog/track.py:59
+msgid "Track Search Results"
+msgstr "音軌搜尋結果"
+
+#: picard/ui/searchdialog/track.py:64
+msgid "Release"
+msgstr "發行品"
+
+#: picard/ui/searchdialog/track.py:175
+msgid "Standalone Recording"
+msgstr "獨立的錄音"
+
+#: picard/util/bytes2human.py:34
+#, python-format
+msgid "%s B"
+msgstr "%s B"
+
+#: picard/util/bytes2human.py:35
+#, python-format
+msgid "%s kB"
+msgstr "%s kB"
+
+#: picard/util/bytes2human.py:36
+#, python-format
+msgid "%s KiB"
+msgstr "%s KiB"
+
+#: picard/util/bytes2human.py:37
+#, python-format
+msgid "%s MB"
+msgstr "%s MB"
+
+#: picard/util/bytes2human.py:38
+#, python-format
+msgid "%s MiB"
+msgstr "%s MiB"
+
+#: picard/util/bytes2human.py:39
+#, python-format
+msgid "%s GB"
+msgstr "%s GB"
+
+#: picard/util/bytes2human.py:40
+#, python-format
+msgid "%s GiB"
+msgstr "%s GiB"
+
+#: picard/util/bytes2human.py:41
+#, python-format
+msgid "%s TB"
+msgstr "%s TB"
+
+#: picard/util/bytes2human.py:42
+#, python-format
+msgid "%s TiB"
+msgstr "%s TiB"
+
+#: picard/util/bytes2human.py:43
+#, python-format
+msgid "%s PB"
+msgstr "%s PB"
+
+#: picard/util/bytes2human.py:44
+#, python-format
+msgid "%s PiB"
+msgstr "%s PiB"
+
+#: picard/util/bytes2human.py:85
+#, python-format
+msgid "%s "
+msgstr "%s "
+
+#: picard/util/checkupdate.py:98
+msgid "Error loading Picard releases list: {error_message}"
+msgstr ""
+
+#: picard/util/checkupdate.py:102 picard/util/checkupdate.py:133
+#: picard/util/checkupdate.py:153
+msgid "Picard Update"
+msgstr "Picard 更新"
+
+#: picard/util/checkupdate.py:103
+msgid ""
+"Unable to retrieve the latest version information from the website.\n"
+"(https://{url}{endpoint})"
+msgstr ""
+
+#: picard/util/checkupdate.py:134
+msgid ""
+"A new version of Picard is available.\n"
+"\n"
+"This version: {picard_old_version}\n"
+"New version: {picard_new_version}\n"
+"\n"
+"Would you like to download the new version?"
+msgstr ""
+
+#: picard/util/checkupdate.py:150
+msgid "unknown"
+msgstr "未知"
+
+#: picard/util/checkupdate.py:154
+msgid ""
+"There is no update currently available for your subscribed update level: {update_level}\n"
+"\n"
+"Your version: {picard_old_version}\n"
+msgstr ""
+
+#: picard/util/tags.py:25
+msgid "Original Release Date"
+msgstr "原始發售日"
+
+#: picard/util/tags.py:26
+msgid "Original Year"
+msgstr "原本年份"
+
+#: picard/util/tags.py:27
+msgid "Album Artist"
+msgstr "專輯創作者"
+
+#: picard/util/tags.py:28
+msgid "Track Number"
+msgstr "音軌編號"
+
+#: picard/util/tags.py:29
+msgid "Total Tracks"
+msgstr "總音軌數"
+
+#: picard/util/tags.py:30
+msgid "Disc Number"
+msgstr "唱片編號"
+
+#: picard/util/tags.py:31
+msgid "Total Discs"
+msgstr "總唱片數"
+
+#: picard/util/tags.py:32
+msgid "Album Artist Sort Order"
+msgstr "專輯創作者排序方式"
+
+#: picard/util/tags.py:33
+msgid "Artist Sort Order"
+msgstr "創作者排序方式"
+
+#: picard/util/tags.py:34
+msgid "Title Sort Order"
+msgstr "標題排序方式"
+
+#: picard/util/tags.py:35
+msgid "Album Sort Order"
+msgstr "專輯排序方式"
+
+#: picard/util/tags.py:36
+msgid "Composer Sort Order"
+msgstr "作曲者排序方式"
+
+#: picard/util/tags.py:37
+msgid "ASIN"
+msgstr "亞馬遜標準識別號碼"
+
+#: picard/util/tags.py:38
+msgid "Grouping"
+msgstr "群組"
+
+#: picard/util/tags.py:39
+msgid "ISRC"
+msgstr "ISRC"
+
+#: picard/util/tags.py:40
+msgid "Mood"
+msgstr "心情"
+
+#: picard/util/tags.py:41
+msgid "BPM"
+msgstr "BPM"
+
+#: picard/util/tags.py:42
+msgid "Key"
+msgstr "調"
+
+#: picard/util/tags.py:43
+msgid "Copyright"
+msgstr "著作權"
+
+#: picard/util/tags.py:45
+msgid "Composer"
+msgstr "作曲"
+
+#: picard/util/tags.py:46
+msgid "Writer"
+msgstr "作者"
+
+#: picard/util/tags.py:47
+msgid "Conductor"
+msgstr "指揮"
+
+#: picard/util/tags.py:48
+msgid "Lyricist"
+msgstr "作詞"
+
+#: picard/util/tags.py:49
+msgid "Arranger"
+msgstr "編曲"
+
+#: picard/util/tags.py:50
+msgid "Producer"
+msgstr "製作"
+
+#: picard/util/tags.py:51
+msgid "Engineer"
+msgstr "工程師"
+
+#: picard/util/tags.py:52
+msgid "Subtitle"
+msgstr "標題"
+
+#: picard/util/tags.py:53
+msgid "Disc Subtitle"
+msgstr "唱片標題"
+
+#: picard/util/tags.py:54
+msgid "Remixer"
+msgstr "重混音"
+
+#: picard/util/tags.py:55
+msgid "MusicBrainz Recording Id"
+msgstr "MusicBrainz 錄音代號"
+
+#: picard/util/tags.py:56
+msgid "MusicBrainz Track Id"
+msgstr "MusicBrainz 音軌代號"
+
+#: picard/util/tags.py:57
+msgid "MusicBrainz Release Id"
+msgstr "MusicBrainz 發行品代號"
+
+#: picard/util/tags.py:58
+msgid "MusicBrainz Artist Id"
+msgstr "MusicBrainz 創作者代號"
+
+#: picard/util/tags.py:59
+msgid "MusicBrainz Release Artist Id"
+msgstr "MusicBrainz 發行品創作者代號"
+
+#: picard/util/tags.py:60
+msgid "MusicBrainz Work Id"
+msgstr "MusicBrainz 作品代號"
+
+#: picard/util/tags.py:61
+msgid "MusicBrainz Release Group Id"
+msgstr "MusicBrainz 發行組代號"
+
+#: picard/util/tags.py:62
+msgid "MusicBrainz Disc Id"
+msgstr "MusicBrainz 光碟代號"
+
+#: picard/util/tags.py:63
+msgid "MusicIP PUID"
+msgstr "MusicIP PUID"
+
+#: picard/util/tags.py:64
+msgid "MusicIP Fingerprint"
+msgstr "MusicIP 特徵碼"
+
+#: picard/util/tags.py:65
+msgid "AcoustID"
+msgstr "AcoustID"
+
+#: picard/util/tags.py:66
+msgid "AcoustID Fingerprint"
+msgstr "AcoustID 特徵碼"
+
+#: picard/util/tags.py:67
+msgid "Disc Id"
+msgstr "光碟代號"
+
+#: picard/util/tags.py:68
+msgid "Artist Website"
+msgstr "創作者的網站"
+
+#: picard/util/tags.py:69
+msgid "Compilation (iTunes)"
+msgstr "合輯 (iTunes)"
+
+#: picard/util/tags.py:70
+msgid "Comment"
+msgstr "註記"
+
+#: picard/util/tags.py:71
+msgid "Genre"
+msgstr "類型"
+
+#: picard/util/tags.py:72
+msgid "Encoded By"
+msgstr "編碼器"
+
+#: picard/util/tags.py:73
+msgid "Encoder Settings"
+msgstr "編碼設定"
+
+#: picard/util/tags.py:74
+msgid "Performer"
+msgstr "演奏者"
+
+#: picard/util/tags.py:75
+msgid "Release Type"
+msgstr "發行品類型"
+
+#: picard/util/tags.py:76
+msgid "Release Status"
+msgstr "發行品狀態"
+
+#: picard/util/tags.py:77
+msgid "Release Country"
+msgstr "發售國家"
+
+#: picard/util/tags.py:78
+msgid "Record Label"
+msgstr "商標"
+
+#: picard/util/tags.py:80
+msgid "Catalog Number"
+msgstr "型錄編號"
+
+#: picard/util/tags.py:81
+msgid "DJ-Mixer"
+msgstr "DJ 混音"
+
+#: picard/util/tags.py:82
+msgid "Media"
+msgstr "媒體"
+
+#: picard/util/tags.py:83
+msgid "Lyrics"
+msgstr "歌詞"
+
+#: picard/util/tags.py:84
+msgid "Mixer"
+msgstr "混音"
+
+#: picard/util/tags.py:86
+msgid "Script"
+msgstr "文字系統"
+
+#: picard/util/tags.py:88
+msgid "Rating"
+msgstr "評分"
+
+#: picard/util/tags.py:89
+msgid "Artists"
+msgstr "創作者"
+
+#: picard/util/tags.py:90
+msgid "Work"
+msgstr "作品"
+
+#: picard/util/tags.py:91
+msgid "Movement"
+msgstr ""
+
+#: picard/util/tags.py:92
+msgid "Movement Number"
+msgstr ""
+
+#: picard/util/tags.py:93
+msgid "Movement Count"
+msgstr ""
+
+#: picard/util/tags.py:94
+msgid "Show Work & Movement"
+msgstr ""
+
+#: picard/util/tags.py:95
+msgid "Original Artist"
+msgstr "原始創作者"
+
+#: picard/util/tags.py:96
+msgid "MusicBrainz Original Artist Id"
+msgstr "MusicBrainz 原始創作者代號"
+
+#: picard/util/tags.py:97
+msgid "Original Album"
+msgstr "原始專輯"
+
+#: picard/util/tags.py:98
+msgid "MusicBrainz Original Release Id"
+msgstr "MusicBrainz 原始發行品代號"
+
+#: picard/util/tags.py:99
+msgid "ReplayGain Album Gain"
+msgstr ""
+
+#: picard/util/tags.py:100
+msgid "ReplayGain Album Peak"
+msgstr ""
+
+#: picard/util/tags.py:101
+msgid "ReplayGain Album Range"
+msgstr ""
+
+#: picard/util/tags.py:102
+msgid "ReplayGain Track Gain"
+msgstr ""
+
+#: picard/util/tags.py:103
+msgid "ReplayGain Track Peak"
+msgstr ""
+
+#: picard/util/tags.py:104
+msgid "ReplayGain Track Range"
+msgstr ""
+
+#: picard/util/tags.py:105
+msgid "ReplayGain Reference Loudness"
+msgstr ""
+
+#: picard/util/tags.py:106
+msgid "R128 Album Gain"
+msgstr ""
+
+#: picard/util/tags.py:107
+msgid "R128 Track Gain"
+msgstr ""
+
+#: picard/util/versions.py:62
+msgid "is not installed"
+msgstr "沒有安裝"
+
+#: picard/util/webbrowser2.py:38
+msgid "Web Browser Error"
+msgstr "網頁瀏覽器錯誤"
+
+#: picard/util/webbrowser2.py:38
+#, python-format
+msgid ""
+"Error while launching a web browser:\n"
+"\n"
+"%s"
+msgstr "啟動網頁瀏覽時發生錯誤：\n\n%s"
