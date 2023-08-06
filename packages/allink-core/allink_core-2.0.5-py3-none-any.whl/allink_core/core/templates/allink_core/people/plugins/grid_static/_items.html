@@ -1,0 +1,41 @@
+{% load cms_tags allink_cms_tags sekizai_tags i18n thumbnail allink_image_tags allink_link_tags %}
+
+{% for object in object_list %}
+
+    <div class="grid-item {% if appended %}appended{% endif %}">
+        <div class="manage-spacings">
+            {% if object.preview_image %}
+                <div class="image-container">
+                    {% if  instance.detail_link_enabled %}
+                        <a href="{% get_absolute_url object instance.apphook_page.application_namespace %}">
+                    {% endif %}
+                        {% render_image image=object.preview_image %}
+                    {% if  instance.detail_link_enabled %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if object.title %}
+                <div class="heading-container">
+                    <h3 class="heading">
+                        {% render_model_ajax object "title" %}
+                    </h3>
+                </div>
+            {% endif %}
+            <div class="text-container">
+                <p>
+                    {% if object.units %}
+                        {{ object.units }}<br>
+                    {% endif %}
+                    {% if object.email %}
+                        <a class="text" href="mailto:{{object.email}}" data-softpage-disabled>{% trans "E-Mail" %}</a><br>
+                    {% endif %}
+                    {% if object.phone %}
+                        <a href="tel:{{object.phone}}" data-softpage-disabled>{{object.phone}}</a><br>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}

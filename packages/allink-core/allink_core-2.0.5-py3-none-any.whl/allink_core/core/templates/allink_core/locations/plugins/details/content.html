@@ -1,0 +1,66 @@
+{% load cms_tags allink_cms_tags sekizai_tags i18n thumbnail allink_image_tags %}
+
+{% for object in object_list %}
+
+    <div class="locations-plugin details-container {{ instance.css_classes }}">
+
+        <div class="details__col-container">
+            <div class="details__col details__col-1 contact-container">
+
+                <h2 class="heading">{% trans 'Contact' %}</h2>
+
+                <div class="text-container">
+                    {% if object.title %}
+                        <p class="footer-container__heading">{% render_model_ajax object "title" %}</p>
+                    {% endif %}
+                    <p>
+                        {% if object.subtitle %}
+                            {{object.subtitle}}<br>
+                        {% endif %}
+                        {% if object.street %}
+                            {{object.street}} {{object.street_nr}}<br>
+                        {% endif %}
+                        {% if object.zip_code or object.place %}
+                            {{object.zip_code}} {{object.place}}<br>
+                        {% endif %}
+                        {% if object.map_link %}
+                            {% trans "Directions" as link_label %}
+                            {% include "partials/buttons/link.html" with link_url=object.map_link link_label=link_label link_classes="btn btn-default" link_attributes='target="_blank" rel="noopener' %}
+                        {% endif %}
+                    </p>
+
+                    <p>
+                        {% if object.email %}
+                            <a class="text" href="mailto:{{object.email}}">{{object.email}}</a><br>
+                        {% endif %}
+                        {% if object.phone %}
+                            <a class="text" href="tel:{{object.phone}}">{{object.phone_formatted}}</a><br>
+                        {% endif %}
+                        {% if object.mobile %}
+                            <a class="text" href="tel:{{object.mobile}}">{{object.mobile_formatted}}</a><br>
+                        {% endif %}
+                        {% if object.fax %}
+                            <a class="text" href="tel:{{object.fax}}">{{object.fax_formatted}}</a><br>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="details__col details__col-2 openinghours-container">
+
+                <h2 class="heading">{% trans 'Opening hours' %}</h2>
+
+                <div class="timeslot-list">
+                    {% for day in object.opening_hours %}
+                        <div class="timeslot-list__entry">
+                                <div class="days">{{ day.start_day }}{% if day.start_day != day.end_day %} – {{ day.end_day }}{% endif %}</div>
+                                <div class="hours">{{ day.time }} {% trans 'h' %}</div>
+                        </div>
+                    {% endfor %}
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endfor %}
