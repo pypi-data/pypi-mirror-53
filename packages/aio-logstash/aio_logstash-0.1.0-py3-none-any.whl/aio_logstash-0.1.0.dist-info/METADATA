@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: aio-logstash
+Version: 0.1.0
+Summary: Python AsyncIO Logstash Logger
+Home-page: https://github.com/SinaKhorami/aio-logstash
+License: UNKNOWN
+Keywords: asyncio logstash logger
+Author: Sina Khorami
+Author-email: sinakhorami94@gmail.com
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+
+# aio-logstash
+python asyncio logstash logger adapter
+
+## Installation
+------------
+```Shell
+pip install aio-logstash
+```
+## Usage
+-----
+```python
+import logging
+import asyncio
+from aio_logstash.handler import TCPHandler
+
+async def main():
+    handler = TCPHandler()
+    await handler.connect('127.0.0.1', 5000)
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    logger.addHandler(handler)
+
+    logger.info('test', extra={'foo': 'bar'})
+
+    await handler.exit()
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+```
