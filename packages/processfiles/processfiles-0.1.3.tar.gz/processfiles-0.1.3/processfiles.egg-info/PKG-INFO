@@ -1,0 +1,22 @@
+Metadata-Version: 1.2
+Name: processfiles
+Version: 0.1.3
+Summary: Python local file process tracker
+Home-page: https://github.com/whoopnip/py-process-files/
+Author: Nick DeRobertis
+Author-email: whoopnip@gmail.com
+License: MIT
+Project-URL: Code, https://github.com/whoopnip/py-process-files/
+Project-URL: Documentation, https://whoopnip.github.io/py-process-files/
+Description: 
+        Use this tool to select files of given file types in a folder, and track whether these files have been processed,
+        regardless of whether the script needs to be run multiple times. Stores progress on the files as a text file in the
+        same folder, so that a long-running operation on many files can be resumed where it left off if it was stopped.
+        It will also automatically estimate time to completion.
+        See more at the repo page: https://github.com/whoopnip/py-process-files
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
