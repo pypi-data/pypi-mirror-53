@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: semvergen
+Version: 0.1.6
+Summary: Semver Generator from Git tags
+Home-page: https://github.com/bradj/semvergen
+Author: Brad Janke
+Author-email: brad.janke@gmail.com
+License: UNKNOWN
+Keywords: semver,generator
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Code Generators
+Requires-Dist: click (==7.0)
+
+# semvergen
+Generates a valid semver version derived from latest git tag
+
+[![semvergen status](https://github.com/bradj/semvergen/workflows/CI/badge.svg)](https://github.com/bradj/semvergen/actions)
+
+
