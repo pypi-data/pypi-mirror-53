@@ -1,0 +1,22 @@
+FROM jrmsdev/sadm:test
+
+LABEL maintainer="Jeremías Casteglione <jrmsdev@gmail.com>"
+LABEL version="19.08.14"
+
+ARG SADM_UID
+ARG SADM_GID
+
+USER root:root
+WORKDIR /root
+
+COPY --chown=sadm:sadm venv/requirements-dev.txt /tmp
+RUN sudo -u sadm pip3 install --system -r /tmp/requirements-dev.txt
+
+RUN rm -rf /root/.cache/pip
+RUN rm -rf /home/sadm/.cache/pip
+RUN rm -f /tmp/requirements-dev.txt
+
+USER sadm:sadm
+WORKDIR /opt/src/sadm
+
+CMD /bin/bash -i -l

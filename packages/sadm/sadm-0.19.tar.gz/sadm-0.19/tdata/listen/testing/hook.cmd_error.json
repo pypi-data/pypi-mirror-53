@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["testing", "testing", "push"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 500,
+		"match": "mock error code 1"
+	}
+}

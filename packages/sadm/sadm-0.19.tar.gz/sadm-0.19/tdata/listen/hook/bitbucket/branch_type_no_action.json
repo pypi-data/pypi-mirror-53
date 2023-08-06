@@ -1,0 +1,25 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "testing", "push"]
+	},
+	"headers": {},
+	"data": {
+		"push": {
+			"changes": [{
+				"new": {
+					"type": "tag",
+					"name": "master",
+					"target": {
+						"type": "commit",
+						"hash": "abc1234"
+					}
+				}
+			}]
+		}
+	},
+	"response.error": {
+		"status": 304,
+		"match": "no action: change type tag"
+	}
+}

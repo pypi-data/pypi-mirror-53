@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "_exec",
+		"args": ["testing", "testing.error"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 500,
+		"match": "_exec task testing.error"
+	}
+}

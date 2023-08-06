@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "test_auth_user_uuid", "push"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 403,
+		"match": "forbidden: no user uuid"
+	}
+}

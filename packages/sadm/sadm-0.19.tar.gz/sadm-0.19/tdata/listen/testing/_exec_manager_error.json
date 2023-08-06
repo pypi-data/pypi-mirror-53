@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "_exec",
+		"args": ["nomanager", "testing"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 500,
+		"match": "nomanager: no manager"
+	}
+}

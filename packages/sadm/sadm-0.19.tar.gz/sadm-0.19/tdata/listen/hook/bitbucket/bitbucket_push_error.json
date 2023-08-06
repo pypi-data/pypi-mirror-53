@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "testing", "push"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 403,
+		"match": "forbidden: args 'push'"
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "testing", "push"]
+	},
+	"headers": {},
+	"data": {
+		"push": {
+			"changes": [{
+				"new": {
+					"type": "branch",
+					"name": "master",
+					"target": {
+						"type": "commit",
+						"hash": ""
+					}
+				}
+			}]
+		}
+	},
+	"response.error": {
+		"status": 403,
+		"match": "forbidden: target hash is empty"
+	}
+}

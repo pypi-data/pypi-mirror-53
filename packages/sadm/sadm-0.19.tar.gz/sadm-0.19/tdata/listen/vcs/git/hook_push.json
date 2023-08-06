@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "_exec",
+		"args": ["webhook.repo.git", "push"]
+	},
+	"headers": {},
+	"data": {
+		"repo.path": "/usr/src/testing",
+		"repo.checkout": "abc1234"
+	},
+	"response": "OK"
+}

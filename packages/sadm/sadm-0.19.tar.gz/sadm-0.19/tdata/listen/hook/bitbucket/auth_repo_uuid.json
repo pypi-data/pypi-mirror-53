@@ -1,0 +1,26 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "test_auth_uuid", "push"]
+	},
+	"headers": {},
+	"data": {
+		"repository": {
+			"name": "test_auth_uuid",
+			"uuid": "12345678"
+		},
+		"push": {
+			"changes": [{
+				"new": {
+					"type": "branch",
+					"name": "master",
+					"target": {
+						"type": "commit",
+						"hash": "abc1234"
+					}
+				}
+			}]
+		}
+	},
+	"response": "OK"
+}

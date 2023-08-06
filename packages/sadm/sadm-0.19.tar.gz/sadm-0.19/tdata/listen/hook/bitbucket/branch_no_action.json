@@ -1,0 +1,25 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "testing", "push"]
+	},
+	"headers": {},
+	"data": {
+		"push": {
+			"changes": [{
+				"new": {
+					"type": "branch",
+					"name": "other_branch",
+					"target": {
+						"type": "commit",
+						"hash": "abc1234"
+					}
+				}
+			}]
+		}
+	},
+	"response.error": {
+		"status": 304,
+		"match": "no action: branch other_branch"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["testing", "testing.proverr", "push"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 400,
+		"match": "invalid provider: proverr"
+	}
+}

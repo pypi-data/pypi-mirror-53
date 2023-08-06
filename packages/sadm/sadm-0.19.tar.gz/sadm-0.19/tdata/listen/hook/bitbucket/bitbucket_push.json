@@ -1,0 +1,21 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["bitbucket", "testing", "push"]
+	},
+	"headers": {},
+	"data": {
+		"push": {
+			"changes": [{
+				"new": {
+					"type": "branch",
+					"name": "master",
+					"target": {
+						"type": "commit",
+						"hash": "abc1234"
+					}
+				}
+			}]
+		}
+	}
+}

@@ -1,0 +1,38 @@
+sudo: false
+language: python
+
+os: linux
+dist: bionic
+
+git:
+  depth: 3
+  submodules: false
+
+branches:
+  only:
+    - master
+    - next
+
+python:
+  - "3.6"
+  - "3.7"
+  - "nightly"
+
+matrix:
+  fast_finish: true
+
+cache: pip
+
+install:
+  - test -z "${CODECOV_TOKEN}" || pip install --upgrade codecov
+  - pip install --upgrade -r venv/requirements-test.txt
+  - pip install --upgrade -r requirements.txt
+  - pip install --upgrade .
+  - sadm --version
+
+script:
+  - ./check.sh
+
+after_success:
+  - test -z "${CODECOV_TOKEN}" || ./coverage.sh
+  - test -z "${CODECOV_TOKEN}" || codecov

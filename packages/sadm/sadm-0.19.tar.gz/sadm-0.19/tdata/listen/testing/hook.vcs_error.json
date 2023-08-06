@@ -1,0 +1,12 @@
+{
+	"handler": {
+		"name": "hook.repo",
+		"args": ["testing", "vcs.error", "push"]
+	},
+	"headers": {},
+	"data": {},
+	"response.error": {
+		"status": 400,
+		"match": "invalid vcs: vcserr"
+	}
+}
