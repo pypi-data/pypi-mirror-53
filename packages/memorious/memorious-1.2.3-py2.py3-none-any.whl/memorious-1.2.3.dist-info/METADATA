@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: memorious
+Version: 1.2.3
+Summary: A minimalistic, recursive web crawling library for Python.
+Home-page: http://github.com/alephdata/memorious
+Author: Journalism Development Network
+Author-email: data@occrp.org
+License: MIT
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Requires-Dist: banal (>=0.4.2)
+Requires-Dist: click
+Requires-Dist: requests[security] (>=2.21.0)
+Requires-Dist: requests-ftp
+Requires-Dist: lxml (>=3)
+Requires-Dist: PyYAML (>=3.10)
+Requires-Dist: normality (>=1.0.0)
+Requires-Dist: tabulate
+Requires-Dist: dataset (>=1.0.8)
+Requires-Dist: servicelayer[amazon,google] (==1.8.4)
+Requires-Dist: urlnormalizer (==1.2.3)
+Requires-Dist: pantomime (==0.3.3)
+Requires-Dist: dateparser
+Requires-Dist: stringcase
+Requires-Dist: redis (==3.2.1)
+Requires-Dist: flask
+Requires-Dist: babel
+Provides-Extra: dev
+Requires-Dist: pytest ; extra == 'dev'
+Requires-Dist: pytest-env ; extra == 'dev'
+Requires-Dist: pytest-cov ; extra == 'dev'
+Requires-Dist: pytest-mock ; extra == 'dev'
+Provides-Extra: ocr
+Requires-Dist: tesserocr ; extra == 'ocr'
+
+UNKNOWN
+
+
