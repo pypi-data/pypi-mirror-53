@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: spamwatch
+Version: 0.1.1
+Summary: SpamWatch API Wrapper
+Home-page: https://github.com/SpamWatch/spamwatch-py
+Author: Simon Schürrle
+Author-email: simon@spamwat.ch
+License: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Description: # SpamWatch API Python Wrapper
+        # Basic Usage
+        ```python
+        import spamwatch
+        token = 'A_LONG_TOKEN_HERE'
+        client = spamwatch.Client(token)
+        ban = client.get_ban(777000)
+        print(ban.reason)
+        ```
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Typing :: Typed
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
