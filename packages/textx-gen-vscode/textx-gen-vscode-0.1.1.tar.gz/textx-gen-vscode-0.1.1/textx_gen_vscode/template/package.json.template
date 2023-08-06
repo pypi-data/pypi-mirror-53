@@ -1,0 +1,46 @@
+{
+  "name": "{{project_name.replace('_', '-')|lower}}",
+  "description": "{{description}}",
+  "version": "{{version}}",
+  "publisher": "{{publisher}}",
+  "repository": "{{repository}}",
+  "engines": {
+    "vscode": "^1.32.3"
+  },
+  "activationEvents": [
+	{% for lang in languages %}
+		"onLanguage:{{lang.name|lower}}"
+		{%- if loop.index != languages|length %},{% endif %}
+    {% endfor %}
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+		{% for lang in languages %}
+			{
+        "id": "{{lang.name|lower}}",
+        "extensions": [
+          "{{lang.pattern.split('.')[-1]}}"
+        ]
+      }
+		{%- if loop.index != languages|length -%},{%- endif %}
+  	{% endfor %}
+    ],
+    "grammars": [
+		{% for lang in languages %}
+			{
+        "language": "{{lang.name|lower}}",
+        "scopeName": "source.{{lang.name|lower}}",
+        "path": "syntaxes/{{lang.name|lower}}.json"
+      }
+		{%- if loop.index != languages|length -%},{%- endif %}
+  	{% endfor %}
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "vscode": "^1.1.33"
+  }
+}
