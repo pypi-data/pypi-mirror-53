@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: twerk
+Version: 0.0.1
+Summary: Make Twitter work for humans by blocking fake accounts.
+Home-page: https://pypi.org/project/twerk
+License: MIT
+Author: Jace Browning
+Author-email: jacebrowning@gmail.com
+Requires-Python: >=3.7,<4.0
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Jupyter
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Communications
+Classifier: Typing :: Typed
+Requires-Dist: bullet (>=2.1.0,<3.0.0)
+Requires-Dist: click (>=7.0,<8.0)
+Requires-Dist: datafiles (>=0.5,<0.6)
+Requires-Dist: ipdb (>=0.12.2,<0.13.0)
+Requires-Dist: minilog (>=1.2.4,<2.0.0)
+Requires-Dist: splinter (>=0.11.0,<0.12.0)
+Requires-Dist: webdriver_manager (>=1.8.2,<2.0.0)
+Project-URL: Documentation, https://twerk.readthedocs.io
+Project-URL: Repository, https://github.com/jacebrowning/twerk
+Description-Content-Type: text/markdown
+
+# Twerk
+
+This is a Selenium-powered tool to browse Twitter and automatically block fake accounts.
+
+This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
+
+[![Unix Build Status](https://img.shields.io/travis/jacebrowning/twerk/master.svg?label=unix)](https://travis-ci.org/jacebrowning/twerk)
+[![Windows Build Status](https://img.shields.io/appveyor/ci/jacebrowning/twerk/master.svg?label=window)](https://ci.appveyor.com/project/jacebrowning/twerk)
+[![Coverage Status](https://img.shields.io/coveralls/jacebrowning/twerk/master.svg)](https://coveralls.io/r/jacebrowning/twerk)
+[![PyPI Version](https://img.shields.io/pypi/v/twerk.svg)](https://pypi.org/project/twerk)
+[![PyPI License](https://img.shields.io/pypi/l/twerk.svg)](https://pypi.org/project/twerk)
+
+# Setup
+
+## Requirements
+
+* Python 3.7+
+* Poetry
+
+# Usage
+
+To run this program from source:
+
+```text
+$ git clone https://github.com/jacebrowning/twerk
+$ cd twerk
+$ poetry install
+$ poetry run twerk
+```
+
+# Configuration
+
+The `$TWITTER_USERNAME` and `$TWITTER_PASSWORD` environment variables can be set to avoid manually typing account credentials.
+
+The `$TWITTER_SEED_USERNAME` can be set to override the default starting account when searching for fake accounts.
+
+---
+
+> **Disclaimer**: I am by no means responsible for any usage of this tool. Please consult the [full license](https://github.com/jacebrowning/twerk/blob/master/LICENSE.md) for details.
+
