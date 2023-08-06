@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "pyuscf"
+version = "0.2.1"
+description = "USCF Member Service Area (MSA) for Python"
+license = "GPL-2.0"
+authors = ["Juan Antonio Sauceda <jasgordo@gmail.com>"]
+readme = "README.md"
+homepage = "https://gitlab.com/skibur/pyuscf"
+repository = "https://gitlab.com/skibur/pyuscf"
+documentation = "https://gitlab.com/skibur/pyuscf"
+keywords = [
+    "uscf",
+    "msa",
+    "chess",
+    "rating"
+]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License (GPL)",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Operating System :: OS Independent",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+bs4 = "^0.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

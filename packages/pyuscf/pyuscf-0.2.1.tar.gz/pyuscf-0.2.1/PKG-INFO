@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: pyuscf
+Version: 0.2.1
+Summary: USCF Member Service Area (MSA) for Python
+Home-page: https://gitlab.com/skibur/pyuscf
+License: GPL-2.0
+Keywords: uscf,msa,chess,rating
+Author: Juan Antonio Sauceda
+Author-email: jasgordo@gmail.com
+Requires-Python: >=3.6,<4.0
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: bs4 (>=0.0.1,<0.0.2)
+Project-URL: Documentation, https://gitlab.com/skibur/pyuscf
+Project-URL: Repository, https://gitlab.com/skibur/pyuscf
+Description-Content-Type: text/markdown
+
+# pyuscf: USCF Member Service Area (MSA) for Python
+
+The United States Chess Federation (USCF) website for publicly available
+chess member information. The package is nothing more than a client, but there
+are some limitations on searching for chess members' information.
+
+Visit www.uschess.org for further information on the limitations.
+
+## Usage
+
+```python
+>>> from pyuscf import Msa
+>>> player = Msa(12743305)
+>>> player.get_name()
+'FABIANO CARUANA'
+>>> player.get_regular_rating()
+'2895* 2019-08-01'
+>>> player.get_fide_rating()
+'2818 2019-08-01'
+>>>
+```
