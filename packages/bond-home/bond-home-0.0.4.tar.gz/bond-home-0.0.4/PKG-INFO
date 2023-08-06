@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: bond-home
+Version: 0.0.4
+Summary: Python library for controlling BOND Home Hub
+Home-page: http://github.com/nguyer/bond-home
+Author: Nicko Guyer
+Author-email: nguyer@gmail.com
+License: MIT
+Description: # Bond Home Library for Python
+        
+        _A Python library for interacting with the Local API of a Bond Home Hub_
+        https://bondhome.io/
+        
+        Local API Docs: http://docs-local.appbond.com/
+        
+        ## Installation
+        
+            $ pip3 install bond-home
+        
+        ## Usage
+        
+        ```python
+        from bond import Bond
+        import time
+        
+        bond = Bond(bondIp='192.168.1.100', bondToken='abcdefghijklmnop')
+        
+        bond.toggleLight('5842137d')
+        time.sleep(2)
+        bond.toggleLight('5842137d')
+        ```
+        
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
