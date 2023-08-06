@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: mass-ping
+Version: 1
+Summary: A threaded ICMP ping using /bin/ping, ping.exe.
+Home-page: https://github.com/YUChoe/mass_ping
+Author: Tom YU Choe
+Author-email: yonguk.choe@gmail.com
+License: MIT
+Description: # Mass Ping
+        
+        A multi-threaded ICMP ping using /bin/ping, ping.exe.
+        
+        ## Features
+        * You can get a quick result.
+        * It detects ping flapping.
+        * You don't need root privilege to send a ping.
+        * It has no dependency as using only python standard library.
+        
+        
+        ## Installation
+        Run the folowing to install:
+        
+        ```shell
+        pip install mass-ping
+        ```
+        
+        ## Usage
+        
+        ```python
+        >>> from mass_ping import MassPing
+        >>> hosts = ['8.8.8.8', '8.8.4.4', 'yahoo.com', 'ns.speedvpn.net', 'noizze.net']
+        >>> ping = MassPing(hosts=hosts, thread_count=len(hosts), test_count=2)  # test_count=2 means when ping fails retry 1 more time
+        >>> result = ping.start()
+        >>> from pprint import pprint
+        >>> pprint(result)
+        {'alive': ['8.8.4.4', '8.8.8.8', 'noizze.net', 'ns.speedvpn.net', 'yahoo.com'],
+         'dead': [],
+         'flapping': []}
+        ```
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: System Administrators
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Description-Content-Type: text/markdown
