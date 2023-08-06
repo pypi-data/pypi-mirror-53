@@ -1,0 +1,45 @@
+Metadata-Version: 2.0
+Name: Babel-Godot
+Version: 0.1
+Summary: Plugin for Babel to support Godot scene files (.tscn)
+Home-page: https://github.com/remram44/pybabel-godot
+Author: Remi Rampin
+Author-email: remirampin@gmail.com
+License: BSD
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
+
+Babel Godot plugin
+==================
+
+This is a plugin for `Babel <http://babel.pocoo.org/>`_, the internationalization library, that adds support for scene files from the `Godot game engine <https://godotengine.org/>`_.
+
+Using a mapping file like this::
+
+    [python: **.gd]
+    encoding = utf-8
+    extract_messages = tr
+
+    [godot_scene: **.tscn]
+    encoding = utf-8
+
+you can extract messages to be translated from both your ``.gd`` and ``.tscn`` files using::
+
+    pybabel extract -F babel_mapping_file -k Label/text -k tr -o translations.pot .
+
+You can then create ``.po`` files from the POT catalog using `Poedit <https://poedit.net/>`_, or online services  such as `Crowdin <https://crowdin.com/>`_, `Transifex <https://www.transifex.com/>`_, or `Weblate <https://weblate.org/>`_.
+
+
