@@ -1,0 +1,4 @@
+#!/bin/sh
+/usr/bin/dockerd --log-level fatal
+echo "...was already"
+exit 0
