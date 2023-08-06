@@ -1,0 +1,83 @@
+Changelog
+=========
+
+1.2 (2019-10-09)
+----------------
+
+- Updated to Facebook API 4.0
+  [sarn0ld]
+
+1.1 (2017-05-10)
+----------------
+
+- Facebook Login with JavaScript SDK v2.1
+  [petschki]
+- add Facebook Login Viewlet
+  [petschki]
+- disable old style portal_action by default. code is still there (see documentation)
+  [petschki]
+- Fix access_token processing
+- Remove Welcome message
+
+1.1b1 (2014-10-22)
+------------------
+
+- Remove dependency on collective.beaker. Optional Beaker support is available
+  with https://pypi.python.org/pypi/Products.BeakerSessionDataManager
+  since we use Zope's session_data_manager
+  [petschki]
+
+1.0.3 (2014-10-21)
+------------------
+
+- Add german translation
+  [petschki]
+
+- Encoding unicode user credentials.
+  see http://goo.gl/63Kyuo for more info
+  [petschki]
+
+
+1.0.2 (2014-10-10)
+------------------
+
+- Fix dependencies includes
+  [erral]
+
+1.0.1 (2014-10-10)
+------------------
+
+- Fix docs
+  [erral]
+
+1.0 (2014-10-10)
+----------------
+
+- Fix user search
+  [erral]
+
+- Fix to be able to add the plugin through the ZMI
+  [erral]
+
+
+1.0b2 (2012-10-16)
+------------------
+
+- FaceBook users are now PloneUsers
+  [erral]
+
+- Implement user search in storage
+  [erral]
+
+- Get properties from self data storage instead of relying on Session
+  [erral]
+
+- Change user action name not to clash with Plone's login
+  [erral]
+
+
+1.0b1 (2012-07-13)
+------------------
+
+- Initial release
+  [erral]
