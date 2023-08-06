@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "lcg-neuro-v2-dataset-orm"
+version = "0.3.0"
+description = "High resolution recordings in primate secondary visual cortex"
+authors = ["Pedro Asad <pasad@lcg.ufrj.br>"]
+repository = "https://gitlab.com/lcg/neuro/v2/dataset/python-orm"
+homepage = "https://lcg.gitlab.io/neuro/v2/dataset/python-orm"
+documentation = "https://lcg.gitlab.io/neuro/v2/dataset/python-orm"
+readme = "README.md"
+packages = [
+    { include = "v2_dataset", from = "src" },
+]
+include = [
+    "dataset/tables/*.csv",
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+click = "^7.0"
+environ_config = "^18.2"
+iso8601 = "^0.1.12"
+lcg-neuro-compneuro = "^0.1.0"
+lcg-neuro-plx = "^0.3.1"
+marshmallow = "^2.19"
+numpy = "^1.16"
+packaging = "^19.2"
+pandas = "^0.24.2"
+pedroasad-attrs-patch = "^0.2.1"
+pint = "^0.9.0"
+sqlalchemy = "^1.3"
+stringcase = "^1.2"
+tqdm = "^4.32"
+
+[tool.poetry.dev-dependencies]
+black = {version = "*", allows-prereleases = true}
+bumpversion = "^0.5.3"
+codecov = "^2.0"
+pre-commit = "^1.17"
+pytest = "^5.0"
+pytest-cov = "^2.7"
+recommonmark = "^0.5.0"
+sphinx = "^2.1"
+sphinx_rtd_theme = "^0.4.3"
+toml = "^0.10.0"
+sphinx-click = "^2.3"
+
+[build-system]
+build-backend = "poetry.masonry.api"
+requires = ["poetry>=0.12"]

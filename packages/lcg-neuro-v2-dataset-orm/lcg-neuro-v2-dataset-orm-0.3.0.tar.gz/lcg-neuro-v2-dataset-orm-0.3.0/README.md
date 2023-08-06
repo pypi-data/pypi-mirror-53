@@ -1,0 +1,89 @@
+# v2_dataset &ndash; Python object-relational mapping (ORM) and tools for the V2 Dataset
+
+[![][badge-python]][python-docs]
+[![][badge-version]][latest release]
+
+[![][badge-black]][Black]
+
+[![][badge-ci-status]][repository-master]
+![][badge-cov]
+
+- [Documentation](https://lcg.gitlab.io/neuro/v2/dataset/python-orm)
+- [Issue tracker](https://gitlab.com/lcg/neuro/v2/dataset/python-orm/issues)
+- [Repository contents](MANIFEST.md)
+- [History of changes](CHANGELOG.md)
+- [Contribution/development guide](CONTRIBUTING.md)
+
+---
+
+This repository contains a [Python package][latest release] based on the [SQLAlchemy] object-relational mapping (ORM) framework for accessing the V2 Dataset's curated information.
+It also contains a minimal [command-line interface](https://lcg.gitlab.io/neuro/v2/dataset/python-orm/cli.html) that supports the creation of [SQLite] databases to hold curated information and its manipulation through a set of [parsing routines](https://lcg.gitlab.io/neuro/v2/dataset/python-orm/api/v2_dataset.db.parsing.html) that are being continuously developed.
+
+The curated information itself is stored in the [contents repository], together with information on how to obtain the recording data (which is not open-sourced, as of now).
+The [contents repository] should be cloned *separately* and linked from your working copy, as explained below.
+
+## Installation and setup
+
+The library may be installed with
+
+   ```bash
+   pip install lcg-neuro-v2-dataset-orm
+   ```
+
+Additional steps:
+   
+1. Clone the V2 Dataset's [contents repository] to any directory on your computer, *e.g.*:
+
+   ```bash
+   git clone git@gitlab.com:lcg/neuro/v2/dataset/contents /data/v2-dataset
+   ```
+   
+   **Make sure** to check out a **compatible version** of the [contents repository].
+   Usually, the latest version of the library will be compatible with the latest version of the dataset.
+
+1. The library must be able to locate the dataset directory, which can be done in one of two ways:
+
+   * If Define a `V2_DATASET_DIR` environment variable pointing to the directory where you cloned the [contents repository] (you may do it with a `.envrc` file), or
+   * Create a symlink named `dataset` (it is Git-ignored in this repository) in your working copy or library installation directory (`/lib/pythonx.y/site-packages/lcg-neuro-v2-dataset-orm`) pointing to the [contents repository] copy.
+
+**Note:** You may need `g++` or `clang` to compile some dependent libraries's extensions.
+
+## Development notes
+
+### Git LFS and cloning
+
+Cloning may take a while because we use [Git LFS] to track larger files that are included mainly for testing.
+After the initial cloning, further pushing/pulling/fetching should only take as long as needed to download missing files, which we intend to keep at a minimum over this project's lifetime.
+
+**Important:** you must install [Git LFS] before cloning.
+
+---
+
+*&mdash; Powered by [GitLab CI]*<br>
+*&mdash; Created by [Pedro Asad
+&lt;pasad@lcg.ufrj.br&gt;](mailto:pasad@lcg.ufrj.br) using [cookiecutter] and [@pedroasad.com/templates/python/python/app-1.0.0](https://gitlab.com/pedroasad.com/templates/python/python-app/tags/1.0.0)*  
+
+[Black]: https://pypi.org/project/black/
+[CHANGELOG]: ./CHANGELOG.md
+[CONTRIBUTING]: ./CONTRIBUTING.md
+[Git LFS]: https://git-lfs.github.com/
+[Gitlab CI]: https://docs.gitlab.com/ee/ci
+[LICENSE]: ./LICENSE.txt
+[MANIFEST]: ./MANIFEST.md
+[README]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm/blob/master/README.md
+[SQLAlchemy]: https://www.sqlalchemy.org
+[SQLite]: https://www.sqlite.org
+[badge-black]: https://img.shields.io/badge/code%20style-Black-black.svg
+[badge-ci-coverage]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm/badges/master/coverage.svg
+[badge-ci-status]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm/badges/master/pipeline.svg
+[badge-cov]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm/badges/master/coverage.svg
+[badge-python]: https://img.shields.io/badge/Python-%E2%89%A53.6-blue.svg
+[badge-version]: https://img.shields.io/badge/version-0.3.0%20-orange.svg
+[contents repository]: https://gitlab.com/lcg/neuro/v2/dataset/contents
+[cookiecutter]: http://cookiecutter.readthedocs.io/
+[latest release]: https://test.pypi.org/project/lcg-neuro-v2-dataset-orm/0.3.0/
+[python-docs]: https://docs.python.org/3.6
+[repository-codecov]: https://codecov.io/gl/lcg:neuro:v2:dataset/python-orm
+[repository-master]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm
+[repository-security]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm/security
+[repository]: https://gitlab.com/lcg/neuro/v2/dataset/python-orm
