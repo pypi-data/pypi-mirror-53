@@ -1,0 +1,64 @@
+{
+    "make_parcellation": { 
+        "input" : {
+            "extension": ["nii", "nii.gz"],
+            "suffix": "bold"
+        },
+        "confounds": {
+            "extension": "tsv",
+            "suffix": "regressors",
+            "desc": "confounds"
+        },
+        "output": 
+            {"extension": "tsv",
+            "suffix": "timeseries"},
+        "module": 
+            "utils"
+    },
+    "derive_temporalnetwork": {
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "timeseries"},
+        "output": 
+            {"extension": "tsv",
+            "suffix": "temporalconnectivity"},
+        "module": 
+            "timeseries"
+    },
+    "volatility": {
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "temporalconnectivity"},
+        "output": 
+            {"extension": "tsv",
+            "suffix": "volatility"},
+        "module": 
+            "networkmeasures"
+    },
+    "exclude_confound": { 
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "timeseries"}
+    },
+    "exclude_runs": { 
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "timeseries"}
+    },
+
+    "networkmeasure": {
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "tconn"}
+    },
+    "communitystucture": {
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "tconn"}
+    },
+    "calc_communitymeasure": {
+        "input" : 
+            {"extension": ["tsv"],
+            "suffix": "communities"}
+    } 
+}
