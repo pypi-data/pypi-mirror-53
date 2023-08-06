@@ -1,0 +1,202 @@
+Metadata-Version: 2.1
+Name: flakehell
+Version: 0.3.0
+Summary: Flake8 wrapper to make it nice and configurable
+Home-Page: https://gitlab.com/life4/flakehell
+Project-URL: Documentation, https://flakehell.readthedocs.io/
+Author: Gram (@orsinium)
+Author-email: master_fess@mail.ru
+Requires-Python: >=3.5
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Framework :: Flake8
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Quality Assurance
+Requires-Dist: alabaster; extra == "docs"
+Requires-Dist: dlint; extra == "dev"
+Requires-Dist: entrypoints
+Requires-Dist: flake8>=3.7.5
+Requires-Dist: flake8-alfred; extra == "dev"
+Requires-Dist: flake8-annotations-complexity; extra == "dev"
+Requires-Dist: flake8-bandit; extra == "dev"
+Requires-Dist: flake8-broken-line; extra == "dev"
+Requires-Dist: flake8-bugbear; extra == "dev"
+Requires-Dist: flake8-builtins; extra == "dev"
+Requires-Dist: flake8-coding; extra == "dev"
+Requires-Dist: flake8-commas; extra == "dev"
+Requires-Dist: flake8-comprehensions; extra == "dev"
+Requires-Dist: flake8-debugger; extra == "dev"
+Requires-Dist: flake8-django; extra == "dev"
+Requires-Dist: flake8-docstrings; extra == "dev"
+Requires-Dist: flake8-eradicate; extra == "dev"
+Requires-Dist: flake8-executable; extra == "dev"
+Requires-Dist: flake8-isort; extra == "dev"
+Requires-Dist: flake8-logging-format; extra == "dev"
+Requires-Dist: flake8-mutable; extra == "dev"
+Requires-Dist: flake8-pep3101; extra == "dev"
+Requires-Dist: flake8-pie; extra == "dev"
+Requires-Dist: flake8-print; extra == "dev"
+Requires-Dist: flake8-quotes; extra == "dev"
+Requires-Dist: flake8-rst-docstrings; extra == "dev"
+Requires-Dist: flake8-scrapy; extra == "dev"
+Requires-Dist: flake8-strict; extra == "dev"
+Requires-Dist: flake8-string-format; extra == "dev"
+Requires-Dist: flake8-variables-names; extra == "dev"
+Requires-Dist: mccabe; extra == "dev"
+Requires-Dist: pep8-naming; extra == "dev"
+Requires-Dist: pygments
+Requires-Dist: pygments-github-lexers; extra == "docs"
+Requires-Dist: pylint
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: recommonmark; extra == "docs"
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: termcolor
+Requires-Dist: toml
+Requires-Dist: urllib3
+Requires-Dist: wemake-python-styleguide; extra == "dev"
+Provides-Extra: dev
+Provides-Extra: docs
+
+
+
+.. image:: ./assets/logo.png
+   :target: ./assets/logo.png
+   :alt: FlakeHell
+
+===============================================================================
+
+
+.. image:: https://badge.fury.io/py/flakehell.svg
+   :target: https://badge.fury.io/py/flakehell
+   :alt: PyPI version
+
+
+.. image:: https://travis-ci.org/life4/flakehell.svg?branch=master
+   :target: https://travis-ci.org/life4/flakehell
+   :alt: Build Status
+
+
+.. image:: https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT
+   :alt: License: MIT
+
+
+.. image:: https://readthedocs.org/projects/flakehell/badge/?version=latest
+   :target: https://flakehell.readthedocs.io/
+   :alt: Documentation
+
+
+It's a `Flake8 <https://gitlab.com/pycqa/flake8>`_ wrapper to make it cool.
+
+
+* Shareable and remote configs.
+* Legacy-friendly: ability to get report only about new errors.
+* Use only specified plugins, not everything installed.
+* Manage codes per plugin.
+* Enable and disable plugins and codes by wildcard.
+* Make output beautiful.
+* `pyproject.toml <https://www.python.org/dev/peps/pep-0518/>`_ support.
+* Show codes for installed plugins.
+* Show all messages and codes for a plugin.
+* Check that all required plugins are installed.
+* Syntax highlighting in messages and code snippets.
+* `PyLint <https://github.com/PyCQA/pylint>`_ integration.
+* Allow codes intersection for different plugins.
+
+
+.. image:: ./assets/grouped.png
+   :target: ./assets/grouped.png
+   :alt: output example
+
+
+Installation
+------------
+
+.. code-block:: bash
+
+   python3 -m pip install --user flakehell
+
+Usage
+-----
+
+First of all, let's create ``pyproject.toml`` config:
+
+.. code-block::
+
+   [tool.flakehell]
+   # optionally inherit from remote config (or local if you want)
+   base = "https://raw.githubusercontent.com/life4/flakehell/master/pyproject.toml"
+   # specify any flake8 options. For example, exclude "example.py":
+   exclude = ["example.py"]
+   # make output nice
+   format = "grouped"
+   # 80 chars aren't enough in 21 century
+   max_line_length = 90
+   # show line of source code in output
+   show_source = true
+
+   # list of plugins and rules for them
+   [tool.flakehell.plugins]
+   # include everything in pyflakes except F401
+   pyflakes = ["+*", "-F401"]
+   # enable only codes from S100 to S199
+   flake8-bandit = ["-*", "+S1??"]
+   # enable everything that starts from `flake8-`
+   "flake8-*" = ["+*"]
+   # explicitly disable plugin
+   flake8-docstrings = ["-*"]
+
+Show plugins that aren't installed yet:
+
+.. code-block:: bash
+
+   flakehell missed
+
+Show installed plugins, used plugins, specified rules, codes prefixes:
+
+.. code-block:: bash
+
+   flakehell plugins
+
+
+.. image:: ./assets/plugins.png
+   :target: ./assets/plugins.png
+   :alt: plugins command output
+
+
+Show codes and messages for a specific plugin:
+
+.. code-block:: bash
+
+   flakehell codes pyflakes
+
+
+.. image:: ./assets/codes.png
+   :target: ./assets/codes.png
+   :alt: codes command output
+
+
+Run flake8 against the code:
+
+.. code-block:: bash
+
+   flakehell lint
+
+This command accepts all the same arguments as Flake8.
+
+Read `flakehell.readthedocs.io <https://flakehell.readthedocs.io/>`_ for more information.
+
+
+.. image:: ./assets/flaky.png
+   :target: ./assets/flaky.png
+   :alt: 
+
+
+The FlakeHell mascot (Flaky) is created by `@diana_leit <https://www.instagram.com/diana_leit/>`_ and licensed under the `CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0/>`_ license.
