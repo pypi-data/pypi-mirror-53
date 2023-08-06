@@ -1,0 +1,61 @@
+%YAML 1.2
+---
+# -----------------------------------------------------------------------------
+# Version of the template
+version: "{{ version }}"
+
+# -----------------------------------------------------------------------------
+# Name of the package
+package_name: {{ package_name }}
+
+# -----------------------------------------------------------------------------
+# all folders needed
+# Paths definitions
+paths:
+  # ---------------------------------------------------------------------------
+  # root for the folders if needed
+  # if blanck, all realtives path will start at the conf file location
+  # if not blanck, all relative path will start at this folder
+  #         and the folder can be a relative to the conf file
+  root: ./
+
+  # -----------------------------------------------------------------------------
+  # the jinja folder
+  # ${root}/${jinja}
+  jinja: "{{ paths.jinja }}"
+
+  # -----------------------------------------------------------------------------
+  # the folder with web resources
+  # ${root}/${resources}
+  resources: "{{ paths.resources }}"
+
+  # -----------------------------------------------------------------------------
+  # the html template folder
+  # ${root}/${template}
+  template: "{{ paths.template }}"
+
+  # -----------------------------------------------------------------------------
+  # the locale folder
+  # ${root}/${locale}
+  locale: "{{ paths.locale }}"
+
+  # -----------------------------------------------------------------------------
+  # the start context in yaml
+  # ${root}/${context_filename}
+  context_filename: "{{ paths.context }}"
+
+# -----------------------------------------------------------------------------
+# library image tag in the template
+lib_image_tag: "{{ template_parameters.lib_image_tag }}"
+
+# -----------------------------------------------------------------------------
+# library image extension files
+lib_image_ext: {{ template_parameters.lib_image_ext }}
+
+# -------------------------------------------------------------------------
+# the module name for the translation
+gettext_module_name: "{{ template_parameters.gettext_module_name }}"
+
+# -------------------------------------------------------------------------
+# lang list for the translation
+language_list: {{ template_parameters.language_list }}
