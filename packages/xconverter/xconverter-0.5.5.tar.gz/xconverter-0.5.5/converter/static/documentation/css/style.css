@@ -1,0 +1,267 @@
+@charset "UTF-8";
+
+@media print {
+
+    @page {
+        margin-left: 1cm;
+        margin-right: 1cm;
+
+        @top-left {
+            font-size: 10px;
+            content: string(journal-title);
+        }
+        @top-center {
+        }
+        @top-right {
+            content: string(issue-label);
+            font-size: 10px;
+        } 
+        @bottom-left {
+        }
+        @bottom-center {
+            content: string(license);
+            font-size: 10px;
+            text-align: center;
+        }
+        @bottom-right {
+            content: counter(page);
+            font-size: 12px;
+        }
+    }
+
+    head, head > meta {
+        display:inline;
+        color: red;
+    }
+
+    meta[name="journal-title"] {
+        string-set: journal-title attr(content);
+    }
+
+    meta[name="issue-label"] {
+        string-set: issue-label attr(content);
+    }
+
+    meta[name="license"] {
+        string-set: license attr(content);
+    }
+
+}
+
+p {
+    line-height: 12pt;
+}
+
+.article {
+    font-family: tahoma;
+    font-size: 8pt;
+}
+
+.article {
+}
+
+.article .body {
+    margin-top: 10px;
+    columns: 2;
+    column-gap: 0.5cm;
+}
+
+.article .title-group {
+    width: 100%;
+    font-size: 20pt;
+    text-align: left;
+}
+
+.article .title-group .article-title {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.article-id {
+    text-align: left;
+}
+
+.contrib-group {
+    text-align: right;
+    margin-left: 50%;
+    margin-right: 0;
+    font-size: 10pt;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.contrib-group * {
+    margin: 0;
+    padding: 0;
+}
+
+.contrib-group .contrib {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.contrib-group .name {
+    font-weight: bold;
+
+}
+
+.article .abstract-group {
+    columns: 2;
+    column-gap: 20px;
+    background-color: #E5E5E5;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sec .title {
+    font-size: 12pt;
+}
+
+.sec .sec .title {
+    font-size: 10pt;
+}
+
+.sec .sec .sec .title {
+    font-size: 8pt;
+}
+
+.sec .sec .sec .sec .title {
+    font-size: 8pt;
+}
+
+.sec .sec .sec .sec .sec .title {
+    font-size: 8pt;
+
+}
+
+.xref {
+    font-size: 7pt;
+}
+
+.article ul li {
+    margin-bottom: 5px;
+    line-height: 12pt;
+}
+
+.article ol li {
+    margin-bottom: 5px;
+    line-height: 12pt;
+}
+
+
+
+.fig {
+    column-span: all;
+}
+
+.fig .fig-header * {
+    font-size: 8pt;
+}
+
+.fig .fig-header .label {
+    text-transform: uppercase;
+    font-size: 8pt;
+}
+
+.fig .fig-header .caption .title {
+    font-size: 10pt;
+}
+
+.table-wrap {
+    column-span: all;
+}
+
+.table-wrap .table-wrap-header * {
+    font-size: 8pt;
+}
+
+.table-wrap .table-wrap-header .label {
+    text-transform: uppercase;
+    font-size: 8pt;
+}
+
+.table-wrap .table-wrap-header .caption .title {
+    font-size: 10pt;
+}
+
+.example {
+    font-size: 8pt;
+}
+
+.fig-group .fig-group-header {
+    font-size: 8pt;
+}
+
+.fig-group .fig-group-header * {
+    font-size: 8pt;
+}
+
+.boxed-text .boxed-header * {
+    font-size: 8pt;
+}
+
+.boxed-text .boxed-header .label {
+    font-size: 8pt;
+    text-transform: uppercase;
+}
+
+.boxed-text .boxed-header .caption .title {
+    font-size: 10pt;
+}
+
+.boxed-text .boxed-content {
+    font-size: 10pt;
+    margin-top: 0.3cm;
+}
+
+.footnotes {
+    columns: 2;
+    column-gap: 0.5cm;
+}
+
+.footnotes .title {
+    column-span: all;
+    border-bottom: solid 2px gray;
+    text-transform: uppercase;
+}
+
+.ref-list {
+    columns: 2;
+    column-gap: 0.5cm;
+}
+
+.ref-list .title {
+    column-span: all;
+    border-bottom: solid 2px gray;
+    text-transform: uppercase;
+}
+
+.bio-notes .title {
+    font-weight: bold;
+    border-bottom: solid 2px gray;
+    text-transform: uppercase;
+}
+
+.ack-group .title {
+    font-weight: bold;
+    border-bottom: solid 2px gray;
+    text-transform: uppercase;
+}
+
+.disp-quote {
+    width: 90%;
+}
+
+.verbatim {
+    width: 90%;
+}
+
+.text-strike {
+    text-decoration: line-through;
+}
+
+.text-overline {
+    text-decoration: overline;
+}
