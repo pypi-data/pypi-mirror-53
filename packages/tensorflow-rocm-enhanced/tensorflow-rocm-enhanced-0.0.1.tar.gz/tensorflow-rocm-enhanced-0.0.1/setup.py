@@ -1,0 +1,30 @@
+import setuptools
+
+setuptools.setup(
+    name="tensorflow-rocm-enhanced",
+    version="0.0.1",
+    author="Google Inc.",
+    author_email="opensource@google.com",
+    description="TensorFlow is an open source machine learning framework for everyone.",
+    url="https://www.tensorflow.org/",
+    packages=setuptools.find_packages(),
+    classifiers=(
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Education",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Topic :: Scientific/Engineering",
+        "Topic :: Scientific/Engineering :: Mathematics",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Software Development",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ),
+)
