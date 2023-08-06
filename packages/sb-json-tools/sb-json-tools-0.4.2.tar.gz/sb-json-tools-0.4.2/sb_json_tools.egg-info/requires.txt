@@ -1,0 +1,16 @@
+fastjsonschema
+click
+ijson
+
+[dev]
+pytest
+pytest-cov
+flake8
+isort
+bump2version
+pre-commit
+reno
+pylint
+
+[dev:(python_version>='3.6')]
+black
