@@ -1,0 +1,105 @@
+<div class="container-fluid" width="95%">
+% for c in content:
+%     if c['name'] == 'header':
+          <br /><h2>{{ c['header'] }}</h2><br />
+%     elif c['name'] == 'footer':
+          <h6>{{ c['footer'] }}</h6><br />
+%     elif c['name'] == 'description':
+          <p>{{ c['description'] }}</p><br />
+%     elif c['name'] == 'image':
+          <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                <div class="thumbnail">
+                  <a href="{{ c['url'] }}" target="_blank"><img src="{{ c['url'] }}" style="width:95%" class="img-responsive" alt="" /></a>
+                </div>
+              </div>
+              <br />
+          </div>
+          </div>
+%     elif c['name'] == 'image_grid':
+%         div_suffix = c['title'].lower().replace(' ', '_').replace(':', '').replace('.', '')
+          <div role="tablist">
+            <b-card no-body class="mb-1">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button block href="#" class="text-left" variant="secondary" v-b-toggle.accordion-{{ div_suffix }}>{{ c['title'] }}</b-button>
+              </b-card-header>
+%             if c['visible']:
+              <b-collapse id="accordion-{{ div_suffix }}" visible accordion="{{ div_suffix }}-accordion" role="tabpanel" variant="secondary">
+%             else:
+              <b-collapse id="accordion-{{ div_suffix }}" accordion="{{ div_suffix }}-accordion" role="tabpanel" variant="secondary">
+%             end
+                <b-card-body>
+                  <b-container fluid class="bv-{{ div_suffix }}">
+%                   for i, image in enumerate(c['images']):
+%                       col_size = 12 // c['grid_size']
+%                       if i % c['grid_size'] == 0:
+                          <b-row>
+%                       end
+                            <b-col cols="{{ col_size }}">
+                              <b-link href="{{ image['url'] }}"><b-img thumbnail fluid src="{{ image['url'] }}" alt=""></b-img></b-link>
+                            </b-col>
+%                       if i % c['grid_size'] == c['grid_size'] - 1:
+                          </b-row>
+%                       end
+%                   end
+                  </b-container>
+                </b-card-body>
+%               if 'footer' in c:
+                  <b-card-footer><em>{{ c['footer'] }}</em></b-card-footer>
+%               end
+              </b-collapse>
+            </b-card>
+          </div>
+          <br />
+%     elif c['name'] == 'table':
+%         div_suffix = c['title'].lower().replace(' ', '_').replace(':', '').replace('.', '')
+          <div role="tablist">
+            <b-card no-body class="mb-1">
+              <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button block href="#" class="text-left" v-b-toggle.accordion-{{ div_suffix }}>{{ c['title'] }}</b-button>
+              </b-card-header>
+%             if c['visible']:
+              <b-collapse id="accordion-{{ div_suffix }}" visible accordion="{{ div_suffix }}-accordion" role="tabpanel">
+%             else:
+              <b-collapse id="accordion-{{ div_suffix }}" accordion="{{ div_suffix }}-accordion" role="tabpanel">
+%             end
+                <b-card-body>
+                  <b-container fluid class="bv-{{ div_suffix }}">
+                    <div id="table_{{ div_suffix }}">
+                      <div>
+                        <b-table hover bordered show-empty responsive head-variant="light"
+                        :items="items['{{ c['url'] }}']"
+                        :fields="fields['{{ c['url'] }}']"
+                        :current-page="currentPage['{{ c['url'] }}']"
+                        :per-page="perPage"
+                        >
+                        </b-table>
+                      </div>
+                      <div>
+                        <b-col md="6" class="my-1">
+                          <b-pagination
+                            :total-rows="totalRows['{{ c['url'] }}']"
+                            :per-page="perPage"
+                            v-model="currentPage['{{ c['url'] }}']"
+                            class="my-0"
+                          />
+                        </b-col>
+                      </div>
+                    </div>
+                  </b-container>
+                </b-card-body>
+%               if 'footer' in c:
+                  <b-card-footer><em>{{ c['footer'] }}</em></b-card-footer>
+%               end
+              </b-collapse>
+            </b-card>
+          </div>
+          <br />
+%     elif c['name'] == 'plot':
+%         div_suffix = c['title'].lower().replace(' ', '_').replace(':','').replace('.', '')
+          <div id="plot_{{ div_suffix }}"></div>
+          <br />
+%     end
+% end
+</div>
