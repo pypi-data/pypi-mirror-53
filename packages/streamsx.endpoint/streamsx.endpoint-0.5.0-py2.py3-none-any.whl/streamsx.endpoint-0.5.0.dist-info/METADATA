@@ -1,0 +1,36 @@
+Metadata-Version: 2.0
+Name: streamsx.endpoint
+Version: 0.5.0
+Summary: IBM Streams endpoint integration
+Home-page: https://github.com/IBMStreams/streamsx.endpoint
+Author: IBM Streams @ github.com
+Author-email: hegermar@de.ibm.com
+License: Apache License - Version 2.0
+Description-Content-Type: UNKNOWN
+Keywords: streams,ibmstreams,streaming,analytics,streaming-analytics,http,endpoint
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: streamsx
+Requires-Dist: streamsx.toolkits
+
+Overview
+========
+
+Provides endpoints within IBM Cloud Pak for Data (CP4D) enviroment that are exposed through the `enpoint-monitor <https://github.com/IBMStreams/endpoint-monitor>`_.
+
+This package is for use with IBM Streams in IBM Cloud Pak for Data (CP4D) and provides functions to add Streams operators acting as communication endpoints for your Streams application.
+
+* `CP4D: Developing application with IBM Streams <https://www.ibm.com/support/producthub/icpdata/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/streams/developing-intro.html>`_
+* `CP4D: IBM Streams endpoint monitor <https://github.com/IBMStreams/endpoint-monitor>`_
+* `IBM Streams developer community <https://developer.ibm.com/streamsdev/>`_
+
+Documentation
+=============
+
+* `streamsx.endpoint package documentation <http://streamsxendpoint.readthedocs.io>`_
+
+
