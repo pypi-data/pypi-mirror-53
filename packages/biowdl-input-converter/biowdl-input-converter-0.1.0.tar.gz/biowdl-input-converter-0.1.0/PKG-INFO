@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: biowdl-input-converter
+Version: 0.1.0
+Summary: Converting various input formats into WDL structs for BioWDL pipelines.
+Home-page: https://github.com/biowdl/biowdl-input-converter
+Author: Leiden University Medical Center
+Author-email: sasc@lumc.nl
+License: MIT
+Description: .. Badges have empty alts. So nothing shows up if they do not work.
+        
+        .. image:: https://img.shields.io/pypi/v/biowdl-input-converter.svg
+          :target: https://pypi.org/project/biowdl-input-converter/
+          :alt:
+        
+        .. image:: https://img.shields.io/conda/v/bioconda/biowdl-input-converter.svg
+          :target: http://bioconda.github.io/recipes/biowdl-input-converter/README.html
+          :alt:
+        
+        .. image:: https://img.shields.io/pypi/pyversions/biowdl-input-converter.svg
+          :target: https://pypi.org/project/biowdl-input-converter/
+          :alt:
+        
+        .. image:: https://img.shields.io/pypi/l/biowdl-input-converter.svg
+          :target: https://github.com/biowdl/biowdl-input-converter/blob/master/LICENSE
+          :alt:
+        
+        .. image:: https://travis-ci.org/biowdl/biowdl-input-converter.svg?branch=develop
+          :target: https://travis-ci.org/biowdl/biowdl-input-converter
+          :alt:
+        
+        .. image:: https://codecov.io/gh/biowdl/biowdl-input-converter/branch/develop/graph/badge.svg
+          :target: https://codecov.io/gh/biowdl/biowdl-input-converter
+          :alt:
+        
+        ========================
+        BioWDL input converter
+        ========================
+        
+        biowdl-input-converter converts human-readable samplesheets into
+        a format that can be easily processed by BioWDL pipelines.
+        
+        Check out the documentation on https://biowdl-input-converter.readthedocs.io
+        for more information on installation and usage.
+        
+        For more information on BioWDL check out the documentation on
+        https://biowdl.github.io.
+        
+Keywords: biowdl pipeline input csv yaml json samplesheet convert
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+Description-Content-Type: text/x-rst
