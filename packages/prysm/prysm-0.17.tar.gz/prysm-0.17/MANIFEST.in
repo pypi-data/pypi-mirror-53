@@ -1,0 +1,5 @@
+prune *
+exclude readthedocs.yml
+exclude .DS_Store
+graft prysm
+prune prysm/__pycache__
