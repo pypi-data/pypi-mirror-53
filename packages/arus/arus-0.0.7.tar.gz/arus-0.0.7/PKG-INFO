@@ -1,0 +1,82 @@
+Metadata-Version: 2.1
+Name: arus
+Version: 0.0.7
+Summary: Activity Recognition with Ubiquitous Sensing
+Home-page: https://github.com/qutang/arus
+Keywords: ubiquitous computing,activity recognition,sensing,data processing,machine learning
+Author: qutang
+Author-email: tqshelly@gmail.com
+Requires-Python: >=3.6,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Human Machine Interfaces
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: matplotlib (>=3.1,<4.0)
+Requires-Dist: numpy (>=1.17,<2.0)
+Requires-Dist: pandas (>=0.25.1,<0.26.0)
+Requires-Dist: pathos (>=0.2.5,<0.3.0)
+Requires-Dist: scipy (>=1.3,<2.0)
+Project-URL: Documentation, https://qutang.github.io/arus/
+Project-URL: Repository, https://github.com/qutang/arus
+Description-Content-Type: text/markdown
+
+## Overview
+
+__arus__ python package provides a computation framework to manage and process ubiquitous sensory data for activity recognition.
+
+[![PyPI version](https://badge.fury.io/py/arus.svg)](https://badge.fury.io/py/arus)
+
+## Get started
+
+#### Prerequists
+
+```bash
+python >= 3.6
+```
+
+#### Installation
+
+```bash
+> pip install arus
+```
+
+or with `pipenv`
+
+```bash
+> pipenv install arus
+```
+
+or with `poetry`
+
+```bash
+> poetry add arus
+```
+
+### Plugins
+
+`arus` packages can be extended to involve more file types, Bluetooth devices or network protocols. The following list includes official plugins that extend `arus`.
+
+#### Official plugins
+
+1. [`arus-stream-metawear`](): a `Stream` class that can be used to stream data acquired from a Metawear device (A wireless Bluetooth sensor) in real-time.
+
+
+### Development
+
+#### Prerequists
+
+```bash
+python >= 3.6
+poetry >= 0.12.17
+```
+
+#### Set up development environment
+
+```bash
+> git clone https://github.com/qutang/arus.git
+> cd arus
+> poetry install
+```
