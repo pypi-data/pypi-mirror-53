@@ -1,0 +1,25 @@
+troposphere==2.4.9
+typing
+picage
+pathlib_mate
+superjson
+configirl
+
+[:python_version == "2.7"]
+typing
+
+[docs]
+sphinx==1.8.1
+sphinx_rtd_theme
+sphinx-jinja
+sphinx-copybutton
+docfly>=0.0.17
+rstobj>=0.0.5
+pygments
+
+[tests]
+pytest==3.2.3
+pytest-cov==2.5.1
+pathlib_mate
+picage
+jinja2
