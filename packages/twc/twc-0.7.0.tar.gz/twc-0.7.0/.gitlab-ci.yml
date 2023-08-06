@@ -1,0 +1,82 @@
+image: python:3.5
+
+stages:
+    - test
+    - deploy
+
+before_script:
+    - pip3 install --upgrade pipenv
+    - make init
+
+.test: &test
+    stage: test
+    variables:
+      PIPENV_VERBOSITY: "-1"
+    script:
+      - make -f Makefile.ci $CI_JOB_NAME
+
+py35:
+    <<: *test
+    image: python:3.5
+
+py36:
+    <<: *test
+    image: python:3.6
+
+py37:
+    <<: *test
+    image: python:3.7
+
+lint:
+    <<: *test
+
+coverage:
+    <<: *test
+    artifacts:
+        name: coverage
+        expire_in: 14 days
+        paths:
+            - coverage.xml
+            - htmlcov/
+    allow_failure: true
+
+package-check:
+    stage: test
+    before_script:
+        - pip3 install --upgrade pipenv
+        - pipenv install --dev --ignore-pipfile
+    script:
+        - pipenv check
+        - pipenv run python3 setup.py sdist bdist_wheel
+        - pipenv run twine check dist/*
+
+dist:
+    stage: deploy
+    before_script:
+        - ci/apt install -y -qq --no-install-recommends asciidoctor ruby-pygments.rb
+        - pip3 install pipenv
+        - pipenv install --dev --ignore-pipfile
+    only:
+        - tags
+        - triggers
+    script:
+        - python3 setup.py sdist bdist_wheel
+        - pipenv run twine upload dist/* -u "$PYPI_USER" -p "$PYPI_PASS"
+    artifacts:
+        name: "${CI_PROJECT_NAME}-{$CI_BUILD_REF_NAME}"
+        paths:
+            - dist/
+
+pages:
+    stage: deploy
+    before_script:
+        - ci/apt install -y -qq --no-install-recommends asciidoctor ruby-pygments.rb
+    script:
+        - ci/gen-pages
+    artifacts:
+        paths:
+            - public
+    only:
+        - master
+        - tags
+        - triggers

@@ -1,0 +1,65 @@
+:twdoc: https://taskwarrior.org/download/
+:twc-pypi: https://pypi.org/project/twc/
+:pipsi: https://github.com/mitsuhiko/pipsi
+
+
+[[installation]]
+== Installation
+
+First, make sure that TaskWarrior is installed on your system. TaskWarrior is
+packaged for most of Linux distributions. Please refer to TaskWarrior's
+{twdoc}[documentation] for details. Typically you can install Taskwarrior with
+one of the following commands:
+
+[source, console]
+----
+$ sudo apt install taskwarrior  # Debian, Ubuntu, Termux, Windows 10 WSL
+$ pacman -S task  # Archlinux
+$ yum install task  # Fedora
+----
+
+Next you should obtain TWC with one of the methods described below. After TWC
+is installed it can be run by typing `twc` in your console.
+
+=== From PyPI
+
+TWC is distributed via {twc-pypi}[PyPI]. It is recommended to use a tool like
+{pipsi}[pipsi] to handle installations from PyPI, because it offers isolation
+of installed applications and an easy way to uninstall them together with their
+dependencies.
+
+[source, console]
+----
+$ pipsi install --python python3 twc
+----
+
+You can also use bare PIP:
+
+[source, console]
+----
+$ pip3 install --user twc
+----
+
+=== From Git
+
+You can also manually download, build and install TWC:
+
+[source, console]
+----
+$ git clone https://gitlab.com/mgoral/twc
+$ cd twc
+$ python3 setup.py install
+----
+
+`setup.py` accepts several options to e.g. change install destination. You can
+read about them by running `python3 setup.py install --help`.
+
+If you only want to check TWC, you can use *pipenv* to install it in local
+virtualenv (outside of PATH). To install and run TWC this way replace setup.py
+command from above with:
+
+[source, console]
+----
+$ pipenv install
+$ pipenv run twc
+----

@@ -1,0 +1,26 @@
+:termux: https://termux.com
+:tzlocal-bug: https://github.com/regebro/tzlocal/pull/55
+
+[[termux]]
+== Termux
+
+TWC works on {termux}[Termux], although there's currently a {tzlocal-bug}[bug]
+in tzlocal - a library indirectly used by TWC to get local timezone
+information.
+
+Before running TWC on Termux you have to export the following environment
+variable:
+
+[source,sh]
+----
+export TZ=$(getprop persist.sys.timezone)
+----
+
+Termux emulates scroll events as key presses. You can bind them for easier
+navigation:
+
+[source,python]
+----
+c.bind('right', 'next-agenda')
+c.bind('left', 'prev-agenda')
+----

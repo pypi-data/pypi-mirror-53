@@ -1,0 +1,546 @@
+// tag::manpage[]
+:formatspec: https://docs.python.org/3/library/string.html#formatspec
+:basedir-url: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+// end::manpage[]
+
+[[config]]
+== Configuration
+
+// tag::manpage[]
+During startup TWC reads a configuration file that commonly contains various
+settings: definitions of agendas, key bindings, program options etc. Typically
+it is kept in user's configuration directory: _~/.config/twc/config.py_, but
+TWC follows ther rules of {basedir-url}[XDG Base Directory Specification]:
+
+1. _$XDG_CONFIG_HOME/twc/config.py_ is checked. If `$XDG_CONFIG_HOME` is not
+   set, it defaults to _$HOME/.config_.
+2. any of _$XDG_DATA_DIRS/twc/config.py_ is checked. `$XDG_DATA_DIRS` is a
+   colon-separated list of directories to check. If it is not set, it defaults
+   to a single directory: /etc/xdg.
+
+Some options can be configured with specific program arguments. They are
+usually named the same as their config.py counterparts and they take precedence
+over settings from configuration file.
+
+TWC's configuration file is ordinary Python file. It comes with exposed
+*variable c* which should be used to configure all aspects of TWC and it
+contains all necessary methods to do so.
+
+// end::manpage[]
+
+.Example config.py
+[source,python]
+----
+def title(s):
+    return '<heading>== {} ==</heading>'.format(s)
+
+next_fmt = \
+    '<sr right=" "><warning>{priority}</warning></sr>' \
+    '{description} ' \
+    '<comment><sr left="[" right="] "><ind value=A>{annotations}</ind></sr>{id}</comment>' \
+    '<sr left=" "><info>{tags}</info></sr>'
+
+c.set('incsearch', False)
+c.set('taskrc', '~/other_taskrc')
+
+# visible comments
+c.set_style('comment', 'fg:lightblue bold')
+
+c.add_block(
+    agenda='Next tasks',
+    title=title('Tasks with tags'),
+    filter='-WAITING -BLOCKING -BLOCKED +PENDING (+tag1 or +tag2)',
+    fmt=next_fmt,
+    sort='urgency-,priority')
+
+c.add_block(
+    agenda='Next tasks',
+    title=title('Inbox'),
+    filter='( status:pending tags.is: )',
+    fmt=next_fmt)
+----
+
+// tag::manpage[]
+
+[[config-agendas]]
+=== Agendas
+Agendas are built from blocks. Each block specifies methods of retrieving tasks
+from TaskWarrior and presenting them in TWC. These include, but are not limited
+to filter used to retrieve tasks, tasks' sorting method and tasks formatting.
+
+Agendas are automatically created when blocks are defined. This is all done
+with *c.add_block()* function, which requires specifying parent agenda of block.
+
+Apart from _agenda_, all parameters passed to *c.add_block()* must be named,
+i.e.  given in form of _name=value_, like: _sort='urgency'_, _limit=5_ etc.
+
+[[config-tasks-format]]
+==== Tasks Format
+
+Format of tasks displayed inside a block is a mix of {formatspec}[Python's
+string format] and HTML-like markup.
+
+You can use any TaskWarrior's attribute name (includeing UDAs) as
+format's placeholder and it will be displayed if it is present in a particular
+task.
+
+----
+{id} -- {description} -- {tags} {priority} {customuda}
+----
+
+[NOTE]
+For some types TWC returns pre-formatted strings. For example, all lists (like
+list of tags or annotations) will have their elements separated by a colon.
+
+Some additional markup can be added. The following tags are available:
+
+- `<sr left="[" right="]">text</sr>` - surrounds text with _left_ and _right_;
+- `<ind value="A">text</ind>` - if there is any text inside a tag, it is
+  replaced with _value_. It is particularily useful for indicating that some
+  attribute is present without displaying it (like long list of annotations):
+  `<ind value="A">{annotations}</ind>`;
+- any style name: `<somestyle>text</somestyle>`. See <<styles>> section for
+  additional informations.
+
+Markup elements (surrounding text, indicators) won't be added if there is no
+text inside the tags. For example, if task has no annotations, `<ind
+value="A">{annotations}</ind>` won't display "A" indicator.
+
+[TIP]
+====
+This can be used to conditionally insert separators (e.g. spaces) between task
+attributes. For example `<sr>` can be used to add a space only after a priority
+and nothing when task doesn't have a priority set:
+
+----
+<sr right=" ">{priority}</sr>{description}
+----
+====
+
+[[key-bindings]]
+=== Key Bindings
+
+You can modify any key binding available in TWC with two functions: *c.bind()*
+and *c.unbind()*. Unbinding is particularily useful if you want to disable a
+default key, because TWC will unbind automatically keys when re-binding them to
+a different command.
+
+TWC supports key sequences: executing commands by pressing some keys following
+the others (similar to e.g. Vim). For example, to jump to the first task in
+agenda you can double press "g". In configuration this should be set as _g g_
+(2 "g" letters separated by space).
+
+Key prefixes are supported:
+
+- _c-_ for combinations with ctrl (e.g. _c-f_, meaning kbd:[Ctrl+f])
+- _a-_ for combinations with alt (e.g. _a-space_, meaning kbd:[Atl+Space])
+- _s-_ for combinations with shift (e.g. _s-tab_, meaning kbd:[Shift+Tab])
+
+Due to how most terminals work, when you want to bind a command to
+"shift+letter", you'll usually simply write upper-case letter, like kbd:[A]
+instead of kbd:[Shift+a].
+
+There are 2 sets of default key bindings enabled: ordinary ones (arrows used
+for navigation, used shortcuts are common in most of popular applications like
+text editors) and Vim-style (bindings familiar to Vim users).
+
+==== Global Commads
+*activate*::
+Performs action on currently focused item:  opens task details, accepts typed
+command etc.
++
+Default bindings: kbd:[Enter].
+
+*cancel*::
+Cancels current action, e.g. cancels current command. On agenda view clears
+prompt and selections.
++
+Default bindings: kbd:[Esc].
+
+*quit*::
+Closes current screen (e.g. task details), eventually exitting TWC. This
+command is inactive when typing a command. 
++
+Default bindings: kbd:[Q], kbd:[q], kbd:[Ctrl+c].
+
+*followurl*::
+Searches currently selected task (either in agenda or in detailed view) for URL
+patterns. If any URL is found, it will be opened in a browser configured in
+user's operating system. If more than one URLs are found, opens a new window
+which allows selecting which URLs should be opened.
++
+Default bindings: kbd:[f].
+
+==== Navigation
+
+*scroll.down*::
+Scrolls down current view, e.g. by selecting next task on agenda view or
+scrolling a screen on task details view.
++
+Default bindings: kbd:[Down], kbd:[j].
+
+*scroll.up*::
+Same as scroll.down, but backwards.
++
+Default bindings: kbd:[Up], kbd:[k].
+
+*scroll.nextsection*::
+Jumps to the beginning of next visual section, e.g. next block in current
+agenda. 
++
+Default bindings: kbd:[Page Down], kbd:[\]].
+
+*scroll.prevsection*::
+Jumps to the beginning of previous visual section, e.g. block in current agenda. 
++
+Default bindings: kbd:[Page Up], kbd:[[].
+
+*scroll.begin*::
+Jumps to the first task in current agenda. 
++
+Default bindings: kbd:[Home], kbd:[gg].
+
+*scroll.end*::
+Jumps to the last task in current agenda. 
++
+Default bindings: kbd:[End], kbd:[G].
+
+*tab.next*::
+Opens next agenda (the one to the right). 
++
+Default bindings: kbd:[Tab].
+
+*tab.prev*::
+Opens previous agenda (the one to the left). 
++
+Default bindings: kbd:[Shift+Tab].
+
+*search*::
+Starts new search of tasks in current agenda. 
++
+Default bindings: kbd:[Ctrl+f], kbd:[/].
+
+*search.forward*::
+Finds next occurence of currently searched term. Defa
++
+ult bindings: kbd:[n].
+
+*search.backward*::
+Finds previous occurence of currently searched term. 
++
+Default bindings: kbd:[N].
+
+==== Task Commands
+
+*task.add*::
+Opens a command line which accepts a new task's description and parameters.
+They will be directly passed to TaskWarrior, so its syntax can be used, e.g.
++
+----
+> Task description +tag due:someday
+----
++
+You can use tab- and auto-completion. Press kbd:[Tab] to see a list of
+completions available. 
++
+Default bindings: kbd:[a].
+
+*task.add.subtask*::
+Adds a new task the same way as *task.add*, but additionally sets a dependency
+to it in a currently highlighted task. Tasks added this way are considered
+sub-tasks and task which depend on them are their parents.
++
+Default bindings: kbd:[t].
+
+*task.modify*::
+Opens a command line which accepts a modification command:
++
+----
+> -tag1 -tag2 due:
+----
++
+Tab- and auto-completion are available. 
++
+Default bindings: kbd:[m].
+
+*task.edit*::
+Runs _task edit_ which edits task in a text editor. This is not the recommended
+method of modifying tasks, but is provided for exceptional circumstances.
++
+Default bindings: kbd:[e].
+
+*task.annotate*::
+Opens a command line which accepts a new annotation which will be added to
+currently focused task. 
++
+Default bindings: kbd:[A].
+
+*task.denotate*::
+Opens a command line which accepts any of existing annotations. Typed
+annotation will be removed. Annotation must be typed exactly the same as it's
+present inside task. Tab- and auto completion are available: they will complete
+full annotations. 
++
+Default bindings: kbd:[D].
+
+*task.toggle*::
+Mark focused task's status as _done_ if it is currently pending. Otherwise mark
+it as _pending_. 
++
+Default bindings: kbd:[Alt-Space]
+
+*task.delete*::
+Delete focused task. Keep in mind that TaskWarrior doesn't really delete tasks,
+but merely marks them with _deleted_ status and removes them from most reports.
+You can still access them by their UUID. 
++
+Default bindings: kbd:[Delete].
+
+*task.undo*::
+Reverts the most recent action. This command uses _task undo_ underneath.
++
+Default bindings: kbd:[u].
+
+*task.synchornize*::
+Synchronizes tasks with a task server. Task server must be correctly configured
+in taskrc. 
++
+Default bindings: kbd:[S].
+
+*task.select*::
+Toggles selection for current task. You can bulk-edit multiple selected tasks,
+for example by adding/removing tags for all of them.
++
+Default bindings: kbd:[Space].
+
+*refresh*::
+Refreshes the view. Useful after some modifications which by design don't
+automatically refresh agenda (like sync).
++
+Default bindings: kbd:[R].
+
+[[settings]]
+=== Settings
+
+Many different settings can be changed with *c.set()* function. Below is
+alphabetical list of all available TWC settings.
+
+[[settings-agenda]]
+*agenda*::
+Agenda to start TWC with. If it's not set (default), first defined agenda
+will be used.
+
+*autocomplete*::
+Enable commands autocompletion instead of tab completion. 
++
+Default: _False_.
+
+*autohelp*::
+Shows various help texts, hints and tooltips. For example, command line will
+initially display additional visual feedback about current action. 
++
+Default: _True_.
+
+*deffilter*::
+Default filter used for all blocks. Useful when you don't want to repeat some
++
+obvious filter over and over again. Default: _"-DELETED -PARENT"_
+
+*incsearch*::
+Enable incremental search (search-when-typing). 
++
+Default: _True_
+
+*ignorecase*::
+Disable case sensitive search. 
++
+Default: _True_
+
+*smartcase*::
+Override 'ignorecase' when search string contains upper case characters. Only
+used when 'ignorecase' is on (that's how it works in Vim). It results in
+case-sensitive search when search string contains upper case characters and
+case-insensitive when it contains only lower case characters. 
++
+Default: _True_.
+
+[[statusline]]
+*statusleft*::
+*statusright*::
+Formattings of status lines. *statusleft* contains elements aligned to the left
+and *statusright* - to the right. Status line is disabled when both of these
+settings are disabled (set to empty strings).
++
+Status line format is similar to <<config-tasks-format>>. Main difference is
+that task attributes are referenced by _{task.<attribute>}_, e.g.
+"{task.description}". Additionally, there are more placeholders available:
++
+- {taskrc} - path of currently used taskrc
+- {command} - name of current command, when command line is active (e.g. add,
+  modify, annotate,...)
+- {COMMAND} - same as before, but command is UPPER CASED
+- {task.<attribute>} - any attribute of currently highlighted task
+- {agenda.pos} - position of highlighted item
+- {agenda.size} - size of current agenda
+- {agenda.ppos} - percentage position of highlighted item
+
+[[settings-taskrc]]
+*taskrc*::
+Path to used taskrc file. 
++
+Default: _~/.taskrc_.
+
+*timeoutlen*::
+Time in milliseconds that is waited for a mapped sequence to complete. For
+example, if "a b" sequence is mapped, TWC will wait for "b" after "a" was first
+pressed for number milliseconds equal to timeoutlen. If this time passes, it
+the whole key sequence is cancelled. This is similar to Vim setting with the
+same name. 
++
+Default: _1000_.
+
+*ttimeoutlen*::
+Time in milliseconds that is waited for a key code sequence to complete.  It's
+important to distinguish escape key from other keys that start with escape
+sequence (x1B, e.g. `c-[`). This s similar to Vim setting with the same name.
++
+Default: _50_.
+
+[[styles]]
+=== Styles
+
+With *c.set_style()* you can create new styles which can be used to change
+appearence of tasks and status line. Style is a mix of foregound and background
+colors as well as some flags describing text formatting (like bold, italics).
+
+[.center, width=75%, cols=">m,<1", options="header"]
+.Style examples
+|===
+| Style | Description
+
+| fg:white
+| white foreground, color is named
+
+| bg:#000000
+| black background, hexadecimal notation
+
+| bg:ansiblue
+| ANSI color palette
+
+| bold italic underline blink reverse hidden
+| all supported style flags
+
+| nobold noitalic nounderline noblink noreverse nohidden
+| reverse flags
+
+|===
+
+NOTE: Predefined styles are: _heading, text, comment, info, warning, error,
+highlight, mark, tabline, tabsel, tab, tooltip, statusline, status.1,
+status.2_. Some of them are used for styling specific elements of program
+interface.
+
+Such styles can be used e.g. to change appearence of tasks or status line.
+
+.Example style usage
+[source,python]
+----
+c.set_style('mystyle', 'fg:#EEEEEE bg:black bold')
+
+c.set('statusright', '<mystyle>{task.id}</mystyle>')
+c.add_block(...
+    format='<mystyle>{description}</mystyle>')
+----
+
+To only change colors (but not other appearence options, like blinking or color
+reversing) you can also use drop-in unnamed styles. To do that use any tag with
+_fg_, _color_ or _bg_ attributes.
+
+.Unnamed styles
+[source,python]
+----
+c.set_style('mystyle', 'fg:#EEEEEE bg:black bold')
+
+c.set('statusright', '<mystyle>{task.id}</mystyle>')
+c.add_block(...
+    format='<blah fg=blue bg="#999333">{description} </blah>')
+----
+
+=== Configuration Reference
+
+[[add_block]]
+*c.add_block(agenda, *, title, format='{description}', filter=None, sort=None, limit=None)*::
+Adds a new block to a given _agenda_, which will be created if it doesn't exist.
++
+Block contains a _title_ which is displayed above all of its tasks. Tasks
+formatting is described by _format_ string (see <<config-tasks-format>> section
+for details).  By default only raw task description is displayed.
++
+When given, _sort_ parameter decides order of tasks inside block.  It is
+compatible with TaskWarrior's reports sorting. It iss defined by a
+comma-separated list of task attributes. Each of attributes can be additionally
+post-fixed by a "+" or "-" sign for ascending and descending order. For
+example:
++
+----
+sort='project+,urgency-,priority'
+----
++
+TaskWarrior's listing breaks (e.g. `project+/,description+`) are not supported.
++
+Maximum number of tasks displayed in block can be limited by a _limit_. This
+is applied after sorting. By default number of tasks is not limited.
++
+.Example
+----
+c.add_block(
+    agenda="My Agenda",
+    title="All tasks",
+    format='<sr right=" ">{id}</sr>{description}',
+    limit=20)
+----
+
+[[bind]]
+[[unbind]]
+*c.bind(key, command)*::
+*c.unbind(key)*::
+These functions allow binding and unbinding keys in config.py. Keys are
+automatically re-bound (unbound and bound) when *c.bind()* is called with a
+previously used _key_ and new _command_.
++
+For a list and description of TWC commands see <<key-bindings>> section.
++
+.Example
+----
+# binds a key sequence
+c.bind('space t a', 'add-task')
+
+# unbinds default undo
+c.unbind('u')
+----
+
+[[set]]
+*c.set(setting, value)*::
+Changes a program option named _setting_ to the given _value_. See <<settings>>
+section for a list and description of available settings.
++
+.Example
+----
+c.set('statusleft', '{COMMAND} {task.id}')
+c.set('ignorecase', False)
+----
+
+[[set_style]]
+*c.set_style(name, style)*::
+Sets a new style or changes the existing one. Styles are used to change
+appearence of tasks, status line and certain interface elements.
++
+Function accepts _name_ of a stype and _style_ definition. See <<styles>>
+section for details.
++
+.Example
+----
+c.set_style('heading', 'fg:#EEEEEE bg:black bold')
+----
+
+// end::manpage[]

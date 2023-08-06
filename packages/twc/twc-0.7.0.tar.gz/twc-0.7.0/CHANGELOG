@@ -1,0 +1,85 @@
+twc (0.7.0)
+
+  * Breaking: 'quit' command is now used to close task details instead of
+    'cancel'.
+  * Search and open URLs in selected tasks ('followurl' command, by default
+    bound to 'f').
+  * Bugfix: Fixed destroying interface during parallel prints.
+  * Bugfix: Fixed exception causing total interface break when sync and other
+    operation are performed simultaneously.
+
+ -- Michał Góral <dev@goral.net.pl> Sat, 12 Oct 2019 13:15:34 +0200
+
+twc (0.6.0)
+
+  * New command: task.add.subtask (binding: t).
+    Subtask is a new task which automatically becomes a dependency of currently
+    highlighted task.
+  * Show search string for the whole time of searching, even across the tabs
+    and in case of errors.
+  * Bugfix: Fixed incorrect stripping of non-string settings' values.
+  * Bugfix: Show completions for new tags when modifying tasks.
+  * Bugfix: Fixed editing tasks with -t switch (custom taskrc).
+
+ -- Michał Góral <dev@goral.net.pl> Mon, 15 Jul 2019 09:49:35 +0200
+
+twc (0.5.0)
+
+  * Breaking: Rename most of commands.
+    This will cause non-default key bindings to stop working.
+  * Implemented bulk editing of tasks.
+    Tasks can be selected with a space and then most of ordinary commands (like
+    modifying, deleting, toggling, annotating, denotating) can be performed on
+    all selected tasks.
+    This adds a new command: task.select
+  * New command: task.edit, which opens selected tasks in $EDITOR.
+  * Any uncaught exceptions will be reported by shor error messages. This
+    fature can be disabled with --debug flag.
+  * Possibly long running background operations (tasks syncing) will
+    continuously display animations to indicate that they're still running.
+  * Bugfix: Fixed double delete destroying interface.
+  * Bugfix: Fixed incorrect sorting of children (blocking) tasks.
+  * Bugfix: Fixed default config error: fmt -> format.
+  * Bugfix: Fixed destroying the interface when 'undo' fails.
+
+ -- Michał Góral <dev@goral.net.pl> Thu, 30 May 2019 07:42:03 +0200
+
+twc (0.4.0)
+
+  * Breaking: block.fmt becomes block.format.
+  * Published documentation: https://mgoral.gitlab.io/twc.
+  * Generate and install manpages together with TWC packages.
+
+ -- Michał Góral <dev@goral.net.pl> Mon, 20 May 2019 23:58:06 +0200
+
+twc (0.3.0)
+
+  * Added 'agenda' setting and commandline argument which sets first agenda to
+    start with.
+  * Added 'taskrc' to settings.
+  * Added fallback of settings:
+    commandline arguments -> settings from configuration file -> default values
+  * Added settings fallbacks: args->settings->defaults
+  * Added confirmation print after manual refresh.
+  * Bugfix: Fixed handling tasks with quote.
+
+ -- Michał Góral <dev@goral.net.pl> Sun, 12 May 2019 22:04:25 +0200
+
+twc (0.2.0)
+
+  * Added bottom statusline, configured with 'statusleft' and 'statusright' options
+  * Implemented search and incremental search through current agenda.
+    It's configured with 'incsearch', 'ignorecase' and 'smartcase' options.
+  * If there are many blocks in agenda, they will be processed concurrently,
+    which should speed up agenda loading times.
+  * Bugfix: Gracefully handle some errors.
+  * Bugfix: Fixed an error when switching to agenda with smaller number of
+    items than currently highlighted one.
+
+ -- Michał Góral <dev@goral.net.pl> Thu, 09 May 2019 07:24:21 +0200
+
+twc (0.1.0)
+
+  * Initial release
+
+ -- Michał Góral <dev@goral.net.pl> Sun, 05 May 2019

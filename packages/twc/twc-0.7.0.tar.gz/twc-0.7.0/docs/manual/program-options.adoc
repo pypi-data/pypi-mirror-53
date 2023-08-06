@@ -1,0 +1,40 @@
+[[program-options]]
+== Program options
+
+// tag::manpage[]
+TWC can be invoked with additional arguments which modify its initial state and
+behavior. The following options are available:
+
+*-a, --agenda*=_AGENDA_::
+Selects agenda which should be initially displayed when TWC starts. This option
+exects full agenda name and is case-sensitive. If agenda's name contains spaces
+or other special characters, it can be e.g. enclosed in single or double quotes
+(see your shell manual for informations about escaping special characters:
++
+----
+twc --agenda="Next tasks"
+----
++
+Setting this option overrides _<<settings-agenda,agenda>>_ setting from
+configuration file.
+
+*-t, --taskrc*=_TASKRC_::
+Path to taskrc which should be the source of TaskWarrior configuration used by
+TWC. This file should contain for example configuration of taskd
+(synchronization server) or UDAs. By default _~/.taskrc_ is used. See also
+*taskrc(5)*.
++
+Setting this option overrides _<<settings-taskrc,taskrc>>_ setting from
+configuration file.
+
+*--debug*::
+Enables additional features useful for debugging, like printing full tracebacks
+for exceptions.
+
+*--version*::
+Shows TWC's version number and then exits.
+
+*-h, --help*::
+Displays a help message with short summary of available options and then exits.
+
+// end::manpage[]
