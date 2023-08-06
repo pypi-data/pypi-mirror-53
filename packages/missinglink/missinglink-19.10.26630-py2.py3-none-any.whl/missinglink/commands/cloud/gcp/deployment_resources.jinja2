@@ -1,0 +1,41 @@
+resources:
+  - name: ml-rm-custom-role
+    type: gcp-types/iam-v1:projects.roles
+    properties:
+      parent: projects/{{ params['project_id'] }}
+      roleId: {{ params['rm_custom_role']['roleId'] }}
+      role:
+        title: {{ params['rm_custom_role']['title'] }}
+        description: {{ params['rm_custom_role']['description'] }}
+        stage: {{ params['stage'] }}
+        includedPermissions: {{ params['rm_custom_role']['includedPermissions'] }}
+
+  - name: ml-instances-custom-role
+    type: gcp-types/iam-v1:projects.roles
+    properties:
+      parent: projects/{{ params['project_id'] }}
+      roleId: {{ params['instances_custom_role']['roleId'] }}
+      role:
+        title: {{ params['instances_custom_role']['title'] }}
+        description: {{ params['instances_custom_role']['description'] }}
+        stage: {{ params['stage'] }}
+        includedPermissions: {{ params['instances_custom_role']['includedPermissions'] }}
+
+  - name: {{ params['instances_service_account']['name'] }}
+    type: iam.v1.serviceAccount
+    properties:
+      accountId: {{ params['instances_service_account']['name'] }}
+      displayName: Missinglink Instances Service Account
+
+  - name: {{ params['storage']['name'] }}
+    type: storage.v1.bucket
+    properties:
+      name: {{ params['storage']['name'] }}
+      location: {{ params['region'] }}
+      project: {{ params['project_id'] }}
+      labels:
+        app: missinglink-ai
+      bindings:
+        - role: roles/storage.objectAdmin
+          members:
+            - serviceAccount:{{ params['instances_service_account']['name'] }}@{{ params['project_id'] }}.iam.gserviceaccount.com
