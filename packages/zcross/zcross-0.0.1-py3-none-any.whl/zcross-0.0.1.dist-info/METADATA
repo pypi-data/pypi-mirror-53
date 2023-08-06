@@ -1,0 +1,92 @@
+Metadata-Version: 2.1
+Name: zcross
+Version: 0.0.1
+Summary: An utility to read low-pressure gaseous cross sections data
+Home-page: https://gitlab.com/micrenda/zcross-python
+Author: Michele Renda
+Author-email: michele.renda@cern.ch
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.0
+Description-Content-Type: text/markdown
+
+# ZCross
+
+ZCross is a python library used to read low pressure gas sections from various sources like [LXCat](https://lxcat.net/home/).
+
+## Installation
+
+To install this package just use pip:
+``` shell
+pip install zcross
+```
+
+After installing it is necessary to download the cross-section databases. As today, only the [LXCat](https://lxcat.net/home/) dataset is available.
+
+After downloading the database, uncompress and copy to a shared directory such as:
+``` shell
+/opt/zcross-data/
+```
+and configure the `$ZCROSS_DATA` enviroment variable in your `.bashrc` or in `/etc/profile.d/zcross.sh`
+``` shell
+export ZCROSS_DATA=/opt/zcross-data/
+```
+
+Unfortunately, due licensing issues, **we are not able to distribute** the cross section database and we are closely working with the [LXCat](https://lxcat.net/home/) to make them available. Please contact the [authors](michele.renda@cern.ch) of this module for support or updates about the databases availability.
+
+## Examples
+
+List the database availables:
+``` python
+from zcross import ZCross
+
+z = ZCross()
+for database in z.databases:
+	print(database)
+```
+
+Show the groups and references of a speficic database:
+``` python
+from zcross import ZCross
+
+z = ZCross()
+database = z.databases[0]
+
+for group in database.groups:
+	print(group)
+
+for reference in database.references:
+	print(reference.bibtex())
+```
+
+Show the process of a specific group:
+``` python
+from zcross import ZCross
+
+z = ZCross()
+database = z.databases[0]
+group      = database.groups[0]
+
+for process in group.processes:
+	print("Process {} (type: {}) : {}".format(process.id, process.collisionType, process))
+	print("Comment: {}\n".format(process.comment))
+```
+
+Show the cross section table of a specific process:
+``` python
+from zcross import ZCross
+
+z = ZCross()
+database = z.databases[0]
+group    = database.groups[0]
+process  = group.processes[0]
+
+print('Energy [{}],\tArea [{}]'.format(process.energy_units, process.cross_section_units))
+
+for energy, area in zip(process.energy, process.cross_section):
+	print('{:8.2f}\t{:e}'.format(energy, area))
+```
+
