@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Current Command Extensions &#8212; django-extensions 2.1.7 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ideas for New Command Extensions" href="command_extension_ideas.html" />
+    <link rel="prev" title="Installation instructions" href="installation_instructions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="command_extension_ideas.html" title="Ideas for New Command Extensions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation_instructions.html" title="Installation instructions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 2.1.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="current-command-extensions">
+<h1>Current Command Extensions<a class="headerlink" href="#current-command-extensions" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">synopsis</dt>
+<dd class="field-odd"><p>Current Command Extensions</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><a class="reference internal" href="shell_plus.html"><span class="doc">shell_plus</span></a> - An enhanced version of the Django shell.  It will autoload
+all your models making it easy to work with the ORM right away.</p></li>
+<li><p><a class="reference internal" href="admin_generator.html"><span class="doc">admin_generator</span></a> - Generate automatic Django Admin classes by providing an app name. Outputs
+source code at STDOUT.</p></li>
+<li><p><em>clean_pyc</em> - Remove all python bytecode compiled files from the project</p></li>
+<li><p><em>create_command</em> - Creates a command extension directory structure within the
+specified application.  This makes it easy to get started with adding a
+command extension to your application.</p></li>
+<li><p><a class="reference internal" href="create_template_tags.html"><span class="doc">create_template_tags</span></a> - Creates a template tag directory structure within the
+specified application.</p></li>
+<li><p><em>create_jobs</em> - Creates a Django jobs command directory structure for the
+given app name in the current directory.  This is part of the impressive jobs
+system.</p></li>
+<li><p><em>clear_cache</em> - Clear django cache, useful when testing or deploying.</p></li>
+<li><p><em>compile_pyc</em> - Compile python bytecode files for the project.</p></li>
+<li><p><em>describe_form</em> - Used to display a form definition for a model. Copy and
+paste the contents into your forms.py and you’re ready to go.</p></li>
+<li><p><a class="reference internal" href="delete_squashed_migrations.html"><span class="doc">delete_squashed_migrations</span></a> - Deletes leftover migrations after
+squashing and converts squashed migration to a normal one.</p></li>
+<li><p><a class="reference internal" href="dumpscript.html"><span class="doc">dumpscript</span></a> - Generates a Python script that will
+repopulate the database using objects. The advantage of this approach is that
+it is easy to understand, and more flexible than directly populating the
+database, or using XML.</p></li>
+<li><p><a class="reference external" href="export_emails.html">export_emails</a> - export the email addresses for your
+users in one of many formats.  Currently supports Address, Google, Outlook,
+LinkedIn, and VCard formats.</p></li>
+<li><p><em>find_template</em> - Finds the location of the given template by resolving its path</p></li>
+<li><p><em>generate_secret_key</em> - Creates a new secret key that you can put in your
+settings.py module.</p></li>
+<li><p><a class="reference external" href="graph_models.html">graph_models</a> - Creates a <a class="reference external" href="http://www.graphviz.org/">GraphViz</a> dot file.  You need
+to send this output to a file yourself.  Great for graphing your models. Pass
+multiple application names to combine all the models into a single dot file.</p></li>
+<li><p><em>mail_debug</em> - Starts a mail server which echos out the contents of the email
+instead of sending it.</p></li>
+<li><p><a class="reference internal" href="merge_model_instances.html"><span class="doc">merge_model_instances</span></a> - Merges duplicate model instances by
+reassigning related model references to a chosen primary model instance.</p></li>
+<li><p><em>notes</em> - Show all annotations like TODO, FIXME, BUG, HACK, WARNING, NOTE or XXX in your py and HTML files.</p></li>
+<li><p><em>passwd</em> - Makes it easy to reset a user’s password.</p></li>
+<li><p><em>pipchecker</em> - Scan pip requirement file(s)s for out-of-date packages. Similar to
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span> <span class="pre">-o</span></code> which used installed packages (in virtualenv) instead of requirements file(s).</p></li>
+<li><p><a class="reference external" href="print_settings.html">print_settings</a> - Similar to <code class="docutils literal notranslate"><span class="pre">diffsettings</span></code> but shows <em>selected</em>
+active Django settings or <em>all</em> if no args passed.</p></li>
+<li><p><em>print_user_for_session</em> - Print the user information for the provided
+session key. this is very helpful when trying to track down the person who
+experienced a site crash.
+It seems this works only if setting <code class="docutils literal notranslate"><span class="pre">SESSION_ENGINE</span></code> is
+<code class="docutils literal notranslate"><span class="pre">'django.contrib.sessions.backends.db'</span></code> (default value).</p></li>
+<li><p><em>drop_test_database</em> - Drops the test database. Usefull when running Django
+test via some automated system (BuildBot, Jenkins, etc) and making sure that
+the test database is always dropped at the end.</p></li>
+<li><p><em>reset_db</em> - Resets a database (currently sqlite3, mysql, postgres). Uses “DROP DATABASE” and “CREATE DATABASE”.</p></li>
+<li><p><em>runjob</em> - Run a single maintenance job.  Part of the jobs system.</p></li>
+<li><p><em>runjobs</em> - Runs scheduled maintenance jobs. Specify hourly, daily, weekly,
+monthly.  Part of the jobs system.</p></li>
+<li><p><a class="reference internal" href="runprofileserver.html"><span class="doc">runprofileserver</span></a> - Starts <em>runserver</em> with hotshot/profiling tools enabled.
+I haven’t had a chance to check this one out, but it looks really cool.</p></li>
+<li><p><a class="reference external" href="runscript.html">runscript</a> - Runs a script in the django context.</p></li>
+<li><p><a class="reference external" href="runserver_plus.html">runserver_plus</a> - The standard runserver stuff but with
+the Werkzeug debugger baked in. Requires <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a>. This one kicks ass.</p></li>
+<li><p><em>set_fake_emails</em> - Give all users a new email based on their account data (“%(username)s&#64;example.com” by default). Possible parameters are: username, first_name, last_name. <em>DEBUG only</em></p></li>
+<li><p><em>set_fake_passwords</em> -  Sets all user passwords to a common value (<em>password</em> by default). <em>DEBUG only</em>.</p></li>
+<li><p><em>show_template_tags</em> - Displays template tags and filters available in the current project.</p></li>
+<li><p><em>show_urls</em> - Displays the url routes that are defined in your project. Very
+crude at this point.</p></li>
+<li><p><a class="reference internal" href="sqldiff.html"><span class="doc">sqldiff</span></a> - Prints the (approximated) difference between an app’s models and
+what is in the database.  This is very nice, but also very experimental at
+the moment.  It can not catch everything but it’s a great sanity check.</p></li>
+<li><p><a class="reference internal" href="sqlcreate.html"><span class="doc">sqlcreate</span></a> - Generates the SQL to create your database for you, as specified
+in settings.py.</p></li>
+<li><p><a class="reference internal" href="sqldsn.html"><span class="doc">sqldsn</span></a> - Reads the Django settings and extracts the parameters needed
+to connect to databases using other programs.</p></li>
+<li><p><a class="reference external" href="sync_s3.html">sync_s3</a> - Copies files found in settings.MEDIA_ROOT to S3.
+Optionally can also gzip CSS and Javascript files and set the
+Content-Encoding header, and also set a far future expires header for browser
+caching.</p></li>
+<li><p><a class="reference internal" href="syncdata.html"><span class="doc">syncdata</span></a> - Makes the current database have the same data as the fixture(s), no more, no less.</p></li>
+<li><p><em>unreferenced_files</em> - Prints a list of all files in MEDIA_ROOT that are not referenced in the database.</p></li>
+<li><p><em>update_permissions</em> - Reloads permissions for specified apps, or all apps if no args are specified.</p></li>
+<li><p><em>validate_templates</em> - Validate templates on syntax and compile errors.</p></li>
+<li><p><em>set_default_site</em> - Set parameters of the default <cite>django.contrib.sites</cite> Site using <cite>name</cite> and <cite>domain</cite> or <cite>system-fqdn</cite>.</p></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation_instructions.html"
+                        title="previous chapter">Installation instructions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="command_extension_ideas.html"
+                        title="next chapter">Ideas for New Command Extensions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/command_extensions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="command_extension_ideas.html" title="Ideas for New Command Extensions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation_instructions.html" title="Installation instructions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-extensions 2.1.7 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Copyright (C) 2008-2015 Michael Trier, Bas van Oostveen and contributors.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
