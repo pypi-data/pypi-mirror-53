@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: Jupinx
+Version: 0.2.0
+Summary: Jupinx extension: Convert your RST files into into different formats like notebook, pdf, html.
+Home-page: https://github.com/QuantEcon/jupinx
+Author: QuantEcon
+Author-email: admin@quantecon.org
+License: BSD
+Download-URL: https://github.com/QuantEcon/jupinx/archive/0.2.0.tar.gz
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Sphinx
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Framework :: Sphinx :: Extension
+Classifier: Topic :: Documentation
+Classifier: Topic :: Utilities
+Requires-Dist: docutils
+Requires-Dist: nbformat
+Requires-Dist: sphinx (>=1.8.5)
+Requires-Dist: dask
+Requires-Dist: dask[distributed]
+Requires-Dist: ipython
+Requires-Dist: nbconvert
+Requires-Dist: notebook
+Requires-Dist: jupyter-client
+Requires-Dist: pyzmq (>=17.1.3)
+Requires-Dist: sphinxcontrib-bibtex
+Requires-Dist: sphinxcontrib-jupyter (>=0.5.0)
+
+
+This package contains the Jupinx cmd and quickstart utilities.
+
+
