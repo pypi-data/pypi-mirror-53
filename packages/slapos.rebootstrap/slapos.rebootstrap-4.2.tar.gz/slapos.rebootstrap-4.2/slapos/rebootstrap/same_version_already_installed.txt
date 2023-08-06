@@ -1,0 +1,30 @@
+
+
+An edge case is when the python is provided by a part that does not need to install anything.
+
+>>> import sys
+>>> print system(buildout),
+Develop: '/sample-buildout/recipes'
+>>> write(sample_buildout, 'buildout.cfg',
+... """
+... [buildout]
+... develop = recipes
+... extensions = slapos.rebootstrap
+... python = already_installed_python
+...
+... parts =
+...   realrun
+...
+... [already_installed_python]
+... recipe = recipes:pyalreadyinstalled
+...
+... [realrun]
+... recipe = recipes:pyshow
+... """ % dict(syspython=sys.executable))
+
+>>> print system(buildout),
+Using already installed /system_python
+Develop: '/sample-buildout/recipes'
+Installing already_installed_python.
+Installing realrun.
+Running with: /system_python

@@ -1,0 +1,66 @@
+Simple case: switch to a Python with same major/minor version
+-------------------------------------------------------------
+
+>>> import sys
+>>> print system(buildout),
+Develop: '/sample-buildout/recipes'
+>>> write(sample_buildout, 'buildout.cfg',
+... """
+... [buildout]
+... develop = recipes
+... extensions = slapos.rebootstrap
+... python = installpython
+...
+... parts =
+...   realrun
+...
+... [installpython]
+... recipe = recipes:pyinstall
+...
+... [realrun]
+... recipe = recipes:pyshow
+... """ % dict(syspython=sys.executable))
+
+>>> print system(buildout),
+slapos.rebootstrap: Make sure that the section 'installpython' won't be reinstalled after rebootstrap.
+Develop: '/sample-buildout/recipes'
+Installing installpython.
+slapos.rebootstrap: 
+************ REBOOTSTRAP: IMPORTANT NOTICE ************
+bin/buildout is being reinstalled right now, as new python:
+  /sample_buildout/parts/installpython/bin/python
+is available, and buildout is using another python:
+  /system_python
+Buildout will be restarted automatically to have this change applied.
+************ REBOOTSTRAP: IMPORTANT NOTICE ************
+<BLANKLINE>
+Generated script '/sample-buildout/bin/buildout-rebootstrap'.
+Develop: '/sample-buildout/recipes'
+Updating installpython.
+Installing realrun.
+Running with: /sample_buildout/parts/installpython/bin/python
+
+>>> print system(buildout),
+Develop: '/sample-buildout/recipes'
+Updating installpython.
+Updating realrun.
+Running with: /sample_buildout/parts/installpython/bin/python
+
+>>> cp(buildout + '-orig', buildout)
+>>> print system(buildout),
+slapos.rebootstrap: Make sure that the section 'installpython' won't be reinstalled after rebootstrap.
+Develop: '/sample-buildout/recipes'
+Updating installpython.
+slapos.rebootstrap: 
+************ REBOOTSTRAP: IMPORTANT NOTICE ************
+bin/buildout is being reinstalled right now, as new python:
+  /sample_buildout/parts/installpython/bin/python
+is available, and buildout is using another python:
+  /system_python
+Buildout will be restarted automatically to have this change applied.
+************ REBOOTSTRAP: IMPORTANT NOTICE ************
+<BLANKLINE>
+Develop: '/sample-buildout/recipes'
+Updating installpython.
+Updating realrun.
+Running with: /sample_buildout/parts/installpython/bin/python

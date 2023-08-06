@@ -1,0 +1,176 @@
+Metadata-Version: 1.1
+Name: slapos.rebootstrap
+Version: 4.2
+Summary: A zc.buildout extension to solve chicken-and-egg problem of using python which is built by itself
+Home-page: https://lab.nexedi.com/nexedi/slapos.rebootstrap
+Author: Kazuhiko Shiozaki
+Author-email: kazuhiko@nexedi.com
+License: ZPL 2.1
+Description: Rerun buildout with a python provided by buildout
+        =================================================
+        
+        Buildout 2.0 no-longer supports using multiple versions of Python in a
+        single buildout. This extension makes it possible to use 'yet another
+        single' version of python, by building a specified python part and its
+        dependencies first then reinvoking buildout with the executable.
+        
+        Usage
+        -----
+        
+        A part to build python is required. You need to specify it by `python`
+        parameter in `buildout` section, just same as buildout 1.x. The python
+        section must provide executable option that gives the path to a Python
+        executable.
+        
+        And add slapos.rebootstrap to `extensions` parameter in `buildout` section.
+        
+        Use whatever python to bootstrap and run buildout. If this extension
+        detects that sys.executable used to run buildout is different than
+        executable provided in python section, it will try to find this
+        executable. If it does not exists, it will install this section and
+        then reinstall buildout using new python executable. Later buildout
+        run will continue using new python.
+        
+        Example profile and invocation
+        ------------------------------
+        ::
+        
+          [buildout]
+          extensions = slapos.rebootstrap
+          python = slapospython
+          
+          parts =
+            realrun
+          
+          [slapospython]
+          recipe = plone.recipe.command
+          stop-on-error = true
+          bin_dir = ${buildout:parts-directory}/${:_buildout_section_name_}/bin
+          executable = ${:bin_dir}/python
+          command = mkdir -p ${:bin_dir} && cp -f /usr/bin/python ${:executable}
+          
+          [realrun]
+          recipe = plone.recipe.command
+          command =
+            echo Running with python ${buildout:executable}
+          update-command = ${:command}
+        
+        After bootstrapping and running this buildout it will print:
+        
+        Running with python /path/to/buildout/parts/slapospython/bin/python
+        
+        Running tests
+        -------------
+        
+        Test for this package can be run as simple as:
+        
+         $ python setup.py test
+        
+        Please keep in mind that clean python environment is required -- the best one is
+        provided by buildout or virtualenv *WITHOUT* site packages.
+        
+        
+        Changes
+        =======
+        
+        4.2 (2019-10-10)
+        ----------------
+        
+        - Support python provided by a part that does not need install.
+          This fixes installation of slapos software release which python comes
+          already installed in shared parts from an outer slapos.
+        
+        4.1 (2017-06-06)
+        ----------------
+        
+        - Fix MANIFEST.in: some files were missing.
+        
+        4.0 (2017-06-05)
+        ----------------
+        
+        Complete reimplementation:
+        
+        - Work entirely in-place, even to switch to a different version of Python.
+        - Update bin/buildout to immediately use the wanted Python on subsequent
+          buildout runs.
+        
+        For SlapOS, the second point is required to have the instanciation done
+        with the built Python.
+        
+        3.10 (2017-03-15)
+        -----------------
+        
+        * Drop zc.buildout version pinning to prevent loop in case of version
+          change.
+        
+        3.9 (2017-03-15)
+        ----------------
+        
+        * Drop zc.buildout version pinning in reboot() to prevent loop in
+          case of version change.
+        
+        3.8 (2017-03-13)
+        ----------------
+        
+        * Use a dedicated rebootstrap directory only if
+          buildout:rebootstrap-directory is set.
+        
+        3.7 (2016-08-18)
+        ----------------
+        
+        * Preserve bin-directory for generate bin/buildout on the
+          appropriate location.
+        
+        3.6 (2016-06-30)
+        ----------------
+        
+        * Add more parameters for the use case with slapos.package.
+        
+        3.5 (2016-06-10)
+        ----------------
+        
+        * Explicitly specify the python interpreter and the config file when
+          invoking a new buildout process to build rebootstrap directory.
+        
+        3.4 (2016-06-10)
+        ----------------
+        
+        * Use a dedicated buildout directory for building a rebootstrap
+          python. The change in 3.2 was wrong because it causes infinite loop
+          of rebootstrap and build for different version of python.
+        
+        3.3 (2016-01-20)
+        ----------------
+        
+        * Ignore MissingSection exception in _uninstall_part().
+        
+        3.2 (2015-11-10)
+        ----------------
+        
+        * Support zc.buildout >= 2.0.0.
+        * Same parts directory as the normal buildout is used so that we can
+          build faster and also make the code simpler.
+        * Python part is now specified by `python` parameter in `buildout`
+          section.
+        * Restart automatically with the original python when running python
+          part is removed.
+        
+        3.1 (2011-06-24)
+        ----------------
+        
+        * Support eggs parameter in rebootstrap section in order to add additional
+          eggs for rebootstrapped buildout.
+        
+        3.0 (2011-05-27)
+        ----------------
+        
+        * Renamed from slapos.tool.rebootstrap 2.4
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Buildout :: Extension
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Zope Public License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

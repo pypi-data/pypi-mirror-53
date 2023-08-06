@@ -1,0 +1,75 @@
+Rebootstrap with a different major/minor version of Python
+----------------------------------------------------------
+
+TODO: The test is incomplete for 2 reasons:
+
+- The test environment must be prepared with a directory containing the source
+  tarballs of several eggs, at least `setuptools` and `zc.buildout`.
+  Hence the failure that it couldn't find a distribution for `setuptools`.
+- To go further, we'd need a really different version of Python instead of
+  tricking `slapos.rebootstrap` that we have one, to reproduce the
+  reinstallation of many eggs in `/eggs/` for the wanted version, and check
+  that the change of signatures is ignored for the parts required to build
+  Python.
+
+>>> import sys
+>>> write(sample_buildout, 'recipes', 'setup.py',
+... """
+... from setuptools import setup
+...
+... setup(
+...   name = "recipes",
+...   entry_points = {'zc.buildout':[
+...     'pyinstall = pyinstall:Pyinstall',
+...     'pyshow = pyshow:Pyshow',
+...   ],
+...   'zc.buildout.extension': ['ext = extension:extension'],},
+...   )
+... """)
+>>> write(sample_buildout, 'recipes', 'extension.py',
+... """
+... import sys
+... class extension(object):
+...   version_info = ()
+...   def __init__(self, buildout):
+...     from slapos import rebootstrap
+...     assert sys is rebootstrap.sys
+...     rebootstrap.sys = self
+...   def __getattr__(self, attr):
+...     return getattr(sys, attr)
+... """)
+>>> print system(buildout),
+Develop: '/sample-buildout/recipes'
+>>> write(sample_buildout, 'buildout.cfg',
+... """
+... [buildout]
+... develop = recipes
+... extensions = slapos.rebootstrap recipes
+... python = installpython
+...
+... parts =
+...   realrun
+...
+... [installpython]
+... recipe = recipes:pyinstall
+...
+... [realrun]
+... recipe = recipes:pyshow
+... """ % dict(syspython=sys.executable))
+
+>>> print system(buildout), # doctest: +ELLIPSIS
+slapos.rebootstrap: Make sure that the section 'installpython' won't be reinstalled after rebootstrap.
+Develop: '/sample-buildout/recipes'
+Installing installpython.
+slapos.rebootstrap: 
+************ REBOOTSTRAP: IMPORTANT NOTICE ************
+bin/buildout is being reinstalled right now, as new python:
+  /sample_buildout/parts/installpython/bin/python
+is available, and buildout is using another python:
+  /system_python
+Buildout will be restarted automatically to have this change applied.
+************ REBOOTSTRAP: IMPORTANT NOTICE ************
+<BLANKLINE>
+While:
+  Installing.
+Error: Couldn't find a distribution for 'setuptools==...'
