@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: django-findreplace
+Version: 0.1
+Summary: Django Find Replace
+Home-page: https://github.com/developersociety/django-findreplace
+Maintainer: The Developer Society
+Maintainer-email: studio@dev.ngo
+License: BSD
+Description: Django Find Replace
+        ===================
+        
+        A Django_ management command which will replace all instances of a string throughout a database
+        with another - useful for bulk content changes.
+        
+        .. _Django: https://www.djangoproject.com/
+        
+        Installation
+        ------------
+        
+        Using pip_:
+        
+        .. _pip: https://pip.pypa.io/
+        
+        .. code-block:: console
+        
+            $ pip install django-findreplace
+        
+        Edit your Django project's settings module, and add the application to ``INSTALLED_APPS``:
+        
+        .. code-block:: python
+        
+            INSTALLED_APPS = [
+                # ...
+                "findreplace",
+                # ...
+            ]
+        
+        Usage
+        -----
+        
+        To replace all instances of *foo* with *bar*:
+        
+        .. code-block:: console
+        
+            $ ./manage.py findreplace foo bar
+        
+        To use this command without being asked for confirmation:
+        
+        .. code-block:: console
+        
+            $ ./manage.py findreplace --noinput foo bar
+        
+Platform: any
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 1.8
+Classifier: Framework :: Django :: 1.11
+Classifier: Framework :: Django :: 2.2
+Requires-Python: >=3.4
+Description-Content-Type: text/x-rst
