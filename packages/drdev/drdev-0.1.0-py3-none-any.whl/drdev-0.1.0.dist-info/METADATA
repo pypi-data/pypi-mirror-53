@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: drdev
+Version: 0.1.0
+Summary: CLI to manage docker dev environments.
+Home-page: https://github.com/ageekinside/drdev
+Author: Marc Brooks
+Author-email: marcwbrooks@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
+Requires-Dist: click (>=7.0)
+Requires-Dist: cookiecutter (>=1.6.0)
+Requires-Dist: black (>=19.3b0)
+Requires-Dist: environs (>=6.0.0)
+Requires-Dist: docker (>=4.0.2)
+
+
+# Docker Development (drdev)
+
+Planned functionality
+
+* Create a setup.py to create pip installable package
+* Support various flavors of linux
+* Add multiple programming languages: Python, Go, Rust, C?
+* Customizable scripts for dev setup
+* NeoVIM setup and loading .vimrc
+
+tools/funcitonality to build
+
+* spin up : Spins up a docker container for development work
+* list dev : Lists all dev containers
+* connect: Connect a terminal to a specific dev container
+* output a dockerfile for the dev env
+* create a docker compose file
+
+
