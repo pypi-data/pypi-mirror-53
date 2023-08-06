@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: kan_secret_storage
+Version: 0.1.3
+Summary: Python Secret Storage package
+Home-page: https://github.com/kansoftware/secret_storage
+Author: Andrew KAN
+Author-email: kan@kansoftware.ru
+License: GPL-3
+Description: # secret_storage
+        Python Secret Storage package
+        
+        ## Install
+        ```bash
+        pip install kan_secret_storage
+        ```
+        
+        ## Usage
+        ```python
+        import kan_secret_storage.main as ss
+        
+        message = 'Hello Blablacode.ru!'
+        ss.storedata("message", message.encode("utf-8"))
+        message1 = ss.getdata("message")
+        ```
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
