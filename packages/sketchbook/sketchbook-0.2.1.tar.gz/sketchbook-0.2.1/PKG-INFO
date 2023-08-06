@@ -1,0 +1,76 @@
+Metadata-Version: 2.1
+Name: sketchbook
+Version: 0.2.1
+Summary: A template engine built for asyncio with async/await syntax support.
+Home-page: https://github.com/futursolo/sketchbook
+Author: Kaede Hoshikawa
+Author-email: futursolo@icloud.com
+License: Apache License 2.0
+Description: Sketchbook
+        ==========
+        .. image:: https://travis-ci.org/futursolo/sketchbook.svg?branch=master
+          :target: https://travis-ci.org/futursolo/sketchbook
+        
+        .. image:: https://coveralls.io/repos/github/futursolo/sketchbook/badge.svg?branch=master
+          :target: https://coveralls.io/github/futursolo/sketchbook?branch=master
+        
+        A template engine built with async/await syntax support for asyncio and curio.
+        
+        Intallation
+        -----------
+        .. code-block:: shell
+        
+            $ pip install -U sketchbook
+        
+        Source Code
+        -----------
+        :code:`sketchbook` is open sourced under
+        `Apache License 2.0 <http://www.apache.org/licenses/LICENSE-2.0>`_ and its
+        source code is hosted on `GitHub <https://github.com/futursolo/sketchbook/>`_.
+        
+        Requirements
+        ------------
+        - Python 3.6.1+
+        - aiofiles>=0.3.1,<1(Optional, used by :code:`sketchbook.AsyncSketchFinder`)
+        
+        Alternative Event Loop
+        ----------------------
+        Beside the :code:`asyncio` module from the Python standard library, Sketchbook
+        can also be used with `curio <https://curio.readthedocs.io/en/latest/>`_.
+        
+        Documentation
+        -------------
+        The Documentation is hosted `here <https://sketchbook.futures.moe/>`_.
+        
+        License
+        -------
+        Copyright 2019 Kaede Hoshikawa
+        
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+        
+            http://www.apache.org/licenses/LICENSE-2.0
+        
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+        
+Platform: UNKNOWN
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Provides-Extra: aiofiles
+Provides-Extra: curio
+Provides-Extra: full
+Provides-Extra: test
+Provides-Extra: dev
