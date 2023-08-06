@@ -1,0 +1,13 @@
+#! /bin/env python
+
+import os
+import json
+import sys
+from cerberusctl.cerberus import *
+
+def main():
+    return cerberuscli()
+
+if __name__ == "__main__":
+    sys.exit(main())
+
