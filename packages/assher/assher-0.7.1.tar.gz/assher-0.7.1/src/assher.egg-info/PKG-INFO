@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: assher
+Version: 0.7.1
+Summary: Async SSH/SFTP massive runner
+Home-page: https://github.com/wWolfovich/assher
+Author: Oleg Marin
+Author-email: wWolfovich@gmail.com
+License: UNKNOWN
+Description: # ASSHer
+        Asynchronous SSH/SFTP runner.
+        
+        ## Installation
+        
+        ```sh
+        python3 -m pip install assher
+        ```
+        
+        ## Usage as command-line utility
+        You can see help by running
+        ```sh
+        python3 -m assher --help
+        ```
+        Example of running on a couple of networks (using bash sequence expression)
+        ```sh
+        python3 -m assher -L 50 --hosts 192.168.22{5..6}.{10..254} -c "hostname -s" -U root -i ~/.ssh/very_secret_privkey
+        ```
+Keywords: AIO async SSH SFTP aioqs
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
