@@ -1,0 +1,37 @@
+# BMPxlsxWriter
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+The library takes a dictionary of form {Sheet: {Cell: Value}} and updates the specified Excel file accordingly.
+
+This function was created in support of the Model My Watershed Web application WikiWatersheds that models Best Management Practice (BMP) impacts to reducing water quality impacts. (https://modelmywatershed.org/)
+
+### Example Function Run
+```sh
+## Function(dataDictionary, FileName)
+
+## Dictionary - {"SHEET": {"CELL": VALUE, "CELL": VALUE}}
+
+datadict = {
+'Sheet1': {'D1': 123.4, 'D2': 567.8},
+'Sheet2': {'D1': 123.4, 'D2': 567.8},
+'Sheet3': {'D1': 123.4, 'D2': 567.8},
+}
+
+## Full Path to File
+
+loc = os.getcwd()
+fnme = 'MMW_BMP_Spreadsheet_Tool(Skippack).xlsx'
+file = os.path.join(loc, fnme)
+
+## Run Function
+
+BMPxlsxWriter.write(datadict, file)
+```
+
+### Installation
+
+BMPxlsxWriter was written for Python version 2.7
+
+```sh
+$ pip install BMPxslxWriter
+```
