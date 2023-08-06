@@ -1,0 +1,52 @@
+CHANGES
+=======
+
+1.0.1
+-----
+
+* OpenDev Migration Patch
+* Replace openstack.org git:// URLs with https://
+* Rename agent queue - fixes broken minor update
+* Ensure notifications are consumed from non-pool queue
+* Set amqp\_auto\_delete=true for notifications transport
+* Avoid tox\_install.sh
+* import zuul job settings from project-config
+* Fix tox\_install.sh for pip10
+* Update UPPER\_CONSTRAINTS\_FILE for stable/queens
+* Update .gitreview for stable/queens
+
+1.0.0
+-----
+
+* Add unit tests for member manager
+* Make the agent distributed using hashring and notifications
+* Fix devstack example
+* Node state configuration - add log\_agent\_heartbeat
+* Fix nits in networking-baremetal docs
+* Add dsvm job
+* Update docs and generate config file example
+* Add support to bind type vlan networks
+* Devstack - Add ironic-neutron-agent
+* Use reporting\_interval option from neutron
+* Switch from MechanismDriver to SimpleAgentMechanismDriverBase
+* Updated from global requirements
+* start\_flag = True, only first time, or conf change
+* Add baremetal neutron agent
+* Updated from global requirements
+* Updated from global requirements
+* Updated from global requirements
+* Use constants from neutron-lib
+* Update URLs in documents according to document migration
+* Fix to use "." to source script files
+* Update reno for stable/pike
+
+0.1.0
+-----
+
+* Add initial release note
+* Add installation documentation
+* Add devstack plugin to install networking\_baremetal
+* Add baremetal ML2 driver
+* Add .gitignore
+* Initial commit from cookiecutter
+* Added .gitreview
