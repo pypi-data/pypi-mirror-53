@@ -1,0 +1,93 @@
+[tox]
+envlist =
+    {% for env in supports | sort -%}
+    {{ env }}
+    {% endfor -%}
+    build
+    readme
+    safety
+    secrets
+    {% if style -%}style{%- endif %}
+    {% if docs -%}docs-{html,doctest,linkcheck,spelling,style}{%- endif %}
+skipsdist = True
+
+[testenv]
+setenv =
+changedir = {envtmpdir}
+commands =
+    {envbindir}/pip install {toxinidir}
+    {envbindir}/{{ test_runner }} {posargs:{{ tests }}}
+    {envpython} -m doctest {toxinidir}/README.rst
+deps =
+    {% for each in test_deps -%}
+    {{ each }}
+    {%- endfor %}
+    {% if not closed %}codecov,{% endif %}coverage: coverage>=5.0a7
+
+[testenv:coverage]
+setenv =
+    {[testenv]setenv}
+    COVERAGE_FILE={envtmpdir}/coverage-data
+commands =
+    {envbindir}/pip install {toxinidir}
+    {envbindir}/coverage run --rcfile={toxinidir}/.coveragerc {envbindir}/{{ test_runner }} {{ tests }}
+    {envbindir}/coverage report --rcfile={toxinidir}/.coveragerc --show-missing
+    {envbindir}/coverage html --directory={envtmpdir}/htmlcov --rcfile={toxinidir}/.coveragerc {posargs}
+
+[testenv:build]
+deps = pep517
+commands =
+    {envbindir}/python -m pep517.check {toxinidir}
+
+[testenv:readme]
+changedir = {toxinidir}
+deps = readme_renderer
+commands =
+    {envbindir}/python setup.py check --restructuredtext --strict
+
+[testenv:safety]
+deps = safety
+commands =
+    {envbindir}/pip install {toxinidir}
+    {envbindir}/safety check
+
+[testenv:secrets]
+deps = detect-secrets
+commands = {envbindir}/detect-secrets scan {toxinidir}
+
+[testenv:style]
+deps = ebb-lint
+commands =
+  {envbindir}/flake8 {posargs} --max-complexity 10 {{ tests }} {toxinidir}/setup.py{% if docs %} {toxinidir}/docs
+{% for each in ["html", "doctest", "linkcheck", "spelling"] -%}
+
+[testenv:docs-{{ each }}]
+changedir = docs
+whitelist_externals = make
+commands = {envpython} -m sphinx -b {{ each }} {toxinidir}/docs/ {envtmpdir}/build {posargs:-a -n -T -W}
+deps =
+    -r{toxinidir}/docs/requirements.txt
+    {toxinidir}
+{% endfor %}
+
+[testenv:docs-style]
+changedir = docs
+commands = doc8 {posargs} {toxinidir}/docs
+deps =
+    doc8
+    pygments
+    pygments-github-lexers
+{% endif %}
+{% if not closed %}
+[testenv:codecov]
+passenv = CODECOV* CI TRAVIS TRAVIS_*
+setenv =
+    {[testenv]setenv}
+    COVERAGE_DEBUG_FILE={envtmpdir}/coverage-debug
+    COVERAGE_FILE={envtmpdir}/coverage-data
+commands =
+    {envbindir}/pip install {toxinidir}
+    {envbindir}/coverage run --rcfile={toxinidir}/.coveragerc {envbindir}/{{ test_runner }} {{ tests }}
+    {envbindir}/coverage xml -o {envtmpdir}/coverage.xml
+    {envbindir}/codecov --required --disable gcov --file {envtmpdir}/coverage.xml
+{%- endif %}
