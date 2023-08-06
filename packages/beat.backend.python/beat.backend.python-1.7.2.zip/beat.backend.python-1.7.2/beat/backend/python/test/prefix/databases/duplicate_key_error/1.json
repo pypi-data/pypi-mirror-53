@@ -1,0 +1,19 @@
+{
+    "root_folder": "/tmp/foo/bar",
+    "protocols": [
+        {
+            "name": "test_duplicate_key",
+            "name": "test_duplicate_key",
+            "template": "double/1",
+            "views": {
+                "double": {
+                    "view": "MyView",
+                    "parameters": {
+                        "threshold": 3
+                    }
+                }
+            }
+        }
+    ],
+    "schema_version": 2
+}

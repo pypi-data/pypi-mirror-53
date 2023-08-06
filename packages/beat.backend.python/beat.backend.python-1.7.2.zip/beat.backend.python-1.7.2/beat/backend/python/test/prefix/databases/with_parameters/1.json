@@ -1,0 +1,42 @@
+{
+  "root_folder": "/tmp/foo/bar",
+  "protocols": [
+    {
+      "name": "test_with_parameters",
+      "template": "protocol",
+      "sets": [
+        {
+          "name": "double",
+          "template": "double",
+          "view": "Parametrized",
+          "outputs": {
+              "a": "user/single_integer/1",
+              "b": "user/single_integer/1",
+              "sum": "user/single_integer/1"
+          },
+          "parameters": {
+            "threshold": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_with_empty_parameters",
+      "template": "protocol",
+      "sets": [
+        {
+          "name": "double",
+          "template": "double",
+          "view": "Parametrized",
+          "outputs": {
+              "a": "user/single_integer/1",
+              "b": "user/single_integer/1",
+              "sum": "user/single_integer/1"
+          },
+          "parameters": {
+          }
+        }
+      ]
+    }
+  ]
+}
