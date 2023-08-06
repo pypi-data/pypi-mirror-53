@@ -1,0 +1,80 @@
+cffi
+perfmetrics>=3.0.0
+zope.interface
+zope.dottedname
+zc.lockfile
+ZODB>=5.5
+transaction>=2.4.0
+
+[all_tested_drivers]
+
+[all_tested_drivers:platform_python_implementation == "CPython"]
+psycopg2>=2.6.1
+
+[all_tested_drivers:platform_python_implementation == "CPython" and sys_platform != "win32"]
+mysqlclient>=1.4
+
+[all_tested_drivers:python_version == "2.7" or platform_python_implementation == "PyPy"]
+pg8000>=1.11.0
+
+[all_tested_drivers:python_version == "3.5" or platform_python_implementation == "PyPy"]
+psycopg2cffi>=2.7.4
+
+[all_tested_drivers:python_version == "3.6" or platform_python_implementation == "PyPy" or sys_platform == "win32"]
+PyMySQL>=0.6.6
+
+[all_tested_drivers:python_version == "3.7" or platform_python_implementation == "PyPy"]
+mysql-connector-python>=8.0.16
+
+[docs]
+sphinxcontrib-programoutput
+repoze.sphinx.autointerface
+sphinx_rtd_theme
+
+[memcache]
+
+[memcache:platform_python_implementation == "CPython" and sys_platform != "win32"]
+pylibmc
+
+[memcache:platform_python_implementation == "PyPy" or sys_platform == "win32"]
+python-memcached
+
+[mysql:platform_python_implementation=="CPython" and (sys_platform != "win32")]
+mysqlclient>=1.4
+
+[mysql:platform_python_implementation=="PyPy" or (sys_platform == "win32")]
+PyMySQL>=0.6.6
+
+[oracle]
+cx_Oracle>=5.0.0
+
+[postgresql: platform_python_implementation == "CPython"]
+psycopg2>=2.8.3
+
+[postgresql: platform_python_implementation == "PyPy"]
+psycopg2cffi>=2.8.1
+
+[test]
+random2
+zope.testing
+ZODB[test]
+zc.zlibstorage
+zope.testrunner
+nti.testing
+pyperf
+psutil
+
+[test:platform_python_implementation == "CPython" and sys_platform != "win32"]
+pylibmc
+
+[test:platform_python_implementation == "PyPy" or sys_platform == "win32"]
+python-memcached
+
+[test:python_version == "2.7"]
+mock
+
+[test:python_version > "2.7"]
+ZEO>=5.2
+
+[test:sys_platform != "win32"]
+gevent>=1.5a1
