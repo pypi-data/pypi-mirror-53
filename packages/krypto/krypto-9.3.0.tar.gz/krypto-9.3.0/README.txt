@@ -1,0 +1,1 @@
+encrypt files and data using a secure AES256 key.
