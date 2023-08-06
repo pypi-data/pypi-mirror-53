@@ -1,0 +1,72 @@
+Metadata-Version: 1.1
+Name: robotframework-couchbasemanager
+Version: 2.0.0
+Summary: Robot Framework Library For Managing Couchbase Server.
+Home-page: https://github.com/peterservice-rnd/robotframework-couchbasemanager
+Author: JSC PETER-SERVICE
+Author-email: mf_aist_all@billing.ru
+License: Apache License 2.0
+Description: RobotFramework Couchbase Manager Library
+        ========================================
+        
+        |Build Status|
+        
+        Short Description
+        -----------------
+        
+        `Robot Framework`_ library for managing Couchbase server, based on `Couchbase REST API`_.
+        
+        Installation
+        ------------
+        
+        ::
+        
+            pip install robotframework-couchbasemanager
+        
+        Documentation
+        -------------
+        
+        See keyword documentation for robotframework-couchbasemanager library in
+        folder ``docs``.
+        
+        Example
+        -------
+        +-----------+------------------+
+        | Settings  |       Value      |
+        +===========+==================+
+        |  Library  | CouchbaseManager |
+        +-----------+------------------+
+        |  Library  |   Collections    |
+        +-----------+------------------+
+        
+        +---------------+---------------------------------------+--------------+----------+---------------+-----------------+
+        |  Test cases   |                 Action                |   Argument   | Argument |    Argument   |    Argument     |
+        +===============+=======================================+==============+==========+===============+=================+
+        |  Simple Test  | CouchbaseManager.Connect To Couchbase | my_host_name |   8091   | administrator | alias=couchbase |
+        +---------------+---------------------------------------+--------------+----------+---------------+-----------------+
+        |               | ${overview}=                          | Overview     |          |               |                 |
+        +---------------+---------------------------------------+--------------+----------+---------------+-----------------+
+        |               | Log Dictionary                        | ${overview}  |          |               |                 |
+        +---------------+---------------------------------------+--------------+----------+---------------+-----------------+
+        |               | Close All Couchbase Connections       |              |          |               |                 |
+        +---------------+---------------------------------------+--------------+----------+---------------+-----------------+
+        
+        License
+        -------
+        
+        Apache License 2.0
+        
+        .. _Robot Framework: http://www.robotframework.org
+        .. _Couchbase REST API: http://docs.couchbase.com/couchbase-manual-2.5/cb-rest-api/
+        
+        .. |Build Status| image:: https://travis-ci.org/peterservice-rnd/robotframework-couchbasemanager.svg?branch=master
+           :target: https://travis-ci.org/peterservice-rnd/robotframework-couchbasemanager
+Keywords: testing testautomation robotframework autotest requests http couchbase
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Testing
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Framework :: Robot Framework :: Library
