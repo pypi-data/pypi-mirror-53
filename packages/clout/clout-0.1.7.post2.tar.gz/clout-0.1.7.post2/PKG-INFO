@@ -1,0 +1,139 @@
+Metadata-Version: 2.1
+Name: clout
+Version: 0.1.7.post2
+Summary: Use dataclasses without repeating yourself
+Author: Clout contributors
+Author-email: python-clout@users.noreply.github.com
+Requires-Python: >=3.7,<4.0
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Provides-Extra: docs
+Requires-Dist: appdirs (>=1.4,<2.0)
+Requires-Dist: attrs (==19.2.0)
+Requires-Dist: click (==7.0)
+Requires-Dist: dataclasses (>=0.6.0,<0.7.0)
+Requires-Dist: glom (>=19.2,<20.0)
+Requires-Dist: importlib_resources (>=1.0,<2.0)
+Requires-Dist: inflection (>=0.3.1,<0.4.0)
+Requires-Dist: lark-parser (>=0.7.3,<0.8.0)
+Requires-Dist: marshmallow (>=3.0,<4.0)
+Requires-Dist: typing-extensions (>=3.7,<4.0)
+Requires-Dist: typing-inspect (>=0.4.0,<0.5.0)
+Description-Content-Type: text/x-rst
+
+=======================================================
+Clout: Command Line Object Utility Tool
+=======================================================
+
+.. start-badges
+
+.. list-table::
+    :stub-columns: 1
+
+    * - docs
+      - |docs|
+    * - tests
+      - | |travis|
+        |
+    * - package
+      - | |version|
+        | |wheel|
+        | |supported-versions|
+        | |supported-implementations|
+        | |commits-since|
+
+.. |docs| image:: https://img.shields.io/readthedocs/clout
+    :target: https://clout.readthedocs.org
+    :alt: Documentation Status
+
+
+.. |travis| image:: https://img.shields.io/travis/com/python-clout/clout
+    :alt: Travis-CI Build Status
+    :target: https://travis-ci.com/python-clout/clout
+
+.. |version| image:: https://img.shields.io/pypi/v/clout.svg
+    :alt: PyPI Package latest release
+    :target: https://pypi.org/pypi/clout
+
+.. |commits-since| image:: https://img.shields.io/github/commits-since/python-clout/clout/v0.1.7.svg
+    :alt: Commits since latest release
+    :target: https://github.com/python-clout/clout/compare/v0.1.7...master
+
+.. |wheel| image:: https://img.shields.io/pypi/wheel/clout.svg
+    :alt: PyPI Wheel
+    :target: https://pypi.org/pypi/clout
+
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/clout.svg
+    :alt: Supported versions
+    :target: https://pypi.org/pypi/clout
+
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/clout.svg
+    :alt: Supported implementations
+    :target: https://pypi.org/pypi/clout
+
+
+.. end-badges
+
+
+
+..
+    start-usage
+
+
+Convert dataclasses into a command-line interface.
+
+Quickstart
+---------------
+
+
+To install, use
+
+.. code-block:: bash
+
+    pip install clout
+
+
+Define some dataclasses and convert them into a command-line interface.
+
+
+.. code-block:: python
+
+    import attr
+    import click
+
+    import clout
+
+
+    @attr.dataclass
+    class DB:
+        host: str
+        port: int
+
+
+    @attr.dataclass
+    class Config:
+        db: DB
+        dry_run: bool
+
+
+    cli = clout.Command(type=Config)
+
+    print(cli.build())
+
+
+.. code-block:: bash
+
+    $ myapp config --dry-run db --host example.com --port 9999
+    Config(db=DB(host='example.com', port=9999), dry_run=True)
+
+
+..
+    end-usage
+
+See the full docs for more information: https://clout.readthedocs.io/
+
