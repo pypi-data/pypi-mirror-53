@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: flask-taxonomies
+Version: 6.5.4
+Summary: Taxonomy Term trees REST API for Invenio Applications
+Home-page: https://github.com/oarepo/flask-taxonomies
+Author: Miroslav Bauer
+Author-email: bauer@cesnet.cz
+License: MIT
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Development Status :: 4 - Beta
+Requires-Dist: python-slugify (>=3.0.2)
+Requires-Dist: webargs (>=5.3.2)
+Requires-Dist: wrapt (>=1.11.0)
+Provides-Extra: mysql
+Requires-Dist: invenio-db[mysql] (>=1.0.0b3) ; extra == 'mysql'
+Provides-Extra: postgresql
+Requires-Dist: invenio-db[postgresql] (>=1.0.0b3) ; extra == 'postgresql'
+Provides-Extra: sqlite
+Requires-Dist: invenio-db (>=1.0.0b3) ; extra == 'sqlite'
+Provides-Extra: tests
+Requires-Dist: pytest (>=4.6.3) ; extra == 'tests'
+Requires-Dist: factory-boy (>=2.12.0) ; extra == 'tests'
+Requires-Dist: pdbpp (>=0.10.0) ; extra == 'tests'
+Requires-Dist: pydocstyle (<5.0.0,>=1.0.0) ; extra == 'tests'
+Requires-Dist: check-manifest (>=0.25) ; extra == 'tests'
+Requires-Dist: coverage (>=4.0) ; extra == 'tests'
+Requires-Dist: isort (>=4.3.3) ; extra == 'tests'
+Requires-Dist: mock (>=2.0.0) ; extra == 'tests'
+Requires-Dist: pytest-cache (>=1.0) ; extra == 'tests'
+Requires-Dist: pytest-mock (>=1.6.0) ; extra == 'tests'
+Requires-Dist: pytest-cov (>=1.8.0) ; extra == 'tests'
+Requires-Dist: pytest-random-order (>=0.5.4) ; extra == 'tests'
+Requires-Dist: pytest-pep8 (>=1.0.6) ; extra == 'tests'
+Requires-Dist: openpyxl (>=2.6.3) ; extra == 'tests'
+Requires-Dist: invenio[auth,base,elasticsearch6,metadata,postgresql,tests] (==3.1.1) ; extra == 'tests'
+
+UNKNOWN
+
+
