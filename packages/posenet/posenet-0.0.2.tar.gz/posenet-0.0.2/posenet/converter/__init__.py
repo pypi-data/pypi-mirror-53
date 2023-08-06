@@ -1,0 +1,1 @@
+from posenet.converter.config import load_config
