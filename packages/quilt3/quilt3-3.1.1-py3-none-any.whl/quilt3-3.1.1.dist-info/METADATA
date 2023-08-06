@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: quilt3
+Version: 3.1.1
+Summary: Quilt: where data comes together
+Home-page: https://github.com/quiltdata/quilt
+Author: quiltdata
+Author-email: contact@quiltdata.io
+License: LICENSE
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+Requires-Dist: appdirs (>=1.4.0)
+Requires-Dist: aws-requests-auth (>=0.4.2)
+Requires-Dist: boto3 (>=1.8.0)
+Requires-Dist: jsonlines (==1.2.0)
+Requires-Dist: numpy (>=1.14.0)
+Requires-Dist: packaging (>=16.8)
+Requires-Dist: pandas (>=0.19.2)
+Requires-Dist: pyarrow (>=0.14.1)
+Requires-Dist: requests (>=2.12.4)
+Requires-Dist: ruamel.yaml (<=0.15.70)
+Requires-Dist: tqdm (>=4.26.0)
+Requires-Dist: urllib3 (<1.25,>=1.21.1)
+Requires-Dist: humanize
+Requires-Dist: xattr (>=0.9.6) ; platform_system != "Windows"
+Provides-Extra: tests
+Requires-Dist: codecov ; extra == 'tests'
+Requires-Dist: pytest (<5.1.0) ; extra == 'tests'
+Requires-Dist: pytest-cov ; extra == 'tests'
+Requires-Dist: responses ; extra == 'tests'
+Requires-Dist: tox ; extra == 'tests'
+Requires-Dist: detox ; extra == 'tests'
+Requires-Dist: tox-pytest-summary ; extra == 'tests'
+
+
+Quilt is a data management tool designed for data discoverability, data dependency
+management, and data version control using `data packages <https://blog.quiltdata.com/data-packages-for-fast-reproducible-python-analysis-c74b78015c7f>`_.
+
+The `quilt3` PyPi package allows you to build, push, and install data packages in Quilt using Python.
+Visit the `documentation quickstart <https://docs.quiltdata.com/quickstart>`_ for more information.
+
+
+
