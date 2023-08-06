@@ -1,0 +1,60 @@
+from bs4 import BeautifulSoup
+import urllib.request
+import urllib.error
+import urllib.parse
+
+
+def fetch_url(url):
+    headers_v4 = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'}
+    url_req = urllib.request.Request(url, headers=headers_v4)
+
+    try:
+        urlobj = urllib.request.urlopen(url_req)
+    except urllib.error.HTTPError as e:
+        # print(e.code)  # TODO: 404 500 etc
+        return ''
+
+    htmlbinary = urlobj.read()
+    html = htmlbinary.decode('utf-8', errors="ignore")
+    if ' charset=euc-kr"' in html:
+        html = htmlbinary.decode('euc-kr', errors="ignore")
+    return html
+
+def crawler(url):
+    html = fetch_url(url)
+    if html:
+        soup = BeautifulSoup(html, 'html.parser')
+
+        title_soup = soup.find('meta', property='og:title')
+        if title_soup:
+            title = title_soup.get('content', None)
+        else:
+            if soup.title.string:
+                title = soup.title.string
+                # title_match = re.search('<title.*>(.*?)</title>', soup.title)
+                # title = title_match.group(1)
+            else:
+                title = ''
+
+        try:
+            desc_soup = soup.find('meta', property='og:description')
+            desc = desc_soup.get('content', None)
+        except Exception as e:
+            desc = ''
+
+        try:
+            image_soup = soup.find('meta', property='og:image')
+            image_url = image_soup.get('content', None)
+            image_url = urllib.parse.urljoin(url, image_url)
+        except Exception as e:
+            image_url = ''
+    else:
+        title = ''
+        desc = ''
+        image_url = ''
+
+    return title, desc, image_url, html
+
+
+if __name__ == '__main__':
+    pass

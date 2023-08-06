@@ -1,0 +1,44 @@
+Metadata-Version: 2.1
+Name: noizze-crawler
+Version: 2
+Summary: A web page crawler which returns (title, og:image, og:description).
+Home-page: https://github.com/YUChoe/noizze_crawler
+Author: Tom YU Choe
+Author-email: yonguk.choe@gmail.com
+License: MIT
+Description: [![Latest Version](https://img.shields.io/pypi/v/noizze-crawler.svg)](https://pypi.org/project/noizze-crawler/)
+        
+        # NOIZZE Crawler
+        
+        A web page crawler PyPI Package which returns (title, og:image, og:description).
+        
+        ## Dependency
+        * BeautifulSoup4
+        
+        ## Installation
+        Run the folowing to install:
+        
+        ```shell
+        pip install noizze-crawler
+        ```
+        
+        ## Usage
+        
+        ```python
+        from noizze_crawler import crawler
+        
+        if __name__ == '__main__':
+            url = 'https://dvdprime.com/g2/bbs/board.php?bo_table=comm&wr_id=20525678'
+            title, desc, image_url, html = crawler(url)
+            print(title, desc, image_url)  # html
+        ```
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: System Administrators
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Description-Content-Type: text/markdown
