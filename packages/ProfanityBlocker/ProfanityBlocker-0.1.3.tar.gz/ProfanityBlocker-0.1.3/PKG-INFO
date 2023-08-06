@@ -1,0 +1,34 @@
+Metadata-Version: 1.1
+Name: ProfanityBlocker
+Version: 0.1.3
+Summary: A Python Intergration For The Profanity Blocker API
+Home-page: https://github.com/voarsh/ProfanityBlocker-Python-Implementation
+Author: David Crompton
+Author-email: davidallancrompton@outlook.com
+License: MIT
+Download-URL: https://github.com/voarsh/ProfanityBlocker-Python-Implementation/archive/master.tar.gz
+Description: 
+        ProfanityBlocker is a rules engine that is able to identify and block words and phrases that have been identified as containing Profane Language.
+        
+        Pricing information for ProfanityBlocker can be found at: https://www.profanity-blocker.co.uk/#pricing
+        
+        We have designed our Python implementation to be simple to use. Meaning that sending a request to our service to process only takes three lines of code!
+        
+            import ProfanityBlocker
+        
+            Service = ProfanityBlocker.ProfanityService(LicenceKey,EmailFilter=False, LinkFilter=False,PhoneFilter=False)
+        
+            print(Service.ParseText("Test"))
+        
+        ProfanityBlocker has a range of filters that you can enable in your requests, as seen above, you can enable filtering out; E-Mail addresses, Web Links as well as Phone Numbers!
+        
+Keywords: Profanity Blocker,Profanity,Word Filter,Filter
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
