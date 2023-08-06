@@ -1,0 +1,27 @@
+[build-system]
+requires = [ "poetry>=0.12",]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+name = "remotedata"
+version = "0.1.0"
+description = "Accessing and caching remote data."
+authors = [ "pwwang <pwwang@pwwang.com>",]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/pwwang/remotedata"
+repository = "https://github.com/pwwang/remotedata"
+
+[tool.poetry.dependencies]
+python = "^3.4"
+requests = "*"
+cmdy = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-cov = "*"
+python-simpleconf = "*"
+dropbox = "*"
+
+[tool.poetry.scripts]
+remotedata-hash = "remotedata:console"
