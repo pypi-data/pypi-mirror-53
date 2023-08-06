@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ ! -d "$HOME/.vim" ]; then
+	cd ~ 
+	git clone https://github.com/whohe/.vim 
+	ln -s .vim/vimrc .vimrc
+	cd ~/.vim
+	git submodule update --init --recursive 
+	echo "...ok"
+else
+	echo "...was already"
+fi
+exit 1
