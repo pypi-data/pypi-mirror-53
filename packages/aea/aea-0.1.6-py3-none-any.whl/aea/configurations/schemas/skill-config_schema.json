@@ -1,0 +1,109 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for the skill configuration file.",
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+        "name",
+        "authors",
+        "version",
+        "license",
+        "url",
+        "protocols"
+    ],
+    "properties": {
+        "name": {"type": "string"},
+        "authors": {"type": "string"},
+        "version": {"type": "string"},
+        "license": {"type": "string"},
+        "url": {"type": "string"},
+        "protocols": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string"}
+        },
+        "handlers": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": ["handler"],
+              "properties": {
+                "handler": { "$ref": "#/definitions/handler" }
+              }
+            }
+        },
+        "behaviours": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": ["behaviour"],
+              "properties": {
+                "behaviour": { "$ref": "#/definitions/behaviour" }
+              }
+            }
+        },
+        "tasks": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": ["task"],
+              "properties": {
+                "task": { "$ref": "#/definitions/task" }
+              }
+            }
+        },
+        "shared_classes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": ["shared_class"],
+              "properties": {
+                "task": { "$ref": "#/definitions/shared_class" }
+              }
+            }
+        },
+        "dependencies": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "definitions.json#/definitions/requirement" }
+        }
+    },
+    "definitions": {
+        "behaviour": {
+            "type": "object",
+            "required": ["class_name", "args"],
+            "properties": {
+                "class_name": {"type": "string"},
+                "args": {"type": "object"}
+            }
+        },
+        "task": {
+            "type": "object",
+            "required": ["class_name", "args"],
+            "properties": {
+                "class_name": {"type": "string"},
+                "args": {"type": "object"}
+            }
+        },
+        "handler": {
+            "type": "object",
+            "required": ["class_name", "args"],
+            "properties": {
+                "class_name": {"type": "string"},
+                "args": {"type": "object"}
+            }
+        },
+        "shared_class": {
+            "type": "object",
+            "required": ["class_name", "args"],
+            "properties": {
+                "class_name": {"type": "string"},
+                "args": {"type": "object"}
+            }
+        }
+    }
+}
