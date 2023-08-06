@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>模板</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<div class="tools">
+			<div class="tools-2">
+				<div>日期：<input type="date" name="schDate" id="schDate" value="2019-01-01"/></div>
+				<div>
+					<a title="保存排程数据" href="javascript:;" onclick="alert('待实现')">保存</a>
+					<a title="作业:下达备料任务/下达卤制任务" href="javascript:;" onclick="alert('待实现')">提交</a>
+					<a title="作业:撤销已下达备料任务/撤销已下达卤制任务" href="javascript:;" onclick="alert('待实现')">撤销</a>
+				</div>
+			</div>
+			<div class="tools-3">
+				<div><a href="temp/Template-X1-YYYY-MM-DD.xlsx" target="_blank">下载<br/>模板</a></div>
+				<div><a href="javascript:;" onclick="Snail.setCSS('.app-schedule-analyze', {'display': 'flex'});" target="_blank">查看调<br/>试信息</a></div>
+			</div>
+		</div>
+		<div id="app">
+			<div class="app-title">大件班卤制排程表</div>
+			<div class="app-setting">
+				<div>
+					<div>今日需求：</div>
+					<div id="PRO_DATA"></div>
+				</div>
+				<div>
+					<div>预留卤锅圈次数量：</div>
+					<div>		
+					</div>
+				</div>
+			</div>
+			<div class="app-main">
+				<div class="app-main-l">
+					<div>初始<br/>状态</div>
+					<div>
+						<div id="S_STATE_0"><!-- 第0圈 --></div>
+						<div id="S_STATE_1"></div>
+						<div id="S_STATE_2"></div>
+						<div id="S_STATE_3"></div>
+						<div id="S_STATE_4"></div>
+						<div id="S_STATE_5"></div>
+						<div id="S_STATE_6"></div>
+						<div id="S_STATE_7"></div>
+						<div id="S_STATE_8"></div>
+						<div id="S_STATE_9"></div>
+					</div>
+				</div>
+				<div class="app-main-c">
+					<div class="app-time-scale">
+						<div><div>8:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>9:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>10:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>11:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>12:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>13:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>14:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>15:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>16:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>17:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>18:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>19:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+						<div><div>20:00</div><div><div>&nbsp;</div><div>&nbsp;</div></div></div>
+					</div>
+					<div class="app-boiler">
+						<div>
+							<div>第1号卤锅</div>
+							<div id="POT_0"><!--
+								<span style="width: 130px;">鸭脖</span>
+								<span style="width: 130px;">鸭脖</span>
+								<span style="width: 130px;">鸭脖</span>
+								<span style="width: 98px;">鸭架</span>
+								<span style="width: 98px;">鸭架</span>
+								<span style="width: 110px; background-color: #8EBB1B;">鸭掌</span> -->
+							</div>
+						</div>
+						<div>
+							<div>第2号卤锅</div>
+							<div id="POT_1"></div>
+						</div>
+						<div>
+							<div>第3号卤锅</div>
+							<div id="POT_2"></div>
+						</div>
+						<div>
+							<div>第4号卤锅</div>
+							<div id="POT_3"></div>
+						</div>
+						<div>
+							<div>第5号卤锅</div>
+							<div id="POT_4"></div>
+						</div>
+						<div>
+							<div>第6号卤锅</div>
+							<div id="POT_5"></div>
+						</div>
+						<div>
+							<div>第7号卤锅</div>
+							<div id="POT_6"></div>
+						</div>
+						<div>
+							<div>第8号卤锅</div>
+							<div id="POT_7"></div>
+						</div>
+						<div>
+							<div>第9号卤锅</div>
+							<div id="POT_8"></div>
+						</div>
+						<div>
+							<div>第10号卤锅</div>
+							<div id="POT_9"></div>
+						</div>
+					</div>
+				</div>
+				<div class="app-main-r">
+					<div>结束状态</div>
+					<div>
+						<div id="E_STATE_0"><!-- <span>第6圈</span><span>第0圈</span> --></div>
+						<div id="E_STATE_1"></div>
+						<div id="E_STATE_2"></div>
+						<div id="E_STATE_3"></div>
+						<div id="E_STATE_4"></div>
+						<div id="E_STATE_5"></div>
+						<div id="E_STATE_6"></div>
+						<div id="E_STATE_7"></div>
+						<div id="E_STATE_8"></div>
+						<div id="E_STATE_9"></div>
+					</div>
+				</div>
+			</div>
+			<div class="app-schedule-analyze">
+				<span>排程结果分析：</span>
+				<div id="SCH_ANALYZE"></div>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="js/snail.common-es6-0.0.1.js"></script>
+		<script type="text/javascript">
+			(function($, win, doc){
+				
+				function render(data){
+					
+					// 显示排程
+					for(let i=0,len=data.SCHEDULE_DATA.length; i<len; i++){
+						
+						let schedule = data.SCHEDULE_DATA[i];
+						let products = schedule['schedule'];
+						let schemes = schedule['schemes']
+						
+						$.cleanHtml('#S_STATE_' + schemes[0]);
+						$.appendHtml('#S_STATE_' + schemes[0], ('第' + schemes[1] + '圈'));
+						
+						if(0 >= schedule['totalTime']){
+							continue;
+						}
+						
+						let html = ['<span style="width: 30px; margin-left: ' + (2 * schedule['sTime']) + 'px; font-size: 10px; line-height: 15px; background-color: #9E9E9E;" title="加热卤水">加热<br/>卤水</span>'];
+						let timeCount = 0;
+						
+						for(let j=0,jlen=products.length; j<jlen; j++){
+							
+							let product = products[j];
+							let scaleplate = 2 * product['processTime'];
+							timeCount += product['processTime'];
+							
+							let productBackgroundColor = '';
+							
+							if(2 == product['batchIndex']){
+								productBackgroundColor = ' background-color: #8EBB1B;';
+							} else if(0 == product['batchIndex']){
+								productBackgroundColor = ' background-color: #9E9E9E;';
+							}
+					
+							
+							html.push('<span style="width: ' + scaleplate + 'px;' + productBackgroundColor + '" title="' + product['name'] + '">');
+							html.push(product['shortName']);
+							html.push('</span>');
+						}
+						
+						$.cleanHtml('#POT_' + schemes[0]);
+						$.appendHtml('#POT_' + schemes[0], html.join(''));
+						
+						html = [];
+						html.push('<span>第' + schedule['eIndex'] + '圈</span>');
+						
+						if(6 <= schedule['eIndex']){
+							html.push('<span>第0圈</span>');
+						}else{
+							html.push('<span>&nbsp;</span>');
+						}
+						
+						$.cleanHtml('#E_STATE_' + schemes[0]);
+						$.appendHtml('#E_STATE_' + schemes[0], html.join(''));
+					}
+					
+					var productData = data.SCHEMES_DATA['productData'];
+					var ptypeData = ['A1', 'A2', 'A3', 'B'];
+					var pbatchData = [[], []];
+					
+					for(let i=0,len=ptypeData.length; i<len; i++){
+						
+						let pData = productData[ptypeData[i]];
+						
+						let count = 0;
+						
+						for(let j=0,jlen=pData.length; j<jlen; j++){
+							count += pData[j]['count'];
+							pbatchData[pData[j]['product']['batchIndex']-1].push(pData[j]['product']['shortName'] + '(' + pData[j]['count'] + ')');
+						}
+						
+						ptypeData[i] = ptypeData[i] + '(' + count + ')';
+					}
+					
+					var html = [];
+					
+					// 展示今日需求
+					for(let i=0,len=pbatchData.length; i<len; i++){
+						html.push('<span>[第' + (i + 1) + '批]&nbsp;&nbsp;' + pbatchData[i].join("、") + '</span>');
+					}
+					
+					
+					$.cleanHtml('#PRO_DATA');
+					$.appendHtml('#PRO_DATA', html.join(''));
+					
+					// 输出分析结果
+					html = [];
+					html.push('<p>');
+					html.push('  <span style="margin-right: 20px;">初始状态：</span>');
+					html.push($.toJSONString(data.SCHEMES_DATA['boilerSStates']));
+					html.push('</p>');
+					html.push('<p>');
+					html.push('  <span style="margin-right: 20px;">预留卤锅圈次数量：</span>');
+					html.push($.toJSONString(data.SCHEMES_DATA['boilerEStateCount']));
+					html.push('</p>');
+					html.push('<p>');
+					html.push('  <span style="margin-right: 20px;">产品数据(分类)：</span>');
+					html.push($.toJSONString(ptypeData));
+					html.push('</p>');
+					html.push('<p>');
+					html.push('  <span style="margin-right: 20px;">产品数据(分批)：</span>');
+					html.push($.toJSONString(pbatchData));
+					html.push('</p>');
+					
+					
+					$.cleanHtml('#SCH_ANALYZE');
+					$.appendHtml('#SCH_ANALYZE', html.join(''));
+					
+					html = [];
+					for(let i=0,len=data.SCHEDULE_DATA.length; i<len; i++){
+						for(let j=0,jlen=data.SCHEDULE_DATA.length; j<jlen; j++){
+							
+							let schemes = data.SCHEDULE_DATA[j]['schemes'];
+							
+							if(i != schemes[0]){
+								continue;
+							}
+							
+							html.push('<p>');
+							html.push('  <span style="margin-right: 20px;">');
+							html.push('第' + (schemes[0] + 1) + '口锅');
+							html.push('  </span>');
+							html.push('  <span style="margin-right: 20px;">');
+							html.push('初始状态：' + schemes[1]+ '圈');
+							html.push('  </span>');
+							html.push('【方案原数据：' + $.toJSONString(schemes) + '】');
+							html.push('</p>');
+						}
+					}
+					
+					$.appendHtml('#SCH_ANALYZE', html.join(''));
+				}
+				
+				$.bindEvent('body', 'dragover', function(event){
+					// 避免浏览器对数据的默认处理
+					event.preventDefault();
+				});
+				
+				$.bindEvent('body', 'drop', function(event){
+					
+					event.preventDefault();
+					
+					var files = event.dataTransfer.files;
+
+					if(!files || files.length < 0){
+						return;
+					}
+					
+					var result = null;
+					
+					try{
+						
+						result = $.http.upload('/fileserver/upload', files[0]);
+						result = $.toJSON(result);
+			
+						alert(result.message);
+						
+						if('200' != result.code){
+							return;
+						}
+						
+					}catch(error){
+						
+						if(result){
+							alert(result);
+						}else{
+							alert('上传失败！');
+						}
+						return;
+					}
+					
+					date = result.data;
+					
+					$.http.delete('/api/schedule/v1/' + date);
+					
+					try{
+						result = null;
+						result = $.http.get('/api/schedule/v1/' + date,null,{'Accept': 'application/json'});
+						
+						alert(result.message);
+						
+						if('200' != result.code){
+							alert(result.message);
+							return;
+						}
+						
+						render(result.data);
+					}catch(error){
+						if(result){
+							alert(result);
+						}else{
+							alert('运算失败！');
+						}
+						return;
+					}
+					
+					$.setEleValue('#schDate', date.substring(0,4) + '-' + date.substring(4,6) + '-' + date.substring(6));
+				});
+				
+				function loadData(){
+				
+					var date = $.getEleValue('#schDate');
+					date = $.toDate(date);
+					
+					try{
+						var result = $.http.get('/api/schedule/v1/' + $.dateFormat(date, 'yyyyMMdd'),null,{'Accept': 'application/json'});
+						
+						if('200' != result.code){
+							alert(result.message);
+							return;
+						}
+						
+						if(result.data){
+							render(result.data);
+						}else{
+							alert("无排程数据！");
+						}
+					}catch(error){
+						alert(error);
+					}
+				}
+				
+				// 初始化日期
+				$.setEleValue('#schDate', $.dateFormat(new Date()));
+				$.bindEvent('#schDate', 'change', function(event){
+					loadData();
+				});
+				
+				// 加截排程数据
+				loadData();
+				
+			})(Snail, window, document);
+		</script>
+	</body>
+</html>
