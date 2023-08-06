@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="cp1252" />
+    <title>Image Embedding</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="next" title="Image Grid" href="imagegrid.html" />
+    <link rel="prev" title="Image Viewer" href="imageviewer.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="imagegrid.html" title="Image Grid"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="imageviewer.html" title="Image Viewer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Orange3 Image Analytics  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="image-embedding">
+<h1>Image Embedding</h1>
+<p>Image embedding through deep neural networks.</p>
+<p><strong>Inputs</strong></p>
+<ul class="simple">
+<li><p>Images: List of images.</p></li>
+</ul>
+<p><strong>Outputs</strong></p>
+<ul class="simple">
+<li><p>Embeddings: Images represented with a vector of numbers.</p></li>
+<li><p>Skipped Images: List of images where embeddings were not calculated.</p></li>
+</ul>
+<p><strong>Image Embedding</strong> reads images and uploads them to a remote server or evaluate them locally. Deep learning models are used to calculate a feature vector for each image. It returns an enhanced data table with additional columns (image descriptors).</p>
+<p>Images can be imported with [Import Images](importimages.md) widget or as paths to images in a spreadsheet. In this case the column with images paths needs a three-row header with <em>type=image</em> label in the third row.</p>
+<p>![](images/header-example.png)</p>
+<p>Image Embedding offers several embedders, each trained for a specific task. Images are sent to a server or they are evaluated locally on the user’s computer, where vectors representations are computed. SqueezeNet embedder offers a fast evaluation on users computer which does not require an internet connection. If you decide to use other embedders than SqueezeNet, you will need an internet connection. Images sent to the server are not stored anywhere.</p>
+<p>![](images/ImageEmbedding-stamped.png)</p>
+<ol class="arabic">
+<li><p>Information on the number of embedded images and images skipped.</p></li>
+<li><p>Settings:
+- <em>Image attribute</em>: attribute containing images you wish to embed
+- <em>Embedder</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SqueezeNet: [Small and fast](<a class="reference external" href="https://arxiv.org/abs/1602.07360" target="_blank">https://arxiv.org/abs/1602.07360</a>) model for image recognition trained on ImageNet.</p></li>
+<li><p>Inception v3: [Google’s Inception v3](<a class="reference external" href="https://arxiv.org/abs/1512.00567" target="_blank">https://arxiv.org/abs/1512.00567</a>) model trained on ImageNet.</p></li>
+<li><p>VGG-16: [16-layer image recognition model](<a class="reference external" href="https://arxiv.org/abs/1409.1556" target="_blank">https://arxiv.org/abs/1409.1556</a>) trained on ImageNet.</p></li>
+<li><p>VGG-19: [19-layer image recognition model](<a class="reference external" href="https://arxiv.org/abs/1409.1556" target="_blank">https://arxiv.org/abs/1409.1556</a>) trained on ImageNet.</p></li>
+<li><p>Painters: A model trained to [predict painters from artwork images](<a class="reference external" href="http://blog.kaggle.com/2016/11/17/painter-by-numbers-competition-1st-place-winners-interview-nejc-ilenic/" target="_blank">http://blog.kaggle.com/2016/11/17/painter-by-numbers-competition-1st-place-winners-interview-nejc-ilenic/</a>).</p></li>
+<li><p>DeepLoc: A model trained to analyze [yeast cell images](<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/29036616" target="_blank">https://www.ncbi.nlm.nih.gov/pubmed/29036616</a>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Tick the box on the left to start the embedding automatically. Alternatively, click <em>Apply</em>. To cancel the embedding, click <em>Cancel</em>.</p></li>
+<li><p>Access help.</p></li>
+</ol>
+<div class="section" id="example">
+<h2>Example</h2>
+<p>Let us first import images from a folder with [Import Images](importimages.md). We have three images of an orange, a banana and a strawberry in a folder called Fruits. From <strong>Import Images</strong> we will send a data table containing a column with image paths to <strong>Image Embedding</strong>.</p>
+<p>We will use the default embedder <em>SqueezeNet</em>. The widget will automatically start retrieving image vectors from the server.</p>
+<p>![](images/ImageEmbedding-Example1.png)</p>
+<p>Once the computation is done, you can observe the enhanced data in a <strong>Data Table</strong>. With the retrieved embeddings, you can continue with any machine learning method Orange offers. Below is an example for clustering.</p>
+<p>![](images/ImageEmbedding-Example2.png)</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="imagegrid.html" title="Image Grid"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="imageviewer.html" title="Image Viewer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Orange3 Image Analytics  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Laboratory of Bioinformatics, Faculty of Computer Science, University of Ljubljana.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: Orange3-ImageAnalytics
+Version: 0.4.0
+Summary: Orange3 add-on for image data mining.
+Home-page: http://orange.biolab.si/download
+Author: Bioinformatics Laboratory, FRI UL
+Author-email: contact@orange.biolab.si
+License: GPL3+
+Keywords: orange3 add-on,orange3-imageanalytics
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Dist: Orange3 (>=3.20.0)
+Requires-Dist: Pillow (!=5.1.0,>=4.2.1)
+Requires-Dist: cachecontrol
+Requires-Dist: hypertemp
+Requires-Dist: lockfile
+Requires-Dist: ndf (>=0.1.2)
+Requires-Dist: numpy (==1.16.*)
+Requires-Dist: requests
+Requires-Dist: scipy
+
+Image Analytics
+---------------
+
+Simplifies loading of images and through deep network-based embedding 
+enables their analysis. Embedding represents images with feature vector,
+allowing the use of Orange's standard arsenal of widgets for 
+clustering, classification or any other kind of 
+feature-based analysis. Use Image Viewer from the core Orange 
+to visualize the images.
+
+
