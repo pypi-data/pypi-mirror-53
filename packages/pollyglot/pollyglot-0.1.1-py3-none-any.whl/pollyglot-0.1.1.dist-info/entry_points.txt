@@ -1,0 +1,8 @@
+[console_scripts]
+pollymake = pollyglot.make:main
+
+[pollyglot.tarprep]
+cbin_notmat = pollyglot.tarprep:cbin_notmat
+wav_koumura = pollyglot.tarprep:wav_koumura
+wav_textgrid = pollyglot.tarprep:wav_textgrid
+
