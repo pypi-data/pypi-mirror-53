@@ -1,0 +1,76 @@
+{% extends "layout.jinja" %}
+
+{% block title %}Running Experiment{% endblock %}
+
+{% block nav_content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6 no-padding">
+            <h6 class="no-padding header teal-text text-darken-2">
+                Experiments: Results
+                {{ start }}
+            </h6>
+            <div class="experiment-meta">
+                <span><strong>Started At:</strong> <time class="started_at">-</time></span>
+                <span><strong>Finished At:</strong> <time class="finished_at">-</time></span>
+                <span><strong>Config File:</strong> <code class="config_file">-</code></span>
+            </div>
+        </div>
+        <div class="col s12 m6 no-padding">
+            <h6 class="no-padding header teal-text text-darken-2">Config:</h6>
+            <pre class="config_content"><code>-</code></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col s12">
+    <div class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <ul class="tabs">
+        <li class="tab col s4"><a class="active" href="#log">Log</a></li>
+        <li class="tab col s4"><a href="#result">Result</a></li>
+        <li class="tab col s4"><a href="#plots">Plots</a></li>
+    </ul>
+</div>
+
+<div id="result" class="col s12"></div>
+
+<div id="plots" class="col s12">
+    <div class="row">
+    </div>
+</div>
+
+<div id="log" class="col s12">
+    <ul class="collapsible expandable status-log">
+        <li class="active waiting experiment-log">
+            <div class="collapsible-header status">
+                <i class="material-icons amber-text">access_time</i>Running Tests
+            </div>
+            <div class="collapsible-body log grey darken-3 green-text text-lighten-2" style="padding: .5rem;">
+                <span class="loading">nothing received yet ...</span>
+            </div>
+        </li>
+        <li class="waiting plot-log">
+            <div class="collapsible-header status">
+                <i class="material-icons amber-text">access_time</i>Generating Plots
+            </div>
+            <div class="collapsible-body log grey darken-3 green-text text-lighten-2" style="padding: .5rem;">
+                <span class="loading">Generating ...</span>
+            </div>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='event-stream.js') }}"></script>
+    <script>
+    if (!!window.EventSource) {
+        log_stream('{{ request.path + "?config=" + config + "&iterations=" + iterations }}', '{{ url_for("plots.generate_ajax", experiment=experiment) }}');
+    }
+    </script>
+{% endblock %}
