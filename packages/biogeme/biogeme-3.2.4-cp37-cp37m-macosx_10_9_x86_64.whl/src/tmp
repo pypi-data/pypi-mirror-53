@@ -1,0 +1,13 @@
+  bioUInt config = 1 + (gradient)?1:0 + (hessian)?1:0 ;
+  if (recycle == config && theDerivatives != NULL) {
+    if (gradient || hessian) {
+      if (theDerivatives->getSize() == literalIds.size()) {
+	return theDerivatives ;
+      }
+    }
+    else {
+      //    DEBUG_MESSAGE("Plus - Recycled: " << str.length() << " = " << theDerivatives->f) ;
+      return theDerivatives ;
+    }
+  }
+  recycle = config ; 
