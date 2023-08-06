@@ -1,0 +1,289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Introduction &#8212; django-admin-tools-stats 0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer Documentation" href="developer-doc.html" />
+    <link rel="prev" title="Django Admin Tools Stats Documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="developer-doc.html" title="Developer Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Django Admin Tools Stats Documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-admin-tools-stats 0.9.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<span id="intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">0.9.0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Oct 04, 2019</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body">django, python, plot, graph, nvd3, d3, dashboard</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">Arezqui Belaid, Petr Dlouhý</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">License:</th><td class="field-body">MIT</td>
+</tr>
+</tbody>
+</table>
+<p>–</p>
+<p>Create beautiful configurable charts from your models and display them on the <code class="docutils literal notranslate"><span class="pre">django-admin</span></code> index page or on <code class="docutils literal notranslate"><span class="pre">django-admin-tools</span></code> dashboard.
+The charts are based on models and criterias defined through admin interface and some chart parameters are configurable in live view.</p>
+<p>This is application is fork of <a class="reference external" href="https://github.com/areski/django-admin-tools-stats/">django-admin-tools-stats</a> which has been reworked to display all charts through Ajax and made work with plain <code class="docutils literal notranslate"><span class="pre">django-admin</span></code>. The <code class="docutils literal notranslate"><span class="pre">django-admin-tools</span></code> are supported but not needed.</p>
+<img alt="https://github.com/PetrDlouhy/django-admin-charts/raw/develop/docs/source/_static/admin_dashboard.png" src="https://github.com/PetrDlouhy/django-admin-charts/raw/develop/docs/source/_static/admin_dashboard.png" />
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Install, upgrade and uninstall django-admin-charts with these commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install django-admin-charts
+</pre></div>
+</div>
+<div class="section" id="basic-setup-for-django-admin">
+<h2>Basic setup for <code class="docutils literal notranslate"><span class="pre">django-admin</span></code><a class="headerlink" href="#basic-setup-for-django-admin" title="Permalink to this headline">¶</a></h2>
+<p>Add <code class="docutils literal notranslate"><span class="pre">admin_tools_stats</span></code> (the Django admin charts application) &amp; <code class="docutils literal notranslate"><span class="pre">django_nvd3</span></code> into INSTALLED_APPS in settings.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;admin_tools_stats&#39;</span><span class="p">,</span>  <span class="c1"># this must be BEFORE &#39;admin_tools&#39; and &#39;django.contrib.admin&#39;</span>
+    <span class="s1">&#39;django_nvd3&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Install the <code class="docutils literal notranslate"><span class="pre">nvd3</span></code> and <code class="docutils literal notranslate"><span class="pre">d3</span></code> javascript libraries. For installation with <code class="docutils literal notranslate"><span class="pre">django-bower</span></code> see section <a class="reference internal" href="#installation-of-javascript-libraries-with-django-bower">Installation of javascript libraries with django-bower</a>.</p>
+<p>Register chart views in your <code class="docutils literal notranslate"><span class="pre">urls.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="k">import</span> <span class="n">path</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin_tools_stats/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;admin_tools_stats.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Run migrations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py migrate
+</pre></div>
+</div>
+<p>Open admin panel, configure <code class="docutils literal notranslate"><span class="pre">Dashboard</span> <span class="pre">Stats</span> <span class="pre">Criteria</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Dashboard</span> <span class="pre">Stats</span></code> respectively</p>
+</div>
+</div>
+<div class="section" id="special-configurations">
+<h1>Special configurations<a class="headerlink" href="#special-configurations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="update-from-django-admin-tools-stats">
+<h2>Update from <code class="docutils literal notranslate"><span class="pre">django-admin-tools-stats</span></code><a class="headerlink" href="#update-from-django-admin-tools-stats" title="Permalink to this headline">¶</a></h2>
+<p>Uninstall <code class="docutils literal notranslate"><span class="pre">django-admin-tools-stats</span></code>.</p>
+<p>Follow <code class="docutils literal notranslate"><span class="pre">django-admin-charts</span></code> installation according to previous section. Especially pay attention to these steps:
+- Move <code class="docutils literal notranslate"><span class="pre">admin_tools_stats</span></code> in <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> before <code class="docutils literal notranslate"><span class="pre">admin_tools</span></code> and <code class="docutils literal notranslate"><span class="pre">django.contrib.admin</span></code>.
+- Configure <code class="docutils literal notranslate"><span class="pre">urls.py</span></code>.</p>
+<p>Change <code class="docutils literal notranslate"><span class="pre">DashboardCharts</span></code> to <code class="docutils literal notranslate"><span class="pre">DashboardChart</span></code> in dashboard definition (this is recomended even if dummy class is left for compatibility reasons).</p>
+<p>Check any overridden template from <code class="docutils literal notranslate"><span class="pre">admin_tools_stats</span></code> or <code class="docutils literal notranslate"><span class="pre">DashboardChart(s)</span></code> class that might interfere with the changes.</p>
+</div>
+<div class="section" id="installation-of-javascript-libraries-with-django-bower">
+<h2>Installation of javascript libraries with <code class="docutils literal notranslate"><span class="pre">django-bower</span></code><a class="headerlink" href="#installation-of-javascript-libraries-with-django-bower" title="Permalink to this headline">¶</a></h2>
+<p>Add <code class="docutils literal notranslate"><span class="pre">django-bower</span></code> to INSTALLED_APPS in settings.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;djangobower&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Add the following properties to you settings.py file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specifie path to components root (you need to use absolute path)</span>
+<span class="n">BOWER_COMPONENTS_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">,</span> <span class="s1">&#39;components&#39;</span><span class="p">)</span>
+
+
+<span class="n">BOWER_INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;d3#3.3.13&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;nvd3#1.7.1&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Add django-bower finder to your static file finders:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">STATICFILES_FINDERS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;djangobower.finders.BowerFinder&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Run the following commands. These will download nvd3.js and its dependencies using bower and throw them in to you static folder for access by your application:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py bower_install
+$ python manage.py collectstatic
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage-with-django-admin-tools">
+<h2>Usage with <code class="docutils literal notranslate"><span class="pre">django-admin-tools</span></code><a class="headerlink" href="#usage-with-django-admin-tools" title="Permalink to this headline">¶</a></h2>
+<p>Configure <code class="docutils literal notranslate"><span class="pre">admin_tools</span></code></p>
+<p>Add following code to dashboard.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">admin_tools_stats.modules</span> <span class="k">import</span> <span class="n">DashboardChart</span><span class="p">,</span> <span class="n">get_active_graph</span>
+
+<span class="c1"># append an app list module</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">modules</span><span class="o">.</span><span class="n">AppList</span><span class="p">(</span>
+    <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Dashboard Stats Settings&#39;</span><span class="p">),</span>
+    <span class="n">models</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;admin_tools_stats.*&#39;</span><span class="p">,</span> <span class="p">),</span>
+<span class="p">))</span>
+
+<span class="c1"># Copy following code into your custom dashboard</span>
+<span class="c1"># append following code after recent actions module or</span>
+<span class="c1"># a link list module for &quot;quick links&quot;</span>
+<span class="n">graph_list</span> <span class="o">=</span> <span class="n">get_active_graph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">graph_list</span><span class="p">:</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;require_chart_jscss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;graph_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">graph_key</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;select_box_&#39;</span><span class="p">):</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DashboardChart</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You may also need to add some includes to your template admin base, see an example on the demo project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">demoproject</span><span class="o">/</span><span class="n">demoproject</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">base_site</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>django-admin-charts is a django based application, the major requirements are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>django-jsonfield</li>
+<li>django-qsstats-magic</li>
+<li>django-nvd3</li>
+<li>django-bower</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>If you’ve found a bug, add a feature or improve django-admin-charts and
+think it is useful then please consider contributing.
+Patches, pull requests or just suggestions are always welcome!</p>
+<p>Source code: <a class="reference external" href="http://github.com/PetrDlouhy/django-admin-charts">http://github.com/PetrDlouhy/django-admin-charts</a></p>
+<p>Bug tracker: <a class="reference external" href="https://github.com/PetrDlouhy/django-admin-charts/issues">https://github.com/PetrDlouhy/django-admin-charts/issues</a></p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Documentation is available on ‘Read the Docs’:
+<a class="reference external" href="http://readthedocs.org/docs/django-admin-charts/">http://readthedocs.org/docs/django-admin-charts/</a></p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>django-admin-charts is licensed under MIT, see <code class="docutils literal notranslate"><span class="pre">MIT-LICENSE.txt</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#basic-setup-for-django-admin">Basic setup for <code class="docutils literal notranslate"><span class="pre">django-admin</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#special-configurations">Special configurations</a><ul>
+<li><a class="reference internal" href="#update-from-django-admin-tools-stats">Update from <code class="docutils literal notranslate"><span class="pre">django-admin-tools-stats</span></code></a></li>
+<li><a class="reference internal" href="#installation-of-javascript-libraries-with-django-bower">Installation of javascript libraries with <code class="docutils literal notranslate"><span class="pre">django-bower</span></code></a></li>
+<li><a class="reference internal" href="#usage-with-django-admin-tools">Usage with <code class="docutils literal notranslate"><span class="pre">django-admin-tools</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#development">Development</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Django Admin Tools Stats Documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="developer-doc.html"
+                        title="next chapter">Developer Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/introduction.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="developer-doc.html" title="Developer Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Django Admin Tools Stats Documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-admin-tools-stats 0.9.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2014, Arezqui Belaid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
+    </div>
+  </body>
+</html>
