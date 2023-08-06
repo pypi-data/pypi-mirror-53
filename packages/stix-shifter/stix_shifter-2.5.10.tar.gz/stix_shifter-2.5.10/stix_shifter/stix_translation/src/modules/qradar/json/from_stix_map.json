@@ -1,0 +1,61 @@
+{
+  "ipv4-addr": {
+    "fields": {
+      "value": ["sourceip", "destinationip", "identityip"]
+    }
+  },
+  "ipv6-addr": {
+    "fields": {
+      "value": ["sourceip", "destinationip"]
+    }
+  },
+  "url": {
+    "fields": {
+      "value": ["url"]
+    }
+  },
+  "mac-addr": {
+    "fields": {
+      "value": ["sourcemac", "destinationmac"]
+    }
+  },
+  "file": {
+    "fields": {
+      "name": ["filename"],
+      "hashes.SHA-256": ["filehash"],
+      "hashes.MD5": ["filehash"],
+      "hashes.SHA-1": ["filehash"]
+    }
+  },
+  "network-traffic": {
+    "fields": {
+      "src_port": ["sourceport"],
+      "dst_port": ["destinationport"],
+      "protocols[*]": ["protocolid"],
+      "start": ["starttime"],
+      "end": ["endtime"],
+      "src_ref.value": ["sourceip", "sourcemac"],
+      "dst_ref.value": ["destinationip", "destinationmac"]
+    }
+  },
+  "user-account": {
+    "fields": {
+      "user_id": ["username"]
+    }
+  },
+  "artifact": {
+    "fields": {
+      "payload_bin": ["base64_payload"]
+    }
+  },
+  "domain-name": {
+    "fields": {
+      "value": ["domainname"]
+    }
+  },
+  "x-readable-payload": {
+    "fields": {
+      "value": ["utf8_payload"]
+    }
+  }
+}
