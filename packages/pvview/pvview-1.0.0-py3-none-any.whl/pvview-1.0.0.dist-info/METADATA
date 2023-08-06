@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: pvview
+Version: 1.0.0
+Summary: display one or more EPICS PVs in a PyDM GUI window as a table
+Home-page: https://github.com/BCDA-APS/pvview/
+Author: Pete R. Jemian
+Author-email: jemian@anl.gov
+License: OPEN SOURCE LICENSE
+Download-URL: https://github.com/BCDA-APS/pvview/
+Keywords: Python,Qt5,PyDM,EPICS
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: Free To Use But Restricted
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Dist: PyDM
+
+# pvview
+display one or more EPICS PVs in a PyDM GUI window as a table
+
+
+INSTALL:
+
+    pip install pvview
+
+Most Recent Tagged Build for conda installation
+
+[![Anaconda-Server Badge](https://anaconda.org/BCDA-APS/pvview/badges/installer/conda.svg)](https://conda.anaconda.org/aps-anl-tag)
+[![Anaconda-Server Badge](https://anaconda.org/BCDA-APS/pvview/badges/platforms.svg)](https://anaconda.org/aps-anl-tag/pvview)
+[![Anaconda-Server Badge](https://anaconda.org/BCDA-APS/pvview/badges/version.svg)](https://anaconda.org/aps-anl-tag/pvview)
+[![Anaconda-Server Badge](https://anaconda.org/BCDA-APS/pvview/badges/downloads.svg)](https://anaconda.org/aps-anl-tag/pvview)
+
+    conda install -c aps-anl-tag -c pydm-tag -c conda-forge pvview
+
+EXAMPLE:
+
+    pvview.py {sky,xxx}:{iso8601,:UPTIME} xxx:alldone adsky:cam1:Acquire &
+
+![pvview image](screen.jpg)
+
+The `pvview` code was migrated from the 
+[BcdaQWidgets](https://github.com/BCDA-APS/bcdaqwidgets) project 
+(PyQt4-aware widgets for Python2)
+to use the [PyDM](https://github.com/slaclab/pydm) project.
+
+
