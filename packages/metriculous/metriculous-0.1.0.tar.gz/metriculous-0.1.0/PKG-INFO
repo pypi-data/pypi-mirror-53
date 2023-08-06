@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: metriculous
+Version: 0.1.0
+Summary: Very unstable library containing utilities to measure and visualize statistical properties of machine learning models.
+Home-page: https://gitlab.com/luminovo/public/metriculous
+Author: Luminovo GmbH
+Author-email: pypi@luminovo.ai
+Keywords: metriculous,machine,learning,metrics
+Requires-Python: >=3.7,<4.0
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: assertpy (>=0.14.0,<0.15.0)
+Requires-Dist: bokeh (>=1.1,<2.0)
+Requires-Dist: numpy (>=1.16,<2.0)
+Requires-Dist: pandas (>=0.25.0,<0.26.0)
+Requires-Dist: scikit-learn (>=0.21.2,<0.22.0)
+Project-URL: Repository, https://gitlab.com/luminovo/public/metriculous
