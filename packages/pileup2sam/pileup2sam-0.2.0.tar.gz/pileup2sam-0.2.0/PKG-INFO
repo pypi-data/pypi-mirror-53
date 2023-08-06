@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: pileup2sam
+Version: 0.2.0
+Summary: Convert pileup to SAM
+Home-page: https://github.com/winni2k/pileup2sam
+Author: Warren W. Kretzschmar
+Author-email: warren.kretzschmar@ki.se
+License: UNKNOWN
+Description: # pileup2sam
+        A partial implementation of a [pileup](https://en.wikipedia.org/wiki/Pileup_format) to 
+        [SAM](https://www.ncbi.nlm.nih.gov/pubmed/19505943) format conversion tool.
+        
+        - This is an inefficient and naive implementation, but it seems to do the trick.
+        - Does not support indels! 
+        
+        ## Example usage
+        
+        ```bash
+        pileup2sam -r test/cases/simulated.fa test/cases/simulated.head100.pileup out.sam
+        ```
+        
+Keywords: htslib sam bam pileup samtools
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7, <4
+Description-Content-Type: text/markdown
