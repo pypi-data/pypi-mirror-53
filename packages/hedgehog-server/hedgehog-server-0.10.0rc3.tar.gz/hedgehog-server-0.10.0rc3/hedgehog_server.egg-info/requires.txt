@@ -1,0 +1,17 @@
+concurrent-utils~=0.2.0
+hedgehog-protocol~=0.10.0rc2
+hedgehog-utils[protobuf,trio,zmq]~=0.7.0rc1
+hedgehog-platform~=0.2.0
+
+[dev]
+pytest
+pytest-runner
+pytest-asyncio
+pytest-trio
+pytest-cov
+pytest-timeout
+mypy
+
+[raspberry]
+RPi.GPIO
+pyserial-asyncio
