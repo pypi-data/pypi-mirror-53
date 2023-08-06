@@ -1,0 +1,14 @@
+stack_name: comeRoaetFabnodeSample
+description: Basic Node
+script: node.py
+node:
+    fxname: BasicNode
+    archive: node.zip
+    handler: node.lambda_handler
+    bucket_name: jlh-dev-lambda-functions
+    role_import: iamFilterRoleId
+outputs:
+    - name: Alpha
+inputs:
+    - name: Router
+      source: snsRouterTopicId

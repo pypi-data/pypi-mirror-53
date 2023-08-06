@@ -1,0 +1,147 @@
+CloudFormation {
+    {% set prefix = stack_name -%}
+    {%- set nodename = [prefix, node['fxname']]|join('') %}
+    description = external_parameters.fetch(
+        :description,  "{{ description }}")
+
+    code_archive = '{{ node['archive'] }}'
+    handler = '{{ node['handler'] }}'
+    fx_name = '{{ nodename }}'
+    code_bucket_id = '{{ node['bucket_name'] }}'
+    node_role_id = '{{ node['role_import'] }}'
+
+    Description description
+
+    {% for input in inputs -%}
+    {%- set queue_name = [prefix, input['name'], 'Input']|join('') -%}
+    {%- set input_name = [prefix, input['name'], 'Trigger']|join('') -%}
+    Queue(:{{ queue_name }}) do
+    end
+
+    Resource("{{ queue_name + 'Source' }}") do
+        Type("AWS::SNS::Subscription")
+        Property("Protocol", "sqs")
+        Property("Endpoint", FnGetAtt(:{{ queue_name }}, 'Arn'))
+        Property("TopicArn", FnImportValue('{{ input['source'] }}'))
+    end
+
+    QueuePolicy(:{{ queue_name + 'SourcePolicy' }}) do
+        PolicyDocument(
+            'Id' => 'RouterSNSToFilterPolicy',
+            'Statement' =>
+            [
+                {
+                    'Effect' => 'Allow',
+                    'Action' => [
+                        'sqs:SendMessage'
+                    ],
+                    'Condition' => {
+                        'ArnEquals' => {
+                            'aws:SourceArn' => FnImportValue('{{ input['source'] }}')
+                        }
+                    },
+                    'Principal' => {
+                        'AWS' => '*'
+                    },
+                    'Resource' => '*',
+                    'Sid' => 'Allows router to SNS->SQS filter'
+                }
+            ]
+        )
+        Queues [ Ref(:{{ queue_name }}) ]
+    end
+
+    Resource(:{{ input_name }}) do
+        Type 'AWS::Lambda::EventSourceMapping'
+        Property('EventSourceArn', FnGetAtt(:{{ queue_name }}, 'Arn'))
+        Property('FunctionName', FnGetAtt(:{{ nodename }}, 'Arn'))
+    end
+    {% endfor -%}
+
+    Resource(:{{ nodename }}) do
+        Type 'AWS::Lambda::Function'
+        Property('Handler', handler)
+        Property('FunctionName', fx_name)
+        Property('Role', FnImportValue(node_role_id))
+        Property('Code',
+                S3Bucket: code_bucket_id,
+                S3Key: code_archive)
+        Property('Runtime', 'python3.7')
+        Property('Timeout', '25')
+        Property('Environment', {
+            'Variables' => {
+                {% for output in outputs -%}
+                {%- set queue_name = [prefix, output['name'], 'Output']|join('') -%}
+                '{{ output['name']}}': Ref(:{{ queue_name }}){{ ',' if not loop.last }}
+                {% endfor %}
+            }
+        })
+    end
+
+    {% for output in outputs -%}
+    {%- set queue_name = [prefix, output['name'], 'Output']|join('') -%}
+
+    Topic(:{{ queue_name }}) do
+    end
+
+    Output(:{{ 'export'+queue_name }}) do
+        Description '{{ node['fxname'] + '.' + output['name'] }}'
+        Value Ref(:{{ queue_name }})
+        Export '{{ prefix + '-' + output['name'] }}'
+    end
+
+    TopicPolicy(:{{ queue_name + 'Policy' }}) do
+        PolicyDocument(
+            'Version' => '2012-10-17',
+            'Statement' =>
+            [
+                {
+                    'Effect' => 'Allow',
+                    'Action' => 'sns:Publish',
+                    'Principal' => {
+                        'AWS': [
+                            "{{ acctarn }}"
+                        ]
+                    },
+                    'Resource' => Ref(:{{ queue_name }}),
+                    'Condition' => {
+                        'ArnLike' => {
+                            'aws:SourceArn' => FnJoin(
+                                '', ['arn:aws:lambda:::', fx_name])
+                        }
+                    }
+                }
+            ]
+        )
+        Topics [ Ref(:{{ queue_name }}) ]
+    end
+
+    # Allows SNS to send message on SQS
+    # move
+    # QueuePolicy(:pFilterToWorkerQueuePolicy) do
+    #     PolicyDocument(
+    #         'Id' => 'FilterToWorkerQueuePolicy',
+    #         'Statement' =>
+    #         [
+    #             {
+    #                 'Effect' => 'Allow',
+    #                 'Action' => [
+    #                     'sqs:SendMessage'
+    #                 ],
+    #                 'Condition' => {
+    #                     'ArnEquals' => {
+    #                         'aws:SourceArn' => Ref(:{{ queue_name }})
+    #                     }
+    #                 },
+    #                 'Principal' => {
+    #                     'AWS' => '*'
+    #                 },
+    #                 'Resource' => '*',
+    #                 'Sid' => 'Allows filter to SNS->SQS worker'
+    #             }
+    #         ]
+    #     )
+    #     Queues [ Ref(:sqsNoopWorkerInput) ]
+    # end
+    {%- endfor %}
+}
