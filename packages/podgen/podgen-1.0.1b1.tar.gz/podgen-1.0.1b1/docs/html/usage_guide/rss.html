@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>RSS &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Full example" href="example.html" />
+    <link rel="prev" title="Episodes" href="episodes.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="episodes.html" title="Previous document">Episodes</a>
+        </li>
+        <li>
+          <a href="example.html" title="Next document">Full example</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="rss">
+<h1>RSS<a class="headerlink" href="#rss" title="Permalink to this headline">¶</a></h1>
+<p>Once you’ve added all the information and episodes, you’re ready to
+take the final step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rssfeed</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">rss_str</span><span class="p">()</span>
+<span class="c1"># Print to stdout, just as an example</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rssfeed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you’re okay with the default parameters of <a class="reference internal" href="../api.podcast.html#podgen.Podcast.rss_str" title="podgen.Podcast.rss_str"><code class="xref py py-meth docutils literal notranslate"><span class="pre">podgen.Podcast.rss_str()</span></code></a>,
+you can use a shortcut by converting your <a class="reference internal" href="../api.podcast.html#podgen.Podcast" title="podgen.Podcast"><code class="xref py py-class docutils literal notranslate"><span class="pre">Podcast</span></code></a> to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rssfeed</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rssfeed</span><span class="p">)</span>
+<span class="c1"># Or let print convert to str for you</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.rss_str" title="podgen.Podcast.rss_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rss_str</span></code></a>([minimize, encoding, xml_declaration])</p></td>
+<td><p>Generate an RSS feed and return the feed XML as string.</p></td>
+</tr>
+</tbody>
+</table>
+<p>You may also write the feed to a file directly, using <a class="reference internal" href="../api.podcast.html#podgen.Podcast.rss_file" title="podgen.Podcast.rss_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">podgen.Podcast.rss_file()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">rss_file</span><span class="p">(</span><span class="s1">&#39;rss.xml&#39;</span><span class="p">,</span> <span class="n">minimize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../api.podcast.html#podgen.Podcast.rss_file" title="podgen.Podcast.rss_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rss_file</span></code></a>(filename[, minimize, encoding, …])</p></td>
+<td><p>Generate an RSS feed and write the resulting XML to a file.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there are any mandatory attributes that aren’t set, you’ll get errors
+when generating the RSS.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Generating the RSS is not completely free. Save the result to a variable
+once instead of generating the same RSS over and over.</p>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="episodes.html" title="Previous document">Episodes</a>
+        </li>
+        <li>
+          <a href="example.html" title="Next document">Full example</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background/index.html">Background</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Usage Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="podcasts.html">Podcasts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="episodes.html">Episodes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html">Full example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/usage_guide/rss.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

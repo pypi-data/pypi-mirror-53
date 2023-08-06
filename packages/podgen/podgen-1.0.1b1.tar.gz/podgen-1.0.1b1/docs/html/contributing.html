@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Contributing &#8212; PodGen Documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Documentation" href="api.html" />
+    <link rel="prev" title="Adding new tags" href="advanced/extending.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="advanced/extending.html" title="Previous document">Adding new tags</a>
+        </li>
+        <li>
+          <a href="api.html" title="Next document">API Documentation</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-up">
+<h2>Setting up<a class="headerlink" href="#setting-up" title="Permalink to this headline">¶</a></h2>
+<p>To install the dependencies, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.txt
+</pre></div>
+</div>
+<p>while you have a <a class="reference external" href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtual environment</a>
+activated.</p>
+<p>You are recommended to use <a class="reference external" href="https://github.com/yyuu/pyenv">pyenv</a> to handle
+virtual environments and Python versions. That way, you can easily test and
+debug problems that are specific to one version of Python.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>You can perform an integration test by running <code class="docutils literal notranslate"><span class="pre">podgen/__main__.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m podgen
+</pre></div>
+</div>
+<p>When working on this project, you should run the unit tests as well as the
+integration test, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make test
+</pre></div>
+</div>
+<p>The unit tests reside in <code class="docutils literal notranslate"><span class="pre">podgen/tests</span></code> and are written using the
+<a class="reference external" href="https://docs.python.org/3/library/unittest.html#module-unittest" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest</span></code></a> module.</p>
+</div>
+<div class="section" id="values">
+<h2>Values<a class="headerlink" href="#values" title="Permalink to this headline">¶</a></h2>
+<p>Read <a class="reference internal" href="background/philosophy.html"><span class="doc">Philosophy</span></a>, <a class="reference internal" href="background/scope.html"><span class="doc">Scope</span></a> and <a class="reference internal" href="background/fork.html"><span class="doc">Why the fork?</span></a>
+for a run-down on what values/principles lay the foundation for this project.
+In short, it is important to keep the API as simple as possible.</p>
+<p>You must also write unittests as you code, ideally using <strong>test-driven
+development</strong> (that is, write a test, observe that the test fails, write code
+so the test works, observe that the test succeeds, write a new test and so on).
+That way, you know that the tests actually contribute and you get to think
+about how the API will look before you tackle the problem head-on.</p>
+<p>Make sure you update <code class="docutils literal notranslate"><span class="pre">podgen/__main__.py</span></code> so it still works, and use your new
+functionality there if it makes sense.</p>
+<p>You must also make sure you <strong>update any relevant documentation</strong>. Remember that
+the documentation includes lots of examples and also describes the API
+independently from docstring comments in the code itself.</p>
+<p>Pull requests in which the unittests and documentation are NOT up to date
+with the code will NOT be accepted.</p>
+<p>Lastly, a single <strong>commit</strong> shouldn’t include more changes than it needs. It’s better to do a big
+change in small steps, each of which is one commit. Explain the impact of your
+changes in the commit message.</p>
+</div>
+<div class="section" id="the-workflow">
+<h2>The Workflow<a class="headerlink" href="#the-workflow" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Check out <a class="reference external" href="https://waffle.io/tobinus/python-podgen">waffle.io</a> or
+<a class="reference external" href="https://github.com/tobinus/python-podgen/issues">GitHub Issues</a>.</p>
+<ul class="simple">
+<li><p>Find the issue you wish to work on.</p></li>
+<li><p>Add your issue if it’s not already there.</p></li>
+<li><p>Discuss the issue and get feedback on your proposed solution. Don’t waste
+time on a solution that might not be accepted!</p></li>
+</ul>
+</li>
+<li><p>Work on the issue in a separate branch which follows the name scheme
+<code class="docutils literal notranslate"><span class="pre">tobinus/python-podgen#&lt;issue-number&gt;-&lt;brief-description&gt;</span></code> in your own fork. To be honest, I
+don’t know if Waffle.io will notice that, but it doesn’t hurt to try, I
+guess! You might want to read up on <a class="reference external" href="https://github.com/waffleio/waffle.io/wiki/Recommended-Workflow-Using-Pull-Requests-&amp;-Automatic-Work-Tracking">Waffle.io’s recommended workflow</a>.</p></li>
+<li><p>Push the branch.</p></li>
+<li><p>Do the work.</p></li>
+<li><p>When you’re done and you’ve updated the documentation and tests (see above),
+create a pull request which references the issue.</p></li>
+<li><p>Wait for me or some other team member to review the pull request. Keep an
+eye on your inbox or your GitHub notifications, since we may have some
+objections or feedback that you must take into consideration. <strong>It’d be a
+shame if your work never led to anything because you didn’t notice a
+comment!</strong></p></li>
+<li><p>Consider making the same changes to <a class="reference external" href="https://github.com/lkiesow/python-feedgen">python-feedgen</a>
+as well.</p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="advanced/extending.html" title="Previous document">Adding new tags</a>
+        </li>
+        <li>
+          <a href="api.html" title="Next document">API Documentation</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Generate podcasts with ease.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=tobinus&repo=python-podgen&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background/index.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_guide/index.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced Topics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up">Setting up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#values">Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-workflow">The Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/blob/master/CHANGELOG.md">Changelog</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/tobinus/python-podgen/tree/master">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.org/project/podgen/">PyPI</a></li>
+    
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Lars Kiesow. Modified work © 2019, Thorben Dahl.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/contributing.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
