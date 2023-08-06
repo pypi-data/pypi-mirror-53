@@ -1,0 +1,6 @@
+include *.txt
+include requirements/*.txt
+include README.md
+recursive-include search_engine_parser *.py
+prune docs/ 
+prune scripts/
