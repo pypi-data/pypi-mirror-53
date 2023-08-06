@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: eralegis
+Version: 0.0.9
+Summary: Projeto simples para calculo de data thelemica
+Home-page: https://github.com/tiagocordeiro/eralegis
+Author: Tiago Cordeiro
+Author-email: tiago@mulhergorila.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Framework :: Paste
+Description-Content-Type: text/markdown
+Requires-Dist: flatlib (>=0.2.1)
+Requires-Dist: pyswisseph (>=2.0.0.post2)
+
+# EraLegis
+
+[![Build Status](https://travis-ci.org/tiagocordeiro/eralegis.svg?branch=master)](https://travis-ci.org/tiagocordeiro/eralegis)
+[![Updates](https://pyup.io/repos/github/tiagocordeiro/eralegis/shield.svg)](https://pyup.io/repos/github/tiagocordeiro/eralegis/)
+[![Python 3](https://pyup.io/repos/github/tiagocordeiro/eralegis/python-3-shield.svg)](https://pyup.io/repos/github/tiagocordeiro/eralegis/)
+
+### Configurando o ambiente
+```shell
+$ python3 -m venv venv
+$ source venv/bin/activate
+(venv)$ 
+```
+
+### Instalando via git
+```shell
+git clone https://github.com/tiagocordeiro/eralegis.git
+```
+
+### Instalando via pip
+```shell
+pip install eralegis
+```
+
+### Importando o módulo
+```python
+$ python
+>>> from eralegis import thelemicdate
+>>> hoje = thelemicdate.now()
+>>> print(hoje)
+☉ in 04º ♉ ☽ in 24º ♌ Dies Martis Anno IV:v æræ novæ
+```
+
+
+
