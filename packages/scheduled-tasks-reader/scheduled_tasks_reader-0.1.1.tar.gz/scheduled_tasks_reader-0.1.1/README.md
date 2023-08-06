@@ -1,0 +1,119 @@
+# Scheduled Task Reader
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&logo=appveyor)](https://github.com/psf/black)
+[![](https://img.shields.io/pypi/v/scheduled-tasks-reader?style=for-the-badge&logo=appveyor)](https://pypi.org/project/scheduled-tasks-reader/0.1/)
+[![](https://img.shields.io/badge/Maintained-nope-red?style=for-the-badge)](https://gitlab.crystal-cube.ch/ul15/list-scheduled-tasks/)
+[![](https://img.shields.io/badge/Swag-Check-greeen?style=for-the-badge&logoWidth=40&logo=data:image/png;base64,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)](https://gitlab.crystal-cube.ch/ul15/list-scheduled-tasks/)
+
+A program to various information of scheduled tasks.
+
+## Installation
+
+Clone this git repository, then run the following commands:
+
+```python3 -m venv venv```
+
+```source venv/bin/activate```
+
+```pip3 install -r requirements.txt```
+
+or just
+
+```pip3 install scheduled-tasks-reader```
+
+## Help page
+
+```console
+usage: Scheduled Tasks Reader [-h] [-o OUTPUT] [-of]
+                              [-n TASK_NAMES [TASK_NAMES ...]]
+                              [-p TASK_PATHS [TASK_PATHS ...]] [-s  [...]]
+                              [-t  [...]] [--only_hidden] [--raw_data]
+                              [--version]
+                              dir_of_registry_files
+
+Get Overview of Scheduled Tasks from the relevant registry files.
+
+positional arguments:
+  dir_of_registry_files
+                        Path to the directory containing the relevant registry
+                        files
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Store output at specified location. It will overwrite
+                        existing files!
+  -of , --output_format 
+                        Define output format. Default value is: html.Allowed
+                        values are: ['html', 'json', 'csv']
+  -n TASK_NAMES [TASK_NAMES ...], --task_names TASK_NAMES [TASK_NAMES ...]
+                        Filter for array of one or more names of scheduled
+                        task (separated by space).
+  -p TASK_PATHS [TASK_PATHS ...], --task_paths TASK_PATHS [TASK_PATHS ...]
+                        Filter for array of one or more paths of scheduled
+                        task (separated by space).
+  -s  [ ...], --sort_by  [ ...]
+                        Sort by array of one or more attributes of scheduled
+                        task (separated by space). Default values are:
+                        ['task_path', 'task_name'].Allowed values are:
+                        ['task_path', 'task_name', 'enabled', 'hidden',
+                        'triggers', 'exec_command', 'exec_args',
+                        'schedule_time']
+  -t  [ ...], --task_triggers  [ ...]
+                        Filter for array of one or more trigger types of
+                        scheduled task (separated by space). Allowed values
+                        are: ['EventTrigger', 'TimeTrigger', 'LogonTrigger',
+                        'BootTrigger', 'CalendarTrigger',
+                        'SessionStateChangeTrigger', 'RegistrationTrigger']
+  --table_terminal_output
+                        Show the output as a table, needs a wide Terminal.
+  --only_hidden         Show only the hidden scheduled tasks
+  --raw_data            Append the raw data from the scheduled tasks parsed
+                        from the xmls to the normal output.
+  --version             show program's version number and exit
+
+```
+
+## Example output
+
+```console
+task_path        Microsoft/Windows/Registry                        
+task_name        RegIdleBackup                                     
+enabled          True                                              
+hidden           True                                              
+triggers         [CalendarTrigger]                                 
+exec_command                                                       
+exec_args                                                          
+schedule_time    {'schedule': 'ScheduleByDay', 'dayInterval': '10'}
+===========================
+...
+```
+
+or with the --table_terminal_output it would look like this:
+
+```console
+task_path  task_name                  enabled  hidden  triggers            exec_command                                                                 exec_args                                           schedule_time                                                                     
+ .          AviraSystemSpeedupUpdate   True     False   [CalendarTrigger]   "C:\ProgramData\Avira\SystemSpeedup\Update\avira_speedup_setup_update.exe"   /VERIFY /VERYSILENT /NOSTART /NODOTNET /NORESTART   {'schedule': 'ScheduleByWeek', 'daysOfWeek': ['Tuesday'], 'weeksInterval': '1'}  
+ .          Avira_Antivirus_Systray    True     False   [ LogonTrigger]     "C:\Program Files (x86)\Avira\Antivirus\avgnt.exe"                           /min                                                N/A
+...
+```
+
+
+## Built With
+
+* [python3](https://www.python.org/) - Python :heart:
+* [argparse](https://docs.python.org/3/library/argparse.html?highlight=argparse#module-argparse) - Parser for command-line options, arguments and sub-commands
+* [xmltodict](https://github.com/martinblech/xmltodict) - To parse xml files
+* [pandas](https://github.com/pandas-dev/pandas) - Powerful Python data analysis toolkit
+
+## Contributing
+
+Contributing in form of feedback, bug reporting or pull requests is welcome.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Google :heart:
