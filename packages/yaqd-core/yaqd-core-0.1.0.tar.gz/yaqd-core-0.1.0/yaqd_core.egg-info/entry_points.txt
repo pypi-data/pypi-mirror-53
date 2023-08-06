@@ -1,0 +1,5 @@
+[console_scripts]
+yaqd-base-daemon = yaqd_core._daemon:BaseDaemon.main
+yaqd-base-hardware = yaqd_core.hardware._base:BaseHardwareDaemon.main
+yaqd-continuous-hardware = yaqd_core.hardware._continuous:ContinuousHardwareDaemon.main
+
