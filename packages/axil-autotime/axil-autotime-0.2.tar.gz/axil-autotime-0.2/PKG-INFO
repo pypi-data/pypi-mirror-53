@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: axil-autotime
+Version: 0.2
+Summary: An improved version of Time everything in IPython by Phillip Cloud
+Home-page: UNKNOWN
+Author: Lev Maximov
+License: Apache
+Description: # axil-autotime
+        An improved version of `ipython-autotime` by Phillip Cloud.  
+        Ignores function and class definitions.
+        
+        ## Installation:
+        
+        ```
+        $ pip install axil-autotime
+        ```
+        
+        ## Usage
+        
+        Run `%load_ext autotime` to load the extension.
+        
+        <img src="https://raw.githubusercontent.com/axil/axil-autotime/master/img/screenshot.png" width="400">
+        
+        ## Want to turn it off?
+        
+        ```python
+        In [5]: %unload_ext autotime
+        ```
+        
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Education
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Utilities
+Description-Content-Type: text/markdown
