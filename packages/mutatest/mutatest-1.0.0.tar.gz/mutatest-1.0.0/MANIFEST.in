@@ -1,0 +1,22 @@
+include LICENSE
+
+# Core configuration files
+include *.ini
+include *.md
+include *.rst
+include *.toml
+include *.yml
+include *.yaml
+
+# coverage configuration
+include .coveragerc
+
+# Tests
+recursive-include tests *.py
+
+# docs
+recursive-include docs *.bat
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
+recursive-include docs requirements.txt
