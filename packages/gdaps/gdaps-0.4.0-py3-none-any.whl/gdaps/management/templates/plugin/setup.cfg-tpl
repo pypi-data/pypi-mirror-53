@@ -1,0 +1,55 @@
+[check-manifest]
+ignore =
+    *.sublime-project
+    .git*
+    .vscode/*
+    manage.py
+
+
+[metadata]
+name = {{ plugin_group }}.{{ app_name }}
+version = attr:{{ plugin_group }}.{{ app_name }}.__version__
+description = "A {{ project_title }} plugin app."
+long_description = file: README.rst
+long_description_content_type = text/x-rst
+author = {{ author }}
+author_email = {{ author_email }}
+url = https://www.example.com/
+license = GPLv3
+# If you use a license file activate the line below.
+# license_file = LICENSE
+
+classifiers =
+    Development Status :: 1 - Planning
+    Environment :: Web Environment
+    Framework :: Django :: {{ docs_version }}
+    Intended Audience :: Developers
+    License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+    Natural Language :: English
+    Operating System :: OS Independent
+    Programming Language :: JavaScript
+    Programming Language :: Python :: 3 :: Only
+    Programming Language :: Python :: 3.6
+    Topic :: Internet :: WWW/HTTP
+    Topic :: Internet :: WWW/HTTP :: Dynamic Content
+    Topic :: Internet :: WWW/HTTP :: WSGI
+
+[options]
+zip_safe = False
+include_package_data = True
+packages = find:
+install_requires =
+    django
+python_requires = >=3.6
+
+[options.entry_points]
+{{ plugin_group }} =
+    {{ app_name }} = {{ plugin_group }}.{{ app_name }}
+
+[options.extras_require]
+dev =
+    check-manifest
+    pytest==4.6.3
+    pytest-cov==2.7.1
+    twine
+    django-debug-toolbar
