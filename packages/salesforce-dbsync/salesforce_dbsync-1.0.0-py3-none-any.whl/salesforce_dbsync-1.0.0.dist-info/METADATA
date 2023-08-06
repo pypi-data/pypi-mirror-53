@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: salesforce-dbsync
+Version: 1.0.0
+Summary: Python library to download data from Salesforce and synchronize with a relational database
+Home-page: https://github.com/satapathy/pypi-salesforce-dbsync
+Author: S Satapathy
+Author-email: shubhakant.satapathy@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+# salesforce-dbsync
+Python library to download data from Salesforce and synchronize with a relational database 
+
+
+### Example ###
+
+Following sample code downloads data from tables from Salesforce. 
+It also creates a MySQL Database, sets up the mirror tables alongwith Indexes and inserts the data in the table.
+Running the same script at a later date with Syncronize the Database table with any additions or changes in Salesforce
+Deletion if records in Salesforce is currently not handeled
+Only MySQL database is supported at this time
+
+```python
+from salesforce-dbsync import Screenwriter
+
+```
+```
+Output:
+```
+
+
