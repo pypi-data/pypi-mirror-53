@@ -1,0 +1,83 @@
+Metadata-Version: 2.1
+Name: hdx-scraper-geonode
+Version: 1.0.0
+Summary: HDX Python generic geonode scraper
+Home-page: https://github.com/OCHA-DAP/hdx-scraper-geonode
+Author: Michael Rans
+Author-email: rans@email.com
+License: MIT
+Description: [![Build Status](https://travis-ci.org/OCHA-DAP/hdx-scraper-geonode.svg?branch=master&ts=1)](https://travis-ci.org/OCHA-DAP/hdx-scraper-geonode) [![Coverage Status](https://coveralls.io/repos/github/OCHA-DAP/hdx-scraper-geonode/badge.svg?branch=master&ts=1)](https://coveralls.io/github/OCHA-DAP/hdx-scraper-geonode?branch=master)
+        
+        The HDX Scraper Geonode Library enables easy building of scrapers for extracting data 
+        from geonode servers. 
+        
+        ## Usage
+        
+        The library has detailed API documentation which can be found
+        here: <http://ocha-dap.github.io/hdx-scraper-geonode/>. The code for the
+        library is here: <https://github.com/ocha-dap/hdx-scraper-geonode>.
+        
+        ## GeoNodeToHDX Class
+        
+        You should create an object of the GeoNodeToHDX class which has methods:
+        get_locationsdata, get_layersdata, generate_dataset_and_showcase.
+        
+            geonodetohdx = GeoNodeToHDX('https://geonode.wfp.org', downloader)
+            # get countries where count > 0
+            countries = geonodetohdx.get_countries(use_count=True)
+            # get layers for country with ISO 3 code SDN
+            layers = geonodetohdx.get_layers(countryiso='SDN')
+            # get layers for all countries
+            geonodetohdx = GeoNodeToHDX('https://geonode.themimu.info', downloader)
+            layers = get_layers(countryiso=None)
+        
+        There are default terms to be ignored and mapped. These can be overridden by
+        creating a YAML configuration with the new configuration in this format:
+        
+            ignore_data:
+              - deprecated
+        
+            category_mapping:
+              Elevation: 'elevation - topography - altitude'
+              'Inland Waters': river
+        
+            titleabstract_mapping:
+              bridges:
+                - bridges
+                - transportation
+                - 'facilities and infrastructure'
+              idp:
+                camp:
+                  - 'displaced persons locations - camps - shelters'
+                  - 'internally displaced persons - idp'
+                else:
+                  - 'internally displaced persons - idp'
+          
+        ignore_data are any terms in the abstract that mean that the dataset 
+        should not be added to HDX.
+          
+        category_mapping are mappings from the category field category__gn_description 
+        to HDX metadata tags.
+          
+        titleabstract_mapping are terms in the title or abstract that mean that 
+        particular tags should be added to the HDX metadata tags.
+        
+        For more fine grained tuning of these, you retrieve the dictionaries and
+        manipulate them directly:
+        
+            geonodetohdx = GeoNodeToHDX('https://geonode.wfp.org', downloader)
+            ignore_data = geonodetohdx.get_ignore_data() 
+            category_mapping = geonodetohdx.get_category_mapping() 
+            titleabstract_mapping = geonodetohdx.get_titleabstract_mapping()         
+Keywords: HDX,scraper,geonode
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/markdown
