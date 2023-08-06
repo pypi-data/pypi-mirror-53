@@ -1,0 +1,46 @@
+---- Minecraft Crash Report ----
+// Why did you do that?
+
+Time: 6/16/19 11:22 PM
+Description: Exception in server tick loop
+
+org.apache.logging.log4j.core.appender.AppenderLoggingException: Attempted to append to non-started appender ServerGuiConsole
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender(AppenderControl.java:89)
+	at org.apache.logging.log4j.core.config.LoggerConfig.callAppenders(LoggerConfig.java:425)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:406)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:367)
+	at org.apache.logging.log4j.core.Logger.log(Logger.java:110)
+	at org.apache.logging.log4j.spi.AbstractLogger.info(AbstractLogger.java:1025)
+	at net.minecraft.util.LoggingPrintStream.logString(LoggingPrintStream.java:31)
+	at net.minecraft.util.LoggingPrintStream.println(LoggingPrintStream.java:21)
+	at com.microsoft.Malmo.Utils.TimeHelper$SyncManager.debugLog(TimeHelper.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:1730)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Linux (amd64) version 5.0.10-surface-linux-surface
+	Java Version: 1.8.0_212, Oracle Corporation
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 496786392 bytes (473 MB) / 937426944 bytes (894 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 1 total; -Xmx2G
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP 9.38 Powered by Forge 13.20.0.2228 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.11.2} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.11.2-13.20.0.2228-PROJECT(Minecraft).jar) 
+	UCHIJAAAA	forge{13.20.0.2228} [Minecraft Forge] (forgeSrc-1.11.2-13.20.0.2228-PROJECT(Minecraft).jar) 
+	UCHIJAAAA	malmomod{0.37.0} [Microsoft Malmo Mod] (MalmoMod-0.37.0.jar) 
+	Loaded coremods (and transformers): 
+OverclockingPlugin (MalmoMod-0.37.0.jar)
+  com.microsoft.Malmo.OverclockingClassTransformer
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['MalmoTutorialBot'/0, l='TEMP_0_8b3b4ade-d142-466f-8d3e-9cf261573087', x=527.50, y=4.00, z=-1310.50]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

@@ -1,0 +1,133 @@
+---- Minecraft Crash Report ----
+// Oops.
+
+Time: 6/15/19 7:17 PM
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at java.util.regex.Matcher.getTextLength(Matcher.java:1283)
+	at java.util.regex.Matcher.reset(Matcher.java:309)
+	at java.util.regex.Matcher.<init>(Matcher.java:229)
+	at java.util.regex.Pattern.matcher(Pattern.java:1093)
+	at java.util.Formatter.parse(Formatter.java:2547)
+	at java.util.Formatter.format(Formatter.java:2501)
+	at java.io.PrintStream.format(PrintStream.java:970)
+	at com.microsoft.Malmo.Client.VideoHook.postRender(VideoHook.java:349)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_31_VideoHook_postRender_RenderWorldLastEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:185)
+	at net.minecraftforge.client.ForgeHooksClient.dispatchRenderLast(ForgeHooksClient.java:166)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorldPass(EntityRenderer.java:1470)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1299)
+	at com.microsoft.Malmo.Utils.TextureHelper$MalmoEntityRenderer.renderWorld(TextureHelper.java:93)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1106)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:3515)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:407)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:26)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Client thread
+Stacktrace:
+	at java.util.regex.Matcher.getTextLength(Matcher.java:1283)
+	at java.util.regex.Matcher.reset(Matcher.java:309)
+	at java.util.regex.Matcher.<init>(Matcher.java:229)
+	at java.util.regex.Pattern.matcher(Pattern.java:1093)
+	at java.util.Formatter.parse(Formatter.java:2547)
+	at java.util.Formatter.format(Formatter.java:2501)
+	at java.io.PrintStream.format(PrintStream.java:970)
+	at com.microsoft.Malmo.Client.VideoHook.postRender(VideoHook.java:349)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_31_VideoHook_postRender_RenderWorldLastEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:185)
+	at net.minecraftforge.client.ForgeHooksClient.dispatchRenderLast(ForgeHooksClient.java:166)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorldPass(EntityRenderer.java:1470)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1299)
+	at com.microsoft.Malmo.Utils.TextureHelper$MalmoEntityRenderer.renderWorld(TextureHelper.java:93)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['MineRLAgent'/2585, l='MpServer', x=-70.50, y=63.92, z=243.50]]
+	Chunk stats: MultiplayerChunkCache: 81, 81
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-52,61,181), Chunk: (at 12,3,5 in -4,11; contains blocks -64,0,176 to -49,255,191), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 80 game time, 80 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 32 total; [EntityItem['item.tile.rail'/129, l='MpServer', x=-33.41, y=32.00, z=214.77], EntityItem['item.tile.rail'/130, l='MpServer', x=-32.23, y=32.00, z=213.13], EntityItem['item.tile.rail'/133, l='MpServer', x=-25.13, y=32.00, z=214.13], EntityChicken['Chicken'/134, l='MpServer', x=-27.50, y=72.00, z=233.50], EntityChicken['Chicken'/135, l='MpServer', x=-30.50, y=73.00, z=235.50], EntityChicken['Chicken'/136, l='MpServer', x=-32.50, y=74.00, z=232.50], EntityChicken['Chicken'/137, l='MpServer', x=-31.50, y=73.00, z=234.50], EntityChicken['Chicken'/142, l='MpServer', x=-22.69, y=72.00, z=240.17], EntityChicken['Chicken'/143, l='MpServer', x=-23.66, y=72.00, z=239.82], EntityChicken['Chicken'/144, l='MpServer', x=-22.50, y=72.00, z=241.50], EntityChicken['Chicken'/145, l='MpServer', x=-24.82, y=72.00, z=241.00], EntityItem['item.tile.torch'/84, l='MpServer', x=-68.46, y=34.00, z=207.13], EntityItem['item.tile.rail'/86, l='MpServer', x=-61.54, y=34.00, z=204.28], EntityItem['item.tile.rail'/88, l='MpServer', x=-61.51, y=34.00, z=205.55], EntityPlayerSP['MineRLAgent'/2585, l='MpServer', x=-70.50, y=63.92, z=243.50], EntityChicken['Chicken'/37, l='MpServer', x=-116.50, y=63.00, z=230.50], EntityChicken['Chicken'/38, l='MpServer', x=-113.50, y=63.00, z=227.50], EntityChicken['Chicken'/39, l='MpServer', x=-113.50, y=63.00, z=229.50], EntityItem['item.tile.rail'/43, l='MpServer', x=-90.33, y=38.00, z=199.88], EntityItem['item.item.string'/44, l='MpServer', x=-91.87, y=39.50, z=198.07], EntityChicken['Chicken'/108, l='MpServer', x=-43.50, y=75.00, z=237.50], EntityChicken['Chicken'/109, l='MpServer', x=-44.50, y=74.00, z=239.50], EntityChicken['Chicken'/110, l='MpServer', x=-42.50, y=74.72, z=238.51], EntityChicken['Chicken'/111, l='MpServer', x=-44.50, y=74.00, z=238.50], EntityItem['item.item.string'/48, l='MpServer', x=-90.75, y=38.00, z=199.88], EntityItem['item.item.string'/49, l='MpServer', x=-90.75, y=38.00, z=197.88], EntityItem['item.tile.rail'/50, l='MpServer', x=-93.16, y=39.00, z=198.18], EntityItem['item.tile.torch'/53, l='MpServer', x=-85.13, y=35.00, z=210.74], EntityItem['item.tile.rail'/55, l='MpServer', x=-84.13, y=35.00, z=212.79], EntityItem['item.tile.rail'/59, l='MpServer', x=-84.56, y=35.00, z=221.24], EntityItem['item.tile.rail'/60, l='MpServer', x=-86.41, y=35.00, z=222.25], EntityItem['item.tile.rail'/61, l='MpServer', x=-84.75, y=35.00, z=223.11]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:456)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2774)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:436)
+	at net.minecraft.client.main.Main.main(Main.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:26)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Linux (amd64) version 5.0.10-surface-linux-surface
+	Java Version: 1.8.0_212, Oracle Corporation
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 452447976 bytes (431 MB) / 915406848 bytes (873 MB) up to 1908932608 bytes (1820 MB)
+	JVM Flags: 1 total; -Xmx2G
+	IntCache: cache: 7, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP 9.38 Powered by Forge 13.20.0.2228 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.11.2} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.11.2-13.20.0.2228-PROJECT(Minecraft).jar) 
+	UCHIJAAAA	forge{13.20.0.2228} [Minecraft Forge] (forgeSrc-1.11.2-13.20.0.2228-PROJECT(Minecraft).jar) 
+	UCHIJAAAA	malmomod{0.37.0} [Microsoft Malmo Mod] (MalmoMod-0.37.0.jar) 
+	Loaded coremods (and transformers): 
+OverclockingPlugin (MalmoMod-0.37.0.jar)
+  com.microsoft.Malmo.OverclockingClassTransformer
+	Launched Version: 1.11.2
+	LWJGL: 2.9.4
+	OpenGL: GeForce GTX 1060/PCIe/SSE2 GL version 4.6.0 NVIDIA 430.14, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i7-8650U CPU @ 1.90GHz
