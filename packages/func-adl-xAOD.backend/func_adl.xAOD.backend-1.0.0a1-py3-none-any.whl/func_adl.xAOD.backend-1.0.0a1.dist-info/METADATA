@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: func-adl.xAOD.backend
+Version: 1.0.0a1
+Summary: Functional Analysis Description Language for xAOD backends
+Home-page: https://github.com/iris-hep/func_adl.xAOD.backend
+Author: G. Watts (IRIS-HEP/UW Seattle)
+Author-email: gwatts@uw.edu
+Maintainer: Gordon Watts (IRIS-HEP/UW Seattle)
+Maintainer-email: gwatts@uw.edu
+License: TBD
+Platform: Any
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities
+Description-Content-Type: text/markdown
+Requires-Dist: requests (>=2.0.0)
+Requires-Dist: pandas (>=0.24.0)
+Requires-Dist: uproot (>=3.7.0)
+Requires-Dist: retry (>=0.9.2)
+Requires-Dist: Jinja2 (>=2.10)
+Requires-Dist: func-adl.xAOD (==1.0.0-alpha.1)
+
+# func_adl.xAOD.backend
+ Backend to run the xAOD transformer
+
+[![Travis Build Badge](https://travis-ci.org/iris-hep/func_adl.xAOD.backend.svg?branch=master)](https://travis-ci.org/iris-hep/func_adl.xAOD.backend)
+[![Code Coverage](https://codecov.io/gh/iris-hep/func_adl.xAOD.backend/graph/badge.svg)](https://codecov.io/gh/iris-hep/func_adl.xAOD.backend)
+
+This backend implementation of the `func_adl` language will run against ATLAS xAOD files, using C++ to run against.
+
