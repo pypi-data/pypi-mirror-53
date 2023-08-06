@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: tildee
+Version: 0.6.0
+Summary: A client for tildes.net
+Home-page: https://tildee.readthedocs.io/en/latest/index.html
+License: MIT
+Author: deing
+Author-email: admin@15318.de
+Requires-Python: >=3.7,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Requires-Dist: cssselect (>=1.0,<2.0)
+Requires-Dist: lxml (>=4.3,<5.0)
+Requires-Dist: requests (>=2.22,<3.0)
+Project-URL: Repository, https://git.dingenskirchen.systems/Dingens/tildee.py
+Description-Content-Type: text/markdown
+
+This is tildee.py, a Python 3 library for interacting with the <https://tildes.net> API. Note that this API is not stable and not actually intended for external use, so this could break at any moment. Main repository and issue tracker is on [Dingenskirchen Systems Git](https://git.15318.de/dingens/tildee.py) (Login using GitLab or -Hub available), there are mirrors provided on [GitLab](https://gitlab.com/deing/tildee) and [GitHub](https://github.com/deingithub/tildee) for discoverability.
+
+[PyPI](https://pypi.org/project/tildee/) — [Source](https://git.15318.de/dingens/tildee.py) — [Docs](https://tildee.readthedocs.io/en/latest/index.html)
+

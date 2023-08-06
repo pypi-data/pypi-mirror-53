@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "tildee"
+version = "0.6.0"
+description = "A client for tildes.net"
+license = "MIT"
+readme = "README.md"
+authors = ["deing <admin@15318.de>"]
+homepage = "https://tildee.readthedocs.io/en/latest/index.html"
+repository = "https://git.dingenskirchen.systems/Dingens/tildee.py"
+classifiers = [
+	"Operating System :: OS Independent",
+	"Topic :: Internet :: WWW/HTTP",
+	"Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.22"
+lxml = "^4.3"
+cssselect = "^1.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12", "rtd-poetry"]
+build-backend = "rtd_poetry"
