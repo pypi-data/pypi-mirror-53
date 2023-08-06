@@ -1,0 +1,31 @@
+#!/bin/bash
+
+CONF_FILE=$HOME/.config/odoopti.cfg
+
+if [ -f $CONF_FILE ]; then
+	exit 0
+fi
+
+editor=$(which nano)
+[ "$DISPLAY" ] || [ "$WAYLAND_DISPLAY" ] && editor=$(which gedit)
+
+if [ ! -f "$CONF_FILE" ]; then
+	cat -> $CONF_FILE <<-EOF
+	[global]
+	foo=bar
+
+	[env:live]
+	server_url=odoo.pti-cosmetics.com
+	database=paragon
+	user=your@email.com
+	password=
+	
+	[env:spinoff]
+	server_url=erp.pti-cosmetics.com
+	database=spinoff
+	user=your@email.com
+	password=
+	EOF
+fi
+
+$editor $CONF_FILE

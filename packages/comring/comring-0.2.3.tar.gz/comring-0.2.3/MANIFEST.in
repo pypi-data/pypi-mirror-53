@@ -1,0 +1,7 @@
+graft comring/webapp/static
+graft comring/webapp/templates
+graft res
+graft bin
+global-exclude *.pyc
+global-exclude *.log
+include comring/webapp/logging-default.yaml

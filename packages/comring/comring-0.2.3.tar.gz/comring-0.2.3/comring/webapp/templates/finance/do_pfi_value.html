@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% block title %}PFI Value Report{% endblock %}
+{% endblock %}
+
+{% block custom_head %}
+<link href="{{ url_for('static', filename='vendor/datatables/datatables.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block custom_scripts %}
+<script src="{{ url_for('static', filename='vendor/datatables/datatables.min.js') }}"></script>
+<script language="javascript">
+    // Call the dataTables jQuery plugin
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            "language": {
+                "decimal": ",",
+                "thousands": "."
+            },
+            "dom": "Bfrtip",
+            "buttons": [
+                "copy", "csv", "excelHtml5"
+            ],
+            "columns": [
+                { "type": "html" },
+                { "type": "html" },
+                { "type": "html" },
+                { "type": "num-fmt" }
+            ]
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Input</h6>
+                  </div>
+                  <div class="card-body">
+                    <form method="post">
+                      <div class="form-group">
+                        <label for="pickingNumbers">Picking numbers</label>
+                        <textarea class="form-control" id="pickingNumbers" name="pickings" rows="5" placeholder="Stock transfer numbers separated by comma, space, or new line"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          {% if result %}
+          <div class="row">
+            <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Result</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-sm table-bordered thead-dark" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th>Number</th>
+                            <th>Partner Name</th>
+                            <th>Date</th>
+                            <th>PFI Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for do in result %}
+                          <tr>
+                            <td>{{ do['name'] }}</td>
+                            <td>{{ do['partner_id'][1] }}</td>
+                            <td>{{ do['create_date'] }}</td>
+                            <td align="right">{{ do['pfi_value_fmt'] }}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            <div>
+
+          </div>
+          {% endif %}
+
+
+{% endblock %}

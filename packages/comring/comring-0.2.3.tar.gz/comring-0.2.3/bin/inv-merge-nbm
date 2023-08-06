@@ -1,0 +1,36 @@
+#!/bin/bash
+
+mypath="$(dirname "`readlink -f "$0"`")"
+
+function usage () {
+    progname="$1"
+    echo "Usage: $progname <env> <clientref>" > /dev/stderr
+}
+
+env="$1"
+if [[ -z $env ]]; then
+    usage "$0"
+    exit 1
+fi
+
+ref="$2"
+if [[ -z $ref ]]; then
+    usage "$0"
+    exit 2
+fi
+
+if [[ $env == "pti" ]]; then
+    env_env="nbm-pti"
+    env_journal="PTI51"
+else
+    if [[ $env == "prm" ]]; then
+        env_env="nbm-prm"
+        env_journal="PRM51"
+    else
+        echo "Invalid env: $env" > /dev/stderr
+        exit 3
+    fi
+fi
+
+cd "$mypath"/..
+python3 -m finance.invoice_merge -l DEBUG -e $env_env -w -j $env_journal -c 20 -r "$ref" -t clientref $ref

@@ -1,0 +1,57 @@
+#!/bin/bash
+
+mypath="$(dirname "`readlink -f "$0"`")"
+
+"$mypath"/check-conf
+
+infiles="$HOME/Data-Odoo/inv-per-brand"
+mkdir -p "$infiles"
+
+if [ ! -z "$1" ]; then
+	infilename=$1
+else
+	echo "Langkah 1: Copy-paste nomor-nomor invoice di sini. 1 nomor per baris. Akhiri dengan baris kosong lalu tekan CTRL+D"
+	
+	tmpfile=$(mktemp)
+	cat -> $tmpfile
+	
+	sed -i -e '/^$/d' $tmpfile
+	
+	lines=$(cat $tmpfile | wc -l)
+	if [[ $lines -eq 0 ]]; then
+		echo "No lines in input"
+		exit 1
+	fi
+	
+	echo "Jumlah nomor invoice: $lines"
+	
+	read -p 'Beri nama file (hanya boleh huruf, angka, strip, garis bawah): ' infilename
+	if [[ -z "$infilename" ]]; then
+		echo "Nama tidak boleh dikosongkan"
+		exit 2
+	fi
+	cp $tmpfile $infiles/$infilename.csv
+fi
+
+infilepath="$infiles/$infilename.csv"
+outfilepath="$infiles/$infilename-out.csv"
+
+if [ ! -f "$infilepath" ]; then
+	echo "File data tidak ditemukan: $infilepath"
+	exit 4
+fi
+
+pricelists=
+
+envname=live
+read -p 'Environment [live]: ' envname
+if [[ -z "$envname" ]]; then
+	envname=live
+fi
+
+nums="$(cat $infilepath | sed -e 's/\n/,/g;/^\s*$/,d')"
+python3 -m finance.inv_total_brand -l INFO -e live -n "$nums"
+
+echo "Output file: $outfilepath"
+
+exit 0
