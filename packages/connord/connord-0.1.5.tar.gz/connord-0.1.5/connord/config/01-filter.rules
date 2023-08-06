@@ -1,0 +1,383 @@
+# vim: set fileencoding=utf-8 filetype=yaml :
+
+# connord - connect to nordvpn servers
+# Copyright (C) 2019  Mael Stor <maelstor@posteo.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+################################################################################
+# 01-filter.rules
+#
+# Jinja2 template for iptables
+# The naming scheme is important. You can prefix the table name with a number
+# to specify the order in which the files are loaded. The name after '-'
+# is the table name the rules are applied upon. If the table is suffixed with a
+# '6' the rules are applied to ip6tables. Recognized file endings are rules
+# and fallback. Fallback files are applied before connecting to a nordvpn server
+# and after disconnecting. Rules files are applied after connecting to a nordvpn 
+# server.
+#
+# Recognized variables which must not be present in the config file:
+# vpn_remote:   the remote ip address of the vpn server
+# vpn_protocol: the protocol in use: udp or tcp
+# vpn_port:     the port to communicate with the vpn server
+#
+# In addition to variables above which are exposed from connord there are a lot
+# of variables available from openvpn's environment. They can be seen
+# in the output of connord when not running in daemon mode and are well 
+# documented in man 8 openvpn in the 'Environment Variables' section.
+#
+# This file is parsed from top to bottom so make sure chains and rules are in
+# right order. Chains are created if they are not present yet.
+#
+# An unindented line defines a chain.
+# policy: Policy like it is described in man iptables
+# action: Not used yet
+# rules:  List of rules in the format which is accepted by python-iptables. See
+#         documentation there.
+################################################################################
+
+connord-icmp-in:
+  policy: None
+  action: create
+  rules:
+  - protocol: icmp
+    icmp:
+      icmp-type: echo-reply
+    target: ACCEPT
+  - target:
+      LOG:
+        log-prefix: '[ICMP_I_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+connord-lo-in:
+  policy: None
+  action: create
+  rules:
+  - target: ACCEPT
+
+connord-vpn-in-tcp:
+  policy: None
+  action: create
+  rules:
+  - target:
+      LOG:
+        log-prefix: '[VPN_I_T_R]: '
+  - protocol: tcp
+    target:
+      REJECT:
+        reject-with: tcp-reset
+
+connord-vpn-in-udp:
+  policy: None
+  action: create
+  rules:
+  - target:
+      LOG:
+        log-prefix: '[VPN_I_U_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-port-unreachable
+
+connord-vpn-in:
+  policy: None
+  action: create
+  rules:
+  - protocol: icmp
+    target: connord-icmp-in
+  - protocol: tcp
+    target: connord-vpn-in-tcp
+  - protocol: udp
+    target: connord-vpn-in-udp
+  - target:
+      LOG:
+        log-prefix: '[VPN_I_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+connord-lan-in-tcp:
+  policy: None
+  action: create
+  rules:
+  - target:
+      LOG:
+        log-prefix: '[LAN_I_T_R]: '
+  - protocol: tcp
+    target:
+      REJECT:
+        reject-with: tcp-reset
+
+connord-lan-in-udp:
+  policy: None
+  action: create
+  rules:
+  - target:
+      LOG:
+        log-prefix: '[LAN_I_U_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-port-unreachable
+
+connord-lan-in:
+  policy: None
+  action: create
+  rules:
+  - protocol: icmp
+    target: connord-icmp-in
+  - protocol: tcp
+    target: connord-lan-in-tcp
+  - protocol: udp
+    target: connord-lan-in-udp
+  - target:
+      LOG:
+        log-prefix: '[LAN_I_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+INPUT:
+  policy: DROP
+  action: None
+  rules:
+  - conntrack:
+      ctstate: RELATED,ESTABLISHED
+    target: ACCEPT
+  - conntrack:
+      ctstate: INVALID
+    target: DROP
+  - protocol: tcp
+    tcp:
+      tcp-flags:
+      - '!'
+      - 'FIN,SYN,RST,ACK'
+      - 'SYN'
+    conntrack:
+      ctstate: NEW
+    target: DROP
+  - in-interface: lo
+    conntrack:
+      ctstate: NEW
+    target: connord-lo-in
+  - in-interface: "{{ gateway.interface }}"
+    conntrack:
+      ctstate: NEW
+    target: connord-lan-in
+  - in-interface: "{{ dev }}"
+    conntrack:
+      ctstate: NEW
+    target: connord-vpn-in
+  - target:
+      LOG:
+        log-prefix: '[IN_R]: '
+  - protocol: tcp
+    target:
+      REJECT:
+        reject-with: tcp-reset
+  - protocol: udp
+    target:
+      REJECT:
+        reject-with: icmp-port-unreachable
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+connord-icmp-out:
+  policy: None
+  action: create
+  rules:
+  - icmp:
+      icmp-type: echo-request
+    protocol: icmp
+    target: ACCEPT
+  - icmp:
+      icmp-type: destination-unreachable
+    protocol: icmp
+    target: ACCEPT
+  - protocol: icmp
+    target:
+      LOG:
+        log-prefix: '[ICMP_O_R]: '
+  - protocol: icmp
+    target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+connord-lo-out:
+  policy: None
+  action: create
+  rules:
+  - target: ACCEPT
+
+connord-lan-out-tcp:
+  policy: None
+  action: create
+  rules:
+  - protocol: tcp
+    tcp:
+      sport: 67:68
+      dport: 67:68
+    target: ACCEPT
+{% if vpn_protocol is defined and 'tcp' == vpn_protocol %}
+  - dst: "{{ ip_address }}"
+    protocol: "{{ vpn_protocol }}"
+    tcp:
+      dport: "{{ port_number }}"
+    target: ACCEPT
+{% endif %}
+  - target:
+      LOG:
+        log-prefix: '[LAN_O_T_R]: '
+  - protocol: tcp
+    target:
+      REJECT:
+        reject-with: tcp-reset
+
+connord-lan-out-udp:
+  policy: None
+  action: create
+  rules:
+{% for server in dhcp_option.dns %}
+  - dst: "{{ server }}"
+    protocol: udp
+    target: ACCEPT
+    udp:
+      dport: '53'
+{% endfor %}
+  - protocol: udp
+    target: ACCEPT
+    udp:
+      sport: 67:68
+      dport: 67:68
+{% if vpn_protocol is defined and 'udp' == vpn_protocol %}
+  - dst: "{{ ip_address }}"
+    protocol: "{{ vpn_protocol }}"
+    udp:
+      dport: "{{ port_number }}"
+    target: ACCEPT
+{% endif %}
+  - target:
+      LOG:
+        log-prefix: '[LAN_O_T_R]: '
+  - protocol: udp
+    target:
+      REJECT:
+        reject-with: icmp-port-unreachable
+
+connord-lan-out:
+  policy: None
+  action: create
+  rules:
+  - protocol: icmp
+    conntrack:
+      ctstate: NEW
+    target: connord-icmp-out
+  - protocol: tcp
+    conntrack:
+      ctstate: NEW
+    target: connord-lan-out-tcp
+  - protocol: udp
+    conntrack:
+      ctstate: NEW
+    target: connord-lan-out-udp
+  - target:
+      LOG:
+        log-prefix: '[LAN_O_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+connord-vpn-out-tcp:
+  policy: None
+  action: create
+  rules:
+  - target: ACCEPT
+
+connord-vpn-out-udp:
+  policy: None
+  action: create
+  rules:
+  - target: ACCEPT
+
+connord-vpn-out:
+  policy: None
+  action: create
+  rules:
+  - protocol: icmp
+    target: connord-icmp-out
+  - protocol: tcp
+    target: connord-vpn-out-tcp
+  - protocol: udp
+    target: connord-vpn-out-udp
+  - target:
+      LOG:
+        log-prefix: '[VPN_O_R]: '
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+
+OUTPUT:
+  policy: ACCEPT
+  action: None
+  rules:
+  - conntrack:
+      ctstate: RELATED,ESTABLISHED
+    target: ACCEPT
+  - conntrack:
+      ctstate: INVALID
+    target: DROP
+  - protocol: tcp
+    tcp:
+      tcp-flags:
+      - '!'
+      - 'FIN,SYN,RST,ACK'
+      - 'SYN'
+    conntrack:
+      ctstate: NEW
+    target: DROP
+  - out-interface: lo
+    conntrack:
+      ctstate: NEW
+    target: connord-lo-out
+  - out-interface: "{{ gateway.interface }}"
+    conntrack:
+      ctstate: NEW
+    target: connord-lan-out
+  - out-interface: "{{ dev }}"
+    conntrack:
+      ctstate: NEW
+    target: connord-vpn-out
+  - target:
+      LOG:
+        log-prefix: '[OUT_D]: '
+  - protocol: tcp
+    target:
+      REJECT:
+        reject-with: tcp-reset
+  - protocol: udp
+    target:
+      REJECT:
+        reject-with: icmp-port-unreachable
+  - target:
+      REJECT:
+        reject-with: icmp-proto-unreachable
+FORWARD:
+  policy: DROP
+  action: None
+  rules:
+  - target:
+      LOG:
+        log-prefix: '[FORW_D]: '
