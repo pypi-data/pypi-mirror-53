@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: django-settings-json
+Version: 1.0.0
+Summary: Django Settings JSON is a small package for helping you have environment variables when you can't use them directly from your operational system.
+Home-page: https://github.com/andrebr/django-settings-json
+Author: Andre Pereira
+Author-email: django-settings-json@aper.com.br
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=2.7
+Description-Content-Type: text/markdown
+
+# django-settings-json
+
+Sample `settings.json` file:
+
+```json
+{
+  "DEBUG": true, 
+  "TIME_ZONE": "America/New_York"
+}
+```
+
+Usage
+--
+
+Use `get_setting()` when retrieving environment variables on your `settings.py` file:
+
+```python
+from settings_json import get_setting
+
+DEBUG = get_setting('DEBUG')
+TIME_ZONE = get_setting('TIME_ZONE')
+```
+
+GitIgnore
+--
+
+Remember to add `settings.json` into your `.gitignore`, so it don't get tracked.
+
+```
+settings.json
+```
+
+Missing Variables
+--
+
+If you forget to add a variable on your `settings.json`, it'll raise an error like the one below:
+
+`Set the TIME_ZONE environment variable on settings.json`
+
+
