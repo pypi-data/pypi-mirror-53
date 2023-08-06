@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: django-sso-app
+Version: 0.3.21
+Summary: Django single sign-on app
+Home-page: https://bitbucket.org/pai/django-remote-templates
+Author: pai
+Author-email: paiuolo@gmail.com
+License: mit
+Project-URL: Documentation, https://pyscaffold.org/
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Description-Content-Type: text/markdown
+Requires-Dist: python-slugify (==3.0.3)
+Requires-Dist: Pillow (==6.1.0)
+Requires-Dist: argon2-cffi (==19.1.0)
+Requires-Dist: redis (==3.3.6)
+Requires-Dist: celery (==4.3.0)
+Requires-Dist: django-celery-beat (==1.5.0)
+Requires-Dist: flower (==0.9.3)
+Requires-Dist: ipython
+Requires-Dist: django (==2.2.4)
+Requires-Dist: django-environ (==0.4.5)
+Requires-Dist: django-model-utils (==3.2.0)
+Requires-Dist: django-allauth (==0.39.1)
+Requires-Dist: django-crispy-forms (==1.7.2)
+Requires-Dist: django-redis (==4.10.0)
+Requires-Dist: django-rest-auth (==0.9.5)
+Requires-Dist: djangorestframework (==3.10.2)
+Requires-Dist: coreapi (==2.3.3)
+Requires-Dist: django-rest-swagger (==2.2.0)
+Requires-Dist: django-filter (==2.1.0)
+Requires-Dist: djangorestframework-jwt (==1.11.0)
+Requires-Dist: django-cors-headers (==3.0.2)
+Requires-Dist: cherrypy (==18.2.0)
+Provides-Extra: testing
+Requires-Dist: pytest ; extra == 'testing'
+Requires-Dist: pytest-cov ; extra == 'testing'
+
+# django-sso-app
+
+Django single sign-on app.
+
+
+## Description
+
+...
+
+
+## Note
+
+This project has been set up using PyScaffold 3.2.1. For details and usage
+information on PyScaffold see https://pyscaffold.org/.
+
+
