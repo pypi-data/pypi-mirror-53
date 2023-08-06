@@ -1,0 +1,84 @@
+[tool.poetry]
+name = "rero"
+version = "1.0.1"
+description = "Rero is a transmission protocol suitable for efficient, reliable, and robust communication especially well suited for DMA supported MCU operations."
+authors = ["Reinhard Panhuber"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://panir.gitlab.io/rero"
+repository = "https://gitlab.com/PaniR/rero"
+documentation = "https://panir.gitlab.io/rero"
+keywords = ["protocol", "efficient", "scalable", "DMA", "MCU"]
+packages = [
+    { include = "rero", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+crcmod = "^1.7"
+cobs = "^1.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.1"
+tox = "^3.13"
+mkdocs = "^1.0.4"
+pymdown-extensions = "^6.1"
+pytest-cov = "^2.7.1"
+
+[tool.poetry.repositories]
+testpypi = "https://test.pypi.org/legacy/"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+## PORTRAY
+[tool.portray]
+modules = ["src/rero"]
+output_dir = "public"
+
+[tool.portray.mkdocs]
+site_name = "Rero"
+repo_url = "https://gitlab.com/PaniR/rero"
+repo_name = "PaniR/rero"
+extra_javascript = ["https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"]
+markdown_extensions = ["pymdownx.arithmatex","codehilite","admonition","extra","pymdownx.details","pymdownx.highlight"]
+
+[tool.portray.mkdocs.theme]
+name = "material"
+# palette = {primary = "blue grey", accent = "pink"}
+
+#[tool.portray.pdoc3]
+#module = ["src/rero"]
+
+## TOX
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py35,py36,py37,clean,report
+isolated_build = True
+
+[tool:pytest]
+testpaths = tests
+addopts =
+    --cov-report=term-missing
+
+[tox:.package]
+# note tox will use the same python version as under what tox is installed to package
+# so unless this is python 3 you can require a given python version for the packaging
+# environment via the basepython key
+basepython = python3
+
+[testenv]
+deps = 
+    pytest >= 5.1.0
+    pytest-cov >= 2.7.1
+commands = pytest
+
+# Release tooling
+[testenv:build]
+basepython = python3
+
+deps = poetry
+commands = poetry build
+"""
