@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: cn-sort
+Version: 0.5.3
+Summary: 按拼音和笔顺快速排序大量简体中文词组（支持百万数量级）。
+Home-page: https://github.com/bmxbmx3/cn_sort/tree/master
+Author: bmxbmx3
+Author-email: 982766639@qq.com
+License: MIT
+Download-URL: https://github.com/bmxbmx3/cn_sort/releases
+Description: ﻿# cn_sort
+        
+        按拼音和笔顺快速排序大量简体中文词组（支持百万数量级，简体中文与非中文混用的词组也可）。
+        
+        # 使用
+        ```
+        from cn_sort.process_cn_word import *
+        
+        text_list = ["人群", "河水", "人", "河流", "WTO世贸组织"]      # 待排序的中文词组列表
+        result_text_list=list(sort_text_list(text_list))        # 按拼音和笔顺排序后的中文字组列表
+        print(result_text_list)
+        
+        # 输出为：
+        # ['WTO世贸组织', '河流', '河水', '人', '人群']
+        ```
+Keywords: njupt chinese word sort pronounce bihua 排序 中文 拼音 笔画 笔顺 词 汉字
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
