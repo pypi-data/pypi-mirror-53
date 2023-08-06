@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: fontcell
+Version: 1.5.6.1
+Summary: FOntCell - A software tool for automatic parallel computed fusion of ontologies
+Home-page: https://gitlab.com/jcabaulaporta/fontcell
+Author: Javier Cabau Laporta
+Author-email: jcabaulaporta@outlook.es
+License: LICENSE
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
+Classifier: Operating System :: OS Independent
+Requires-Dist: StringDist (>=1.0.9)
+Requires-Dist: bigmpi4py (>=1.2.4)
+Requires-Dist: graphviz (>=0.10.1)
+Requires-Dist: matplotlib (>=2.2.4)
+Requires-Dist: networkx (>=2.2)
+Requires-Dist: numpy (>=1.16.1)
+Requires-Dist: pandas (>=0.24.1)
+Requires-Dist: plotly (>=3.6.1)
+Requires-Dist: pyexcel-ods (>=0.5.4)
+Requires-Dist: pyexcel (>=0.5.12)
+Requires-Dist: seaborn (>=0.9.0)
+Requires-Dist: tqdm (>=4.31.1)
+
+# FOntCell
+
+FOntCell is a software module in Python for automatic computed fusion of ontologies. The FOntCell module produces a fused ontology in OBO format and a circular representation of the fused ontology in a Directed Acyclic Graph (DAG) in an interactive HTML file.
+
+Prerequisites, User Manual, and Troubleshooting availabel at: https://gitlab.com/JavierCabau/fontcell/
+
+
