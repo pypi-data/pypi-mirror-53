@@ -1,0 +1,74 @@
+Metadata-Version: 2.1
+Name: date-extractor
+Version: 4.0.6
+Summary: Extract dates from text
+Home-page: https://github.com/DanielJDufour/date-extractor
+Author: Daniel J. Dufour
+Author-email: daniel.j.dufour@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/DanielJDufour/date-extractor/tarball/download
+Description: [![Build Status](https://travis-ci.org/DanielJDufour/date-extractor.svg?branch=master)](https://travis-ci.org/DanielJDufour/date-extractor)
+        
+        [![Requirements Status](https://requires.io/github/DanielJDufour/date-extractor/requirements.svg?branch=master)](https://requires.io/github/DanielJDufour/date-extractor/requirements/?branch=master)
+        
+        [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000?style=plastic)]()
+        
+        # date-extractor
+        date-extractor helps you extract dates from text
+        
+        # Installation
+        ```
+        pip install pytz
+        pip install date-extractor
+        ```
+        
+        # Use
+        ```
+        from date_extractor import extract_dates
+        text = "I arrived in that city on January 4, 1937"
+        dates = extract_dates(text)
+        ```
+        
+        # Returning Precision
+        ```
+        from date_extractor import extract_date
+        text = "I arrived in that city in 1937"
+        date, precision = extract_date(text, return_precision=True)
+        # precision = 'year'
+        ```
+        
+        
+        # Features
+        | Languages Supported |
+        | ------------------- |
+        | Arabic |
+        | English |
+        | French |
+        | Sorani (Kurdish) |
+        | Turkish |
+        
+        # Testing
+        To test the package run
+        ```
+        python -m unittest date_extractor.tests.test
+        ```
+        
+        If you are using Python 3, you may need to run the following to test
+        ```
+        python3 -m unittest date_extractor.tests.test
+        ```
+        
+        # Versions
+        Works on Python 2 and 3!
+        
+        # Support
+        Contact Daniel Dufour at daniel.j.dufour@gmail.com
+        
+Keywords: date,datetime,python,tagging
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
