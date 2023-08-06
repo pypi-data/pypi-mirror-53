@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: kamzik3
+Version: 0.3.8
+Summary: Device controlling framework
+Home-page: https://stash.desy.de/projects/KAM/repos/kamzik3
+Author: Martin Domaracky
+Author-email: martin.domaracky@desy.de
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Natural Language :: English
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: numpy (>=1.16)
+Requires-Dist: pyzmq (>=18.0)
+Requires-Dist: pint (>=0.9)
+Requires-Dist: bidict (>=0.18)
+Requires-Dist: pyqt5 (>=5.13)
+Requires-Dist: pyqtgraph (>=0.10)
+Requires-Dist: pyserial (>=3.4)
+Requires-Dist: oyaml (>=0.9)
+
+Kamzik3 is Controlling Framework with unified Graphical Interface.
+
+Requirements
+------------
+
+  * Python: 3.6 or 3.7
+
+  **Python Modules: Backend**
+
+  * numpy
+  * pyzmq
+  * pint
+  * bidict
+  * natsort
+  * pyqt5
+  * pyqtgraph
+  * pyserial
+  * oyaml
+  * pydaqmx
+
+
+
