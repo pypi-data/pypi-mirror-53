@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: pringles-devs
+Version: 1.0.3
+Summary: A DEVS model composition library
+Home-page: https://github.com/colonelpringles/pringles
+Author: Colonel Pringles
+License: UNKNOWN
+Description: ## Pringles - A DEVS model composition Python
+        [![Build Status](https://travis-ci.org/colonelpringles/pringles.svg?branch=master)](https://travis-ci.org/colonelpringles/pringles) [![Coverage](https://codecov.io/gh/colonelpringles/pringles/branch/master/graphs/badge.svg)](https://codecov.io/gh/colonelpringles/pringles/branch/master) [![pypi-version](https://img.shields.io/pypi/v/pringles-devs.svg)](https://pypi.org/project/pringles-devs/) [![Total alerts](https://img.shields.io/lgtm/alerts/g/colonelpringles/pringles.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/colonelpringles/pringles/alerts/) [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/colonelpringles/pringles.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/colonelpringles/pringles/context:python)
+        
+        Pringles is a DEVS model composition library, which makes easy to assemble and link multiple atomic/coupled models. It works as a Python library, and in its road ahead, will easily integrate with the Jupyter environment.
+        
+        
+        #### Requirements
+        - Python 3.7 (check out pyenv if you have a different python version installed)
+        
+        The library can be installed with pip:
+        ```
+        pip install pringles-devs
+        ```
+        
+        #### Extra Requirements
+        For local development, you can install everything through:
+        ```
+        make install
+        ```
+        in the repo root directory.
+        
+        After changes are made you can locally check the same things the CI does by executing:
+        ```
+        make local
+        ```
+        
+        
+        #### Pringles Examples
+        They can be found in https://github.com/colonelpringles/pringles_examples
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
