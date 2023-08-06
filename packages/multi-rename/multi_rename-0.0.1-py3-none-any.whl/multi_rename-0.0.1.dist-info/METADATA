@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: multi-rename
+Version: 0.0.1
+Summary: Easily rename multiple files ending with incrementing numbers.
+Home-page: https://github.com/pshkrh/multi-rename
+Author: Pushkar Kurhekar
+Author-email: dev@pshkrh.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# multi-rename
+
+A python module for renaming multiple files in a directory to a common format ending in incrementing numbers.
+
+## Installation
+
+Install using pip:
+
+```sh
+pip install multi-rename
+```
+
+## Usage
+
+```Python
+from multi-rename import multi_renamer
+
+multi_renamer('/path/to/dir/here','file_name')
+```
+
+## Example
+
+```Python
+multi_renamer('/home/test_imgs/','newname')
+```
+
+This will make all the files in the directory to be renamed as:
+
+```
+newname1.jpg
+newname2.pdf
+newname3.png
+...
+```
+
+## Contributing
+
+If you have any bug fixes / useful feature additions, feel free to fork this repository, make your changes and drop in a pull request.
+
+## License
+
+[MIT](https://github.com/pshkrh/multi-rename/blob/master/LICENSE)
+
