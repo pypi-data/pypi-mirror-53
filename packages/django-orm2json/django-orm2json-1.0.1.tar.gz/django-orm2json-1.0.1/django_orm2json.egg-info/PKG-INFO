@@ -1,0 +1,73 @@
+Metadata-Version: 1.1
+Name: django-orm2json
+Version: 1.0.1
+Summary: A library for converting ORM Django models to JSON format.
+Home-page: https://github.com/MrEarnestWhim/orm2json
+Author: Mr Earnest Whim
+Author-email: 5494567@gmail.com
+License: MIT License (MIT)
+Description: ==========
+        ORM 2 JSON
+        ==========
+        
+        A library for converting ORM Django models to JSON format. You can easily work with a simple request, as well as nested Many To Many.
+        
+        Quick start
+        -----------
+        
+        1. Add "orm2json" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = [
+                ...
+                'orm2json',
+            ]
+        
+        2. Example code::
+        
+            import Orm2JSON
+        
+            serialize_object = Orm2JSON(
+                User.objects.filter(**filter),
+                (
+                    'username',
+                    'email',
+                    'avatar',
+                    {
+                        'game': ['game_id', 'title'],
+                        'category': [
+                            'category',
+                            'internal_name',
+                            {
+                                'title': [
+                                    'name',
+                                    'date'
+                                ]
+                            }
+                        ],
+                    },
+                ),
+                image_size={
+                    'avatar': 'icon',
+                },
+                add_static={
+                    'custom_field': 'text'
+                }
+            )
+            type(serialize_object.serialize())
+            >> <class 'str'>
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
