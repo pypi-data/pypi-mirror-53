@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: oligo
+Version: 1.0.0
+Summary: Obtiene datos del contador inteligente en la red de iberdrola distribucion
+Home-page: https://github.com/blackleg/python-oligo
+Author: blackleg
+Author-email: hectorespertpardo@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# python-oligo
+
+Obtiene datos del contador inteligente en la red de iberdrola distribución
+
+Instalación:
+
+```
+pip install oligo
+```
+
+Ejemplo, consultar consumo actual:
+
+```python
+from oligo import Iber
+
+connection = Iber()
+connection.login("user", "password")
+
+watt = connection.watthourmeter()
+print(watt)
+```
+
+
+Ejemplo, consultar estado ICP interno:
+
+```python
+from oligo import Iber
+connection = Iber()
+connection.login("user", "password")
+watt = connection.icpstatus()
+print(watt)
+```
+
+
