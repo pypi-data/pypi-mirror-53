@@ -1,0 +1,2758 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+# menu: party/config/timetracking
+msgctxt "model:ir.ui.menu,name:menu_timetracking"
+msgid "Timetracking"
+msgstr "Timetracking"
+
+# menu: party/config/timetracking
+msgctxt "model:ir.ui.menu,name:menu_cfg_timetracking"
+msgid "Settings"
+msgstr "Settings"
+
+# menu timetracking/employees
+msgctxt "model:ir.ui.menu,name:menu_employee_form"
+msgid "Employees"
+msgstr "Employees"
+
+msgctxt "model:ir.action,name:act_employee_form"
+msgid "Employees"
+msgstr "Employees"
+
+# cron
+msgctxt "model:ir.cron,name:cron_recalc_timeaccounts"
+msgid "Work time tracking: Recalculation of the evaluations"
+msgstr "Work time tracking: Recalculation of the evaluations"
+
+# group
+msgctxt "model:res.group,name:group_employee_admin"
+msgid "Timetracking - Edit Employees"
+msgstr "Timetracking - Edit Employees"
+
+msgctxt "model:res.group,name:group_timetracking_employee"
+msgid "Timetracking - Employee"
+msgstr "Timetracking - Employee"
+
+msgctxt "model:res.group,name:group_timetracking_employee_editeval"
+msgid "Timetracking - Employee can edit its evaluation"
+msgstr "Timetracking - Employee can edit its evaluation"
+
+msgctxt "model:res.group,name:group_timetracking_employee_editsick"
+msgid "Timetracking - Employee can edit its sick days"
+msgstr "Timetracking - Employee can edit its sick days"
+
+msgctxt "model:res.group,name:group_tariff_edit"
+msgid "Timetracking - Edit Tariff"
+msgstr "Timetracking - Edit Tariff"
+
+msgctxt "model:res.group,name:group_worktime_edit"
+msgid "Timetracking - Edit Work Time"
+msgstr "Timetracking - Edit Work Time"
+
+msgctxt "model:res.group,name:group_cronjob"
+msgid "Timetracking - Cronjob"
+msgstr "Timetracking - Cronjob"
+
+
+###########################
+# wizard: create employee #
+###########################
+msgctxt "model:ir.action,name:act_createemployee_wizard"
+msgid "Create Employee"
+msgstr "Create Employee"
+
+msgctxt "model:ir.ui.menu,name:menu_createemployee_wiz"
+msgid "Create Employee"
+msgstr "Create Employee"
+
+msgctxt "model:ir.action,name:act_createemployee_edit_wizard"
+msgid "Edit Employee"
+msgstr "Edit Employee"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "select/create party"
+msgstr "select/create party"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "Contact Mechanisms"
+msgstr "Contact Mechanisms"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "Name and address"
+msgstr "Name and address"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "Contract data"
+msgstr "Contract data"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "Tryton user"
+msgstr "Tryton user"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "Work time/Holidays"
+msgstr "Work time/Holidays"
+
+msgctxt "view:employee_timetracking.wizemployee_create.start:"
+msgid "Calendar"
+msgstr "Calendar"
+
+msgctxt "wizard_button:employee_timetracking.wizemployee_create,start,end:"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgctxt "wizard_button:employee_timetracking.wizemployee_create,start,saveemployee:"
+msgid "Save Employee"
+msgstr "Save Employee"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,partymethod:"
+msgid "Party"
+msgstr "Party"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,partymethod:"
+msgid "create a new party or use an existing party"
+msgstr "create a new party or use an existing party"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,partymethod:"
+msgid "create a new party"
+msgstr "create a new party"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,partymethod:"
+msgid "use an existing party"
+msgstr "use an existing party"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_sel:"
+msgid "Select Party"
+msgstr "Select Party"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,parties:"
+msgid "Parties"
+msgstr "Parties"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_address:"
+msgid "Address"
+msgstr "Address"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_zip:"
+msgid "ZIP"
+msgstr "ZIP"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_city:"
+msgid "City"
+msgstr "City"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_country:"
+msgid "Country"
+msgstr "Country"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_subdivision:"
+msgid "Subdivision"
+msgstr "Subdivision"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_phone:"
+msgid "Phone"
+msgstr "Phone"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_mobile:"
+msgid "Mobile"
+msgstr "Mobile"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_fax:"
+msgid "Fax"
+msgstr "Fax"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,pty_email:"
+msgid "E-Mail"
+msgstr "E-Mail"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,tariff:"
+msgid "Tariff model"
+msgstr "Tariff model"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,worktime:"
+msgid "Working time model"
+msgstr "Working time model"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,holidays:"
+msgid "Holidays"
+msgstr "Holidays"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,holidays:"
+msgid "Number of holidays per year"
+msgstr "Number of holidays per year"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,specleave:"
+msgid "Special leave"
+msgstr "Special leave"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,specleave:"
+msgid "Number of special leave days per year"
+msgstr "Number of special leave days per year"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,startdate:"
+msgid "Start Date"
+msgstr "Start Date"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,startdate:"
+msgid "When the employee joins the company."
+msgstr "When the employee joins the company."
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,enddate:"
+msgid "End Date"
+msgstr "End Date"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,enddate:"
+msgid "When the employee leaves the company."
+msgstr "When the employee leaves the company."
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,usr_ena:"
+msgid "Tryton user"
+msgstr "Tryton user"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,usr_ena:"
+msgid "Connect employee with a Tryton user"
+msgstr "Connect employee with a Tryton user"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,usr_method:"
+msgid "User"
+msgstr "User"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,usr_method:"
+msgid "create a new user"
+msgstr "create a new user"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,usr_method:"
+msgid "use an existing user"
+msgstr "use an existing user"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,usr_method:"
+msgid "create a new user or use an existing user"
+msgstr "create a new user or use an existing user"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,users:"
+msgid "Users"
+msgstr "Users"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,usr_sel:"
+msgid "Selected user"
+msgstr "Selected user"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,usr_login:"
+msgid "Login"
+msgstr "Login"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,usr_login:"
+msgid "User name for login to Tryton"
+msgstr "User name for login to Tryton"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,usr_passwd:"
+msgid "Password"
+msgstr "Password"
+
+msgctxt "help:employee_timetracking.wizemployee_create.start,usr_passwd:"
+msgid "Password for login to Tryton"
+msgstr "Password for login to Tryton"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,cal_titletext:"
+msgid "Used Title"
+msgstr "Used Title"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,cal_sel:"
+msgid "Select Calendar"
+msgstr "Select Calendar"
+
+msgctxt "field:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Title"
+msgstr "Title"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Holidays"
+msgstr "Holidays"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Vacation"
+msgstr "Vacation"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Username's Holiday"
+msgstr "Username's Holiday"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Username's Holidays"
+msgstr "Username's Holidays"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Username's Vacation"
+msgstr "Username's Vacation"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt:"
+msgid "Customized Title"
+msgstr "Customized Title"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt2:"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt2:"
+msgid "Holidays"
+msgstr "Holidays"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt2:"
+msgid "Vacation"
+msgstr "Vacation"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt2:"
+msgid "Username's Holiday"
+msgstr "replacethis's Holiday"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt2:"
+msgid "Username's Holidays"
+msgstr "replacethis's Holidays"
+
+msgctxt "selection:employee_timetracking.wizemployee_create.start,cal_titlefmt2:"
+msgid "Username's Vacation"
+msgstr "replacethis's Vacation"
+
+
+############################
+# wizard: enter attendance #
+############################
+msgctxt "model:ir.action,name:act_attendance_wizard"
+msgid "Enter Attendance"
+msgstr "Enter Attendance"
+
+msgctxt "model:ir.ui.menu,name:menu_attendance_wiz"
+msgid "Enter Attendance"
+msgstr "Enter Attendance"
+
+msgctxt "error:employee_timetracking.wizperiod_attendance:"
+msgid "Please assign a tariff to employee '%s' first."
+msgstr "Please assign a tariff to employee '%s' first."
+
+msgctxt "error:employee_timetracking.wizperiod_attendance:"
+msgid "Please select an employee first."
+msgstr "Please select an employee first."
+
+msgctxt "error:employee_timetracking.wizperiod_attendance:"
+msgid "Dialog not init."
+msgstr "Dialog not init."
+
+msgctxt "error:employee_timetracking.wizperiod_attendance:"
+msgid "No presence entered."
+msgstr "No presence entered."
+
+msgctxt "view:employee_timetracking.wizperiod_attendance.start:"
+msgid "Current State"
+msgstr "Current State"
+
+msgctxt "view:employee_timetracking.wizperiod_attendance.start:"
+msgid "You can always start or finish a working time or site work."
+msgstr "You can always start or finish a working time or site work."
+
+msgctxt "view:employee_timetracking.wizperiod_attendance.start:"
+msgid "At the beginning of a new time entry, a possibly still open time entry will be closed."
+msgstr "At the beginning of a new time entry, a possibly still open time entry will be closed."
+
+msgctxt "view:employee_timetracking.wizperiod_attendance.start:"
+msgid "You can also enter an close entry without first entering a start entry."
+msgstr "You can also enter an close entry without first entering a start entry."
+
+msgctxt "view:employee_timetracking.wizperiod_attendance.start:"
+msgid "Select the presence type you want to start or end."
+msgstr "Select the presence type you want to start or end."
+
+msgctxt "error:employee_timetracking.wizperiod_attendance.start:"
+msgid "Please assign a tariff to employee '%s' first."
+msgstr "Please assign a tariff to employee '%s' first."
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,currstate:"
+msgid "Current State"
+msgstr "Current State"
+
+msgctxt "selection:employee_timetracking.wizperiod_attendance.start,currstate:"
+msgid "Active"
+msgstr "Active"
+
+msgctxt "selection:employee_timetracking.wizperiod_attendance.start,currstate:"
+msgid "Inactive"
+msgstr "Inactive"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,breakstart:"
+msgid "Break start"
+msgstr "Break start"
+
+msgctxt "help:employee_timetracking.wizperiod_attendance.start,breakstart:"
+msgid "Start time of the current break"
+msgstr "Start time of the current break"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,breakstate:"
+msgid "Status of the break"
+msgstr "Status of the break"
+
+msgctxt "selection:employee_timetracking.wizperiod_attendance.start,breakstate:"
+msgid "Active"
+msgstr "Active"
+
+msgctxt "selection:employee_timetracking.wizperiod_attendance.start,breakstate:"
+msgid "Inactive"
+msgstr "Inactive"
+
+msgctxt "wizard_button:employee_timetracking.wizperiod_attendance,start,end:"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgctxt "wizard_button:employee_timetracking.wizperiod_attendance,start,ending:"
+msgid "Ending"
+msgstr "Ending"
+
+msgctxt "wizard_button:employee_timetracking.wizperiod_attendance,start,beginning:"
+msgid "Beginning"
+msgstr "Beginning"
+
+msgctxt "wizard_button:employee_timetracking.wizperiod_attendance,start,beginbreak:"
+msgid "Start break"
+msgstr "Pause beginnen"
+
+msgctxt "wizard_button:employee_timetracking.wizperiod_attendance,start,endbreak:"
+msgid "End break"
+msgstr "Pause beenden"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,presences:"
+msgid "Presences"
+msgstr "Presences"
+
+msgctxt "help:employee_timetracking.wizperiod_attendance.start,presences:"
+msgid "allowed presences"
+msgstr "allowed presences"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,employee:"
+msgid "Employee"
+msgstr "Employee"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,currtype:"
+msgid "Type of Presence"
+msgstr "Type of Presence"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,currstart:"
+msgid "Start"
+msgstr "Start"
+
+msgctxt "field:employee_timetracking.wizperiod_attendance.start,currperiod:"
+msgid "Time period"
+msgstr "Time period"
+
+
+##########
+# colors #
+##########
+msgctxt "model:ir.action,name:act_colors_form"
+msgid "Colors"
+msgstr "Colors"
+
+msgctxt "model:ir.ui.menu,name:menu_config_colors"
+msgid "Colors"
+msgstr "Colors"
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "This rgb-color is already in use."
+msgstr "This rgb-color is already in use."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "Invalid Color - syntax: #RRGGBB in hex values"
+msgstr "Invalid Color - syntax: #RRGGBB in hex values"
+
+
+################
+# break period #
+################
+msgctxt "model:ir.action,name:act_breakperiod_form"
+msgid "Break time"
+msgstr "Break time"
+
+msgctxt "model:ir.action,name:act_breakperiod_calendar"
+msgid "Break time calendar"
+msgstr "Break time calendar"
+
+msgctxt "model:ir.ui.menu,name:menu_breakperiod2"
+msgid "Break time"
+msgstr "Break time"
+
+msgctxt "model:ir.ui.menu,name:menu_breakperiod_calendar"
+msgid "Break time calendar"
+msgstr "Break time calendar"
+
+msgctxt "model:ir.action.act_window.domain,name:act_breakperiod_form_currentmonth"
+msgid "current month"
+msgstr "current month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_breakperiod_form_lastmonth"
+msgid "last month"
+msgstr "last month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_breakperiod_form_all"
+msgid "all"
+msgstr "all"
+
+msgctxt "view:employee_timetracking.breakperiod:"
+msgid "Edit"
+msgstr "Edit"
+
+msgctxt "view:employee_timetracking.breakperiod:"
+msgid "Examine"
+msgstr "Examine"
+
+msgctxt "view:employee_timetracking.breakperiod:"
+msgid "Lock"
+msgstr "Lock"
+
+msgctxt "view:employee_timetracking.breakperiod:"
+msgid "State"
+msgstr "State"
+
+msgctxt "view:employee_timetracking.breakperiod:"
+msgid "Information"
+msgstr "Information"
+
+msgctxt "view:employee_timetracking.breakperiod:"
+msgid "Break time is the period of pause entered by the employee."
+msgstr "Break time is the period of pause entered by the employee."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "This start time is already in use."
+msgstr "This start time is already in use."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "This end time is already in use."
+msgstr "This end time is already in use."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "End time must be after start time."
+msgstr "End time must be after start time."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "Please enter a time."
+msgstr "Please enter a time."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "Enter start and end time before moving on."
+msgstr "Enter start and end time before moving on."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "Edit denied, the evaluation period of the break time item '%s' is locked."
+msgstr "Edit denied, the evaluation period of the break time item '%s' is locked."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "The break time entry is in the 'locked' state and can not be deleted."
+msgstr "The break time entry is in the 'locked' state and can not be deleted."
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "The break time item overlaps with this item: '%s'"
+msgstr "The break time item overlaps with this item: '%s'"
+
+msgctxt "error:employee_timetracking.breakperiod:"
+msgid "Edit denied, the break time item '%s' is locked."
+msgstr "Edit denied, the break time item '%s' is locked."
+
+msgctxt "field:employee_timetracking.breakperiod,state:"
+msgid "State"
+msgstr "State"
+
+msgctxt "selection:employee_timetracking.breakperiod,state:"
+msgid "Editable"
+msgstr "Editable"
+
+msgctxt "selection:employee_timetracking.breakperiod,state:"
+msgid "Examine"
+msgstr "Examine"
+
+msgctxt "selection:employee_timetracking.breakperiod,state:"
+msgid "Locked"
+msgstr "Locked"
+
+msgctxt "field:employee_timetracking.breakperiod,employee:"
+msgid "Employee"
+msgstr "Employee"
+
+msgctxt "field:employee_timetracking.breakperiod,startpos:"
+msgid "Start"
+msgstr "Start"
+
+msgctxt "help:employee_timetracking.breakperiod,startpos:"
+msgid "Beginning of the presence"
+msgstr "Beginning of the presence"
+
+msgctxt "field:employee_timetracking.breakperiod,endpos:"
+msgid "End"
+msgstr "End"
+
+msgctxt "help:employee_timetracking.breakperiod,endpos:"
+msgid "End of the presence"
+msgstr "End of the presence"
+
+msgctxt "field:employee_timetracking.breakperiod,weekday:"
+msgid "Weekday"
+msgstr "Weekday"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Mon"
+msgstr "Mon"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Tue"
+msgstr "Tue"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Wed"
+msgstr "Wed"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Thu"
+msgstr "Thu"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Fri"
+msgstr "Fri"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Sat"
+msgstr "Sat"
+
+msgctxt "selection:employee_timetracking.breakperiod,weekday:"
+msgid "Sun"
+msgstr "Sun"
+
+msgctxt "field:employee_timetracking.breakperiod,duration:"
+msgid "Duration"
+msgstr "Duration"
+
+msgctxt "field:employee_timetracking.breakperiod,week:"
+msgid "Week"
+msgstr "Week"
+
+msgctxt "help:employee_timetracking.breakperiod,week:"
+msgid "Calendar week"
+msgstr "Calendar week"
+
+
+##########
+# period #
+##########
+msgctxt "model:ir.action,name:act_period_form"
+msgid "Presence time"
+msgstr "Presence time"
+
+msgctxt "model:ir.action,name:act_period_calendar"
+msgid "Presence Calendar"
+msgstr "Presence Calendar"
+
+msgctxt "model:ir.ui.menu,name:menu_period"
+msgid "Presence time"
+msgstr "Presence time"
+
+msgctxt "model:ir.ui.menu,name:menu_period_calendar"
+msgid "Presence Calendar"
+msgstr "Presence Calendar"
+
+msgctxt "model:ir.action.act_window.domain,name:act_period_form_currentmonth"
+msgid "current month"
+msgstr "current month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_period_form_lastmonth"
+msgid "last month"
+msgstr "last month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_period_form_all"
+msgid "all"
+msgstr "all"
+
+msgctxt "error:employee_timetracking.period:"
+msgid "This start time is already in use."
+msgstr "This start time is already in use."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "This end time is already in use."
+msgstr "This end time is already in use."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "End time must be after start time."
+msgstr "End time must be after start time."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "Please enter a time."
+msgstr "Please enter a time."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "Enter start and end time before moving on."
+msgstr "Enter start and end time before moving on."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "The working time entry is in the 'locked' state and can not be deleted."
+msgstr "The working time entry is in the 'locked' state and can not be deleted."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "The working time item overlaps with this item: '%s'"
+msgstr "The working time item overlaps with this item: '%s'"
+
+msgctxt "error:employee_timetracking.period:"
+msgid "Edit denied, the evaluation period of the working time item '%s' is locked."
+msgstr "Edit denied, the evaluation period of the working time item '%s' is locked."
+
+msgctxt "error:employee_timetracking.period:"
+msgid "Edit denied, the working time item '%s' is locked."
+msgstr "Edit denied, the working time item '%s' is locked."
+
+msgctxt "view:employee_timetracking.period:"
+msgid "Presence time"
+msgstr "Presence time"
+
+msgctxt "view:employee_timetracking.period:"
+msgid "Edit"
+msgstr "Edit"
+
+msgctxt "view:employee_timetracking.period:"
+msgid "Examine"
+msgstr "Examine"
+
+msgctxt "view:employee_timetracking.period:"
+msgid "Lock"
+msgstr "Lock"
+
+msgctxt "view:employee_timetracking.period:"
+msgid "State"
+msgstr "State"
+
+msgctxt "view:employee_timetracking.period:"
+msgid "Information"
+msgstr "Information"
+
+msgctxt "view:employee_timetracking.period:"
+msgid "Presence time is the period of activity entered by the employee."
+msgstr "Presence time is the period of activity entered by the employee."
+
+msgctxt "view:employee_timetracking.period:"
+msgid "The type of presence is used to assign the presence time to the time accounts."
+msgstr "The type of presence is used to assign the presence time to the time accounts."
+
+msgctxt "view:employee_timetracking.period:"
+msgid "The assignment of the current presence time to the time accounts is done by the button 'Examine'."
+msgstr "The assignment of the current presence time to the time accounts is done by the button 'Examine'."
+
+msgctxt "view:employee_timetracking.period:"
+msgid "The list of time account items shows the assignment of the current attendance time to the time accounts."
+msgstr "The list of time account items shows the assignment of the current attendance time to the time accounts."
+
+msgctxt "field:employee_timetracking.period,presence:"
+msgid "Type of Presence"
+msgstr "Type of Presence"
+
+msgctxt "field:employee_timetracking.period,state:"
+msgid "State"
+msgstr "State"
+
+msgctxt "selection:employee_timetracking.period,state:"
+msgid "Editable"
+msgstr "Editable"
+
+msgctxt "selection:employee_timetracking.period,state:"
+msgid "Examine"
+msgstr "Examine"
+
+msgctxt "selection:employee_timetracking.period,state:"
+msgid "Locked"
+msgstr "Locked"
+
+msgctxt "field:employee_timetracking.period,employee:"
+msgid "Employee"
+msgstr "Employee"
+
+msgctxt "field:employee_timetracking.period,startpos:"
+msgid "Start"
+msgstr "Start"
+
+msgctxt "help:employee_timetracking.period,startpos:"
+msgid "Beginning of the presence"
+msgstr "Beginning of the presence"
+
+msgctxt "field:employee_timetracking.period,endpos:"
+msgid "End"
+msgstr "End"
+
+msgctxt "help:employee_timetracking.period,endpos:"
+msgid "End of the presence"
+msgstr "End of the presence"
+
+msgctxt "field:employee_timetracking.period,duration:"
+msgid "Duration"
+msgstr "Duration"
+
+msgctxt "field:employee_timetracking.period,weekday:"
+msgid "Weekday"
+msgstr "Weekday"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Mon"
+msgstr "Mon"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Tue"
+msgstr "Tue"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Wed"
+msgstr "Wed"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Thu"
+msgstr "Thu"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Fri"
+msgstr "Fri"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Sat"
+msgstr "Sat"
+
+msgctxt "selection:employee_timetracking.period,weekday:"
+msgid "Sun"
+msgstr "Sun"
+
+msgctxt "field:employee_timetracking.period,accountitem:"
+msgid "Time Account Item"
+msgstr "Time Account Item"
+
+msgctxt "help:employee_timetracking.period,accountitem:"
+msgid "Entries in the time accounts created by the current presence item."
+msgstr "Entries in the time accounts created by the current presence item."
+
+msgctxt "field:employee_timetracking.period,week:"
+msgid "Week"
+msgstr "Week"
+
+msgctxt "help:employee_timetracking.period,week:"
+msgid "Calendar week"
+msgstr "Calendar week"
+
+msgctxt "field:employee_timetracking.period,is_eval_locked:"
+msgid "Evaluation locked"
+msgstr "Evaluation locked"
+
+
+############
+# employee #
+############
+msgctxt "view:company.employee:"
+msgid "Contract data"
+msgstr "Contract data"
+
+msgctxt "view:company.employee:"
+msgid "Work time/Holidays"
+msgstr "Work time/Holidays"
+
+msgctxt "error:company.employee:"
+msgid "'Holidays' must be positive"
+msgstr "'Holidays' must be positive"
+
+msgctxt "error:company.employee:"
+msgid "'Special leave' must be positive"
+msgstr "'Special leave' must be positive"
+
+msgctxt "error:company.employee:"
+msgid "The company '%s' is not in the list of companies of the cron job."
+msgstr "The company '%s' is not in the list of companies of the cron job."
+
+msgctxt "error:company.employee:"
+msgid "Deleting calendar from employee is not allowed."
+msgstr "Deleting calendar from employee is not allowed."
+
+msgctxt "error:company.employee:"
+msgid "This calendar is already used by another user."
+msgstr "This calendar is already used by another user."
+
+msgctxt "field:company.employee,tariff:"
+msgid "Tariff model"
+msgstr "Tariff model"
+
+msgctxt "field:company.employee,holidays:"
+msgid "Holidays"
+msgstr "Holidays"
+
+msgctxt "help:company.employee,holidays:"
+msgid "Number of holidays per year"
+msgstr "Number of holidays per year"
+
+msgctxt "field:company.employee,specleave:"
+msgid "Special leave"
+msgstr "Special leave"
+
+msgctxt "help:company.employee,specleave:"
+msgid "Number of special leave days per year"
+msgstr "Number of special leave days per year"
+
+msgctxt "field:company.employee,worktime:"
+msgid "Working time model"
+msgstr "Working time model"
+
+msgctxt "field:company.employee,color:"
+msgid "Background color"
+msgstr "Background color"
+
+msgctxt "help:company.employee,color:"
+msgid "Background color in the calendar view"
+msgstr "Background color in the calendar view"
+
+msgctxt "field:company.employee,calendar:"
+msgid "Holiday Calendar"
+msgstr "Holiday Calendar"
+
+
+##################
+# tariff model  #
+##################
+msgctxt "model:ir.action,name:act_tariffmodel_form"
+msgid "Tariff model"
+msgstr "Tariff model"
+
+msgctxt "model:ir.ui.menu,name:menu_config_tariffmodel"
+msgid "Tariff model"
+msgstr "Tariff model"
+
+msgctxt "view:employee_timetracking.tariffmodel:"
+msgid "Description"
+msgstr "Description"
+
+msgctxt "view:employee_timetracking.tariffmodel:"
+msgid "Account rule"
+msgstr "Account rule"
+
+msgctxt "view:employee_timetracking.tariffmodel:"
+msgid "Break time rule"
+msgstr "Break time rule"
+
+msgctxt "view:employee_timetracking.tariffmodel:"
+msgid "Type of Presence"
+msgstr "Type of Presence"
+
+msgctxt "view:employee_timetracking.tariffmodel:"
+msgid "Used by Employees"
+msgstr "Used by Employees"
+
+# errors
+msgctxt "error:employee_timetracking.tariffmodel:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.tariffmodel:"
+msgid "This shorthand symbol is already in use."
+msgstr "This shorthand symbol is already in use."
+
+# fields
+msgctxt "field:employee_timetracking.tariffmodel,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.tariffmodel,shortname:"
+msgid "shorthand symbol"
+msgstr "shorthand symbol"
+
+msgctxt "help:employee_timetracking.tariffmodel,shortname:"
+msgid "The shorthand symbol appears in the tables of the reports."
+msgstr "The shorthand symbol appears in the tables of the reports."
+
+msgctxt "field:employee_timetracking.tariffmodel,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.tariffmodel,accountrule:"
+msgid "Account rule"
+msgstr "Account rule"
+
+msgctxt "field:employee_timetracking.tariffmodel,breaktime:"
+msgid "Break time rule"
+msgstr "Break time rule"
+
+msgctxt "field:employee_timetracking.tariffmodel,presence:"
+msgid "Type of presence"
+msgstr "Type of presence"
+
+msgctxt "field:employee_timetracking.tariffmodel,type_present:"
+msgid "Primary presence type"
+msgstr "Primary presence type"
+
+msgctxt "help:employee_timetracking.tariffmodel,type_present:"
+msgid "Presence type as default for the absent user"
+msgstr "Presence type as default for the absent user"
+
+msgctxt "field:employee_timetracking.tariffmodel,employees:"
+msgid "Used by Employees"
+msgstr "Used by Employees"
+
+msgctxt "field:employee_timetracking.tariffmodel,main_timeaccount:"
+msgid "Main time account"
+msgstr "Main time account"
+
+msgctxt "help:employee_timetracking.tariffmodel,main_timeaccount:"
+msgid "Time account for monthly worktime"
+msgstr "Time account for monthly worktime"
+
+
+
+######################
+# presence relation  #
+######################
+msgctxt "field:employee_timetracking.presence_rel,tariff:"
+msgid "Tariff model"
+msgstr "Tariff model"
+
+msgctxt "field:employee_timetracking.presence_rel,presence:"
+msgid "Presence"
+msgstr "Presence"
+
+msgctxt "error:employee_timetracking.presence_rel:"
+msgid "This type of presence is already in use in the current tariff model."
+msgstr "This type of presence is already in use in the current tariff model."
+
+
+#####################
+# accountrule rule  #
+#####################
+msgctxt "model:ir.action,name:act_accountrule_form"
+msgid "Account rule"
+msgstr "Account rule"
+
+msgctxt "model:ir.ui.menu,name:menu_config_accountrule"
+msgid "Account rule"
+msgstr "Account rule"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Description"
+msgstr "Description"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Account rule"
+msgstr "Account rule"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Target account and factor"
+msgstr "Target account and factor"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Range of working time in which the rule applies, in the localtime of your company."
+msgstr "Range of working time in which the rule applies, in the localtime of your company."
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "week days at which the rule applies"
+msgstr "week days at which the rule applies"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Presence type for which the rule applies"
+msgstr "Presence type for which the rule applies"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Factor for work time"
+msgstr "Factor for work time"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Rule defintion"
+msgstr "Rule defintion"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "The time account rule is executed when the employee ends a presence time."
+msgstr "The time account rule is executed when the employee ends a presence time."
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "The account rule specifies:"
+msgstr "The account rule specifies:"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "- at what times of the day and on which days of the week the rule applies"
+msgstr "- at what times of the day and on which days of the week the rule applies"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "- on which time account the working time is booked"
+msgstr "- on which time account the working time is booked"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "- which factor is applied to the booked time"
+msgstr "- which factor is applied to the booked time"
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "To apply a time account rule to an employee, add the rule to the employee's tariff model."
+msgstr "To apply a time account rule to an employee, add the rule to the employee's tariff model."
+
+msgctxt "view:employee_timetracking.accountrule:"
+msgid "Hint: 0:00 = 24:00 clock"
+msgstr "Hint: 0:00 = 24:00 clock"
+
+# errors
+msgctxt "error:employee_timetracking.accountrule:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.accountrule:"
+msgid "This shorthand symbol is already in use."
+msgstr "This shorthand symbol is already in use."
+
+msgctxt "error:employee_timetracking.accountrule:"
+msgid "Factor can not be zero."
+msgstr "Factor can not be zero."
+
+msgctxt "error:employee_timetracking.accountrule:"
+msgid "'to' must be creater than 'from'"
+msgstr "'to' must be creater than 'from'"
+
+msgctxt "error:employee_timetracking.accountrule:"
+msgid "at least one weekday must be activated"
+msgstr "at least one weekday must be activated"
+
+# fields
+msgctxt "field:employee_timetracking.accountrule,presence:"
+msgid "Type of presence"
+msgstr "Type of presence"
+
+msgctxt "help:employee_timetracking.accountrule,presence:"
+msgid "Presence type for which the rule applies"
+msgstr "Presence type for which the rule applies"
+
+msgctxt "field:employee_timetracking.accountrule,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.accountrule,shortname:"
+msgid "shorthand symbol"
+msgstr "shorthand symbol"
+
+msgctxt "help:employee_timetracking.accountrule,shortname:"
+msgid "The shorthand symbol appears in the tables of the reports."
+msgstr "The shorthand symbol appears in the tables of the reports."
+
+msgctxt "field:employee_timetracking.accountrule,mintime:"
+msgid "from"
+msgstr "from"
+
+msgctxt "help:employee_timetracking.accountrule,mintime:"
+msgid "Begin time from which the rule applies."
+msgstr "Begin time from which the rule applies."
+
+msgctxt "field:employee_timetracking.accountrule,maxtime:"
+msgid "to"
+msgstr "to"
+
+msgctxt "help:employee_timetracking.accountrule,maxtime:"
+msgid "End time until which the rule applies. Hint: 0:00 = 24:00 clock"
+msgstr "End time until which the rule applies. Hint: 0:00 = 24:00 clock"
+
+msgctxt "field:employee_timetracking.accountrule,holiday:"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "help:employee_timetracking.accountrule,holiday:"
+msgid "Rule is only used on public holidays or not on public holidays"
+msgstr "Rule is only used on public holidays or not on public holidays"
+
+msgctxt "selection:employee_timetracking.accountrule,holiday:"
+msgid "is public holiday"
+msgstr "is public holiday"
+
+msgctxt "selection:employee_timetracking.accountrule,holiday:"
+msgid "is not public holiday"
+msgstr "is not public holiday"
+
+msgctxt "field:employee_timetracking.accountrule,factor:"
+msgid "Factor"
+msgstr "Factor"
+
+msgctxt "help:employee_timetracking.accountrule,factor:"
+msgid "Factor for working hours while the rule applies"
+msgstr "Factor for working hours while the rule applies"
+
+msgctxt "field:employee_timetracking.accountrule,mon:"
+msgid "Mon"
+msgstr "Mon"
+
+msgctxt "help:employee_timetracking.accountrule,mon:"
+msgid "rule applies at Monday"
+msgstr "rule applies at Monday"
+
+msgctxt "field:employee_timetracking.accountrule,tue:"
+msgid "Tue"
+msgstr "Tue"
+
+msgctxt "help:employee_timetracking.accountrule,tue:"
+msgid "rule applies at Tuesday"
+msgstr "rule applies at Tuesday"
+
+msgctxt "field:employee_timetracking.accountrule,wed:"
+msgid "Wed"
+msgstr "Wed"
+
+msgctxt "help:employee_timetracking.accountrule,wed:"
+msgid "rule applies at Wednesday"
+msgstr "rule applies at Wednesday"
+
+msgctxt "field:employee_timetracking.accountrule,thu:"
+msgid "Thu"
+msgstr "Thu"
+
+msgctxt "help:employee_timetracking.accountrule,thu:"
+msgid "rule applies at Thursday"
+msgstr "rule applies at Thursday"
+
+msgctxt "field:employee_timetracking.accountrule,fri:"
+msgid "Fri"
+msgstr "Fri"
+
+msgctxt "help:employee_timetracking.accountrule,fri:"
+msgid "rule applies at Friday"
+msgstr "rule applies at Friday"
+
+msgctxt "field:employee_timetracking.accountrule,sat:"
+msgid "Sat"
+msgstr "Sat"
+
+msgctxt "help:employee_timetracking.accountrule,sat:"
+msgid "rule applies at Saturday"
+msgstr "rule applies at Saturday"
+
+msgctxt "field:employee_timetracking.accountrule,sun:"
+msgid "Sun"
+msgstr "Sun"
+
+msgctxt "help:employee_timetracking.accountrule,sun:"
+msgid "rule applies at Sunday"
+msgstr "rule applies at Sunday"
+
+msgctxt "field:employee_timetracking.accountrule,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.accountrule,account:"
+msgid "Time Account"
+msgstr "Time Account"
+
+msgctxt "help:employee_timetracking.accountrule,account:"
+msgid "Time account on which a suitable presence time is booked."
+msgstr "Time account on which a suitable presence time is booked."
+
+
+####################
+# break time rule  #
+####################
+msgctxt "model:ir.action,name:act_breaktime_form"
+msgid "Break time rule"
+msgstr "Break time rule"
+
+msgctxt "model:ir.ui.menu,name:menu_config_breaktime"
+msgid "Break time rule"
+msgstr "Break time rule"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "Description"
+msgstr "Description"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "Deduction rule"
+msgstr "Deduction rule"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "Range of working time in which the rule applies"
+msgstr "Range of working time in which the rule applies"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "Deduction time"
+msgstr "Deduction time"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "Syntax: 'hh:mm:ss' or 'hh:mm'"
+msgstr "Syntax: 'hh:mm:ss' or 'hh:mm'"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "The break regulation determines at which working hours a break time is deducted per day."
+msgstr "The break regulation determines at which working hours a break time is deducted per day."
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "The respective lower limit of the working time is not fallen below with the deduction."
+msgstr "The respective lower limit of the working time is not fallen below with the deduction."
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "For example"
+msgstr "For example"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "- Working time: 4h 20 min, Rule: 4-5:59h / -30 min, reduced working hours: 4h"
+msgstr "- Working time: 4h 20 min, Rule: 4-5:59h / -30 min, reduced working hours: 4h"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "- Working time: 4h 50 min, Rule: 4-5:59h / -30 min, reduced working hours: 4h 20 min"
+msgstr "- Working time: 4h 50 min, Rule: 4-5:59h / -30 min, reduced working hours: 4h 20 min"
+
+msgctxt "view:employee_timetracking.breaktime:"
+msgid "- Working time: 6h 20 min, Rule: 6-7:59h / -60 min, reduced working hours: 6h"
+msgstr "- Working time: 6h 20 min, Rule: 6-7:59h / -60 min, reduced working hours: 6h"
+
+
+# errors
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "This shorthand symbol is already in use."
+msgstr "This shorthand symbol is already in use."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "This 'from' time is already in use."
+msgstr "This 'from' time is already in use."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "This 'to' time is already in use."
+msgstr "This 'to' time is already in use."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "Time must be positive."
+msgstr "Time must be positive."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "'to' must be creater than 'from'"
+msgstr "'to' must be creater than 'from'"
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "Deduction values must be positive."
+msgstr "Deduction values must be positive."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "The deduction time can not be zero."
+msgstr "The deduction time can not be zero."
+
+msgctxt "error:employee_timetracking.breaktime:"
+msgid "The from/to time range overlaps with the following rules: %s"
+msgstr "The from/to time range overlaps with the following rules: %s"
+
+# fields
+msgctxt "field:employee_timetracking.breaktime,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.breaktime,shortname:"
+msgid "shorthand symbol"
+msgstr "shorthand symbol"
+
+msgctxt "help:employee_timetracking.breaktime,shortname:"
+msgid "The shorthand symbol appears in the tables of the reports."
+msgstr "The shorthand symbol appears in the tables of the reports."
+
+msgctxt "field:employee_timetracking.breaktime,mintime:"
+msgid "from"
+msgstr "from"
+
+msgctxt "help:employee_timetracking.breaktime,mintime:"
+msgid "Minimum working time per day from which the rule applies. (e.g. 4h30m --> 04:30)"
+msgstr "Minimum working time per day from which the rule applies. (e.g. 4h30m --> 04:30)"
+
+msgctxt "field:employee_timetracking.breaktime,maxtime:"
+msgid "to"
+msgstr "to"
+
+msgctxt "help:employee_timetracking.breaktime,maxtime:"
+msgid "Maximum working time per day from which the rule applies.  (e.g. 6h --> 06:00)"
+msgstr "Maximum working time per day from which the rule applies.  (e.g. 6h --> 06:00)"
+
+msgctxt "field:employee_timetracking.breaktime,deduction:"
+msgid "Deduction time"
+msgstr "Deduction time"
+
+msgctxt "help:employee_timetracking.breaktime,hours:"
+msgid "Number of hours/minutes to be deducted (e.g. 30m --> 00:30)"
+msgstr "Number of hours/minutes to be deducted (e.g. 30m --> 00:30)"
+
+msgctxt "field:employee_timetracking.breaktime,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.breaktime,tariff:"
+msgid "used in Tariff model"
+msgstr "used in Tariff model"
+
+msgctxt "help:employee_timetracking.breaktime,tariff:"
+msgid "This break time is used in the specified tariff models."
+msgstr "This break time is used in the specified tariff models."
+
+
+####################
+# type of presence #
+####################
+msgctxt "model:ir.action,name:act_presence_form"
+msgid "Type of presence"
+msgstr "Type of presence"
+
+msgctxt "model:ir.ui.menu,name:menu_config_presence"
+msgid "Type of presence"
+msgstr "Type of presence"
+
+msgctxt "view:employee_timetracking.presence:"
+msgid "Type of presence"
+msgstr "Type of presence"
+
+msgctxt "view:employee_timetracking.presence:"
+msgid "Description"
+msgstr "Description"
+
+msgctxt "view:employee_timetracking.presence:"
+msgid "Effect on accounts"
+msgstr "Effect on accounts"
+
+msgctxt "view:employee_timetracking.presence:"
+msgid "The presence type can be used by the employee to indicate the kind of his activity."
+msgstr "The presence type can be used by the employee to indicate the kind of his activity."
+
+msgctxt "view:employee_timetracking.presence:"
+msgid "The presence type is used in the time account rule to determine which time account rule is applied."
+msgstr "The presence type is used in the time account rule to determine which time account rule is applied."
+
+msgctxt "view:employee_timetracking.presence:"
+msgid "To make the presence type available to an employee, add the type to the employee's tariff model."
+msgstr "To make the presence type available to an employee, add the type to the employee's tariff model."
+
+
+# errors
+msgctxt "error:employee_timetracking.presence:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.presence:"
+msgid "This shorthand symbol is already in use."
+msgstr "This shorthand symbol is already in use."
+
+# fields
+msgctxt "field:employee_timetracking.presence,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.presence,shortname:"
+msgid "shorthand symbol"
+msgstr "shorthand symbol"
+
+msgctxt "help:employee_timetracking.presence,shortname:"
+msgid "The shorthand symbol appears in the tables of the reports."
+msgstr "The shorthand symbol appears in the tables of the reports."
+
+msgctxt "field:employee_timetracking.presence,employees:"
+msgid "Used by Employees"
+msgstr "Used by Employees"
+
+msgctxt "field:employee_timetracking.presence,color:"
+msgid "Text color"
+msgstr "Text color"
+
+msgctxt "help:employee_timetracking.presence,color:"
+msgid "Text color in the calendar view"
+msgstr "Text color in the calendar view"
+
+msgctxt "field:employee_timetracking.presence,numemployees:"
+msgid "Employees"
+msgstr "Employees"
+
+msgctxt "help:employee_timetracking.presence,numemployees:"
+msgid "Used by Employees"
+msgstr "Used by Employees"
+
+msgctxt "field:employee_timetracking.presence,company:"
+msgid "Company"
+msgstr "Company"
+
+
+# presence: fixamount
+msgctxt "field:employee_timetracking.presence,fixamount:"
+msgid "set amount"
+msgstr "set amount"
+
+msgctxt "help:employee_timetracking.presence,fixamount:"
+msgid "select half or full days at holiday time"
+msgstr "select half or full days at holiday time"
+
+msgctxt "selection:employee_timetracking.presence,fixamount:"
+msgid "specified time"
+msgstr "specified time"
+
+msgctxt "selection:employee_timetracking.presence,fixamount:"
+msgid "half working day"
+msgstr "half working day"
+
+msgctxt "selection:employee_timetracking.presence,fixamount:"
+msgid "full working day"
+msgstr "full working day"
+
+
+
+################
+# time account #
+################
+msgctxt "model:ir.action,name:act_timeaccount_form"
+msgid "Time Account"
+msgstr "Time Account"
+
+msgctxt "model:ir.ui.menu,name:menu_config_timeaccount"
+msgid "Time Account"
+msgstr "Time Account"
+
+msgctxt "error:employee_timetracking.timeaccount:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.timeaccount:"
+msgid "This shorthand symbol is already in use."
+msgstr "This shorthand symbol is already in use."
+
+msgctxt "view:employee_timetracking.timeaccount:"
+msgid "Information"
+msgstr "Information"
+
+msgctxt "view:employee_timetracking.timeaccount:"
+msgid "Time accounts:"
+msgstr "Time accounts:"
+
+msgctxt "view:employee_timetracking.timeaccount:"
+msgid "The time accounts save the registered working time."
+msgstr "The time accounts save the registered working time."
+
+msgctxt "view:employee_timetracking.timeaccount:"
+msgid "There can be any number of time accounts in your tariff model."
+msgstr "There can be any number of time accounts in your tariff model."
+
+msgctxt "view:employee_timetracking.timeaccount:"
+msgid "The assignment of a registered working time to a time account is performed by a time account rule."
+msgstr "The assignment of a registered working time to a time account is performed by a time account rule."
+
+msgctxt "field:employee_timetracking.timeaccount,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.timeaccount,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.timeaccount,shortname:"
+msgid "shorthand symbol"
+msgstr "shorthand symbol"
+
+msgctxt "help:employee_timetracking.timeaccount,shortname:"
+msgid "The shorthand symbol appears in the tables of the reports."
+msgstr "The shorthand symbol appears in the tables of the reports."
+
+msgctxt "field:employee_timetracking.timeaccount,color:"
+msgid "Text color"
+msgstr "Text color"
+
+msgctxt "help:employee_timetracking.timeaccount,color:"
+msgid "Text color in the calendar view"
+msgstr "Text color in the calendar view"
+
+
+#####################
+# time account item #
+#####################
+msgctxt "model:ir.action,name:act_timeaccountitem_form"
+msgid "Time Account Item"
+msgstr "Time Account Item"
+
+msgctxt "model:ir.action,name:act_timeaccountitem_calendar"
+msgid "Time Account Calendar"
+msgstr "Time Account Calendar"
+
+msgctxt "model:ir.ui.menu,name:menu_timeaccountitem"
+msgid "Time Account Item"
+msgstr "Time Account Item"
+
+msgctxt "model:ir.ui.menu,name:menu_timeaccountitem_calendar"
+msgid "Time Account Calendar"
+msgstr "Time Account Calendar"
+
+msgctxt "model:ir.action.act_window.domain,name:act_timeaccountitem_form_currentmonth"
+msgid "current month"
+msgstr "current month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_timeaccountitem_form_lastmonth"
+msgid "last month"
+msgstr "last month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_timeaccountitem_form_all"
+msgid "all"
+msgstr "all"
+
+msgctxt "view:employee_timetracking.timeaccountitem:"
+msgid "Account Item"
+msgstr "Account Item"
+
+msgctxt "view:employee_timetracking.timeaccountitem:"
+msgid "State"
+msgstr "State"
+
+msgctxt "view:employee_timetracking.timeaccountitem:"
+msgid "Examine"
+msgstr "Examine"
+
+msgctxt "view:employee_timetracking.timeaccountitem:"
+msgid "Lock"
+msgstr "Lock"
+
+msgctxt "view:employee_timetracking.timeaccountitem:"
+msgid "The time account entry is the time used to calculate the time worked."
+msgstr "The time account entry is the time used to calculate the time worked."
+
+msgctxt "view:employee_timetracking.timeaccountitem:"
+msgid "The assignment of the presence time to the various time accounts is based on the tariff model."
+msgstr "The assignment of the presence time to the various time accounts is based on the tariff model."
+
+msgctxt "error:employee_timetracking.timeaccountitem:"
+msgid "The time account item is in the 'locked' state and can not be deleted or edited."
+msgstr "The time account item is in the 'locked' state and can not be deleted or edited."
+
+msgctxt "error:employee_timetracking.timeaccountitem:"
+msgid "The time account item overlaps with this item: '%s'"
+msgstr "The time account item overlaps with this item: '%s'"
+
+msgctxt "error:employee_timetracking.timeaccountitem:"
+msgid "Edit denied, the evaluation period of the time account item '%s' is locked."
+msgstr "Edit denied, the evaluation period of the time account item '%s' is locked."
+
+msgctxt "field:employee_timetracking.timeaccountitem,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.timeaccountitem,employee:"
+msgid "Employee"
+msgstr "Employee"
+
+msgctxt "field:employee_timetracking.timeaccountitem,period:"
+msgid "Presence time"
+msgstr "Presence time"
+
+msgctxt "field:employee_timetracking.timeaccountitem,account:"
+msgid "Time Account"
+msgstr "Time Account"
+
+msgctxt "field:employee_timetracking.timeaccountitem,startpos:"
+msgid "Start"
+msgstr "Start"
+
+msgctxt "field:employee_timetracking.timeaccountitem,endpos:"
+msgid "End"
+msgstr "End"
+
+msgctxt "field:employee_timetracking.timeaccountitem,state:"
+msgid "State"
+msgstr "State"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,state:"
+msgid "Created"
+msgstr "Created"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,state:"
+msgid "Examine"
+msgstr "Examine"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,state:"
+msgid "Locked"
+msgstr "Locked"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,state:"
+msgid "Evaluated"
+msgstr "Evaluated"
+
+msgctxt "field:employee_timetracking.timeaccountitem,state_month:"
+msgid "Month"
+msgstr "Month"
+
+msgctxt "field:employee_timetracking.timeaccountitem,duration:"
+msgid "Duration"
+msgstr "Duration"
+
+msgctxt "field:employee_timetracking.timeaccountitem,weekday:"
+msgid "Weekday"
+msgstr "Weekday"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Mon"
+msgstr "Mon"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Tue"
+msgstr "Tue"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Wed"
+msgstr "Wed"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Thu"
+msgstr "Thu"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Fri"
+msgstr "Fri"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Sat"
+msgstr "Sat"
+
+msgctxt "selection:employee_timetracking.timeaccountitem,weekday:"
+msgid "Sun"
+msgstr "Sun"
+
+msgctxt "field:employee_timetracking.timeaccountitem,week:"
+msgid "Week"
+msgstr "Week"
+
+msgctxt "help:employee_timetracking.timeaccountitem,week:"
+msgid "Calendar week"
+msgstr "Calendar week"
+
+msgctxt "field:employee_timetracking.timeaccountitem,evaluation:"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "field:employee_timetracking.timeaccountitem,accountrule:"
+msgid "Account rule"
+msgstr "Account rule"
+
+msgctxt "help:employee_timetracking.timeaccountitem,accountrule:"
+msgid "applied time account rule"
+msgstr "applied time account rule"
+
+
+##############
+# evaluation #
+##############
+msgctxt "model:ir.action,name:act_evaluation_form"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "model:ir.ui.menu,name:menu_evaluation"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "model:ir.action.act_window.domain,name:act_evaluation_form_currentmonth"
+msgid "current month"
+msgstr "current month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_evaluation_form_lastmonth"
+msgid "last month"
+msgstr "last month"
+
+msgctxt "model:ir.action.act_window.domain,name:act_evaluation_form_currentyear"
+msgid "current year"
+msgstr "current year"
+
+msgctxt "model:ir.action.act_window.domain,name:act_evaluation_form_lastyear"
+msgid "last year"
+msgstr "last year"
+
+msgctxt "model:ir.action.act_window.domain,name:act_evaluation_form_all"
+msgid "all"
+msgstr "all"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Recalculate"
+msgstr "Recalculate"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Vacation Days"
+msgstr "Vacation Days"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "State"
+msgstr "State"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Create"
+msgstr "Create"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Activate"
+msgstr "Activate"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Lock"
+msgstr "Lock"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Time accounts"
+msgstr "Time accounts"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Daily view"
+msgstr "Daily view"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "Calendar view"
+msgstr "Calendar view"
+
+msgctxt "view:employee_timetracking.evaluation:"
+msgid "The day view shows the entries on the primary time account."
+msgstr "The day view shows the entries on the primary time account."
+
+msgctxt "error:employee_timetracking.evaluation:"
+msgid "This date is already in use."
+msgstr "This date is already in use."
+
+msgctxt "error:employee_timetracking.evaluation:"
+msgid "The evaluation '%s' is currently in the active month and can not be fixed until next month."
+msgstr "The evaluation '%s' is currently in the active month and can not be fixed until next month."
+
+msgctxt "error:employee_timetracking.evaluation:"
+msgid "The evaluation can not be fixed because the evaluation '%s' is not yet fixed."
+msgstr "The evaluation can not be fixed because the evaluation '%s' is not yet fixed."
+
+msgctxt "error:employee_timetracking.evaluation:"
+msgid "The evaluation item is in the 'locked' state and can not be deleted."
+msgstr "The evaluation item is in the 'locked' state and can not be deleted."
+
+msgctxt "field:employee_timetracking.evaluation,employee:"
+msgid "Employee"
+msgstr "Employee"
+
+msgctxt "field:employee_timetracking.evaluation,vacationdays:"
+msgid "Vacation days"
+msgstr "Vacation days"
+
+msgctxt "field:employee_timetracking.evaluation,sickdays:"
+msgid "Sick Days"
+msgstr "Sick Days"
+
+msgctxt "field:employee_timetracking.evaluation,numsickdays:"
+msgid "Sick Days"
+msgstr "Sick Days"
+
+msgctxt "help:employee_timetracking.evaluation,sickdays:"
+msgid "number of sick days"
+msgstr "number of sick days"
+
+msgctxt "field:employee_timetracking.evaluation,evaldate:"
+msgid "Date"
+msgstr "Date"
+
+msgctxt "help:employee_timetracking.evaluation,evaldate:"
+msgid "First day of the month for the evaluation."
+msgstr "First day of the month for the evaluation."
+
+msgctxt "field:employee_timetracking.evaluation,state:"
+msgid "State"
+msgstr "State"
+
+msgctxt "selection:employee_timetracking.evaluation,state:"
+msgid "Created"
+msgstr "Created"
+
+msgctxt "selection:employee_timetracking.evaluation,state:"
+msgid "Active"
+msgstr "Active"
+
+msgctxt "selection:employee_timetracking.evaluation,state:"
+msgid "Locked"
+msgstr "Locked"
+
+msgctxt "field:employee_timetracking.evaluation,evalitem:"
+msgid "Time Accounts"
+msgstr "Time Accounts"
+
+msgctxt "field:employee_timetracking.evaluation,accountitems:"
+msgid "Time Account Items"
+msgstr "Time Account Items"
+
+msgctxt "field:employee_timetracking.evaluation,days:"
+msgid "Daily view"
+msgstr "Daily view"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_target:"
+msgid "Target"
+msgstr "Target"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_target:"
+msgid "Target working time per month"
+msgstr "Target working time per month"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_target_str:"
+msgid "Target"
+msgstr "Target"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_target_str:"
+msgid "Target working time per month"
+msgstr "Target working time per month"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_actual:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_actual:"
+msgid "Actual working time per month"
+msgstr "Actual working time per month"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_actual_str:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_actual_str:"
+msgid "Actual working time per month"
+msgstr "Actual working time per month"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_wobreaks:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_wobreaks:"
+msgid "Actual working time per month without breaks"
+msgstr "Actual working time per month without breaks"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_wobreaks_str:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_wobreaks_str:"
+msgid "Actual working time per month without breaks"
+msgstr "Actual working time per month without breaks"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_diff:"
+msgid "Difference"
+msgstr "Difference"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_diff:"
+msgid "Difference between actual and target working time per month"
+msgstr "Difference between actual and target working time per month"
+
+msgctxt "field:employee_timetracking.evaluation,worktime_diff_str:"
+msgid "Difference"
+msgstr "Difference"
+
+msgctxt "help:employee_timetracking.evaluation,worktime_diff_str:"
+msgid "Difference between actual and target working time per month"
+msgstr "Difference between actual and target working time per month"
+
+msgctxt "field:employee_timetracking.evaluation,holidays:"
+msgid "Holidays"
+msgstr "Holidays"
+
+msgctxt "help:employee_timetracking.evaluation,holidays:"
+msgid "public holidays"
+msgstr "public holidays"
+
+msgctxt "field:employee_timetracking.evaluation,payed_out:"
+msgid "Paid out"
+msgstr "Paid out"
+
+msgctxt "help:employee_timetracking.evaluation,payed_out:"
+msgid "paid working time, usually corresponds to the planned working time, may also include overtime"
+msgstr "paid working time, usually corresponds to the planned working time, may also include overtime"
+
+msgctxt "field:employee_timetracking.evaluation,bal_prev_month:"
+msgid "Previous month"
+msgstr "Previous month"
+
+msgctxt "help:employee_timetracking.evaluation,bal_prev_month:"
+msgid "Balance of the primary working time account of the previous month"
+msgstr "Balance of the primary working time account of the previous month"
+
+msgctxt "field:employee_timetracking.evaluation,bal_prev_month_str:"
+msgid "Previous month"
+msgstr "Previous month"
+
+msgctxt "help:employee_timetracking.evaluation,bal_prev_month_str:"
+msgid "Balance of the primary working time account of the previous month"
+msgstr "Balance of the primary working time account of the previous month"
+
+msgctxt "field:employee_timetracking.evaluation,vacationdays_taken:"
+msgid "Vacation Days"
+msgstr "Vacation Days"
+
+msgctxt "help:employee_timetracking.evaluation,vacationdays_taken:"
+msgid "holidays taken this month"
+msgstr "holidays taken this month"
+
+msgctxt "field:employee_timetracking.evaluation,vacationdays_remain:"
+msgid "Remain Vacation Days"
+msgstr "Remain Vacation Days"
+
+msgctxt "help:employee_timetracking.evaluation,vacationdays_remain:"
+msgid "vacantion days remainig after current month"
+msgstr "vacantion days remainig after current month"
+
+msgctxt "field:employee_timetracking.evaluation,bal_current_month:"
+msgid "Current month"
+msgstr "Current month"
+
+msgctxt "help:employee_timetracking.evaluation,bal_current_month:"
+msgid "Balance of the primary working time account of the current month"
+msgstr "Balance of the primary working time account of the current month"
+
+msgctxt "field:employee_timetracking.evaluation,needs_recalc:"
+msgid "Recalculation"
+msgstr "Recalculation"
+
+msgctxt "help:employee_timetracking.evaluation,needs_recalc:"
+msgid "The evaluation is scheduled for recalculation."
+msgstr "The evaluation is scheduled for recalculation."
+
+msgctxt "field:employee_timetracking.evaluation,recalc_at:"
+msgid "Recalculated"
+msgstr "Recalculated"
+
+msgctxt "help:employee_timetracking.evaluation,recalc_at:"
+msgid "The evaluation was recalculated at the time shown."
+msgstr "The evaluation was recalculated at the time shown."
+
+
+#######################
+# evaluation holidays #
+#######################
+msgctxt "model:ir.action,name:act_evaluation_form"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "error:employee_timetracking.evaluation_vacationdays:"
+msgid "The end date must be after the start date."
+msgstr "The end date must be after the start date."
+
+msgctxt "error:employee_timetracking.evaluation_vacationdays:"
+msgid "There is already an entry for this start date."
+msgstr "There is already an entry for this start date."
+
+msgctxt "error:employee_timetracking.evaluation_vacationdays:"
+msgid "There is already an entry for this end date."
+msgstr "There is already an entry for this end date."
+
+msgctxt "error:employee_timetracking.evaluation_vacationdays:"
+msgid "The item '%s' overlaps with '%s' in the evaluation '%s'."
+msgstr "The item '%s' overlaps with '%s' in the evaluation '%s'."
+
+msgctxt "error:employee_timetracking.evaluation_vacationdays:"
+msgid "The beginning and end of the holiday entry must be in the range of '%s' to '%s'."
+msgstr "The beginning and end of the holiday entry must be in the range of '%s' to '%s'."
+
+msgctxt "error:employee_timetracking.evaluation_vacationdays:"
+msgid "The evaluation '%s' is locked, therefore the entry can not be created or changed."
+msgstr "The evaluation '%s' is locked, therefore the entry can not be created or changed."
+
+msgctxt "field:employee_timetracking.evaluation_vacationdays,evaluation:"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "field:employee_timetracking.evaluation_vacationdays,date_start:"
+msgid "Start Date"
+msgstr "Start Date"
+
+msgctxt "field:employee_timetracking.evaluation_vacationdays,date_end:"
+msgid "End Date"
+msgstr "End Date"
+
+msgctxt "field:employee_timetracking.evaluation_vacationdays,halfday:"
+msgid "Half Day"
+msgstr "Half Day"
+
+msgctxt "field:employee_timetracking.evaluation_vacationdays,autoitem:"
+msgid "Automatically"
+msgstr "Automatically"
+
+msgctxt "help:employee_timetracking.evaluation_vacationdays,autoitem:"
+msgid "The entry was created automatically."
+msgstr "The entry was created automatically."
+
+
+#######################
+# evaluation sickdays #
+#######################
+msgctxt "error:employee_timetracking.evaluation_sickdays:"
+msgid "The end date must be after the start date."
+msgstr "The end date must be after the start date."
+
+msgctxt "error:employee_timetracking.evaluation_sickdays:"
+msgid "There is already an entry for this start date."
+msgstr "There is already an entry for this start date."
+
+msgctxt "error:employee_timetracking.evaluation_sickdays:"
+msgid "There is already an entry for this end date."
+msgstr "There is already an entry for this end date."
+
+msgctxt "error:employee_timetracking.evaluation_sickdays:"
+msgid "The item '%s' overlaps with '%s' in the evaluation '%s'."
+msgstr "The item '%s' overlaps with '%s' in the evaluation '%s'."
+
+msgctxt "error:employee_timetracking.evaluation_sickdays:"
+msgid "The beginning and end of the sickday entry must be in the range of '%s' to '%s'."
+msgstr "The beginning and end of the sickday entry must be in the range of '%s' to '%s'."
+
+msgctxt "error:employee_timetracking.evaluation_sickdays:"
+msgid "The evaluation '%s' is locked, therefore the entry can not be created or changed."
+msgstr "The evaluation '%s' is locked, therefore the entry can not be created or changed."
+
+msgctxt "field:employee_timetracking.evaluation_sickdays,evaluation:"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "field:employee_timetracking.evaluation_sickdays,date_start:"
+msgid "Start Date"
+msgstr "Start Date"
+
+msgctxt "field:employee_timetracking.evaluation_sickdays,date_end:"
+msgid "End Date"
+msgstr "End Date"
+
+
+##################################
+# wizard: recalculate evaluation #
+##################################
+msgctxt "model:ir.action,name:wizard_recalc_evaluation"
+msgid "Recalculate evaluation"
+msgstr "Recalculate evaluation"
+
+
+######################
+# days of evaluation #
+######################
+msgctxt "field:employee_timetracking.evaluation-dayofyear,evaluation:"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,period:"
+msgid "Presence time"
+msgstr "Presence time"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,holidayname:"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,date:"
+msgid "Date"
+msgstr "Date"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,accountitem:"
+msgid "Account item"
+msgstr "Account item"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,accountitem:"
+msgid "Time account entry in the primary time account"
+msgstr "Time account entry in the primary time account"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,accountitems_nonmain:"
+msgid "other account items"
+msgstr "other account items"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,accountitems_nonmain:"
+msgid "Time account entries in the other time accounts"
+msgstr "Time account entries in the other time accounts"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,daytype:"
+msgid "Day type"
+msgstr "Day type"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,daytype:"
+msgid "Weekend"
+msgstr "Weekend"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,daytype:"
+msgid "Weekday"
+msgstr "Weekday"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,daytype:"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Weekday"
+msgstr "Weekday"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Mon"
+msgstr "Mon"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Tue"
+msgstr "Tue"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Wed"
+msgstr "Wed"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Thu"
+msgstr "Thu"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Fri"
+msgstr "Fri"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Sat"
+msgstr "Sat"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,weekday:"
+msgid "Sun"
+msgstr "Sun"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,week:"
+msgid "Week"
+msgstr "Week"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,targettime:"
+msgid "Target"
+msgstr "Target"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,targettime:"
+msgid "Target working time"
+msgstr "Target working time"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,startpos:"
+msgid "Start"
+msgstr "Start"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,endpos:"
+msgid "End"
+msgstr "End"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,duration:"
+msgid "Duration"
+msgstr "Duration"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,duration:"
+msgid "Duration of the current time account item"
+msgstr "Duration of the current time account item"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,sumact:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,sumact:"
+msgid "Sum of all attendance times for this day."
+msgstr "Sum of all attendance times for this day."
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,diff:"
+msgid "Difference"
+msgstr "Difference"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,diff:"
+msgid "Difference between target time and actual time without breaks."
+msgstr "Difference between target time and actual time without breaks."
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,wobreaks:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,wobreaks:"
+msgid "reduced working time due to break time"
+msgstr "reduced working time due to break time"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,sumbreaks:"
+msgid "Entered Break Times"
+msgstr "Entered Break Times"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,sumbreaks:"
+msgid "Sum of break times entered by the employee"
+msgstr "Sum of break times entered by the employee"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,breaktime:"
+msgid "break time"
+msgstr "break time"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,breaktime:"
+msgid "used break time at this day"
+msgstr "used break time at this day"
+
+msgctxt "help:employee_timetracking.evaluation-dayofyear,info_pause:"
+msgid "Break"
+msgstr "Break"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,vacationday:"
+msgid "Vacation Day"
+msgstr "Vacation Day"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,vacationday:"
+msgid "not a vacation day"
+msgstr "not a vacation day"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,vacationday:"
+msgid "full vacation day"
+msgstr "full vacation day"
+
+msgctxt "selection:employee_timetracking.evaluation-dayofyear,vacationday:"
+msgid "half vacation day"
+msgstr "half vacation day"
+
+msgctxt "field:employee_timetracking.evaluation-dayofyear,sickday:"
+msgid "Sick Day"
+msgstr "Sick Day"
+
+
+###################
+# evaluation item #
+###################
+msgctxt "model:ir.action,name:act_evaluationitem_form"
+msgid "Time account"
+msgstr "Time account"
+
+msgctxt "error:employee_timetracking.evaluationitem:"
+msgid "This time account is already in use."
+msgstr "This time account is already in use."
+
+msgctxt "field:employee_timetracking.evaluationitem,evaluation:"
+msgid "Evaluation"
+msgstr "Evaluation"
+
+msgctxt "field:employee_timetracking.evaluationitem,account:"
+msgid "Time Account"
+msgstr "Time Account"
+
+msgctxt "field:employee_timetracking.evaluationitem,accountname:"
+msgid "Account name"
+msgstr "Account name"
+
+msgctxt "help:employee_timetracking.evaluationitem,accountname:"
+msgid "Name of time account at create date of evaluation."
+msgstr "Name of time account at create date of evaluation."
+
+msgctxt "field:employee_timetracking.evaluationitem,balancestart:"
+msgid "Initial balance"
+msgstr "Initial balance"
+
+msgctxt "field:employee_timetracking.evaluationitem,balstartmanu:"
+msgid "Initial balance manually"
+msgstr "Initial balance manually"
+
+msgctxt "help:employee_timetracking.evaluationitem,balstartmanu:"
+msgid "Enter a defined initial balance for this month"
+msgstr "Enter a defined initial balance for this month"
+
+msgctxt "field:employee_timetracking.evaluationitem,balancediff:"
+msgid "Balance"
+msgstr "Balance"
+
+msgctxt "field:employee_timetracking.evaluationitem,start_minute:"
+msgid "Initial Balance"
+msgstr "Initial Balance"
+
+msgctxt "help:employee_timetracking.evaluationitem,start_minute:"
+msgid "Initial balance, taken from the previous month, in hh:mm"
+msgstr "Initial balance, taken from the previous month, in hh:mm"
+
+msgctxt "field:employee_timetracking.evaluationitem,diff_minute:"
+msgid "Balance"
+msgstr "Balance"
+
+msgctxt "help:employee_timetracking.evaluationitem,diff_minute:"
+msgid "calculated balance from time account items in hh:mm"
+msgstr "calculated balance from time account items in hh:mm"
+
+msgctxt "field:employee_timetracking.evaluationitem,needs_recalc:"
+msgid "Recalculation"
+msgstr "Recalculation"
+
+msgctxt "help:employee_timetracking.evaluationitem,needs_recalc:"
+msgid "The time account is scheduled for recalculation."
+msgstr "The time account is scheduled for recalculation."
+
+msgctxt "field:employee_timetracking.evaluationitem,recalc_at:"
+msgid "Recalculated"
+msgstr "Recalculated"
+
+msgctxt "help:employee_timetracking.evaluationitem,recalc_at:"
+msgid "The time account was recalculated at the time shown."
+msgstr "The time account was recalculated at the time shown."
+
+msgctxt "field:employee_timetracking.evaluationitem,payed_out:"
+msgid "Paid out"
+msgstr "Paid out"
+
+msgctxt "help:employee_timetracking.evaluationitem,payed_out:"
+msgid "paid working time / over time"
+msgstr "paid working time / over time"
+
+
+######################
+# working time model #
+######################
+msgctxt "model:ir.action,name:act_worktimemodel_form"
+msgid "Working time model"
+msgstr "Working time model"
+
+msgctxt "model:ir.ui.menu,name:menu_config_worktimemodel"
+msgid "Working time model"
+msgstr "Working time model"
+
+msgctxt "error:employee_timetracking.worktimemodel:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.worktimemodel:"
+msgid "This shorthand symbol is already in use."
+msgstr "This shorthand symbol is already in use."
+
+msgctxt "error:employee_timetracking.worktimemodel:"
+msgid "The from/to time range overlaps with the following rules: %s"
+msgstr "The from/to time range overlaps with the following rules: %s"
+
+msgctxt "field:employee_timetracking.worktimemodel,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.worktimemodel,shortname:"
+msgid "shorthand symbol"
+msgstr "shorthand symbol"
+
+msgctxt "help:employee_timetracking.worktimemodel,shortname:"
+msgid "The shorthand symbol appears in the tables of the reports."
+msgstr "The shorthand symbol appears in the tables of the reports."
+
+msgctxt "field:employee_timetracking.worktimemodel,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.worktimemodel,worktimerule:"
+msgid "Working time rule"
+msgstr "Working time rule"
+
+msgctxt "field:employee_timetracking.worktimemodel,hours_per_week:"
+msgid "Hours/Week"
+msgstr "Hours/Week"
+
+
+#####################
+# working time rule #
+#####################
+msgctxt "view:employee_timetracking.worktimerule:"
+msgid "Range of working time in which the rule applies, in the localtime of your company."
+msgstr "Range of working time in which the rule applies, in the localtime of your company."
+
+msgctxt "view:employee_timetracking.worktimerule:"
+msgid "week days at which the rule applies"
+msgstr "week days at which the rule applies"
+
+msgctxt "error:employee_timetracking.worktimerule:"
+msgid "'to' must be creater than 'from'"
+msgstr "'to' must be creater than 'from'"
+
+msgctxt "error:employee_timetracking.worktimerule:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.worktimerule:"
+msgid "at least one weekday must be activated"
+msgstr "at least one weekday must be activated"
+
+msgctxt "field:employee_timetracking.worktimerule,wtmodel:"
+msgid "Work time model"
+msgstr "Work time model"
+
+msgctxt "field:employee_timetracking.worktimerule,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.worktimerule,mintime:"
+msgid "from"
+msgstr "from"
+
+msgctxt "help:employee_timetracking.worktimerule,mintime:"
+msgid "Begin time from which the rule applies."
+msgstr "Begin time from which the rule applies."
+
+msgctxt "field:employee_timetracking.worktimerule,maxtime:"
+msgid "to"
+msgstr "to"
+
+msgctxt "help:employee_timetracking.worktimerule,maxtime:"
+msgid "End time until which the rule applies."
+msgstr "End time until which the rule applies."
+
+msgctxt "field:employee_timetracking.worktimerule,mon:"
+msgid "Mon"
+msgstr "Mon"
+
+msgctxt "help:employee_timetracking.worktimerule,mon:"
+msgid "rule applies at Monday"
+msgstr "rule applies at Monday"
+
+msgctxt "field:employee_timetracking.worktimerule,tue:"
+msgid "Tue"
+msgstr "Tue"
+
+msgctxt "help:employee_timetracking.worktimerule,tue:"
+msgid "rule applies at Tuesday"
+msgstr "rule applies at Tuesday"
+
+msgctxt "field:employee_timetracking.worktimerule,wed:"
+msgid "Wed"
+msgstr "Wed"
+
+msgctxt "help:employee_timetracking.worktimerule,wed:"
+msgid "rule applies at Wednesday"
+msgstr "rule applies at Wednesday"
+
+msgctxt "field:employee_timetracking.worktimerule,thu:"
+msgid "Thu"
+msgstr "Thu"
+
+msgctxt "help:employee_timetracking.worktimerule,thu:"
+msgid "rule applies at Thursday"
+msgstr "rule applies at Thursday"
+
+msgctxt "field:employee_timetracking.worktimerule,fri:"
+msgid "Fri"
+msgstr "Fri"
+
+msgctxt "help:employee_timetracking.worktimerule,fri:"
+msgid "rule applies at Friday"
+msgstr "rule applies at Friday"
+
+msgctxt "field:employee_timetracking.worktimerule,sat:"
+msgid "Sat"
+msgstr "Sat"
+
+msgctxt "help:employee_timetracking.worktimerule,sat:"
+msgid "rule applies at Saturday"
+msgstr "rule applies at Saturday"
+
+msgctxt "field:employee_timetracking.worktimerule,sun:"
+msgid "Sun"
+msgstr "Sun"
+
+msgctxt "help:employee_timetracking.worktimerule,sun:"
+msgid "rule applies at Sunday"
+msgstr "rule applies at Sunday"
+
+
+###########
+# holiday #
+###########
+msgctxt "model:ir.action,name:act_holiday_form"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "model:ir.ui.menu,name:menu_config_holiday"
+msgid "Holiday"
+msgstr "Holiday"
+
+msgctxt "error:employee_timetracking.holiday:"
+msgid "This name is already in use."
+msgstr "This name is already in use."
+
+msgctxt "error:employee_timetracking.holiday:"
+msgid "This date is already in use."
+msgstr "This date is already in use."
+
+msgctxt "field:employee_timetracking.holiday,name:"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "field:employee_timetracking.holiday,date:"
+msgid "Date"
+msgstr "Date"
+
+msgctxt "field:employee_timetracking.holiday,company:"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "field:employee_timetracking.holiday,repyear:"
+msgid "every year"
+msgstr "every year"
+
+msgctxt "field:employee_timetracking.holiday,halfday:"
+msgid "half day"
+msgstr "half day"
+
+msgctxt "help:employee_timetracking.holiday,halfday:"
+msgid "working hours will be reduced by half this day"
+msgstr "working hours will be reduced by half this day"
+
+
+###########################
+# report evaluation month #
+###########################
+msgctxt "model:ir.action,name:report_evaluation_month"
+msgid "monthly Report"
+msgstr "monthly Report"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Time account"
+msgstr "Time account"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "from"
+msgstr "from"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "to"
+msgstr "to"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Employee:"
+msgstr "Employee:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Code:"
+msgstr "Code:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Date/Week"
+msgstr "Date/Week"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Start"
+msgstr "Start"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "End"
+msgstr "End"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Target"
+msgstr "Target"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Actual"
+msgstr "Actual"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Diff"
+msgstr "Diff"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Info"
+msgstr "Info"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Totals"
+msgstr "Totals"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Balances"
+msgstr "Balances"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Vacation"
+msgstr "Vacation"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Additions"
+msgstr "Additions"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Target:"
+msgstr "Target:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Actual:"
+msgstr "Actual:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Difference:"
+msgstr "Difference:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Paid out:"
+msgstr "Paid out:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Prev. month:"
+msgstr "Prev. month:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Current month:"
+msgstr "Current month:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Paying out:"
+msgstr "Paying out:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Circulation:"
+msgstr "Circulation:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Taken:"
+msgstr "Taken:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Remaining:"
+msgstr "Remaining:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Current:"
+msgstr "Taken:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Public holidays:"
+msgstr "Public holidays:"
+
+msgctxt "report:employee_timetracking.report_evaluation_month:"
+msgid "Sick days:"
+msgstr "Sick days:"
+
+
+############
+# calendar #
+############
+msgctxt "field:pim_calendar.calendar,allday_events:"
+msgid "All-Day-Events only"
+msgstr "All-Day-Events only"
+
+msgctxt "help:pim_calendar.calendar,allday_events:"
+msgid "Allows only full-day appointments in this calendar"
+msgstr "Allows only full-day appointments in this calendar"
+
+msgctxt "error:pim_calendar.calendar:"
+msgid "Disabling the all-day option is not allowed as long as the calendar is connected to an employee."
+msgstr "Disabling the all-day option is not allowed as long as the calendar is connected to an employee."
+
+msgctxt "field:pim_calendar.calendar,is_holidaycal:"
+msgid "Holiday Calendar"
+msgstr "Holiday Calendar"
+
+
+#########
+# event #
+#########
+msgctxt "error:pim_calendar.event:"
+msgid "In calendar '%s' only all-day events are allowed."
+msgstr "In calendar '%s' only all-day events are allowed."
+
+
+#################
+# config wizard #
+#################
+msgctxt "model:ir.action,name:act_tariffmodel_config"
+msgid "Configure Tariff Model"
+msgstr "Configure Tariff Model"
+
+msgctxt "view:employee_timetracking.tariffmodel.config.start:"
+msgid "You can now add a tariff model into your system."
+msgstr "You can now add a tariff model into your system."
+
+msgctxt "view:employee_timetracking.tariffmodel.config.start:"
+msgid "This is done in four steps. First we create working time accounts,"
+msgstr "This is done in four steps. First we create working time accounts,"
+
+msgctxt "view:employee_timetracking.tariffmodel.config.start:"
+msgid "then attendance types, then the tariff model and the working time model follow."
+msgstr "then attendance types, then the tariff model and the working time model follow."

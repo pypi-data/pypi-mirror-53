@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!-- forms -->
+        <record model="ir.ui.view" id="eval_sickday_view_form">
+            <field name="model">employee_timetracking.evaluation_sickdays</field>
+            <field name="type">form</field>
+            <field name="name">eval_sickday_form</field>
+        </record>
+        <record model="ir.ui.view" id="eval_sickday_view_tree">
+            <field name="model">employee_timetracking.evaluation_sickdays</field>
+            <field name="type">tree</field>
+            <field name="name">eval_sickday_tree</field>
+        </record>
+
+        <!-- action view -->
+        <record model="ir.action.act_window" id="act_eval_sickday_form">
+            <field name="name">Sick Days</field>
+            <field name="res_model">employee_timetracking.evaluation_sickdays</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_eval_sickday_form1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="eval_sickday_view_tree"/>
+            <field name="act_window" ref="act_eval_sickday_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_eval_sickday_form2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="eval_sickday_view_form"/>
+            <field name="act_window" ref="act_eval_sickday_form"/>
+        </record>
+
+        <!-- deny access -->
+        <record model="ir.model.access" id="access_eval_sickday_anon">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation_sickdays')]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <!-- access rule group -->
+        <record model="ir.rule.group" id="rule_group_eval_sickday_anon">
+            <field name="model" search="[('model', '=', 'employee_timetracking.evaluation_sickdays')]"/>
+            <field name="global_p" eval="False"/>
+            <field name="default_p" eval="True"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.rule" id="rule_group_eval_sickday_anon_line1">
+            <field name="domain" pyson="1" eval="[]" />
+            <field name="rule_group" ref="rule_group_eval_sickday_anon"/>
+        </record>
+
+    </data>
+</tryton>
