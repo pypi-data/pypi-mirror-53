@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: easysound
+Version: 1.0.3
+Summary: A simple, easy sound programming in Python.
+Home-page: https://github.com/ericzzer/Easy_Sound
+Author: Eric Zeng
+Author-email: ericchufengzeng@163.com
+License: MIT
+Description: 
+        ## Easy_Sound
+        
+        EasySound is a simple, easy sound programming in Python,Support MP3 and WAV files, all sound interactions are invoked by simple function calls.
+        EasySound runs on Python  3
+        
+        ## Example Usage
+        
+        If you want to play the sound, you have two choices:
+        
+        1. Play without GUI
+        ```
+        >>> from easysound import play
+        >>> play.play(test.mp3)
+        >>> play.play(test.wav)
+        ```
+        
+        2. Play with GUI
+        This will open the default player
+        ```
+        >>> from easysound import play
+        >>> play.ui_play(test.mp3)
+        >>> play.ui_play(test.wav)
+        ```
+        
+        If you want to record
+        ```
+        >>> from easysound import rec
+        >>> rec.rec("test.wav",2,"start","stop")
+        ```
+        Full documentation is always available.
+        
+        ## BUG FIXES
+        Please report any problems found.
+        
+        ## KNOWN ISSUES
+        Errors occur when using `import easysound`
+        
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
