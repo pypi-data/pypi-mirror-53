@@ -1,0 +1,9 @@
+FROM python:3.6
+
+RUN pip install mlcomp
+
+# Set the locale
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+CMD ["mlcomp-server", "start-site"]
