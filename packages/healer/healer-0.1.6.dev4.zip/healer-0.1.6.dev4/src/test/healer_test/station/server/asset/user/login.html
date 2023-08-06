@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap/form.html' import render_form %}
+{% from 'macro/message_flash.html' import render_message_flash %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+	    <div class="center-block col-md-6" style="float:none; max-width:100%; background-color:lightgrey;">
+	      <h3>login</h3>
+            {{ render_form(form) }}
+            {{ render_message_flash() }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

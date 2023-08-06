@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% from 'macro/lister_nav.html' import render_pager %}
+{% from 'macro/lister_view.html' import render_pagination %}
+
+{% block content %}
+
+    <h3>render_pager</h3>
+    {{ render_pager(pagination) }}
+    
+    <h3>render_pagination</h3>
+    {{ render_pagination(pagination) }}
+
+    <h1>Messages</h1>
+    {% for message in message_list %}
+        Message: {{ message.id }}<br>
+    {% endfor %}
+    
+{% endblock %}

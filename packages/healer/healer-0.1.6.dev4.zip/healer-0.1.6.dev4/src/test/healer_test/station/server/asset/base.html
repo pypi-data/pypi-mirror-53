@@ -1,0 +1,61 @@
+{% from 'bootstrap/nav.html' import render_nav_item %}
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>Healer {{ current_user.username }}</title>
+		<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		{{ web_bootstrap.load_css('css/bootstrap.css') }}
+        {% block style %}{% endblock %} 
+	</head>
+	
+	<body onload="brython({{ brython_config|safe }})">
+
+      <header class="text-center"> {% block header %} {% endblock %} </header>
+	
+	  <main class="container">
+
+	  
+	  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	    <button class="navbar-toggler" type="button" data-toggle="collapse"
+	      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+	      aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	      <ul class="navbar-nav mr-auto">
+            {{ render_nav_item('ara_home',  'Home',  use_li=True) }}
+            {{ render_nav_item('ara_root',  'Root',  use_li=True) }}
+	        {{ render_nav_item('ara_form',  'Form',  use_li=True) }}
+	        {{ render_nav_item('ara_nav',   'Nav',   use_li=True) }}
+	        {{ render_nav_item('ara_pager', 'Pager', use_li=True) }}
+            {{ render_nav_item('ara_util',  'Util',  use_li=True) }}
+            {{ render_nav_item('ara_plot',  'Plot',  use_li=True) }}
+            {{ render_nav_item('user.ara_login',  'Login',  use_li=True) }}
+            {{ render_nav_item('user.ara_logout',  'Logout',  use_li=True) }}
+            {{ render_nav_item('user.ara_register',  'Register',  use_li=True) }}
+	      </ul>
+	    </div>
+	  </nav>
+	
+	  {% block content %}{% endblock %} 
+	  
+	  </main>
+	  
+	  <footer class="text-center"> {% block footer %} {% endblock %} </footer>
+
+      {{ web_jquery.load_js('jquery.js') }}
+      {{ web_popper.load_js('umd/popper.js') }}
+      {{ web_bootstrap.load_js('js/bootstrap.js') }}
+	  
+      {{ web_vue.load_js('vue.js') }}
+      {{ web_vue_router.load_js('vue-router.js') }}
+      
+      {{ brython.load_js('brython.js') }}
+
+      {% block script %}{% endblock %} 
+	  
+	</body>
+</html>

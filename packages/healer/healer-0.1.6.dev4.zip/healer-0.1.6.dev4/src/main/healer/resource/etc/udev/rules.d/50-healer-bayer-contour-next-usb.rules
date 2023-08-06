@@ -1,0 +1,5 @@
+#
+# Bayer Contour Next USB HID
+#
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1a79", ATTRS{idProduct}=="7410", MODE="0666"

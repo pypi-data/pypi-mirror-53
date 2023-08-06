@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Git Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{ bootstrap.load_css() }}
+
+<style>
+.container {
+	max-width: 500px;
+	padding-top: 20px;
+}
+
+input {
+	max-width: 250px;
+}
+
+.avatar {
+	max-width: 150px;
+}
+</style>
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Git Matched</h1>
+    <br>
+    <form role="form" method="post" onsubmit="return false;">
+      <div class="form-group">
+        <input type="text" class="form-control" name="location" placeholder="Enter a location"
+          required>
+        <input type="text" class="form-control" name="language"
+          placeholder="Enter a programming langauge" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Find a developer!</button>
+      <button type="submit" class="btn btn-success" id="try-again">Try a different location</button>
+    </form>
+    <br>
+    <div id="results"></div>
+  </div>
+  {{ bootstrap.load_js() }}
+  <script src={{ url_for('static', filename='main.js') }}></script>
+</body>
+</html>

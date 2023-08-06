@@ -1,0 +1,47 @@
+{
+    "name": "web_npm",
+    "version": "0.0.0",
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.21",
+        "@fortawesome/free-regular-svg-icons": "^5.10.1",
+        "@fortawesome/free-solid-svg-icons": "^5.10.1",
+        "@fortawesome/vue-fontawesome": "^0.1.6",
+        "bootstrap": "^4.3.1",
+        "bootstrap-vue": "^2.0.0-rc.28",
+        "idle-js": "^1.2.0",
+        "idle-vue": "^2.0.5",
+        "jquery": "^3.4.1",
+        "popper.js": "^1.15.0",
+        "vee-validate": "^2.2.15",
+        "vue": "^2.6.10",
+        "vue-authenticate": "^1.4.1",
+        "vue-gate": "^0.3.1",
+        "vue-router": "^3.1.1",
+        "vue-timers": "^2.0.2",
+        "vuedraggable": "^2.23.0",
+        "vuex": "^3.1.1",
+        "vuex-persist": "^2.0.1"
+    },
+    "description": "resources",
+    "main": "index.js",
+    "devDependencies": {
+        "acorn-dynamic-import": "^4.0.0",
+        "css-loader": "^3.2.0",
+        "lodash": "^4.17.15",
+        "mini-css-extract-plugin": "^0.8.0",
+        "patch-package": "^6.1.2",
+        "webpack": "^4.39.2",
+        "webpack-cli": "^3.3.7"
+    },
+    "scripts": {
+        "postinstall": "patch-package",
+        "build": "webpack",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/random-healer/healer.git"
+    }
+}

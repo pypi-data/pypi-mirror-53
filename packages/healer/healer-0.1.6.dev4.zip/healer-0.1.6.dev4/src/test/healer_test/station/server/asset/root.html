@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Root</h3>
+
+<ul>
+  <li>
+    <a href="{{ url_for('ara_form') }}">Form</a>
+  </li>
+  <li>
+    <a href="{{ url_for('ara_nav') }}">Nav</a>
+  </li>
+  <li>
+    <a href="{{ url_for('ara_pager') }}">Pager</a>
+  </li>
+  <li>
+    <a href="{{ url_for('ara_util') }}">Utils</a>
+  </li>
+  <li>
+    <a href="{{ url_for('ara_plot') }}">Plot</a>
+  </li>
+</ul>
+
+<div id="root">
+</div>
+
+{% endblock %}
+

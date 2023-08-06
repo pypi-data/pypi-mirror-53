@@ -1,0 +1,5 @@
+#
+# Ketonix USB
+#
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="f453", MODE="0666"

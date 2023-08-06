@@ -1,0 +1,255 @@
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    246 14.396810      localhost ()          Shenzhen_05:5b:59 (Electronic Scale) RFCOMM   13                                  
+
+Frame 246: 13 bytes on wire (104 bits), 13 bytes captured (104 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 0
+    Control: Frame type: Set Asynchronous Balanced Mode (SABM) (0x2f), P/F flag: 1
+    Payload length: 0
+    Frame Check Sequence: 0x1c
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    248 14.402371      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          RFCOMM   13                                  
+
+Frame 248: 13 bytes on wire (104 bits), 13 bytes captured (104 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Acknowledgement (UA) (0x63), P/F flag: 1
+    Payload length: 0
+    Frame Check Sequence: 0xd7
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    249 14.403103      localhost ()          Shenzhen_05:5b:59 (Electronic Scale) RFCOMM   23                                  
+
+Frame 249: 23 bytes on wire (184 bits), 23 bytes captured (184 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 0
+    Payload length: 10
+    Multiplexer Control Command
+        Type: DLC Parameter Negotiation (PN) (0x20), C/R flag = 1, E/A flag = 1
+        MCC Length: 8
+        00.. .... = Zeros padding: 0x0
+        ..00 1100 = MCC DLCI: 0x0c (Direction: 0, Channel: 6)
+        I1-I4: 0x0, C1-C4: 0xf
+        ..00 0000 = Priority: 0
+        Acknowledgement Timer T1: 0(0 ms)
+        Max Frame Size: 990
+        Maximum number of retransmissions: 0
+        .... .111 = Error Recovery Mode: 7
+    Frame Check Sequence: 0x70
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    251 14.409794      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          RFCOMM   7                                   
+
+Frame 251: 7 bytes on wire (56 bits), 7 bytes captured (56 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 0, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 0
+    Payload length: 10
+    Multiplexer Control Command
+        Type: DLC Parameter Negotiation (PN) (0x20), C/R flag = 0, E/A flag = 1
+        MCC Length: 8
+        00.. .... = Zeros padding: 0x0
+        ..00 1100 = MCC DLCI: 0x0c (Direction: 0, Channel: 6)
+        I1-I4: 0x0, C1-C4: 0xe
+        ..00 0111 = Priority: 7
+        Acknowledgement Timer T1: 0(0 ms)
+        Max Frame Size: 990
+        Maximum number of retransmissions: 0
+        .... .010 = Error Recovery Mode: 2
+    Frame Check Sequence: 0xaa
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    261 14.552701      localhost ()          Shenzhen_05:5b:59 (Electronic Scale) RFCOMM   13                                  
+
+Frame 261: 13 bytes on wire (104 bits), 13 bytes captured (104 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 6
+    Control: Frame type: Set Asynchronous Balanced Mode (SABM) (0x2f), P/F flag: 1
+    Payload length: 0
+    Frame Check Sequence: 0x43
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    263 14.559806      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          RFCOMM   13                                  
+
+Frame 263: 13 bytes on wire (104 bits), 13 bytes captured (104 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 6
+    Control: Frame type: Unnumbered Acknowledgement (UA) (0x63), P/F flag: 1
+    Payload length: 0
+    Frame Check Sequence: 0x88
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    264 14.560556      localhost ()          Shenzhen_05:5b:59 (Electronic Scale) RFCOMM   17                                  
+
+Frame 264: 17 bytes on wire (136 bits), 17 bytes captured (136 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 0
+    Payload length: 4
+    Multiplexer Control Command
+        Type: Modem Status Command (MSC) (0x38), C/R flag = 1, E/A flag = 1
+        MCC Length: 2
+        0011 00.. = MCC DLCI: 0x0c (Direction: 0, Channel: 6)
+        .... ..1. = Ones padding: 0x1
+        .... ...1 = EA Flag: Last field octet (0x1)
+        V.24 Signals: FC = 0, RTC = 1, RTR = 1, IC = 0, DV = 1
+    Frame Check Sequence: 0x70
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    265 14.561669      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          RFCOMM   18                                  
+
+Frame 265: 18 bytes on wire (144 bits), 18 bytes captured (144 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 0, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 0
+    Payload length: 4
+    Multiplexer Control Command
+        Type: Modem Status Command (MSC) (0x38), C/R flag = 1, E/A flag = 1
+        MCC Length: 2
+        0011 00.. = MCC DLCI: 0x0c (Direction: 0, Channel: 6)
+        .... ..1. = Ones padding: 0x1
+        .... ...1 = EA Flag: Last field octet (0x1)
+        V.24 Signals: FC = 0, RTC = 1, RTR = 1, IC = 0, DV = 1
+    Frame Check Sequence: 0xaa
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    266 14.562437      localhost ()          Shenzhen_05:5b:59 (Electronic Scale) RFCOMM   17                                  
+
+Frame 266: 17 bytes on wire (136 bits), 17 bytes captured (136 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 0
+    Payload length: 4
+    Multiplexer Control Command
+        Type: Modem Status Command (MSC) (0x38), C/R flag = 0, E/A flag = 1
+        MCC Length: 2
+        0011 00.. = MCC DLCI: 0x0c (Direction: 0, Channel: 6)
+        .... ..1. = Ones padding: 0x1
+        .... ...1 = EA Flag: Last field octet (0x1)
+        V.24 Signals: FC = 0, RTC = 1, RTR = 1, IC = 0, DV = 1
+    Frame Check Sequence: 0x70
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    268 14.568450      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          RFCOMM   18                                  
+
+Frame 268: 18 bytes on wire (144 bits), 18 bytes captured (144 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 0, Direction: 0, Channel: 0
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 0
+    Payload length: 4
+    Multiplexer Control Command
+        Type: Modem Status Command (MSC) (0x38), C/R flag = 0, E/A flag = 1
+        MCC Length: 2
+        0011 00.. = MCC DLCI: 0x0c (Direction: 0, Channel: 6)
+        .... ..1. = Ones padding: 0x1
+        .... ...1 = EA Flag: Last field octet (0x1)
+        V.24 Signals: FC = 0, RTC = 1, RTR = 1, IC = 0, DV = 1
+    Frame Check Sequence: 0xaa
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    270 14.789246      localhost ()          Shenzhen_05:5b:59 (Electronic Scale) SPP      22                                  
+
+Frame 270: 22 bytes on wire (176 bits), 22 bytes captured (176 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 1, Direction: 0, Channel: 6
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 1
+    Payload length: 8
+    Credits: 3
+    Frame Check Sequence: 0x53
+Bluetooth SPP Packet
+    Data: fe020100b935018e
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    274 14.825308      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          RFCOMM   15                                  
+
+Frame 274: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 0, Direction: 0, Channel: 6
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 1
+    Payload length: 0
+    Credits: 1
+    Frame Check Sequence: 0x89
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    338 22.421742      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          SPP      31                                  
+
+Frame 338: 31 bytes on wire (248 bits), 31 bytes captured (248 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 0, Direction: 0, Channel: 6
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 1
+    Payload length: 16
+    Credits: 0
+    Frame Check Sequence: 0x89
+Bluetooth SPP Packet
+    Data: cf02b5b9037100e81d025e0d023206f7
+
+No.     Time           Source                Destination           Protocol Length Info       src port dst port Leftover Capture Data
+    339 22.449212      Shenzhen_05:5b:59 (Electronic Scale) localhost ()          SPP      31                                  
+
+Frame 339: 31 bytes on wire (248 bits), 31 bytes captured (248 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth RFCOMM Protocol
+    Address: E/A flag: 1, C/R flag: 0, Direction: 0, Channel: 6
+    Control: Frame type: Unnumbered Information with Header check (UIH) (0xef), P/F flag: 1
+    Payload length: 16
+    Credits: 0
+    Frame Check Sequence: 0x89
+Bluetooth SPP Packet
+    Data: cf02b5b9037100e81d025e0d023206f7

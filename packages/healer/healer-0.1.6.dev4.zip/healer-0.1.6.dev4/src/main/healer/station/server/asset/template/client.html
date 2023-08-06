@@ -1,0 +1,9 @@
+{% extends 'any.html' %}
+
+{% block content %}
+        <div id="arkon"></div>
+{% endblock %}
+
+{% block script %}
+        {{ client.load_module('arkon.js') }}
+{% endblock %}

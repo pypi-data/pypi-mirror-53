@@ -1,0 +1,51 @@
+find_service
+found service_list: 2 
+
+Service Name: None
+    Host:        88:1B:99:05:5B:59
+    Description: None
+    Provided By: None
+    Protocol:    L2CAP
+    channel/PSM: 1
+    service classes: ['1200'] 
+    profiles:    [('1200', 256)] 
+    service id:  None 
+
+Service Name: SerialPort
+    Host:        88:1B:99:05:5B:59
+    Description: None
+    Provided By: None
+    Protocol:    RFCOMM
+    channel/PSM: 6
+    service classes: ['1101'] 
+    profiles:    [('1101', 256)] 
+    service id:  None 
+
+###
+
+[bluetooth]# pair 88:1B:99:05:5B:59
+Attempting to pair with 88:1B:99:05:5B:59
+[CHG] Device 88:1B:99:05:5B:59 Connected: yes
+[CHG] Device 88:1B:99:05:5B:59 Modalias: bluetooth:v0039p5050d0120
+[CHG] Device 88:1B:99:05:5B:59 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+[CHG] Device 88:1B:99:05:5B:59 UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+[CHG] Device 88:1B:99:05:5B:59 ServicesResolved: yes
+[CHG] Device 88:1B:99:05:5B:59 Paired: yes
+
+###
+
+[bluetooth]# info 88:1B:99:05:5B:59
+Device 88:1B:99:05:5B:59 (public)
+        Name: Electronic Scale
+        Alias: Electronic Scale
+        Class: 0x00240404
+        Icon: audio-card
+        Paired: yes
+        Trusted: yes
+        Blocked: no
+        Connected: no
+        LegacyPairing: yes
+        UUID: Serial Port               (00001101-0000-1000-8000-00805f9b34fb)
+        UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
+        Modalias: bluetooth:v0039p5050d0120
+        RSSI: -53

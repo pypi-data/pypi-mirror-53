@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>Healer</title>
+		<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        {{ web_pack.load_css('bundle.css') }}
+        {% block style %}{% endblock %}
+	</head>
+{#    <body onload="brython({{ brython_config|safe }})">#}
+    <body>
+		<header id="header">
+    		{% block header %}{% endblock %}
+		</header>
+		<main id="main">
+    		{% block content %}{% endblock %}
+		</main>
+		<footer id="footer">
+    		{% block footer %}{% endblock %}
+		</footer>
+        {{ web_pack.load_js('bundle.js') }}
+        {{ brython.load_js('brython.js') }}
+        {% block script %}{% endblock %}
+    </body>
+</html>

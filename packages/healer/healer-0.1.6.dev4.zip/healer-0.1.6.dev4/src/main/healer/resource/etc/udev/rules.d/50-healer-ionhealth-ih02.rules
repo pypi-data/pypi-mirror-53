@@ -1,0 +1,5 @@
+#
+# Ion Health IH02 Serial USB
+#
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea80", MODE="0666"

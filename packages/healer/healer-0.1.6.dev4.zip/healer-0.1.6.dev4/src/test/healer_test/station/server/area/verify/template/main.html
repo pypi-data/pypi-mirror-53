@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="root"></div>
+
+    <div id="report_head"></div>
+    <div id="report_body"></div>
+
+{% endblock %}
+
+{% block script %}
+    {{ client_test.load_py('runtime.py') }}
+{% endblock %}

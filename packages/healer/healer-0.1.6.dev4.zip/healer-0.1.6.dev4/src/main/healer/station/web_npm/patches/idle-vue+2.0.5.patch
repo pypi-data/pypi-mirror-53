@@ -1,0 +1,159 @@
+diff --git a/node_modules/idle-vue/src/index.js b/node_modules/idle-vue/src/index.js
+index 7d520ff..eb3a373 100644
+--- a/node_modules/idle-vue/src/index.js
++++ b/node_modules/idle-vue/src/index.js
+@@ -1,86 +1,80 @@
+ 'use strict'
+ 
+ import IdleJs from 'idle-js'
+-import IdleView from './components/Idle'
+ 
+-export default {
+-  IdleView,
+-  install (Vue, options) {
+-    const {
+-      eventEmitter,
+-      store,
+-      moduleName = 'idleVue',
+-      idleTime = 60 * 1000,
+-      events = ['mousemove', 'keydown', 'mousedown', 'touchstart'],
+-      keepTracking = true,
+-      startAtIdle = true
+-    } = options || {}
++const namespace = '_idle_js'
++const event_engine = `${namespace}_event_engine`
++const intent_active = `${namespace}_intent_active`
++const intent_passive = `${namespace}_intent_idling`
++const store_mutation = `${namespace}/state_change`
+ 
+-    if (!eventEmitter && !store) {
+-      throw Error('Either `eventEmitter` or `store` must be passed in options')
+-    }
++const default_config = {
++		idle_time: 300 * 1000,
++		event_list: ['mousemove', 'keydown', 'mousedown', 'touchstart'],
++}
++
++const VueIdleMixin = {
+ 		
+-    store && store.registerModule(moduleName, {
+-      state: { isIdle: startAtIdle },
+-      mutations: {
+-        [`${moduleName}/IDLE_CHANGED`]: function (state, isIdle) {
+-          state.isIdle = isIdle
++  beforeCreate () {
++  	const component = this
++    if (component.$store) {
++    	const module = {
++        state: { has_active: false },
++        mutations: {
++          [store_mutation]: function (state, has_active) {
++            state.has_active = has_active
++          }
+         }
+       }
+-    })
+-
+-    const onIdleStr = `${moduleName}_onIdle`
+-    const onActiveStr = `${moduleName}_onActive`
+-
+-    const idle = new IdleJs({
+-      idle: idleTime,
+-      events,
+-      keepTracking,
+-      startAtIdle,
++    	component.$store.registerModule(namespace, module)    	
++    }
++  	const idle_opts = this.$options.idle_opts || {}
++  	const config = {
++        idle: idle_opts.idle_time || default_config.idle_time,
++        events: idle_opts.event_list || default_config.event_list,
++        startAtIdle: true,
++        keepTracking: true,
++        onActive () {
++          component.$emit(intent_active)
++          if (component.$store) {
++          	component.$store.commit(store_mutation, true)
++          }
++        },
++        onIdle () {
++        	component.$emit(intent_passive)
++          if (component.$store) {
++          	component.$store.commit(store_mutation, false)
++          }
++        },
++  	}
++  	this[event_engine] = new IdleJs(config)
++  },
+   
+-      onIdle () {
+-        eventEmitter && eventEmitter.$emit(onIdleStr)
+-        store && store.commit(`${moduleName}/IDLE_CHANGED`, true)
+-      },
+-      onActive () {
+-        eventEmitter && eventEmitter.$emit(onActiveStr)
+-        store && store.commit(`${moduleName}/IDLE_CHANGED`, false)
+-      }
+-    })
+-    idle.start()
++  created () {
++  	const idle_opts = this.$options.idle_opts || {}
++  	const react_on_active = idle_opts.react_on_active
++    if (react_on_active) {
++    	this[intent_active] = react_on_active.bind(this)
++    	this.$on(intent_active, this[intent_active])
++    }
++  	const react_on_passive = idle_opts.react_on_passive
++    if (react_on_passive) {
++    	this[intent_passive] = react_on_passive.bind(this)
++    	this.$on(intent_passive, this[intent_passive])
++    }
++  	this[event_engine].start()
++  },
+   
+-    Vue.component('IdleView', IdleView)
++  destroyed () {
++  	this[event_engine].stop()
++    if (this[intent_active]) {
++    	this.$off(intent_active, this[intent_active])
++    }
++    if (this[intent_passive]) {
++    	this.$off(intent_passive, this[intent_passive])
++    }
++  },
+   
+-    Vue.mixin({
+-      data () {
+-        return {
+-          [onIdleStr]: null,
+-          [onActiveStr]: null
+-        }
+-      },
+-      created () {
+-        if (eventEmitter && this.$options.onIdle) {
+-          this[onIdleStr] = this.$options.onIdle.bind(this)
+-          eventEmitter.$on(onIdleStr, this[onIdleStr])
+-        }
+-        if (eventEmitter && this.$options.onActive) {
+-          this[onActiveStr] = this.$options.onActive.bind(this)
+-          eventEmitter.$on(onActiveStr, this[onActiveStr])
+-        }
+-      },
+-      destroyed () {
+-        if (eventEmitter && this[onIdleStr]) {
+-          eventEmitter.$off(onIdleStr, this[onIdleStr])
+-        }
+-        if (eventEmitter && this[onActiveStr]) {
+-          eventEmitter.$off(onActiveStr, this[onActiveStr])
+-        }
+-      },
+-      computed: {
+-        isAppIdle () {
+-          return store && store.state[moduleName].isIdle
+-        }
+-      }
+-    })
+-  }
+ }
++
++export default VueIdleMixin

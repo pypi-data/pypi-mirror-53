@@ -1,0 +1,5 @@
+#
+# Dummy USB device for testing
+#
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", MODE="0666"
