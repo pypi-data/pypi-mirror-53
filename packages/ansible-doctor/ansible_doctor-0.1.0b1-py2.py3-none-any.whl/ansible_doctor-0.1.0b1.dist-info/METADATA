@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: ansible-doctor
+Version: 0.1.0b1
+Summary: Generate documentation from annotated Ansible roles using templates
+Home-page: https://github.com/xoxys/ansible-doctor
+Author: Robert Kaussow
+Author-email: mail@geeklabor.de
+License: https://github.com/xoxys/ansible-doctor
+Keywords: ansible role documentation
+Platform: UNKNOWN
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: System :: Installation/Setup
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Utilities
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Documentation
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: pyyaml
+Requires-Dist: ruamel.yaml
+Requires-Dist: appdirs
+Requires-Dist: colorama
+Requires-Dist: anyconfig
+Requires-Dist: pathspec
+Requires-Dist: python-json-logger
+Requires-Dist: jsonschema
+Requires-Dist: jinja2
+
+# ansible-doctor
+
+[![Build Status](https://cloud.drone.io/api/badges/xoxys/ansible-doctor/status.svg)](https://cloud.drone.io/xoxys/ansible-doctor)
+![License](https://img.shields.io/github/license/xoxys/ansible-doctor)
+
+
