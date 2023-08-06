@@ -1,0 +1,48 @@
+Metadata-Version: 2.1
+Name: lifesospy-mqtt
+Version: 0.11.4
+Summary: MQTT client to report state of LifeSOS security system and devices.
+Home-page: https://github.com/rorr73/lifesospy_mqtt
+Author: Richard Orr
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Other Environment
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Home Automation
+Classifier: Topic :: Security
+Requires-Python: >=3.5.3
+Requires-Dist: janus (~=0.4.0)
+Requires-Dist: lifesospy (~=0.10.1)
+Requires-Dist: paho-mqtt (~=1.4.0)
+Requires-Dist: pyyaml (>=4.2b1)
+Requires-Dist: python-dateutil (>=2.7.5)
+Requires-Dist: python-daemon (~=2.1.2)
+
+LifeSOS MQTT Client
+===================
+
+.. image:: https://badge.fury.io/py/lifesospy-mqtt.svg
+    :target: https://badge.fury.io/py/lifesospy-mqtt
+.. image:: https://readthedocs.org/projects/lifesospy-mqtt/badge/?version=latest
+    :target: http://lifesospy-mqtt.readthedocs.org/en/latest/?badge=latest
+    :alt: Documentation Status
+
+This application provides an MQTT client that interfaces with
+`LifeSOS <http://lifesos.com.tw>`__ alarm systems, sensors and switches.
+It will publish the state of all devices to an MQTT broker, which can
+then be consumed by any application that provides MQTT support, such as
+Home Assistant or OpenHAB. It will also subscribe to topics on the
+broker that allow the control of the alarm system (eg. arm, disarm) and
+turn on/off any attached switches.
+
+It was written for & tested with the LS-30 model, though it should also
+work on the LS-10/LS-20 models. Note that in some markets, they may also
+be labelled under the name of the distributor; eg. SecurePro in
+Australia, WeBeHome in northern Europe.
+
+For a quickstart and configuration help, please refer to the `ReadTheDocs <http://lifesospy-mqtt.readthedocs.io>`__ site.
+
+
