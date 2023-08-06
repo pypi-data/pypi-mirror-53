@@ -1,0 +1,37 @@
+site_name: dictdaora
+site_description: Dicts that can be accessed via attributes
+
+theme:
+    name: 'material'
+    palette:
+      primary: 'light-green'
+      accent: 'teal'
+    logo: 'python-white.svg'
+    favicon: 'favicon.png'
+
+repo_name: dutradda/dictdaora
+repo_url: https://github.com/dutradda/dictdaora
+edit_uri: ''
+google_analytics:
+    - ''
+    - 'auto'
+
+nav:
+    - dictdaora: 'index.md'
+    - Features: 'features.md'
+    - Some Explanation: 'explain-concept.md'
+    - Tutorial - User Guide:
+        - Introduciton: 'tutorial/intro.md'
+    - Benchmarks: 'benchmarks.md'
+    - Help dictdaora - Get Help: 'help.md'
+    - Development - Contributing: 'contributing.md'
+    - Changelog: changelog.md
+
+markdown_extensions:
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown_include.include:
+      base_path: docs
+  - admonition
+  - codehilite
+  - extra
