@@ -1,0 +1,44 @@
+Parameters of the template
+==========================
+version: {{ version }}
+author: {{ author }}
+package_name: {{ package_name }}
+
+The template context
+--------------------
+
+{{template_context|pprint|indent(4, True)}}
+
+
+List of the variables
+---------------------
+The list af the variables with the usage
+{%- for var in vars %}
+    <!-- var({{var}})="Some data" -->
+{%- endfor %}
+
+
+List of the page layout part parameters
+---------------------------------------
+
+Here is the list of the parameters you can use in the pages :
+{%- for param in params %}
+- {{param['name']}}_off
+{%- endfor %}
+
+With one of the parameters, you can deactivate some part of the page template.
+To activate a parameter, you need to define the variable. The command for each parameter is the following :
+
+{%- for param in params %}
+    <!-- var(page:{{param['name']}}_off)="off" -->
+{%- endfor %}
+
+If you define one variable, the html part will be removed.
+The test to disable the part is the following : 
+
+    if NAME_off is undefined
+
+
+Variable for Xenon (not usable)
+---------------------
+ - content
