@@ -1,0 +1,167 @@
+.small.ui.dropdown {
+  font-size: 0.8rem!important;
+}
+.small.ui.dropdown * {
+  font-size: 0.8rem!important;
+}
+
+.alertmessages {
+  width: 20rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  z-index: 100000;
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  margin:0;
+}
+
+.alertmessages .closebtn {
+  position: fixed !important;
+  top:2rem;
+  right:2.5rem;
+  z-index: 100;
+  padding: 0.3rem 0.5rem !important;
+}
+
+.alertmessages .ui.message {
+  margin: 0 0 0.2rem 0;
+}
+
+.mainmenu {
+  background: #2185D0;
+}
+
+#tabMenu img{
+  width: 4rem;
+}
+
+.disabled img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.compact.multiple.dropdown .delete.icon{
+  margin-left: 0.1rem;
+}
+
+.compact.multiple.dropdown .ui.label{
+  margin: 0;
+  padding: 0.45rem 0.3rem;
+}
+
+.loadingbackground {
+  opacity: 0.5;
+}
+
+.mainmenu .active.item, .obstypechoice .active.item {
+  background: rgba(33,133,208,0.1)!important;
+}
+
+.mainmenu .item {
+  padding: 0.5rem!important;
+}
+
+.mainmenucontainer .mainmenu .header {
+  opacity: 1;
+  /*height: 4.5rem;*/
+  -webkit-transition: height 0.3s linear,width 0.3s linear, opacity 0.3s linear; /* Safari */
+  transition: height 0.3s linear,width 0.3s linear, opacity 0.3s linear;
+  transition-delay: 0.5s;
+}
+
+.mainmenucontainer.smallmenu .mainmenu .header {
+  opacity: 0;
+  height: 0!important;
+  -webkit-transition: height 0s linear,width 0s linear, opacity 0s linear;
+  transition: height 0s linear,width 0s linear, opacity 0s linear;
+  transition-delay: 0s;
+}
+
+.mainmenucontainer {
+  width: 20rem;
+  -webkit-transition: width 0.25s, height 0.25s; /* Safari */
+  transition: width 0.25s, height 0.25s;
+}
+
+.smallmenu {
+  width: 6rem;
+  -webkit-transition: width 0.25s, height 0.25s; /* Safari */
+  transition: width 0.25s, height 0.25s;
+  transition-delay: 0s;
+}
+
+.indented
+{
+  padding-left: 1em;
+}
+
+.bare{
+  padding: 0;
+  margin: 0;
+}
+
+.nomargin
+{
+  margin: 0;
+}
+
+#info-banner
+{
+  background: dodgerblue;
+  color: white;
+  padding: 10px 5px 10px 0;
+  margin-bottom: 0;
+}
+
+#info-banner a
+{
+  color: orange;
+  text-decoration: underline;
+}
+
+#info-banner .close_button {
+    cursor: pointer;
+}
+
+
+#maincontentdiv,
+#maincontentdiv > div.plot,
+#maincontentdiv > div.ui.black.label {
+  margin: 0;
+}
+
+div.ui.label.divheader {
+    width:100%;
+    opacity:0.7;
+    text-align:center;
+    border-radius: 0;
+}
+
+div.ui.segment.plot {
+    padding: 0;
+}
+
+div#footer {
+  background-color: white;
+  margin: 0.5rem 0 0;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+body {
+  background-color: #e8e8e8;
+}
+
+#togglemenusize {
+  background-color:rgb(60,60,60);
+  padding:0.3rem;
+  text-align:center;
+  cursor:pointer;
+}
+
+div.ui.stackable.three.column.centered.grid > div.column {
+  text-align:center;
+  min-width:20rem;
+  padding: 0.5rem;
+  border: rgba(0,0,0,0.2) solid 1px;
+}

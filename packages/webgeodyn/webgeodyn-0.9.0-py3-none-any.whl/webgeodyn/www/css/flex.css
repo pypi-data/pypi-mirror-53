@@ -1,0 +1,78 @@
+/**
+ * Flexbox elements definition
+ */
+
+/* CONTAINER */
+._flexcontainer {
+  display: flex;
+  flex-direction: row;
+  /*padding: 0.5rem;*/
+}
+
+._flexcontainer._column {
+  flex-direction: column;
+}
+
+._flexcontainer.wrap {
+  flex-wrap: wrap;
+}
+
+._flexcontainer._centered {
+  justify-content: center;
+}
+
+._flexcontainer._rightalign {
+  justify-content: flex-end;
+}
+
+._flexcontainer._spaced {
+  justify-content: space-around;
+}
+
+._flexcontainer._vcentered {
+  align-items: center;
+}
+
+._flexcontainer._flex-end {
+  align-items: flex-end;
+}
+
+._flexcontainer._flex-start {
+  align-items: flex-start;
+}
+
+._flexcontainer._baseline {
+  align-items: baseline;
+}
+
+._flexcontainer._stretch {
+  align-items: stretch;
+}
+
+/* FLEXBOXES */
+
+._flexfixedsize {
+  flex:0 0 auto;
+  margin: 0.5rem;
+}
+
+._flex {
+  flex:1 1 auto;
+  margin: 0.5rem;
+}
+
+._flex._center, ._flexfixedsize._center {
+  align-self: center;
+}
+
+._flex._flex-start, ._flexfixedsize._flex-start {
+  align-self: flex-start;
+}
+
+._flex._flex-end, ._flexfixedsize._flex-end {
+  align-self: flex-end;
+}
+
+._flex._stretch, ._flexfixedsize._stretch {
+  align-self: stretch;
+}

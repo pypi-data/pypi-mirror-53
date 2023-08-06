@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Map" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+    <meta charset="utf-8"/>
+    <title>Earth core visu</title>
+    <meta itemprop="name" content="earthcorevisu"/>
+    <meta itemprop="description" name="description" content="Animated visualisation of flow on earth core surface"/>
+    <meta itemprop="author" name="author" content="Yannick Martin - Geodynamo - ISTerre"/>
+
+    <!--
+    <meta property="og:type"        content="website"/>
+    <meta property="og:title"       content="EarthCoreVisu"/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url"         content="http://earth.nullschool.net"/>
+    <meta property="og:image"       content="http://earth.nullschool.net/preview.jpg"/>
+    -->
+
+    <link rel="shortcut icon" href="favicon.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/iphone-icon.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/ipad-icon.png"/>
+
+    <link rel="stylesheet" type="text/css" href="libs/semantic/semantic.css">
+    <link rel="stylesheet" type="text/css" href="libs/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="earthcorevisu.css">
+
+    <script src="libs/jquery/jquery-3.2.1.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery.mousewheel.min.js" charset="utf-8"></script>
+
+    <script src="libs/jqueryui/jquery-ui.min.js" charset="utf-8"></script>
+
+    <script src="libs/mathjs/math.min.js" charset="utf-8"></script>
+
+    <script src="libs/d3/d3.js" charset="utf-8"></script>
+    <script src="libs/d3.geo.projection/d3-geo-projection.js" charset="utf-8"></script>
+
+    <script src="libs/topojson/topojson.js" charset="utf-8"></script>
+
+    <script src="libs/semantic/semantic.js" charset="utf-8"></script>
+
+    <script src="libs/gif/gif.js" charset="utf-8"></script>
+    <script src="libs/gif/gif.worker.js" charset="utf-8"></script>
+
+    <script src="libs/ccapture/CCapture.all.min.js" charset="utf-8"></script>
+    <!--<script src="libs/ccapture/CCapture.js" charset="utf-8"></script>
+    <script src="libs/ccapture/Whammy.js" charset="utf-8"></script>-->
+
+    <script src="earthcorevisu.js" charset="utf-8"></script>
+
+</head>
+<body data-lang="en">
+
+<div class="ui compact segment" id="canvasdiv" style="width:100%; height:100%; display:inline-block">
+</div>
+
+
+<script>
+    /// IDEAS :
+    /// http://christopheviau.com/var/d33d/
+
+    var globeController = null;
+    var realUData = 0;
+
+    globeController = new earthcorevisu.GlobeController(
+        {
+            projectionName: "Aitoff",
+            parentDivName: "#canvasdiv",
+            title: 'Test data',
+            overlay: {
+                opacity: 0,
+                data: realUData,
+                colorScale: "BuRd",
+                colorScaleInvert: false,
+                logColors: true,
+                show: true,
+                unit: "km/yr",
+                title: "Flow norm",
+                hiddenColor: "rgba(0,0,0,0.75)",
+                min: null,
+                max: null
+            },
+            flow: {
+                opacity: 0,
+                data: realUData,
+                colorScale: "white",
+                colorScaleInvert: false,
+                logColors: false,
+                show: false,
+                timestep: 0.6,
+                unit: "km/yr",
+                title: "Core surface flow",
+                maxParticleSize: 5,
+                minParticleSize: 1,
+            }
+        });
+
+    $(window).resize(function () {
+        globeController.resize();
+
+    })
+
+    //$(document).on('mouseup', function(){
+    //  overlay.drawOverlay();
+    //});
+    // Create a capturer that exports an animated GIF
+    // Notices you have to specify the path to the gif.worker.js
+
+
+</script>
+</body>
+</html>
