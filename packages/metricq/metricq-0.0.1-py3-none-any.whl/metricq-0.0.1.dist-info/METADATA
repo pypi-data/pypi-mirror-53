@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: metricq
+Version: 0.0.1
+Summary: UNKNOWN
+Home-page: https://github.com/metricq
+Author: TU Dresden
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.5
+Requires-Dist: aio-pika (>=5.2.3)
+Requires-Dist: protobuf
+Requires-Dist: yarl
+Provides-Extra: examples
+Requires-Dist: aiomonitor ; extra == 'examples'
+Requires-Dist: click ; extra == 'examples'
+Requires-Dist: click-log ; extra == 'examples'
+Requires-Dist: click-completion ; extra == 'examples'
+
+UNKNOWN
+
+
