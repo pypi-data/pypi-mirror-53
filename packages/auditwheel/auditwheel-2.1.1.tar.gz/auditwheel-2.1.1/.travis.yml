@@ -1,0 +1,31 @@
+language: python
+dist: xenial
+matrix:
+  include:
+  - python: "3.5"
+  - python: "3.6"
+  - python: "3.7"
+  - python: "3.7"
+    env: LINTER=1
+
+sudo: required
+services:
+  - docker
+
+notifications:
+  email: false
+
+before_install:
+  - pip install --upgrade pip setuptools
+
+install:
+  - pip install -r test-requirements.txt
+  - pip install tox codecov
+  - pip install -e .
+
+script:
+  - tests/travis.sh
+
+cache:
+  directories:
+    - $HOME/.cache/auditwheel_tests
