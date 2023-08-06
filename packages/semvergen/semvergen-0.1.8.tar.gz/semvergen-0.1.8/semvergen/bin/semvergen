@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import click
+
+from semvergen.generate import version
+from semvergen._version import __version__
+
+
+@click.command()
+@click.version_option(version=__version__)
+def parse(*args, **kwargs):
+    print(version())
+
+
+if __name__ == '__main__':
+    parse()
