@@ -1,0 +1,184 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="icemac.addressbook">
+
+  <securityPolicy
+     component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
+
+  <unauthenticatedPrincipal
+     id="zope.anybody"
+     title="Unauthenticated User" />
+  <unauthenticatedGroup
+     id="zope.Anybody"
+     title="Unauthenticated Users" />
+  <authenticatedGroup
+     id="zope.Authenticated"
+     title="Authenticated Users" />
+  <everybodyGroup
+     id="zope.Everybody"
+     title="All Users" />
+
+  <!-- Roles for anonymous and authenticated -->
+  <grant
+     principal="zope.Everybody"
+     permissions="
+        zope.View
+        zope.dublincore.view
+     " />
+
+  <!-- Roles for all authenticated users -->
+  <grant
+     principal="zope.Authenticated"
+     permissions="
+        icemac.addressbook.ViewAddressBook
+        icemac.addressbook.ViewPersonName
+        icemac.addressbook.ViewSomePrincipals
+        z3c.preference.EditPreference
+     " />
+
+  <!-- Editor -->
+  <role id="icemac.addressbook.global.Editor"
+        title="Editor"
+        description="Role which allows global editing of data"
+        />
+
+  <grant
+     role="icemac.addressbook.global.Editor"
+     permissions="
+        icemac.addressbook.AddEMailAddress
+        icemac.addressbook.AddFile
+        icemac.addressbook.AddHomePageAddress
+        icemac.addressbook.AddKeyword
+        icemac.addressbook.AddPerson
+        icemac.addressbook.AddPhoneNumber
+        icemac.addressbook.AddPostalAddress
+        icemac.addressbook.ArchivePerson
+        icemac.addressbook.ClonePerson
+        icemac.addressbook.EditAddressBookContents
+        icemac.addressbook.EditAllPreferences
+        icemac.addressbook.EditEMailAddress
+        icemac.addressbook.EditFile
+        icemac.addressbook.EditHomePageAddress
+        icemac.addressbook.EditKeyword
+        icemac.addressbook.EditKeywordContainer
+        icemac.addressbook.EditPerson
+        icemac.addressbook.EditPersonContents
+        icemac.addressbook.EditPhoneNumber
+        icemac.addressbook.EditPostalAddress
+        icemac.addressbook.ExportPerson
+        icemac.addressbook.ListPersons
+        icemac.addressbook.ViewEMailAddress
+        icemac.addressbook.ViewFile
+        icemac.addressbook.ViewHomePageAddress
+        icemac.addressbook.ViewKeyword
+        icemac.addressbook.ViewKeywordContainer
+        icemac.addressbook.ViewPerson
+        icemac.addressbook.ViewPhoneNumber
+        icemac.addressbook.ViewPostalAddress
+     " />
+
+
+  <!-- Visitor -->
+  <role id="icemac.addressbook.global.Visitor"
+        title="Visitor"
+        description="Role which allows global visiting of data"
+        />
+
+  <grant
+     role="icemac.addressbook.global.Visitor"
+     permissions="
+        icemac.addressbook.EditAllPreferences
+        icemac.addressbook.ExportPerson
+        icemac.addressbook.ListPersons
+        icemac.addressbook.ViewEMailAddress
+        icemac.addressbook.ViewFile
+        icemac.addressbook.ViewHomePageAddress
+        icemac.addressbook.ViewKeyword
+        icemac.addressbook.ViewKeywordContainer
+        icemac.addressbook.ViewPerson
+        icemac.addressbook.ViewPhoneNumber
+        icemac.addressbook.ViewPostalAddress
+     " />
+
+  <!-- Archivist -->
+  <role id="icemac.addressbook.global.Archivist"
+        title="Archivist"
+        description="Role which can manage the archive."
+        />
+
+  <grant
+     role="icemac.addressbook.global.Archivist"
+     permissions="
+        icemac.addressbook.EditAllPreferences
+        icemac.addressbook.UnarchivePerson
+        icemac.addressbook.ViewArchive
+        icemac.addressbook.ViewKeyword
+        icemac.addressbook.ViewPerson
+     " />
+
+
+  <!-- Archive Visitor -->
+  <role id="icemac.addressbook.global.ArchiveVisitor"
+        title="Archive Visitor"
+        description="Role which can access the archive (read only)."
+        />
+
+  <grant
+     role="icemac.addressbook.global.ArchiveVisitor"
+     permissions="
+        icemac.addressbook.EditAllPreferences
+        icemac.addressbook.ViewArchive
+        icemac.addressbook.ViewKeyword
+        icemac.addressbook.ViewPerson
+     " />
+
+
+  <!-- Administrator -->
+  <role
+     id="icemac.addressbook.global.Administrator"
+     title="Administrator"
+     description="Administrator for the Addressbook"
+     />
+
+  <grant
+     role="icemac.addressbook.global.Administrator"
+     permissions="
+        icemac.addressbook.AddAddressBook
+        icemac.addressbook.AddEMailAddress
+        icemac.addressbook.AddFile
+        icemac.addressbook.AddHomePageAddress
+        icemac.addressbook.AddKeyword
+        icemac.addressbook.AddKeywordContainer
+        icemac.addressbook.AddPerson
+        icemac.addressbook.AddPhoneNumber
+        icemac.addressbook.AddPostalAddress
+        icemac.addressbook.ArchivePerson
+        icemac.addressbook.ClonePerson
+        icemac.addressbook.EditAddressBook
+        icemac.addressbook.EditAddressBookContents
+        icemac.addressbook.EditAllPreferences
+        icemac.addressbook.EditEMailAddress
+        icemac.addressbook.EditEntities
+        icemac.addressbook.EditFile
+        icemac.addressbook.EditHomePageAddress
+        icemac.addressbook.EditKeyword
+        icemac.addressbook.EditKeywordContainer
+        icemac.addressbook.EditPerson
+        icemac.addressbook.EditPersonContents
+        icemac.addressbook.EditPhoneNumber
+        icemac.addressbook.EditPostalAddress
+        icemac.addressbook.ExportPerson
+        icemac.addressbook.ListPersons
+        icemac.addressbook.UnarchivePerson
+        icemac.addressbook.ViewArchive
+        icemac.addressbook.ViewEMailAddress
+        icemac.addressbook.ViewFile
+        icemac.addressbook.ViewHomePageAddress
+        icemac.addressbook.ViewKeyword
+        icemac.addressbook.ViewKeywordContainer
+        icemac.addressbook.ViewPerson
+        icemac.addressbook.ViewPhoneNumber
+        icemac.addressbook.ViewPostalAddress
+     " />
+
+</configure>
