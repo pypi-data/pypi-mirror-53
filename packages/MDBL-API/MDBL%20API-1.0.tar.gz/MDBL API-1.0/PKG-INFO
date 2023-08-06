@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: MDBL API
+Version: 1.0
+Summary: Python API wrapper az Magyar Discord Bot Lista APIhoz.
+Home-page: https://github.com/FightMan01
+Author: FightMan01
+License: MIT
+Description: Hivatalos MDBL API wrapper Pythonhoz!
+        
+        Példa
+        --------------
+        
+        .. code:: py
+        
+            import mdbl
+            import discord
+            from discord.ext import commands
+            import asyncio
+        
+            class MDBLAPI(commands.Cog):
+        
+                def __init__(self, bot):
+                    self.bot = bot
+                    self.mdbl = mdbl.Bot()
+        
+                @commands.command()
+                async def link(self, ctx):
+                    mdbl_link = self.mdbl.botlink(bot.user.id)
+                    await ctx.send(mdbl_link)
+        
+            def setup(bot):
+                bot.add_cog(MDBLAPI(bot))
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.5.3
+Description-Content-Type: text/x-rst
