@@ -1,0 +1,44 @@
+Metadata-Version: 1.1
+Name: pylsqpack
+Version: 0.2.5
+Summary: Python wrapper for the ls-qpack QPACK library
+Home-page: https://github.com/aiortc/pylsqpack
+Author: Jeremy Lainé
+Author-email: jeremy.laine@m4x.org
+License: BSD
+Description: pylsqpack
+        =========
+        
+        |pypi-v| |pypi-pyversions| |pypi-l| |travis|
+        
+        .. |pypi-v| image:: https://img.shields.io/pypi/v/pylsqpack.svg
+            :target: https://pypi.python.org/pypi/pylsqpack
+        
+        .. |pypi-pyversions| image:: https://img.shields.io/pypi/pyversions/pylsqpack.svg
+            :target: https://pypi.python.org/pypi/pylsqpack
+        
+        .. |pypi-l| image:: https://img.shields.io/pypi/l/pylsqpack.svg
+            :target: https://pypi.python.org/pypi/pylsqpack
+        
+        .. |travis| image:: https://img.shields.io/travis/com/aiortc/pylsqpack.svg
+            :target: https://travis-ci.com/aiortc/pylsqpack
+        
+        `pylsqpack` is a wrapper around the `ls-qpack`_ library. It provides Python
+        `Decoder` and `Encoder` objects to read or write HTTP/3 headers compressed
+        with QPACK.
+        
+        .. _ls-qpack: https://github.com/litespeedtech/ls-qpack/
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Internet :: WWW/HTTP
