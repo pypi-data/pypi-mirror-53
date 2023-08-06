@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+from passgenerate import generate
+from exposer.exposer import Exposer
+from exposer.actions import CliAction
+from exposer.targets import Cli
+class app:
+    cli = Exposer(CliAction,Cli)
+
+@app.cli
+def run(
+    times=5,
+    passlength=32,
+    include=[],
+    exclude=[],
+    include_numbers=True,
+    include_big_letters=True,
+    include_little_letters=True,
+    include_special_chars1=False,
+    include_special_chars2=False,
+    include_special_chars3=False,
+    include_special_chars4=False,
+):
+    return generate(
+            int(times),
+            int(passlength),
+            include,
+            ",".join(exclude).split(','),
+            include_numbers,
+            include_big_letters,
+            include_little_letters,
+            include_special_chars1,
+            include_special_chars2,
+            include_special_chars3,
+            include_special_chars4,
+        )
+Application=app.cli.expose()
+for password in Application:
+    print(password)

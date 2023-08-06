@@ -1,0 +1,1 @@
+from .passgenerate import generate
