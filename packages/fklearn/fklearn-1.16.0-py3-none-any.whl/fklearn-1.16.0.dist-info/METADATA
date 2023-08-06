@@ -1,0 +1,56 @@
+Metadata-Version: 2.1
+Name: fklearn
+Version: 1.16.0
+Summary: Functional machine learning
+Home-page: https://github.com/nubank/fklearn
+Author: Nubank
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: cloudpickle (<0.9.0,>=0.8.0)
+Requires-Dist: joblib (<0.14.0,>=0.13.2)
+Requires-Dist: numpy (<1.17.0,>=1.16.4)
+Requires-Dist: pandas (<0.25,>=0.24.1)
+Requires-Dist: scikit-learn (<0.22.0,>=0.21.2)
+Requires-Dist: statsmodels (<1,>=0.9.0)
+Requires-Dist: toolz (<1,>=0.9.0)
+Provides-Extra: all
+Requires-Dist: lightgbm (<2.3.0,>=2.2.2) ; extra == 'all'
+Requires-Dist: xgboost (<0.90,>=0.81) ; extra == 'all'
+Requires-Dist: catboost (<0.15.0,>=0.14.2) ; extra == 'all'
+Requires-Dist: shap (<0.29.0,>=0.28.5) ; extra == 'all'
+Requires-Dist: swifter (<0.300,>=0.284) ; extra == 'all'
+Provides-Extra: all_models
+Requires-Dist: lightgbm (<2.3.0,>=2.2.2) ; extra == 'all_models'
+Requires-Dist: xgboost (<0.90,>=0.81) ; extra == 'all_models'
+Requires-Dist: catboost (<0.15.0,>=0.14.2) ; extra == 'all_models'
+Provides-Extra: catboost
+Requires-Dist: catboost (<0.15.0,>=0.14.2) ; extra == 'catboost'
+Provides-Extra: devel
+Requires-Dist: pytest (<5,>=4.2.1) ; extra == 'devel'
+Requires-Dist: pytest-cov (<3,>=2.6.1) ; extra == 'devel'
+Requires-Dist: pytest-xdist (<2,>=1.26.1) ; extra == 'devel'
+Requires-Dist: mypy (<1,>=0.670) ; extra == 'devel'
+Requires-Dist: codecov (<3,>=2.0) ; extra == 'devel'
+Requires-Dist: lightgbm (<2.3.0,>=2.2.2) ; extra == 'devel'
+Requires-Dist: xgboost (<0.90,>=0.81) ; extra == 'devel'
+Requires-Dist: catboost (<0.15.0,>=0.14.2) ; extra == 'devel'
+Requires-Dist: shap (<0.29.0,>=0.28.5) ; extra == 'devel'
+Requires-Dist: swifter (<0.300,>=0.284) ; extra == 'devel'
+Provides-Extra: lgbm
+Requires-Dist: lightgbm (<2.3.0,>=2.2.2) ; extra == 'lgbm'
+Provides-Extra: test_deps
+Requires-Dist: pytest (<5,>=4.2.1) ; extra == 'test_deps'
+Requires-Dist: pytest-cov (<3,>=2.6.1) ; extra == 'test_deps'
+Requires-Dist: pytest-xdist (<2,>=1.26.1) ; extra == 'test_deps'
+Requires-Dist: mypy (<1,>=0.670) ; extra == 'test_deps'
+Requires-Dist: codecov (<3,>=2.0) ; extra == 'test_deps'
+Provides-Extra: tools
+Requires-Dist: shap (<0.29.0,>=0.28.5) ; extra == 'tools'
+Requires-Dist: swifter (<0.300,>=0.284) ; extra == 'tools'
+Provides-Extra: xgboost
+Requires-Dist: xgboost (<0.90,>=0.81) ; extra == 'xgboost'
+
+UNKNOWN
+
+
