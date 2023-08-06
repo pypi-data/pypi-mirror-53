@@ -1,0 +1,14 @@
+sqlalchemy>=1.1
+
+[docs]
+sphinx>=1.4
+sphinx_rtd_theme
+sphinx-autodoc-typehints
+
+[testing]
+codecov
+pytest
+pytest-cov
+pytest-regressions
+pre-commit
+tox
