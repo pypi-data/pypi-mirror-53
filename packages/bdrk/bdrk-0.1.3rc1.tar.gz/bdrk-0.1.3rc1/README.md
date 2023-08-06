@@ -1,0 +1,172 @@
+[Bedrock](https://bedrock.basis-ai.com) helps data scientists own the end-to-end deployment of machine learning workflows. `bdrk` is the official client library for interacting with APIs on Bedrock platform.
+
+## Usage
+
+In order to use `bdrk`, you need to register an account with Basis AI. Please email `contact@basis-ai.com` to get started. Once an account is created, you will be issued a personal API token that you can use to authenticate with Bedrock.
+
+### Installing Bedrock client
+
+You can install Bedrock client library from PyPi with the following command. We recommend running it in a virtual environment to prevent potential dependency conflicts.
+
+```bash
+pip install bdrk
+```
+
+Note that the client library is officially supported for python 3.7 and above.
+
+#### Installing optional dependencies
+
+The following optional dependencies can be installed to enable additional featues.
+
+Command line support:
+
+```bash
+pip install bdrk[cli]
+```
+
+Feauture Store support:
+
+```bash
+pip install bdrk[fs]
+```
+
+### Setting up your environment
+
+Once installed, you need to add a well formed `bedrock.hcl` configuration file in your project's root directory. The configuration file specifies which script to run for training and deployment as well as their respective base Docker images. You can find an example directory layout [here](https://github.com/basisai/churn_prediction).
+
+When using the module locally, you may need to define the following environment variables for `bdrk` to make API calls to Bedrock. These variables will be automatically set on your workload container when running in cluster.
+
+```bash
+BEDROCK_API_DOMAIN=https://bedrock.basis-ai.com
+BEDROCK_API_TOKEN=<your personal API token>
+```
+
+### bedrock_client library
+
+The `bedrock_client` library provides utility functions for your training runs.
+
+#### Logging training metrics
+
+You can easily export training metrics to Bedrock by adding logging code to `train.py`. The example below demonstrates logging charts and metrics for visualisation on Bedrock platform.
+
+```python
+import logging
+
+from bedrock_client.bedrock.api import BedrockApi
+
+logger = logging.getLogger(__name__)
+bedrock = BedrockApi(logger)
+bedrock.log_metric("Accuracy", 0.97)
+bedrock.log_chart_data([0, 1, 2, 3], [0.1, 0.5, 0.7, 0.9])
+```
+
+### bdrk library
+
+The `bdrk` library provides APIs for interacting with the Bedrock platform.
+
+<details><summary>Example usage (click to expand)</summary>
+<p>
+
+```python
+import time
+from pprint import pprint
+
+from bdrk.v1 import ApiClient, Configuration, ModelApi, PipelineApi, ServeApi
+from bdrk.v1.models import (
+    GitSourceSchema,
+    ModelServerSchema,
+    PipelineResourcesSchema,
+    ServerResourcesSchema,
+    TrainingPipelineRunSchema,
+)
+from bdrk.v1_util import download_and_unzip_artefact
+
+# Variables to set
+ACCESS_TOKEN = "MY-TOKEN"
+
+REPO_URI = "MY-REPO-URI"
+REPO_REF = "MY-BRANCH"
+REPO_USERNAME = "MY-USERNAME"
+REPO_PASSWORD = "MY-PASSWORD"
+
+ENVIRONMENT_ID = "MY-ENVIRONMENT"
+PIPELINE_ID = "MY-PIPELINE"
+ENDPOINT_ID = "MY-ENDPOINT"
+
+configuration = Configuration()
+
+# Configure API key authorization: ApiTokenAuth
+configuration.api_key["X-Bedrock-Access-Token"] = ACCESS_TOKEN
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['X-Bedrock-Access-Token'] = 'Bearer'
+
+configuration.host = "https://api.bdrk.ai"
+
+# Create an instance of the API class
+api_client = ApiClient(configuration)
+pipeline_api = PipelineApi(api_client)
+serve_api = ServeApi(api_client)
+model_api = ModelApi(api_client)
+
+# Get a training pipeline created on the Bedrock platform
+pipeline = pipeline_api.get_training_pipeline_by_id(pipeline_id=PIPELINE_ID)
+pprint(pipeline)
+
+# Run the pipeline
+run_schema = TrainingPipelineRunSchema(
+    environment_public_id=ENVIRONMENT_ID,
+    resources=PipelineResourcesSchema(cpu="500m", memory="200M"),
+    script_parameters={"MYPARAM": "1.23"},
+)
+run = pipeline_api.run_training_pipeline(
+    pipeline_id=pipeline.public_id, training_pipeline_run_schema=run_schema
+)
+pprint(run)
+
+# Wait for pipeline run to complete
+run_id = run.entity_id
+while run.status in {"Accepted", "Running"}:
+    print(f"Waiting for run to complete...")
+    time.sleep(3)
+    run = pipeline_api.get_training_pipeline_run(pipeline_id=pipeline.public_id, run_id=run_id)
+
+print(f"Run completed with status: {run.status}")
+
+assert run.artefact_id, "Run has no artefact!"
+
+# Get artefact details
+artefact = model_api.get_artefact_details(model_id=pipeline.model_id, artefact_id=run.artefact_id)
+pprint(artefact)
+
+# Download and unzip artefact
+download_and_unzip_artefact(
+    api_client=api_client,
+    model_id=pipeline.model_id,
+    model_artefact_id=run.artefact_id,
+    output_dir="/tmp/artefact",
+)
+
+# Get a model endpoint created on the Bedrock platform
+endpoint = serve_api.get_endpoint(endpoint_id=ENDPOINT_ID)
+
+
+# Deploy a model server to the endpoint
+server_schema = ModelServerSchema(
+    config_file_path="bedrock.hcl",
+    model_version_id=run.artefact_id,
+    resources=ServerResourcesSchema(cpu="500m", memory="200M", min_replicas=1, max_replicas=1),
+    source=GitSourceSchema(
+        uri=REPO_URI, ref=REPO_REF, username=REPO_USERNAME, password=REPO_PASSWORD
+    ),
+)
+server = serve_api.deploy_server(endpoint_id=ENDPOINT_ID, model_server_schema=server_schema)
+
+
+# [BDRK-884] Undeploy a Model server by Model endpoint name and Model server ID using
+# client library
+serve_api.undeploy_server(endpoint_id=ENDPOINT_ID, server_id=server.id)
+
+```
+
+</p>
+</details>
