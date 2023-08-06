@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: dutate
+Version: 0.1
+Summary: Python client for dutate.com
+Home-page: https://gitlab.com/dutate-plugins/python_client
+Author: Doniyor Jurabayev
+Author-email: behconsci@gmail.com
+License: UNKNOWN
+Download-URL: https://gitlab.com/dutate-plugins/python_client/blob/master/dist/dutate-0.1.tar.gz
+Keywords: track,monitor,bug
+Platform: UNKNOWN
+Requires-Dist: requests
+
+===============================
+Python Client for dutate.com
+===============================
+
+Install
+-------
+
+``pip install dutate``
+
+
+Usage
+-----
+
+::
+
+    from dutate import Dutate
+
+    dtt = Dutate(token='ave32sde98ruj23if3riugrg')
+
+    dtt.track('important event')
+
+
