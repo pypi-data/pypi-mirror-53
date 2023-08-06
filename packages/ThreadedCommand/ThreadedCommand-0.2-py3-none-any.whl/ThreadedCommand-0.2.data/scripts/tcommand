@@ -1,0 +1,21 @@
+#!python
+
+import threadedcommand as nc
+import sys
+
+if len(sys.argv) < 3:
+    print("Not enough arguments")
+    print("Run tcommand <threads> <command....>")
+    exit()
+
+command = sys.argv
+
+try:
+    threads = int(sys.argv[1])
+except ValueError:
+    print("First argument must be a number")
+    exit()
+
+del command[0:2]
+
+nc.run(command, threads)
