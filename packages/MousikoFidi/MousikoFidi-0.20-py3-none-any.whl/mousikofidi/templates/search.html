@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="center">
+    <h1>File Search</h1>
+
+    <p>Enter a search term in the form below to search your music dirs.</p>
+    <p style="font-size: 0.8em;">Warning: MousikóFídi searching is slow since it examines each file, so please be patient.  Faster searching is <a href="https://todo.sr.ht/~hristoast/mousikofidi/11">a planned feature</a>.</p>
+
+    <form id="search" action="{{ url_for('.search') }}" method="get">
+      <input id="q" type="text" placeholder="Search" name="q" value="{% if q %}{{ q }}{% endif %}">
+      <label for="only-audio">Only Audio
+        <input type="checkbox" id="only-audio" name="only-audio"{% if only_audio %} checked{% endif %}>
+      </label>
+
+      <label for="only-video">Only Video
+        <input type="checkbox" id="only-video" name="only-video"{% if only_video %} checked{% endif %}>
+      </label>
+      <input id="qbtn" type="submit" value="Submit">
+    </form>
+  </div>
+
+  {% if hits %}
+    <h2 class="center">Found <span class="bold">{{ hits|length }}</span> matches for <span class="bold">"{{ q }}"</span>{% if only_audio %} searching only audio files{% elif only_video %} searching only video files{% endif %}:</h2>
+    {% if not only_audio and not only_video %}
+      <h4 class="center">{{ item_list|length }} audio file{% if audio_list|length > 1 or audio_list|length == 0 %}s{% endif %} | {{ video_list|length }} video file{% if video_list|length > 1 or video_list|length == 0 %}s{% endif %}</h4>
+    {% endif %}
+  {% elif not hits and q %}
+    <h2 class="center">No matches found for <span class="bold">"{{ q }}"</span>{% if only_audio %} searching only audio files{% elif only_video %} searching only video files{% endif %}</h2>
+  {% endif %}
+
+  {% include "item_table.html" with context %}
+
+  {% if item_list %}
+    {% include "audio_player.html" with context %}
+  {% endif %}
+
+  {% if video_list %}
+    {% include "video_player.html" with context %}
+  {% endif %}
+
+{% endblock %}

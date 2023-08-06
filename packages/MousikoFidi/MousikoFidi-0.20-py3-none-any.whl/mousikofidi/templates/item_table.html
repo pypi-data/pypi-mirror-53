@@ -1,0 +1,260 @@
+{% if item_list %}
+
+  {% if add_all_button %}
+    <form class="center" action="/playlist/bulk/%2Fbulk" method="post">
+      <input id="bulk-add" type="submit" value="Add All Files To Playlist" title="Add all files in this directory to the playlist.">
+      <input id="item-list" name="bulk-list" type="hidden" value="{{ file_list }}">
+    </form>
+  {% endif %}
+
+  <h4 class="center">{% if video_list %}Audio Tracks{% else %}Files:{% endif %}</h4>
+
+  <table style="margin: 0 auto;">
+
+    <thead>
+      <tr>
+        <th class="mobile-hide">Track</th>
+        {% if secret_key and playlist_add %}
+          <th>Add</th>
+        {% endif %}
+        <th>Play</th>
+        <th>Title</th>
+        <th class="mobile-hide">Album</th>
+        <th class="mobile-hide">Artist</th>
+        <th class="mobile-hide">Length</th>
+        {% if secret_key and playlist_rm %}
+          <th>Remove</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+    <tbody id="playlist">
+      {% for item in item_list %}
+        {% if item.type == "audio" %}
+          <tr style="position: relative;">
+
+            <td class="center mobile-hide"> {# TRACK #}
+              {% if item.track and not item.tracktotal %}{{ item.track }}{% endif %}
+              {% if item.track and item.tracktotal %}{{ item.track }}/{{ item.tracktotal }}{% endif %}
+            </td>
+
+            {% if playlist_add %}
+              <td> {# ADD #}
+                <form action="/playlist/add/{{ item.escaped_path }}" class="center" method="post">
+                  <input class="plus" type="submit" value="&plus;" title="Add this track to the playlist.">
+                  <input id="{{ item.slug }}" name="slug" type="hidden" value="{{ item.slug }}">
+                </form>
+              </td>
+            {% endif %}
+
+            <td class="center"> {# PLAY #}
+              {% if page_name != "Playlist" %}
+                <div class="anchor" id="{{ item.slug }}-target"></div>
+              {% endif %}
+              <div class="play-arrow" data-browse="/browse/{{ item.escaped_path }}" data-num="0" data-path="{{ item.unescaped_path }}" data-title="{% if item.title %}{{ item.title }}{% else %}{{ item.file_name }}{% endif %}" id="{{ item.slug }}" title="Click to play this track."></div>
+            </td>
+
+            <td class="title title-regular"> {# TITLE #}
+              <a class="mobile-big" href="/browse/{{ item.escaped_path }}" title="This track's title.">
+                {% if item.title %}
+                  {{ item.title }}
+                {% else %}
+                  {{ item.file_name }}
+                {% endif %}
+              </a>
+            </td>
+
+            <td class="title-mobile"> {# MOBILE TITLE #}
+              <a class="mobile-big" href="/browse/{{ item.escaped_path }}" title="This track's title.">
+                {% if item.title %}
+                  {{ item.title_mobile }}
+                {% else %}
+                  {{ item.file_name_mobile }}
+                {% endif %}
+              </a>
+            </td>
+
+            <td class="mobile-hide"> {# ALBUM #}
+              {% if item.album %}{{ item.album }}{% endif %}
+            </td>
+
+            <td class="mobile-hide">
+              {% if item.artist %}{{ item.artist }}{% endif %}
+            </td>
+
+            <td class="center mobile-hide">
+              {% if item.length %}{{ item.length }}{% endif %}
+            </td>
+
+            {% if secret_key and playlist_rm %}
+              <td>
+                <form action="/playlist/rm/{{ item.escaped_path }}" class="center" method="post">
+                  <input class="bold red X" type="submit" value="X">
+                </form>
+              </td>
+            {% endif %}
+          </tr>
+
+        {% elif item.type == "video" %}
+          <tr>
+            <td class="center mobile-hide"> {# TRACK #}
+              {% if item.track and not item.tracktotal %}{{ item.track }}{% endif %}
+              {% if item.track and item.tracktotal %}{{ item.track }}/{{ item.tracktotal }}{% endif %}
+            </td>
+
+            {% if playlist_add %}
+              <td> {# ADD #}
+                <form action="/playlist/add/{{ item.escaped_path }}" class="center" method="post">
+                  <input class="plus" type="submit" value="&plus;">
+                  <input id="{{ item.slug }}" name="slug" type="hidden" value="{{ item.slug }}">
+                </form>
+              </td>
+            {% endif %}
+
+            <td class="center"> {# PLAY #}
+              {% if page_name != "Playlist" %}
+                <div class="anchor" id="{{ item.slug }}-target"></div>
+              {% endif %}
+              <div class="video-arrow" data-browse="/browse/{{ item.escaped_path }}" data-num="0" data-path="{{ item.unescaped_path }}" data-title="{% if item.title %}{{ item.title }}{% else %}{{ item.file_name }}{% endif %}" id="{{ item.slug }}" title="Click to play this track."></div>
+            </td>
+
+            <td class="title-regular"> {# TITLE #}
+              <a class="mobile-big video-title" href="/browse/{{ item.escaped_path }}" title="This track's title.">
+                {% if item.title %}
+                  {{ item.title }}
+                {% else %}
+                  {{ item.file_name }}
+                {% endif %}
+              </a>
+            </td>
+
+            <td class="title-mobile"> {# TITLE #}
+              <a class="mobile-big video-title" href="/browse/{{ item.escaped_path }}" title="This track's title.">
+                {% if item.title %}
+                  {{ item.title_mobile }}
+                {% else %}
+                  {{ item.file_name_mobile }}
+                {% endif %}
+              </a>
+            </td>
+
+            <td class="mobile-hide"> {# ALBUM #}
+              {% if item.album %}{{ item.album }}{% endif %}
+            </td>
+
+            <td class="mobile-hide"> {# ARTIST #}
+              {% if item.artist %}{{ item.artist }}{% endif %}
+            </td>
+
+            <td class="center mobile-hide">
+              {% if item.length %}{{ item.length }}{% endif %}
+            </td>
+
+            {% if secret_key and playlist_rm %}
+              <td>
+                <form action="/playlist/rm/{{ item.escaped_path }}" class="center" method="post">
+                  <input class="bold red X" type="submit" value="X">
+                </form>
+              </td>
+            {% endif %}
+
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
+{% if video_list %}
+  <h4 class="center">Video Tracks</h4>
+  <table style="margin: 0 auto;">
+
+    <thead>
+      <tr>
+        <th class="mobile-hide">Track</th>
+        {% if secret_key and playlist_add %}
+          <th>Add</th>
+        {% endif %}
+        <th>Play</th>
+        <th>Title</th>
+        <th class="mobile-hide">Album</th>
+        <th class="mobile-hide">Artist</th>
+        <th class="mobile-hide">Length</th>
+        {% if secret_key and playlist_rm %}
+          <th class="mobile">Remove</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+    <tbody id="video-playlist">
+      {% for item in video_list %}
+        {% if item.type == "video" %}
+          <tr>
+
+            <td class="center mobile-hide">
+              {% if item.track and not item.tracktotal %}{{ item.track }}{% endif %}
+              {% if item.track and item.tracktotal %}{{ item.track }}/{{ item.tracktotal }}{% endif %}
+            </td>
+
+            {% if playlist_add %}
+              <td> {# ADD #}
+                <form action="/playlist/add/{{ item.escaped_path }}" class="center" method="post">
+                  <input class="plus" type="submit" value="&plus;">
+                  <input id="{{ item.slug }}" name="slug" type="hidden" value="{{ item.slug }}">
+                </form>
+              </td>
+            {% endif %}
+
+            <td class="center"> {# PLAY #}
+              {% if page_name != "Playlist" %}
+                <div class="anchor" id="{{ item.slug }}-target"></div>
+              {% endif %}
+              <div class="video-arrow" data-browse="/browse/{{ item.escaped_path }}" data-num="0" data-path="{{ item.unescaped_path }}" data-title="{% if item.title %}{{ item.title }}{% else %}{{ item.file_name }}{% endif %}" id="{{ item.slug }}" title="Click to play this track."></div>
+            </td>
+
+            <td class="title-regular"> {# TITLE #}
+              <a class="mobile-big video-title" href="/browse/{{ item.escaped_path }}" title="This track's title.">
+                {% if item.title %}
+                  {{ item.title }}
+                {% else %}
+                  {{ item.file_name }}
+                {% endif %}
+              </a>
+            </td>
+
+            <td class="title-mobile"> {# TITLE #}
+              <a class="mobile-big video-title" href="/browse/{{ item.escaped_path }}" title="This track's title.">
+                {% if item.title %}
+                  {{ item.title_mobile }}
+                {% else %}
+                  {{ item.file_name_mobile }}
+                {% endif %}
+              </a>
+            </td>
+
+            <td class="mobile-hide"> {# ALBUM #}
+              {% if item.album %}{{ item.album }}{% endif %}
+            </td>
+
+            <td class="mobile-hide"> {# ARTIST #}
+              {% if item.artist %}{{ item.artist }}{% endif %}
+            </td>
+
+            <td class="center mobile-hide">
+              {% if item.length %}{{ item.length }}{% endif %}
+            </td>
+
+            {% if secret_key and playlist_rm %}
+              <td class="mobile">
+                <form action="/playlist/rm/{{ item.escaped_path }}" class="center" method="post">
+                  <input class="bold red X" type="submit" value="X">
+                </form>
+              </td>
+            {% endif %}
+
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}

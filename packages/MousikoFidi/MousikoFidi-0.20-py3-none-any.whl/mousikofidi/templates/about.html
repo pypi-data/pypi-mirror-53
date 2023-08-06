@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h5 class="center"><a href="https://man.sr.ht/~hristoast/mousikofidi/user_guide.md" title="A link to the MousikóFídi User's Guide.">MousikóFídi User's Guide</a> | <a href="https://man.sr.ht/~hristoast/mousikofidi/config.md" title="A link to the MousikóFídi Config Guide.">MousikóFídi Config Guide</a> | <a href="https://man.sr.ht/~hristoast/mousikofidi/setup.md" title="A link to the MousikóFídi Setup Guide.">MousikóFídi Setup Guide</a></h5>
+
+  <h4 class="center">About This Software</h4>
+
+  <p>
+    You are using MousikóFídi: a web application designed for streaming self-hosted audio and video, via a web browser.  It is designed to have as few dependencies as possible, and to be easier to set up than other software that serves a similar purpose.
+  </p>
+
+  <div class="center">
+    <img src="{{ logo_path }}" title="The MousikóFídi logo, by Ogenfald.">
+  </div>
+
+  <div id="get-help"></div>
+  <h5 class="center"><a href="#get-help">How To Get Help With MousikóFídi</a></h5>
+
+  <p>
+    In the links above, you can find: a user's manual, a configuration guide, as well as a full setup document.
+  </p>
+
+  <p>
+    The entire wiki exists in the code repository <a href="https://git.sr.ht/~hristoast/mousikofidi/tree/wiki">under the <code>wiki</code> branch</a>, and an editor like <a href="https://github.com/retext-project/retext">ReText</a> can be used to view the rendered <code>.md</code> files offline.
+  </p>
+
+  <p>
+    If you've found a bug, please be sure to <a href="https://todo.sr.ht/~hristoast/mousikofidi" title="A link to the MousikóFídi issue tracker.">report it on the issue tracker</a>!
+  </p>
+
+  <p>
+    Also check out the official MousikóFídi IRC channel on freenode!  Use the chat box below, or any IRC client of your choosing.
+  </p>
+
+  <iframe src="https://kiwiirc.com/client/irc.freenode.org/?nick=fidi|?#mousikofidi" style="border:0; width:100%; height:450px;" title="An embedded chat window for the official MousikóFídi IRC channel on freenode."></iframe>
+
+{% endblock %}
