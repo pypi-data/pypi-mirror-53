@@ -1,0 +1,492 @@
+Metadata-Version: 2.1
+Name: guillotina
+Version: 5.0.15
+Summary: asyncio REST API Resource database
+Home-page: https://github.com/plone/guillotina
+Author: Ramon Navarro Bosch & Nathan Van Gheem
+Author-email: ramon@plone.org
+License: BSD
+Keywords: asyncio,REST,Framework,transactional
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7.0
+Requires-Dist: aiohttp (<3.6.0,>=3.0.0)
+Requires-Dist: jsonschema
+Requires-Dist: python-dateutil
+Requires-Dist: pycryptodome
+Requires-Dist: jwcrypto
+Requires-Dist: setuptools
+Requires-Dist: ujson
+Requires-Dist: zope.interface
+Requires-Dist: pyjwt
+Requires-Dist: asyncpg
+Requires-Dist: cffi
+Requires-Dist: PyYAML (>=5.1)
+Requires-Dist: lru-dict
+Requires-Dist: mypy-extensions
+Requires-Dist: argon2-cffi
+Provides-Extra: docs
+Requires-Dist: sphinx ; extra == 'docs'
+Requires-Dist: recommonmark ; extra == 'docs'
+Requires-Dist: sphinxcontrib-httpdomain ; extra == 'docs'
+Requires-Dist: sphinxcontrib-httpexample ; extra == 'docs'
+Requires-Dist: sphinx-guillotina-theme ; extra == 'docs'
+Requires-Dist: sphinx-autodoc-typehints ; extra == 'docs'
+Provides-Extra: mailer
+Requires-Dist: html2text (>=2018.1.9) ; extra == 'mailer'
+Requires-Dist: aiosmtplib (>=1.0.6) ; extra == 'mailer'
+Provides-Extra: redis
+Requires-Dist: aioredis (>=1.2) ; extra == 'redis'
+Provides-Extra: test
+Requires-Dist: pytest (>=3.8.0<=5.0.0) ; extra == 'test'
+Requires-Dist: docker ; extra == 'test'
+Requires-Dist: backoff ; extra == 'test'
+Requires-Dist: psycopg2-binary ; extra == 'test'
+Requires-Dist: pytest-asyncio (>=0.10.0) ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: coverage (>=4.0.3) ; extra == 'test'
+Requires-Dist: pytest-docker-fixtures ; extra == 'test'
+Requires-Dist: pytest-rerunfailures ; extra == 'test'
+
+Introduction
+============
+
+.. image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
+   :target: http://guillotina.readthedocs.io/en/latest/
+
+.. image:: https://travis-ci.org/plone/guillotina.svg?branch=master
+   :target: https://travis-ci.org/plone/guillotina
+
+.. image:: https://codecov.io/gh/plone/guillotina/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/plone/guillotina/branch/master
+   :alt: Test Coverage
+
+.. image:: https://img.shields.io/pypi/pyversions/guillotina.svg
+   :target: https://pypi.python.org/pypi/guillotina/
+   :alt: Python Versions
+
+.. image:: https://img.shields.io/pypi/v/guillotina.svg
+   :target: https://pypi.python.org/pypi/guillotina
+
+.. image:: https://img.shields.io/pypi/l/guillotina.svg
+   :target: https://pypi.python.org/pypi/guillotina/
+   :alt: License
+
+.. image:: https://badges.gitter.im/plone/guillotina.png
+   :target: https://gitter.im/plone/guillotina
+   :alt: Chat
+
+Please `read the detailed docs <http://guillotina.readthedocs.io/en/latest/>`_
+
+
+This is the working project of the next generation Guillotina server based on asyncio.
+
+
+Dependencies
+------------
+
+* Python >= 3.7
+* PostgreSQL >= 9.6
+
+
+Quickstart
+----------
+
+We use pip
+
+.. code-block:: shell
+
+    pip install guillotina
+
+
+Run PostgreSQL
+--------------
+
+If you don't have a PostgreSQL server to play with, you can run one with Docker.
+
+Download and start the Docker container by running
+
+.. code-block:: shell
+
+    make run-postgres
+
+
+
+Run the server
+--------------
+
+To run the server
+
+.. code-block:: shell
+
+    g
+
+
+Then...
+
+.. code-block:: shell
+
+    curl http://localhost:8080
+
+
+Or, better yet, use `Postman <https://www.getpostman.com/>`_ to start playing with API.
+
+You can also navigate in your Guillotina server with its built-in web admin interface by visiting http://localhost:8080/+admin/.
+
+Deploy on Heroku
+----------------
+
+Read more `Guillotina-Heroku <https://github.com/guillotinaweb/guillotina-heroku>`_.
+
+.. image:: https://www.herokucdn.com/deploy/button.svg
+   :target: https://www.heroku.com/deploy?template=https://github.com/guillotinaweb/guillotina-heroku
+
+Getting started with development
+--------------------------------
+
+Using pip (requires Python > 3.7)
+
+.. code-block:: shell
+
+    git clone git@github.com:plone/guillotina.git
+    cd guillotina
+    python3.7 -m venv .
+    ./bin/pip install -r requirements.txt
+    ./bin/pip install -r contrib-requirements.txt
+    ./bin/pip install -e .[test]
+    ./bin/pre-commit install
+
+
+Run tests
+---------
+
+We're using `pytest <https://docs.pytest.org/en/latest/>`_
+
+.. code-block:: shell
+
+    ./bin/pytest guillotina
+
+and for test coverage
+
+.. code-block:: shell
+
+    ./bin/pytest --cov=guillotina guillotina/
+
+With file watcher...
+
+.. code-block:: shell
+
+    ./bin/ptw guillotina --runner=./bin/py.test
+
+
+To run tests with cockroach db
+
+.. code-block:: shell
+
+    USE_COCKROACH=true ./bin/pytest guillotina
+
+Default
+-------
+
+Default root access can be done with AUTHORIZATION header : Basic root:root
+
+
+Docker
+------
+
+You can also run Guillotina with Docker!
+
+
+First, run PostgreSQL
+
+.. code-block:: shell
+
+    docker run --rm \
+        -e POSTGRES_DB=guillotina \
+        -e POSTGRES_USER=guillotina \
+        -p 127.0.0.1:5432:5432 \
+        --name postgres \
+        postgres:9.6
+
+Then, run Guillotina
+
+.. code-block:: shell
+
+    docker run --rm -it \
+        --link=postgres -p 127.0.0.1:8080:8080 \
+        guillotina/guillotina:latest \
+        g -c '{"databases": [{"db": {"storage": "postgresql", "dsn": "postgres://guillotina:@postgres/guillotina"}}], "root_user": {"password": "root"}}'
+
+
+This assumes you have a config.yaml in your current working directory
+
+
+Chat
+----
+
+Join us to talk about Guillotina at https://gitter.im/plone/guillotina
+
+
+CHANGELOG
+=========
+
+5.0.15 (2019-10-02)
+-------------------
+
+- Provide workaround for asyncio contextvars ipython bug in shell
+  [vangheem]
+
+
+5.0.14 (2019-10-02)
+-------------------
+
+- Throw an `TransactionObjectRegistrationMismatchException` exception if you attempt to
+  register an object with a transaction that is a different than existing registration
+  for that object.
+  [vangheem]
+
+
+5.0.13 (2019-09-27)
+-------------------
+
+- Case insensitive environ `G_` variable lookup
+  [svx]
+
+- Improve reST syntax of README
+  [svx]
+
+- Fix typo in CHANGELOG
+  [svx]
+
+5.0.12 (2019-09-24)
+-------------------
+
+- Fix shut down for redis pubsub driver
+  [vangheem]
+
+- Swagger url support for X-Forwarded-Proto and X-Forwarded-Schema
+  [bloodbare]
+
+
+5.0.11 (2019-09-18)
+-------------------
+
+- Fix patch field delete to handle when value is None
+  [vangheem]
+
+- Adjust Sphinx to build in parallel
+  [svx]
+
+
+5.0.10 (2019-09-06)
+-------------------
+
+- Be able to use guillotina's types in 3rd party apps
+  [vangheem]
+
+
+5.0.9 (2019-09-05)
+------------------
+
+- Handle errors vacuuming
+  [vangheem]
+
+
+5.0.8 (2019-09-05)
+------------------
+
+- pypi package desc fix
+
+
+5.0.7 (2019-09-05)
+------------------
+
+- Explicitly reset task vars on every request
+  [vangheem]
+
+- Fix futures execute error when no futures are defined for type
+  [vangheem]
+
+
+5.0.6 (2019-09-04)
+------------------
+
+- Fix `execute.clear_futures()`
+  [vangheem]
+
+- Adding Helm Charts
+  [karannaoh]
+
+5.0.4 (2019-09-04)
+------------------
+
+- Upgrade mypy
+  [vangheem]
+
+- Fix not setting cache values for updated object when push is not enabled
+  [vangheem]
+
+- Fix conflict error handling with registry objects
+  [vangheem]
+
+- Sorted imports in all files and added `isort` in .travis to keep the format
+  [masipcat]
+
+
+5.0.3 (2019-09-02)
+------------------
+
+- `BaseObject.__txn__` now weakref to prevent reference cycles
+  [vangheem]
+
+- Change default service registration to work without inline defined klass methods
+  [vangheem]
+
+- Fix doc builds for new open api 3
+  [vangheem]
+
+- Fix getting cache value from redis
+  [vangheem]
+
+- Fix calculating in-memory cache size
+  [vangheem]
+
+- Update Makefile [svx]
+- Remove buildout bits [svx]
+
+5.0.2 (2019-08-30)
+------------------
+
+- Fix json schema validation
+  [vangheem]
+
+- Fix memory cache to be able to calc size properly
+  [vangheem]
+
+- Better redis pubsub error handling
+  [vangheem]
+
+
+5.0.1 (2019-08-30)
+------------------
+
+- Be not log verbose when pubsub utility task is cancelled
+  [vangheem]
+
+
+5.0.0 (2019-08-30)
+------------------
+
+- Be able to configure cache to not push pickles with invalidation data
+  [vangheem]
+
+- Fix transaction handling to always get current active transaction, throw exception
+  when transaction is closed and be able to refresh objects.
+  [vangheem]
+
+- More normalization of execute module with task_vars/request objects
+  [vangheem]
+
+- Allow committing objects that were created with different transaction
+  [vangheem]
+
+- Fix async utils to work correctly with transactions and context vars
+  [vangheem]
+
+- Be able to have `None` default field values
+  [vangheem]
+
+
+5.0.0a16 (2019-08-26)
+---------------------
+
+- Throw exception when saving object to closed transaction
+  [vangheem]
+
+- Fix cache key for SQLStatements cache. This was causing vacuuming on multi-db environments
+  to not work since the vacuuming object was shared between dbs on guillotina_dynamictablestorage.
+  [vangheem]
+
+- Refractor and bug fix in validation of parameter
+
+- Implement more optimized way to vacuum objects which dramatically improves handling
+  of deleting very large object trees
+  [vangheem]
+
+- Fix `LightweightConnection` pg class to close active cursors when connection done
+  [vangheem]
+
+- Swagger doc for search endpoint
+  [karannaoh]
+
+- Fix `modification_date` not indexed when an object is patched
+  [masipcat]
+
+- Move to black code formatter
+  [vangheem]
+
+- Fix field.validate() crashes when providing invalid schema (for field of type Object)
+  [masipcat]
+
+- Upgrade to Swagger 3/Open API 3
+  [karannaoh]
+
+- Implement json schema validation
+  [karannaoh]
+
+
+5.0.0a15 (2019-08-02)
+---------------------
+
+- Dict schema serialization needs properties to be valid JSON Schema
+  [bloodbare]
+
+- Fix potential bug when working with multiple databases/transaction managers
+  [vangheem]
+
+- New `guillotina.fields.BucketDictField`
+  [vangheem]
+
+- New `@fieldvalue/{field name or dotted behavior + field name}` endpoint
+  [vangheem]
+
+
+5.0.0a14 (2019-07-30)
+---------------------
+
+- Leaking txn on reindex on pg
+  [bloodbare]
+
+
+5.0.0a13 (2019-07-29)
+---------------------
+
+- Run default factory on attributes on behaviors
+  [bloodbare]
+
+- Allow to get full object serialization on GET operation
+  [bloodbare]
+
+- Only register object for writing if base object changed. Otherwise, changes to behavior data
+  was also causing writes to the object it was associated with
+  [vangheem]
+
+- Add `x-virtualhost-path` header support for url generation
+  [vangheem]
+
+
+
+...
+
+You are seeing a truncated changelog.
+
+You can read the `changelog file <https://github.com/plone/guillotina/blob/master/CHANGELOG.rst>`_
+for a complete list.
+
+
+
