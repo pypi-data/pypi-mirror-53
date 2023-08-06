@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Whim</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="manifest" href="/static/site.webmanifest">
+    <link rel="stylesheet" href="/static/alertify.min.css">
+    <link rel="stylesheet" href="/static/alertify.themes.default.min.css">
+    <link rel="stylesheet" href="/static/editor.css">
+  </head>
+  <body>
+    <div id="editor"></div>
+    <script src="/static/ace-1.4.6/ace.js"></script>
+    <script src="/static/ace-1.4.6/ext-modelist.js"></script>
+    <script src="/static/ace-1.4.6/ext-language_tools.js"></script>
+    <script src="/static/alertify.min.js"></script>
+    <script src="/static/favico-0.3.10.min.js"></script>
+    <script src="/static/api.js"></script>
+    <script src="/static/async_alerts.js"></script>
+    <script src="/static/save_manager.js"></script>
+    <script>
+      let editor = ace.edit('editor');
+      let file_path = /^\/edit(.*)$/.exec(location.pathname)[1];
+      let api_client = new APIClient();
+      let favicon = new Favico({
+          animation: 'none',
+          position: 'up',
+          bgColor: '#f00',
+      });
+
+      let save_manager = new SaveManager(
+        editor,
+        api_client,
+        (content) => { // onChange
+          sessionStorage.setItem('unsavedContent_' + file_path, content);
+          favicon.badge(' ');
+        },
+        () => { // onSave
+          favicon.badge('');
+        }
+      );
+
+      window.addEventListener('beforeunload', event => {
+        if (save_manager.isUnsaved()) {
+          event.preventDefault();
+          event.returnValue = 'Leave site? Changes you made may not be saved.';
+          return event.returnValue;
+        }
+      })
+
+      document.addEventListener('keydown', event => {
+         if((event.ctrlKey || event.metaKey) && event.which == 83) {
+            save_manager.save(file_path);
+            event.preventDefault();
+            return false;
+        }
+      });
+
+      let modelist = ace.require("ace/ext/modelist");
+      editor.setTheme('ace/theme/cobalt');
+      editor.setOptions({
+        enableLiveAutocompletion: true,
+        printMarginColumn: 120,
+        scrollPastEnd: 1,
+        showInvisibles: true,
+      });
+
+      (async () => {
+
+        let unsaved_content = sessionStorage.getItem('unsavedContent_' + file_path);
+        if (unsaved_content != null && !await asyncConfirm('Load previously unsaved changes?')) {
+          unsaved_content = null;
+        }
+        await save_manager.open(file_path, unsaved_content);
+
+        let cursor_position = JSON.parse(sessionStorage.getItem('cursorPosition_' + file_path));
+        if (cursor_position != null) {
+          editor.gotoLine(cursor_position.row + 1, cursor_position.column + 1);
+        }
+
+        editor.selection.on('changeCursor', () => {
+          sessionStorage.setItem('cursorPosition_' + file_path, JSON.stringify(editor.getCursorPosition()));
+        });
+
+      })();
+
+    </script>
+  </body>
+</html>
