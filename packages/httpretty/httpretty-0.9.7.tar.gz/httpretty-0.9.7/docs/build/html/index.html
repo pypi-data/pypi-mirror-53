@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HTTPretty’s - HTTP Client Mocking for Python &mdash; HTTPretty 0.9.6 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="What is HTTPretty ?" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> HTTPretty
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">What is HTTPretty ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#demo">Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#motivation">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acks.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Hacking on HTTPretty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#main-contributors">Main contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">HTTPretty</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>HTTPretty’s - HTTP Client Mocking for Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="httpretty-s-http-client-mocking-for-python">
+<h1>HTTPretty’s - HTTP Client Mocking for Python<a class="headerlink" href="#httpretty-s-http-client-mocking-for-python" title="Permalink to this headline">¶</a></h1>
+<p>HTTP Client mocking tool for Python. Provides a full fake TCP socket module. Inspired by <a class="reference external" href="https://github.com/chrisk/fakeweb">FakeWeb</a></p>
+<p>Looking for the <a class="reference external" href="https://github.com/gabrielfalcao/HTTPretty">Github Repository</a> ?</p>
+<p><strong>Python Support:</strong></p>
+<ul class="simple">
+<li><strong>2.7.13</strong></li>
+<li><strong>3.6.5</strong></li>
+<li><strong>3.7.0</strong></li>
+</ul>
+<img alt="https://github.com/gabrielfalcao/HTTPretty/raw/master/docs/source/_static/logo.svg?sanitize=true" src="https://github.com/gabrielfalcao/HTTPretty/raw/master/docs/source/_static/logo.svg?sanitize=true" />
+<a class="reference external image-reference" href="http://httpretty.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/httpretty/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/gabrielfalcao/HTTPretty"><img alt="https://travis-ci.org/gabrielfalcao/HTTPretty.svg?branch=master" src="https://travis-ci.org/gabrielfalcao/HTTPretty.svg?branch=master" /></a>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">What is HTTPretty ?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#a-more-technical-description">A more technical description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#installing">Installing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#demo">Demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#expecting-a-simple-response-body">expecting a simple response body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#making-assertions-in-a-callback-that-generates-the-response-body">making assertions in a callback that generates the response body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#link-headers">Link headers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#motivation">Motivation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#the-idea-behind-httpretty-how-it-works">The idea behind HTTPretty (how it works)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acks.html">Acknowledgements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="acks.html#caveats">caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#register-uri">register_uri</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#enable">enable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#disable">disable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#is-enabled">is_enabled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#last-request">last_request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#latest-requests">latest_requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#activate">activate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#httprettified">httprettified</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#httprettized">httprettized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#httprettyrequest">HTTPrettyRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#httprettyrequestempty">HTTPrettyRequestEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#fakesockfile">FakeSockFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#fakesslsocket">FakeSSLSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#uriinfo">URIInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#urimatcher">URIMatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#entry">Entry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#modules">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-httpretty.core">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-httpretty.http">Http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-httpretty.utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-httpretty.errors">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Hacking on HTTPretty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#install-development-dependencies">install development dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#next-steps">next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#main-contributors">Main contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">0.9.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id2">0.8.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id3">0.6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id4">0.6.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id5">0.6.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id6">0.5.14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id7">0.5.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id8">0.5.11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id9">0.5.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id10">0.5.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id11">0.5.8</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="introduction.html" class="btn btn-neutral float-right" title="What is HTTPretty ?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gabriel Falcao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>What is HTTPretty ? &mdash; HTTPretty 0.9.6 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Acknowledgements" href="acks.html" />
+    <link rel="prev" title="HTTPretty’s - HTTP Client Mocking for Python" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HTTPretty
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What is HTTPretty ?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-more-technical-description">A more technical description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing">Installing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#demo">Demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#expecting-a-simple-response-body">expecting a simple response body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-assertions-in-a-callback-that-generates-the-response-body">making assertions in a callback that generates the response body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#link-headers">Link headers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#motivation">Motivation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-idea-behind-httpretty-how-it-works">The idea behind HTTPretty (how it works)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acks.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Hacking on HTTPretty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#main-contributors">Main contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HTTPretty</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>What is HTTPretty ?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p id="introduction"><a class="reference external" href="https://github.com/gabrielfalcao/HTTPretty">Github</a></p>
+<div class="section" id="what-is-httpretty">
+<h1>What is HTTPretty ?<a class="headerlink" href="#what-is-httpretty" title="Permalink to this headline">¶</a></h1>
+<p>Once upon a time a python developer wanted to use a RESTful api,
+everything was fine but until the day he needed to test the code that
+hits the RESTful API: what if the API server is down? What if its
+content has changed ?</p>
+<p>Don’t worry, HTTPretty is here for you:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">expect</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+
+<span class="nd">@httpretty.activate</span>
+<span class="k">def</span> <span class="nf">test_yipit_api_returning_deals</span><span class="p">():</span>
+    <span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span><span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="s2">&quot;http://api.yipit.com/v1/deals/&quot;</span><span class="p">,</span>
+                           <span class="n">body</span><span class="o">=</span><span class="s1">&#39;[{&quot;title&quot;: &quot;Test Deal&quot;}]&#39;</span><span class="p">,</span>
+                           <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://api.yipit.com/v1/deals/&#39;</span><span class="p">)</span>
+
+    <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">equal</span><span class="p">([{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Deal&quot;</span><span class="p">}])</span>
+</pre></div>
+</div>
+<div class="section" id="a-more-technical-description">
+<h2>A more technical description<a class="headerlink" href="#a-more-technical-description" title="Permalink to this headline">¶</a></h2>
+<p>HTTPretty is a HTTP client mock library for Python 100% inspired on ruby’s [FakeWeb](<a class="reference external" href="http://fakeweb.rubyforge.org/">http://fakeweb.rubyforge.org/</a>).
+If you come from ruby this would probably sound familiar :smiley:</p>
+</div>
+<div class="section" id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>Installing httpretty is as easy as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install httpretty
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="expecting-a-simple-response-body">
+<h2>expecting a simple response body<a class="headerlink" href="#expecting-a-simple-response-body" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-bash notranslate"><div class="highlight"><pre><span></span>import requests
+import httpretty
+
+def test_one<span class="o">()</span>:
+    httpretty.enable<span class="o">()</span>  <span class="c1"># enable HTTPretty so that it will monkey patch the socket module</span>
+    httpretty.register_uri<span class="o">(</span>httpretty.GET, <span class="s2">&quot;http://yipit.com/&quot;</span>,
+                           <span class="nv">body</span><span class="o">=</span><span class="s2">&quot;Find the best daily deals&quot;</span><span class="o">)</span>
+
+    <span class="nv">response</span> <span class="o">=</span> requests.get<span class="o">(</span><span class="s1">&#39;http://yipit.com&#39;</span><span class="o">)</span>
+
+    assert response.text <span class="o">==</span> <span class="s2">&quot;Find the best daily deals&quot;</span>
+
+    httpretty.disable<span class="o">()</span>  <span class="c1"># disable afterwards, so that you will have no problems in code that uses that socket module</span>
+    httpretty.reset<span class="o">()</span>    <span class="c1"># reset HTTPretty state (clean up registered urls and request history)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-assertions-in-a-callback-that-generates-the-response-body">
+<h2>making assertions in a callback that generates the response body<a class="headerlink" href="#making-assertions-in-a-callback-that-generates-the-response-body" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-bash notranslate"><div class="highlight"><pre><span></span>import requests
+import json
+import httpretty
+
+@httpretty.activate
+def test_with_callback_response<span class="o">()</span>:
+  def request_callback<span class="o">(</span>request, uri, response_headers<span class="o">)</span>:
+      <span class="nv">content_type</span> <span class="o">=</span> request.headers.get<span class="o">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">)</span>
+      assert request.body <span class="o">==</span> <span class="s1">&#39;{&quot;nothing&quot;: &quot;here&quot;}&#39;</span>, <span class="s1">&#39;unexpected body: {}&#39;</span>.format<span class="o">(</span>request.body<span class="o">)</span>
+      assert <span class="nv">content_type</span> <span class="o">==</span> <span class="s1">&#39;application/json&#39;</span>, <span class="s1">&#39;expected application/json but received Content-Type: {}&#39;</span>.format<span class="o">(</span>content_type<span class="o">)</span>
+      <span class="k">return</span> <span class="o">[</span><span class="m">200</span>, response_headers, json.dumps<span class="o">({</span><span class="s2">&quot;hello&quot;</span>: <span class="s2">&quot;world&quot;</span><span class="o">})]</span>
+
+  httpretty.register_uri<span class="o">(</span>
+      HTTPretty.POST, <span class="s2">&quot;https://httpretty.example.com/api&quot;</span>,
+      <span class="nv">body</span><span class="o">=</span>request_callback<span class="o">)</span>
+
+  <span class="nv">response</span> <span class="o">=</span> requests.post<span class="o">(</span><span class="s1">&#39;https://httpretty.example.com/api&#39;</span>, <span class="nv">headers</span><span class="o">={</span><span class="s1">&#39;Content-Type&#39;</span>: <span class="s1">&#39;application/json&#39;</span><span class="o">}</span>, <span class="nv">data</span><span class="o">=</span><span class="s1">&#39;{&quot;nothing&quot;: &quot;here&quot;}&#39;</span><span class="o">)</span>
+
+  expect<span class="o">(</span>response.json<span class="o">())</span>.to.equal<span class="o">({</span><span class="s2">&quot;hello&quot;</span>: <span class="s2">&quot;world&quot;</span><span class="o">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="link-headers">
+<h2>Link headers<a class="headerlink" href="#link-headers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Tests link headers by using the <cite>adding_headers</cite> parameter.</p>
+<div class="code python highlight-bash notranslate"><div class="highlight"><pre><span></span>import requests
+from sure import expect
+import httpretty
+
+
+@httpretty.activate
+def test_link_response<span class="o">()</span>:
+    <span class="nv">first_url</span> <span class="o">=</span> <span class="s2">&quot;http://foo-api.com/data&quot;</span>
+    <span class="nv">second_url</span> <span class="o">=</span> <span class="s2">&quot;http://foo-api.com/data?page=2&quot;</span>
+    <span class="nv">link_str</span> <span class="o">=</span> <span class="s2">&quot;&lt;%s&gt;; rel=&#39;next&#39;&quot;</span> % second_url
+
+    httpretty.register_uri<span class="o">(</span>
+        httpretty.GET,
+        first_url,
+        <span class="nv">body</span><span class="o">=</span><span class="s1">&#39;{&quot;success&quot;: true}&#39;</span>,
+        <span class="nv">status</span><span class="o">=</span><span class="m">200</span>,
+        <span class="nv">content_type</span><span class="o">=</span><span class="s2">&quot;text/json&quot;</span>,
+        <span class="nv">adding_headers</span><span class="o">={</span><span class="s2">&quot;Link&quot;</span>: link_str<span class="o">}</span>,
+    <span class="o">)</span>
+    httpretty.register_uri<span class="o">(</span>
+        httpretty.GET,
+        second_url,
+        <span class="nv">body</span><span class="o">=</span><span class="s1">&#39;{&quot;success&quot;: false}&#39;</span>,
+        <span class="nv">status</span><span class="o">=</span><span class="m">500</span>,
+        <span class="nv">content_type</span><span class="o">=</span><span class="s2">&quot;text/json&quot;</span>,
+    <span class="o">)</span>
+    <span class="c1"># Performs a request to `first_url` followed by some testing</span>
+    <span class="nv">response</span> <span class="o">=</span> requests.get<span class="o">(</span>first_url<span class="o">)</span>
+    expect<span class="o">(</span>response.json<span class="o">())</span>.to.equal<span class="o">({</span><span class="s2">&quot;success&quot;</span>: True<span class="o">})</span>
+    expect<span class="o">(</span>response.status_code<span class="o">)</span>.to.equal<span class="o">(</span><span class="m">200</span><span class="o">)</span>
+    <span class="nv">next_url</span> <span class="o">=</span> response.links<span class="o">[</span><span class="s2">&quot;next&quot;</span><span class="o">][</span><span class="s2">&quot;url&quot;</span><span class="o">]</span>
+    expect<span class="o">(</span>next_url<span class="o">)</span>.to.equal<span class="o">(</span>second_url<span class="o">)</span>
+
+    <span class="c1"># Follow the next URL and perform some testing.</span>
+    <span class="nv">response2</span> <span class="o">=</span> requests.get<span class="o">(</span>next_url<span class="o">)</span>
+    expect<span class="o">(</span>response2.json<span class="o">())</span>.to.equal<span class="o">({</span><span class="s2">&quot;success&quot;</span>: False<span class="o">})</span>
+    expect<span class="o">(</span>response2.status_code<span class="o">)</span>.to.equal<span class="o">(</span><span class="m">500</span><span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="motivation">
+<h1>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h1>
+<p>When building systems that access external resources such as RESTful
+webservices, XMLRPC or even simple HTTP requests, we stumble in the
+problem:</p>
+<blockquote>
+<div><em>“I’m gonna need to mock all those requests”</em></div></blockquote>
+<p>It brings a lot of hassle, you will need to use a generic mocking
+tool, mess with scope and so on.</p>
+<div class="section" id="the-idea-behind-httpretty-how-it-works">
+<h2>The idea behind HTTPretty (how it works)<a class="headerlink" href="#the-idea-behind-httpretty-how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>HTTPretty <a class="reference external" href="http://en.wikipedia.org/wiki/Monkey_patch">monkey patches</a>
+Python’s <a class="reference external" href="http://docs.python.org/library/socket.html">socket</a> core
+module, reimplementing the HTTP protocol, by mocking requests and
+responses.</p>
+<p>As for how it works this way, you don’t need to worry what http
+library you’re gonna use.</p>
+<p>HTTPretty will mock the response for you :) <em>(and also give you the
+latest requests so that you can check them)</em></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="acks.html" class="btn btn-neutral float-right" title="Acknowledgements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="HTTPretty’s - HTTP Client Mocking for Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gabriel Falcao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1459 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; HTTPretty 0.9.6 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hacking on HTTPretty" href="contributing.html" />
+    <link rel="prev" title="Acknowledgements" href="acks.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HTTPretty
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">What is HTTPretty ?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#demo">Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#motivation">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acks.html">Acknowledgements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#register-uri">register_uri</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable">enable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disable">disable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-enabled">is_enabled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#last-request">last_request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#latest-requests">latest_requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#activate">activate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#httprettified">httprettified</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#httprettized">httprettized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#httprettyrequest">HTTPrettyRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#httprettyrequestempty">HTTPrettyRequestEmpty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fakesockfile">FakeSockFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fakesslsocket">FakeSSLSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uriinfo">URIInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#urimatcher">URIMatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entry">Entry</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#modules">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-httpretty.core">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-httpretty.http">Http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-httpretty.utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-httpretty.errors">Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Hacking on HTTPretty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html#main-contributors">Main contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HTTPretty</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<span id="api"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="register-uri">
+<span id="httpretty"></span><h2>register_uri<a class="headerlink" href="#register-uri" title="Permalink to this headline">¶</a></h2>
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.register_uri">
+<em class="property">classmethod </em><code class="descclassname">httpretty.</code><code class="descname">register_uri</code><span class="sig-paren">(</span><em>method</em>, <em>uri</em>, <em>body='{&quot;message&quot;: &quot;HTTPretty :)&quot;}'</em>, <em>adding_headers=None</em>, <em>forcing_headers=None</em>, <em>status=200</em>, <em>responses=None</em>, <em>match_querystring=False</em>, <em>priority=0</em>, <em>**headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.register_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.register_uri" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">httpretty</span>
+
+
+<span class="k">def</span> <span class="nf">request_callback</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">):</span>
+    <span class="n">content_type</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span> <span class="o">==</span> <span class="s1">&#39;{&quot;nothing&quot;: &quot;here&quot;}&#39;</span><span class="p">,</span> <span class="s1">&#39;unexpected body: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">content_type</span> <span class="o">==</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span> <span class="s1">&#39;expected application/json but received Content-Type: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})]</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span>
+    <span class="n">HTTPretty</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="s2">&quot;https://httpretty.example.com/api&quot;</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">request_callback</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">enabled</span><span class="p">():</span>
+    <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://httpretty.example.com/api&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s1">&#39;{&quot;nothing&quot;: &quot;here&quot;}&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">})</span>
+
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">latest_requests</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>method</strong> – one of <code class="docutils literal notranslate"><span class="pre">httpretty.GET</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.POST</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.DELETE</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.HEAD</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.OPTIONS</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.CONNECT</span></code></li>
+<li><strong>uri</strong> – a string (e.g.: <strong>“https://httpbin.org/ip”</strong>)</li>
+<li><strong>body</strong> – a string, defaults to <code class="docutils literal notranslate"><span class="pre">{&quot;message&quot;:</span> <span class="pre">&quot;HTTPretty</span> <span class="pre">:)&quot;}</span></code></li>
+<li><strong>adding_headers</strong> – dict - headers to be added to the response</li>
+<li><strong>forcing_headers</strong> – dict - headers to be forcefully set in the response</li>
+<li><strong>status</strong> – an integer, defaults to <strong>200</strong></li>
+<li><strong>responses</strong> – a list of entries, ideally each created with <a class="reference internal" href="#httpretty.core.httpretty.Response" title="httpretty.core.httpretty.Response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Response()</span></code></a></li>
+<li><strong>priority</strong> – an integer, useful for setting higher priority over previously registered urls. defaults to zero</li>
+<li><strong>match_querystring</strong> – bool - whether to take the querystring into account when matching an URL</li>
+<li><strong>headers</strong> – headers to be added to the response</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="enable">
+<h2>enable<a class="headerlink" href="#enable" title="Permalink to this headline">¶</a></h2>
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.enable">
+<em class="property">classmethod </em><code class="descclassname">httpretty.</code><code class="descname">enable</code><span class="sig-paren">(</span><em>allow_net_connect=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.enable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables HTTPretty.
+When <code class="docutils literal notranslate"><span class="pre">allow_net_connect</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> any connection to an unregistered uri will throw <a class="reference internal" href="#httpretty.errors.UnmockedError" title="httpretty.errors.UnmockedError"><code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.errors.UnmockedError</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span>
+    <span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span>
+    <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http://.*&#39;</span><span class="p">),</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;man&#39;</span><span class="p">:</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">:</span> <span class="s1">&#39;middle&#39;</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://foo.bar/foo/bar&#39;</span><span class="p">)</span>
+
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span>
+    <span class="s2">&quot;man&quot;</span><span class="p">:</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;the&quot;</span><span class="p">:</span> <span class="s2">&quot;middle&quot;</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">after calling this method the original <a class="reference external" href="https://docs.python.org/3/library/socket.html#module-socket" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> is replaced with <a class="reference internal" href="#httpretty.core.fakesock" title="httpretty.core.fakesock"><code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.core.fakesock</span></code></a>. Make sure to call <a class="reference internal" href="#httpretty.core.httpretty.disable" title="httpretty.core.httpretty.disable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">disable()</span></code></a> after done with your tests or use the <code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.enabled</span></code> as decorator or <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">context-manager</a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="disable">
+<h2>disable<a class="headerlink" href="#disable" title="Permalink to this headline">¶</a></h2>
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.disable">
+<em class="property">classmethod </em><code class="descclassname">httpretty.</code><code class="descname">disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.disable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.disable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disables HTTPretty entirely, putting the original <a class="reference external" href="https://docs.python.org/3/library/socket.html#module-socket" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a>
+module back in its place.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+<span class="c1"># request passes through fake socket</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org&#39;</span><span class="p">)</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="c1"># request uses real python socket module</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method does not call <code class="xref py py-meth docutils literal notranslate"><span class="pre">httpretty.core.reset()</span></code> automatically.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="is-enabled">
+<h2>is_enabled<a class="headerlink" href="#is-enabled" title="Permalink to this headline">¶</a></h2>
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.is_enabled">
+<em class="property">classmethod </em><code class="descclassname">httpretty.</code><code class="descname">is_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.is_enabled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.is_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if HTTPretty is enabled</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="last-request">
+<h2>last_request<a class="headerlink" href="#last-request" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="httpretty.last_request">
+<code class="descclassname">httpretty.</code><code class="descname">last_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty.html#last_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.last_request" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the last <a class="reference internal" href="#httpretty.core.HTTPrettyRequest" title="httpretty.core.HTTPrettyRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPrettyRequest</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="latest-requests">
+<h2>latest_requests<a class="headerlink" href="#latest-requests" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="httpretty.latest_requests">
+<code class="descclassname">httpretty.</code><code class="descname">latest_requests</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty.html#latest_requests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.latest_requests" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the history of made requests</p>
+</dd></dl>
+
+</div>
+<div class="section" id="activate">
+<span id="id1"></span><h2>activate<a class="headerlink" href="#activate" title="Permalink to this headline">¶</a></h2>
+<dl class="attribute">
+<dt id="httpretty.activate">
+<code class="descclassname">httpretty.</code><code class="descname">activate</code><a class="headerlink" href="#httpretty.activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#httpretty.core.httprettified" title="httpretty.core.httprettified"><code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.core.httprettified</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="httprettified">
+<span id="id2"></span><h2>httprettified<a class="headerlink" href="#httprettified" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.httprettified">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">httprettified</code><a class="reference internal" href="_modules/httpretty/core.html#httprettified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httprettified" title="Permalink to this definition">¶</a></dt>
+<dd><p>decorator for test functions</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Also available under the alias <a class="reference internal" href="#httpretty.activate" title="httpretty.activate"><code class="xref py py-func docutils literal notranslate"><span class="pre">httpretty.activate()</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>test</strong> – a callable</td>
+</tr>
+</tbody>
+</table>
+<p>example usage with <a class="reference external" href="https://nose.readthedocs.io/en/latest/">nosetests</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sure</span>
+<span class="kn">from</span> <span class="nn">httpretty</span> <span class="kn">import</span> <span class="n">httprettified</span>
+
+<span class="nd">@httprettified</span>
+<span class="k">def</span> <span class="nf">test_using_nosetests</span><span class="p">():</span>
+    <span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span>
+        <span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span>
+        <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+
+    <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;HTTPretty :)&quot;</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<p>example usage with <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest module</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">expect</span>
+<span class="kn">from</span> <span class="nn">httpretty</span> <span class="kn">import</span> <span class="n">httprettified</span>
+
+<span class="nd">@httprettified</span>
+<span class="k">class</span> <span class="nc">TestWithPyUnit</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_httpbin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span><span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;HTTPretty :)&quot;</span>
+        <span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="httprettized">
+<span id="id3"></span><h2>httprettized<a class="headerlink" href="#httprettized" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.httprettized">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">httprettized</code><span class="sig-paren">(</span><em>allow_net_connect=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httprettized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httprettized" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">context-manager</a> for enabling HTTPretty.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span><span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;42.42.42.42&#39;</span><span class="p">}))</span>
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">enabled</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">latest_requests</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;42.42.42.42&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="httprettyrequest">
+<span id="id5"></span><h2>HTTPrettyRequest<a class="headerlink" href="#httprettyrequest" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.HTTPrettyRequest">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">HTTPrettyRequest</code><span class="sig-paren">(</span><em>headers</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.HTTPrettyRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a HTTP request. It takes a valid multi-line,
+<code class="docutils literal notranslate"><span class="pre">\r\n</span></code> separated string with HTTP headers and parse them out using
+the internal <cite>parse_request</cite> method.</p>
+<p>It also replaces the <cite>rfile</cite> and <cite>wfile</cite> attributes with StringIO
+instances so that we guarantee that it won’t make any I/O, neighter
+for writing nor reading.</p>
+<p>It has some convenience attributes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">headers</span></code> -&gt; a mimetype object that can be cast into a dictionary,
+contains all the request headers</p>
+<p><code class="docutils literal notranslate"><span class="pre">method</span></code> -&gt; the HTTP method used in this request</p>
+<p><code class="docutils literal notranslate"><span class="pre">querystring</span></code> -&gt; a dictionary containing lists with the
+attributes. Please notice that if you need a single value from a
+query string you will need to get it manually like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">body</span></code> -&gt; the request body as a string</p>
+<p><code class="docutils literal notranslate"><span class="pre">parsed_body</span></code> -&gt; the request body parsed by <code class="docutils literal notranslate"><span class="pre">parse_request_body</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">request</span><span class="o">.</span><span class="n">querystring</span>
+<span class="go">{&#39;name&#39;: [&#39;Gabriel Falcao&#39;]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">request</span><span class="o">.</span><span class="n">querystring</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="httpretty.core.HTTPrettyRequest.parse_querystring">
+<code class="descname">parse_querystring</code><span class="sig-paren">(</span><em>qs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequest.parse_querystring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.HTTPrettyRequest.parse_querystring" title="Permalink to this definition">¶</a></dt>
+<dd><p>parses an UTF-8 encoded query string into a dict of string lists</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>qs</strong> – a querystring</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dict of lists</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.core.HTTPrettyRequest.parse_request_body">
+<code class="descname">parse_request_body</code><span class="sig-paren">(</span><em>body</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequest.parse_request_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.HTTPrettyRequest.parse_request_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to parse the post based on the content-type passed.
+Return the regular body if not</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>body</strong> – string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a python object such as dict or list in case the deserialization suceeded. Else returns the given param <code class="docutils literal notranslate"><span class="pre">body</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="httpretty.core.HTTPrettyRequest.querystring">
+<code class="descname">querystring</code><em class="property"> = None</em><a class="headerlink" href="#httpretty.core.HTTPrettyRequest.querystring" title="Permalink to this definition">¶</a></dt>
+<dd><p>a dictionary containing parsed request body or None if
+HTTPrettyRequest doesn’t know how to parse it.  It currently
+supports parsing body data that was sent under the
+<code class="docutils literal notranslate"><span class="pre">content`-type`</span> <span class="pre">headers</span> <span class="pre">values:</span> <span class="pre">``application/json</span></code> or
+<code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="httprettyrequestempty">
+<span id="id6"></span><h2>HTTPrettyRequestEmpty<a class="headerlink" href="#httprettyrequestempty" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.HTTPrettyRequestEmpty">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">HTTPrettyRequestEmpty</code><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequestEmpty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.HTTPrettyRequestEmpty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an empty <a class="reference internal" href="#httpretty.core.HTTPrettyRequest" title="httpretty.core.HTTPrettyRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPrettyRequest</span></code></a>
+where all its properties are somehow empty or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="fakesockfile">
+<span id="id7"></span><h2>FakeSockFile<a class="headerlink" href="#fakesockfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.FakeSockFile">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">FakeSockFile</code><a class="reference internal" href="_modules/httpretty/core.html#FakeSockFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.FakeSockFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fake socket file descriptor. Under the hood all data is written in
+a temporary file, giving it a real file descriptor number.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="fakesslsocket">
+<span id="id8"></span><h2>FakeSSLSocket<a class="headerlink" href="#fakesslsocket" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.FakeSSLSocket">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">FakeSSLSocket</code><span class="sig-paren">(</span><em>sock</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#FakeSSLSocket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.FakeSSLSocket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorthand for <a class="reference internal" href="#httpretty.core.fakesock" title="httpretty.core.fakesock"><code class="xref py py-class docutils literal notranslate"><span class="pre">fakesock</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="uriinfo">
+<span id="id9"></span><h2>URIInfo<a class="headerlink" href="#uriinfo" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.URIInfo">
+<em class="property">class </em><code class="descclassname">httpretty.</code><code class="descname">URIInfo</code><span class="sig-paren">(</span><em>username=''</em>, <em>password=''</em>, <em>hostname=''</em>, <em>port=80</em>, <em>path='/'</em>, <em>query=''</em>, <em>fragment=''</em>, <em>scheme=''</em>, <em>last_request=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.URIInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal representation of <a class="reference external" href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URIs</a></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">all arguments are optional</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> – </li>
+<li><strong>password</strong> – </li>
+<li><strong>hostname</strong> – </li>
+<li><strong>port</strong> – </li>
+<li><strong>path</strong> – </li>
+<li><strong>query</strong> – </li>
+<li><strong>fragment</strong> – </li>
+<li><strong>scheme</strong> – </li>
+<li><strong>last_request</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="httpretty.URIInfo.from_uri">
+<em class="property">classmethod </em><code class="descname">from_uri</code><span class="sig-paren">(</span><em>uri</em>, <em>entry</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo.from_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.URIInfo.from_uri" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>uri</strong> – string</li>
+<li><strong>entry</strong> – an instance of <a class="reference internal" href="#httpretty.core.Entry" title="httpretty.core.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.URIInfo.full_url">
+<code class="descname">full_url</code><span class="sig-paren">(</span><em>use_querystring=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo.full_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.URIInfo.full_url" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>use_querystring</strong> – bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a string with the full url with the format <code class="docutils literal notranslate"><span class="pre">{scheme}://{credentials}{domain}{path}{query}</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.URIInfo.get_full_domain">
+<code class="descname">get_full_domain</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo.get_full_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.URIInfo.get_full_domain" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a string in the form <code class="docutils literal notranslate"><span class="pre">{domain}:{port}</span></code> or just the domain if the port is 80 or 443</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="urimatcher">
+<span id="id10"></span><h2>URIMatcher<a class="headerlink" href="#urimatcher" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.URIMatcher">
+<em class="property">class </em><code class="descclassname">httpretty.</code><code class="descname">URIMatcher</code><span class="sig-paren">(</span><em>uri</em>, <em>entries</em>, <em>match_querystring=False</em>, <em>priority=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIMatcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.URIMatcher" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="httpretty.URIMatcher.get_next_entry">
+<code class="descname">get_next_entry</code><span class="sig-paren">(</span><em>method</em>, <em>info</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIMatcher.get_next_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.URIMatcher.get_next_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle through available responses, but only once.
+Any subsequent requests will receive the last response</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="entry">
+<span id="id11"></span><h2>Entry<a class="headerlink" href="#entry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.Entry">
+<em class="property">class </em><code class="descclassname">httpretty.</code><code class="descname">Entry</code><span class="sig-paren">(</span><em>method</em>, <em>uri</em>, <em>body</em>, <em>adding_headers=None</em>, <em>forcing_headers=None</em>, <em>status=200</em>, <em>streaming=False</em>, <em>**headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Created by <a class="reference internal" href="#httpretty.core.httpretty.register_uri" title="httpretty.core.httpretty.register_uri"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_uri()</span></code></a> and
+stored in memory as internal representation of a HTTP
+request/response definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>method</strong> – string</li>
+<li><strong>uri</strong> – string</li>
+<li><strong>body</strong> – string</li>
+<li><strong>adding_headers</strong> – dict - headers to be added to the response</li>
+<li><strong>forcing_headers</strong> – dict - headers to be forcefully set in the response</li>
+<li><strong>status</strong> – an integer (e.g.: <code class="docutils literal notranslate"><span class="pre">status=200</span></code>)</li>
+<li><strong>streaming</strong> – bool - whether to stream the response</li>
+<li><strong>headers</strong> – keyword-args with headers to be added to the response</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When using the <code class="docutils literal notranslate"><span class="pre">forcing_headers</span></code> option make sure to add the header <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> otherwise calls using <code class="xref py py-mod docutils literal notranslate"><span class="pre">requests</span></code> will try to load the response endlessly.</p>
+</div>
+<dl class="method">
+<dt id="httpretty.Entry.fill_filekind">
+<code class="descname">fill_filekind</code><span class="sig-paren">(</span><em>fk</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry.fill_filekind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.Entry.fill_filekind" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes HTTP Response data to a file descriptor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parm fk:</th><td class="field-body">a file-like object</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>side-effect:</strong> this method moves the cursor of the given file object to zero</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.Entry.normalize_headers">
+<code class="descname">normalize_headers</code><span class="sig-paren">(</span><em>headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry.normalize_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.Entry.normalize_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize keys in header names so that <code class="docutils literal notranslate"><span class="pre">COntent-tyPe</span></code> becomes <code class="docutils literal notranslate"><span class="pre">content-type</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>headers</strong> – dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.Entry.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.Entry.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>validates the body size with the value of the <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code>
+header</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="modules">
+<span id="api-modules"></span><h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-httpretty.core">
+<span id="core"></span><span id="api-module-core"></span><h2>Core<a class="headerlink" href="#module-httpretty.core" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="httpretty.core.EmptyRequestHeaders">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">EmptyRequestHeaders</code><a class="reference internal" href="_modules/httpretty/core.html#EmptyRequestHeaders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.EmptyRequestHeaders" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict subclass used as internal representation of empty request
+headers</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="httpretty.core.Entry">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">Entry</code><span class="sig-paren">(</span><em>method</em>, <em>uri</em>, <em>body</em>, <em>adding_headers=None</em>, <em>forcing_headers=None</em>, <em>status=200</em>, <em>streaming=False</em>, <em>**headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Created by <a class="reference internal" href="#httpretty.core.httpretty.register_uri" title="httpretty.core.httpretty.register_uri"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_uri()</span></code></a> and
+stored in memory as internal representation of a HTTP
+request/response definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>method</strong> – string</li>
+<li><strong>uri</strong> – string</li>
+<li><strong>body</strong> – string</li>
+<li><strong>adding_headers</strong> – dict - headers to be added to the response</li>
+<li><strong>forcing_headers</strong> – dict - headers to be forcefully set in the response</li>
+<li><strong>status</strong> – an integer (e.g.: <code class="docutils literal notranslate"><span class="pre">status=200</span></code>)</li>
+<li><strong>streaming</strong> – bool - whether to stream the response</li>
+<li><strong>headers</strong> – keyword-args with headers to be added to the response</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When using the <code class="docutils literal notranslate"><span class="pre">forcing_headers</span></code> option make sure to add the header <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> otherwise calls using <code class="xref py py-mod docutils literal notranslate"><span class="pre">requests</span></code> will try to load the response endlessly.</p>
+</div>
+<dl class="method">
+<dt id="httpretty.core.Entry.fill_filekind">
+<code class="descname">fill_filekind</code><span class="sig-paren">(</span><em>fk</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry.fill_filekind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.Entry.fill_filekind" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes HTTP Response data to a file descriptor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parm fk:</th><td class="field-body">a file-like object</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>side-effect:</strong> this method moves the cursor of the given file object to zero</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.core.Entry.normalize_headers">
+<code class="descname">normalize_headers</code><span class="sig-paren">(</span><em>headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry.normalize_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.Entry.normalize_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize keys in header names so that <code class="docutils literal notranslate"><span class="pre">COntent-tyPe</span></code> becomes <code class="docutils literal notranslate"><span class="pre">content-type</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>headers</strong> – dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.core.Entry.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#Entry.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.Entry.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>validates the body size with the value of the <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code>
+header</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">FakeSSLSocket</code><span class="sig-paren">(</span><em>sock</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#FakeSSLSocket"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Shorthand for <a class="reference internal" href="#httpretty.core.fakesock" title="httpretty.core.fakesock"><code class="xref py py-class docutils literal notranslate"><span class="pre">fakesock</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">FakeSockFile</code><a class="reference internal" href="_modules/httpretty/core.html#FakeSockFile"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Fake socket file descriptor. Under the hood all data is written in
+a temporary file, giving it a real file descriptor number.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">HTTPrettyRequest</code><span class="sig-paren">(</span><em>headers</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequest"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Represents a HTTP request. It takes a valid multi-line,
+<code class="docutils literal notranslate"><span class="pre">\r\n</span></code> separated string with HTTP headers and parse them out using
+the internal <cite>parse_request</cite> method.</p>
+<p>It also replaces the <cite>rfile</cite> and <cite>wfile</cite> attributes with StringIO
+instances so that we guarantee that it won’t make any I/O, neighter
+for writing nor reading.</p>
+<p>It has some convenience attributes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">headers</span></code> -&gt; a mimetype object that can be cast into a dictionary,
+contains all the request headers</p>
+<p><code class="docutils literal notranslate"><span class="pre">method</span></code> -&gt; the HTTP method used in this request</p>
+<p><code class="docutils literal notranslate"><span class="pre">querystring</span></code> -&gt; a dictionary containing lists with the
+attributes. Please notice that if you need a single value from a
+query string you will need to get it manually like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">body</span></code> -&gt; the request body as a string</p>
+<p><code class="docutils literal notranslate"><span class="pre">parsed_body</span></code> -&gt; the request body parsed by <code class="docutils literal notranslate"><span class="pre">parse_request_body</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">request</span><span class="o">.</span><span class="n">querystring</span>
+<span class="go">{&#39;name&#39;: [&#39;Gabriel Falcao&#39;]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">request</span><span class="o">.</span><span class="n">querystring</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">parse_querystring</code><span class="sig-paren">(</span><em>qs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequest.parse_querystring"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>parses an UTF-8 encoded query string into a dict of string lists</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>qs</strong> – a querystring</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dict of lists</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">parse_request_body</code><span class="sig-paren">(</span><em>body</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequest.parse_request_body"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Attempt to parse the post based on the content-type passed.
+Return the regular body if not</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>body</strong> – string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a python object such as dict or list in case the deserialization suceeded. Else returns the given param <code class="docutils literal notranslate"><span class="pre">body</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">querystring</code><em class="property"> = None</em></dt>
+<dd><p>a dictionary containing parsed request body or None if
+HTTPrettyRequest doesn’t know how to parse it.  It currently
+supports parsing body data that was sent under the
+<code class="docutils literal notranslate"><span class="pre">content`-type`</span> <span class="pre">headers</span> <span class="pre">values:</span> <span class="pre">``application/json</span></code> or
+<code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">HTTPrettyRequestEmpty</code><a class="reference internal" href="_modules/httpretty/core.html#HTTPrettyRequestEmpty"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Represents an empty <a class="reference internal" href="#httpretty.core.HTTPrettyRequest" title="httpretty.core.HTTPrettyRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPrettyRequest</span></code></a>
+where all its properties are somehow empty or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="httpretty.core.URIInfo">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">URIInfo</code><span class="sig-paren">(</span><em>username=''</em>, <em>password=''</em>, <em>hostname=''</em>, <em>port=80</em>, <em>path='/'</em>, <em>query=''</em>, <em>fragment=''</em>, <em>scheme=''</em>, <em>last_request=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.URIInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal representation of <a class="reference external" href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URIs</a></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">all arguments are optional</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> – </li>
+<li><strong>password</strong> – </li>
+<li><strong>hostname</strong> – </li>
+<li><strong>port</strong> – </li>
+<li><strong>path</strong> – </li>
+<li><strong>query</strong> – </li>
+<li><strong>fragment</strong> – </li>
+<li><strong>scheme</strong> – </li>
+<li><strong>last_request</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="httpretty.core.URIInfo.from_uri">
+<em class="property">classmethod </em><code class="descname">from_uri</code><span class="sig-paren">(</span><em>uri</em>, <em>entry</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo.from_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.URIInfo.from_uri" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>uri</strong> – string</li>
+<li><strong>entry</strong> – an instance of <a class="reference internal" href="#httpretty.core.Entry" title="httpretty.core.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.core.URIInfo.full_url">
+<code class="descname">full_url</code><span class="sig-paren">(</span><em>use_querystring=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo.full_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.URIInfo.full_url" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>use_querystring</strong> – bool</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a string with the full url with the format <code class="docutils literal notranslate"><span class="pre">{scheme}://{credentials}{domain}{path}{query}</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.core.URIInfo.get_full_domain">
+<code class="descname">get_full_domain</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#URIInfo.get_full_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.URIInfo.get_full_domain" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a string in the form <code class="docutils literal notranslate"><span class="pre">{domain}:{port}</span></code> or just the domain if the port is 80 or 443</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.core.create_fake_connection">
+<code class="descclassname">httpretty.core.</code><code class="descname">create_fake_connection</code><span class="sig-paren">(</span><em>address</em>, <em>timeout=&lt;object object&gt;</em>, <em>source_address=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#create_fake_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.create_fake_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>drop-in replacement for <a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.create_connection" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket.create_connection()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.core.fake_getaddrinfo">
+<code class="descclassname">httpretty.core.</code><code class="descname">fake_getaddrinfo</code><span class="sig-paren">(</span><em>host</em>, <em>port</em>, <em>family=None</em>, <em>socktype=None</em>, <em>proto=None</em>, <em>flags=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fake_getaddrinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fake_getaddrinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>drop-in replacement for <a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.getaddrinfo" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket.getaddrinfo()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.core.fake_gethostbyname">
+<code class="descclassname">httpretty.core.</code><code class="descname">fake_gethostbyname</code><span class="sig-paren">(</span><em>host</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fake_gethostbyname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fake_gethostbyname" title="Permalink to this definition">¶</a></dt>
+<dd><p>drop-in replacement for <a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.gethostbyname" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket.gethostbyname()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.core.fake_gethostname">
+<code class="descclassname">httpretty.core.</code><code class="descname">fake_gethostname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fake_gethostname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fake_gethostname" title="Permalink to this definition">¶</a></dt>
+<dd><p>drop-in replacement for <a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.gethostname" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">socket.gethostname()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.core.fake_wrap_socket">
+<code class="descclassname">httpretty.core.</code><code class="descname">fake_wrap_socket</code><span class="sig-paren">(</span><em>orig_wrap_socket_fn</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fake_wrap_socket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fake_wrap_socket" title="Permalink to this definition">¶</a></dt>
+<dd><p>drop-in replacement for py:func:<cite>ssl.wrap_socket</cite></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="httpretty.core.fakesock">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">fakesock</code><a class="reference internal" href="_modules/httpretty/core.html#fakesock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fakesock" title="Permalink to this definition">¶</a></dt>
+<dd><p>fake <a class="reference external" href="https://docs.python.org/3/library/socket.html#module-socket" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a></p>
+<dl class="class">
+<dt id="httpretty.core.fakesock.socket">
+<em class="property">class </em><code class="descname">socket</code><span class="sig-paren">(</span><em>family=&lt;AddressFamily.AF_INET: 2&gt;</em>, <em>type=&lt;SocketKind.SOCK_STREAM: 1&gt;</em>, <em>protocol=0</em>, <em>_sock=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fakesock.socket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fakesock.socket" title="Permalink to this definition">¶</a></dt>
+<dd><p>drop-in replacement for <code class="xref py py-class docutils literal notranslate"><span class="pre">socket.socket</span></code></p>
+<dl class="method">
+<dt id="httpretty.core.fakesock.socket.makefile">
+<code class="descname">makefile</code><span class="sig-paren">(</span><em>mode='r'</em>, <em>bufsize=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fakesock.socket.makefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fakesock.socket.makefile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns this fake socket’s own tempfile buffer.</p>
+<p>If there is an entry associated with the socket, the file
+descriptor gets filled in with the entry data before being
+returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="httpretty.core.fakesock.socket.real_sendall">
+<code class="descname">real_sendall</code><span class="sig-paren">(</span><em>data</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#fakesock.socket.real_sendall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.fakesock.socket.real_sendall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends data to the remote server. This method is called
+when HTTPretty identifies that someone is trying to send
+non-http data.</p>
+<p>The received bytes are written in this socket’s tempfile
+buffer so that HTTPretty can return it accordingly when
+necessary.</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">httpretty.core.</code><code class="descname">httprettified</code><span class="sig-paren">(</span><em>test=None</em>, <em>allow_net_connect=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httprettified"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>decorator for test functions</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Also available under the alias <a class="reference internal" href="#httpretty.activate" title="httpretty.activate"><code class="xref py py-func docutils literal notranslate"><span class="pre">httpretty.activate()</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>test</strong> – a callable</td>
+</tr>
+</tbody>
+</table>
+<p>example usage with <a class="reference external" href="https://nose.readthedocs.io/en/latest/">nosetests</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sure</span>
+<span class="kn">from</span> <span class="nn">httpretty</span> <span class="kn">import</span> <span class="n">httprettified</span>
+
+<span class="nd">@httprettified</span>
+<span class="k">def</span> <span class="nf">test_using_nosetests</span><span class="p">():</span>
+    <span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span>
+        <span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span>
+        <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+
+    <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;HTTPretty :)&quot;</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<p>example usage with <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest module</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">expect</span>
+<span class="kn">from</span> <span class="nn">httpretty</span> <span class="kn">import</span> <span class="n">httprettified</span>
+
+<span class="nd">@httprettified</span>
+<span class="k">class</span> <span class="nc">TestWithPyUnit</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_httpbin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span><span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;HTTPretty :)&quot;</span>
+        <span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">httprettized</code><span class="sig-paren">(</span><em>allow_net_connect=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httprettized"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">context-manager</a> for enabling HTTPretty.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span><span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;42.42.42.42&#39;</span><span class="p">}))</span>
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">enabled</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">latest_requests</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;42.42.42.42&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="httpretty.core.httpretty">
+<em class="property">class </em><code class="descclassname">httpretty.core.</code><code class="descname">httpretty</code><a class="reference internal" href="_modules/httpretty/core.html#httpretty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty" title="Permalink to this definition">¶</a></dt>
+<dd><p>manages HTTPretty’s internal request/response registry and request matching.</p>
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.Response">
+<em class="property">classmethod </em><code class="descname">Response</code><span class="sig-paren">(</span><em>body</em>, <em>method=None</em>, <em>uri=None</em>, <em>adding_headers=None</em>, <em>forcing_headers=None</em>, <em>status=200</em>, <em>streaming=False</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.Response" title="Permalink to this definition">¶</a></dt>
+<dd><p>shortcut to create an <a class="reference internal" href="#httpretty.core.Entry" title="httpretty.core.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a> that takes the body as first positional argument</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">the parameters of this function match those of the <a class="reference internal" href="#httpretty.core.Entry" title="httpretty.core.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a> constructor</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>body</strong> – </li>
+<li><strong>method</strong> – one of <code class="docutils literal notranslate"><span class="pre">httpretty.GET</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.POST</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.DELETE</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.HEAD</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.OPTIONS</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.CONNECT</span></code></li>
+<li><strong>uri</strong> – </li>
+<li><strong>adding_headers</strong> – </li>
+<li><strong>forcing_headers</strong> – </li>
+<li><strong>status</strong> – defaults to <strong>200</strong></li>
+<li><strong>streaming</strong> – defaults to <strong>False</strong></li>
+<li><strong>kw</strong> – keyword-arguments passed onto the <a class="reference internal" href="#httpretty.core.Entry" title="httpretty.core.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an <a class="reference internal" href="#httpretty.core.Entry" title="httpretty.core.Entry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Entry</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt>
+<em class="property">classmethod </em><code class="descname">disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.disable"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Disables HTTPretty entirely, putting the original <a class="reference external" href="https://docs.python.org/3/library/socket.html#module-socket" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a>
+module back in its place.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+<span class="c1"># request passes through fake socket</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org&#39;</span><span class="p">)</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="c1"># request uses real python socket module</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method does not call <code class="xref py py-meth docutils literal notranslate"><span class="pre">httpretty.core.reset()</span></code> automatically.</p>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt>
+<em class="property">classmethod </em><code class="descname">enable</code><span class="sig-paren">(</span><em>allow_net_connect=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.enable"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Enables HTTPretty.
+When <code class="docutils literal notranslate"><span class="pre">allow_net_connect</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> any connection to an unregistered uri will throw <a class="reference internal" href="#httpretty.errors.UnmockedError" title="httpretty.errors.UnmockedError"><code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.errors.UnmockedError</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span>
+    <span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span>
+    <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http://.*&#39;</span><span class="p">),</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;man&#39;</span><span class="p">:</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">:</span> <span class="s1">&#39;middle&#39;</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://foo.bar/foo/bar&#39;</span><span class="p">)</span>
+
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span>
+    <span class="s2">&quot;man&quot;</span><span class="p">:</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;the&quot;</span><span class="p">:</span> <span class="s2">&quot;middle&quot;</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">after calling this method the original <a class="reference external" href="https://docs.python.org/3/library/socket.html#module-socket" title="(in Python v3.7)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> is replaced with <a class="reference internal" href="#httpretty.core.fakesock" title="httpretty.core.fakesock"><code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.core.fakesock</span></code></a>. Make sure to call <a class="reference internal" href="#httpretty.core.httpretty.disable" title="httpretty.core.httpretty.disable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">disable()</span></code></a> after done with your tests or use the <code class="xref py py-class docutils literal notranslate"><span class="pre">httpretty.enabled</span></code> as decorator or <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">context-manager</a></p>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.historify_request">
+<em class="property">classmethod </em><code class="descname">historify_request</code><span class="sig-paren">(</span><em>headers</em>, <em>body=''</em>, <em>append=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.historify_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.historify_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>appends request to a list for later retrieval</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span><span class="n">httpretty</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">enabled</span><span class="p">():</span>
+    <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">latest_requests</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt>
+<em class="property">classmethod </em><code class="descname">is_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.is_enabled"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Check if HTTPretty is enabled</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">()</span> <span class="o">==</span> <span class="bp">True</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.match_http_address">
+<em class="property">classmethod </em><code class="descname">match_http_address</code><span class="sig-paren">(</span><em>hostname</em>, <em>port</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.match_http_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.match_http_address" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hostname</strong> – a string</li>
+<li><strong>port</strong> – an integer</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an <code class="xref py py-class docutils literal notranslate"><span class="pre">URLMatcher</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.match_https_hostname">
+<em class="property">classmethod </em><code class="descname">match_https_hostname</code><span class="sig-paren">(</span><em>hostname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.match_https_hostname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.match_https_hostname" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hostname</strong> – a string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an <code class="xref py py-class docutils literal notranslate"><span class="pre">URLMatcher</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.match_uriinfo">
+<em class="property">classmethod </em><code class="descname">match_uriinfo</code><span class="sig-paren">(</span><em>info</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.match_uriinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.match_uriinfo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>info</strong> – an <a class="reference internal" href="#httpretty.core.URIInfo" title="httpretty.core.URIInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">URIInfo</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a 2-item tuple: (<code class="xref py py-class docutils literal notranslate"><span class="pre">URLMatcher</span></code>, <a class="reference internal" href="#httpretty.core.URIInfo" title="httpretty.core.URIInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">URIInfo</span></code></a>) or <code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">[])</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.playback">
+<em class="property">classmethod </em><code class="descname">playback</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.playback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.playback" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="s1">&#39;/tmp/ip.json&#39;</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/tmp/ip.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">data</span> <span class="o">==</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> – a string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">context-manager</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.record">
+<em class="property">classmethod </em><code class="descname">record</code><span class="sig-paren">(</span><em>filename</em>, <em>indentation=4</em>, <em>encoding='utf-8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.record" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">httpretty</span>
+
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="s1">&#39;/tmp/ip.json&#39;</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/ip&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/tmp/ip.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">data</span> <span class="o">==</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> – a string</li>
+<li><strong>indentation</strong> – an integer, defaults to <strong>4</strong></li>
+<li><strong>encoding</strong> – a string, defaults to <strong>“utf-8”</strong></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>a <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers">context-manager</a></p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt>
+<em class="property">classmethod </em><code class="descname">register_uri</code><span class="sig-paren">(</span><em>method</em>, <em>uri</em>, <em>body='{&quot;message&quot;: &quot;HTTPretty :)&quot;}'</em>, <em>adding_headers=None</em>, <em>forcing_headers=None</em>, <em>status=200</em>, <em>responses=None</em>, <em>match_querystring=False</em>, <em>priority=0</em>, <em>**headers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.register_uri"><span class="viewcode-link">[source]</span></a></dt>
+<dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">httpretty</span>
+
+
+<span class="k">def</span> <span class="nf">request_callback</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">):</span>
+    <span class="n">content_type</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span> <span class="o">==</span> <span class="s1">&#39;{&quot;nothing&quot;: &quot;here&quot;}&#39;</span><span class="p">,</span> <span class="s1">&#39;unexpected body: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">content_type</span> <span class="o">==</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span> <span class="s1">&#39;expected application/json but received Content-Type: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})]</span>
+
+<span class="n">httpretty</span><span class="o">.</span><span class="n">register_uri</span><span class="p">(</span>
+    <span class="n">HTTPretty</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="s2">&quot;https://httpretty.example.com/api&quot;</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="n">request_callback</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">enabled</span><span class="p">():</span>
+    <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://httpretty.example.com/api&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s1">&#39;{&quot;nothing&quot;: &quot;here&quot;}&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">})</span>
+
+<span class="k">assert</span> <span class="n">httpretty</span><span class="o">.</span><span class="n">latest_requests</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s1">&#39;https://httpbin.org/ip&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>method</strong> – one of <code class="docutils literal notranslate"><span class="pre">httpretty.GET</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.PUT</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.POST</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.DELETE</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.HEAD</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.PATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.OPTIONS</span></code>, <code class="docutils literal notranslate"><span class="pre">httpretty.CONNECT</span></code></li>
+<li><strong>uri</strong> – a string (e.g.: <strong>“https://httpbin.org/ip”</strong>)</li>
+<li><strong>body</strong> – a string, defaults to <code class="docutils literal notranslate"><span class="pre">{&quot;message&quot;:</span> <span class="pre">&quot;HTTPretty</span> <span class="pre">:)&quot;}</span></code></li>
+<li><strong>adding_headers</strong> – dict - headers to be added to the response</li>
+<li><strong>forcing_headers</strong> – dict - headers to be forcefully set in the response</li>
+<li><strong>status</strong> – an integer, defaults to <strong>200</strong></li>
+<li><strong>responses</strong> – a list of entries, ideally each created with <a class="reference internal" href="#httpretty.core.httpretty.Response" title="httpretty.core.httpretty.Response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Response()</span></code></a></li>
+<li><strong>priority</strong> – an integer, useful for setting higher priority over previously registered urls. defaults to zero</li>
+<li><strong>match_querystring</strong> – bool - whether to take the querystring into account when matching an URL</li>
+<li><strong>headers</strong> – headers to be added to the response</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="httpretty.core.httpretty.reset">
+<em class="property">classmethod </em><code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#httpretty.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.httpretty.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>resets the internal state of HTTPretty, unregistering all URLs</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.core.url_fix">
+<code class="descclassname">httpretty.core.</code><code class="descname">url_fix</code><span class="sig-paren">(</span><em>s</em>, <em>charset=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/core.html#url_fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.core.url_fix" title="Permalink to this definition">¶</a></dt>
+<dd><p>escapes special characters</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-httpretty.http">
+<span id="http"></span><span id="api-module-http"></span><h2>Http<a class="headerlink" href="#module-httpretty.http" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="httpretty.http.last_requestline">
+<code class="descclassname">httpretty.http.</code><code class="descname">last_requestline</code><span class="sig-paren">(</span><em>sent_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/http.html#last_requestline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.http.last_requestline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the last line in sent_data that can be parsed with parse_requestline</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="httpretty.http.parse_requestline">
+<code class="descclassname">httpretty.http.</code><code class="descname">parse_requestline</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/httpretty/http.html#parse_requestline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.http.parse_requestline" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5">http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_requestline</span><span class="p">(</span><span class="s1">&#39;GET / HTTP/1.0&#39;</span><span class="p">)</span>
+<span class="go">(&#39;GET&#39;, &#39;/&#39;, &#39;1.0&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_requestline</span><span class="p">(</span><span class="s1">&#39;post /testurl htTP/1.1&#39;</span><span class="p">)</span>
+<span class="go">(&#39;POST&#39;, &#39;/testurl&#39;, &#39;1.1&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_requestline</span><span class="p">(</span><span class="s1">&#39;Im not a RequestLine&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">Not a Request-Line</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-httpretty.utils">
+<span id="utils"></span><span id="api-module-utils"></span><h2>Utils<a class="headerlink" href="#module-httpretty.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-httpretty.errors">
+<span id="exceptions"></span><span id="api-module-exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-httpretty.errors" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="httpretty.errors.HTTPrettyError">
+<em class="property">exception </em><code class="descclassname">httpretty.errors.</code><code class="descname">HTTPrettyError</code><a class="reference internal" href="_modules/httpretty/errors.html#HTTPrettyError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.errors.HTTPrettyError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="httpretty.errors.UnmockedError">
+<em class="property">exception </em><code class="descclassname">httpretty.errors.</code><code class="descname">UnmockedError</code><a class="reference internal" href="_modules/httpretty/errors.html#UnmockedError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#httpretty.errors.UnmockedError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Hacking on HTTPretty" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="acks.html" class="btn btn-neutral float-left" title="Acknowledgements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gabriel Falcao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
