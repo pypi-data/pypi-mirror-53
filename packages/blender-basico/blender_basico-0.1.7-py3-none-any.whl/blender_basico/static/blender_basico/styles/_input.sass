@@ -1,0 +1,255 @@
+/* INPUTS */
+.input-append input, .input-prepend input,
+.input-append select, .input-prepend select,
+.input-append .uneditable-input, .input-prepend .uneditable-input
+	background-color: lighten($color-background, 5%)
+	transition: background-color 0.1s ease-in
+
+.form-control
+	color: $color-text-dark
+	border: none
+	border-bottom: 2px solid $color-text-dark-secondary
+	border-radius: 0
+	box-shadow: none
+	background-color: lighten($color-background, 3%)
+	transition: border-color .15s ease-in-out
+
+	&:hover
+		background-color: white !important
+		border-color: rgba($color-primary, .5) !important
+		color: darken($color-primary, 15%)
+
+	&:focus
+		box-shadow: none
+		border-color: $color-primary !important
+
+.input-group
+	display: flex
+	flex-wrap: wrap
+
+	.control-label
+		width: 100%
+
+	.form-control
+		display: inline-block
+		width: auto
+		float: right
+
+/* Form with Errors */
+.has-error
+	.form-control
+		border-color: $color-danger !important
+		box-shadow: none
+		&:active, &:focus
+			box-shadow: none
+			border-color: $color-danger !important
+	.input-group-addon
+		border-color: $color-danger !important
+
+.has-error.input-group .input-group-addon,
+.has-error.input-group .control-label
+	color: $color-danger !important
+
+/* INPUT: Checkbox */
+.input-group input.form-control[type=checkbox],
+.input-group.input-group-lg input.form-control[type=checkbox]
+	box-shadow: none !important
+
+.input-group input.form-control[type=checkbox]
+	width: 15px
+
+.input-group.input-group-lg input.form-control[type=checkbox]
+	width: 20px
+
+/* INPUT: Checkbox Labels */
+.input-group input.form-control[type=checkbox]+label.control-label,
+.input-group.input-group-lg input.form-control[type=checkbox]+label.control-label
+	text-align: left
+	cursor: pointer
+	user-select: none
+	transition: color 0.1s ease-out
+
+.input-group input.form-control[type=checkbox]:hover+label.control-label,
+.input-group.input-group-lg input.form-control[type=checkbox]:hover+label.control-label
+	color: $color-secondary
+
+.input-group input.form-control[type=checkbox]:checked+label.control-label,
+.input-group.input-group-lg input.form-control[type=checkbox]:checked+label.control-label
+	color: $color-primary
+	&:hover
+		color: $color-secondary
+
+.input-group input.form-control[type=checkbox]+label.control-label
+	padding-left: 22px
+	padding-top: 3px
+
+.input-group.input-group-lg input.form-control[type=checkbox]+label.control-label
+	padding-left: 30px
+	padding-top: 6px
+
+
+/* FORM LABELS */
+label
+	display: block
+	font-weight: normal
+	color: $color-text-dark-primary
+	text-align: left
+
+.control-label
+	font-size: 95%
+
+.form-horizontal .control-label
+	text-align: left
+
+.input-group
+	select
+		height: auto !important
+		padding: 6px 7px 7px !important
+
+		&:focus
+			border: none
+			box-shadow: none
+
+		&:hover, &:focus
+			color: inherit
+
+	option
+		margin: 0 4px 0 8px
+
+	&.disabled
+		opacity: .5
+		cursor: not-allowed
+		pointer-events: none
+
+		.input-group-addon, .form-control
+			color: $color-text-dark-hint
+			border-color: $color-text-dark-hint
+
+
+	.form-control[type='file']
+		padding-top: 5px
+
+	&.input-group-lg .form-control[type='file']
+		padding-top: 6px
+
+
+/* INPUT: Checkbox Addon */
+.input-group input.form-control[type=checkbox]+label.control-label,
+.input-group.input-group-lg input.form-control[type=checkbox]+label.control-label
+	user-select: none
+
+/* INPUT ADDONS */
+.input-group .input-group-addon
+	display: inline-block
+	float: left
+	background-color: white
+	border: none
+	border-bottom: 2px solid $color-text-dark-secondary
+	border-radius: 0
+	color: lighten($color-text, 20%) !important
+
+	&+.form-control
+		border-radius: 0
+
+.form-control + .input-group-addon.danger > button
+	color: $color-danger
+
+.error
+	color: $color-danger
+
+ul.error
+	margin: 0 !important
+	padding: 5px 0 0 0 !important
+	display: inline-block
+	& li
+		&:after
+			content: '' !important
+
+.box ul.error li, .box ul.error li:last-child
+	margin-bottom: 0
+
+.edit_box
+	background-color: lighten($color-info, 10%)
+	float: right
+	color: $color-text-light
+	padding: 8px 10px
+	margin: 8px
+	cursor: pointer
+	user-select: none
+	border-radius: 3px
+	box-shadow: 2px 2px 0 rgba(black, .1)
+
+.edit_box:hover
+	background-color: lighten($color-info, 5%)
+
+.edit_box:focus, .edit_box:active
+	background-color: $color-secondary
+
+
+/* CKEditor Overrides */
+.cke_chrome
+	font-family: $font-body !important
+	font-weight: lighter
+	color: darken($color-text, 10%) !important
+	border: thin solid lighten($color-text, 40%) !important
+	background-color: lighten($color-background, 3%) !important
+	resize: vertical
+	margin: 0 !important
+	box-shadow: 2px 2px 0 rgba(darken($color-background, 60%), .1)
+	border-radius: 3px
+
+span#cke_2_top
+	padding: 5px !important
+	border: none
+	background-image: none
+	background-color: transparent !important
+	box-shadow: none
+
+span.cke_toolgroup
+	border: none
+	border-bottom: 2px solid transparent
+	background-image: none
+	background-color: white
+
+a.cke_button_off
+	border-bottom: 2px solid transparent !important
+	box-shadow: none
+
+a.cke_button_off:hover, a.cke_button_off:focus, a.cke_button_off:active,
+a.cke_button_disabled:hover, a.cke_button_disabled:focus, a.cke_button_disabled:active
+	background-image: none !important
+	background-color: transparent !important
+	color: white !important
+	border-bottom: 2px solid $color-primary !important
+
+a.cke_button_on, a.cke_button_on:hover, a.cke_button_on:focus, a.cke_button_on:active
+	background-image: none !important
+	background-color: transparent !important
+	border-bottom: 2px solid $color-secondary !important
+	color: white !important
+	box-shadow: none
+
+/* PLACEHOLDERS */
+\::-webkit-input-placeholder
+	color: lighten($color-text, 40%) !important
+
+\:-moz-placeholder
+	/* Mozilla Firefox 4 to 18 */
+	color: lighten($color-text, 40%) !important
+	opacity: 1
+
+\::-moz-placeholder
+	color: lighten($color-text, 40%) !important
+	opacity: 1
+
+\:-ms-input-placeholder
+	color: lighten($color-text, 40%) !important
+
+/* CHECKBOXES */
+.input-group.input-checkbox
+	margin-top: 25px
+	margin-bottom: 25px
+
+.input-group.input-checkbox .control-label
+	font-size: 100%
+	text-align: left !important
