@@ -1,0 +1,28 @@
+Metadata-Version: 1.2
+Name: fslock
+Version: 2.0
+Summary: Shared and exclusive file locking using flock(2)
+Home-page: https://gitlab.com/remram44/python-fslock
+Author: Remi Rampin
+Author-email: remirampin@gmail.com
+Maintainer: Remi Rampin
+Maintainer-email: remirampin@gmail.com
+License: MIT
+Project-URL: Homepage, https://gitlab.com/remram44/python-fslock
+Project-URL: Say Thanks, https://saythanks.io/to/remram44
+Project-URL: Source, https://gitlab.com/remram44/python-fslock
+Project-URL: Tracker, https://gitlab.com/remram44/python-fslock/issues
+Description: File locks
+        ==========
+        
+        This library provides a safe wrapper around ``flock(2)``. It avoids problems when using locks in multi-threaded applications, while still exposing exclusive and shared locks.
+        
+        It also contains a caching utility, ``fslock.cache.cache_get_or_set()``, which can be use to safely cache files that are expensive to produce on disk.
+        
+Keywords: lock,flock,file lock,locking,filesystem
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3 :: Only
