@@ -1,0 +1,48 @@
+Metadata-Version: 1.2
+Name: thonny-ev3dev
+Version: 0.36
+Summary: A plug-in which adds EV3 support for Thonny
+Home-page: https://www.github.com/harcokuppens/thonny-ev3dev
+Author: Harco Kuppens
+Author-email: h.kuppens@cs.ru.nl
+License: MIT
+Description: 
+        The thonny-ev3dev package is a plug-in which adds EV3 support for Thonny.
+        
+        To correctly use the thonny-ev3dev plugin you must not use 'import ev3dev.ev3 as
+        ev3' to import the ev3dev library, but instead you import it as:
+        
+            import ev3devcontext; ev3=ev3devcontext.getEV3API()
+        
+        Then depending on the context(simulator,EV3,pc) the right library is loaded.   
+        
+        For more info about the thonny-ev3dev plugin see: https://github.com/harcokuppens/thonny-ev3dev/wiki
+        
+        For more info about Thonny: http://thonny.org
+        
+Keywords: IDE education programming EV3 mindstorms lego
+Platform: Windows
+Platform: macOS
+Platform: Linux
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: Freeware
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Education
+Classifier: Topic :: Software Development
+Requires-Python: >=3.4
