@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: imageproxy
+Version: 0.2.0
+Summary: WSGI application to dynamically resize images.
+Home-page: https://github.com/kgaughan/imageproxy
+Author: Keith Gaughan
+Author-email: k@stereochro.me
+License: Apache Licence v2.0
+Description: **imageproxy** is a small standalone WSGI application that dynamically
+        resizes images.
+        
+        It supports virtual hosting, so you can use the same instance to serve
+        assets for different domains.
+        
+        Example config file::
+        
+            [site:example.net]
+            root=/srv/example.net/web/media/images
+            prefix=/assets/media/images
+        
+            [site:example.com]
+            root=/srv/example.com/web/media/images
+            prefix=/assets/media/images
+        
+        By default only JPEG files can be resized, but if you'd like to make
+        GIFs and PNGs resizable, add the following::
+        
+            [type:image/gif]
+            resize=true
+        
+            [type:image/png]
+            resize=true
+        
+        You can specify the configuration file location by giving its path in
+        the ``IMAGEPROXY_SETTINGS`` environment variable.
+        
+        If you want to use this with Paste, it comes with a sample config file.
+        Naturally, you'll need Paste, PasteDeploy, and PasteScript to run it.
+        However, Paste isn't required and the ``imageproxy.create_application``
+        callable can be used with any WSGI server.
+        
+        .. vim:set ft=rst:
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
+Description-Content-Type: text/x-rst
