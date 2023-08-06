@@ -1,0 +1,6 @@
+{% load i18n %}
+<a href="{% if record.report_file %}{{ record.report_file.url }}{% endif %}"
+   class="btn btn-info"
+   {% if not record.is_complete %}disabled{% endif %}
+>
+{% trans "Download" %}</a>
