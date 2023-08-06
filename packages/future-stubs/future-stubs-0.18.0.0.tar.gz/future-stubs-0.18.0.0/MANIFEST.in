@@ -1,0 +1,5 @@
+prune docs
+prune tests
+prune stubs
+recursive-exclude src *.py
+recursive-include src *.pyi
