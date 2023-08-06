@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: backend.ai-krunner-centos
+Version: 2.1.0
+Summary: Backend.AI Kernel Runner for CentOS
+Home-page: https://backend.ai
+Author: Lablup Inc.
+Author-email: devops@lablup.com
+License: MIT
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: Click (>=7.0)
+Provides-Extra: build
+Requires-Dist: wheel (>=0.33.4) ; extra == 'build'
+Requires-Dist: twine (>=1.13.0) ; extra == 'build'
+Provides-Extra: ci
+Provides-Extra: dev
+Requires-Dist: pytest-sugar ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest (>=5.0.1) ; extra == 'test'
+Requires-Dist: flake8 (>=3.7.0) ; extra == 'test'
+Requires-Dist: codecov ; extra == 'test'
+
+# backend.ai-krunner-centos
+Backend.AI Kernel Runner Package for CentOS-based Kernels
+
+
