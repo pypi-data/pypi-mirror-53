@@ -1,0 +1,26 @@
+Metadata-Version: 2.0
+Name: soms
+Version: 1.0
+Summary: A package to check system related metrics and values for simpler blackbox monitoring
+Home-page: https://github.com/AjeetK/so.git
+Author: Ajeet Khan
+Author-email: i.ajeetkhan@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Description-Content-Type: text/markdown
+
+# soms - A package that can help to do blackbox monitoring by providing metrics related to system-overview,IOPS,Disks,Memory,CPU etc using a single command.
+
+A pip package to get different types of system related metrics and values by simply running one command.
+
+
+### Assumptions:
+
++ Assuming python is installed on your system.
++ vmstat, iostat, free, w commands are already installed
+
+
+
