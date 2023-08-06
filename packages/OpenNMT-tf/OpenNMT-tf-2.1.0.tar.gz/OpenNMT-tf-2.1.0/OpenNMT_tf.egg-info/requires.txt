@@ -1,0 +1,13 @@
+pyyaml==5.1.*
+rouge==0.3.1
+tensorflow-addons>=0.6.0
+
+[:platform_system == "Linux"]
+pyonmttok<2,>=1.16.0
+
+[:python_version >= "3.0"]
+sacrebleu<2,>=1.4.1
+
+[tests]
+parameterized
+nose2
