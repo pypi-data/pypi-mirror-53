@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "narmock"
+version = "0.2.10"
+description = "A minimal mocking utility for C projects."
+authors = ["Valentin Berlier <berlier.v@gmail.com>"]
+license = "MIT"
+
+homepage = "https://github.com/vberlier/narmock"
+repository = "https://github.com/vberlier/narmock"
+documentation = "https://github.com/vberlier/narmock"
+
+readme = "README.md"
+
+keywords = [
+  "c",
+  "mocking",
+  "tests",
+  "narwhal",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pycparser = "^2.19"
+jinja2 = "^2.10"
+
+[tool.poetry.dev-dependencies]
+black = { version = "^19.3b0", allows-prereleases = true }
+
+[tool.poetry.scripts]
+narmock = 'narmock.cli:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
