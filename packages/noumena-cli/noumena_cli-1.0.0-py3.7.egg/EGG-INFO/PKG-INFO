@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: noumena-cli
+Version: 1.0.0
+Summary: Data format translation program
+Home-page: https://gitlab.com/igor.bobusky/noumena-cli
+Author: Igor Bobusky
+Author-email: igor.bobusky@gmail.com
+License: UNKNOWN
+Description: # noumena-cli - Data format translation program
+        
+        ## Description
+        Command line utility which will read CSV files and PRN files from stdin and, 
+        based on a command line option, print either JSON or HTML to stdout, so that it would work as part of a 
+        command pipeline.
+        
+        Identical input content (i.e the data in the file, minus the formatting characters) 
+        should produce identical output - irrespective of whether the input data format was CSV or PRN. 
+        Non ASCII characters should be handled and rendered correctly. 
+        No content should be lost in translation and all output should be readable when encoded to UTF-8.
+        
+        
+        ## How to install and run
+        
+        
+        python src\noumena_cli\cli_noumena.py json --input-format prn < src\noumena_cli\Workbook2.prn
+        python src\noumena_cli\cli_noumena.py json --input-format csv < src\noumena_cli\Workbook2.csv
+        
+        python src\noumena_cli\cli_noumena.py html --input-format prn < src\noumena_cli\Workbook2.prn
+        python src\noumena_cli\cli_noumena.py html --input-format csv < src\noumena_cli\Workbook2.csv
+        
+Keywords: noumena cli
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
