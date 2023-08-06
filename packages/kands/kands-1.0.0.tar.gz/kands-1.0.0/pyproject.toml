@@ -1,0 +1,19 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "kands"
+author = "Marcos Gabarda"
+author-email = "hey@marcosgabarda.com"
+home-page = "https://marcosgabarda.com"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Utilities",
+]
+requires = ["termcolor"]
+description-file = "README.md"
+requires-python=">=3.6"
+
+[tool.flit.scripts]
+kands = "kands.main:main"
