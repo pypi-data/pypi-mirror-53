@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "keios-dynabuffers-rhea"
+version = "0.2.0"
+description = ""
+authors = ["fridayy <benjamin.krenn@leftshift.one>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
