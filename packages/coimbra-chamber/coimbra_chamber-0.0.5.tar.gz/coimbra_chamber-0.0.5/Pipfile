@@ -1,0 +1,31 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pep8 = "*"
+pydocstyle = "*"
+pylint = "*"
+pytest = "*"
+pytest-cov = "*"
+check-manifest = "*"
+twine = "*"
+seaborn = "*"
+jupyter = "*"
+
+[packages]
+dacite = "*"
+matplotlib = "*"
+mysql-connector-python = "*"
+numpy = "*"
+pandas = "*"
+scipy = "*"
+uncertainties = "*"
+coolprop = "*"
+nptdms = "*"
+sqlalchemy = "*"
+coimbra-chamber = {editable = true,path = "."}
+
+[requires]
+python_version = "3.7"
