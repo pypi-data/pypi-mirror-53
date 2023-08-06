@@ -1,0 +1,27 @@
+name: story
+version: 1  # Doesn't matter, since version-script will run.
+version-script: echo ${CIRCLE_TAG}
+summary: Story CLI
+description: Core toolkit to interact with Storyscript Cloud
+grade: stable
+confinement: strict
+base: core18
+
+apps:
+  story:
+    command: bin/story
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+parts:
+  story:
+    plugin: python
+    python-version: python3
+    source: dist/story.tar.gz
+    stage-packages:
+      - libbz2-1.0
+      - libdb5.3
+      - liblzma5
+      - libncursesw5
+      - libtinfo5
+      - zlib1g

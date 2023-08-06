@@ -1,0 +1,163 @@
+version: 2.0
+jobs:
+  test:
+    working_directory: ~/repo
+    docker:
+    - image: circleci/python:3.7.0-node
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "setup.py" }}
+        - v1-dependencies-
+
+    - run:
+        name: install dependencies
+        command: |
+          python -m venv venv
+          . venv/bin/activate
+          python3 setup.py install
+          pip install tox
+
+    - save_cache:
+        paths:
+        - ./venv
+        key: v1-dependencies-{{ checksum "setup.py" }}
+
+    - run:
+        command: |
+          . venv/bin/activate
+          tox
+
+    - run:
+        name: collect coverage
+        command: |
+          bash <(curl -s https://codecov.io/bash)
+
+    - store_artifacts:
+        path: test-reports
+        destination: test-reports
+
+  release_pypi:
+    docker:
+    - image: circleci/python:3.7.0-node
+    steps:
+      - checkout
+      - run:
+          name: setup venv
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+      - run:
+          name: install twine
+          command: |
+            . venv/bin/activate
+            pip install twine
+      - run:
+          name: sdist
+          command: |
+            . venv/bin/activate
+            python setup.py sdist
+      - run:
+          name: upload
+          command: |
+            . venv/bin/activate
+            twine upload dist/story-*.tar.gz
+  release_brew:
+    macos:
+      xcode: "9.0"
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "8e:2f:db:cd:a7:a4:38:ca:c1:c3:8f:ef:fc:27:4a:93"
+      - run:
+          name: install or re-link brew
+          command: |
+            if [ -d /usr/local/Cellar ]; then
+              for i in `ls /usr/local/Cellar/`; do echo "Re-linking $i"; brew link --force $i; done
+            else
+              /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            fi
+      - run:
+          name: upgrade python
+          command: brew upgrade python || echo "Python is already installed"
+      - run:
+          name: install virtualenv
+          command: pip3 install virtualenv
+      - checkout
+      - run:
+          name: change git name
+          command: git config --global user.name "Storyscript Infrastructure"
+      - run:
+          name: change git email
+          command: git config --global user.email infra@storyscript.io
+      - run:
+          name: create brew pr
+          command: bash ./scripts/update_brew.sh $CIRCLE_TAG
+  release_snap:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run:
+          name: sudo apt-get update
+          command: sudo apt-get update
+      - run:
+          name: Install snapd and snapcraft
+          command: sudo apt-get install snapd snapcraft
+      - run:
+          name: Build snapcraft build container
+          command: docker build -t story-snapcraft snap
+      - run:
+          name: Build sdist tar of the CLI
+          command: docker run --rm -v $PWD:/story story-snapcraft /bin/sh -c 'cd /story && python3 setup.py sdist'
+      - run:
+          name: Move the sdist to a well known file (we move this because we do not want to edit snapcraft.yaml on the fly)
+          command: sudo mv dist/story-${CIRCLE_TAG}.tar.gz dist/story.tar.gz
+      - run:
+          name: Build snap image
+          command: docker run --rm -e CIRCLE_TAG=${CIRCLE_TAG} -v $PWD:/story story-snapcraft /bin/sh -c 'cd /story && snapcraft clean && snapcraft'
+      - run:
+          name: Install the recently build snap locally
+          command: sudo snap install --dangerous story_${CIRCLE_TAG}_amd64.snap
+      - run:
+          name: Check the version of the snap installed
+          command: /snap/bin/story --version | grep ${CIRCLE_TAG}
+      - run:
+          name: Login to snapcraft
+          command: mkdir -p .snapcraft && echo $SNAPCRAFT_LOGIN_FILE_BASE64 | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
+      - run:
+          name: Push to snapcraft
+          command: snapcraft push story_${CIRCLE_TAG}_amd64.snap --release stable
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+    - test:
+        filters:
+          tags:
+            only: /.*/
+    - release_pypi:
+        requires:
+          - test
+        filters:
+          tags:
+            only: /^[0-9]+\.[0-9]+\.[0-9]+$/
+          branches:
+            ignore: /.*/
+    - release_snap:
+        requires:
+          - release_pypi
+        filters:
+          tags:
+            only: /^[0-9]+\.[0-9]+\.[0-9]+$/
+          branches:
+            ignore: /.*/
+    - release_brew:
+        requires:
+          - release_pypi
+        filters:
+          tags:
+            only: /^[0-9]+\.[0-9]+\.[0-9]+$/
+          branches:
+            ignore: /.*/
