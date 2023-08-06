@@ -1,0 +1,29 @@
+Metadata-Version: 1.1
+Name: html_cleaner
+Version: 0.3.dev0
+Summary: clean up html files
+Home-page: https://github.com/account-login/html_cleaner
+Author: account-login
+Author-email: UNKNOWN
+License: MIT
+Description: usage: clean up html files
+        
+        positional arguments:
+          files                 files
+        
+        optional arguments:
+          -h, --help            show this help message and exit
+          --processor PROCESSOR
+                                number of process
+          --encoding ENCODING   fallback to this encoding
+          --no-script           remove js
+          -r, --recursive       recursive into directory
+          -p PATTERN, --pattern PATTERN
+                                glob pattern
+        
+Keywords: html cleaner tidy
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
