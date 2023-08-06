@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: blowpipe
+Version: 0.0.5
+Summary: blowpipe is a docker based data pipeline / workflow engine.
+Home-page: https://github.com/simonski/blowpipe
+Author: Simon Gauld
+Author-email: simon.gauld@gmail.com
+License: Apache 2.0
+Keywords: blowpipe data pipeline docker workflow
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: tabulate
+Requires-Dist: PyYAML
+Requires-Dist: docker
+Requires-Dist: kubernetes
+Requires-Dist: flask
+Requires-Dist: pyfiglet
+Requires-Dist: grpcio
+Requires-Dist: grpcio-tools
+Requires-Dist: sqlalchemy
+
+A python/docker based workflow engine.
+
+
