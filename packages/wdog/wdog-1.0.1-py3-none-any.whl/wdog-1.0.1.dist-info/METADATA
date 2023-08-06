@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: wdog
+Version: 1.0.1
+Summary: A File System Watch dog
+Home-page: UNKNOWN
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: watchdog (>=0.8.3)
+
+# Watch Dog
+
+## __author__ = Dr. Abiira Nathan
+
+A File system watch dog. Fit for monitoring and reloading a server
+configuration file.
+Based on watchdog module
+
+# Installation
+```pip install wdog```
+
+Example Usage:
+```
+from wdog import WatchDog
+import config
+
+def reload_config():
+    print("Reload server configiguration file")
+    import importlib
+    importlib.reload(config)
+    # Assuming config reads reads settings from config.ini
+
+
+dog = WatchDog(callback=reload_config, folder_to_track='.',
+include_patterns=['*/config.ini'])
+try:
+    dog.monitor_forever()
+except(KeyBoardInterrupt, EOFError):
+    print('Bye!')
+
+```
+You can extend this to do some fancy things.
+
