@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: python-clients
+Version: 0.1.3
+Summary: This library implements wrapper for different python interfaces
+Home-page: https://github.com/Hedgehogues/python-clients
+Author: Egor Urvanov
+Author-email: hedgehogues@bk.ru
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: requests (==2.22.0)
+
+# Python-clients
+
+This library implements wrapper for different python interfaces. We have:
+
+* http client
+* mongodb client
+
+Each client is class with request method and class implemented base class of any custom methods. This is very simple. 
+But you can encapsulate inner structure of requests.
+
+# Installation
+
+We use python3.7. Installation is a very simple:
+
+    pip install python-clients
+
+
