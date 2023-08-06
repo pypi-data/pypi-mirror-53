@@ -1,0 +1,30 @@
+---
+- name: create volumes
+  gather_facts: False
+  hosts: hives
+  become: True
+  vars:
+    ansible_python_interpreter: "{{ hive_home_dir }}/docker/bin/python"
+
+  tasks:
+  - include_role:
+      name: drbd-resource
+    loop: "{{ groups['drbd_volumes'] | default([]) | intersect(groups[hive_stage]) | list}}"
+    loop_control:
+      loop_var: hive_safe_volume_host
+  - name: create drbd volume
+    docker_volume:
+      name: "{{ hostvars[item].hive_volume.name }}"
+      driver: "local"
+      driver_options:
+        type: "{{ hostvars[item].hive_volume.drbd.fstype }}"
+        device: "/dev/drbd{{ hostvars[item].hive_volume.drbd.device_id }}"
+    loop: "{{ groups['drbd_volumes'] | default([]) | intersect(groups[hive_stage]) | list}}"
+  - name: create another driver volume
+    docker_volume:
+      name: "{{ hostvars[item].hive_volume.name }}"
+      driver: "{{ hostvars[item].hive_volume.driver }}"
+      driver_options: "{{ hostvars[item].hive_volume.dirver_options | default(omit) }}"
+    loop: "{{ groups['volumes'] | default([]) | intersect(groups[hive_stage]) | list}}"
+  - import_role:
+      name: reboot
