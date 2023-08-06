@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: pytest-steps
+Version: 1.6.3
+Summary: Create step-wise / incremental tests in pytest.
+Home-page: https://github.com/smarie/python-pytest-steps
+Maintainer: Sylvain MARIE
+Maintainer-email: sylvain.marie@schneider-electric.com
+License: BSD 3-Clause
+Download-URL: https://github.com/smarie/python-pytest-steps/tarball/1.6.3
+Keywords: pytest test step incremental decorator parametrize parameter state share result modular
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Testing
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Framework :: Pytest
+Description-Content-Type: text/markdown
+Requires-Dist: makefun (>=1.5)
+Requires-Dist: wrapt
+Requires-Dist: six
+Requires-Dist: functools32 ; python_version < "3.2"
+Requires-Dist: funcsigs ; python_version < "3.3"
+
+# pytest-steps
+
+[![Python versions](https://img.shields.io/pypi/pyversions/pytest-steps.svg)](https://pypi.python.org/pypi/pytest-steps/) [![Build Status](https://travis-ci.org/smarie/python-pytest-steps.svg?branch=master)](https://travis-ci.org/smarie/python-pytest-steps) [![Tests Status](https://smarie.github.io/python-pytest-steps/junit/junit-badge.svg?dummy=8484744)](https://smarie.github.io/python-pytest-steps/junit/report.html) [![codecov](https://codecov.io/gh/smarie/python-pytest-steps/branch/master/graph/badge.svg)](https://codecov.io/gh/smarie/python-pytest-steps)
+
+[![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-pytest-steps/) [![PyPI](https://img.shields.io/pypi/v/pytest-steps.svg)](https://pypi.python.org/pypi/pytest-steps/) [![Downloads](https://pepy.tech/badge/pytest-steps)](https://pepy.tech/project/pytest-steps) [![Downloads per week](https://pepy.tech/badge/pytest-steps/week)](https://pepy.tech/project/pytest-steps) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-pytest-steps.svg)](https://github.com/smarie/python-pytest-steps/stargazers)
+
+Create step-wise / incremental tests in `pytest`.
+
+The documentation for users is available here: [https://smarie.github.io/python-pytest-steps/](https://smarie.github.io/python-pytest-steps/)
+
+A readme for developers is available here: [https://github.com/smarie/python-pytest-steps](https://github.com/smarie/python-pytest-steps)
+
+
