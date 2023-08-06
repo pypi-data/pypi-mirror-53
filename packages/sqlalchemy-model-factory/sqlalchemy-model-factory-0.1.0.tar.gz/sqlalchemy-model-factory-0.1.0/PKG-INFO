@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: sqlalchemy-model-factory
+Version: 0.1.0
+Summary: A library to assist in generating models from a central location.
+Author: Dan Cardin
+Author-email: ddcardin@gmail.com
+Requires-Python: >=3.5
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Provides-Extra: docs
+Provides-Extra: pytest
+Requires-Dist: m2r; extra == "docs"
+Requires-Dist: pytest (>=1.0); extra == "pytest"
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx_autodoc_typehints
+Requires-Dist: sphinx_rtd_theme; extra == "docs"
+Requires-Dist: sqlalchemy
