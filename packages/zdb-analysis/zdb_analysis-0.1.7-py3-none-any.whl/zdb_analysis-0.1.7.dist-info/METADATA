@@ -1,0 +1,59 @@
+Metadata-Version: 2.1
+Name: zdb-analysis
+Version: 0.1.7
+Summary: Pandas + Z inv analysis
+Home-page: UNKNOWN
+Author: Shane Breeze
+Author-email: sdb15@ic.ac.uk
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Classifier: Development Status :: 3 - Alpha
+Description-Content-Type: text/markdown
+Requires-Dist: future (>=0.17.1)
+Requires-Dist: numexpr (>=2.6.9)
+Requires-Dist: numpy (>=1.16.2)
+Requires-Dist: oyaml (>=0.8)
+Requires-Dist: pandas (>=0.24.2)
+Requires-Dist: pysge (>=0.1.1)
+Requires-Dist: conpy (>=0.1.0)
+Requires-Dist: PyYAML (>=4.2b1)
+Requires-Dist: tables (>=3.5.1)
+Requires-Dist: tqdm (>=4.31.1)
+
+# Z invisible DB analysis
+
+Setup with
+
+```
+source setup.sh
+```
+
+To run the analysis use `zdb_analyse.py`:
+
+```
+usage: zdb_analyse.py [-h] [-m MODE] [-j NCORES] [--sge-opts SGE_OPTS]
+                      [-n NFILES] [-o OUTPUT]
+                      config
+
+positional arguments:
+  config                Path to yaml file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MODE, --mode MODE  Parallelisation: 'multiprocessing', 'sge', 'htcondor'
+  -j NCORES, --ncores NCORES
+                        Number of cores for 'multiprocessing' jobs
+  --sge-opts SGE_OPTS   Options to pass onto qsub
+  -n NFILES, --nfiles NFILES
+                        Number of files to process. -1 = all
+  -o OUTPUT, --output OUTPUT
+                        Output file
+
+```
+
+
