@@ -1,0 +1,139 @@
+Metadata-Version: 2.1
+Name: enochecker
+Version: 0.0.5
+Summary: Library to build checker scripts for EnoEngine A/D CTF Framework in Python
+Home-page: https://github.com/ENOWARS/enochecker
+Author: domenukk
+Author-email: dmaier@sect.tu-berlin.de
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: atomicwrites (==1.3.0)
+Requires-Dist: attrs (==19.1.0)
+Requires-Dist: blinker (==1.4)
+Requires-Dist: certifi (==2019.3.9)
+Requires-Dist: chardet (==3.0.4)
+Requires-Dist: Click (==7.0)
+Requires-Dist: colorama (==0.4.1)
+Requires-Dist: elastic-apm (==4.2.2)
+Requires-Dist: Flask (==1.0.2)
+Requires-Dist: future (==0.17.1)
+Requires-Dist: futures (==3.1.1)
+Requires-Dist: idna (==2.8)
+Requires-Dist: itsdangerous (==1.1.0)
+Requires-Dist: Jinja2 (==2.10.1)
+Requires-Dist: MarkupSafe (==1.1.1)
+Requires-Dist: pathlib2 (==2.3.3)
+Requires-Dist: pluggy (==0.9.0)
+Requires-Dist: psutil (==5.6.2)
+Requires-Dist: py (==1.8.0)
+Requires-Dist: uwsgidecorators
+Requires-Dist: pymongo (==3.8.0)
+Requires-Dist: pytest (==4.4.1)
+Requires-Dist: requests (==2.21.0)
+Requires-Dist: six (==1.12.0)
+Requires-Dist: typing (==3.6.6)
+Requires-Dist: urllib3 (==1.24.3)
+Requires-Dist: websocket-client (==0.56.0)
+Requires-Dist: Werkzeug (==0.15.2)
+
+# EnoChecker
+
+This is the checker lib that shall be used by all checkers in ENOWARS3.
+
+For a simple checker, subclass `enochecker.BaseChecker`.
+```python
+from enochecker import BaseChecker, BrokenServiceException, run
+
+class AwesomeChecker(BaseChecker):
+
+    def putflag(self):  # type: () -> None
+        # TODO: Put flag to service
+        self.debug("flag is {}".format(self.flag))
+        self.http_post("/putflaghere", params={"flag": self.flag})
+        # ...
+
+    def getflag(self):  # type: () -> None
+        # tTODO: Get the flag.
+        if not self.http_get("/getflag") == self.flag:
+            raise BrokenServiceException("Ooops, wrong Flag")
+
+    def putnoise(self):
+        # put some noise
+        with self.connect() as telnet:
+            telnet.write(self.noise) 
+
+    def getnoise(self):
+        with self.connect() as telnet:
+            telnet.write("gimmeflag\n")
+            telnet.read_expect(self.noise)
+
+    def havoc(self):
+        self.http("FUNFUN").text == "FUNFUN"
+
+
+if __name__ == "__main__":
+    run(AwesomeChecker)
+```
+
+A full example, including helpful comments, can be found in [examplechecker.py](examplechecker.py).
+
+The full API specification can be found [docs/api.md](docs/api.md).
+(Generated from docstring using `pydocmd simple ...`).
+
+## Installation
+For now, the library can be installed using pip/git, like:
+`pip install git+https://github.com/domenukk/enochecker`
+
+## Launch Checker
+The goal is to have checkers launched via uSWGI and the Engine talking to it via http. 
+For testing, however, you can use the commandline instead:
+
+```
+usage: check.py run [-h] [-a ADDRESS] [-n TEAM_NAME] [-r ROUND] [-f FLAG]
+                    [-t MAX_TIME] [-i CALL_IDX] [-p [PORT]]
+                    {putflag,getflag,putnoise,getnoise,havoc,listen}
+
+positional arguments:
+  {putflag,getflag,putnoise,getnoise,havoc,listen}
+                        The Method, one of ['putflag', 'getflag', 'putnoise',
+                        'getnoise', 'havoc'] or "listen" to start checker
+                        service
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ADDRESS, --address ADDRESS
+                        The ip or address of the remote team to check
+  -n TEAM_NAME, --team_name TEAM_NAME
+                        The teamname of the team to check
+  -r ROUND, --round ROUND
+                        The round we are in right now
+  -f FLAG, --flag FLAG  The Flag, a Fake flag or a Unique ID, depending on the
+                        mode
+  -t MAX_TIME, --max_time MAX_TIME
+                        The maximum amount of time the script has to execute
+                        in seconds
+  -i CALL_IDX, --call_idx CALL_IDX
+                        Unique numerical index per round. Each id only occurs
+                        once and is tighly packed, starting with 0. In a
+                        service supporting multiple flags, this would be used
+                        to decide which flag to place.
+  -p [PORT], --port [PORT]
+                        The port the checker should attack
+
+````
+
+## Why use it at all?
+
+Many nice features for CTF Checker writing, obviously.
+Also, under-the-hood changes on the Engine can be made without any problems.
+
+For further instructions on how to write a checker with this Framework look at [docs/usage.md](docs/usage.md).
+
+Now, code away :).
+
+
