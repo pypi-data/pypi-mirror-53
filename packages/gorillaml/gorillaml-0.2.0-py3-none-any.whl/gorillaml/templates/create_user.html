@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    {{ widget.gorillaml_custom_form(metadata) }}
+
+    <div class="col-md-9">
+        {% call widget.gcard(title='Plugins shortcut', body_class='p-0') %}
+        {% include 'plugins_table.html' %}
+        {% endcall %}
+    </div>
+</div>
+{% endblock %}

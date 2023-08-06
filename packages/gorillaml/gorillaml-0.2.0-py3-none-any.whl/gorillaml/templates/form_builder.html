@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    {{ widget.gorillaml_custom_form(metadata) }}
+
+    {% call widget.gcard(title='Form builder form collections', class='col-md-9', body_class='p-0') %}
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th style="width: 10px">ID</th>
+                <th>Form name</th>
+                <th>Callback</th>
+                <th>Methods</th>
+                <th>Enctype</th>
+                <th>By</th>
+                <th>Action</th>
+            </tr>
+            {% if collections|length > 0 %}
+            {% for row in collections %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.callback }}</td>
+                <td>{{ row.method }}</td>
+                <td>{{ row.enctype }}</td>
+                <td>{{ row.user.username }}</td>
+                <td>
+                    <nav>
+                      <ul class="pagination pagination-sm">
+                          <li class="page-item">
+                              <a class="page-link" href="{{ url_for('form_builder', action='open', fid=row.id) }}" title="View form"><i class="fas fa-eye"></i></a>
+                          </li>
+                          <li class="page-item">
+                              <a class="page-link" href="{{ url_for('form_builder', action='edit', fid=row.id) }}" title="Edit form"><i class="fas fa-edit"></i></a>
+                          </li>
+                          <li class="page-item">
+                              <a class="page-link" href="{{ url_for('form_builder', action='delete', fid=row.id) }}" title="Delete form"><i class="fas fa-trash"></i></a>
+                          </li>
+                      </ul>
+                    </nav>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="7" align="center">No forms found yet.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    {% endcall %}
+</div>
+{% endblock %}

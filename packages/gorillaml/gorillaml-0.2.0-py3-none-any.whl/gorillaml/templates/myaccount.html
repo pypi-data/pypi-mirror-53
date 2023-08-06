@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    {{ widget.gorillaml_custom_form(metadata) }}
+
+    {% call widget.gcard(title='Recreate Plugins Cache') %}
+    <a href="{{ url_for('plugins_cache_recreate') }}">
+        <div class="loading-plugins-cache" data-intro='You have to recreate plugin cache everytime when you made changes in code-base to see the changes.'>
+            <button class="btn btn-danger btn-recreate">Recreate</button>
+        </div>
+    </a>
+    {% endcall %}
+</div>
+{% endblock %}
