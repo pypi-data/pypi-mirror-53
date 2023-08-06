@@ -1,0 +1,25 @@
+pool:
+  vmImage: 'macOS-10.13'
+
+strategy:
+  matrix:
+    Python35:
+      python.version: '3.5'
+    Python36:
+      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
+    PyPy3:
+      python.version: 'pypy3'
+
+steps:
+- task: UsePythonVersion@0
+  displayName: 'Use Python $(python.version)'
+  inputs:
+    versionSpec: '$(python.version)'
+
+- script: pip install wheel tox
+  displayName: 'Install Tox'
+
+- script: tox -e py
+  displayName: 'Run Tox'
