@@ -1,0 +1,15 @@
+pbr!=2.1.0,>=3.1.1
+django-compressor>=2.2
+oslo.log>=3.37.0
+python-keystoneclient>=3.15.0
+python-solumclient>=2.6.1
+oslo.utils>=3.36.0
+Babel>=2.5.3
+django-babel>=0.6.2
+horizon>=13.0.0
+
+[:(python_version<'3.0')]
+Django<2,>=1.11
+
+[:(python_version>='3.0')]
+Django<2.1,>=1.11
