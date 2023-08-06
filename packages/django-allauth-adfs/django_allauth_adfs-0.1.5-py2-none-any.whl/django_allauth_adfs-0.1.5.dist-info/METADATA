@@ -1,0 +1,25 @@
+Metadata-Version: 2.0
+Name: django-allauth-adfs
+Version: 0.1.5
+Summary: ADFS oAuth provider for django-allauth
+Home-page: https://github.com/thenewguy/django-allauth-adfs
+Author: gordon
+Author-email: wgordonw1@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Operating System :: OS Independent
+Classifier: Framework :: Django
+Requires-Dist: django-allauth (>=0.26.0)
+Requires-Dist: six
+Provides-Extra: jwt
+Requires-Dist: PyJWT; extra == 'jwt'
+Requires-Dist: cryptography; extra == 'jwt'
+Provides-Extra: pki
+Requires-Dist: certifi; extra == 'pki'
+Requires-Dist: ndg-httpsclient; extra == 'pki'
+Requires-Dist: pyopenssl; extra == 'pki'
+
+UNKNOWN
+
+
