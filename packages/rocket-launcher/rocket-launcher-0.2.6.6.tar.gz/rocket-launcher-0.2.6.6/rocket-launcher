@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import os
+import threading
+import time
+from rockets import *
+
+f = open("/etc/supervisor.d/dockerd.ini", "w+")
+f.write("[program:dockerd]\ncommand = run-docker-server\n\n")
+f.close()
+
+threads = [
+    threading.Thread(target=supervisord, name='supervisor'),
+    threading.Thread(target=secure_shell, name='ssh'),
+    threading.Thread(target=ranger, name='ranger'),
+    threading.Thread(target=terminal, name='fish'),
+    threading.Thread(target=editor, name='vim'),
+    threading.Thread(target=node, name='node'),
+    threading.Thread(target=git, name='git'),
+]
+
+for w in threads:
+    w.start()
+
+multiplexer()
+terminal()
+ranger()
+git()
+
+os.system('sudo -H -u who byobu');
