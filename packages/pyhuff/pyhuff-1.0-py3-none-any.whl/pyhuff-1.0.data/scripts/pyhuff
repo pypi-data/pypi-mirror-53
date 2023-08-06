@@ -1,0 +1,9 @@
+#!python
+
+import sys
+import pyhuff.core as hf
+
+if len(sys.argv) < 2:
+    print('Error: no filename given')
+else:
+    hf.compress(sys.argv[1])
