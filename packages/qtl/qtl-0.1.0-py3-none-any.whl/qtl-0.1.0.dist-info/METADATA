@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: qtl
+Version: 0.1.0
+Summary: Utilities for analyzing and visualizing QTL data
+Home-page: UNKNOWN
+Author: Francois Aguet (Broad Institute)
+Author-email: francois@broadinstitute.org
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+
+## pyQTL
+
+pyQTL is a python module for analyzing and visualizing quantitative trait loci (QTL) data.
+
+
+### Install
+You can install pyQTL using pip:
+```
+pip3 install qtl
+```
+or directly from this repository:
+```
+$ git clone git@github.com:broadinstitute/pyqtl.git
+$ cd pyqtl
+# set up virtual environment and install
+$ virtualenv venv
+$ source venv/bin/activate
+(venv)$ pip install -e .
+```
+
