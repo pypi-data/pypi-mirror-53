@@ -1,0 +1,69 @@
+Metadata-Version: 2.1
+Name: msg91-otp
+Version: 0.1.0
+Summary: Minimal OTP only API coverage for msg91.com service
+Home-page: https://gitlab.com/coopon/reusable-libs/python/msg91-otp
+Author: Prasanna Venkadesh
+Author-email: prasanna@cooponscitech.in
+License: UNKNOWN
+Description: ### msg91-otp
+        
+        [msg91.com](https://msg91.com) is one of the bulk SMS provider in India. This package `msg91-otp` is a python wrapper for **sending** and **verifying** OTPs using msg91.com. This is a minimal wrapper covers only OTP use-case and doesn't cover all HTTP API's exposed by msg91.
+        
+        #### Install
+        
+            python setup.py install
+        
+        #### Usage
+        
+            from msg91_otp.client import OTPClient
+            
+            # obtain this auth_key from msg91.com
+            auth_key = "xxxxxxxxxxxxxxxxx"
+            otp_client = OTPClient(auth_key)
+            
+            sender = "YOUR_SERVICE_NAME"
+            # if OTP value is not supplied, msg91 automatically creates for you
+            message = "Your One Time Password (OTP) is"
+            receiver = "9876543210"
+            service_response = otp_client.send_otp(receiver, sender=sender, message=message)
+        
+            # if you want to supply your own OTP
+            otp = 3342
+            service_response = otp_client.send_otp(receiver, otp=otp)
+        
+            print (service_response.status, service_response.message)
+        
+            # verify OTP for a given mobile number
+            verify_response = otp_client.verify_otp(receiver, otp)
+            print (verify_response.status, verify_response.message)
+        
+            # re-send a OTP
+            otp_resend = otp_client.resend_otp(receiver)
+            print (otp_resend.status, otp_resend.message)
+        
+            # Asynchronous client follows the same method signatures
+            from msg91_otp.client import AsyncOTPClient
+            async_client = AsyncOTPClient(auth_key)
+        
+            await async_client.send_otp(receiver)
+        
+        
+        #### Contributors
+        
+        1. Prasanna Venkadesh
+        
+        #### License
+        
+        This package is licenced under GNU AGPL v3.0
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=2.7
+Description-Content-Type: text/markdown
