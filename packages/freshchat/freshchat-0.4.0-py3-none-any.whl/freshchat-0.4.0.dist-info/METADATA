@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: freshchat
+Version: 0.4.0
+Summary: A library provide a http client for Freshchat API
+Home-page: https://github.com/twyla-ai/python-freshchat
+Author: Twyla Engineering
+Author-email: software@twyla.ai
+Requires-Python: >=3.7,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: aiohttp (>=3.5,<4.0)
+Requires-Dist: cafeteria (>=0.19,<0.20)
+Requires-Dist: pycrypto (>=2.6,<3.0)
+Requires-Dist: pytest-cov (>=2.7,<3.0)
+Project-URL: Repository, https://github.com/twyla-ai/python-freshchat
+Description-Content-Type: text/markdown
+
+# FreshChat Client
+A library provide a http client for Freshchat API 
+
+## Installation
+`poetry install python-freshchat`
+
