@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: magicresult
+Version: 0.0.0
+Summary: Module providing magic result types via Python macros
+Home-page: https://github.com/ddworken/magicresult
+Author: David Dworken
+Author-email: david@daviddworken.com
+License: MIT
+Keywords: macro magic bad-ideas
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+Requires-Dist: astor
+
+# Magic Results
+
+Usage:
+
+```
+# -*- coding: macro -*-
+
+from magicresult import Result, ok, error, attempt
+
+def get_str_ok() -> Result[str]:
+    return ok("hello world")
+
+def get_str_err() -> Result[str]:
+    return error("something went wrong")
+
+def magic_example() -> Result[None]:
+    a = attempt(get_str_ok())
+    print("First string is: " + a)
+    b = attempt(get_str_err())
+    print("Second string is: " + b)
+    return ok(None)
+
+print(f"magic_example returned {magic_example()}")
+```
+
