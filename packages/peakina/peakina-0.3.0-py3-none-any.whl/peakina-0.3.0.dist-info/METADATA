@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: peakina
+Version: 0.3.0
+Summary: Pea Kina
+Home-page: https://github.com/ToucanToco/peakina
+Author: Toucan Toco
+Author-email: dev@toucantoco.com
+License: BSD
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: chardet
+Requires-Dist: jq
+Requires-Dist: pandas
+Requires-Dist: paramiko
+Requires-Dist: pyarrow
+Requires-Dist: pydantic
+Requires-Dist: python-slugify
+Requires-Dist: s3fs
+Requires-Dist: tables
+Requires-Dist: urllib3
+Requires-Dist: xlrd
+Requires-Dist: xmltodict
+Provides-Extra: test
+Requires-Dist: black ; extra == 'test'
+Requires-Dist: flake8 ; extra == 'test'
+Requires-Dist: isort ; extra == 'test'
+Requires-Dist: mypy ; extra == 'test'
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pytest-cases ; extra == 'test'
+Requires-Dist: pytest-cov ; extra == 'test'
+Requires-Dist: pytest-isort ; extra == 'test'
+Requires-Dist: pytest-mock ; extra == 'test'
+Requires-Dist: pytest-rerunfailures ; extra == 'test'
+Requires-Dist: pytest-sugar ; extra == 'test'
+
+Pea Kina
+
+
