@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import numpy,sys,fitsio,re
+'''
+quasar-sdss-coord infile.log /Users/vincent/ASTRO/library/lists/SDSS/SDSS_QSO_DR12.fits
+'''
+log_path,sdss_path = sys.argv[1],sys.argv[2]
+log = numpy.genfromtxt(log_path,names=True,dtype=object)
+columns = 'PLATE MJD FIBERID RA DEC'.split()
+sdss = fitsio.read(sdss_path, 1, columns=columns)
+outlist = open('coord-'+sys.argv[1],'w')
+for i in range(len(sdss)):
+    name = 'SDSS/DR12/spec-%04i-%05is-%04i.fits'%(sdss['PLATE'][i],sdss['MJD'][i],sdss['FIBERID'][i])
+    ra,dec = sdss['RA'][i],sdss['DEC'][i]
+    # Decompose right ascension values
+    ra   = ra*24./360
+    hrs  = float(str(abs(ra)).split('.')[0])
+    mins = float(str(abs(60.*(ra-hrs))).split('.')[0])
+    sec1 = float(str(abs(3600.*(ra-hrs-mins/60.))).split('.')[0])
+    sec2 = ('%.3f'%float(abs(3600.*(ra-hrs-mins/60.)-sec1))).split('.')[1]
+    ra2  = '%02i:%02i:%02i.'%(hrs,mins,sec1)+sec2
+    # Decompose declinaison values
+    sign = '-' if dec<0 else '+'
+    degs = float(str(abs(dec)).split('.')[0])
+    mins = float(str(abs(60.*(abs(dec)-degs))).split('.')[0])
+    sec1 = float(str(abs(3600.*(abs(dec)-degs-mins/60.))).split('.')[0])
+    sec2 = ('%.3f'%float(abs(3600.*(abs(dec)-degs-mins/60.)-sec1))).split('.')[1]
+    dec2 = sign+'%02i:%02i:%02i.'%(degs,mins,sec1)+sec2
+    outlist.write(name+' {0:>15} {1:>15} {2:>10} {3:>10}\n'.format(ra2,dec2,'%.5f'%(ra*360/24.),'%.5f'%dec))
+outlist.close()
