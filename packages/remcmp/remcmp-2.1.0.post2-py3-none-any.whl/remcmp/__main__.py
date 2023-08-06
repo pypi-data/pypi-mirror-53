@@ -1,0 +1,4 @@
+import remcmp
+
+
+remcmp.main()
