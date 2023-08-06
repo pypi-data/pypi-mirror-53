@@ -1,0 +1,4 @@
+[sqlalchemy.dialects]
+hawq = sqlalchemy_hawq.dialect:HawqDialect
+hawq+psycopg2 = sqlalchemy_hawq.dialect:HawqDialect
+
