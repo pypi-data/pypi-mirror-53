@@ -1,0 +1,83 @@
+# Compiled files
+*.py[cod]
+*.a
+*.o
+*.so
+__pycache__
+
+# Ignore .c files by default to avoid including generated code. If you want to
+# add a non-generated .c extension, use `git add -f filename.c`.
+*.c
+
+# Other generated files
+*/version.py
+*/cython_version.py
+htmlcov
+.coverage*
+.coverage.subprocess
+
+# Sphinx
+_build
+
+# Pytest
+.cache
+v
+.pytest_cache
+.tox
+
+# Packages/installer info
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+distribute-*.tar.gz
+.eggs
+
+# Other
+.*.swp
+.*.swo
+.*.swn
+*~
+
+# Mac OSX
+.DS_Store
+
+.vscode
+.idea
+.settings
+.pydevproject
+.project
+htmlcov
+MANIFEST
+
+# notebooks
+*.ipynb_checkpoints
+docs/_static/notebooks
+docs/notebooks
+tutorials/fit_result_LogParabola.yaml
+tutorials/model-best-fit.yaml
+tutorials/hgps_data
+gammapy-datasets
+temp
+
+gammapy/gammapy.cfg
+
+docs/_generated
+docs/api
+.coverage
+
+dev/crab
+
+# Data files and images are usually generated
+*.png
+!tutorials/images/*
+*.fits
+*.fits.gz
+*.root

@@ -1,0 +1,46 @@
+---
+general:
+    logging:
+        level: INFO
+    outdir: .
+
+observations:
+    datastore: $GAMMAPY_DATA/hess-dl3-dr1
+    filters:
+        - filter_type: par_value
+          value_param: Crab
+          variable: TARGET_NAME
+
+datasets:
+    dataset-type: SpectrumDatasetOnOff
+    stack-datasets: false
+    background:
+        background_estimator: reflected
+    geom:
+        region:
+            center:
+                - 83.633 deg
+                - 22.014 deg
+            frame: icrs
+            radius: 0.1 deg
+        axes:
+            - name: energy
+              hi_bnd: 100
+              lo_bnd: 0.01
+              nbin: 73
+              interp: log
+              node_type: edges
+              unit: TeV
+
+fit:
+    fit_range:
+        max: 100 TeV
+        min: 1 TeV
+
+flux-points:
+    fp_binning:
+        hi_bnd: 10
+        interp: log
+        lo_bnd: 1
+        nbin: 11
+        unit: TeV
