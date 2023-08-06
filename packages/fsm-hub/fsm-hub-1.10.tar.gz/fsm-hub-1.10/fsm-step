@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+
+"""
+Usage:
+    fsm-step YOUR.MODULE [retry_id]
+    fsm-step XXX.py [retry_id]
+
+fsm-step will load custom outer module and call the function *main*
+
+the function main should return
+    `a string represents next_state`
+OR
+    `a tuple represents (next_state, patch_data)`
+"""
+
+import importlib
+import os
+import sys
+import time
+
+import click
+import requests
+
+try:
+    from loguru import logger
+except ImportError:
+    import logging as logger
+
+sentry_sdk = None
+_sentry_dsn = os.environ.get("SENTRY")
+if _sentry_dsn:
+    try:
+        import sentry_sdk
+        sentry_sdk.init(dsn=_sentry_dsn)
+    except ImportError:
+        logger.warning("*sentry-sdk* is not installed")
+
+
+# custom hub via $PWD/.fsm-hub
+hub = "http://localhost:1024"
+try:
+    hub = open(".fsm-hub").read().strip() or hub
+except FileNotFoundError:
+    pass
+
+sys.path.append("")
+module_name = sys.argv[1]
+if module_name.endswith(".py"):
+    module_name = module_name[:-3].replace("/", ".")
+
+# you MUST define the function *main*
+that_function = importlib.import_module(module_name).main
+
+http = requests.Session()
+
+
+def call(kwargs: dict):
+    c = that_function.__code__
+    args = [kwargs.pop(c.co_varnames[i], None) for i in range(c.co_argcount)]
+    if len(c.co_varnames) == c.co_argcount:
+        return that_function(*args)
+    return that_function(*args, **kwargs)
+
+
+def transit(id, result):
+    patch_data = None
+    if isinstance(result, str):
+        next_state = result
+    else:
+        next_state, patch_data = result
+        assert isinstance(patch_data, dict), patch_data
+    logger.debug(next_state)
+    patch_data and logger.debug(patch_data)
+    rsp = http.post(f"{hub}/transit/{id}/{next_state}", json=patch_data)
+    rsp.raise_for_status()  # hub is gone or logic is broken, so just exit
+
+
+def _generate_have_a_rest():
+    def have_a_rest():
+        time.sleep(3)
+
+    rsp = http.get(f"{hub}/")
+    if rsp.status_code >= 400:
+        logger.warning(rsp)
+        return have_a_rest
+
+    redis_url = rsp.json().get("redis")
+    if not redis_url:
+        return have_a_rest
+
+    from redis import Redis
+
+    _redis = Redis.from_url(redis_url)
+    logger.info(redis_url)
+    _pubsub = _redis.pubsub()
+    _generator = _pubsub.listen()
+
+    def have_a_rest_another():
+        channel = f"state:{module_name}"
+        _pubsub.subscribe(channel)
+        while True:
+            i = next(_generator)
+            if i["type"] != "message":
+                continue
+            # simulate lock
+            id = i['data']
+            if isinstance(id, bytes):
+                id = id.decode()
+            token = f"{id}:{module_name}"
+            if _redis.setnx(token, os.getpid()):
+                _redis.expire(token, 60)
+                break
+        _pubsub.unsubscribe(channel)  # better
+
+    return have_a_rest_another
+
+
+def main():
+    """
+    """
+    if len(sys.argv) > 2:  # this mode is for fix or debug
+        retry_id = int(sys.argv[2])
+        rsp = http.get(f"{hub}/{retry_id}")
+        rsp.raise_for_status()
+        payload = rsp.json()
+        logger.debug(payload)
+        result = call(payload["data"] or {})
+        transit(retry_id, result)
+        return
+
+    have_a_rest = _generate_have_a_rest()
+    # loop mode
+    while True:
+        rsp = http.post(f"{hub}/lock/{module_name}")
+        if rsp.status_code >= 400:  # do not raise, just rest and continue
+            have_a_rest()
+            continue
+
+        payload = rsp.json()
+        logger.debug(payload)
+        id = payload["id"]
+        #ts = payload["ts"]
+        kwargs = payload["data"] or {}
+        assert payload["state"] == module_name
+
+        try:
+            result = call(kwargs)
+        except Exception as e:
+            logger.exception(f"{module_name}.main")
+            sentry_sdk and sentry_sdk.capture_exception(e)
+            continue
+
+        transit(id, result)
+
+
+if __name__ == '__main__':
+    main()
