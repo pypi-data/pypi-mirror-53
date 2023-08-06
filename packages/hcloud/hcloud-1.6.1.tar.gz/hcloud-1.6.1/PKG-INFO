@@ -1,0 +1,156 @@
+Metadata-Version: 2.1
+Name: hcloud
+Version: 1.6.1
+Summary: Official Hetzner Cloud python library
+Home-page: https://github.com/hetznercloud/hcloud-python
+Author: Hetzner Cloud GmbH
+Author-email: support-cloud@hetzner.com
+License: MIT license
+Description: Hetzner Cloud Python
+        ====================
+        
+        
+        .. image:: https://travis-ci.com/hetznercloud/hcloud-python.svg?branch=master
+            :target: https://travis-ci.com/hetznercloud/hcloud-python
+        .. image:: https://readthedocs.org/projects/hcloud-python/badge/?version=latest
+            :target: https://hcloud-python.readthedocs.io
+        .. image:: https://img.shields.io/pypi/pyversions/hcloud.svg
+            :target: https://pypi.org/project/hcloud/
+        
+        Official Hetzner Cloud python library
+        
+        The library's documentation is available at `ReadTheDocs`_, the public API documentation is available at https://docs.hetzner.cloud.
+        
+        .. _ReadTheDocs: https://hcloud-python.readthedocs.io
+        
+        Usage example
+        -------------
+        
+        After the documentation has been created, click on `Usage` section
+        
+        Or open `docs/usage.rst`
+        
+        You can find some more examples under `examples/`.
+        
+        
+        Development
+        -----------
+        
+        Setup Dev Environment
+        ---------------------
+        1) `mkvirtualenv hcloud-python`
+        
+        2) `pip install -e .` or `pip install -e .[docs]` to be able to build docs
+        
+        
+        Run tests
+        ---------
+        * `tox .`
+        * You can specify environment e.g `tox -e py36`
+        * You can test the code style with `tox -e flake8`
+        
+        Create Documentation
+        --------------------
+        
+        Run `make docs`. This will also open a documentation in a tab in your default browser. 
+        
+        
+        Style Guide
+        -------------
+        * **Type Hints**: If the type hint line is too long use inline hinting. Maximum inline type hint line should be 150 chars.
+        
+        License
+        -------------
+        The MIT License (MIT). Please see `License File`_ for more information.
+        
+        .. _License File: https://github.com/hetznercloud/hcloud-python/blob/master/LICENSE
+        
+        
+        =======
+        History
+        =======
+        
+        1.6.1 (2019-10-01)
+        -------------------
+        * Fix: python-dateutil dependency requirement was too strict
+        
+        1.6.0 (2019-09-17)
+        -------------------
+        
+        * Feature: Add missing `get_by_name` on `FloatingIPsClient`
+        
+        1.5.0 (2019-09-16)
+        -------------------
+        
+        * Fix: ServersClient.create_image fails when specifying the `labels`
+        * Feature: Add support for `name` on Floating IPs
+        
+        1.4.1 (2019-08-19)
+        ------------------
+        
+        * Fix: Documentation for `NetworkRoute` domain was missing
+        
+        * Fix: `requests` dependency requirement was to0 strict
+        
+        1.4.0 (2019-07-29)
+        ------------------
+        
+        * Feature: Add `mac_address` to Server PrivateNet domain
+        
+        * Feature: Add python 3.8 support
+        
+        1.3.0 (2019-07-10)
+        ------------------
+        
+        * Feature: Add status filter for servers, images and volumes
+        * Feature: Add 'created' property to Floating IP domain
+        * Feature: Add 'Networks' support
+        
+        1.2.1 (2019-03-13)
+        ------------------
+        
+        * Fix: BoundVolume.server server property now casted to the 'BoundServer'.
+        
+        1.2.0 (2019-03-06)
+        ------------------
+        
+        * Feature: Add `get_by_fingerprint`-method for ssh keys
+        * Fix: Create Floating IP with location raises an error because no action was given.
+        
+        1.1.0 (2019-02-27)
+        ------------------
+        
+        * Feature: Add `STATUS`-constants for server and volume status
+        
+        1.0.1 (2019-02-22)
+        ------------------
+        
+          Fix: Ignore unknown fields in API response instead of raising an error
+        
+        1.0.0 (2019-02-21)
+        ------------------
+        
+        * First stable release.
+          
+          You can find the documentation under https://hcloud-python.readthedocs.io/en/latest/
+        
+        0.1.0 (2018-12-20)
+        ------------------
+        
+        * First release on GitHub.
+        
+Keywords: hcloud hetzner cloud
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <3.9
+Provides-Extra: docs
