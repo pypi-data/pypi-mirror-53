@@ -1,0 +1,36 @@
+site_name: valid8
+# site_description: 'A short description of my project'
+repo_url: https://github.com/smarie/python-valid8
+docs_dir: .
+site_dir: ../site
+nav:
+    - Home and usage: index.md
+    - Why validation: why_validation.md
+    - Validation functions:
+      - Basics: validation_funcs/a_basics.md
+      - Built-in validation functions: validation_funcs/b_base_validation_lib.md
+      - Simple syntax: validation_funcs/c_simple_syntax.md
+      - Composition framework: validation_funcs/d_composition.md
+
+#    - Other usage details: usage.md
+    - valid8 + other tools: valid8_with_other.md
+    - Examples/Recipes:
+      - Overview: examples/overview.md
+      - Example 1: examples/example1.md
+      - Example 2: examples/example2.md
+      - Example 3: examples/example3.md
+      - Example 4: examples/example4.md
+      - Example 5: examples/example5.md
+    - Other validation libs: other_libs.md
+    - API reference: api_reference.md
+    - Changelog: changelog.md
+
+theme:
+  name: 'material'  # readthedocs  mkdocs
+
+markdown_extensions:
+  - admonition  # to add notes such as http://squidfunk.github.io/mkdocs-material/extensions/admonition/
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
