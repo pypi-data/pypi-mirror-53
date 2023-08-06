@@ -1,0 +1,78 @@
+Metadata-Version: 2.1
+Name: bamboo-lib
+Version: 0.0.31
+Summary: Python ETL library
+Home-page: https://github.com/Datawheel/bamboo-lib
+Author: Jonathan Speiser
+Author-email: jonathan@datawheel.us
+License: All Rights Reserved
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: pandas (==0.24.2)
+Requires-Dist: sqlalchemy (==1.2.10)
+Requires-Dist: data-catapult
+Requires-Dist: paramiko (==2.4.1)
+Requires-Dist: sshtunnel (==0.1.4)
+Requires-Dist: redis (==2.10.6)
+Requires-Dist: pathos (==0.2.3)
+Requires-Dist: geopandas (==0.5.1)
+Requires-Dist: pytest
+Requires-Dist: sphinx-rtd-theme (==0.4.3)
+Requires-Dist: google-cloud-storage (==1.18.0)
+Requires-Dist: cryptography (==2.3)
+
+# Bamboo
+![Bamboo Logo](logo.png)
+
+[![Build Status](https://travis-ci.com/Datawheel/bamboo-lib.svg?token=zbq2R2Ly8XSxZPnWwTrV&branch=master)](https://travis-ci.com/Datawheel/bamboo-lib) [![PyPI version](https://badge.fury.io/py/bamboo-lib.svg)](https://badge.fury.io/py/bamboo-lib) [![Docs](https://assets.readthedocs.org/static/projects/badges/passing-flat.svg)](https://datawheel-bamboo-lib.readthedocs-hosted.com/en/latest/)
+
+Bamboo is a library intended to facilitate the process of creating extract, transform, and load (ETL) data pipelines. Bamboo includes many features such as the ability to download and cache HTTP assets, copy files from remote servers, run commands on remote servers, handle zipped archives, perform bulk database ingests and more. 
+
+# Installation
+
+`pip install bamboo-lib`
+
+## Additional Steps
+
+If you will need to use the distributed locking functionality, you will need to install
+some additional software. Below are the instructions for macOS
+
+### Installing Sherlock on macOS.
+
+```brew install libmemcached```
+
+```pip install pylibmc --install-option="--with-libmemcached=/usr/local/Cellar/libmemcached/1.0.18_2"```
+
+```pip install sherlock```
+
+# Running tests
+
+To run the tests, simply run:
+`pytest`
+
+Alternatively, if you would like to display all log/print statements run:
+`pytest -s`
+
+## Configuration
+
+To change the default folder where Bamboo will store HTTP downloads, set the `BAMBOO_DOWNLOAD_FOLDER` environment variable. By default, downloads will go to `/tmp`.
+
+To change the default logger settings, set `BAMBOO_LOGGER_CONF` to point to a logging configuration file (see example in `example/logging.conf`).
+
+## Troubleshooting tips
+
+### Mutli-processing issues on macOS
+If you are running High Sierra or later and get an error like:
+```
+objc[30911]: +[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug
+```
+
+Try setting:
+
+```bash
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+```
+
+
