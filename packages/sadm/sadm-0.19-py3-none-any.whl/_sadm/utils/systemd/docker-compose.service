@@ -1,0 +1,19 @@
+[Unit]
+Description=docker-compose-{serviceName}
+Requires=syslog.service
+Requires=docker.service
+After=docker.service
+AssertFileIsExecutable=/usr/bin/docker-compose
+
+[Service]
+Type=exec
+Restart=on-failure
+StandardError=syslog
+User={serviceUser}
+Group={serviceGroup}
+WorkingDirectory={servicePath}
+ExecStart=/usr/bin/docker-compose up --no-color
+ExecStop=/usr/bin/docker-compose down
+
+[Install]
+WantedBy=multi-user.target

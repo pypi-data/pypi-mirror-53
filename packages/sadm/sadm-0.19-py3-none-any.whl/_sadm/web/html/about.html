@@ -1,0 +1,25 @@
+% setdefault('version', '0.0')
+% setdefault('pythonVersion', '0.0')
+% setdefault('bottleVersion', '0.0')
+% setdefault('sqliteVersion', '0.0')
+% setdefault('sqliteLibVersion', '0.0')
+% setdefault('curyear', '1980')
+% rebase('tpl/base.html', title = 'about')
+<hr>
+<div class="w3-center">
+<h1>sadm</h1>
+<h5>
+	version {{version}}<br>
+	<a href="https://pypi.org/project/sadm" target="_blank">
+		https://pypi.org/project/sadm</a><br>
+	Copyright (c) {{curyear}} Jeremías Casteglione &lt;jrmsdev@gmail.com&gt;<br>
+	See LICENSE file.
+</h5>
+</div>
+<hr>
+<p>
+	bottle {{bottleVersion}}<br>
+	sqlite {{sqliteVersion}}<br>
+	sqlite lib {{sqliteLibVersion}}<br>
+	python {{pythonVersion}}
+</p>
