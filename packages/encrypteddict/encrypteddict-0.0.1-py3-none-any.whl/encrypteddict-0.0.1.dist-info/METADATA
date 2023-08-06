@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: encrypteddict
+Version: 0.0.1
+Summary: A python library to decrypt values in dictionaries
+Home-page: https://github.com/grahamhar/encrypted-dict
+Author: Graham Hargreaves
+License: Apache Licence 2.0
+Keywords: encryption gpg dict
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: pygpgme
+Provides-Extra: dev
+Requires-Dist: flake8 ; extra == 'dev'
+Requires-Dist: nose ; extra == 'dev'
+Requires-Dist: PyYaml ; extra == 'dev'
+
+UNKNOWN
+
+
