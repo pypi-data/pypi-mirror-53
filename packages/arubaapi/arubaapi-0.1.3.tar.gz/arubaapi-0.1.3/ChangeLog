@@ -1,0 +1,49 @@
+CHANGES
+=======
+
+0.1.3
+-----
+
+* add \_\_all\_\_ to arubaapi.py
+* Update readme
+* Fix multiple issues
+
+0.1.2.1
+-------
+
+* update readme
+
+0.1.2
+-----
+
+* Fixed parsing for power status in "show ap system-status" output
+* removed 'tables' and 'namedData' keys and brought their children into the root namespace
+* documentation and linting
+* more readme
+* readme fixes
+* Fixed logging
+
+0.1.1
+-----
+
+* readme formatting
+* more readme
+* changed data model to more correctly reflect arubas xml Tables are now stored in a dict with the table name as the key <re> tags will cause groupings to be placed into data namedData values can now be lists if duplicate names are present
+* typo
+* readme clarification
+* Added \`close()\` and support for \`with\`
+* cleanup and documentation
+* set setup.cfg to always create universal wheel
+
+0.1.0
+-----
+
+* Changed output of cli() function
+* cleanup
+* fixed urllib3 disable\_warning with python3
+* added author\_email
+* Updated documentation
+* added insecure flag
+* updated README
+* fixed setup.cfg
+* init
