@@ -1,0 +1,34 @@
+extend: base
+
+metric:
+  name: dice
+  minimize: False
+
+items:
+  loss:
+    type: series
+    key: loss
+  dice:
+    type: series
+    key: dice
+
+layout:
+  - type: panel
+    title: table
+    table: True
+    parent_cols: 1
+    items:
+      - type: table
+        source: [loss, dice]
+
+  - type: panel
+    title: main
+    parent_cols: 3
+    row_height: 400
+    items:
+      - type: series
+        source: loss
+        multi: True
+      - type: series
+        source: dice
+        multi: True
