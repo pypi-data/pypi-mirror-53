@@ -1,0 +1,69 @@
+Metadata-Version: 2.1
+Name: pinyin-utils
+Version: 0.2.0
+Summary: Utilities for handling Chinese pinyin
+Home-page: https://github.com/johndeighan/pinyin_utils
+Author: John Deighan
+Author-email: john.deighan@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# README.md
+
+Utilities for handling Chinese pinyin
+
+The utilities in this library make it easy to use
+Chinese pinyin
+
+The unit tests are directly in the files and therefore
+serve as documentation of the utility functions in it.
+To execute the unit tests, you can just run:
+
+	pytest -s pinyin_utils.py
+
+To get the library into a project:
+
+	pip install pinyin_utils
+
+# SYNOPSIS of pinyin_utils.py
+
+coming soon
+
+# SYNOPSIS of translate.py
+
+```python
+import os, time, trio, pprint
+
+from translate import translate, initDB, setApiKey
+
+async def main():
+	asks.init('trio')
+
+	# --- The database need not exist.
+	#     Furthermore, if you leave out this call,
+	#     the database will be put at ./Translations.db by default
+	initDB('./Translations.db')  # need not exist
+
+	# --- This env var key is the default if you leave this out
+	setApiKey(os.environ['GOOGLE_APIKEY'])
+
+	hWords = {
+		'cat': None,
+		'dog': None,
+		}
+
+	start_time = time.time()
+	async with trio.open_nursery() as nursery:
+		nursery.start_soon(translate, hWords)
+	total = time.time() - start_time
+	print(f"Total time: {total}")
+
+	pprint.PrettyPrinter(indent=3).pprint(hWords)
+
+
+
