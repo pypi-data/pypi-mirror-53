@@ -1,0 +1,10 @@
+[OptimizationAlgorithm]
+asha = orion.algo.asha:ASHA
+random = orion.algo.random:Random
+
+[Storage]
+legacy = orion.storage.legacy:Legacy
+
+[console_scripts]
+orion = orion.core.cli:main
+
