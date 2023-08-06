@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'This solution consists of a lambda functions which is used to fetch
+  logs from ${APPNAME} and ingest to Sumo Logic.
+
+  '
+Outputs:
+  ${APPNAME_SINGLE}Function:
+    Description: ${APPNAME_SINGLE}Scheduler Function ARN
+    Value:
+      Fn::GetAtt:
+      - ${APPNAME_SINGLE}Function
+      - Arn
+Parameters:
+
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: ${PACKAGENAME}
+    Description: "This solution consists of a lambda functions which is used to fetch logs from ${APPNAME} and ingest to Sumo Logic."
+    Author: Sumo Logic
+    SpdxLicenseId: Apache-2.0
+    LicenseUrl: ./LICENSE
+    ReadmeUrl: ./README.md
+    Labels: ["lambda", "sumologic", "serverless", ${APPNAME_SINGLE}]
+    HomePageUrl: https://github.com/SumoLogic/${PACKAGENAME}
+    SemanticVersion: 1.0.0
+    SourceCodeUrl: https://github.com/SumoLogic/${PACKAGENAME}
+
+Resources:
+
+  ${APPNAME_SINGLE}Function:
+    Properties:
+      Description: "This function gets triggered perodically via CloudWatchEvents and fetches logs from ${APPNAME} and ingest to SumoLogic"
+      CodeUri: ./target/aws/build/
+      Environment:
+        Variables:
+          ENVIRONMENT: "aws"
+          ENABLE_CONSOLE_LOG: "false"
+      Events:
+        ScheduleRule:
+          Properties:
+            Schedule: rate(5 minutes)
+          Type: Schedule
+      Handler: main.main
+      MemorySize: 256
+      Policies:
+          - AmazonDynamoDBFullAccess
+      Runtime: python3.7
+      Timeout: 300
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
