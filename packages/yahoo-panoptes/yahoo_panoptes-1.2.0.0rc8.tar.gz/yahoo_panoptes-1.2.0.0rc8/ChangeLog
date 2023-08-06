@@ -1,0 +1,209 @@
+CHANGES
+=======
+
+1.2.0rc8
+--------
+
+* Remove unused SNMP Connection class
+* t
+* Update SNMP Connections & Tests
+* Update test\_framework SNMP
+* Update Log to include port
+* Add check for clearly-wrong temperature values for Juniper device metrics
+* Update Interface Plugin SNMP Connection
+* Filter null temperature values from Juniper device metrics enrichments
+* Update update\_enrichment\_ip
+* Fix test\_no\_service\_active
+* Rename to avoid conflict with the helpers \_module\_
+* Add the unit test folder
+* Refactor PanoptesSNMPConnectionFactory and add unit tests
+* Add tests for polling\_plugin\_scheduler test\_panoptes\_config.ini
+* Added Coveralls Badge
+* Make tests/discovery a package. Remove redundant test code
+* Add more tests for exceptional behavior for enrichment plugin scheduler
+* Add tests for enrichment\_plugin\_scheduler.py
+* Add plugin enrichment test files
+* Add test suite for enrichment\_plugin\_scheduler.py
+* Add tests for discovery\_plugin\_scheduler.py
+* Remove unused import
+* Improve unit test code coverage for InfluxDB consumber
+* Improve logs for PanoptesContext
+* Increase unir test code coverage for  PanoptesPollingPlugin
+* Raise NotImplementedError in run() for PanoptesPollingPlugin
+* Remove Flaky Tests
+* Enrichment Agent Tests
+* Remove flaky test. Add 'pragma: no cover' for signal\_handlers
+* Add test\_discovery\_plugin\_scheduler.py
+* Improve unit test code coverage for Resource Manager
+* tests/test\_plugin\_agent.py Fix Spacing
+* check for sysexit
+* Update test\_runner regex filter
+* Expand test coverage for scheduler.py class
+* Expand test coverage for scheduler.py classes
+* Discovery Agent Tests
+* Add test for \_shutdown when \_shutdown has already been called by another thread
+* Add tests for PanoptesCeleryPluginScheduler methods
+* Add test for PanoptesCeleryPluginScheduler.update
+* Add error code in pollig status to handle/indicate enrichment failures
+* Add tests for PanoptesCelery classes
+* Test Coverage for Enrichment Group
+* tox
+* Additional Polling Plugin Agent Tests
+* Additional Polling Plugin Agent Tests
+* Additional Polling Plugin Agent Tests
+* Additional Polling Plugin Agent Tests
+* Expand tests for juniper interface enrichment plugin
+* Add test cases to TestPluginEnrichmentCiscoInterface test files, and remove redundant code from PluginEnrichmentCiscoInterface
+* Add tests for Sentinel
+* Expand test coverage for base.py
+* Additional Unit Tests
+* Open Source Cisco NXOS Polling Tests
+* Open Source Cisco IOS Polling Tests
+
+1.2.0rc7
+--------
+
+* Decode UTF-8 when inserting resource metadata key/values into Resource Cache
+
+1.2.0rc6
+--------
+
+* Remove Celery Entrypoint from Coverage
+* Remove Celery Entrypoint from Coverage
+* Open Sourcing Additional Celery Tests
+* sentinel tests
+* Fix DEFAULT\_CONFIG\_FILE\_PATH
+* More updates
+* Fixup comment typos
+* Fix runner and unit tests for runner
+* Update Plugin Schedulers
+* Updates from internal codebase
+
+1.2.0rc5
+--------
+
+* device\_info\_ipvX -> ipvX
+
+1.2.0rc4
+--------
+
+* Update Enrichment Schemas
+
+1.2.0rc3
+--------
+
+* Add Additional Enrichment Groups
+
+1.2.0rc2
+--------
+
+* netmask\_to\_cidr & decimal\_to\_mac
+* Deploy to PyPI only tagged builds
+* Fix typo for description\_content\_type
+* Start using pbr for setuptools
+* Sync Internal and OSS
+* Removed the flaky test
+* Added tests for resource/manager
+* fix conflict
+* update tests/test\_helpers.py:test\_dns\_resolution
+* update tests/test\_framework.py
+* increase coverage
+* generic topic key
+* update tests/test\_base\_plugin.py
+* cleanup
+* check kafka configuration is correct
+* update tests/test\_schema.py
+* PEP 8
+* Increase Test Coverage
+* Use an IP from RFC 5737 to test failure conditions
+* Upgrade version of yahoo\_panoptes\_snmp we depend on
+
+1.2.0rc1
+--------
+
+* Updated Enrichment Results
+* Update test\_base\_plugin.py
+* Additional Kafka Knobs & Increased Test Coverage
+* Add missing docstring
+* Add docstrings. Clean up module references
+* Add Cisco NXOS enrichment plugin and tests
+* Update docstrings and code cleanup
+* Add tests for ios device metrics enrichments
+* Update Maintainer List
+* Add plugin files for cisco ios enrichments
+* Replace smart quotes with straight-quotes
+* Light-editing
+* Add 'order\_matters=False' to test\_runner.py tests
+* Add space to changed line so that format of .travis.yml \*exactly\* matches previous version
+* Update jdk command for travis from 7 to 8
+* Edit 'Background' section
+* Add docs for Generic SNMP Polling Plugin DSL
+* Update plugin test framework to allow setting resource model. Code cleanup
+* Add fan and power metrics for SRX devices and update tests
+* Clean up plugin\_enrichment\_juniper\_device\_metrics.py for opensourcing
+* Sanitize test files for Juniper Enrichment Plugin
+* Add missing docstring
+* Change method signature of \_add\_defaults and update tests
+* Add more detail in docstrings and further clean up code
+* code cleanup
+* Use mock of time to fix timing problem when test run with tox
+* Add debugging lines
+* Remove read enrichment from file tests
+* Cleanup
+* Remove system MIB oids from tests
+* Snapshot. Open-sourced tests for sysDescr, SysUptime, failing to get value (unsupported MIB?). Have removed offending entries in public.snmprec for the time being, but need to re-cover lines of code. Still more json results files that need to be updated
+* Snapshot
+* Snapshot. Troubleshooting bulk\_walk not returning stats
+* Refactor Generic SNMP Polling plugin to inherit from PanoptesSNMPBasePlugin. Change test file to use plugin\_class rather than plugin\_instance
+* Add yahoo\_panoptes/plugins/helpers/snmp\_connections.py to .gitignore
+* Removed two TODOS: '# OIDDataTypes. TODO match formatting to ent.type output' for \_TYPE\_MAPPING dict (currently line 21) and 'correct exception block?' for \_build\_map exception block (currently line 120)
+* Undo changes to panoptes\_base\_plugin
+* Add vendored Zookeeper files
+* Use vendored Zookeeper libs
+* resource\_creation\_timestamp and \_resource\_ttl should be strings
+* Dare I say the last one?
+* Another typo
+* Good typo catch
+* Removed files that we don't need anymore Clarified some points in System Metrics
+* Updated the polling flow diagram
+* Beefed up the flowchart Added the connection states Updated a couple of ambiguities in the document
+* Emphasized 'convention', clarified a couple of the error states
+* predictably missed the one reference
+* heading anchors
+* Converted the SVG down to PNG
+* Modified the section on CPU Utilization to remove ambiguity about instantaneous values
+* Older version are on 'archive'
+* Fixup unit tests
+* fixes yahoo/panoptes#43
+* Bump versions of libs within the ZK jar
+* Fixup typos
+* Download Zookeeper from Apache's archive
+* ZK\_VERSION, not ZOOKEEPER\_VERSION
+* Add ZOOKEEPER\_VERSION environment variable to .travis.yml
+* Try with the latest version of Kazoo
+* Umm - extract the actual ZK version we've downloaded
+* Test against Zookeeper version 3.4.13
+* Update and expand documentation in README.md
+* Pin Kazoo version to 2.5.0 in tox.ini
+* Update README.md to add link to the Docker image
+* Simplify set operations tests. Add clarifying comments
+* Add copyright notice to test\_secrets.py
+* Add tests for passed kv\_store api methods. Make a creative mock for 'get' in 'get\_by\_site'
+* Snapshot. Working on testing fallback to default
+* Remove integer from garbage objects log lines in extract
+* Add deploy lines back
+* Add testfixtures to tox.ini
+* Remove deploy for fork's travis ci
+* Use packaged ratelimitingfilter
+* Add normalize\_key to set\_members method. Increase ttl time for ttl test
+* pycodestyle for test\_key\_value\_store.py
+* Update Installation.md
+* updated installation steps
+* Add tests for validators. Minor bug fixes in validators.py
+* added handler for influxdb
+* Embed links after alt test and images
+* Use refernce links
+* Git rid of camo links
+* Update log location for InfluxDB consumer
+* Fix anchor tags in Installation.md
+* Documentation Cleanups
