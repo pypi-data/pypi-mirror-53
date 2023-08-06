@@ -1,0 +1,53 @@
+Metadata-Version: 2.1
+Name: monday
+Version: 1.0.0
+Summary: A Python client library for Monday.com
+Home-page: https://github.com/ProdPerfect/monday
+Author: Christina D'Astolfo
+Author-email: christina@prodperfect.com
+License: MIT
+Description: # monday
+        A monday.com Python Client Library
+        
+        
+        For an overview of the Monday API, [click here](https://monday.com/developers/v2#introduction-section).
+        
+        
+        #### Requirements
+        - Python >= 3.6
+        - GraphQLClient >= 0.2.4
+        
+        #### Getting started
+        `pip install monday`
+        
+        `monday` is very simple to use -- take a look at the below example:
+        ```python
+        from monday import MondayClient
+        
+        
+        monday = MondayClient('your token')
+        
+        monday.items.create_item(board='12345678', group='today',  item_name='Do a thing'
+        
+        ```
+        
+        **Available methods:**
+        #### Items Resource (monday.items)
+        - `create_item(board, group, item_name)` - Create an item on a board in the given group with name item_name. 
+        
+        - `fetch_items(board_id, column, value)` - Fetch items on a board by column value.
+        
+        
+        #### Contributions
+        TBD
+        
+        #### Bug Reports
+        TBD 
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown; charset=UTF-8
