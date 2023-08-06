@@ -1,0 +1,247 @@
+Metadata-Version: 2.1
+Name: fileoperate
+Version: 1.0.0
+Summary: A module to operate many kinds of files.
+Home-page: https://github.com/yuanke7/fileoperate_package
+Author: Jarno Yuan
+Author-email: ykq12313@gmail.com
+License: UNKNOWN
+Description: ##### 1.file
+        
+        ~~~markdown
+        1. file_isexist(file=None)
+        	@功能 文件是否存在  
+            @参数 file 文件全路径 
+            @返回  True or False or Exception 
+        
+        2. dir_isexist(dir=None) 
+        	@功能 文件夹是否存在  
+            @参数 dir 文件夹全路径 
+            @返回  True or False or Exception 
+            
+        3. create_dir(path=None) 
+        	@功能 创建路径  
+            @参数 path 路径地址 
+            @返回  True or False or Exception 
+            
+        4. create_file(srcfile=None)
+        	@功能 创建文件  
+            @参数 path 路径地址 
+            @参数 file 文件 
+            @返回  True or Exception 
+            
+        5. copy_file(src_file=None, dst_file=None)
+        	@功能 复制文件  
+            @参数 src_file 源文件全路径 
+            @参数 dst_file 目标文件全路径 
+            @返回  True or Exception 
+        
+        6. move_file(src_file=None, dst_path=None)
+        	@功能 移动文件  
+            @参数 src_file 源文件全路径 
+            @参数 dst_path 目标文件全路径 
+            @返回  True or Exception 
+            
+        7. move_folder(src_path=None, dst_path=None)
+        	@功能 移动文件夹  
+            @参数 src_path 源路径 
+            @参数 dst_path 目标路径 
+            @返回  True or Exception 
+        
+        8. del_file(file=None)
+        	@功能 删除文件  
+            @参数 file 文件全路径 
+            @返回  True or Exception 
+            
+        9. del_dir(dir=None) 
+        	@功能 删除文件夹 
+            @参数 dir 文件夹全路径 
+            @返回  True or Exception 
+            
+        10. replaceSpecialChar(content) 
+        	@功能 删除输入内容中的特殊字符，主要为回车符 
+            @参数 content 需要处理的内容，可以为list或者为字符串 
+            @返回  返回去除特殊字符后的字符串，并在list每个元素后边添加**作为分隔 
+        
+        11. getFileContent(file=None)
+        	@功能 读取文件的内容  
+            @参数 file 文件名 
+            @返回  读取成功返回文件内容，失败返回空字符串 
+            
+        12. typeList()
+        	@功能 得到文件类型及对应表  
+            @返回  文件类型及其对应表 
+        
+        13. bytes2hex(bytes)
+        	@功能 字节码转16进制字符串  
+            @参数 bytes 字节码 
+            @返回  返回16进制字符串 
+            
+        14. filetype(filename)
+        	@功能 获取文件的文件类型  
+            @参数 filename 文件名 
+            @返回  返回该文件的文件类型，如果没有匹配则返回unknown 
+            
+        15. getOneLayerFile(path="")
+        	@功能 得到目录下一层的文件列表  
+            @参数 path 全路径 
+            @返回  文件列表 
+            
+        16. getallfile(path="")
+        	@功能 得到目录下的文件列表，不包含文件夹  
+            @参数 path 全路径 
+            @返回  文件列表 
+            
+        17. getallDirectories(path="")
+        	@功能 得到目录下的文件夹列表，深度只有一层  
+            @参数 path 全路径 
+            @返回  文件列表 
+        ~~~
+        
+        ##### 2.log
+        
+        ~~~markdown
+        1. 用法 
+            from fileoperate.log import ILog
+            logger = ILog(__file__)  # 表示当前文件地址
+            发送日志 写入统一的日志中
+            
+        2. info(self, msg)
+        	@功能 输出info类型的日志  
+            @参数 msg 需要输出的信息
+            
+        3. warning(self, msg)
+        	@功能 输出warning类型的日志  
+            @参数 msg 需要输出的信息 
+            
+        4. error(self, msg)
+        	@功能 输出error类型的日志  
+            @参数 msg 需要输出的信息 
+           
+        5. debug(self, msg)
+        	@功能 输出debug类型的日志  
+            @参数 msg 需要输出的信息 
+            
+        6. INFO(self, msg)
+        	@功能 输出info类型的日志  
+            @参数 msg 需要输出的信息 
+            
+        7. exception(self, msg)
+        	@功能 输出exception类型的日志  
+            @参数 msg 需要输出的信息
+        
+        8. getLogFileName(self)
+        	@功能 获取日志文件名
+        ~~~
+        
+        ##### 3.pdf
+        
+        ~~~markdown
+        1. 功能：解析pdf 文本，保存到txt文件中
+        2. parse(path)
+        	@功能 获取pdf文件的文件内容 
+            @参数 path 文件名 
+            @返回  返回该文件的文件内容，内容以list形式存在，每一行为list的一个元素 
+        
+        ~~~
+        
+        ##### 4.word
+        
+        ~~~markdown
+        1. fileTypeCheck(fPath)
+        	@功能 检查该文件是不是docx/doc/wps/txt文件的其中一种 
+            @参数 fpath 文件名 
+            @返回 如果是docx/doc/wps/txt的一种，返回True，否则返回False 
+            
+        2. parse(path)
+        	@功能 获取docx/doc/wps/txt文件的文件内容 
+            @参数 path 文件名 
+            @返回  返回该文件的文件内容，内容以list形式存在，每一行为list的一个元素 
+        ~~~
+        
+        ##### 5.xlsx
+        
+        ~~~markdown
+        1. creatExcel(file,sheetName)
+         	@功能 创建一个excel文件 
+            @参数 file 文件名， sheetName sheet页名 
+            @返回 如果成功返回True，失败抛出异常 
+         
+        2. loadWorkBook(file)
+        	@功能 加载excel文件  
+            @参数 file excel全路径 
+            @返回 Exception 
+          
+        3. getSheet(wb, sheetName)
+        	@功能 获取sheet页  
+            @参数 wb 工作簿 
+            @参数 sheetName sheet页名称 
+            @返回 Exception 
+        
+        4. getMaxRow(sheet)
+        	@功能 获取当前sheet页最大行  
+            @参数 sheet sheet页 
+            @返回 Exception 
+           
+        5. getCellData(sheet, row, column)
+        	@功能 获取单元格数据  
+            @参数 sheet sheet页 
+            @参数 row 行号 
+            @参数 column 列号 
+            @返回 Exception 
+            
+        6. setCellData(sheet, row, column, value)
+        	@功能 设置单元格值  
+            @参数 sheet sheet页 
+            @参数 row 行号 
+            @参数 column 列号 
+            @参数 value 值 
+            @返回 Exception 
+           
+        7. mergeCells(sheet, start_row, start_column, end_row, end_column)
+        	@功能 拆分单元格  
+            @参数 sheet sheet页 
+            @参数 start_row 开始行号 
+            @参数 start_column 开始列号 
+            @参数 end_row 结束行号 
+            @参数 end_column 结束列号 
+            @返回 Exception 
+           
+        8. cellAlignment(sheet, row, column, horizontal=None, vertical=None, border_style=None, border_color=None,
+                          font_size=None, font_color=None, fill_color=None, fill_type=None, wrapText=None) 
+           	@功能 设置单元格样式  
+            @参数 sheet sheet页 
+            @参数 row 行号 
+            @参数 column 列号 
+            @参数 horizontal 水平方向 horizontal_alignments取值说明:('general','left','center','right','fill','justify','centerContinuous','distributed') 
+            @参数 vertical 垂直方向 vertical_aligments取值说明:('top', 'center', 'bottom', 'justify','distributed') 
+            @参数 border_style 单元格样式 border_style取值说明:('dashDot','dashDotDot', 'dashed','dotted','double','hair', 'medium', 'mediumDashDot', 'mediumDashDotDot','mediumDashed', 'slantDashDot', 'thick', 'thin') 
+            @参数 border_color 单元格颜色
+            @参数 font_size 字体大小 
+            @参数 font_color 字体颜色 
+            @参数 fill_color 填充颜色 
+            @参数 fill_type 填充类型 fill_type取值说明:'gray0625', 'lightHorizontal', 'lightVertical', 'gray125', 'darkVertical', 'darkGray', 'darkDown', 'darkTrellis', 'lightTrellis', 'lightDown', 'darkGrid', 'lightUp', 'lightGrid', 'mediumGray', 'solid', 'darkUp', 'darkHorizontal', 'lightGray' 
+            @返回 Exception 
+            例子：cellAlignment(sheet1,i,j,horizontal='center',vertical='center',border_style='medium',border_color='E53528',font_size="22",font_color='0864B1',fill_color='F4CF15',fill_type='solid')
+            
+        9. saveExcel(wb, file)
+        	@功能 保存excel  
+            @参数 wb 工作簿 
+            @参数 file excel全路径 
+            @返回 Exception 
+            
+        10. closeExcel(wb, file)
+        	@功能 关闭excel  
+            @参数 wb 工作簿 
+            @参数 file excel全路径 
+            @返回 Exception 
+        ~~~
+        
+        
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
