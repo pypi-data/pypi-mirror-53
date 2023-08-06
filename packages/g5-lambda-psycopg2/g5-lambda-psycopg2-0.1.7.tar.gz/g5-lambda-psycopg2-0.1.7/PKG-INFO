@@ -1,0 +1,33 @@
+Metadata-Version: 1.1
+Name: g5-lambda-psycopg2
+Version: 0.1.7
+Summary: Fork of awslambda-psycopg2
+Home-page: https://github.com/G5/awslambda-psycopg2
+Author: G5Dev
+Author-email: g5dev@g5searchmarketing.com
+License: MIT
+Download-URL: https://github.com/G5/awslambda-psycopg2/archive/master.zip
+Description: 
+        psycopg2 Python Library for AWS Lambda
+        ======================================
+        
+        This is a custom compiled psycopg2 C library for Python. Due to AWS Lambda
+        missing the required PostgreSQL libraries in the AMI image, we needed to
+        compile psycopg2 with the PostgreSQL `libpq.so` library statically linked
+        libpq library instead of the default dynamic link.
+        
+        ### How to use
+        
+        This project only exists for python 3.7. The subsequent pypi package will only support python 3.7 as well.
+        It only includes the `with_ssl_support` version. Since that will generally be required for AWS lambda usage.
+        
+        ### Building from source
+        Go to the original package if you wish to modify this from source
+        
+Keywords: aws,lambda,psycopg2
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.7
