@@ -1,0 +1,10 @@
+@echo off
+rem Script will set variables we don't want exposed in checked-in file, dist_pypi.bat
+
+set "user_name=yourUserName"
+set "password=Your Password"
+
+rem Maintain the tiny bit of "obscurity" we have with passwords in this file instead of main distribution bat script
+echo ***************************************************************
+echo *****DO NOT CHECK-IN/COMMIT THIS FILE TO SOURCE CONTROL********
+echo ***************************************************************
