@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: func-adl
+Version: 1.0.0a2
+Summary: Functional Analysis Description Language Base Package
+Home-page: https://github.com/iris-hep/func_adl
+Author: G. Watts (IRIS-HEP/UW Seattle)
+Author-email: gwatts@uw.edu
+Maintainer: Gordon Watts (IRIS-HEP/UW Seattle)
+Maintainer-email: gwatts@uw.edu
+License: TBD
+Description: # func_adl
+         Construct hierarchical data queries using SQL-like concepts in python
+        
+        [![Travis Build Badge](https://travis-ci.org/iris-hep/func_adl.svg?branch=master)](https://travis-ci.org/iris-hep/func_adl)
+        [![Code Coverage](https://codecov.io/gh/iris-hep/func_adl/graph/badge.svg)](https://codecov.io/gh/iris-hep/func_adl)
+        
+        This is the base package that has the backend-agnostic code to query hierarchical data. In all likelihood you will want to install
+        one of the following packages:
+        
+        - func_adl.xAOD: for running on an ATLAS experiment xAOD file hosted in ServiceX
+        - func_adl.xAOD.backend: for running on a local file using docker
+        
+        
+Platform: Any
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
