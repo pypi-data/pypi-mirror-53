@@ -1,0 +1,79 @@
+Metadata-Version: 2.1
+Name: pybloomfiltermmap3
+Version: 0.4.18
+Summary: A Bloom filter (bloomfilter) for Python 3 built on mmap
+Home-page: https://github.com/prashnts/pybloomfiltermmap3
+Author: Michael Axiak, Rob Stacey, Prashant Sinha
+Author-email: prashant@noop.pw
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: C
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/markdown
+Requires-Dist: Cython
+
+# pybloomfiltermmap3
+
+`pybloomfiltermmap3` is a `Python 3` compatible fork of `pybloomfiltermmap` by @axiak.
+
+The goal of `pybloomfiltermmap3` is simple: to provide a fast, simple, scalable, correct library for Bloom Filters in Python.
+
+[![Build Status](https://travis-ci.org/PrashntS/pybloomfiltermmap3.svg?branch=master)](https://travis-ci.org/PrashntS/pybloomfiltermmap3)
+[![PyPI](https://img.shields.io/pypi/v/pybloomfiltermmap3.svg)](https://pypi.python.org/pypi/pybloomfiltermmap3)
+[![PyPI](https://img.shields.io/pypi/dw/pybloomfiltermmap3.svg)](https://pypi.python.org/pypi/pybloomfiltermmap3)
+[![PyPI](https://img.shields.io/pypi/pyversions/pybloomfiltermmap3.svg)](https://pypi.python.org/pypi/pybloomfiltermmap3)
+
+
+## Quickstart
+
+After you install, the interface to use is a cross between a file
+interface and a ste interface. As an example:
+```python
+    >>> import pybloomfilter
+    >>> fruit = pybloomfilter.BloomFilter(100000, 0.1, '/tmp/words.bloom')
+    >>> fruit.update(('apple', 'pear', 'orange', 'apple'))
+    >>> len(fruit)
+    3
+    >>> 'mike' in fruit
+    False
+    >>> 'apple' in fruit
+    True
+```
+
+To create an in-memory filter, ditch the file location.
+```python
+    >>> cakes = pybloomfilter.BloomFilter(10000, 0.1)
+```
+*Caveates*: It is currently not possible to persist this filter later.
+
+## Docs
+
+Follow the *official* docs for `pybloomfiltermmap`. http://axiak.github.io/pybloomfiltermmap/
+
+## Install
+
+Please have `Cython` installed. Please note that this version is **specifically** meant for Python 3. In case you need Python 2, please see https://github.com/axiak/pybloomfiltermmap.
+
+To install:
+
+```shell
+    $ pip install cython
+    $ pip install pybloomfiltermmap3
+```
+
+and you should be set.
+
+
+## License
+
+See the LICENSE file. It's under the MIT License.
+
+
+
