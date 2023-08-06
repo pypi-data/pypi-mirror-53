@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: instrument-server
+Version: 1.2.1
+Summary: TCP server for controlling multiple instruments with a simplified SCPI interface
+Home-page: https://github.com/Terrabits/instrument-server
+Author: Nick Lalic
+Author-email: nick.lalic@gmail.com
+License: R&S Terms and Conditions for Royalty-Free Products
+Keywords: RF instrument SCPI
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: ruamel.yaml (>=0.15.85<1.0)
+Requires-Dist: pyvisa (>=1.9.1<2.0)
+Provides-Extra: dev
+Requires-Dist: ddt (>=1.2.0<2.0) ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: ddt (>=1.2.0<2.0) ; extra == 'test'
+
+# instrument Server
+
+TCP server for controlling multiple instruments via a simplified SCPI interface
+
+## Requirements
+
+- python 3.7+
+- `ddt` testing package
+- `ruamel.yaml` yaml parser package
+
+## Install Requirements
+
+To get started:
+
+```shell
+# git clone instrument-server
+cd path/to/instrument-server
+pip install .
+```
+
+Or, alternatively, for development:
+
+```shell
+cd path/to/instrument-server
+pip install -e .[dev]
+```
+
+## Start Server
+
+A command line command `instrument-server` is installed on your system. See `instrument-server --help` for details.
+
+## Example
+
+See `doc/example` for a simple example to help get started.
+
