@@ -1,0 +1,60 @@
+Metadata-Version: 2.1
+Name: scopeagent
+Version: 0.3.6
+Summary: Scope agent for Python
+Home-page: https://scope.dev
+Author: Undefined Labs, Inc
+Author-email: info@undefinedlabs.com
+License: Apache
+Project-URL: Documentation, https://home.undefinedlabs.com/goto/python-agent
+Project-URL: Source, https://github.com/undefinedlabs/scope-go-agent
+Project-URL: Tracker, https://github.com/undefinedlabs/scope-go-agent/issues
+Description: # scope-python-agent [![Documentation Status](https://readthedocs.org/projects/scope-python-agent/badge/?version=latest)](https://scope-python-agent.readthedocs.io/en/latest/?badge=latest) ![](https://github.com/undefinedlabs/scope-python-agent/workflows/Test/badge.svg)
+        
+        Python agent for [Scope](https://scope.dev)
+        
+        
+        ## Install
+        
+            pip install scopeagent
+        
+        
+        ## Usage
+        
+        Please refer to the documentation at [https://docs.scope.dev/docs/python-installation](https://docs.scope.dev/docs/python-installation)
+        
+        
+        ## Development
+        
+        ### Automated Testing
+        
+        The following environment variables are used for database tests:
+        
+        * `POSTGRES_DBURL`
+        
+        To run the tests:
+        
+            tox
+        
+        ### Publishing
+        
+        To publish a new version of `scopeagent` to [pypi](https://pypi.org/):
+        
+            make publish
+        
+        You will need valid [pypi](https://pypi.org/) credentials with access to the `scopeagent` package.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Testing
+Description-Content-Type: text/markdown
+Provides-Extra: docs
+Provides-Extra: tests
