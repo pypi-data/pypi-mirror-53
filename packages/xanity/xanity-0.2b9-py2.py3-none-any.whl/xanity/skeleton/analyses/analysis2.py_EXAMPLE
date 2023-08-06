@@ -1,0 +1,22 @@
+import xanity
+import matplotlib.pyplot as plt
+
+
+def main():
+    
+    data = xanity.load_data(selection={'experiment1': 'fakevar'}, all=True)
+    data.draws.sort_values().iloc[::30].plot(kind='bar')
+
+    with open('myfile.txt', 'w') as f:
+        f.write('asdfasdfadf')
+
+    xanity.save_path(path=['myfile.txt'])
+
+
+    # plot everything
+    plt.show(block=False)
+    plt.pause(1)
+
+# the hook below is used to kick off a xanity run from an experiment script itself:
+if __name__ == '__main__':
+    xanity.run()

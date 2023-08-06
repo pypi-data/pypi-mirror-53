@@ -1,0 +1,39 @@
+import xanity
+import numpy as np
+
+
+###########################################################################
+##
+##
+##     just another basic experiment, because three is a magic number,
+##                don't you know
+##
+##
+###########################################################################
+
+
+# register parameters
+# xanity.experiment_parameters({
+#    'draws': [100,1000,50],
+#    'power': [0.9, 0.5, 0.1],
+# })
+
+def main(
+        draws=200,
+        power=1.5,
+):
+    """ do experiment 3 """
+    a = xanity.load_data({
+        'experiment1': 'fakevar',
+        'experiment2': ['fakevar'],
+    })
+    fakevar = abs(np.random.randn(draws)) ** power
+    xanity.log("here is a print from experiment 3")
+    xanity.save_variable(fakevar)
+
+
+# the hook below is used to kick off a xanity run from an experiment script itself:
+
+
+if __name__ == '__main__':
+    xanity.run()

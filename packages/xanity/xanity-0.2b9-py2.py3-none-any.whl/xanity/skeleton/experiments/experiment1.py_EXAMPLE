@@ -1,0 +1,87 @@
+import xanity
+import numpy as np
+
+# register parameters to use for parametric evaluations:
+xanity.experiment_parameters({
+    'draws': [100, 150, 200],
+    'scale': [1, 2, 3, ],
+    'offset_mag': [9, -0.5, -10],
+})
+
+
+# if you want to do multiple trials, you can:
+xanity.trials(5)
+
+
+# you can use the 'xanity.timed_fn' decorator on a function that your experiment uses
+# and xanity will collect run-duration data and keep it with the rest of your data
+@xanity.timed_fn
+def my_timed_function():
+    i = 0
+    for i in range(10**6):
+        i += 1
+    return
+
+# if you use data from other experiments/analyses, it's best to load it outside the main() function:
+incoming_data = xanity.load_data({'experiment1b': 'fakevar'})
+
+# the 'main' function _is_ the experiment:
+# give it parameters here in the declaration
+def main(
+        draws=200,
+        scale=5,
+        offset_mag=8,
+):
+    """ do experiment 1 """
+
+    # if you must, you can load data from inside the main() function
+    # with the caveat that if you change names, i.e. 'import xanity as x'
+    # or 'from xanity import load_data as ld',
+    # xanity will have a very hard time discovering it before you run your experiments.
+
+    other_incoming_data = xanity.load_data({'experiment1b': 'fakevar'})
+
+    # create some random data
+    fakevar = scale * np.random.rand(draws) ** 2 + offset_mag*np.random.randn(draws)
+
+    # use the xanity logger so your messages will appear in thethat logfiles are kept with run data
+    xanity.log("here is a print from experiment 1")
+
+    # let xanity save variables from the current scope so it can track dependencies and so they can be recalled later
+    xanity.save_variable(fakevar)
+
+    # if you're producing output to a file:
+    with open('myownfile.txt', 'w') as f:
+        f.write('helloooooooo!')
+
+    # let xanity know:
+    xanity.save_path('myownfile.txt')
+    # # Note:
+    # if you save files on the current path and forget to use 'xanity.save_path()', xanity will see them and keep
+    # them with the data, but because xanity allows for your experiments to evolve, it won't assume that a file
+    # _should_ continue to be created by every revision of your experiment
+    # for example:
+    with open('unreported_file.txt', 'w') as f:
+        f.write('helloooooooo!')
+
+    # you can save a checkpoint too, so that you can resume (debugging)
+    # from a place inside the experiment:
+    xanity.save_checkpoint('my_checkpoint', variables=[fakevar])
+    # this will save all tracked files (like 'myownfile.txt' above) and include any variables you specify
+    #  be carefull though:  checkpoint loading is disabled by default; it must be enabled when you call xanity:
+    #     'xanity run --checkpoints experiment1'
+    #
+    #  that's done so that you don't accidentally do 999 runs using the same checkpoint data!
+
+    variables = xanity.load_checkpoint('my_checkpoint')
+    # this will restore checkpointed files to the current working path and
+    # will return checkpointed python variables
+
+    # now, run our timed function:
+    my_timed_function()
+
+
+# the hook below can be used to kick off a xanity run from an experiment script itself:
+
+if __name__ == '__main__':
+    xanity.run()

@@ -1,0 +1,41 @@
+import xanity
+import numpy as np
+
+###########################################################################
+##
+##
+##     just another basic experiment, but
+##      with the parametric run commented out
+##     in the absence of an 'experiment_parameters' request,
+##      the defaults are used  (the ones given in the definition header)
+##
+##
+###########################################################################
+
+# register parameters
+# xanity.experiment_parameters({
+#    'draws': [100,1000,50],
+#    'magnitude': [0.9, 0.5, 0.1],
+# })
+
+
+def main(
+        draws=200,
+        magnitude=5,
+        offset=88,
+):
+    """ do experiment 2 """
+
+    fakevar = magnitude*10*np.random.randn(draws) + offset
+    xanity.log("here is a print from experiment 2")
+    xanity.save_variable(fakevar)
+    a = xanity.load_data({
+        'experiment1': 'fakevar',
+    })
+
+
+# the hook below is used to kick off a xanity run from an experiment script itself:
+
+
+if __name__ == '__main__':
+    xanity.run()
