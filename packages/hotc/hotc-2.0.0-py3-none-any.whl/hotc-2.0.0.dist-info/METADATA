@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: hotc
+Version: 2.0.0
+Summary: A Python 3.6+ library to get walking counts for central Auckland, New Zealand from the Heart of the City API. The API has access to counts from 2012-01-23 to the present.
+License: MIT
+Author: Alex Raichev
+Author-email: araichev@mrcagney.com
+Requires-Python: >=3.6,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: pandas (<1)
+Requires-Dist: requests (>=2.22,<3.0)
