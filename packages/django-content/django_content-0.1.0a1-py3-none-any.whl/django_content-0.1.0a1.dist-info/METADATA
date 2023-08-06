@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: django-content
+Version: 0.1.0a1
+Summary: Django Content framework.
+Home-page: https://gitlab.com/Django.apps/django-content
+Author: a.Signz
+Author-email: a.Signz089@googlemail.com
+License: BSD
+Project-URL: Bug Reports, https://gitlab.com/Django.apps/django-content/issues
+Project-URL: Source, https://gitlab.com/Django.apps/django-content
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Requires-Python: >=3.6
+Requires-Dist: Django (~=2.2)
+Provides-Extra: dev
+Requires-Dist: black (==19.3b0) ; extra == 'dev'
+Requires-Dist: flake8 (~=3.7.8) ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest (~=5.1) ; extra == 'test'
+Requires-Dist: pytest-cov (~=2.7) ; extra == 'test'
+Requires-Dist: pytest-django (~=3.5) ; extra == 'test'
+Requires-Dist: pytest-flake8 (~=1.0) ; extra == 'test'
+
+UNKNOWN
+
+
