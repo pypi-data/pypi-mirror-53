@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: instrumental-dl
+Version: 0.1
+Summary: Download the instrumental for almost any song
+Home-page: https://github.com/QualityHammer/instrumental-downloader
+Author: QualityHammer
+Author-email: agingllama@gmail.com
+License: UNKNOWN
+Description: # Instrumental-Downloader
+        A command line tool to download a song's instrumental from Youtube.
+        
+        # Usage
+        1) cd to the /bin directory
+        2) use your command
+        
+        <p>Command: ./instrumental_dl [filename/ songTitles..]<br><br>
+          filename:     This file should have a .txt extension and be located in the /bin folder.<br>
+                        The file should contain a song title on each line.<br>
+          songTitles:   Multiple song titles can be used as seperate arguments.<br>
+                        Each song title should be contained in quotes so that all the <br>
+                        spaces are included.<p>
+        
+Keywords: instrumental downloader
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
