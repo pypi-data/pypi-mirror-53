@@ -1,0 +1,138 @@
+Metadata-Version: 2.1
+Name: email-client
+Version: 1.4.0
+Summary: Email clients for grader and other services of fless.pro
+Home-page: https://github.com/Flesspro/email-client
+Author: Egor Urvanov
+Author-email: hedgehogues@bk.ru
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: table-test (==0.4.1)
+Requires-Dist: requests (==2.22.0)
+Requires-Dist: pytest (==5.0.1)
+Requires-Dist: python-dotenv (==0.10.3)
+
+# Email client
+
+This repo consist email client for [grader](https://github.com/Flesspro/grader) and other services and packages.
+
+## Installing and run
+
+You need `python3.7`, `pytest5.0.1` and `make4.1`.
+
+Installation: `pip install email-client`
+
+You can see also [PyPi](https://pypi.org/project/email-client/1.3.0/).
+
+We use makefile for run and environment variables for configuration.
+
+You can find smtp-client and imap-client. If you want, you can customize parsing email into smtp-client, you can 
+implement custom strategy and use them. For default, we use strategy for grader. 
+
+To clean email (all emails are deleted):
+
+    ENV_FILE=./.envs/my_envfile.env CLEAN=YES make clean
+
+## Examples   
+
+Creating IMAPClient:
+
+    from email_client import client_pkg
+
+    client = client_pkg.IMAPClient(
+        imap_host=os.getenv('IMAP_HOST'),
+        imap_port=os.getenv('IMAP_PORT'),
+        login=os.getenv('EMAIL_LOGIN'),
+        password=os.getenv('EMAIL_PASSWORD'),
+        extract_strategy=strategy,
+    )
+
+You can log in:
+
+    client.login()
+
+And logout:
+
+    client.logout()
+
+After some minutes you must login again. A lot of servers logout automatically by a time. Also, you can clean emails: 
+
+    client.clean_emails()
+
+You can set specify folder:
+
+    client.clean_emails('inbox')
+
+Another case, you can get all emails:
+
+    emails, statuses = client.get_imails(folder='inbox')
+
+For each emails, you get specify status. If take `zip(emails, statuses)`, you got pairs. You can set `EmailType`, 
+for example `UNSEEN`:
+
+    emails, statuses = client.get_imails(email_typeEmailsTypes.UNSEEN, folder='inbox')
+
+The same way, you can make SMTP client.
+
+## Testing
+
+If we integration-test, we have some stages:
+
+* Data generation
+* Create objects
+* Testing
+* Validation
+* Clean
+
+If we unit-test, we have some stages: 
+
+* Create objects
+* Testing
+* Validation
+
+In this way unit-test is partial case of integration test. We use unit-test for testing 
+logic in context one object, function (method). For example, we have function:
+
+    def plus(a, b):
+        return a + b
+
+This is unit-test. We want to test simple object. This situation is not always possible. 
+If we want communication some systems and modules, we deal with integration tests. 
+For example, we test connect to data base and collect data from there. This is 
+integration-tests. 
+
+All tests lay down into folder:
+
+    tests/
+
+If you want to run tests, you can do this (all emails are deleted):
+
+    ENV_FILE=.envs/my_envfile.env make test
+
+Example `test.env`:
+
+    EMAIL_TIMEOUT_TEST=1.5  # Timeout for waiting between reading and writing of emails
+
+    IMAP_HOST=imap.mail.ru
+    IMAP_PORT=993
+    SMTP_HOST=smtp.mail.ru
+    SMTP_PORT=587
+
+    EMAIL_LOGIN=my@email.ru
+    EMAIL_PASSWORD=my_password
+
+
+### Emails (integration)
+
+We have some clients for email:
+
+* SMTP-client sends emails
+* IMAP-client receives emails
+
+For emails client we have not best way. We test SMTP-client over IMAP-client and IMAP-client
+over SMTP-client.
+
+
