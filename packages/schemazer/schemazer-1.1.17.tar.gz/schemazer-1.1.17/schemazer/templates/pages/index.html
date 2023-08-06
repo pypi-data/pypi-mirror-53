@@ -1,0 +1,38 @@
+{% extends "frame.html" %}
+{% block content %}
+    <div class="block">
+        <i style="float: right">API version {{version}}</i>
+        <p>
+            The API works over HTTP. All requests return a response with a code <i>200</i>.
+            The default response to the error code is 200.
+            <br>
+            API responses are divided into 2 types: <a href="{{docs_path}}/errors">errors</a> and <code>response</code>.
+        </p>
+    </div>
+
+    <div class="block">
+        <em>Success response [200 OK]</em>
+        <pre class="code">
+{
+  "response": {
+    "success": true
+  }
+}</pre>
+    </div>
+
+    <div class="block">
+        <em>Response with errors [200 OK]</em>
+        <pre class="code">
+{
+    "error": {
+        "code": "Error.Code",
+        "failure_param": "param_name",
+        "msg": "Error description",
+        "params": {
+            "param_name": "value"
+        }
+    }
+}</pre>
+    </div>
+
+{% endblock content %}

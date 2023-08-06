@@ -1,0 +1,167 @@
+{% extends "frame.html" %}
+{% block content %}
+
+<div class="block">
+    <p><a href="{{docs_path}}/methods/{{group}}">{{group}}</a>  <  <b>{{method}}</b></p>
+    <p>
+        {{method_schema.description}}
+    </p>
+    <div class="logohint">{{method_schema.url}}</div>
+
+</div>
+
+{% if method_schema.parameters %}
+<div class="block">
+    <em>Query parameters</em>
+    <p>
+        Required parameters mark of <span style="background-color: #f6fefb">*</span>.
+    </p>
+
+    <table class="docutils" border="1">
+        <colgroup>
+            <col width="25%">
+            <col width="75%">
+        </colgroup>
+
+        <tbody valign="top">
+            {% for param in method_schema.parameters %}
+            <tr class="row-even">
+                <td title="{% if param.required %}Required{% endif %}">{% if param.required %}* {% endif %}<b>{{param.name}}</b> ({{param.type.__name__}})</td>
+                <td>
+                    {{param.description}}
+                    <br/>
+                    <em>{{param.example}}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if method_schema.headers %}
+<div class="block">
+    <em>Header parameters</em>
+    <p>
+        Required parameters mark of <span style="background-color: #f6fefb">*</span>.
+    </p>
+
+    <table class="docutils" border="1">
+        <colgroup>
+            <col width="25%">
+            <col width="75%">
+        </colgroup>
+
+        <tbody valign="top">
+            {% for param in method_schema.headers %}
+            <tr class="row-even">
+                <td title="{% if param.required %}Required{% endif %}">{% if param.required %}* {% endif %}<b>{{param.name}}</b> ({{param.type.__name__}})</td>
+                <td>
+                    {{param.description}}
+                    <br/>
+                    <em>{{param.example}}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if method_schema.cookies %}
+<div class="block">
+    <em>Cookie parameters</em>
+    <p>
+        Required parameters mark of <span style="background-color: #f6fefb">*</span>.
+    </p>
+
+    <table class="docutils" border="1">
+        <colgroup>
+            <col width="25%">
+            <col width="75%">
+        </colgroup>
+
+        <tbody valign="top">
+            {% for param in method_schema.cookies %}
+            <tr class="row-even">
+                <td title="{% if param.required %}Required{% endif %}">{% if param.required %}* {% endif %}<b>{{param.name}}</b> ({{param.type.__name__}})</td>
+                <td>
+                    {{param.description}}
+                    <br/>
+                    <em>{{param.example}}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if method_schema.systems %}
+<div class="block">
+    <em>Systems parameters</em>
+    <p>
+        Required parameters mark of <span style="background-color: #f6fefb">*</span>.
+    </p>
+    <p>
+        System parameter can be passed to header, cookie or query parameter.
+    </p>
+
+    <table class="docutils" border="1">
+        <colgroup>
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="40%">
+        </colgroup>
+
+        <tbody valign="top">
+            <tr>
+                <td>&nbsp;</td>
+                <td class="table_header"><i>query name</i></td>
+                <td class="table_header"><i>header name</i></td>
+                <td class="table_header"><i>cookie name</i></td>
+                <td class="table_header"><i>example</i></td>
+            </tr>
+            {% for param in method_schema.systems %}
+            <tr class="row-even">
+                <td title="{% if param.required %}Required{% endif %}">{% if param.required %}* {% endif %}<b>{{param.name}}</b> ({{param.type.__name__}})</td>
+                <td>{{param.query_param}}</td>
+                <td>{{param.header_param}}</td>
+                <td>{{param.cookie_param}}</td>
+                <td>
+                    {{param.description}}
+                    <br/>
+                    <em>{{param.example}}</em>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<div class="block">
+    <em>Response schema</em>
+    <pre class="code">{{response.schema}}</pre>
+</div>
+
+<div class="block">
+    <em>Response example</em>
+    <pre class="code">{{response.example}}</pre>
+</div>
+
+<div class="block">
+    <em>Errors codes</em>
+    <p>All errors in page <a href="{{docs_path}}/errors">errors</a></p>
+    <ul>
+    {% for error in errors %}
+        <li><a href="{{docs_path}}/errors/{{error.code}}">{{error.code}}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+<br>
+<br>
+<br>
+{% endblock content %}

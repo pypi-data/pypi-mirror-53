@@ -1,0 +1,32 @@
+<html>
+<head>
+    <link type="text/css" href="{{ url_for('static', filename='doc/login.css') }}" rel="stylesheet">
+</head>
+
+
+<body style="height: 100%;">
+<div class="wrapper">
+    <div class="container">
+        <h1>{{project_name}} Documentation</h1>
+        <form class="form" method="post" action="{{action}}">
+            {% if msg == 'error' %}
+            <div class="error">
+                <p>Access forbidden</p>
+            </div>
+            {% endif %}
+            <input type="text" placeholder="login" name="login">
+            <input type="password" placeholder="password" name="password">
+            <button type="submit" id="login-button">Sign In</button>
+        </form>
+    </div>
+</div>
+<script>
+    $("#login-button").click(function (event) {
+        event.preventDefault();
+
+        $('form').fadeOut(500);
+        $('.wrapper').addClass('form-success');
+    });
+</script>
+</body>
+</html>

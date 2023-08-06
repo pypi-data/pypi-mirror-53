@@ -1,0 +1,15 @@
+{% extends "frame.html" %}
+{% block content %}
+
+<div class="block">
+    <p><a href="{{docs_path}}/methods/">Groups</a> < Methods of group {{group}}.</p>
+    <ul>
+    {% for method in methods %}
+        <li>
+            <a href="{{docs_path}}/methods/{{group}}.{{method}}">{{method}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}
