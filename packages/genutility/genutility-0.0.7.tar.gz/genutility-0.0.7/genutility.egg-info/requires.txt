@@ -1,0 +1,47 @@
+future
+
+[:python_version < "3.3"]
+mock
+contextlib2
+
+[:python_version < "3.4"]
+pathlib
+
+[:python_version < "3.5"]
+typing
+scandir
+
+[ALL]
+aiohttp
+bencode.py
+ctypes-windows-sdk
+flask
+gensim
+msgpack
+netifaces
+nltk
+orderedset
+pycryptodome
+pyOpenSSL
+PyPDF2
+pypiwin32
+rhash
+toml
+unidecode
+werkzeug
+wmi
+wx
+
+[gensim]
+gensim>=3.3.0
+numpy
+
+[pdf]
+PyPDF2
+
+[tls]
+pycryptodome
+pyOpenSSL
+
+[toml]
+toml
