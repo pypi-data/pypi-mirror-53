@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: django-language-autoswitcher
+Version: 0.0.2
+Summary: Switch language by wind
+Home-page: https://github.com/Oukanina/django-language-autoswitcher
+Author: Oukanina
+Author-email: guo.ke.ke.a@gmail.com
+License: UNKNOWN
+Keywords: django-language-autoswitcher
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Description-Content-Type: text/markdown
+Requires-Dist: Django (>=2.0)
+
+# Usage
+```
+pip install django-language-autoswitcher
+```
+
+
+```
+MiDDLEWARE = (
+    ...
+    'language_autoswitcher.middlelware.LanguageAutoSwitcherMiddleware',
+)
+```
+
+
