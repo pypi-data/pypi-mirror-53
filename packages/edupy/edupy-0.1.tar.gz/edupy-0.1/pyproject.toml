@@ -1,0 +1,11 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "edupy"
+author = "Jeremy Chen"
+author-email = "pypi@jeremychen.email"
+home-page = "https://github.com/jeremy886/edupy"
+classifiers = ["License :: OSI Approved :: MIT License"]
+
