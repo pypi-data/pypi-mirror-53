@@ -1,0 +1,53 @@
+Metadata-Version: 2.1
+Name: data-extractor
+Version: 0.4.0
+Summary: Combine XPath, CSS Selector and JSONPath for Web data extracting.
+Home-page: https://github.com/linw1995/data_extractor
+License: MIT
+Author: linw1995
+Author-email: linw1995@icloud.com
+Requires-Python: >=3.7,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Provides-Extra: docs
+Provides-Extra: linting
+Provides-Extra: test
+Requires-Dist: black (>=19.3b0,<20.0); extra == "linting"
+Requires-Dist: cssselect (>=1.0.3,<2.0.0)
+Requires-Dist: doc8 (>=0.8.0,<0.9.0); extra == "linting"
+Requires-Dist: flake8 (>=3.7.8,<4.0.0); extra == "linting"
+Requires-Dist: isort (>=4.3.21,<5.0.0); extra == "linting"
+Requires-Dist: jsonpath-rw (>=1.4.0,<2.0.0)
+Requires-Dist: jsonpath-rw-ext (>=1.2,<2.0)
+Requires-Dist: lxml (>=4.3.0,<5.0.0)
+Requires-Dist: mypy (>=0.730,<0.731); extra == "linting"
+Requires-Dist: pygments (>=2.4,<3.0); extra == "linting"
+Requires-Dist: pytest (>=5.2.0,<6.0.0); extra == "linting" or extra == "test"
+Requires-Dist: pytest-cov (>=2.7.1,<3.0.0); extra == "test"
+Requires-Dist: sphinx (>=2.2,<3.0); extra == "docs"
+Project-URL: Documentation, https://linw1995.com/data_extractor
+Project-URL: Repository, https://github.com/linw1995/data_extractor
+Description-Content-Type: text/markdown
+
+[![license](https://img.shields.io/github/license/linw1995/data_extractor.svg)](https://github.com/linw1995/data_extractor/blob/master/LICENSE)
+[![Pypi Status](https://img.shields.io/pypi/status/data_extractor.svg)](https://pypi.org/project/data_extractor)
+[![Python version](https://img.shields.io/pypi/pyversions/data_extractor.svg)](https://pypi.org/project/data_extractor)
+[![Package version](https://img.shields.io/pypi/v/data_extractor.svg)](https://pypi.org/project/data_extractor)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/data-extractor.svg)](https://pypi.org/project/data_extractor)
+[![GitHub last commit](https://img.shields.io/github/last-commit/linw1995/data_extractor.svg)](https://github.com/linw1995/data_extractor)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Build Status](https://travis-ci.org/linw1995/data_extractor.svg?branch=master)](https://travis-ci.org/linw1995/data_extractor)
+[![codecov](https://codecov.io/gh/linw1995/data_extractor/branch/master/graph/badge.svg)](https://codecov.io/gh/linw1995/data_extractor)
+[![Documentation Status](https://readthedocs.org/projects/data-extractor/badge/?version=latest)](https://data-extractor.readthedocs.io/en/latest/?badge=latest)
+
+# Data Extractor
+
+Combine **XPath**, **CSS Selector** and **JSONPath** for Web data extracting.
+
