@@ -1,0 +1,10 @@
+six
+
+[:python_version < "3"]
+PyCifRW<4.3
+
+[:python_version >= "3"]
+PyCifRW==4.4
+
+[tests]
+pytest
