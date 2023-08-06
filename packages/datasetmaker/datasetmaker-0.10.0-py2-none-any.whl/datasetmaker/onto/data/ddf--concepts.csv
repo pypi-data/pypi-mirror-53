@@ -1,0 +1,85 @@
+concept,concept_type,name,domain,source,sid,unit,context
+aggregation_method,entity_domain,Polling aggregation method,,,,,
+country,entity_domain,Country,,,,,
+gender,entity_domain,Gender,,,,,
+jurisdiction,entity_domain,Jurisdiction,,,,,
+landlocked,bool,Is landlocked,,,,,
+locale,entity_domain,Locale,,,,,
+name,string,Name,,,,,
+party,entity_domain,Political party,,,,,
+pollster,entity_domain,Pollster,,,,,
+region4,entity_domain,World Region (4),,,,,
+region6,entity_domain,World Region (6),,,,,
+source,entity_domain,Data source,,,,,
+topic,entity_domain,Topic,,,,,
+year,time,Year,,,,,
+unsc_comments1,string,Comments,,unsc,COMMENTS1,,
+unsc_first_name,string,First name,,unsc,FIRST_NAME,,
+unsc_fourth_name,string,Fourth name,,unsc,FOURTH_NAME,,
+unsc_listed_on,time,Date listed on,,unsc,LISTED_ON,,
+unsc_name_original_script,string,Name in original script,,unsc,NAME_ORIGINAL_SCRIPT,,
+unsc_reference_number,string,Reference number,,unsc,REFERENCE_NUMBER,,
+unsc_sanctioned_entity,entity_domain,Data ID,,unsc,DATAID,,
+unsc_sanctioned_individual,entity_domain,Data ID,,unsc,DATAID,,
+unsc_second_name,string,Second name,,unsc,SECOND_NAME,,
+unsc_submitted_by,string,Submitted by country,,unsc,SUBMITTED_BY,,
+unsc_submitted_on,time,Submitton on date,,unsc,SUBMITTED_ON,,
+unsc_third_name,string,Third name,,unsc,THIRD_NAME,,
+unsc_un_list_type,string,UN list type,,unsc,UN_LIST_TYPE,,
+unsc_versionnum,string,Version number,,unsc,VERSIONNUM,,
+wikipedia_flow,composite,,"[wikipedia_visa_country_from, wikipedia_visa_country_to]",wikipedia,,,
+wikipedia_head_gov,entity_domain,Head of government name,,wikipedia,,,"{""page"": ""List_of_current_heads_of_state_and_government""}"
+wikipedia_head_gov_title,string,Head of government title,,wikipedia,,,"{""page"": ""List_of_current_heads_of_state_and_government""}"
+wikipedia_head_state,entity_domain,Head of state name,,wikipedia,,,"{""page"": ""List_of_current_heads_of_state_and_government""}"
+wikipedia_head_state_title,string,Head of state title,,wikipedia,,,"{""page"": ""List_of_current_heads_of_state_and_government""}"
+wikipedia_parl_next,string,Date of next parliamentary election,,wikipedia,,,"{""page"": ""List_of_next_general_elections""}"
+wikipedia_parl_prev,string,Date of previous parliamentary election,,wikipedia,,,"{""page"": ""List_of_next_general_elections""}"
+wikipedia_parl_term,measure,Parliamentary term length,,wikipedia,,years,"{""page"": ""List_of_next_general_elections""}"
+wikipedia_pres_next,string,Date of next parliamentary election,,wikipedia,,,"{""page"": ""List_of_next_general_elections""}"
+wikipedia_pres_prev,string,Date of previous presidential election,,wikipedia,,,"{""page"": ""List_of_next_general_elections""}"
+wikipedia_pres_term,measure,Presidential term length,,wikipedia,,years,"{""page"": ""List_of_next_general_elections""}"
+wikipedia_visa_allowed_stay,measure,Visa allowed stay,,wikipedia,,days,"{""page"": ""Visa""}"
+wikipedia_visa_country_from,role,Visa origin country,country,wikipedia,,,"{""page"": ""Visa""}"
+wikipedia_visa_country_to,role,Visa destination country,country,wikipedia,,,"{""page"": ""Visa""}"
+wikipedia_visa_reciprocity,bool,Visa reciprocity,,wikipedia,,,"{""page"": ""Visa""}"
+wikipedia_visa_requirement,entity_domain,Visa requirement,,wikipedia,,,"{""page"": ""Visa""}"
+nobel_born,time,Date born,,nobel,born,,
+nobel_born_city,string,Born in city,,nobel,bornCity,,
+nobel_born_country,role,Born in country,country,nobel,bornCountry,,
+nobel_category,entity_domain,Nobel prize category,,nobel,category,,
+nobel_died,time,Date died,,nobel,died,,
+nobel_died_city,string,Died in city,,nobel,diedCity,,
+nobel_died_country,role,Died in country,country,nobel,diedCountry,,
+nobel_firstname,string,First name,,nobel,firstname,,
+nobel_instance,entity_domain,Nobel prize instance,,nobel,,,
+nobel_laureate,entity_domain,Laureate ID,,nobel,id,,
+nobel_motivation,string,Nobel prize motivation,,nobel,motivation,,
+nobel_prize,entity_domain,Nobel prize,,nobel,,,
+nobel_surname,string,Surname,,nobel,surname,,
+sipri_currency,entity_domain,Currency,,sipri,,,
+sipri_milexp_cap,measure,Military expenditure per capita,,sipri,,Current USD,
+sipri_milexp_const,measure,Military expenditure in constant USD,,sipri,,USD,
+sipri_milexp_cur,measure,Military expenditure in millions of current USD,,sipri,,Current USD,
+sipri_milexp_gdp,measure,Military expenditure as percentage of GDP,,sipri,,percentage,
+sipri_milexp_gov,measure,Military expenditure as percentage of of government spending,,sipri,,percentage,
+sipri_milexp_locc_cal_years,measure,Military expenditure in local currency calendar years,,sipri,,,
+sipri_milexp_locc_fin_years,measure,Military expenditure in local currency financial years,,sipri,,,
+valforsk_in_mama,string,Ingår i Mätningarnas mätning,,valforsk,,,
+valforsk_mode,string,Metod,,valforsk,,,
+valforsk_opinion_value,measure,Opinionsvärde,,valforsk,,percentage,
+valforsk_pollster_link,string,Länk till opinionsinstitut,,valforsk,,,
+valforsk_samplesize,measure,Svarande,,valforsk,,,
+tax_justice_fsi_index,measure,fsi_index,,,Tax Justice Network,,Secrecy Index
+tax_justice_secrecy_score,measure,secrecy_score,,,Tax Justice Network,,Secrecy Score
+esv_expenditure,entity_domain,Utgiftsområde,,esv,Utgiftsområde,,
+esv_allocation,entity_domain,Anslag,,esv,Anslag,,
+esv_ingoing_transfer_amount,measure,Ingående överföringsbelopp,,esv,Ingående överföringsbelopp,,
+esv_budget,measure,Statens budget,,esv,Statens budget,,
+esv_update_budgets,measure,Ändringsbudgetar,,esv,Ändringsbudgetar,,
+esv_retractions,measure,Indragningar,,esv,Indragningar,,
+esv_exceed,measure,Utnyttjad del av medgivet överskridande,,esv,Utnyttjad del av medgivet överskridande,,
+esv_outcome,measure,Utfall,,esv,Utfall,,
+esv_allocation_credit,measure,Anslagskredit,,esv,Anslagskredit,,
+esv_outgoing_transfer_amount,measure,Utgående överföringsbelopp,,esv,Utgående överföringsbelopp,,
+worldbank_sp.dyn.tfrt.in,measure,"Fertility rate, total (births per woman)",,worldbank,SP.DYN.TFRT.IN,,
+worldbank_sp.dyn.le00.in,measure,"Life expectancy at birth, total (years)",,worldbank,SP.DYN.LE00.IN,,
