@@ -1,0 +1,44 @@
+Metadata-Version: 2.1
+Name: satang-pro-signer-x
+Version: 0.0.1.dev1
+Summary: An implementation of Satang Pro signing request scheme
+Home-page: https://github.com/thebevrishot/satang-pro-signer
+Author: Panu
+Author-email: Panu.suk@protonmail.com
+License: UNKNOWN
+Description: # satang-pro-signer
+        
+        An implementation of Satang Pro request signing scheme.
+        
+        https://docs.satang.pro/authentication
+        
+        ## installation
+        
+        ```
+        pip install satang-pro-signer-x
+        ```
+        
+        ## usage
+        
+        ```python
+        import json
+        import satang_pro_signer # import signer
+        
+        # prepare secret
+        secret = bytes.fromhex('8781e58f94f8b2a58b6aa30649fd6a46')
+        
+        # create signer
+        signer = satang_pro_signer.Signer(secret)
+        
+        # prepare payload to be sign
+        payload = json.loads('{"type":"limit","pair":"btc_thb", "side":"sell", "price":"100000", "amount":"100", "none":"1570763737"}')
+        
+        # sign
+        signature = signer.sign(payload) # bytes
+        ```
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
