@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: proxysiphon
+Version: 0.0.1b1
+Summary: Internal lab tool to parse and clean marine sediment proxy data.
+Home-page: https://github.com/brews/proxysiphon
+Author: S. Brewster Malevich
+Author-email: malevich@email.arizona.edu
+License: GPLv3
+Keywords: marine paleoclimate
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: pandas
+Requires-Dist: chardet
+Requires-Dist: carbonferret
+Requires-Dist: erebusfall
+Requires-Dist: netCDF4
+Requires-Dist: unidecode
+Requires-Dist: xarray
+Requires-Dist: tables
+Requires-Dist: shapely
+Provides-Extra: agemodel
+Requires-Dist: snakebacon ; extra == 'agemodel'
+Provides-Extra: plots
+Requires-Dist: matplotlib (>=3.0.0) ; extra == 'plots'
+Requires-Dist: cartopy ; extra == 'plots'
+
+UNKNOWN
+
+
