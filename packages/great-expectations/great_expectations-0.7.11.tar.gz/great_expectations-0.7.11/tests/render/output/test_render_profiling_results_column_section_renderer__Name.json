@@ -1,0 +1,524 @@
+{
+  "section_name": "Name",
+  "content_blocks": [
+    {
+      "content_block_type": "header",
+      "header": {
+        "template": "Name",
+        "tooltip": {
+          "content": "expect_column_to_exist",
+          "placement": "top"
+        }
+      },
+      "subheader": {
+        "template": "Type: None",
+        "tooltip": {
+          "content": "expect_column_values_to_be_of_type <br>expect_column_values_to_be_in_type_list"
+        }
+      },
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "header": {
+          "classes": [
+            "alert",
+            "alert-secondary"
+          ]
+        }
+      }
+    },
+    {
+      "content_block_type": "table",
+      "header_row": [],
+      "table": [
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Distinct (n)",
+              "tooltip": {
+                "content": "expect_column_unique_value_count_to_be_between"
+              }
+            }
+          },
+          1310
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Distinct (%)",
+              "tooltip": {
+                "content": "expect_column_proportion_of_unique_values_to_be_between"
+              }
+            }
+          },
+          "99.8%"
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Missing (n)",
+              "tooltip": {
+                "content": "expect_column_values_to_not_be_null"
+              }
+            }
+          },
+          0
+        ],
+        [
+          {
+            "content_block_type": "string_template",
+            "string_template": {
+              "template": "Missing (%)",
+              "tooltip": {
+                "content": "expect_column_values_to_not_be_null"
+              }
+            }
+          },
+          "0.0%"
+        ]
+      ],
+      "header": "Properties",
+      "styling": {
+        "classes": [
+          "col-4"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        },
+        "body": {
+          "classes": [
+            "table",
+            "table-sm",
+            "table-unbordered"
+          ],
+          "styles": {
+            "width": "100%"
+          }
+        }
+      }
+    },
+    {
+      "content_block_type": "value_list",
+      "header": {
+        "template": "Example Values",
+        "tooltip": {
+          "content": "expect_column_values_to_be_in_set"
+        }
+      },
+      "value_list": [
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Carlsson, Mr Frans Olof"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Connolly, Miss Kate"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Kelly, Mr James"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Allen, Miss Elisabeth Walton"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Allison, Master Hudson Trevor"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Allison, Miss Helen Loraine"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Allison, Mr Hudson Joshua Creighton"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Allison, Mrs Hudson JC (Bessie Waldo Daniels)"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Anderson, Mr Harry"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Andrews, Miss Kornelia Theodosia"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Andrews, Mr Thomas, jr"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Appleton, Mrs Edward Dale (Charlotte Lamson)"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Artagaveytia, Mr Ramon"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Astor, Colonel John Jacob"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Astor, Mrs John Jacob (Madeleine Talmadge Force)"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Aubert, Mrs Leontine Pauline"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Barkworth, Mr Algernon H"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Baumann, Mr John D"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Baxter, Mr Quigg Edmond"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        },
+        {
+          "content_block_type": "string_template",
+          "string_template": {
+            "template": "$value",
+            "params": {
+              "value": "Baxter, Mrs James (Helene DeLaudeniere Chaput)"
+            },
+            "styling": {
+              "default": {
+                "classes": [
+                  "badge",
+                  "badge-info"
+                ],
+                "styles": {
+                  "word-break": "break-all"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "styling": {
+        "classes": [
+          "col-12"
+        ],
+        "styles": {
+          "margin-top": "20px"
+        }
+      }
+    }
+  ]
+}
