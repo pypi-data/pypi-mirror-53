@@ -1,0 +1,37 @@
+Metadata-Version: 2.1
+Name: simple_parsing
+Version: 0.0.1
+Summary: A small utility for simplifying and cleaning up argument parsing scripts.
+Home-page: https://github.com/lebrice/EasyArgs
+Author: Fabrice Normandin
+Author-email: fabrice.normandin@gmail.com
+License: UNKNOWN
+Description: # Simple, Elegant Argument Parsing
+        
+        When applied to a dataclass, this enables creating an instance of that class and populating the attributes from the command-line.
+            
+        A simple example:
+        ```
+        @dataclass
+        class Options(ParseableFromCommandLine):
+            a: int
+            b: int = 10
+        
+        parser = argparse.ArgumentParser()
+        Options.add_cmd_args(parser)
+        
+        args = parser.parse_args("--a 5")
+        options = Options.from_args(args)
+        print(options) # gives "Options(a=5, b=10)"
+        
+        args = parser.parse_args("--a 1 2 --b 9")
+        options_list = Options.from_args_multiple(args, 2)
+        print(options_list) # gives "[Options(a=1, b=9), Options(a=2, b=9)]"
+        
+        ```
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
