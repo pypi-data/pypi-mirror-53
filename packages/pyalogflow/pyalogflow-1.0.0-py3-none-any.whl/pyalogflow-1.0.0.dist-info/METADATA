@@ -1,0 +1,44 @@
+Metadata-Version: 2.1
+Name: pyalogflow
+Version: 1.0.0
+Summary: Python dialogflow conversation wrapper
+Home-page: https://github.com/pypa/pyalogflow
+Author: Marco Di Gioia
+Author-email: marco.digioia.dev@gmail.com
+License: UNKNOWN
+Project-URL: Github, https://github.com/MarcoDiGioia/pyalogflow
+Keywords: dialogflow python wrapper
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.0.*, <4
+Description-Content-Type: text/markdown
+Requires-Dist: audyo
+Requires-Dist: dialogflow
+Provides-Extra: dev
+Requires-Dist: check-manifest ; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: coverage ; extra == 'test'
+
+==========
+pyalogflow
+==========
+
+Dialogflow python wrapper
+
+Description
+===========
+
+Pyalogflow is a rapid way to implement a dialogflow agent into your application
+
+
+Note
+====
+
+
