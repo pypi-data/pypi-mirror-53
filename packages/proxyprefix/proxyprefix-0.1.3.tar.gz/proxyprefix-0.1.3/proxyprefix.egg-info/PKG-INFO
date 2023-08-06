@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: proxyprefix
+Version: 0.1.3
+Summary: Prefix SCRIPT_NAME with X-Forwarded-Prefix header
+Home-page: https://github.com/yola/proxyprefix
+Author: Yola
+Author-email: engineers@yola.com
+License: MIT (Expat)
+Description: WSGI middleware to prefix SCRIPT_NAME with X-Forwarded-Prefix header.
+        
+        For services behind a reverse proxy so their URLs contain the proxied path.
+        
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
+Provides-Extra: djproxy
