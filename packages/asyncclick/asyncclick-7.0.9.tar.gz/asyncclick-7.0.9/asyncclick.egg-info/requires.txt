@@ -1,0 +1,15 @@
+anyio
+
+[:python_version < "3.7"]
+async_exit_stack
+
+[dev]
+coverage
+pytest-runner
+pytest-trio
+pytest>=3
+sphinx
+tox
+
+[docs]
+sphinx
