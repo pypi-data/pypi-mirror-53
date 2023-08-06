@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: cdiscountapi
+Version: 0.1.5
+Summary: cdiscountapi is a wrapper around the Cdiscount Marketplace API
+Home-page: UNKNOWN
+License: UNKNOWN
+Author: ZIBOURA Mathilde, RABOIS Damien
+Author-email: mathilde.ziboura@abc-culture.fr
+Requires-Python: >=3.6
+Classifier: License :: OSI Approved :: MIT License
+Requires-Dist: requests==2.22.0
+Requires-Dist: requests_mock==1.7.0
+Requires-Dist: zeep==3.4.0
+Requires-Dist: dicttoxml==1.7.4
+Requires-Dist: PyYAML==5.1.2
+Requires-Dist: pdbpp; extra == "dev"
+Requires-Dist: ipython; extra == "dev"
+Requires-Dist: konch; extra == "dev"
+Requires-Dist: sphinx; extra == "doc"
+Requires-Dist: sphinx-nameko-theme; extra == "doc"
+Requires-Dist: pytest==5.2.0; extra == "test"
+Requires-Dist: vcrpy==2.1.0; extra == "test"
+Requires-Dist: pytest-vcr==1.0.2; extra == "test"
+Requires-Dist: coverage==4.5.4; extra == "test"
+Requires-Dist: pytest-cov==2.7.1; extra == "test"
+Provides-Extra: dev
+Provides-Extra: doc
+Provides-Extra: test

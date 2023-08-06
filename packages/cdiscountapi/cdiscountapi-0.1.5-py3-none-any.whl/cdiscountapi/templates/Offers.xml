@@ -1,0 +1,35 @@
+<OfferPackage Name="{{ name }}" PackageType="{{ package_type }}" PurgeAndReplace="{{ purge_and_replace }}" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <OfferPackage.Offers>
+    <OfferCollection Capacity="1">
+        {% for offer in offers %}
+        <Offer {{ offer['attributes'] }}>
+        <Offer.ShippingInformationList>
+            <ShippingInformationList Capacity="{{ offer['shipping_information_list']|length }}">
+            {% for shipping_info in offer['shipping_information_list'] %}
+            <ShippingInformation AdditionalShippingCharges="{{ shipping_info['AdditionalShippingCharges'] }}" DeliveryMode="{{ shipping_info['DeliveryMode'] }}" ShippingCharges="{{ shipping_info['ShippingCharges'] }}" />
+            {% endfor %}
+          </ShippingInformationList>
+        </Offer.ShippingInformationList>
+        {% if 'discount_list' in offer %}
+        <Offer.PriceAndDiscountList>
+            <DiscountComponentList Capacity="{{ offer['discount_list']|length }}">
+            {% for discount_component in offer['discount_list'] %}
+            <DiscountComponent DiscountUnit="1" DiscountValue="{{ discount_component['DiscountValue'] }}" EndDate="{{ discount_component['EndDate'] }}" StartDate="{{ discount_component['StartDate'] }}" Type="{{ discount_component['Type'] }}" />
+            {% endfor %}
+          </DiscountComponentList>
+        </Offer.PriceAndDiscountList>
+        {% endif %}
+      </Offer>
+      {% endfor %}
+    </OfferCollection>
+    </OfferPackage.Offers>
+  {% if offer_publication_list %}
+  <OfferPackage.OfferPublicationList>
+      <OfferPublicationList Capacity="{{ offer_publication_list|length }}">
+          {% for publication_pool in offer_publication_list %}
+          <PublicationPool Id="{{ publication_pool['Id'] }}" />
+          {% endfor %}
+      </OfferPublicationList>
+  </OfferPackage.OfferPublicationList>
+  {% endif %}
+</OfferPackage>
