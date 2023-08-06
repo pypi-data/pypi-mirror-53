@@ -1,0 +1,153 @@
+CHANGES
+=======
+
+0.0.11
+------
+
+* Update instructions for docker
+* Update readme
+
+0.0.10
+------
+
+* Don't bother pushing releases to github as they're already there
+
+0.0.9
+-----
+
+* Specify readme is md
+* Skip cleanup in pypi
+* Fix case
+
+0.0.7
+-----
+
+* Use pbr for packaging
+* Move static files into a python module for correct packaging
+* Revert "Don't clean up after pip packaging, hope the archive is left for github releases"
+
+0.06
+----
+
+* Don't clean up after pip packaging, hope the archive is left for github releases
+
+0.05
+----
+
+* Update Dockerfile to match requirements
+
+0.0.8
+-----
+
+* Remove some unnecessary widgets
+* Don't allow collapsible menus
+* Allow override of database config
+* Skip existing
+
+0.04
+----
+
+* Fix indentation
+
+0.0.2
+-----
+
+* More work on releases
+* Fix indent
+* Remove requirements and see if Travis can install from setup.py
+* Add deployment sections
+* Lint
+* Don't switch on version of Django as this is set in requirements
+* First pass attempt at pip package
+
+0.03
+----
+
+* Admin branding (#86)
+* Serve admin from /
+* Revert "Disable debug mode"
+* Disable debug mode
+* Set unique together (#80)
+* Add display\_lens field to Camera
+* Add copy\_of field to Negative
+* This should have been removed in #77
+* Create mount\_adapter field in Negative
+* Add MountAdapter model
+* Add m2m relationship between lensmodel and accessory
+* Add m2m relationship between cameramodel and accessory
+* Improve docs
+* Split out concepts docs
+* Split out contrib docs
+* Remodel toners as m2m
+* Fix relationship limit
+* Add migration
+* Explicit regex
+* Fix typo
+* Drop unneeded model
+* Sub id for pk to appease debugger
+* Improve \_\_str\_\_ for some models
+* Add explicit sort order on almost all models
+* Downcase verbose names
+* Cleanup
+* Fix indentation
+* Calculate several fields on save
+* Automatically calculate shutter speed durations
+* Add fieldset for Film
+* Give condition hint
+* Calculate negative size attributes and set them read only
+* Make Condition read-only by dropping it from the admin
+* Remove stray config
+* Convert a couple of old choice format to new
+* Add a couple of new fields/choices to enlarger
+* Use choices for shutter\_type
+* Add static limits (#60)
+* Fix error message
+* Refer to film ID properly
+* Handle date types more carefully
+* Add migration for decimal validation
+* Reorder migrations for easy merge
+* Add more validators
+* Add more model validation
+* Add form validation to Scan
+* Add range to filtration
+* Validate lat/long
+* Use choice fields instead of models (#43)
+* Add form validation for LensModel
+* Tweak form layout
+* Add basic integer range validation
+* Add validation for positive integers
+* Add favicon (#42)
+* Add basic Docker support (#41)
+* Add seed data (#40)
+* Add migration for help text
+* Add help text for FKs
+* Override verbose names where the auto ones aren't quite right
+* Specify help text
+* Add currency support
+* Add admin stuff for Print
+* Fix typo in aperture model specification
+* Add admin extras to NEGATIVE
+* Add filtering and searching
+* Use better interpolation
+* First-pass Travis support
+* Add candy to LensModel
+* Fully pimped CameraModel form
+* Limit inlines to show existing records, not empty fields (they can still be added)
+* Add icons on the dashboard (#28)
+* Improve README
+* Add some inlines
+* Use formatted output
+* Override plurals for irregular nouns
+* Fix FK display name. Closes #12
+* Allow null values in FILM
+* Be more careful with NOT NULL constraints and rebase migrations
+* Add skeleton requirements.txt. Fixes #10
+* Expose almost all models to the admin interface
+* Improve field metadata
+* Include seed data in a data migration
+* Bare minimum required to use admin editor
+* Drop \_id suffix
+* Add more m2m relationships
+* Set up m2m fields
+* Create most remaining Models, execpt m2m
+* Add most of the Models with simple relationships
