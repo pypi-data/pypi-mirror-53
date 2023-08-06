@@ -1,0 +1,249 @@
+{
+  "src/lib/components/CadaDashCustomRadioitems.react.js": {
+    "description": "RadioItems is a component that encapsulates several radio item inputs.\nThe values and labels of the RadioItems is specified in the `options`\nproperty and the seleced item is specified with the `value` property.\nEach radio item is rendered as an input with a surrounding label.",
+    "displayName": "RadioItems",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID of this component, used to identify dash components\nin callbacks. The ID needs to be unique across all of the\ncomponents in an app."
+      },
+      "options": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "exact",
+            "value": {
+              "label": {
+                "name": "union",
+                "value": [
+                  {
+                    "name": "string"
+                  },
+                  {
+                    "name": "number"
+                  }
+                ],
+                "description": "The radio item's label",
+                "required": true
+              },
+              "value": {
+                "name": "union",
+                "value": [
+                  {
+                    "name": "string"
+                  },
+                  {
+                    "name": "number"
+                  }
+                ],
+                "description": "The value of the radio item. This value\ncorresponds to the items specified in the\n`value` property.",
+                "required": true
+              },
+              "imgSrc": {
+                "name": "string",
+                "required": true
+              },
+              "imgClassName": {
+                "name": "string",
+                "required": false
+              },
+              "disabled": {
+                "name": "bool",
+                "description": "If true, this radio item is disabled and can't be clicked on.",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": false,
+        "description": "An array of options",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "value": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
+        },
+        "required": false,
+        "description": "The currently selected value"
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the container (div)"
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the container (div)"
+      },
+      "inputStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <input> radio element",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "inputClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the <input> radio element",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "labelStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <label> that wraps the radio input\n and the option's label",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "labelClassName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the <label> that wraps the radio input\n and the option's label",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that gets fired when the value changes."
+      },
+      "imgStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the <img> element\n and the option's label",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "loading_state": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "is_loading": {
+              "name": "bool",
+              "description": "Determines if the component is loading or not",
+              "required": false
+            },
+            "prop_name": {
+              "name": "string",
+              "description": "Holds which property is loading",
+              "required": false
+            },
+            "component_name": {
+              "name": "string",
+              "description": "Holds the name of the component that is loading",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": "Object that holds the loading state object coming from dash-renderer"
+      },
+      "persistence": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "bool"
+            },
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Used to allow user interactions in this component to be persisted when\nthe component - or the page - is refreshed. If `persisted` is truthy and\nhasn't changed from its previous value, a `value` that the user has\nchanged while using the app will keep that change, as long as\nthe new `value` also matches what was given originally.\nUsed in conjunction with `persistence_type`."
+      },
+      "persisted_props": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "enum",
+            "value": [
+              {
+                "value": "'value'",
+                "computed": false
+              }
+            ]
+          }
+        },
+        "required": false,
+        "description": "Properties whose user interactions will persist after refreshing the\ncomponent or the page. Since only `value` is allowed this prop can\nnormally be ignored.",
+        "defaultValue": {
+          "value": "['value']",
+          "computed": false
+        }
+      },
+      "persistence_type": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'local'",
+              "computed": false
+            },
+            {
+              "value": "'session'",
+              "computed": false
+            },
+            {
+              "value": "'memory'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "Where persisted user changes will be stored:\nmemory: only kept in memory, reset on page refresh.\nlocal: window.localStorage, data is kept after the browser quit.\nsession: window.sessionStorage, data is cleared once the browser quit.",
+        "defaultValue": {
+          "value": "'local'",
+          "computed": false
+        }
+      }
+    }
+  }
+}
