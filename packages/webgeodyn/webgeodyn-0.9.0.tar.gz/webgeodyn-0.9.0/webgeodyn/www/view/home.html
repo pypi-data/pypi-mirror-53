@@ -1,0 +1,93 @@
+<div class="ui segment" style="margin-top: 0; margin-bottom: 0!important; overflow-y:auto;">
+    <div class="ui centered header" style="margin:0.5rem 0 1rem 0;">
+        Webgeodyn: visualisation tools for the geomagnetic field and motions of the Earth's liquid core
+    </div>
+    <p id="longDesc"></p>
+
+    <div class="ui stackable three column centered grid" style="margin:1rem;">
+        <div class="column">
+            <div class="ui small header">
+                Streamfunctions at the Core-Mantle Boundary, superimposed with scalar fields
+                <div class="sub header">(e.g. radial magnetic field, flow norm... under several projections)</div>
+            </div>
+            <div class="ui image" style="width:20rem;">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Earth's core surface (Aitoff projection)
+                </div>
+                <img src="images/demoAitoff.gif">
+            </div>
+            <div class="ui image" style="width:13.3rem;">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Orthographic projection
+                </div>
+                <img src="images/demoOrtho.gif">
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui small header">
+                Time-position maps of scalar fields (including geostrophic flow)
+                <div class="sub header">(with respect to longitude, latitude or curvilinear coordinates)</div>
+            </div>
+            <div class="ui image" style="width:20rem;">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Cross-section of secular variation along &Phi;
+                </div>
+                <img src="images/demoCross.png">
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui small header">
+                Time series of spherical harmonics coefficients of core quantities
+            </div>
+            <div class="ui image" style="width:22.5rem;">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Time series of spherical harmonics coefficients
+                </div>
+                <img src="images/demoGnm.png">
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui small header">
+                Time series of length-of-day variation
+                <div class="sub header">derived from core flows</div>
+            </div>
+            <div class="ui image" style="width:20rem">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Comparison of LOD derived from core flows with the actual data
+                </div>
+                <img src="images/demoLOD.png">
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui small header">
+                Mauersberger-Lowes spectra of the core quantities
+                <div class="sub header">for time-average, deviation or at a given date</div>
+            </div>
+            <div class="ui image" style="width:20rem;">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Spectra of averaged core quantities
+                </div>
+                <img src="images/demoSpectra.jpeg">
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui small header">
+                Comparison of model predictions with observatories
+                <div class="sub header">(ground-based observatory series and virtual observatory series)</div>
+            </div>
+            <div class="ui image" style="width:20rem;">
+                <div class="ui black bottom attached label" style="opacity:0.7; text-align:center;">
+                    Comparison with observatories
+                </div>
+                <img src="images/demoObs.jpeg">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            mc.activeTabController.documentReady();
+        });
+    </script>
+
+</div>
