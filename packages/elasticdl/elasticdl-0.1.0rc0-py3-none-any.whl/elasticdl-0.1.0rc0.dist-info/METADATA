@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: elasticdl
+Version: 0.1.0rc0
+Summary: A Kubernetes-native Deep Learning Framework
+Home-page: https://elasticdl.org
+Author: Ant Financial
+License: UNKNOWN
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+Requires-Dist: grpcio-tools
+Requires-Dist: kubernetes
+Requires-Dist: docker
+Requires-Dist: pytest
+Requires-Dist: pytest-cov
+Requires-Dist: pyrecordio (>=0.0.6)
+Requires-Dist: Pillow
+Requires-Dist: odps
+Requires-Dist: redis-py-cluster
+Requires-Dist: mock
+
+ElasticDL is a Kubernetes-native deep learning framework built on top of TensorFlow 2.0 that supports fault-tolerance and elastic scheduling.
+
+
