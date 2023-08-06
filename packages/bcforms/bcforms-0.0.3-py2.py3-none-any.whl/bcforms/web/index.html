@@ -1,0 +1,538 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BcForms: a toolkit for concretely describing macromolecular complexes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-icon-fonts@0.1.1/foundation-icons.css"
+        integrity="sha256-CWltC/W+elkkUKhitcztPiSfE3AEpzAvrkmEqB68Lx0="
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css"
+      integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg=="
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <h1><i>BcForms</i>: a toolkit for concretely describing macromolecular complexes</h1>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <div class="large-7 cell">
+          <p><i>BcForms</i> is a toolkit for concretely describing the molecular structure (atoms and bonds) of macromolecular complexes, including non-canonical monomeric forms, circular topologies, and crosslinks. <i>BcForms</i> was developed to help describe the semantic meaning of whole-cell computational models <a href="https://www.wholecell.org"><i class="fi-link"></i></a>.</p>
+          <p><i>BcForms</i> includes a grammar for describing forms of macromolecular complexes composed of DNA, RNA, protein, and small molecular subunits and crosslinks between the subunits. The DNA, RNA, and protein subunits can be described using <i>BpForms</i> and the small molecule subunits can be described using SMILES. <i>BcForms</i> also includes four software tools for verifying descriptions of complexes and calculating physical properties of complexes such as their molecular structure, formula, molecular weight, and charge: this website, a JSON REST API <a href="https://www.bcforms.org/api/"><i class="fi-link"></i></a>, a command line interface <a href="https://pypi.python.org/pypi/bcforms/"><i class="fi-link"></i></a>, and a Python API <a href="https://pypi.python.org/pypi/bcforms/"><i class="fi-link"></i></a>. <i>BcForms</i> is available open-source <a href="https://github.com/KarrLab/bcforms"><i class="fi-social-github"></i></a> under the MIT license.</p>
+        </div>
+        <div class="large-5 cell">
+          <div class="toc">
+            <h3>Table of contents</h3>
+            <div class="grid-x grid-padding-x">
+              <div class="large-6 cell">
+                <ul>
+                  <li><a href="#calculator">Web application</a></li>
+                  <li><a href="#grammar">Grammar</a>
+                    <ul>
+                      <li><a href="#subunit-composition">Subunit composition</a></li>
+                      <li><a href="#crosslinks">Crosslinks</a>
+                          <ul>
+                              <li><a href="#inline_xlink">Inline definition</a></li>
+                              <li><a href="#onto_xlink">Ontology definition</a></li>
+                          </ul>
+                      </li>
+                      <li><a href="#coordinate-system">Subunit composition</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#interfaces">User interfaces</a>
+                    <ul>
+                      <li><a href="#calculator">Webform</a></li>
+                      <li><a href="#rest">REST API</a></li>
+                      <li><a href="#cli">Command line interface</a></li>
+                      <li><a href="#library">Python library</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="large-6 cell">
+                <ul>
+                  <li><a href="#integration">Integration with standards for kinetic models</a>
+                    <ul>
+                      <li><a href="#cellml">CellML</a></li>
+                      <li><a href="#sbml">SBML</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#resources">Other useful resources</a></li>
+                  <li><a href="#help">Tutorials, docs, and help</a></li>
+                  <li><a href="#contributing">Contributing to <i>BcForms</i></a></li>
+                  <li><a href="#about">About <i>BcForms</i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="calculator"></a>
+        <div class="large-12 cell">
+          <h2><i>BcForms</i> verifier/calculator</h2>
+        </div>
+        <div class="large-6 cell">
+          <a name="form"></a>
+          <h3>Enter a complex and its subunits</h3>
+          <form>
+          <label>Enter a description of the complex. See the documentation below <a href="#grammar"><i class="fi-link"></i></a> for more information about the syntax.
+            <textarea
+              id="bc_form_in"
+              placeholder='2 * abc_a + abc_b'></textarea>
+          </label>
+          <label>Define the subunits of the complex</label>
+          <ul class="tabs" data-tabs id="tabs_subunits_dynamic">
+            <li class="tabs-title" id="tab_add_title"><a href="#tab_add"><i class="fi-plus"></i></a></li>
+          </ul>
+          <div class="tabs-content" data-tabs-content="tabs_subunits_dynamic" id="tabs_content_subunits_dynamic">
+              <div class="tabs-panel" id="tab_add"></div>
+          </div>
+          <div id="warnings" style="color: #da663b;"></div>
+          <div id="errors" style="color: #da3b60;"></div>
+          <input id="submit" type="button" class="button" value="Submit"/>
+          </form>
+        </div>
+
+        <div class="large-6 cell">
+          <h3>Calculated properties of the complex</h3>
+          <form class="out">
+          <label>Pretty printed description of the complex
+            <textarea id="out_bcform" disabled></textarea>
+          </label>
+          <label>Structure (SMILES)
+              <textarea id="out_structure" disabled></textarea>
+          </label>
+          <label>Formula
+              <input type="text" id="out_formula" disabled></input>
+          </label>
+          <label>Molecular weight
+              <input type="number" id="out_mol_wt" disabled></input>
+          </label>
+          <label>Charge
+              <input type="number" id="out_charge" disabled></input>
+          </label>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="grammar"></a>
+        <a name="subunit-composition"></a>
+        <div class="large-12 cell">
+            <h2><i>BcForms</i> grammar</h2>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <h3>Overview</h3>
+          <p>The <i>BcForms</i> represents complexes as a sets of subunits, including their stoichiometries, and a set of interchain/intersubunit crosslinks. Furthermore, <i>BcForms</i> can be combined with <i>BpForms</i> and SMILES descriptions of subunits to calculate properties of complexes.</p>
+
+          <p class="before_list"><i>BcForms</i> descriptions of complexes consist of two parts:</p>
+          <ul>
+            <li><b>Subunit composition of the complex:</b> The subunit composition of the complex, including the stoichiometry of each subunit, is described as a linear expression (e.g., <tt>3 * subunit_a + 2 * subunit_b</tt>).</li>
+            <li><b>Interchain crosslinks:</b> Each crosslink is described as indicated below (e.g., <tt> | x-link: [...]</tt>).</li>
+          </ul>
+
+          <p>The <i>BcForms</i> grammar <a href="https://raw.githubusercontent.com/KarrLab/bcforms/master/bcforms/grammar.lark"><i class="fi-link"></i></a> is defined in Lark syntax <a href="https://lark-parser.readthedocs.io"><i class="fi-link"></i></a>, which is based on EBNF syntax <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form"><i class="fi-link"></i></a>.</p>
+        </div>
+
+        <div class="large-7 cell example">
+          <h3>Examples</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <h5>Heterodimer with no crosslinks</h5>
+                <pre>complex: sub_a + sub_b
+sub_a: bpforms.ProteinForm(AC)
+sub_b: bpforms.ProteinForm(MK)</pre>
+                <p class="form-properties">
+                Structure: C[C@H]([NH3+])C(=O)N[C@H](C(=O)O)CS.CSCC[C@H]([NH3+])C(=O)N[C@@H](CCCC[NH3+])C(=O)O<br/>
+                Formula: C<sub>17</sub>H<sub>38</sub>N<sub>5</sub>O<sub>6</sub>S<sub>2</sub><br/>
+                Molecular weight: 472.64<br/>
+                Charge: 3
+                </p>
+            </div>
+            <div class="large-12 cell">
+                <h5>Homodimer with a crosslink</h5>
+                <pre>complex: 2 * sub_c | x-link: [
+    l-bond-atom: sub_c(1)-1S11 |
+    l-displaced-atom: sub_c(1)-1H11 |
+    r-bond-atom: sub_c(2)-1S11 |
+    r-displaced-atom: sub_c(2)-1H11
+  ]
+sub_c: bpforms.ProteinForm(CA)</pre>
+                <p class="form-properties">
+                Structure: C(=O)([C@@H]([NH3+])CSSC[C@@H](C(=O)N[C@@H](C)C(=O)O)[NH3+])N[C@@H](C)C(=O)O<br/>
+                Formula: C<sub>12</sub>H<sub>24</sub>N<sub>4</sub>O<sub>6</sub>S<sub>2</sub><br/>
+                Molecular weight: 384.466<br/>
+                Charge: 2
+                </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="crosslinks"></a>
+          <h3>Crosslinks between subunits</h3>
+          <p>The <tt class="attribute">x-link</tt> attribute can be used to indicate a bond between atoms from different subunits. For example, this attribute can describe interstrand disulfide bonds between cysteines in proteins and crosslinks in DNA.</p>
+
+          <p>Each crosslink can be described by enclosing attributes which indicate the atoms involved in the bond within square brackets and delimiting the attributes with pipes (e.g., "<tt>| x-link: [l-bond-atom: sub_a(1)-1C1 | r-bond-atom: sub_b(1)-3C2 | ...]</tt>").</p>
+
+          <p><i>BcForms</i> allows two ways of defining inter-subunit crosslinks: inline definition and definition using our ontology of crosslinks.</p>
+
+        </div>
+
+        <div class="large-7 cell example">
+            <h3>Examples</h3>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="inline_xlink"></a>
+          <h4>User-defined crosslinks</h4>
+          <p class="before_list">Each crosslink can be described using the following attributes:</p>
+          <ul>
+            <li><tt>l-bond-atom</tt> and <tt>r-bond-atom</tt>: These attributes indicate the atoms involved in the bond. The values of these attributes are the position of the monomeric form within the sequence of the subunit, the element of the atom, the position of the atom within the monomeric form, and the charge of the atom (e.g., <tt>sub_a(1)-8N3+1</tt>). Open Babel can be used to display the numbers of the atoms within monomeric forms.</li>
+            <li><tt>l-displaced-atom</tt> and <tt>r-displaced-atom</tt>: These attributes indicate the atoms displaced by the formation of the bond. The values of these attributes are also the position of the monomeric form within the sequence of the subunit, the element of the atom, the position of the atom within the monomeric form, and the charge of the atom.</li>
+            <li><tt>order</tt>: This attribute can indicate the order (single, double, triple, aromatic) of the bond.</li>
+            <li><tt>stereo</tt>: This attribute can indicate the stereochemistry of the bond (wedge, hash, up, down).</li>
+            <li><tt>comments</tt>: This attribute can indicate comments about the crosslink, such as uncertainty about its location or structure.</li>
+          </ul>
+
+          <p>Each crosslink can have one or more left and right bond atoms, and zero or more left and right displaced atoms. Each crosslink must have the same number of left and right bond atoms.</p>
+        </div>
+
+        <div class="large-7 cell example">
+          <h4>Examples</h4>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <h5>Interchain disulfide bond</h5>
+                <pre>| x-link: [ l-bond-atom: sub_c(1)-1S11 |
+            l-displaced-atom: sub_c(1)-1H11 |
+            r-bond-atom: sub_c(2)-1S11 |
+            r-displaced-atom: sub_c(2)-1H11 ]</pre>
+            </div>
+          </div>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <h5>Interchain isopeptide bond</h5>
+                <pre>| x-link: [ l-bond-atom: b(1)-4C2 |
+            r-bond-atom: a(2)-1N1-1  |
+            l-displaced-atom: b(1)-4O1 |
+            l-displaced-atom: b(1)-4H1 |
+            r-displaced-atom: a(2)-1H1+1 |
+            r-displaced-atom: a(2)-1H1 ]</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="onto_xlink"></a>
+          <h4>Ontology definition of crosslinks</h4>
+          <p class="before_list">Each crosslink can alternatively be described by using our ontology with three attributes. The list of crosslinks defined in the ontology is available at bpforms.org/crosslink <a href="https://www.bpforms.org/crosslink"><i class="fi-link"></i></a>.</p>
+          <ul>
+            <li><tt>type</tt>: This attributes indicates the type of the crosslink.</li>
+            <li><tt>l</tt> and <tt>r</tt>: These attributes indicate the position of the monomeric form within the sequence of the subunit.</li>
+          </ul>
+
+          <p>Each crosslink must have one type, one left monomeric form, and one right monomeric form.</p>
+
+          <p>Complexes can have zero, one, or more crosslinks.</p>
+        </div>
+
+        <div class="large-7 cell example">
+          <h4>Examples</h4>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <h5>Interchain disulfide bond</h5>
+                <pre>| x-link: [ type: disulfide |
+            l: sub_c(1)-1 |
+            r: sub_c(2)-1 ]</pre>
+            </div>
+          </div>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <h5>Interchain isopeptide bond</h5>
+                <pre>| x-link: [ type: glycyl_lysine_isopeptide |
+            l: b(1)-4 |
+            r: a(2)-1 ]</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-5 cell grammar">
+          <a name="coordinate-system"></a>
+          <h3>Coordinate system</h3>
+          <p>Each subunit, residue, and atom represented by <i>BcForms</i> has a unique coordinate. The coordinates of repeated subunits range from one to the stoichiometry of the subunit. The coordinate of each residue is a two-tuple of the coordinate of its parent subunit and its position within the residue sequence of its parent subunit. The coordinate of each atom is a three-tuple of the coordinate of its parent subunit, the position of its parent residue within the residue sequence of its parent polymer, and its position within the canonical SMILES ordering of its parent residue (which can be displayed by Open Babel).</p>
+        </div>
+        <div class="large-7 cell example">
+          <h3>Example</h3>
+          <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+              <p>The example below illustrates the atom coordinates for the modified amino acid N<sup>5</sup>-methyl-L-arginine.</p>
+            </div>
+            <div class="large-8 cell syntax">
+              <pre>[id: "AA0305"
+  | name: "N5-methyl-L-arginine"
+  | structure: "OC(=O)[C@H](CCCN(C(=[NH2])N)C)
+                [NH3+]"
+  | l-bond-atom: N16-1
+  | l-displaced-atom: H16+1
+  | l-displaced-atom: H16
+  | r-bond-atom: C2
+  | r-displaced-atom: O1
+  | r-displaced-atom: H1
+  ]</pre>
+            </div>
+            <div class="large-4 cell image">
+              <a data-fancybox="gallery"
+                href="https://bpforms.org/img/example/left-right-bonds-AA0305.svg"
+                data-width="600">
+                <img src="https://bpforms.org/img/example/left-right-bonds-AA0305.svg"/>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="interfaces"></a>
+        <div class="large-12 cell">
+          <h2>User interfaces</h2>
+          <p class="before_list"><i>BcForms</i> includes four software interfaces for verifying descriptions of complexes and calculating properties such as their molecular structures, formulae, molecular weights, and charges.</p>
+        </div>
+        <div class="large-3 cell">
+          <h3>Webform</h3>
+          The webform above <a href="#form"><i class="fi-link"></i></a> can be used to validate <i>BcForms</i> and calculate their properties.
+        </div>
+        <div class="large-3 cell">
+          <a name="rest"></a>
+          <h3>JSON REST API</h3>
+          A JSON REST API is available at <a href="https://bcforms.org/api">https://bcforms.org/api</a>.
+        </div>
+        <div class="large-3 cell">
+          <a name="cli"></a>
+          <h3>Command line interface</h3>
+          A command line interface is available from PyPI <a href="https://pypi.python.org/pypi/bcforms"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-3 cell">
+          <a name="library"></a>
+          <h3>Python library</h3>
+          A Python library is available from PyPI <a href="https://pypi.python.org/pypi/bcforms"><i class="fi-link"></i></a>.
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="integration"></a>
+        <div class="large-12 cell">
+          <h2>Integrating <i>BcForms</i> into the CellML and SBML standards for kinetic models</h2>
+          <p class="before_list"><i>BcForms</i> can be used in conjunction with commonly used standards in systems biology. <i>BcForms</i> is also easy to embed into documents such as Excel workbooks and comma-separated tables.</p>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="cellml"></a>
+          <h3>CellML</h3>
+          <p><i>BcForms</i> can be used to concretely describe the meaning of CellML <a href="https://www.cellml.org/"><i class="fi-link"></i></a> components which represent complexes. <i>BcForms</i> can be used with the <tt class="attribute">RDF</tt> element of <tt class="attribute">component</tt> objects.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Example</h3>
+          This example illustrates how to annotate the semantic meaning of a CellML component which represents a homotrimer of a protein which contains two phosphorylated serines (RESID: AA0037 <a href="https://annotation.dbi.udel.edu/cgi-bin/resid?id=AA0037"><i class="fi-link"></i></a>) at the fourth and eighth residues.
+          <pre class="small" style="margin-top: 0.5rem;">...
+
+&lt;component cmeta:id="complex" name="complex"&gt;
+  &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+    &lt;rdf:Description rdf:about="#complex"&gt;
+      &lt;<span class="bpform-attr">bcforms:BcForm</span> <span class="bpform-attr">xmlns:bcforms</span>="<span class="bpform-val">https://bcforms.org</span>"&gt;
+        <span class="bpform">3 * subunit</span>
+      &lt;/<span class="bpform-attr">bcforms:BcForm</span>&gt;
+    &lt;/rdf:Description&gt;
+  &lt;/rdf:RDF&gt;
+&lt;/component&gt;
+
+&lt;component cmeta:id="subunit" name="subunit"&gt;
+  &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+    &lt;rdf:Description rdf:about="#subunit"&gt;
+      &lt;<span class="bpform-attr">bpforms:ProteinForm</span> <span class="bpform-attr">xmlns:bpforms</span>="<span class="bpform-val">https://bpforms.org</span>"&gt;
+        <span class="bpform">LID<span class="modification">{AA0037}</span>MAN<span class="modification">{AA0037}</span>FVGTR</span>
+      &lt;/<span class="bpform-attr">bpforms:ProteinForm</span>&gt;
+    &lt;/rdf:Description&gt;
+  &lt;/rdf:RDF&gt;
+&lt;/component&gt;
+
+...</pre>
+        </div>
+
+        <div class="large-4 cell">
+          <a name="sbml"></a>
+          <h3>SBML</h3>
+          <p><i>BcForms</i> can be used to concretely describe the meaning of Systems Biology Markup Language (SBML) <a href="http://sbml.org"><i class="fi-link"></i></a> species elements which represent complexes. <i>BcForms</i> can be used with the <tt class="attribute">annotation</tt> element of <tt class="attribute">species</tt> elements.</p>
+        </div>
+        <div class="large-8 cell example">
+          <h3>Example</h3>
+          This example illustrates how to annotate the semantic meaning of an SBML species which represents a homodimer of a protein which contains a selenocysteine (U, RESID: AA0022 <a href="https://annotation.dbi.udel.edu/cgi-bin/resid?id=AA0022"><i class="fi-link"></i></a>) at the second residue.
+          <pre class="small" style="margin-top: 0.5rem;">...
+
+&lt;species name="complex"&gt;
+  &lt;annotation&gt;
+    &lt;rdf:RDF
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+      &lt;rdf:Description rdf:about="#complex"&gt;
+        &lt;<span class="bpform-attr">bcforms:BcForm</span> <span class="bpform-attr">xmlns:bcforms</span>="<span class="bpform-val">https://bcforms.org</span>"&gt;
+          <span class="bpform">2 * subunit</span>
+        &lt;/<span class="bpform-attr">bcforms:BcForm</span>&gt;
+      &lt;/rdf:Description&gt;
+    &lt;/rdf:RDF&gt;
+  &lt;/annotation&gt;
+&lt;/species&gt;
+
+&lt;species name="subunit"&gt;
+  &lt;annotation&gt;
+    &lt;rdf:RDF
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+      &lt;rdf:Description rdf:about="#complex-a"&gt;
+        &lt;<span class="bpform-attr">bpforms:ProteinForm</span> <span class="bpform-attr">xmlns:bpforms</span>="<span class="bpform-val">https://bpforms.org</span>"&gt;
+          <span class="bpform">A<span class="modification">{U}</span>CR</span>
+        &lt;/<span class="bpform-attr">bpforms:ProteinForm</span>&gt;
+      &lt;/rdf:Description&gt;
+    &lt;/rdf:RDF&gt;
+  &lt;/annotation&gt;
+&lt;/species&gt;
+
+...</pre>
+
+        </div>
+
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="resources"></a>
+        <div class="large-12 cell">
+          <h2>Resources for determining the structures of complexes</h2>
+          <p class="before_list">Below are several resources which can be helpful for determining the subunit and crosslink composition of complexes.</p>
+        </div>
+        <div class="large-4 cell">
+          <h3>Subunit composition</h3>
+          <ul>
+            <li>BioCyc <a href="https://biocyc.org/"><i class="fi-link"></i></a></li>
+            <li>Complex Portal <a href="https://www.ebi.ac.uk/complexportal/"><i class="fi-link"></i></a></li>
+            <li>CORUM <a href="https://mips.helmholtz-muenchen.de/corum/"><i class="fi-link"></i></a></li>
+            <li>Protein Data Bank (PDB) <a href="https://www.rcsb.org/"><i class="fi-link"></i></a></li>
+            <li>UniProt <a href="https://www.uniprot.org/"><i class="fi-link"></i></a></li>
+          </ul>
+        </div>
+        <div class="large-4 cell">
+          <h3>Crosslink composition</h3>
+          <ul>
+            <li>Protein Data Bank (PDB) <a href="https://www.rcsb.org/"><i class="fi-link"></i></a></li>
+            <li>UniProt <a href="https://www.uniprot.org/"><i class="fi-link"></i></a></li>
+          </ul>
+        </div>
+        <div class="large-4 cell">
+          <h3>Drawing chemical structures</h3>
+          <ul>
+            <li>ChemAxon Marvin <a href="https://chemaxon.com/products/marvin"><i class="fi-link"></i></a></li>
+            <li>Open Babel <a href="http://openbabel.org/wiki/Category:Installation"><i class="fi-link"></i></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="help"></a>
+        <div class="large-12 cell">
+          <h2>Tutorials, documentation, and help</h2>
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the grammar</h3>
+          Documentation for the grammar is available above <a href="#grammar"><i class="fi-link"></i></a>. The definition of the grammar is available at GitHub <a href="https://raw.githubusercontent.com/KarrLab/bcforms/master/bcforms/grammar.lark"><i class="fi-link"></i>.</a>
+        </div>
+        <div class="large-6 cell">
+          <h3>Query builder for the REST API</h3>
+          A visual interface for building REST queries is available at bcforms.org/api <a href="https://www.bcforms.org/api"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the REST API</h3>
+          Documentation for the REST API is available at bcforms.org/api <a href="https://www.bcforms.org/api"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the command line program</h3>
+          Documentation for the command line program is available inline by running <tt>bcforms --help</tt>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Tutorial for the Python API</h3>
+          A Jupyter notebook with an interactive tutorial is available at sandbox.karrlab.org <a href="http://sandbox.karrlab.org/tree/bcforms"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Documentation for the Python API</h3>
+          Detailed documentation for the Python API is available at docs.karrlab.org <a href="https://docs.karrlab.org/bcforms"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-6 cell">
+          <h3>Questions</h3>
+          Please contact the Karr Lab <a href="mailto:info@karrlab.org"><i class="fi-mail"></i></a> with any questions.
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x blue">
+        <a name="contributing"></a>
+        <div class="large-12 cell">
+          <h2>Contributing to <i>BcForms</i></h2>
+        </div>
+        <div class="large-12 cell" style="margin-top: 1rem; padding-top: 0.2rem;">
+          To contribute to the software, please submit a Git pull request <a href="https://github.com/karrlab/bcforms/pulls"><i class="fi-link"></i></a>.
+        </div>
+      </div>
+
+      <div class="grid-x grid-padding-x orange">
+        <a name="about"></a>
+        <div class="large-12 cell">
+          <h2>About <i>BcForms</i></h2>
+        </div>
+        <div class="large-4 cell">
+          <h3>Source code</h3>
+          <i>BcForms</i> is available open-source from GitHub <a href="https://github.com/KarrLab/bcforms"><i class="fi-social-github"></i></a>.
+        </div>
+        <div class="large-4 cell">
+          <h3>License</h3>
+          <i>BcForms</i> is released under the MIT license <a href="https://github.com/KarrLab/bcforms/blob/master/LICENSE"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-4 cell">
+          <h3>Citing <i>BcForms</i></h3>
+          Coming soon!
+        </div>
+        <div class="large-4 cell">
+          <h3>Team</h3>
+          <i>BcForms</i> was developed by Jonathan Karr <a href="https://www.karrlab.org/"><i class="fi-link"></i></a> <a href="https://www.linkedin.com/in/jonrkarr/"><i class="fi-social-linkedin"></i></a> and Xiaoyue Zheng <a href="https://www.linkedin.com/in/xiaoyue-zheng/"><i class="fi-social-linkedin"></i></a> in the Karr Lab <a href="https://www.karrlab.org"><i class="fi-link"></i></a> at the Icahn School of Medicine at Mount Sinai <a href="https://www.mssm.edu/"><i class="fi-link"></i></a> in New York, USA.
+        </div>
+        <div class="large-4 cell">
+          <h3>Acknowledgements</h3>
+          <i>BcForms</i> was supported by a National Institute of Health P41 award <a href="https://projectreporter.nih.gov/project_info_details.cfm?aid=9460251"><i class="fi-link"></i></a>, a National Institute of Health MIRA R35 award <a href="https://projectreporter.nih.gov/project_info_details.cfm?aid=9509480"><i class="fi-link"></i></a>, and a National Science Foundation INSPIRE award <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1649014"><i class="fi-link"></i></a>.
+        </div>
+        <div class="large-4 cell">
+          <h3>Questions/comments</h3>
+          Please contact the Karr Lab <a href="mailto:info@karrlab.org"><i class="fi-mail"></i></a> with any questions or comments.
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"
+      integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw=="
+      crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
