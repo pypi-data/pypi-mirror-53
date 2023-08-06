@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: assemblyline-v3-service
+Version: 3.3.0.dev46
+Summary: Assemblyline (v4) automated malware analysis framework - Service components.
+Home-page: https://bitbucket.org/cse-assemblyline/alv3_service/
+Author: CCCS Assemblyline development team
+Author-email: assemblyline@cyber.gc.ca
+License: MIT
+Keywords: assemblyline malware gc canada cse-cst cse cst cyber cccs
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Requires-Dist: cython
+Requires-Dist: easydict
+Requires-Dist: PyYAML
+Requires-Dist: chardet
+Requires-Dist: python-magic
+Requires-Dist: netifaces
+Requires-Dist: pyroute2
+
+This package provides the Assemblyline v3 service base for the Assemblyline v4 malware analysis framework.
+
+
