@@ -1,0 +1,5 @@
+graft docs
+graft Products
+include *.rst *.cfg *.txt
+global-exclude *.pyc
+exclude .coveragerc
