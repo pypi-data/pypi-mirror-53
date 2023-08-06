@@ -1,0 +1,34 @@
+Metadata-Version: 2.1
+Name: moodlemlbackend
+Version: 2.2.1
+Summary: Python machine learning backend used by mlbackend_python Moodle plugin
+Home-page: https://github.com/moodlehq/moodle-mlbackend-python
+Author: Moodle HQ
+Author-email: integration@moodle.com
+License: GPLv3
+Keywords: moodle machine learning numpy scikit-learn tensorflow
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Education
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: matplotlib (<3.1,>=3.0)
+Requires-Dist: numpy (<1.17,>=1.16.0)
+Requires-Dist: scikit-learn (<0.22,>=0.21)
+Requires-Dist: joblib (<0.14,>=0.13.0)
+Requires-Dist: tensorflow (<1.15,>=1.14.0)
+Requires-Dist: flask (<1.1,>=1.0.2)
+Requires-Dist: boto3 (<1.10,>=1.9.0)
+
+Python machine learning backend for Moodle
+=======================================================
+
+This package is used by Moodle's mlbackend_python plugin.
+
+Info about packaging a new version in _readme_moodle.md: https://github.com/moodlehq/moodle-mlbackend-python/blob/master/readme_moodle.md
+
+
