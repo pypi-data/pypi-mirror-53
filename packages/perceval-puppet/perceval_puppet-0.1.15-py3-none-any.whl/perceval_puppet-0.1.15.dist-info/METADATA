@@ -1,0 +1,72 @@
+Metadata-Version: 2.1
+Name: perceval-puppet
+Version: 0.1.15
+Summary: Bundle of Perceval backends for Puppet, Inc. ecosystem
+Home-page: https://github.com/grimoirelab/perceval-puppet
+Author: Bitergia
+Author-email: sduenas@bitergia.com
+License: GPLv3
+Keywords: development repositories analytics puppet forge
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3
+Description-Content-Type: text/markdown
+Requires-Dist: requests (>=2.7.0)
+Requires-Dist: grimoirelab-toolkit (>=0.1.9)
+Requires-Dist: perceval (>=0.12.12)
+
+# perceval-puppet [![Build Status](https://travis-ci.org/chaoss/grimoirelab-perceval-puppet.svg?branch=master)](https://travis-ci.org/chaoss/grimoirelab-perceval-puppet) [![Coverage Status](https://img.shields.io/coveralls/chaoss/grimoirelab-perceval-puppet.svg)](https://coveralls.io/r/chaoss/grimoirelab-perceval-puppet?branch=master)
+
+
+Bundle of Perceval backends for Puppet, Inc. ecosystem.
+
+## Backends
+
+The backends currently managed by this package support the next repositories:
+
+* Puppet Forge
+
+## Requirements
+
+* Python >= 3.4
+* python3-requests >= 2.7
+* grimoirelab-toolkit > = 0.1.9
+* perceval >= 0.12.12
+
+## Installation
+
+To install this package you will need to clone the repository first:
+
+```
+$ git clone https://github.com/grimoirelab/perceval-puppet.git
+```
+
+Then you can execute the following commands:
+```
+$ pip3 install -r requirements.txt
+$ pip3 install -e .
+```
+
+In case you are a developer, you should execute the following commands to install Perceval in your working directory (option `-e`) and the packages of requirements_tests.txt.
+```
+$ pip3 install -r requirements.txt
+$ pip3 install -r requirements_test.txt
+$ pip3 install -e .
+```
+
+## Examples
+
+### Puppet Forge
+
+```
+$ perceval puppetforge
+```
+
+## License
+
+Licensed under GNU General Public License (GPL), version 3 or later.
+
+
