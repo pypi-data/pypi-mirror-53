@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <record model="ir.ui.view" id="tariffmodel_config_start_view_form">
+            <field name="model">employee_timetracking.tariffmodel.config.start</field>
+            <field name="type">form</field>
+            <field name="name">tariffmodel_config_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="act_tariffmodel_config">
+            <field name="name">Configure Tariff Model</field>
+            <field name="wiz_name">employee_timetracking.tariffmodel.config</field>
+        </record>
+
+        <record model="ir.module.config_wizard.item"
+            id="config_wizard_item_tariffmodel">
+            <field name="sequence" eval="20"/>
+            <field name="action" ref="act_tariffmodel_config"/>
+        </record>
+
+    </data>
+</tryton>
