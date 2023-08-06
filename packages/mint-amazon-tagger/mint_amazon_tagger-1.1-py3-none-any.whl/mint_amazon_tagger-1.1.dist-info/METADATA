@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: mint-amazon-tagger
+Version: 1.1
+Summary: Helps you delete all of your Phoros from Google Photos.
+Home-page: https://github.com/jprouty/delete-all-google-photos
+Author: Jeff Prouty
+Author-email: jeff.prouty@gmail.com
+License: UNKNOWN
+Keywords: google photos delete all
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3
+Description-Content-Type: text/markdown
+Requires-Dist: outdated
+Requires-Dist: progress
+Requires-Dist: selenium
+
+# Delete All Photos From Google Photos
+
+Turns out it's impossible to delete all of your Google Photos, without manually
+selecting photos, page per page, until they are all gone. This app does the
+paging and selecting for you. Simply log in and it will start driving from
+there!
+
+## Setup ##
+
+1. `pip3 install delete-all-google-photos`
+
+2. To get the latest from time to time, update your version:
+`pip3 install --upgrade delete-all-google-photos`
+
+3. Chromedriver should be fetched automatically. But if you run into issues,
+try this:
+```
+# Mac:
+brew tap homebrew/cask
+brew cask install chromedriver
+
+# Ubuntu/Debian:
+# See also: https://askubuntu.com/questions/539498/where-does-chromedriver-install-to
+sudo apt-get install chromium-chromedriver
+```
+
+
