@@ -1,0 +1,16 @@
+wrapt>=1.11.2
+
+[deploy]
+invenio[auth,base,elasticsearch6,metadata,postgresql]==3.1.1
+
+[devel]
+invenio[auth,base,elasticsearch6,metadata,tests]==3.1.1
+
+[postgresql]
+invenio[postgresql]==3.1.1
+
+[sqlite]
+invenio[sqlite]==3.1.1
+
+[tests]
+invenio[auth,base,elasticsearch6,metadata,tests]==3.1.1

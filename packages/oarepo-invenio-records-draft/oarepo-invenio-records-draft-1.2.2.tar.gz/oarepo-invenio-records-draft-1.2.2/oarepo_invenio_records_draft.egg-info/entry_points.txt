@@ -1,0 +1,9 @@
+[flask.commands]
+draft = invenio_records_draft.cli:draft
+
+[invenio_base.api_apps]
+invenio_records_draft = invenio_records_draft.ext:InvenioRecordsDraft
+
+[invenio_base.apps]
+invenio_records_draft = invenio_records_draft.ext:InvenioRecordsDraft
+
