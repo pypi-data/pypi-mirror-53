@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: LambdaGuard
+Version: 2.3.3
+Summary: LambdaGuard
+Home-page: https://github.com/Skyscanner/LambdaGuard
+Author: Artëm Tsvetkov
+Author-email: artem.tsvetkov@skyscanner.net
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Dist: boto3
+Requires-Dist: argparse
+Requires-Dist: requests
+Provides-Extra: dev
+Requires-Dist: coverage (~=4.4) ; extra == 'dev'
+Requires-Dist: flake8 (>=2.5.4) ; extra == 'dev'
+Requires-Dist: pytest (>=2.9.1) ; extra == 'dev'
+Requires-Dist: pytest-mock (>=1.0) ; extra == 'dev'
+Requires-Dist: pip-tools ; extra == 'dev'
+Requires-Dist: wheel ; extra == 'dev'
+Requires-Dist: twine ; extra == 'dev'
+
+
+LambdaGuard is an AWS Serverless Security auditing tool designed to create asset visibility 
+and provide actionable results. It provides a meaningful overview in terms of 
+statistical analysis, AWS service dependencies and configuration checks from 
+the security perspective.
+
+https://github.com/Skyscanner/LambdaGuard
+
+
