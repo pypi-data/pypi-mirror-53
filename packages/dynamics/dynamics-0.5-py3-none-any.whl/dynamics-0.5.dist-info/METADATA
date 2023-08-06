@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: dynamics
+Version: 0.5
+Summary: A pandas helper to interact with MS Dynamics
+Home-page: https://github.com/shytikov/dynamics
+Author: Alexey Shytikov
+Author-email: alexey.shytikov@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: adal
+Requires-Dist: pandas
+Requires-Dist: requests
+
+# Intergation between `pandas` and MS Dynamics CE / CRM / CDS
+
+A Helper pip package for `pandas` interaction with MS Dynamics instances.
+
+The code will try to clean up data available in MS Dynamics instance by casting to correct Python types and pushing it pandas' `DataFrame`.
+
+## Reading entity data to dataframe:
+
+```
+import dynamics
+
+
+# Create a dataframe which will hold needed information
+data = pandas.DataFrame()
+
+data.dynamics.connect(
+    'https://instance.crm4.dynamics.com', 
+    'user@instance.onmicrosoft.com', 
+    'password').entity("prefix_entity").read()
+
+
+print(data)
+```
+
