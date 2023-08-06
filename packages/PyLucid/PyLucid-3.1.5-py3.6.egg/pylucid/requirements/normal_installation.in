@@ -1,0 +1,51 @@
+#
+# Normal installation requirements, using all packages from pypi.
+# This is for all normal PyLucid users.
+#
+# https://requires.io/github/jedie/PyLucid/requirements/
+#
+#
+
+# include the basic requirements
+-r basic_requirements.in
+
+# PyLucid own projects
+#----------------------
+
+# https://github.com/jedie/bootstrap_env
+# https://pypi.org/project/bootstrap_env/
+bootstrap-env>=1.0.0rc18
+
+# https://pypi.org/project/python-creole
+python-creole
+
+# https://pypi.org/project/django-dbpreferences
+#django-dbpreferences
+
+# https://pypi.org/project/django-tools
+django-tools
+
+# https://pypi.org/project/django-cms-tools
+django-cms-tools
+
+# https://pypi.org/project/django-processinfo
+django-processinfo
+
+# https://pypi.org/project/django-reversion-compare/
+#django-reversion-compare>=0.6,<0.7
+
+# https://github.com/jedie/cmsplugin-pygments
+cmsplugin-pygments
+
+# https://github.com/jedie/django-debug-toolbar-django-info
+django-debug-toolbar-django-info
+
+# https://github.com/jedie/djangocms-widgets
+-e git+https://github.com/jedie/djangocms-widgets.git#egg=djangocms-widgets
+
+
+# external Django-CMS Addons
+#----------------------------
+
+# https://github.com/mitar/cmsplugin-markup
+-e git+https://github.com/jedie/cmsplugin-markup.git@develop#egg=cmsplugin-markup
