@@ -1,0 +1,71 @@
+Metadata-Version: 2.1
+Name: usgs-shakecast
+Version: 4.0.13
+Summary: Real time facility monitoring and notifications for earthquake impacts
+Home-page: https://github.com/usgs/shakecast
+Author: Daniel Slosky
+Author-email: dslosky@usgs.gov
+License: MIT
+Keywords: impact hazus aebm earthquake damage
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: astroid (==1.6.5)
+Requires-Dist: atomicwrites (==1.3.0)
+Requires-Dist: attrs (==19.1.0)
+Requires-Dist: autopep8 (==1.4.4)
+Requires-Dist: backports.functools-lru-cache (==1.5)
+Requires-Dist: certifi (==2019.3.9)
+Requires-Dist: chardet (==3.0.4)
+Requires-Dist: click (==6.6)
+Requires-Dist: configparser (==3.7.3)
+Requires-Dist: coverage (==4.5.3)
+Requires-Dist: enum34 (==1.1.6)
+Requires-Dist: Flask (==0.12.3)
+Requires-Dist: Flask-Login (==0.4.1)
+Requires-Dist: Flask-Uploads (==0.2.1)
+Requires-Dist: fpdf (==1.7.2)
+Requires-Dist: funcsigs (==1.0.2)
+Requires-Dist: futures (==3.2.0)
+Requires-Dist: idna (==2.8)
+Requires-Dist: isort (==4.3.15)
+Requires-Dist: itsdangerous (==0.24)
+Requires-Dist: Jinja2 (==2.10.1)
+Requires-Dist: lazy-object-proxy (==1.3.1)
+Requires-Dist: MarkupSafe (==0.23)
+Requires-Dist: mccabe (==0.6.1)
+Requires-Dist: more-itertools (==5.0.0)
+Requires-Dist: pathlib2 (==2.3.3)
+Requires-Dist: pluggy (==0.11.0)
+Requires-Dist: py (==1.8.0)
+Requires-Dist: pycodestyle (==2.5.0)
+Requires-Dist: pylint (==1.9.4)
+Requires-Dist: PySocks (==1.5.7)
+Requires-Dist: pytest (==4.5.0)
+Requires-Dist: requests (==2.21.0)
+Requires-Dist: scandir (==1.10.0)
+Requires-Dist: shakecast-aebm (==0.0a10)
+Requires-Dist: singledispatch (==3.4.0.3)
+Requires-Dist: six (==1.12.0)
+Requires-Dist: SQLAlchemy (==1.3.5)
+Requires-Dist: urllib3 (==1.24.3)
+Requires-Dist: wcwidth (==0.1.7)
+Requires-Dist: Werkzeug (==0.11.10)
+Requires-Dist: wrapt (==1.11.1)
+Requires-Dist: xmltodict (==0.10.2)
+
+| Windows | Linux | Code Coverage | Code Quality |
+| ------------- | ------------- | ------------- | ------------- |
+| [![Build status](https://ci.appveyor.com/api/projects/status/dk0ef1u4gttbkowp/branch/master?svg=true)](https://ci.appveyor.com/project/dslosky-usgs/shakecast-ygu6b/branch/master) | [![Build Status](https://travis-ci.org/usgs/shakecast.svg?branch=master)](https://travis-ci.org/usgs/shakecast) | [![codecov](https://codecov.io/gh/usgs/shakecast/branch/master/graph/badge.svg)](https://codecov.io/gh/usgs/shakecast) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7ab6934c7a2c40fca83e982afd0d2624)](https://www.codacy.com/app/dslosky/shakecast_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=usgs/shakecast&amp;utm_campaign=Badge_Grade) |
+
+# ShakeCast V4
+ShakeCast, short for ShakeMap Broadcast, is a fully automated, open-source system for delivering specific ShakeMap products to critical users and for triggering established post-earthquake response protocols.
+
+Checkout our [user and developer documentation](http://usgs.github.io/shakecast/).
+
+
+
