@@ -1,0 +1,66 @@
+[build-system]
+requires = ["poetry>=1.0.0a4"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+name = "rye"
+version = "0.2.0"
+description = ""
+authors = ["Paul Becotte <pjbecotte@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+repository = "https://gitlab.com/pjbecotte/rye"
+packages = [
+    {include = "rye", from = "src"}
+]
+scripts = {rye = "rye.__main__:cli"}
+
+
+[tool.poetry.dependencies]
+python = "^3.6"
+toml = "~0.10"
+settingscascade = "~0.3.4"
+click = "^7.0"
+colorama = "~0.4"
+virtualenv = "^16.6"
+
+[tool.poetry.dev-dependencies]
+black = {version = "^19.3b0", allows-prereleases = true}
+# This is a subdep of sphinx, but the current latest package is broken
+docutils = "0.15"
+isort = "^4.3"
+mypy = "^0.710"
+pylint = "^2.3"
+pytest = "^4.6"
+pytest-cov = "^2.7"
+sphinx = "^2.1"
+
+[tool.black]
+exclude = '\.rye'
+
+[tool.rye]
+default_tasks = ["pytest", "lint", "format", "typing"]
+base_location = ".rye"
+
+[tool.rye."task.pytest"]
+target_environments = ["poetry.py37", "poetry.py36"]
+
+[tool.rye."poetry.py36"."task.pytest"]
+commands = [["pytest", "tests", "--no-cov"]]
+
+[tool.rye."task.lint"]
+target_environments = ["poetry.py37"]
+commands = [["pylint", "src/rye", "tests"]]
+
+[tool.rye."task.format"]
+target_environments = ["poetry.py37"]
+commands = [
+	["black", ".", "--check"],
+	["isort", "-rc", "-tc", "--check-only", "src", "tests"],
+]
+
+[tool.rye."task.typing"]
+target_environments = ["poetry.py37"]
+commands = [
+	["mypy", "src/rye", "--ignore-missing-imports"],
+]
