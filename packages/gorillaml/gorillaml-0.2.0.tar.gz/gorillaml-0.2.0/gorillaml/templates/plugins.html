@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    {% call widget.gcard(title='All Plugins', body_class='p-0') %}
+    {% include 'plugins_table.html' %}
+    {% endcall %}
+</div>
+{% endblock %}

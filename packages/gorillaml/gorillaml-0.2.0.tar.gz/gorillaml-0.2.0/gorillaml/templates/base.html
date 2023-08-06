@@ -1,0 +1,119 @@
+{% import '_widget.html' as widget %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/intro/minified/introjs.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/codemirror.css') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/'+site_logo) }}"/>
+    <script src="{{ url_for('static', filename='js/codemirror.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/active-line.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/python.js') }}"></script>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'top_menu.html' %}
+        <aside class="main-sidebar sidebar-light-primary elevation-4">
+            <a href="/" class="brand-link" data-intro='Site logo and site-name is customizable from site config.'>
+                <img src="/static/img/{{ site_logo }}" class="brand-image img-circle elevation-3">
+                <span class="brand-text font-weight-light"><b>{{ site_name }}</b></span>
+            </a>
+            {% include 'sidebar.html' %}
+        </aside>
+
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">{{ site_slogan }}</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="container-fluid">
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-ban"></i> Error!</h5>
+                            <ul>
+                                {% for msg in messages %}
+                                <li>{{ msg }}</li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                    {% if messages %}
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Success!</h5>
+                            <ul>
+                                {% for msg in messages %}
+                                <li>{{ msg }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+    <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/intro/minified/intro.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/adminlte.js') }}"></script>
+    <script type=text/javascript>
+    $(function() {
+        var BASE_URL = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+        if(RegExp('multipage', 'gi').test(window.location.search)) {
+            introJs('.content-wrapper').start();
+        }
+        else {
+            $('.tour').bind('click', function() {
+                introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+                    window.location.href = BASE_URL + '/myaccount?multipage=true';
+                });
+                introJs().start();
+            });
+        }
+
+        $('.btn-primary').bind('click', function() {
+            $($(this).attr('frmtarget')).submit();
+        });
+
+        {% block javascript %}{% endblock %}
+    });
+    </script>
+</body>
+</html>

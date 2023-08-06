@@ -1,0 +1,128 @@
+{% macro gcard(title, class='col-md-12', body_class=None, type=None, footer=None) -%}
+<div class="{{ class }}">
+    <div class="card {{ type }}">
+        <div class="card-header">
+            <h3 class="card-title">{{ title }}</h3>
+        </div>
+        <div class="card-body {{ body_class }}">
+            {{ caller() }}
+        </div>
+        {% if footer %}
+        <div class="card-footer">
+            {{ footer|safe }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro gorillaml_custom_form(metadata) -%}
+    {% set footer={} %}
+    {% for field in metadata.form_data.form %}
+        {% if field.type == 'SubmitField' %}
+            {% set btn %}
+            <button class="btn btn-primary" frmtarget="#{{ metadata.form_data.form_id }}">{{ field.label|striptags }}</button>
+            {% endset %}
+            {% set footer=footer.__setitem__(field.type, btn) %}
+        {% endif %}
+    {% endfor %}
+    {% call gcard(title=metadata.info.title, class=metadata.info.class, body_class=metadata.info.body_class, type=metadata.info.type, footer=footer.SubmitField) %}
+        {{ gform(form_id=metadata.form_data.form_id, form=metadata.form_data.form, method=metadata.form_data.method, encryption=metadata.form_data.encryption, extra=metadata.form_data.extra) }}
+    {% endcall %}
+{%- endmacro %}
+
+{% macro gform(form_id, form, method, encryption, extra) -%}
+<form id="{{ form_id }}" role="form" {% if encryption %}enctype="{{ encryption }}"{% endif %} method="{{ method }}">
+    {{ form.csrf_token }}
+    {% for field in form %}
+        {% if field.type != 'SubmitField' %}
+        <div class="form-group {{field.name}} {% if field.errors %} has-error{% endif %}">
+            {{ field.label }} {% if field.flags.required %}<span class="text-danger">*</span>{% endif %}
+            {{ field(class_="form-control") }}
+            {{ extra[field.name]|safe }}
+            {% for message in field.errors %}
+            <span class="help-block small">{{ message }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endfor %}
+</form>
+{%- endmacro %}
+
+{% macro formbuilder(form, class, body_class) -%}
+<div class="{% if class %}{{ class }}{% else %}col-md-12{% endif %}">
+    <div class="card {{ type }}">
+        <div class="card-header">
+            <h3 class="card-title">{% if form.info.name %}{{ form.info.name }}{% else %}Form builder form not exist{% endif %}</h3>
+            <div class="card-tools">{% if form.info.id %}<a href="{{ url_for('form_builder', action='open', fid=form.info.id) }}" title="Edit this form"><i class="fas fa-edit"></i></a>{% endif %}</div>
+        </div>
+        <div class="card-body {{ body_class }}">
+            {% if form.count > 0 %}
+            <form id="form_id_{{ form.info.id }}" role="form" {% if form.info.enctype %}enctype="{{ form.info.enctype }}" {% endif %}method="{{ form.info.method }}" action="{{ url_for(form.info.callback) }}">
+                {{ form.csrf_token }}
+                {% for field in form.elements %}
+                    {% if field.type != 'SubmitField' %}
+                    <div class="form-group {{field.name}} {% if field.errors %} has-error{% endif %}">
+                    {{ field.label }} {% if field.flags.required %}<span class="text-danger">*</span>{% endif %}
+                    {{ field(class_="form-control") }}
+                    {% for message in field.errors %}
+                        <div class="text-danger">{{ message }}</div>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </form>
+            {% else %}
+            Field does not exist.
+            {% endif %}
+        </div>
+        {% if form.count > 0 %}
+        <div class="card-footer">
+            {% for field in form.elements %}
+                {% if field.type == 'SubmitField' %}
+                    <button class="btn btn-primary" frmtarget="#form_id_{{ form.info.id }}">{{ field.label|striptags }}</button>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro gbox(title, value, class='col-lg-3 col-6', icon_class=None, type=None, url=None, footer=None) -%}
+<div class="{{ class }}">
+    <div class="small-box {{ type }}">
+        <div class="inner">
+            <h3>{{ title }}</h3>
+            <p>{{ value }}</p>
+        </div>
+        <div class="icon"><i class="{{ icon_class }}"></i></div>
+        {% if footer %}
+        <a href="{{ url }}" class="small-box-footer">{{ footer }} <i class="fas fa-arrow-circle-right"></i></a>
+        {% endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro gtable(fields, rows) -%}
+<table class="table">
+    <tbody>
+        <tr>
+            {% for field in fields %}
+            <th>{{ field|capitalize }}</th>
+            {% endfor %}
+        </tr>
+        {% if rows|length > 0 %}
+            {% for row in rows %}
+            <tr>
+                {% for field in fields %}
+                <td>{{ row[field] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        {% else %}
+        <tr><td colspan="{{ rows|length }}">No record found yet</td></tr>
+        {% endif %}
+    </tbody>
+</table>
+{%- endmacro %}
