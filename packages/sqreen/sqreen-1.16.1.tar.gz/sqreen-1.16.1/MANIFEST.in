@@ -1,0 +1,9 @@
+include README.md
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include sqreen *.crt *.html
+
+recursive-exclude benchmarks *
+recursive-exclude tests *
